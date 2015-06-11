@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Compile Object-C program in command line &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1183/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2013-01-24T09:41:13Z" />
+
+            
+                <meta property="og:article:tag" content="ObjC" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Compile Object-C program in command line
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1183/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1183/'> Compile Object-C program in command line</a> </h2>
+        <div class="post-meta">发表于2013-01-24 09:41:13 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>Recently I am working on an iOS project, and I am getting interested in the
+language itself. But it is inconvenient to start Xcode for each program,
+especially for program without UI elements in. So I want to set up a command
+line environment that can compile and execute ObjC program.### Prepare the code</p>
+
+<p>First I have to prepare the ObjC file. I have created one file called
+<em>helloworld.m</em> in current directory, and here is the content:</p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    NSLog (@&quot;Hello World!&quot;);
+
+    [pool drain];
+    return 0;
+}
+</code></pre>
+
+<p>Okay, the program does the same thing as the first program of other languages
+do: print out <strong>Hello World!</strong> string.</p>
+
+<h3 id="compile-and-execute-the-program:cbaf7cc632ff6debbe929e03695103f2">Compile and execute the program</h3>
+
+<h4 id="mac-os:cbaf7cc632ff6debbe929e03695103f2">Mac OS</h4>
+
+<p>I have installed Xcode before, so I don&rsquo;t know whether those commands can be
+run successfully without Xcode command line tools.</p>
+
+<p>There are two methods to compile ObjC program from command line in Mac OS, one
+is using <code>gcc</code> and the other one is using <code>clang</code>. Both commands below can
+generate ObjC executable file.</p>
+
+<pre><code>clang -framework Foundation helloworld.m -o helloworld_clang
+
+gcc -framework Foundation helloworld.m -o helloworld_gcc
+</code></pre>
+
+<p>On my side, the two binary file has the same size, and the execute results are
+the same except the timestamp:</p>
+
+<pre><code>$ ./helloworld_clang
+2013-01-24 01:56:27.009 helloworld_clang[7845:707] Hello World!
+
+$ ./helloworld_gcc
+2013-01-24 01:56:29.744 helloworld_gcc[7846:707] Hello World!
+</code></pre>
+
+<h4 id="linux:cbaf7cc632ff6debbe929e03695103f2">Linux</h4>
+
+<p>With GCC, the command line compilation can also be done on Linux platform. I
+am using Debian and have set up the environment after refering <a href="http://stpetrus27.wordpress.com/2011/06/20/compile-objective-c-programs-
+on-linux/">this
+post</a>. Here are the brief steps:</p>
+
+<p>First Install those packages first to prepare the environment.</p>
+
+<pre><code>sudo apt-get install gobjc gnustep gnustep-devel
+</code></pre>
+
+<p>Then compile the program with command listed below:</p>
+
+<pre><code>gcc `gnustep-config --objc-flags` helloworld.m -o helloworld_gcc `gnustep-config --objc-libs` -lgnustep-base
+</code></pre>
+
+<p>After the command return, you can find binary file <code>helloworld_gcc</code> in the
+same directory.</p>
+
+<p>So, with this feature, some simple program can be executed without running
+Xcode, a little convenient for language learning for me.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/objc"><span class="label label-default">ObjC</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1189/"> &lt; Show alert box in calendar operations of iOS6 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1176/"> Invoke map app in iOS app &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1183\/';
+    var disqus_title = 'Compile Object-C program in command line';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1183\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

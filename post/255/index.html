@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 给iphone传电子书 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/255/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2008-03-17T10:21:25Z" />
+
+            
+                <meta property="og:article:tag" content="linux" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="python" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | 给iphone传电子书
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/255/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/255/'> 给iphone传电子书</a> </h2>
+        <div class="post-meta">发表于2008-03-17 10:21:25 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章<a href="http://hzmangel.cn/2008/03/16/%e8%bd
+%ac%e6%8d%a2%e6%96%87%e4%bb%b6%e5%90%8d%e6%a0%bc%e5%bc%8f/">转换文件名格式</a>说了怎么转换文件格式，其实文本的格式也
+需要转换的。把用的脚本写出来吧。<br />
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(<a href="http://www.rejetto.com/hfs/">www.rejetto.co
+m/hfs/</a>)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的
+wget后下载居然是乱码，从文件名到内容，只好自力更生了。<br />
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。<br />
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量
+转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。</p>
+
+<pre><code>#!/usr/bin/python2.5
+
+import glob
+import os
+
+filenames = glob.glob('*.txt')
+
+for foo in filenames:
+    tmp_name = foo.replace('Download\\', '')
+    cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name)
+    os.system(cmd_str)
+    os.system('rm &quot;%s&quot;' % foo)
+    print tmp_name
+</code></pre>
+
+<p>中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执
+行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些
+真的是方便至极。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/linux"><span class="label label-default">linux</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/python"><span class="label label-default">python</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/256/"> &lt; 用iphone发个贴子 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/254/"> 转换文件名格式 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/255\/';
+    var disqus_title = '给iphone传电子书';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/255\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

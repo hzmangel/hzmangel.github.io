@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Vim &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/tags/vim/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Vim
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/tags/vim/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/724/'> 让win下的vim支持非等宽字体</a> </h2>
+        <div class="post-meta">发表于2010-08-23 13:08:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~ 问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。 改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件： diff -r 96b2b1cca7cd src/os_mswin.c --- a/src/os_mswin.c Mon Aug 23 12:55:47 2010 +0800 +++ b/src/os_mswin.c Mon Aug 23 13:05:17 2010 +0800 @@ -3288,8 +3288,11 @@ #ifndef FEAT_PROPORTIONAL_FONTS /* Ignore non-monospace fonts without further ado */ + /* + * hzmangel: I need non-monospace fonts! if ((ntm-&gt;tmPitchAndFamily &amp; 1) != 0) return 1; + */ #endif /* Remember this LOGFONT as a &quot;possible&quot; */ 然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ Update at 2010-09-18 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽 字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下 diff -r 6768ebd0bc04 -r 213b33df021a src/gui_w32.c --- a/src/gui_w32.c Sun Aug 08 16:38:42 2010 +0200 +++ b/src/gui_w32.c Sat Sep 18 10:37:41 2010 +0800 @@ -2298,7 +2298,11 @@ /* On NT, tell the font renderer not to &quot;help&quot; us with Hebrew and Arabic * text.</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/724/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/491/'> Vim居中光标所在行</a> </h2>
+        <div class="post-meta">发表于2009-12-04 11:12:41 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">曾经用Emacs的时候发现那个Ctrl- L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~ zz: 将当前行置于屏幕中间（不是转载…） zt: 将当前行置于屏幕顶端（不是猪头~） zb：底端啦~ 还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/490/'> Vim中的大小写切换</a> </h2>
+        <div class="post-meta">发表于2009-12-04 01:07:05 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\ L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case) 例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾： :%s/^\(\w\)\(.*\)/\u\1\L\2/g 需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是 EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午 试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了： :%s/\([a-z]\)\(.*\)/\U\1\l\2/g \l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/487/'> Vim中的非贪婪匹配</a> </h2>
+        <div class="post-meta">发表于2009-11-02 17:35:40 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助 的指引下折腾出来了。其实很简单，在:h non-greedy一条中有说，使用{-}来匹配，和*的功能类似，于是乎就有： 默认贪婪匹配到行末：/&lt;a.*&gt; 使用非贪婪匹配本标签：/&lt;a.\{-}&gt;</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

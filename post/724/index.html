@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 让win下的vim支持非等宽字体 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/724/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2010-08-23T13:08:03Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="vim" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | 让win下的vim支持非等宽字体
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/724/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/724/'> 让win下的vim支持非等宽字体</a> </h2>
+        <div class="post-meta">发表于2010-08-23 13:08:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~
+问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei
+Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。
+改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件：</p>
+
+<pre><code>diff -r 96b2b1cca7cd src/os_mswin.c
+--- a/src/os_mswin.c    Mon Aug 23 12:55:47 2010 +0800
++++ b/src/os_mswin.c    Mon Aug 23 13:05:17 2010 +0800
+@@ -3288,8 +3288,11 @@
+
+ #ifndef FEAT_PROPORTIONAL_FONTS
+     /* Ignore non-monospace fonts without further ado */
++    /*
++     * hzmangel: I need non-monospace fonts!
+     if ((ntm-&gt;tmPitchAndFamily &amp; 1) != 0)
+        return 1;
++    */
+ #endif
+
+     /* Remember this LOGFONT as a &quot;possible&quot; */
+</code></pre>
+
+<p>然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ <strong>Update at
+2010-09-18</strong> 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 <http://xbeta.info/gvim-
+powerword-ciba.htm> 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽
+字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下</p>
+
+<pre><code>diff -r 6768ebd0bc04 -r 213b33df021a src/gui_w32.c
+--- a/src/gui_w32.c     Sun Aug 08 16:38:42 2010 +0200
++++ b/src/gui_w32.c     Sat Sep 18 10:37:41 2010 +0800
+@@ -2298,7 +2298,11 @@
+     /* On NT, tell the font renderer not to &quot;help&quot; us with Hebrew and Arabic
+      * text.  This doesn't work in 9x, so we have to deal with it manually on
+      * those systems. */
+-    if (os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
++    if (
++#ifdef FEAT_RIGHTLEFT
++            curwin-&gt;w_p_rl &amp;&amp;
++#endif
++    os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
+        foptions |= ETO_IGNORELANGUAGE;
+
+     /*
+</code></pre>
+
+<p>最后是编译好的gvim，安装官方的包后直接丢到安装目录下替换原文件即可，Enjoy~~
+<a href="http://www.hzmangel.info/blog/wp-
+content/uploads/2011/11/gvim20111115.zip">gvim20111115</a></p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/vim"><span class="label label-default">vim</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/729/"> &lt; 一个人的世界 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/721/"> Merge Two Hg Repositories &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/724\/';
+    var disqus_title = '让win下的vim支持非等宽字体';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/724\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

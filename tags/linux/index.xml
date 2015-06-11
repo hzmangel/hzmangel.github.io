@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Mon, 19 Dec 2011 10:41:55 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>List all CVS tags</title>
+      <link>http://hzmangel.github.io/post/1052/</link>
+      <pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1052/</guid>
+      <description>&lt;p&gt;最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;a href=&#34;http://docs.codehaus.org/display/ninja/List+CVS+Tags&#34; target=&#34;_blank&#34;&gt;Perl脚本&lt;/a&gt;，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。脚本的原理就是检查一个working
+directory中所有文件的status，然后把输出的内容去重。脚本运行需要设置好CVSROOT环境变量，而且需要提供一个CVS的工作目录作为参数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/python
+
+import re
+import os
+import sys
+import subprocess as sp
+
+def get_all_tags(cvs_wdir):
+    is_tag_line = False
+    cvs_cmd = &#39;cvs -Q status -R -v&#39;
+    cvs_tag_pattern = re.compile(r&#39;(\w+)\s+&#39;)
+    tmp_tags = []
+
+    os.chdir(cvs_wdir)
+    cmd_pipe = sp.Popen(cvs_cmd, shell=True, stdout=sp.PIPE)
+
+    for line in cmd_pipe.stdout.readlines():
+        if &#39;Existing Tags&#39; in line:
+            is_tag_line = True
+            continue
+
+        if not is_tag_line:
+            continue
+
+        if &#39;============&#39; in line and is_tag_line == True:
+            is_tag_line = 0
+            continue
+
+        line = line.strip()
+        if line != &#39;&#39;:
+            try:
+                tag = cvs_tag_pattern.findall(line.strip())[0]
+            except IndexError:
+                print line
+                raise
+            tmp_tags.append(tag)
+
+    return set(tmp_tags)
+
+if __name__ == &#39;__main__&#39;:
+    print &#39;\n&#39;.join(sorted(get_all_tags(sys.argv[1])))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;话说，有人能提供更好的办法吗？然后，有人可以告诉我，这个东西取出来的东西是全部的tag吗？没用过CVS&amp;hellip;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Blocking/Non-Blocking IO and SYN/ASYN IO</title>
+      <link>http://hzmangel.github.io/post/1035/</link>
+      <pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1035/</guid>
+      <description>&lt;p&gt;这是我上个月&lt;a title=&#34;linuxfb&#34; href=&#34;http://linuxfb.net&#34; target=&#34;_blank&#34;&gt;linuxfb&lt;/a&gt;版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。首先是上次版聚的片子，做的一般，凑合看吧，呵呵。有些片子里面列出来的东西就不细说了，主要说的可能还是版聚完后查的AIO相关的一些东西。
+&lt;div id=&#34;__ss_9043269&#34; style=&#34;width: 425px;&#34;&gt;&lt;strong style=&#34;display: block; margin: 12px 0 4px;&#34;&gt;&lt;a title=&#34;20110828 Non blocking socket&#34; href=&#34;http://www.slideshare.net/linuxfb/non-blocking-socket&#34; target=&#34;_blank&#34;&gt;20110828 Non blocking socket&lt;/a&gt;&lt;/strong&gt; &lt;iframe src=&#34;http://www.slideshare.net/slideshow/embed_code/9043269&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; width=&#34;425&#34; height=&#34;355&#34;&gt;&lt;/iframe&gt;
+&lt;div style=&#34;padding: 5px 0 12px;&#34;&gt;View more &lt;a href=&#34;http://www.slideshare.net/&#34; target=&#34;_blank&#34;&gt;presentations&lt;/a&gt; from &lt;a href=&#34;http://www.slideshare.net/linuxfb&#34; target=&#34;_blank&#34;&gt;linuxfb&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+讲到异步IO这块的时候讨论比较激烈，主要就是在异步IO和非阻塞IO之间的区别。课后做了些功课，于是有了下面这些玩意，如有走过路过发现不对的，敬请指正，在此先行谢过，呵呵。&lt;/p&gt;
+
+&lt;p&gt;===================================================&lt;/p&gt;
+
+&lt;p&gt;ASYNC/SYNC 和 Blocking/Non-Blocking其实可以说是不相干的两个东西，但是由于使用的时候会有特定的组合，所以有时也就混为一谈了。分别在Internet和大中华局域网转了转，找到两篇文章[1][3]，比着上次的幻灯小总结一下吧。&lt;/p&gt;
+
+&lt;p&gt;先从 Dai Jun 后来临时找的幻灯说起，那个片子把IO的时间分成了两个阶段，第一阶段是从应用程序发起请求开始到数据准备完毕结束，第二阶段是把数据从内核态拷贝到用户态。对于应用程序而言，当第二阶段结束后，就表示数据可以使用了，也就是这次IO操作完成。&lt;/p&gt;
+
+&lt;p&gt;首先说Blocking/Non-Blocking，阻塞和非阻塞的区别其实很简单，就是应用程序在等待数据的过程中，是否可以做其它的事情。例如最简单的SYN Blocking操作，程序调了个read()就后就把自己拍晕然后等着被返回的数据砸醒，晕了程序当然不能干活，所以它就是阻塞的。在文章[1]中，有几个很形象的示意图，可以很方便的看出区别。&lt;/p&gt;
+
+&lt;p&gt;再说说ASYN/SYN。同步和异步，主要描述的是消息通知的机制([3])，同步是指内核在处理完请求后，不会告诉程序数据已经准备好了，而需要程序自己去检查；而异步的情况下，请求处理完成后内核会发给程序一个通知。所以，对于悲催的Non-Blocking SYN的模式，程序需要一遍又一遍的去检查数据是不是好了，效率可能还没有Blocking SYN的高。而IO复用，即select()/epoll()的方案，虽然也有阻塞，但是终归它是由系统告知某个fd可用的，所以是异步的IO。至于AIO，把等待数据这个过程也省去了，直接发完请求该干嘛干嘛，等着被叫号就好了。&lt;/p&gt;
+
+&lt;p&gt;所以那天片子里面说的AIO，应该就是指Non-Blocking ASYN的情况，此文中下面写的AIO，都是指这种情况，即非阻塞异步IO。&lt;/p&gt;
+
+&lt;p&gt;说完了区别，再来给AIO补一点东西。&lt;/p&gt;
+
+&lt;p&gt;在Linux中，AIO有两种接口，一种是glibc提供的POSIX异步IO接口，即aio_*函数系；另一种是Linux的原生异步IO接口，是由libaio提供的。POSIX AIO是在用户空间通过线程+阻塞模拟并发操作来实现的，所以性能上没有太多出彩的地方，但是libaio是原生的AIO实现，性能上会好很多[2][4]。这个库好像最早是Oracle弄出来的，在Oracle/DB2中有应用。它使用不同于read()/write()的一套接口，具体的程序我也没看，不过应该是可以用在网络环境中的。&lt;/p&gt;
+
+&lt;p&gt;至于为什么现在还是用epoll撑起大半边天，可能是因为还没有到需要大规模考虑C1000K问题的时候吧，还有就是AIO的编程模型和传统模型的差别不是一点半点，基本上整个架构都需要推倒重来，相比于这个带来的风险，还是直接加服务器比较保险。不过TB已经有童鞋在折腾这些东西了，在slideshare上找到一个片子，有兴趣的可以去围观一下：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.slideshare.net/mryufeng/c1000k&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.slideshare.net/&#34;&gt;http://www.slideshare.net/&lt;/a&gt;&lt;wbr&gt;mryufeng/c1000k&lt;/wbr&gt;&lt;/a&gt; 。话说，这个是不是丢给 Bergwolf 就好？&lt;/p&gt;
+
+&lt;p&gt;差不多就这些了，不知道有没有理解错的地方。最后是参考文献&lt;/p&gt;
+
+&lt;p&gt;[1] Boost application performance using asynchronous I/O, M. Tim Jones, &lt;a href=&#34;http://www.ibm.com/developerworks/linux/library/l-async/&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.ibm.com/developerworks/linux/library/l-async/&#34;&gt;http://www.ibm.com/developerworks/linux/library/l-async/&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] Linux Asynchronous I/O Design: Evolution &amp;amp; Challenge, Suparna Bhattacharya, &lt;a href=&#34;http://www.kernel.org/pub/linux/kernel/people/suparna/aio-linux.pdf&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.kernel.org/pub/linux/kernel/people/suparna/aio-linux.pdf&#34;&gt;http://www.kernel.org/pub/linux/kernel/people/suparna/aio-linux.pdf&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] 同步/异步与阻塞/非阻塞的区别, &lt;a href=&#34;http://www.cppblog.com/converse/archive/2009/05/13/82879.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.cppblog.com/converse/archive/2009/05/13/82879.html&#34;&gt;http://www.cppblog.com/converse/archive/2009/05/13/82879.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4] High Performance Solid State Storage Under Linux, Eric Seppanen, Matthew T. O’Keefe, David J. Lilja, &lt;a href=&#34;http://storageconference.org/2010/Papers/MSST/Seppanen.pdf&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://storageconference.org/2010/Papers/MSST/Seppanen.pdf&#34;&gt;http://storageconference.org/2010/Papers/MSST/Seppanen.pdf&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Remove packages installed by setup.py install</title>
+      <link>http://hzmangel.github.io/post/999/</link>
+      <pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/999/</guid>
+      <description>&lt;p&gt;从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G
+神，在stackoverflow上找到了&lt;a href=&#34;http://stackoverflow.com/questions/1550226/python-
+setup-py-uninstall&#34;&gt;折衷的办法&lt;/a&gt;：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ python setup.py install --record foo.txt
+$ cat foo.txt | xargs rm -f
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;没找到怎么让它输出到stdout，只好用临时文件弄了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get Return Value from popen System Call</title>
+      <link>http://hzmangel.github.io/post/984/</link>
+      <pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/984/</guid>
+      <description>&lt;p&gt;popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信
+息，再用wait的宏进行判断。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int status = pclose(fp);
+if (status == -1) {
+    printf(&amp;quot;Error reported by pclose()\n&amp;quot;);
+    exit(1);
+} else {
+    printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;);
+    printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实是满早前问的一个问题，忘更新过来了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Disable Arial in Chrome</title>
+      <link>http://hzmangel.github.io/post/876/</link>
+      <pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/876/</guid>
+      <description>&lt;p&gt;最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。chrome在有CSS的情况下默认使用的是CSS的设置，而google家的网页里赫然把arial写在CSS的第一位，然后呢，arial在linux下的效果那
+叫一个惨不忍睹啊（或者是我没配好），于是每次在linux下看gmail都是一种煎熬。&lt;/p&gt;
+
+&lt;p&gt;在网上转了一圈，找到了&lt;a href=&#34;http://wdicc.com/some-font-configuration-for-chrome/&#34;&gt;这篇文章&lt;/a&gt;，按着来了一下
+感觉没起啥作用，于是就去找fontconfig的配置说明，然后把匹配的字符串从字体名改成了arial之类的family名，搞定~&lt;/p&gt;
+
+&lt;p&gt;配置文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;                        Arial
+
+
+                        sans-serif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实很简单，匹配所有arial的family，然后把它换成sans-
+serif，不过这样估计系统的字体也被改掉了，反正arial在linux下看就没一个好看的，改掉就改掉吧，嘿嘿。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Merge Two Hg Repositories</title>
+      <link>http://hzmangel.github.io/post/721/</link>
+      <pubDate>Fri, 09 Jul 2010 01:54:31 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/721/</guid>
+      <description>&lt;p&gt;最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库
+叫B，于是有：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A: hg pull –f &amp;lt;repo B&amp;gt;
+A: hg merge
+A: hg ci
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关键的地方是在那个-
+f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(&lt;a href=&#34;http://stackoverflow.com/questions/12843
+/how-to-combine-two-projects-in-mercurial&#34;&gt;via&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reuse the TIME_WAIT Port</title>
+      <link>http://hzmangel.github.io/post/618/</link>
+      <pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/618/</guid>
+      <description>&lt;p&gt;最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA
+IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会
+将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da
+emon启动错误的信息。&lt;/p&gt;
+
+&lt;p&gt;解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou
+t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中
+的东西：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo
+东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sysctl -w net.ipv4.route.flush=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。&lt;/p&gt;
+
+&lt;p&gt;话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Capital S in Linux Permission Bitmap</title>
+      <link>http://hzmangel.github.io/post/614/</link>
+      <pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/614/</guid>
+      <description>&lt;p&gt;昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是-
+rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~&lt;/p&gt;
+
+&lt;p&gt;首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我
+常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr-
+xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。&lt;/p&gt;
+
+&lt;p&gt;最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using sudo in rsh&#39;s command</title>
+      <link>http://hzmangel.github.io/post/610/</link>
+      <pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/610/</guid>
+      <description>&lt;p&gt;公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的
+把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Defaults    requiretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后说一句，最好用visudo编辑，而不要手动改~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mask Mouse on Linux</title>
+      <link>http://hzmangel.github.io/post/583/</link>
+      <pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/583/</guid>
+      <description>&lt;p&gt;最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;不显示&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的
+那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;屏蔽响应事件&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm
+ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。&lt;/p&gt;
+
+&lt;p&gt;这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo;
+可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令&lt;/p&gt;
+
+&lt;p&gt;xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。&lt;/p&gt;
+
+&lt;p&gt;就这两条命令，具体的没的细究，有空再看吧。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set local dir as yum repo</title>
+      <link>http://hzmangel.github.io/post/581/</link>
+      <pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/581/</guid>
+      <description>&lt;p&gt;新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。&lt;/p&gt;
+
+&lt;p&gt;按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下：&lt;/p&gt;
+
+&lt;p&gt;$ cat local.repo&lt;br /&gt;
+[local repo]&lt;br /&gt;
+name=Repository on lldev&lt;br /&gt;
+baseurl=file:///XXX/YYY/ZZZ&lt;br /&gt;
+enabled=1&lt;br /&gt;
+gpgcheck=0&lt;/p&gt;
+
+&lt;p&gt;需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server
+目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Auth ssh with keys</title>
+      <link>http://hzmangel.github.io/post/580/</link>
+      <pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/580/</guid>
+      <description>&lt;p&gt;每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起
+ssh连接请求的机器，S自然是服务端了…&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;S: mkdir ~/.ssh # create the directory for keys&lt;/li&gt;
+&lt;li&gt;S: chmod 700 ~/.ssh # 必需滴，要不然不起作用&lt;/li&gt;
+&lt;li&gt;C: ssh-keygen –d # generate dsa key, the type is changable&lt;/li&gt;
+&lt;li&gt;C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host&lt;/li&gt;
+&lt;li&gt;S: chmod 600 ~/.ssh/authorized_keys # 必需滴&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or
+modes云云(log文件在/var/log/secure)，当然就连不上了~&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update at 2010-09-16:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote
+host&amp;gt;，然后这个命令会做完上面的工作~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>强制umount无响应NFS分区</title>
+      <link>http://hzmangel.github.io/post/482/</link>
+      <pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/482/</guid>
+      <description>
+
+&lt;p&gt;折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。&lt;br /&gt;
+直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：&lt;br /&gt;
+`# fuser -km /mnt/dir&lt;/p&gt;
+
+&lt;h1 id=&#34;umount-f-mnt-dir:49a2bdae285b9bbbddd90f01e10b75f2&#34;&gt;umount -f /mnt/dir`&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Updated at 2011-01-11&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;唔，在网上又找到了一个办法&lt;/p&gt;
+
+&lt;p&gt;umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy
+now, and cleanup all references to the filesystem as soon as it is not busy
+anymore.&lt;/p&gt;
+
+&lt;p&gt;试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无密码rsh</title>
+      <link>http://hzmangel.github.io/post/328/</link>
+      <pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/328/</guid>
+      <description>&lt;p&gt;最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：&lt;span style=&#34;font-family: &#39;Courier New&#39;;&#34;&gt;/etc/hosts.equiv&lt;/span&gt;和家目录下的&lt;span style=&#34;font-family: &#39;Courier New&#39;;&#34;&gt;.rhosts&lt;/span&gt;文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>给iphone传电子书</title>
+      <link>http://hzmangel.github.io/post/255/</link>
+      <pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/255/</guid>
+      <description>&lt;p&gt;没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章&lt;a href=&#34;http://hzmangel.cn/2008/03/16/%e8%bd
+%ac%e6%8d%a2%e6%96%87%e4%bb%b6%e5%90%8d%e6%a0%bc%e5%bc%8f/&#34;&gt;转换文件名格式&lt;/a&gt;说了怎么转换文件格式，其实文本的格式也
+需要转换的。把用的脚本写出来吧。&lt;br /&gt;
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(&lt;a href=&#34;http://www.rejetto.com/hfs/&#34;&gt;www.rejetto.co
+m/hfs/&lt;/a&gt;)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的
+wget后下载居然是乱码，从文件名到内容，只好自力更生了。&lt;br /&gt;
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。&lt;br /&gt;
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量
+转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/python2.5
+
+import glob
+import os
+
+filenames = glob.glob(&#39;*.txt&#39;)
+
+for foo in filenames:
+    tmp_name = foo.replace(&#39;Download\\&#39;, &#39;&#39;)
+    cmd_str = &#39;iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;&#39; % (foo, tmp_name)
+    os.system(cmd_str)
+    os.system(&#39;rm &amp;quot;%s&amp;quot;&#39; % foo)
+    print tmp_name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执
+行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些
+真的是方便至极。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

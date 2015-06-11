@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" MDK10使用手记(1) &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/10/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2004-09-21T22:14:52Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | MDK10使用手记(1)
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/10/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/10/'> MDK10使用手记(1)</a> </h2>
+        <div class="post-meta">发表于2004-09-21 22:14:52 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>想学Linux下的编程，装个Linux装了三天，狂郁闷。<br />
+以前也有一次装系统装到抓狂的，那一次，两天装了九遍系统，其中1遍RH8，4遍RH9，还有4遍就是WindowsXP，那个时候是大菜鸟一只，不会改GRUB，所
+以只有重装了*^_^*。装的我真要发狂了。<br />
+现在两种经历都有了，高密度的和低密度的:-)</p>
+
+<p>一开始是用RH8上手的，后来用过RH9。那天在实验室装上了debian，觉得比较的好用。然后在寝室死活也配不上dhcp，郁闷之下就只有换了个发行版。换成了M
+andrake 10.1c，今天刚用上，只是稍微美化了一下，装了几个软件，感觉还不错，写点东西吧。 ^_^</p>
+
+<p>1、安装篇</p>
+
+<p>可以说是第二次用非RH版的Linux了，第一次用的是debian，网络安装，装软件的时候真的是很方便，可以说让我惊诧不已，真好用。后来在寝室装的时候，也不知
+道怎么回事，死也弄不上dhcp，还多出来一块网卡，装了几次不干了，听人说MDK10用着还行，就装了一个，才用了一段时间，觉得是还不错^_^<br />
+首先说说安装的方法吧，我是从硬盘安装的。先从FTP或之类的地方下到4张iso文件，随便放到哪个盘下，也不用管什么fat或ntfs(这点MDK做的不错，上来就
+支持ntfs)，然后把第一张iso中的isolinux的文件夹解出来，放到一个方便的地方(其实不放也行的，可以认出来，不过最好还是放到fat的分区里面)，我
+是放在C盘根目录下的，然后更改LILO或GRUB(那天装的时候没找到98的启动盘，所以只好用这个了)，如果启动时是LILO，改的文件是/etc/lilo.c
+onf，加上下面几句</p>
+
+<p>image=(hd0,0)/isolinux/alt0/vmlinuz<br />
+label=&ldquo;MDK10 install&rdquo;<br />
+root=/dev/ram3<br />
+initrd=/isolinux/alt0/all.rdz<br />
+append=&ldquo;ramdisk_size=128000 acpi=ht&rdquo;<br />
+vga=788</p>
+
+<p>如果是GRUB，那编辑文件/boot/grub/menu.lst，加上如下语句：</p>
+
+<p>title Mandeaklinux 10 install<br />
+kernel (hd0,0)/isolinux/alt0/vmlinuz ramdisk_size=128000 root=/dev/ram3
+automatic=method:disk acpi=ht vga=788<br />
+initrd (hd0,0)/isolinux/alt0/all.rdz</p>
+
+<p>然后在装的时候，选硬盘安装，键入路径(tips:下下来的iso文件，改一下名字，会方便许多)，只要第一张盘的路径就可以了，后来就可以自动换盘了。后面就可以选
+软件包，正常安装了。</p>
+
+<p>安装就写到这吧，下一篇是我用的美化方法。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/11/"> &lt; MDK10使用手记(2) </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/9/"> 我看中国的教育制度 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/10\/';
+    var disqus_title = 'MDK10使用手记(1)';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/10\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

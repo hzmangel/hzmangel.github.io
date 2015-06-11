@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Dismiss keyboard in UITextViewController &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1166/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2012-07-18T14:43:32Z" />
+
+            
+                <meta property="og:article:tag" content="iOS" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Dismiss keyboard in UITextViewController
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1166/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1166/'> Dismiss keyboard in UITextViewController</a> </h2>
+        <div class="post-meta">发表于2012-07-18 14:43:32 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>The method is collected from Internet and I just record it with my way.First create a single view project, then drag an UITextViewController, an
+UINavigationBar and an UINavigationItem into the storyboard. Link the three
+elements to the ViewController class by dragging with Ctrl key. The view
+controller should implement the UITextViewDelegate, then add some code to the
+function invoked while beginning and completing edit. This sample add one
+button on the navigation bar to dismiss the keyboard, and the button will be
+shown and hidden dynamically. Function <code>textViewDidBeginEditing</code> and
+<code>textViewDidBeginEditing</code> will be used to implement the feature:</p>
+
+<pre><code>- (void) textViewDidBeginEditing:(UITextView *)textView {
+    UIBarButtonItem *send = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
+    self.navItem.rightBarButtonItem = send;
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    self.navItem.rightBarButtonItem = nil;
+}
+</code></pre>
+
+<p>And here is the function leaveEditMode, which will dismiss the keyboard.</p>
+
+<pre><code>- (void) leaveEditMode {
+    [self.content resignFirstResponder];
+}
+</code></pre>
+
+<p>That&rsquo;s all.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/ios"><span class="label label-default">iOS</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1176/"> &lt; Invoke map app in iOS app </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1159/"> Playing MongoDB with Rails &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1166\/';
+    var disqus_title = 'Dismiss keyboard in UITextViewController';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1166\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

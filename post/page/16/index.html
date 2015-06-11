@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/319/'> 放弃Compiz，嗯</a> </h2>
+        <div class="post-meta">发表于2008-06-29 01:48:00 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了好久，发现折腾X没啥意思，够用就行了，以后还是开始折腾程序吧，这才是有用的，嗯。ATI的驱动装上了，能跑glxgears，我已经很欣慰了，过段时间再说 别的吧，先把欠在版上的东西完成了。快餐店准备开张了~~~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/318/'> ACCEPT_KEYWORDS in gentoo</a> </h2>
+        <div class="post-meta">发表于2008-06-28 01:15:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge 今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/317/'> Emerge specific version of software</a> </h2>
+        <div class="post-meta">发表于2008-06-28 01:11:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo software emerge version 想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法： 先装gentoolkit，以找到equery这个工具，然后再equery list -p &lt;pkg name&gt;列出所有可用的版本，最后用emerge =&lt;pkg full name&gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/316/'> ATI on Gentoo</a> </h2>
+        <div class="post-meta">发表于2008-06-27 22:03:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo ATI 配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。 首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。 然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&ndash;initial &ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。 再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。 话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/315/'> Gentoo Install Notes (4)</a> </h2>
+        <div class="post-meta">发表于2008-06-27 21:52:59 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>A Whole New World</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/315/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/314/'> Gentoo Install Notes (3)</a> </h2>
+        <div class="post-meta">发表于2008-06-26 23:52:51 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>又到了讲故事的时间了，嗯。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/314/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/313/'> Gentoo Install Notes (2)</a> </h2>
+        <div class="post-meta">发表于2008-06-26 00:07:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>让我们继续昨晚的故事。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/313/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/312/'> Gentoo Install Notes (1)</a> </h2>
+        <div class="post-meta">发表于2008-06-24 23:58:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/312/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/311/'> 0620-0622自虐日记</a> </h2>
+        <div class="post-meta">发表于2008-06-23 23:56:12 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">20080620 0630：起床，准备往公司赶。 0704：在城铁上看到电视上的时钟，感觉如果在西二旗下车会太早了，于是从上地下车，遛达过去。 0740：开始在路上走的太休闲了，后半段紧赶慢赶终于在40前到了公司门口。 17XX：具体时间忘了，刚从拒马河回来，打水帐弄的身上很不爽，虽然没热水，但还是洗了个澡，真冷啊…… 21XX：逃离杀人现场，去K歌了，虽然基本上是听着的 2300：回屋，洗个热水澡，睡觉。 20080621 0630：起床 08XX：到东湖港，过吊桥时开始小晃一下 08XX：在第一梯队中开始爬山 10XX：在第一梯队中开始下山 11XX：回到住的地方，吃饭，吃的很少，呵呵。 13XX：中关村下车，本来准备走回家，还好在路过某个车站时有辆车过来了，于是上车 1410：回家洗了个澡，然后开始上网灌水 1920：家里面不做饭了，于是骑车到学校，准备BG事宜 2250：BG现场结束，被拖去蹭散伙饭 2320：被劝着留下跟着去K歌，发短信回家，嗯 20080622 0130：把车子锁在学校，然后打车去民大对面麦乐迪 03XX：吼了两首歌后，靠在椅子上睡觉了 05XX：早上醒了一下，继续迷糊 0700：出门，打车去学校 0730：和zp，企鹅吃早饭 0740：吃完早饭想回家，结果想想没带钥匙，叫门怕被海扁，决定骑车去宏福找silly玩 0930：应该是这会到了宏福，结果找不到人 0940：开始往回走，下午还有版聚 1100：到家，洗澡 1120：灌了一会水后驱车赶往学校 1200：宰了Bergwolf一顿饭 1300：骑车和Bergwolf去华联买吃的 1400：版聚正式开始 1700：请人去福口居吃饭（那边居然不让刷卡，改天还钱~~~~） 18XX：回家，洗澡 2250：睡觉，嗯。 小结一下： 1、 十渡，还行吧，不像想像中的那么无聊 2、 要加强锻炼，要不然上班后体力下降很快 3、 原来到宏福还是有点小远的 4、 清河开始那段路简直不是让自行车走的，而且灰N大 5、 热天出去一定要带够水，最好是运动饮料 6、 体力透支，不要太厉害，否则对身体不好 7、 在某些路段骑车不要太快 8、 在去某些地方前，找好路，少走冤枉路</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/310/'> 十渡归来（二）</a> </h2>
+        <div class="post-meta">发表于2008-06-23 21:46:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字：TeamBuilding 十渡</p>
+
+<p>继续昨天的话题，嗯。话说上回聊到第一天晚上11点上床睡觉。第二天早上照例没用闹钟，在6点半左右正式起床了，出门看看发现已经有人早起了，站在外面聊了会天，等着人陆续的都起床了，也就差不多开始吃早饭了。早饭是馒头，玉米糊还有点咸菜，反正也就那样了。考虑到爬山对体能消耗比较大，所以多往肚子里面塞了一个馒头。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/310/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/post/page/15/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/17/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

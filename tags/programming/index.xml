@@ -1,0 +1,1484 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/programming/</link>
+    <description>Recent content in Programming on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Sat, 19 Apr 2014 23:23:51 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Control Goroutines amount via bufferred channel</title>
+      <link>http://hzmangel.github.io/post/1239/</link>
+      <pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1239/</guid>
+      <description>&lt;p&gt;最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
+，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。###  Bufferred Channel&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Bufferred channel&lt;/code&gt;和&lt;a href=&#34;http://www.hzmangel.info/blog/archives/1230&#34;&gt;前一篇文章&lt;/a&gt;中说的东西没
+有太大差别，只是那篇文章中说的channel是不带缓存的，也就是相当于Semaphore的用法，而加了缓存的就是管道。不多说了，直接上代码吧：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import &amp;quot;fmt&amp;quot;
+import &amp;quot;time&amp;quot;
+
+func main() {
+
+    channel_cnt := 10
+    concurrency_chan := make(chan bool, 2)
+    msg_chan := make(chan string)
+
+    fmt.Println(&amp;quot;Start launching goroutines&amp;quot;)
+    for i := 0; i &amp;lt; channel_cnt; i++ {
+        go foo(i, concurrency_chan, msg_chan)
+    }
+    fmt.Println(&amp;quot;Finish launching goroutines&amp;quot;)
+
+    for i := 0; i &amp;lt; channel_cnt; i++ {
+        fmt.Println(&amp;lt;-msg_chan)
+    }
+
+}
+
+func foo(i int, concurrency_chan chan bool, msg_chan chan string) {
+    concurrency_chan &amp;lt;- true
+    s := fmt.Sprintf(&amp;quot;%s: Call index %d&amp;quot;, time.Now(), i)
+    msg_chan &amp;lt;- s
+    time.Sleep(1 * time.Second)
+    &amp;lt;-concurrency_chan
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段程序创建了两个&lt;code&gt;channel&lt;/code&gt;，而&lt;code&gt;concurrency_chan&lt;/code&gt;就是一个用来控制goroutine数量的&lt;code&gt;channel&lt;/code&gt;。在每个&lt;code&gt;gorout
+ine&lt;/code&gt;开始的时候，会往这个&lt;code&gt;channel&lt;/code&gt;中写入一个值，而在函数结束的时候从&lt;code&gt;channel&lt;/code&gt;中把东西取出来。当&lt;code&gt;channel&lt;/code&gt;中的缓存被占满的时候，
+后续的写入请求就会被阻塞，从而达到限制&lt;code&gt;goroutine&lt;/code&gt;个数的目的。代码和输出结果可以看&lt;a href=&#34;http://play.golang.org/p/8-
+qUxtH0gp&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Golang and JSON API</title>
+      <link>http://hzmangel.github.io/post/1233/</link>
+      <pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1233/</guid>
+      <description>
+
+&lt;p&gt;最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。### 生成URL&lt;/p&gt;
+
+&lt;p&gt;嗯，反正我的blog已经被墙了，所以这次就用不存在的网站来作为示例吧。这个网站的名字叫Facebook（其实是不想为国内的账号上传身份证，所以只有用国外的A
+PI了）。找了一圈，决定拿这个不存在的网站的CEO来测试。&lt;/p&gt;
+
+&lt;p&gt;用的是Facebook提供的&lt;a href=&#34;https://developers.facebook.com/docs/graph-
+api&#34;&gt;Graph API&lt;/a&gt;，下面演示的是如何用golang拼出来一个URL：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import (
+    &amp;quot;fmt&amp;quot;
+    &amp;quot;net/url&amp;quot;
+)
+
+func main() {
+    fmt.Println(userinfo_api(&amp;quot;4&amp;quot;, &amp;quot;&amp;quot;))
+}
+
+func userinfo_api(account_id string, access_token string) string {
+    base_url := &amp;quot;http://graph.facebook.com/&amp;quot;
+
+    params := make(url.Values)
+    params.Set(&amp;quot;fields&amp;quot;, &amp;quot;id,name,picture&amp;quot;)
+    if access_token != &amp;quot;&amp;quot; {
+        params.Set(&amp;quot;access_token&amp;quot;, access_token)
+    }
+
+    api_url := base_url + account_id + &amp;quot;?&amp;quot; + params.Encode()
+
+    return api_url
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;程序会在终端上打印出一个编码过的URL地址。这个地址直接贴到浏览器里面是会返回错误信息的，所以下一步我们需要在golang中去访问这个地址。多提一句，到目前
+为止还不需要科学上网的技能。还是一样，如果不想在本机测试结果，可以到&lt;a href=&#34;http://play.golang.org/p/mhBQxRwTmF&#34;&gt;这个地址&lt;/a&gt;去
+瞧一瞧看一看。&lt;/p&gt;
+
+&lt;h3 id=&#34;调用api:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;调用API&lt;/h3&gt;
+
+&lt;p&gt;在网上查了查发现大家对golang自带的http库表示比较满意，所以本着少用第三方库的原则，就直接使用了内置的&lt;code&gt;http&lt;/code&gt;库来获取JSON。程序如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import (
+    &amp;quot;fmt&amp;quot;
+    &amp;quot;net/http&amp;quot;
+    &amp;quot;net/url&amp;quot;
+)
+
+func main() {
+    info_api := userinfo_api(&amp;quot;4&amp;quot;, &amp;quot;&amp;quot;)
+    fmt.Println(info_api)
+    get_api_resp(info_api)
+}
+
+func userinfo_api(account_id string, access_token string) string {
+    base_url := &amp;quot;http://graph.facebook.com/&amp;quot;
+
+    params := make(url.Values)
+    params.Set(&amp;quot;fields&amp;quot;, &amp;quot;id,name,picture&amp;quot;)
+    if access_token != &amp;quot;&amp;quot; {
+        params.Set(&amp;quot;access_token&amp;quot;, access_token)
+    }
+
+    api_url := base_url + account_id + &amp;quot;?&amp;quot; + params.Encode()
+
+    return api_url
+}
+
+func get_api_resp(api_url string) {
+    resp, err := http.Get(api_url)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    fmt.Println(resp)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到，直接使用&lt;code&gt;http.Get&lt;/code&gt;即可向服务器端发送GET请求。这个程序最后打印出来的&lt;code&gt;resp&lt;/code&gt;是一个&lt;code&gt;http.Response&lt;/code&gt;的类型，而我们真正
+需要的是这个响应所带来的内容，所以需要用下面的调用来取得真正的响应内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import &amp;quot;io/ioutil&amp;quot;
+
+...
+
+content, err := ioutil.ReadAll(resp.Body)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时得到的&lt;code&gt;content&lt;/code&gt;是&lt;code&gt;[]byte&lt;/code&gt;类型的数据，即&lt;code&gt;byte&lt;/code&gt;类型的数组，如果直接用&lt;code&gt;fmt.Println(content)&lt;/code&gt;打印出来则会在屏幕
+上显示数据的Ascii码，所以如果想以字符串的形式打印到屏幕上需要将其转换为string类型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fmt.Println(string(content))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时屏幕上显示的即是正常的JSON响应了。&lt;/p&gt;
+
+&lt;h3 id=&#34;处理json数据:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;处理JSON数据&lt;/h3&gt;
+
+&lt;p&gt;此时的JSON数据还只是一个字符串，程序并不认为它和其它的字符串有什么不同，此时就需要使用内置的JSON库去解码，解码所得的结果放于&lt;code&gt;map&lt;/code&gt;结构中。&lt;/p&gt;
+
+&lt;p&gt;golang的解码有两种方式。第一种方式是明确知道返回JSON的数据格式，包括返回数据的结构，每一项的名称，以及值的类型，这种类型的返回数据可以直接解码到预
+先定义的&lt;code&gt;struct&lt;/code&gt;中，然后使用点操作符调用获取其中的值，如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;type userinfo_api_resp struct {
+    Id      string
+    Name    string
+    Picture userinfo_picture_data_wrapper
+}
+
+type userinfo_picture_data_wrapper struct {
+    Data userinfo_picture_data_detail
+}
+
+type userinfo_picture_data_detail struct {
+    Url           string
+    Is_silhouette bool
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在定义好这些内容后，使用下面的代码负责把JSON内容填入其中：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// content saves json repsonse in []byte formated
+err = json.Unmarshal(content, &amp;amp;json_rslt)
+if err != nil {
+    panic(err)
+}
+fmt.Println(json_rslt)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时即可以像普通的struct那样调用JSON中的值了，如使用&lt;code&gt;json_rslt.Name&lt;/code&gt;可以获取到名字，用&lt;code&gt;json_rslt.Picture.Dat
+a.Url&lt;/code&gt;可以获取到图片的地址等。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;struct&lt;/code&gt;中字段名的首字母都需要大写，猜测是由于golang中非首字母大写的变量不会被导出。（话说，真的好想好想吐槽这个设定啊，实在不习惯看大小写混杂的变量名，诶。）&lt;/p&gt;
+
+&lt;p&gt;当JSON返回的格式未知，或者不想定义过多的struct时，可以使用第二种方法。&lt;code&gt;interface{}&lt;/code&gt;。这个东西是一个空的&lt;code&gt;interface&lt;/code&gt;，表示的
+是一个没有任何方法的&lt;code&gt;interface&lt;/code&gt;，因为任何golang的类型都至少实现了0个方法（唔，直接翻译过来的，读着有点拗口，回头揣摩明白了再回来改），所以
+这个类型实际可以用于任何类型的变量。第二种方法就是使用&lt;code&gt;interface{}&lt;/code&gt;来表示所有未定的类型，然后由程序去处理相应的数据。还是上面那段JSON数据，
+想取到图片地址，则需要这么处理：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;json_rslt := map[string]interface{}{}
+
+...
+
+for k1, v1 := range json_rslt {
+    if k1 == &amp;quot;picture&amp;quot; {
+        for k2, v2 := range v1.(map[string]interface{}) {
+            if k2 == &amp;quot;data&amp;quot; {
+                for k3, v3 := range v2.(map[string]interface{}) {
+                    if k3 == &amp;quot;url&amp;quot; {
+                        fmt.Println(v3)
+                    }
+                }
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;唔，其实也没简单到哪去的感觉&amp;hellip;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;range&lt;/code&gt;后调用的诸如&lt;code&gt;v1.(map[string]interface{})&lt;/code&gt;被称为&lt;a href=&#34;http://golan
+g.org/ref/spec#Type_assertions&#34;&gt;&lt;em&gt;type assertions&lt;/em&gt;&lt;/a&gt;，它的意思是断言&lt;code&gt;v1&lt;/code&gt;非空而且&lt;code&gt;v1&lt;/code&gt;的类型是&lt;code&gt;(map[string]interface{
+})&lt;/code&gt;。文档中给出的更加精确的说法是&lt;code&gt;x.(T)&lt;/code&gt;表示&lt;code&gt;x&lt;/code&gt;的动态类型和&lt;code&gt;T&lt;/code&gt;一致，&lt;code&gt;T&lt;/code&gt;必需实现&lt;code&gt;x&lt;/code&gt;的所有接口。更加具体的代码请参考文档&lt;/p&gt;
+
+&lt;p&gt;到这，差不多就完成了，POST请求的事情还没用到，等用到后发现有什么需要写的再写吧。另外需要注意的一点是，&lt;a href=&#34;http://play.golang.org/&#34;&gt;http://play.golang.org/&lt;/a&gt;
+网站上是不允许使用&lt;code&gt;net/http&lt;/code&gt;库的，所以我后面的程序才没有给出代码链接，有兴趣的可以在自己机器上试验，记得要科学上网哦，要不然就会返回奇怪的结果了～&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>goroutines &#43; channel</title>
+      <link>http://hzmangel.github.io/post/1230/</link>
+      <pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1230/</guid>
+      <description>
+
+&lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;code&gt;channel&lt;/code&gt;是需要和&lt;code&gt;goroutines&lt;/code&gt;一起使用的。&lt;/p&gt;
+
+&lt;h3 id=&#34;goroutines:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;goroutines&lt;/h3&gt;
+
+&lt;p&gt;先说&lt;code&gt;goroutines&lt;/code&gt;吧。golang的并行模型使用的是&lt;strong&gt;CSP&lt;/strong&gt;（官方的说法是Newsqueak-Alef-Limbo，和原始的CSP有一些区别
+。具体的差别还没有细查。参见&lt;a href=&#34;http://talks.golang.org/2012/concurrency.slide#10&#34;&gt;此张幻灯片&lt;/a&gt; ），&lt;code&gt;go
+routines&lt;/code&gt;是一个独立运行的函数，不是进程也不是线程。它在被调用或者说被启动后直接返回，而不用等待函数运行结束。这是官方对它的一段&lt;a href=&#34;htt
+p://talks.golang.org/2012/concurrency.slide#17&#34;&gt;简要介绍&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What is a goroutine? It&amp;rsquo;s an independently executing function, launched by a go statement.&lt;/li&gt;
+&lt;li&gt;It has its own call stack, which grows and shrinks as required.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s very cheap. It&amp;rsquo;s practical to have thousands, even hundreds of thousands of goroutines.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s not a thread.&lt;/li&gt;
+&lt;li&gt;There might be only one thread in a program with thousands of goroutines.&lt;/li&gt;
+&lt;li&gt;Instead, goroutines are multiplexed dynamically onto threads as needed to keep all the goroutines running.&lt;/li&gt;
+&lt;li&gt;But if you think of it as a very cheap thread, you won&amp;rsquo;t be far off.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;goroutines&lt;/code&gt;使用&lt;code&gt;go&lt;/code&gt;关键字来创建，创建完后就自己蹲一边运行去了，主程序也不用理它，自己往下走就行。光看文字太枯燥，读程序看输出吧。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import &amp;quot;fmt&amp;quot;
+import &amp;quot;time&amp;quot;
+
+func main() {
+     fmt.Println(&amp;quot;START 1&amp;quot;)
+     for i := 0; i &amp;lt; 3; i++ {
+          foo(i)
+     }
+     fmt.Println(&amp;quot;END 1&amp;quot;)
+
+     fmt.Println(&amp;quot;START 2&amp;quot;)
+     for i := 0; i &amp;lt; 3; i++ {
+          go foo(i)
+     }
+     fmt.Println(&amp;quot;END 2&amp;quot;)
+
+     time.Sleep(1 * time.Second)
+}
+
+func foo(i int) {
+     time.Sleep(1)
+     fmt.Printf(&amp;quot;Call index: %d\n&amp;quot;, i)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;程序的输出是这样的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;START 1
+Call index: 0
+Call index: 1
+Call index: 2
+END 1
+START 2
+END 2
+Call index: 0
+Call index: 2
+Call index: 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;代码中，main函数中用了两个循环，分别调用了3次foo()函数，但是两次调用的方式不同，第一次是直接调用，第二次是使用了&lt;code&gt;goroutine&lt;/code&gt;。从输出看，
+前段输出是正常的顺序，但是从后一段输出可以看到，函数调用是立即返回的，而且最后输出的顺序也是不固定的（3次可能看到的效果比较一致，如果把循环次数涨到10次就
+能看的比较明显了）。在第19行加上sleep的原因是因为main函数在执行完成后会直接退出，不会等待所有&lt;code&gt;goroutines&lt;/code&gt;执行完毕，所以此处需要让程序
+等一等。不方便在本机运行的可以&lt;a href=&#34;http://play.golang.org/p/8BT6RVR7-w&#34;&gt;见这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;channel:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;channel&lt;/h3&gt;
+
+&lt;p&gt;拿sleep来不让main函数退出也不是个事，毕竟时间不好控制，睡多了睡少了都不行，所以这里就引入了&lt;code&gt;channel&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;就像文章开头说的，&lt;code&gt;channel&lt;/code&gt;就像是一个Semaphore或者FIFO的东西，更通俗的理解就是一条传送带或者管道，用于在&lt;code&gt;goroutines&lt;/code&gt;之间传
+递消息。把上面的程序改一下（顺序调用的那个就先去掉了，减少长度，嗯）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package main
+
+import &amp;quot;fmt&amp;quot;
+
+func main() {
+
+    foo_channel := make(chan string)
+    channel_cnt := 3
+
+    fmt.Println(&amp;quot;Start launching goroutines&amp;quot;)
+    for i := 0; i &amp;lt; channel_cnt; i++ {
+        go foo(i, foo_channel)
+    }
+    fmt.Println(&amp;quot;Finish launching goroutines&amp;quot;)
+
+    for i := 0; i &amp;lt; channel_cnt; i++ {
+        fmt.Println(&amp;lt;-foo_channel)
+    }
+
+}
+
+func foo(i int, foo_channel chan string) {
+    s := fmt.Sprintf(&amp;quot;Call index %d&amp;quot;, i)
+    foo_channel &amp;lt;- s
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输入是介样的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Start launching goroutines
+Finish launching goroutines
+Call index 0
+Call index 1
+Call index 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在这个程序里面，没有使用&lt;code&gt;sleep&lt;/code&gt;，程序也做到了等待所有&lt;code&gt;goroutines&lt;/code&gt;运行完毕才退出这个需求，就是靠的main函数最后几行。blog上不知道为
+啥没有行号了，程序&lt;a href=&#34;http://play.golang.org/p/FzHuVttKnB&#34;&gt;见这里吧&lt;/a&gt;。在第7行的时候创建了一个&lt;code&gt;channel&lt;/code&gt;，并把它
+传入了&lt;code&gt;foo()&lt;/code&gt;函数中。而&lt;code&gt;foo()&lt;/code&gt;函数也不像上一次那样直接输出一个字符串，它把需要输出的字符串放到一个string中，然后通过&lt;code&gt;channel&lt;/code&gt;传
+了回来。这条语句：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;foo_channel &amp;lt;- s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;做的就是把字符串放到channel中去，而这条语句：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fmt.Println(&amp;lt;-foo_channel)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;做的就是把字符串从channel中取出来，并把它输出。在执行&lt;code&gt;&amp;lt;-channel&lt;/code&gt;时，如果&lt;code&gt;channel&lt;/code&gt;上没有数据，这条语句是被blocked的，这样就
+能保证main函数在所有goroutines执行完毕前不会退出。而且当channel中有值而且没有被读出的时候，对这个channel的写操作也是被block
+ed的。这时的channel，可以用来做Semaphore。&lt;/p&gt;
+
+&lt;p&gt;上面介绍的channel是没有缓存的，golang中还有一种channel是可以加上缓存的，&lt;a href=&#34;htt
+p://talks.golang.org/2012/concurrency.slide#22A&#34;&gt;官方文档说这个就像是Erlang的mailboxes&lt;/a&gt;，因为不懂Erlang，所以只好把话贴在这以后两手一摊。目前
+在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于&lt;code&gt;select&lt;/code&gt;的文章，目前时间未定，因为还没用到～&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
+      <link>http://hzmangel.github.io/post/1224/</link>
+      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1224/</guid>
+      <description>
+
+&lt;h3 id=&#34;tl-dr:5ab4430131db8e4e631503ef790e7c02&#34;&gt;tl;dr&lt;/h3&gt;
+
+&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.&lt;/p&gt;
+
+&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
+repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next is the full version.### The problem&lt;/p&gt;
+
+&lt;p&gt;Recently I have faced a task to upload a image by a rich format text editor.
+The web server is Rails, so I selected
+&lt;a href=&#34;https://github.com/carrierwaveuploader/carrierwave&#34;&gt;carrierwave&lt;/a&gt; as the
+upload gem, and &lt;a href=&#34;http://mindmup.github.io/bootstrap-
+wysiwyg/&#34;&gt;bootstrap-wysiwyg&lt;/a&gt; as rich format text editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bootstrap-wysiwyg&lt;/code&gt; supports inserting image into edit area, and uploaded
+image via base64. Every thing is okay in development enviromnent, but I have
+met problem while deploying to production server.&lt;/p&gt;
+
+&lt;p&gt;The root cause of the problem is response size exceed the max limitation. The
+uploaded base64 encoded image are saved as string, and will be returned in
+response body. I have tried increasing response body size limitation but take
+no effect, so I switched to method that saving image to file.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution:5ab4430131db8e4e631503ef790e7c02&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;This section only shows how to get image and save via carrierwave, please
+refer to the source of the other contents.&lt;/p&gt;
+
+&lt;p&gt;The sample project is a simple post manage system, each post contains &lt;code&gt;title&lt;/code&gt;
+and &lt;code&gt;content&lt;/code&gt; field, and the &lt;code&gt;content&lt;/code&gt; field is rich format text.&lt;/p&gt;
+
+&lt;p&gt;The passed in base64 encoded image is started with this string:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;data:image/jpeg;base64,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then following the image data.&lt;/p&gt;
+
+&lt;p&gt;The image uploaded is surrounded by &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag, so I added a pre processing
+to the content uploaded. The logic is simple: save found &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag to a file
+with carrierwave, and replace the base64 data to file path. The primary code
+is here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def process_base64_content content
+  return if content.nil?
+  return content if not content.match /&amp;lt;/
+  rslt = &#39;&#39;
+  content.split(&amp;quot;&amp;lt;&amp;quot;).each do |elem_str|
+    if elem_str[0..2] == &amp;quot;img&amp;quot;
+      if elem_str.match(%r{data:(.*?);(.*?),(.*?)&amp;quot;&amp;gt;$})
+        img_data = {
+          :type =&amp;gt;      $1, # &amp;quot;image/png&amp;quot;
+          :encoder =&amp;gt;   $2, # &amp;quot;base64&amp;quot;
+          :data_str =&amp;gt;  $3, # data string
+          :extension =&amp;gt; $1.split(&#39;/&#39;)[1] # &amp;quot;png&amp;quot;
+        }
+
+        other_img = PostImage.new
+        img_data_str = img_data[:data_str]
+        img_data_sio = CarrierStringIO.new(Base64.decode64(img_data_str))
+        other_img.image = img_data_sio
+        other_img.save
+        rslt += view_context.image_tag(other_img.image.url)
+      else
+        rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+      end
+    else
+      rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+    end
+  end
+
+  rslt
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;PostImage&lt;/code&gt; is a model used for saving image. &lt;code&gt;CarrierStringIO&lt;/code&gt; is also a user
+defined class to provide functions &lt;code&gt;original_filename&lt;/code&gt; and &lt;code&gt;content_type&lt;/code&gt;,
+which are required by &lt;code&gt;carrierwave&lt;/code&gt;. Here is the definition of this class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CarrierStringIO &amp;lt; StringIO
+  def original_filename
+    # the real name does not matter
+    &amp;quot;image.jpeg&amp;quot;
+  end
+
+  def content_type
+    # this should reflect real content type, but for this example it&#39;s ok
+    &amp;quot;image/jpeg&amp;quot;
+  end
+end
+
+class PostImage
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  def image_data=(data)
+    sio = CarrierStringIO.new(Base64.decode64(data))
+    self.image = sio
+  end
+
+  mount_uploader :image, PostImageUploader
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last thing is the carrierwave uploader: &lt;code&gt;PostImageUploader&lt;/code&gt;. This is a
+simple uploader that only save the image to file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: utf-8
+
+class PostImageUploader &amp;lt; CarrierWave::Uploader::Base
+
+  storage :file
+
+  def store_dir
+    &amp;quot;uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}&amp;quot;
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the sample project, the file type and file name are hard coded in
+&lt;code&gt;CarrierStringIO&lt;/code&gt;, please feel free to modify code as needed.&lt;/p&gt;
+
+&lt;p&gt;Note: There is an bug of the code: The image can&amp;rsquo;t be extracted out if
+inserted into a text paragraph. I will fix this once I have time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ajax loading multi series to jqPlot</title>
+      <link>http://hzmangel.github.io/post/1220/</link>
+      <pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1220/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;http://www.jqplot.com/tests/data-renderers.php&#34;&gt;Ajax example of jqPlot&lt;/a&gt;
+only shows how to plot on series data, but the request I have met needs multi
+series. The solution is easy, just record here for later reference.&lt;/p&gt;
+
+&lt;p&gt;In the example, The function used to load ajax data is &lt;code&gt;ajaxDataRenderer&lt;/code&gt;,
+which returns array of data. For multi series, just return more than one data
+array. Here is a sample data set:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[
+  [
+    [1,1],[2,2],[3,3],[4,4],[5,5]
+  ],
+  [
+    [5,1],[4,2],[3,3],[2,4],[1,5]
+  ]
+]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Some failed attempts on PNaCl</title>
+      <link>http://hzmangel.github.io/post/1214/</link>
+      <pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1214/</guid>
+      <description>
+
+&lt;p&gt;Google has released his &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl
+/building-and-testing-portable-native-client&#34;&gt;PNaCl&lt;/a&gt; project on Google I/O 2013,
+which can allow user to write portable native client application. The portable
+native client application can be translated to native client program and
+executed on supported architecture.&lt;/p&gt;
+
+&lt;p&gt;The official toolchain contains clang frontend, which can only be used to
+compile C/C++ code to PNaCl application. But the PNaCl application is a subset
+of LLVM so I have tried some other languages have LLVM frontend. I am still
+working on the solution, and this article is just recording some failed
+attempts.### Install PNaCl toolchain&lt;/p&gt;
+
+&lt;p&gt;PNaCl toolchain can be downloaded via &lt;a href=&#34;https://developers.google.com/native-client/sdk/download&#34;&gt;Native Client
+SDK&lt;/a&gt;, please follow
+the instruction for downloading and installing. Here are the commands used
+here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;./naclsdk install pepper_canary&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export NACL_SDK_ROOT=/where/you/put/the/pepper_canary&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd pepper_canary/examples/hello_world; TOOLCHAIN=pnacl CONFIG=Release make&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Chrome is also needed some setup, which also can be found in that page. NOTICE
+that the &lt;code&gt;#enable-nacl-debug&lt;/code&gt; flag can not be enabled, or the PNaCl
+application will not be able to
+loaded(&lt;a href=&#34;http://www.ahwkong.com/post/43309281489/native-client-see-only-
+status-creating-embed&#34;&gt;ref&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;The samples are also avaliable in chrome store, and the link can also be found
+on &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl/building-and-
+testing-portable-native-client&#34;&gt;this page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;golang-and-llgo:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Golang and llgo&lt;/h3&gt;
+
+&lt;p&gt;The first language I tried is Golang. There is a Golang frontend for LLVM
+called &lt;a href=&#34;https://github.com/axw/llgo&#34;&gt;llgo&lt;/a&gt;, and I have tried to use it for
+generating LLVM bitcode from Golang program.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go get&lt;/code&gt; is recommended to install the &lt;code&gt;llgo&lt;/code&gt; package. The &lt;code&gt;CGO_CFLAGS&lt;/code&gt; and
+&lt;code&gt;CGO_LDFLAGS&lt;/code&gt; should be set before executing &lt;code&gt;go get&lt;/code&gt;. I have followed the
+steps on the &lt;a href=&#34;http://blog.awilkins.id.au/2013/05/llgo-on-
+go-11.html&#34;&gt;author&amp;rsquo;s blog&lt;/a&gt; for installing:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install Go 1.1&lt;/li&gt;
+&lt;li&gt;Get PNaCl sdk, which contains Clang and LLVM&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;go get github.com/axw/llgo/cmd/llgo-dist&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;llgo-dist&lt;/code&gt; to build and install runtime&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I was tried it on MacOS 10.7.5, but got the error message said &lt;code&gt;No matching
+.ll file for &amp;quot;asm_darwin_amd64.s&amp;quot;&lt;/code&gt;, I have &lt;a href=&#34;https://github.com/axw/llgo/issues/36&#34;&gt;filed an
+issue&lt;/a&gt; and learned from response that I
+can set target triple to &lt;code&gt;x86_64-apple-macosx10.7.0&lt;/code&gt; or &lt;code&gt;i386-apple-
+macosx10.7.0&lt;/code&gt; for solving this.&lt;/p&gt;
+
+&lt;p&gt;I have met compile error while compiling runtime by &lt;code&gt;llgo-dist&lt;/code&gt; command, which
+seems because of upgrade of golang to 1.1. So I leave &lt;code&gt;llgo&lt;/code&gt; there and waiting
+for some updates from author.&lt;/p&gt;
+
+&lt;h3 id=&#34;ruby:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Ruby&lt;/h3&gt;
+
+&lt;p&gt;Another attempt is &lt;code&gt;ruby&lt;/code&gt;. In ruby 2.0.0, the nacl support has been
+integrated, the document can be found &lt;a href=&#34;https://github.com/csigi/learning
+ruby/blob/master/ruby2/ruby-2.0.0-rc1/nacl/README.nacl&#34;&gt;here&lt;/a&gt;. During compiling the
+ruby source, I have got an &lt;code&gt;rdoc&lt;/code&gt; error, so I added &lt;code&gt;--disable-install-rdoc&lt;/code&gt;
+to the configue command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./configure --prefix=/tmp/nacl-ruby --host=x86_64-nacl --with-baseruby=`which ruby` --disable-install-rdoc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also I made a symbol link of all directories in includes PNaCl sdk directory
+to ruby for solving header file not found error.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ln -s /home/vagrant/source/nacl_sdk/pepper_canary/include/* ./
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If running this command on 64-bit OS, please make sure the 32-bit glibc
+library is installed, or some binaries may get error.&lt;/p&gt;
+
+&lt;p&gt;I have compiled the native executable for ruby, but it can&amp;rsquo;t be executed by
+PNaCl binary. I am still investigating on this.&lt;/p&gt;
+
+&lt;h3 id=&#34;next-step:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Next step&lt;/h3&gt;
+
+&lt;p&gt;I am still trying to write portable native client code with other languages. I
+saw the author of &lt;code&gt;llgo&lt;/code&gt; has made some changes and I will do the test. I will
+update my post when got progress.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title>
+      <link>http://hzmangel.github.io/post/1210/</link>
+      <pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1210/</guid>
+      <description>
+
+&lt;p&gt;Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose &lt;code&gt;carrierwave&lt;/code&gt; finally.
+Also, I selected &lt;code&gt;nested_form&lt;/code&gt; to manage uploading and deleting multiple
+attachments.### Gemfile&lt;/p&gt;
+
+&lt;p&gt;First thing to use those gems is updating &lt;code&gt;Gemfile&lt;/code&gt; in the project, so those
+lines have been added to the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Mongoid
+gem &amp;quot;mongoid&amp;quot;
+
+# File upload
+gem &#39;carrierwave&#39;
+gem &#39;carrierwave-mongoid&#39;, :require =&amp;gt; &#39;carrierwave/mongoid&#39;
+gem &amp;quot;mini_magick&amp;quot;
+
+# Form for multi model
+gem &#39;nested_form&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the modification, remember to run &lt;code&gt;bundle update&lt;/code&gt; to update/install the
+gems and dependencies.&lt;/p&gt;
+
+&lt;h3 id=&#34;model:b5edfa6373c50342486587e36ad49b10&#34;&gt;Model&lt;/h3&gt;
+
+&lt;p&gt;The next step is creating the models. For simplicity, there are only two
+models in the project. One model named &lt;code&gt;Foo&lt;/code&gt;, which contains a title field and
+a relationship field with the other model &lt;code&gt;FooImage&lt;/code&gt;. Here is the definition
+of model &lt;code&gt;Foo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo
+  include Mongoid::Document
+
+  field :title, type: String
+
+  has_many :foo_images # Photoes of the dish
+  accepts_nested_attributes_for :foo_images, :allow_destroy =&amp;gt; true
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;accepts_nested_attributes_for&lt;/code&gt; keyword enables saving associated records
+though the parent, while the &lt;code&gt;:allow_destroy&lt;/code&gt; parameter allows deleting
+associated though attributes hash.&lt;/p&gt;
+
+&lt;p&gt;Here comes the &lt;code&gt;FooImage&lt;/code&gt; model:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class FooImage
+  include Mongoid::Document
+
+  attr_accessible :image
+  mount_uploader :image, FooUploader
+
+  belongs_to :foo
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This model only contains one field &lt;code&gt;:image&lt;/code&gt;, and the difference between others
+is the &lt;code&gt;mount_uploader&lt;/code&gt; keyword, which is used to mount given uploader to the
+given column, then assigning and reading from this field will upload and
+retrieve files. The &lt;em&gt;uploader&lt;/em&gt; is introduced by &lt;code&gt;carrierwave&lt;/code&gt;, which will be
+introduced in next section.&lt;/p&gt;
+
+&lt;h3 id=&#34;uploader:b5edfa6373c50342486587e36ad49b10&#34;&gt;Uploader&lt;/h3&gt;
+
+&lt;p&gt;Uploader is used to handle the file uploaded to the server, which will save
+the file to specified location with multiple version. A uploader can be
+created by the command listed below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails g uploader Foo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A new uploader &lt;code&gt;foo_uploader.rb&lt;/code&gt; will be generated under directory
+&lt;code&gt;app/uploaders/&lt;/code&gt; after command return. The uploader generated by default can
+handle file uploading, and you can add some other function, such as scaling
+image, set whitelisted extension, in the uploader. Remember to remove the
+comment character from either &lt;code&gt;CarrierWave::RMagick&lt;/code&gt; or
+&lt;code&gt;CarrierWave::MiniMagick&lt;/code&gt; line to enable scaling function. &lt;code&gt;Carrierwave&lt;/code&gt; alwo
+support uploading file to cloud storage such as s3 directly, please refer to
+the document for detail. In this uploader, I scale the uploaded image to
+&lt;code&gt;800x600&lt;/code&gt; and add a thumbnail version with size &lt;code&gt;80x60&lt;/code&gt;, here is the code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;process :resize_to_fill =&amp;gt; [800, 600]
+
+version :thumb do
+  process :resize_to_fill =&amp;gt; [80, 60]
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The generated uploader uses &lt;code&gt;scale&lt;/code&gt; for resizing, remember to replace it with existing function like &lt;code&gt;resize_to_fill&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;views:b5edfa6373c50342486587e36ad49b10&#34;&gt;Views&lt;/h3&gt;
+
+&lt;p&gt;The last thing is the view. I plan to use two views in the project. Since this
+is just a simple demo, I have only created one record and shown the title and
+images with table.&lt;/p&gt;
+
+&lt;p&gt;By the way, if you want to deploy this application on production environment,
+please make sure those two configuration:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Make sure your web server, such as &lt;code&gt;Nginx&lt;/code&gt;, &lt;code&gt;Apache&lt;/code&gt;, has write permission to its temp path. If you don&amp;rsquo;t know which directory is it, you can use this simple method to determine: First, check whether the production server can complete process of uploading attachment (Just uploading only, showing of image may have another problem which will be talked about below ). If there is no error, then the permission issue has already done. But if error occurred, please refer to the error log or access log of web server for tracing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now the second problem, showing the image. After uploading successfully, you may can&amp;rsquo;t see the uploaded file. The problem is because production server do not serve static files. The quick fix for this is changing line &lt;code&gt;config.serve_static_assets = false&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt;, but it is not the recommended way, since the production server can&amp;rsquo;t server static file efficiently. The better method is configuring web server to serve those static file directly, please refer to web server&amp;rsquo;s manual for detail.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So, that&amp;rsquo;s it. Thanks for reading, and here is the &lt;a href=&#34;https://github.com/hzmangel/carrierwave-nestedform-mongoid&#34;&gt;link of project on
+GitHub&lt;/a&gt;, any
+comments are appreciated.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Rails with Redis</title>
+      <link>http://hzmangel.github.io/post/1205/</link>
+      <pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1205/</guid>
+      <description>&lt;p&gt;I have met an issue recently that the Rails site always returns 502 error for
+some page. After some investigation, I have found that the problem is caused
+by a long time query of database, which exceeds the timeout value of unicorn
+configuration, then the unicorn worker process will be killed and the Nginx
+returns 502 to user.&lt;/p&gt;
+
+&lt;p&gt;So the solution for this kind prblem is to put the job into some background
+task, and use some other method to inform the frontend when job done. Finally
+I choose the Redis for this task.First of all, the Redis server should be run on the server, I am using ubuntu
+on the server so the command is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install redis-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After installion done, the server will be started as service in the server.&lt;/p&gt;
+
+&lt;p&gt;Then the Rails part. I am using a gem called
+&lt;a href=&#34;https://github.com/resque/resque&#34;&gt;&lt;code&gt;resque&lt;/code&gt;&lt;/a&gt; for creating background jobs. I
+have followed the &lt;a href=&#34;http://railscasts.com/episodes/271-resque&#34;&gt;RailsCasts #271&lt;/a&gt;
+to setup my project, and here is a brief instruction for Rails part:&lt;/p&gt;
+
+&lt;p&gt;First a rake task for resque it is needed, which is also listed in the rails
+casts site.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;quot;resque/tasks&amp;quot;
+
+task &amp;quot;resque:setup&amp;quot; =&amp;gt; :environment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then create workers for the long time tasks in &lt;code&gt;app/worker&lt;/code&gt; directory. I am
+using &lt;code&gt;sleep&lt;/code&gt; method to simulate the long time task, and then the script will
+write some data into Rails cache. Here is the file content of
+&lt;code&gt;app/worker/cache_writer.rb&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CacheWriter
+  @queue = :rails_cache
+  def self.perform(cache_key)
+    sleep 10
+    Rails.cache.write(cache_key, &amp;quot;foobar&amp;quot;)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After worker creation done, I need to update code in the controller to enqueue
+job to Redis. Now in the controller, I just need to enque the task to Redis
+queue with &lt;code&gt;Resque.enqueue&lt;/code&gt; and return:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class TestCachesController &amp;lt; ApplicationController
+  def index
+    @foo = Rails.cache.read(&amp;quot;foo&amp;quot;)
+    if @foo.nil?
+      Resque.enqueue(CacheWriter, &amp;quot;foo&amp;quot;)
+    end
+  end
+
+  def show
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the task can be added to the queue, and we need worker to handle it. The
+&lt;code&gt;bin/resque work&lt;/code&gt; will start a worker process, and the parameter &lt;code&gt;--queues=&lt;/code&gt;
+or &lt;code&gt;--queue=&lt;/code&gt; can be added to specify the working queue. I have copied some
+code from &lt;a href=&#34;https://gist.github.com/J-Gull/1060167&#34;&gt;this page&lt;/a&gt; to make the rake
+can start/stop the workers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Code Snippets - UITableView</title>
+      <link>http://hzmangel.github.io/post/1201/</link>
+      <pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1201/</guid>
+      <description>
+
+&lt;p&gt;Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href=&#34;http://goo.gl/0ZrcA&#34;&gt;http://goo.gl/0ZrcA&lt;/a&gt;. The text above is the introduction text for that project, please reference the code for detailed information.# SimpleTableView&lt;/p&gt;
+
+&lt;p&gt;This app is used to describe some basic feature of &lt;code&gt;UITableView&lt;/code&gt; in iOS
+framework, here is some points of this app:&lt;/p&gt;
+
+&lt;h2 id=&#34;a-tabbed-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;A tabbed view&lt;/h2&gt;
+
+&lt;p&gt;This app shows three different UITableViewController objects, which is
+organized by tabbed view. The table view of this app is created
+programmatically, which is built by this code segment in file &lt;code&gt;AppDelegate.m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+
+    UIViewController *vc_simple_table = [[SimpleTableViewController alloc] initWithNibName:@&amp;quot;SimpleTableViewController&amp;quot; bundle:nil];
+    UIViewController *vc_section_table = [[SectionTableViewController alloc] initWithNibName:@&amp;quot;SectionTableViewController&amp;quot; bundle:nil];
+    UIViewController *vc_grouped_table = [[GroupedTableViewController alloc] initWithNibName:@&amp;quot;GroupedTableViewController&amp;quot; bundle:nil];
+
+    self.tab_bar = [[UITabBarController alloc] init];
+    self.tab_bar.viewControllers = @[vc_simple_table, vc_section_table, vc_grouped_table];
+
+    [self.window addSubview:self.tab_bar.view];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: &lt;code&gt;setRootView&lt;/code&gt; for &lt;code&gt;self.window&lt;/code&gt; can&amp;rsquo;t add show the tabbed view in app, not sure why currently.&lt;/p&gt;
+
+&lt;h2 id=&#34;read-data-from-text-file:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Read data from text file&lt;/h2&gt;
+
+&lt;p&gt;The data source of the list is fetched from a text file by this code segment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NSArray *table_data;
+
+// Country list
+NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@&amp;quot;country_list&amp;quot; ofType:@&amp;quot;txt&amp;quot;] encoding:NSMacOSRomanStringEncoding error:nil];
+table_data = [fileText componentsSeparatedByString:@&amp;quot;\n&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;build-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Build table view&lt;/h2&gt;
+
+&lt;p&gt;Now the prime task, build table view. I have created three types of list, the
+plain, sectioned, and grouped. I want to apply it to some earlier version of
+iOS device, so haven&amp;rsquo;t use the storyboard. By the way, there is a &lt;a href=&#34;h
+ttp://developer.apple.com/library/ios/#documentation/userexperience/conceptual
+/tableview_iphone/AboutTableViewsiPhone/AboutTableViewsiPhone.html#//apple_ref
+/doc/uid/TP40007451-CH1-SW1&#34;&gt;document&lt;/a&gt; on apple development center which can give more
+information.&lt;/p&gt;
+
+&lt;h3 id=&#34;plain-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Plain table view&lt;/h3&gt;
+
+&lt;p&gt;This is the simplest table view, and here is my step:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a Object C class, with xib file. In this app, the created class is &lt;code&gt;SimpleTableViewController&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Modify the header file to make sure the class will implement protocol &lt;code&gt;UITableViewDelegate&lt;/code&gt; and &lt;code&gt;UITableViewDataSource&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Drag the UITableViewController widget to xib file, and associate with member variables.&lt;/li&gt;
+&lt;li&gt;Two functions &lt;code&gt;numberOfRowsInSection&lt;/code&gt; and &lt;code&gt;cellForRowAtIndexPath&lt;/code&gt; are needed for showing data in list.&lt;/li&gt;
+&lt;li&gt;Fill the data into &lt;code&gt;table_data&lt;/code&gt; array, and now you have a simple table list.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;sectioned-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Sectioned table view&lt;/h3&gt;
+
+&lt;p&gt;Class for sectioned table view is &lt;code&gt;SectionTableViewController&lt;/code&gt;, here is the
+prime changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use two-level data structure to save section title and row data. Currently an array is used for section title while a dictionary for detail data.&lt;/li&gt;
+&lt;li&gt;Two functions &lt;code&gt;numberOfSectionsInTableView&lt;/code&gt; and &lt;code&gt;titleForHeaderInSection&lt;/code&gt; are added for returning section count and section title&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numberOfRowsInSection&lt;/code&gt; should be modified to return count in each section.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;grouped-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Grouped table view&lt;/h3&gt;
+
+&lt;p&gt;Class for grouped table view is &lt;code&gt;GroupedTableViewController&lt;/code&gt;, and here is the
+changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Modify the table view widget from &lt;em&gt;plain&lt;/em&gt; to &lt;em&gt;grouped&lt;/em&gt; in xib file&lt;/li&gt;
+&lt;li&gt;The other things are almost the same with section.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;add-the-index:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Add the index&lt;/h2&gt;
+
+&lt;p&gt;This will add an index to the right side of list, since it need a sectioned
+data, so I added it in section table view. Two functions are needed for adding
+index. * &lt;code&gt;sectionIndexTitlesForTableView&lt;/code&gt;: Set the section header string *
+&lt;code&gt;sectionForSectionIndexTitle&lt;/code&gt;: Return the section while clicking section
+title.&lt;/p&gt;
+
+&lt;h2 id=&#34;search-the-list:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Search the list&lt;/h2&gt;
+
+&lt;p&gt;Search function it added to simple table view. Here are the changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add search bar to top of the table view&lt;/li&gt;
+&lt;li&gt;Add function &lt;code&gt;searchBarTextDidBeginEditing&lt;/code&gt; and &lt;code&gt;textDidChange&lt;/code&gt; to handle the typing event in search bar&lt;/li&gt;
+&lt;li&gt;Add function &lt;code&gt;searchBarSearchButtonClicked&lt;/code&gt; to handle search button clicked event&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This search result will be shown real time while typing character to the
+search bar.&lt;/p&gt;
+
+&lt;h2 id=&#34;response-to-user-click-event:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Response to user click event&lt;/h2&gt;
+
+&lt;p&gt;This is added to sectioned table view. Function &lt;code&gt;didSelectRowAtIndexPath&lt;/code&gt; will
+handle user click event.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>@property and its attributes</title>
+      <link>http://hzmangel.github.io/post/1195/</link>
+      <pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1195/</guid>
+      <description>
+
+&lt;p&gt;Recently working on iOS project, and have met some problems while using the
+attributes of &lt;code&gt;@property&lt;/code&gt;. I have searched some documents and here is my idea
+about this.### What is &lt;code&gt;@property&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So, first thing is to talk about the &lt;code&gt;@property&lt;/code&gt;. This will offer a way to
+encapsulate the class. With the @synthesize keyword, the compiler will
+generate a getter and setter function for the variable. For example, there is
+a class called FooTester, which contains a variable named foo, so here is
+piece of the code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Definiation
+@interface FooTester : NSObject
+@property int foo;
+@end
+
+// Implementation
+@implementation PropertyTester
+@synthesize foo;
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, the compiler will generate setter and getter for variable &lt;code&gt;foo&lt;/code&gt;,
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (int) foo {
+    return foo;
+}
+
+- (void) setFoo:(int) i {
+    foo = i;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is really a great function, which brings lots of convenience to
+development. Also, it can accept various attributes as its parameter, which is
+describing below.&lt;/p&gt;
+
+&lt;h3 id=&#34;attributes-of-property:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;Attributes of &lt;code&gt;@property&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The full syntax for @property is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@property (&amp;lt;#attribute_list&amp;gt;) &amp;lt;#variable_type&amp;gt; &amp;lt;#variable_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The attributes is used to define some behavior of the variable.&lt;/p&gt;
+
+&lt;h4 id=&#34;readonly-and-readwrite:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;readonly&lt;/em&gt; and &lt;em&gt;readwrite&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;As the meaning of the word, those two attributes are used to control read-
+write access of the property, while &lt;code&gt;readwrite&lt;/code&gt; is the default value.&lt;/p&gt;
+
+&lt;h4 id=&#34;atomic-and-nonatomic:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;atomic&lt;/em&gt; and &lt;em&gt;nonatomic&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;atomic&lt;/code&gt; and &lt;code&gt;nonatomic&lt;/code&gt; attributes are used to indicate whether the setter
+and getter function returns the whole value of variable. With &lt;code&gt;atomic&lt;/code&gt;, the
+synthesized getter and setter function will be guaranteed. For example, there
+two thread A and B, thread A is getting value in middle while thread B is
+setting value to the object. If the variable is declared with &lt;code&gt;atomic&lt;/code&gt;, the
+value returned to A should be a complete one, which means there is impossible
+to return a object combines the old and new value. Most likely, the getter
+will generate a auto-release copy and then return it.&lt;/p&gt;
+
+&lt;p&gt;There is no this guarantee for &lt;code&gt;nonatomic&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;p&gt;One more thing need to be aware is the &lt;code&gt;atomic&lt;/code&gt; do &lt;em&gt;not&lt;/em&gt; guarantee thread
+safety. It just guarantee the variable has atomic access. For example, if
+thread A, B and C are setting the variable to different value at almost same
+time, then the value of variable is unpredictable.&lt;/p&gt;
+
+&lt;p&gt;The default attribute is &lt;code&gt;atomic&lt;/code&gt;, in case &lt;code&gt;nonatomic&lt;/code&gt; is specified in the
+&lt;code&gt;@property&lt;/code&gt; declaration. And generally speaking, in &lt;code&gt;nonatomic&lt;/code&gt; case, the
+getter and setter function will a little more faster.&lt;/p&gt;
+
+&lt;h4 id=&#34;assign-copy-and-retain:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;assign&lt;/em&gt;, &lt;em&gt;copy&lt;/em&gt; and &lt;em&gt;retain&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Those three attributes are related to memory management, which are used for
+control behavior of setters. The &lt;code&gt;assign&lt;/code&gt; attribute is a simple assignment,
+without any other operations. The &lt;code&gt;copy&lt;/code&gt; attribute means the setter will
+assign the copy of the value to the object variable. The &lt;code&gt;retain&lt;/code&gt; attribute
+means it will assign the pointer to the object variable.&lt;/p&gt;
+
+&lt;p&gt;Hmm&amp;hellip; It is really confusion, so let&amp;rsquo;s write some code to make it more
+clearly.&lt;/p&gt;
+
+&lt;p&gt;First, we need a class with those property type, here are the declaration and
+implementation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+
+@interface PropertyTester : NSObject
+
+@property (assign) NSMutableString *str_assign;
+@property (copy) NSMutableString *str_copy;
+@property (retain) NSMutableString *str_retain;
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;-&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;quot;property.h&amp;quot;
+
+@implementation PropertyTester
+
+@synthesize str_assign;
+@synthesize str_copy;
+@synthesize str_retain;
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we have to prepare some code to test the class. I have written two simple
+code to test this class, one is focusing on the memory and the other is about
+reference count.&lt;/p&gt;
+
+&lt;p&gt;Here comes the program for memory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+#import &amp;quot;property.h&amp;quot;
+
+int main (int argc, const char * argv[])
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str = [NSMutableString stringWithFormat:@&amp;quot;first&amp;quot;];
+
+    property_tester.str_assign = tmp_str;
+    property_tester.str_copy = tmp_str;
+    property_tester.str_retain = tmp_str;
+
+    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [tmp_str appendString:@&amp;quot;second&amp;quot;];
+
+    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The logic for this program is simple. I created a &lt;code&gt;NSMutableString&lt;/code&gt; object
+named &lt;code&gt;tmp_str&lt;/code&gt; and assign it to three different type of property variables,
+then update the object. The information for class object will be printed out
+for examination. I have overloaded the &lt;code&gt;description&lt;/code&gt; of class to show some
+internal information, so the output of the program is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2013-02-08 16:39:14.557 property_update[66361:707] 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, first 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] 0x10fa15030, firstsecond
+2013-02-08 16:39:14.581 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, firstsecond 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, firstsecond
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;According to the screen log, the object &lt;code&gt;tmp_str&lt;/code&gt; has initialized value
+&lt;code&gt;first&lt;/code&gt;, while the memory address is &lt;code&gt;0x10fa15030&lt;/code&gt;. After the assignment
+operations, three variables all contains the same value of &lt;code&gt;tmp_str&lt;/code&gt;, but the
+memory address of &lt;code&gt;str_copy&lt;/code&gt; is different with original one. Then the original
+string &lt;code&gt;tmp_str&lt;/code&gt; updates its value to &lt;code&gt;firstsecond&lt;/code&gt;, while the value for
+variable &lt;code&gt;str_assign&lt;/code&gt; and &lt;code&gt;str_retain&lt;/code&gt; has also updated, but not the
+&lt;code&gt;str_copy&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As mentioned above, the &lt;code&gt;assign&lt;/code&gt; will do simple assignment, while &lt;code&gt;retain&lt;/code&gt;
+will assign the pointer, which is shown in the screen log. The two variable
+has the same value and memory address with original string, and will be
+updated if original string updated. However, &lt;code&gt;copy&lt;/code&gt; means assing a copied
+value to the property, so it contains different memory address, and will no
+update if original object updated.&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s use another program to show difference between &lt;code&gt;assign&lt;/code&gt; and
+&lt;code&gt;retain&lt;/code&gt;. The prime difference between &lt;code&gt;assign&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; is reference
+count, I will use &lt;code&gt;retainCount&lt;/code&gt; in the program to get the reference count.
+Here is the program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+#import &amp;quot;property.h&amp;quot;
+
+void print_ref_cnt(NSObject *obj1, NSObject *obj2, void (^block)(void)) {
+    NSLog(@&amp;quot;====================&amp;quot;);
+    NSLog(@&amp;quot;Reference count of %@&amp;quot;, obj1);
+    NSLog(@&amp;quot;Before: obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    block();
+    NSLog(@&amp;quot;After : obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    NSLog(@&amp;quot;@@@@@@@@@@@@@@@@@@@@&amp;quot;);
+}
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str_assign = [NSMutableString stringWithFormat:@&amp;quot;assign&amp;quot;];
+    NSMutableString *tmp_str_copy = [NSMutableString stringWithFormat:@&amp;quot;copy&amp;quot;];
+    NSMutableString *tmp_str_retain = [NSMutableString stringWithFormat:@&amp;quot;retain&amp;quot;];
+
+    NSLog(@&amp;quot;\n\n\nAssign&amp;quot;);
+    print_ref_cnt(tmp_str_assign, property_tester.str_assign, ^(void) { property_tester.str_assign = tmp_str_assign; });
+    //print_ref_cnt(tmp_str, ^(void) { property_tester.str_assign.release; }); // Over release, seg fault
+
+    NSLog(@&amp;quot;\n\n\nCopy&amp;quot;);
+    print_ref_cnt(tmp_str_copy, property_tester.str_copy, ^(void) { property_tester.str_copy = tmp_str_copy; });
+
+    NSLog(@&amp;quot;\n\n\nRetain&amp;quot;);
+    print_ref_cnt(tmp_str_retain, property_tester.str_retain, ^(void) { property_tester.str_retain = tmp_str_retain; });
+
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The logic for this program is also simple, it creates three objects which will
+be used for &lt;code&gt;assign&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; separatedly, then the program will
+print out the reference count before and after invoking the setter function.
+Here is the result of the program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2013-02-09 10:18:57.058 property_ref[67671:707] 
+
+
+Assign
+2013-02-09 10:18:57.060 property_ref[67671:707] ====================
+2013-02-09 10:18:57.060 property_ref[67671:707] Reference count of assign
+2013-02-09 10:18:57.061 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.063 property_ref[67671:707] 
+
+
+Copy
+2013-02-09 10:18:57.064 property_ref[67671:707] ====================
+2013-02-09 10:18:57.064 property_ref[67671:707] Reference count of copy
+2013-02-09 10:18:57.064 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.066 property_ref[67671:707] 
+
+
+Retain
+2013-02-09 10:18:57.066 property_ref[67671:707] ====================
+2013-02-09 10:18:57.067 property_ref[67671:707] Reference count of retain
+2013-02-09 10:18:57.067 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.067 property_ref[67671:707] After : obj1: 2, obj2: 0
+2013-02-09 10:18:57.068 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.068 property_ref[67671:707] PropertyTester: 0x10b714760
+    assign: 0x10b715020, assign 
+    copy: 0x7fe234101390, copy 
+    retain: 0x10b715150, retain
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the &lt;code&gt;assign&lt;/code&gt;, the reference count for class object doesn&amp;rsquo;t change, while
+for &lt;code&gt;retain&lt;/code&gt;, the reference count increased 1 after invoking setter function,
+since the &lt;code&gt;@property&lt;/code&gt; with &lt;code&gt;retain&lt;/code&gt; will invoke &lt;code&gt;retain&lt;/code&gt; before assignment.&lt;/p&gt;
+
+&lt;h4 id=&#34;weak-and-strong:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;weak&lt;/em&gt; and &lt;em&gt;strong&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Another two attributes are &lt;code&gt;weak&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;, which is introduced from ARC
+feature. The attribute &lt;code&gt;strong&lt;/code&gt; is the same with &lt;code&gt;retain&lt;/code&gt;. While the attribute
+&lt;code&gt;weak&lt;/code&gt; is almost same with &lt;code&gt;assign&lt;/code&gt;. The minor difference between &lt;code&gt;weak&lt;/code&gt; and
+&lt;code&gt;assign&lt;/code&gt; is that the &lt;code&gt;weak&lt;/code&gt; will set object to nil after releasing, which is
+missed in &lt;code&gt;assign&lt;/code&gt; attribute.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Change font size of UITextView dynamically</title>
+      <link>http://hzmangel.github.io/post/1191/</link>
+      <pubDate>Tue, 29 Jan 2013 10:48:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1191/</guid>
+      <description>&lt;p&gt;I am working on a UITextView related problem recently, the widget, which have
+a fixed size, but need to show all content passed in. The text passed in have
+different length, so the font size should be different. The code snippet below
+will change the font size dynamically based on the text.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Set the text before setting font size
+my_text_view.text = foo_text;
+
+// Set the default font name and size
+int pre_defined_font_size = 14;
+my_text_view.font = [UIFont fontWithName:@&amp;quot;Helvetica&amp;quot; size:pre_defined_font_size];
+
+// Change the font size if needed
+if (my_text_view.contentSize.height &amp;gt; my_text_view.frame.size.height) {
+    int adjust_font_size = 1;
+    while (my_text_view.contentSize.height &amp;gt; my_text_view.frame.size.height) {
+        my_text_view.font = [UIFont fontWithName:@&amp;quot;Helvetica&amp;quot; size:pre_defined_font_size-adjust_font_size];
+        adjust_font_size++;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is a comparison between content height and frame height. If the content
+is higher than the frame, the font size will be reduced, and check again.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Show alert box in calendar operations of iOS6</title>
+      <link>http://hzmangel.github.io/post/1189/</link>
+      <pubDate>Thu, 24 Jan 2013 23:47:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1189/</guid>
+      <description>&lt;p&gt;With the new permission schema in iOS6, app should acquire authentication
+before accessing calendar. So the code for calendar operation should be
+surrounded like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EKEventStore *eventStore = [[EKEventStore alloc] init];
+EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+
+[eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    if (granted) {
+        // Calendar operation
+    }
+}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, the code for calendar operation is written in a block.&lt;/p&gt;
+
+&lt;p&gt;After the operation completed, you may want to show customer an alert box to
+say the operation is done. But, showing a UIAlertView object in block will not
+perform expected action. The reason is because of the event loop. I am still
+studying it, so will update it later.&lt;/p&gt;
+
+&lt;p&gt;The correct way to show an alert box is using &lt;code&gt;dispatch_async&lt;/code&gt; function to put
+the operation block to main queue, which looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    if (granted) {
+        // Calendar operation
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@&amp;quot;Event Added&amp;quot;
+                                  message:nil
+                                  delegate:nil
+                                  cancelButtonTitle:@&amp;quot;OK&amp;quot;
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+
+    }
+}];
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Compile Object-C program in command line</title>
+      <link>http://hzmangel.github.io/post/1183/</link>
+      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1183/</guid>
+      <description>
+
+&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
+language itself. But it is inconvenient to start Xcode for each program,
+especially for program without UI elements in. So I want to set up a command
+line environment that can compile and execute ObjC program.### Prepare the code&lt;/p&gt;
+
+&lt;p&gt;First I have to prepare the ObjC file. I have created one file called
+&lt;em&gt;helloworld.m&lt;/em&gt; in current directory, and here is the content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    NSLog (@&amp;quot;Hello World!&amp;quot;);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay, the program does the same thing as the first program of other languages
+do: print out &lt;strong&gt;Hello World!&lt;/strong&gt; string.&lt;/p&gt;
+
+&lt;h3 id=&#34;compile-and-execute-the-program:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Compile and execute the program&lt;/h3&gt;
+
+&lt;h4 id=&#34;mac-os:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Mac OS&lt;/h4&gt;
+
+&lt;p&gt;I have installed Xcode before, so I don&amp;rsquo;t know whether those commands can be
+run successfully without Xcode command line tools.&lt;/p&gt;
+
+&lt;p&gt;There are two methods to compile ObjC program from command line in Mac OS, one
+is using &lt;code&gt;gcc&lt;/code&gt; and the other one is using &lt;code&gt;clang&lt;/code&gt;. Both commands below can
+generate ObjC executable file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;clang -framework Foundation helloworld.m -o helloworld_clang
+
+gcc -framework Foundation helloworld.m -o helloworld_gcc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On my side, the two binary file has the same size, and the execute results are
+the same except the timestamp:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./helloworld_clang
+2013-01-24 01:56:27.009 helloworld_clang[7845:707] Hello World!
+
+$ ./helloworld_gcc
+2013-01-24 01:56:29.744 helloworld_gcc[7846:707] Hello World!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;linux:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Linux&lt;/h4&gt;
+
+&lt;p&gt;With GCC, the command line compilation can also be done on Linux platform. I
+am using Debian and have set up the environment after refering &lt;a href=&#34;http://stpetrus27.wordpress.com/2011/06/20/compile-objective-c-programs-
+on-linux/&#34;&gt;this
+post&lt;/a&gt;. Here are the brief steps:&lt;/p&gt;
+
+&lt;p&gt;First Install those packages first to prepare the environment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install gobjc gnustep gnustep-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then compile the program with command listed below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gcc `gnustep-config --objc-flags` helloworld.m -o helloworld_gcc `gnustep-config --objc-libs` -lgnustep-base
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the command return, you can find binary file &lt;code&gt;helloworld_gcc&lt;/code&gt; in the
+same directory.&lt;/p&gt;
+
+&lt;p&gt;So, with this feature, some simple program can be executed without running
+Xcode, a little convenient for language learning for me.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Invoke map app in iOS app</title>
+      <link>http://hzmangel.github.io/post/1176/</link>
+      <pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1176/</guid>
+      <description>&lt;p&gt;最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&amp;ldquo;comgooglemaps://&amp;ldquo;]])
+        {
+            // iOS 6 with google map app installed
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;ldquo;comgooglemaps://?center=%f,%f&amp;rdquo;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        } else {
+            // Check whether it is iOS 6
+            Class mapItemClass = [MKMapItem class];
+            if (mapItemClass &amp;amp;&amp;amp; [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+            {
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, lng);
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+                MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+                [mapItem setName:venue_name];&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;            [mapItem openInMapsWithLaunchOptions:nil];
+        } else {
+            // Early than iOS 6
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;quot;http://maps.google.com/maps?ll=%f,%f&amp;quot;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;逻辑很简单，首先判断是否可以打开gmap app的&lt;a href=&#34;https://developers.google.com/maps/docum
+entation/ios/urlscheme&#34;&gt;URL schema&lt;/a&gt;，如果不行则试着创建iOS
+6新加入的MKMapItem，如果不能打开，则就是老的iOS了。因为只需要打开系统内建的map程序，所以就这样啦。&lt;/p&gt;
+
+&lt;p&gt;PS: MKMapItem那段程序是从网上找到的，嗯。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dismiss keyboard in UITextViewController</title>
+      <link>http://hzmangel.github.io/post/1166/</link>
+      <pubDate>Wed, 18 Jul 2012 14:43:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1166/</guid>
+      <description>&lt;p&gt;The method is collected from Internet and I just record it with my way.First create a single view project, then drag an UITextViewController, an
+UINavigationBar and an UINavigationItem into the storyboard. Link the three
+elements to the ViewController class by dragging with Ctrl key. The view
+controller should implement the UITextViewDelegate, then add some code to the
+function invoked while beginning and completing edit. This sample add one
+button on the navigation bar to dismiss the keyboard, and the button will be
+shown and hidden dynamically. Function &lt;code&gt;textViewDidBeginEditing&lt;/code&gt; and
+&lt;code&gt;textViewDidBeginEditing&lt;/code&gt; will be used to implement the feature:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (void) textViewDidBeginEditing:(UITextView *)textView {
+    UIBarButtonItem *send = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
+    self.navItem.rightBarButtonItem = send;
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    self.navItem.rightBarButtonItem = nil;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the function leaveEditMode, which will dismiss the keyboard.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (void) leaveEditMode {
+    [self.content resignFirstResponder];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s all.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

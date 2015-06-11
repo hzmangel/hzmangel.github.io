@@ -1,0 +1,133 @@
+body {
+    background: #f1f1f1;
+    color: #666;
+    font-size: 12px;
+    line-height: 18px;
+    font-family: Georgia, "Bitstream Charter", serif;
+    display: block;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+}
+
+input[type="submit"] {
+    font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+}
+
+pre {
+    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+code {
+    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+a:hover {
+    color: red;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
+
+
+header {
+    padding-top: 30px;
+}
+
+#site-wrapper {
+    background: #fff;
+}
+
+#site-title h2 {
+    line-height: 36px;
+    color: black;
+}
+
+#site-description {
+    line-height: 36px;
+    margin-top: 15px;
+    padding-right: 20px;
+}
+
+
+.post {
+    color: #333;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.post .post-title {
+    color: #000;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.3em;
+    margin-bottom: 0;
+}
+
+.post .post-meta {
+    color: #777;
+    font-size: 12px;
+}
+
+.post .post-summary {
+    clear: both;
+    padding: 12px 0 0 0;
+}
+
+.post section {
+    margin-bottom: 18px;
+}
+
+.post footer {
+    margin-bottom: 24px;
+}
+
+.post footer ul {
+    display: inline;
+}
+
+.post footer ul a {
+}
+
+.post nav .previous {
+    float: left;
+    width: 50%;
+}
+
+.post nav .next {
+    float: right;
+    text-align: right
+    width: 50%;
+}
+
+
+
+#pager {
+    margin: 10px 15px;
+}
+
+/* Footer */
+
+.site-footer {
+    margin-bottom: 20px;
+    clear: both;
+    width: 100%;
+}
+
+.site-footer #colophon {
+    border-top: 4px solid #000;
+    margin-top: -4px;
+    overflow: hidden;
+    padding: 18px 0;
+}
+

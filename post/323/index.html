@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Linux终端不回显 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/323/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2008-07-04T09:29:36Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Linux终端不回显
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/323/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/323/'> Linux终端不回显</a> </h2>
+        <div class="post-meta">发表于2008-07-04 09:29:36 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： Linux, 终端属性, 回显</p>
+
+<p>一直想写段程序试试输入不回显的东西，但是一直被一些事情所羁绊（其实是自己懒，玩游戏去了），直到最近要在公司的代码上加东西。</p>
+
+<p>于是乎，一轮 google 以后，终于找到了答案，其实是因为自己看APUE看的头晕了。代码很简单，先用 tcgetattr
+取到现有的属性，然后在现有属性上设置 XXX.c_lflag &amp;= ~ECHO ，再用 <code>tcsetattr</code>
+把新属性给设置上去，就行了，对于两个终端相关的函数，需要提供 fd ，对于 stdin 而言是 0 ，话说不知道为啥昨天直接写 stdin
+不行，下面呢，木有了~~~~</p>
+
+<p>PS：突然想到，代码贴上来是不是好一点？于是下面又有了：</p>
+
+<pre><code>** 1**  **#include ****&lt;stdio.h&gt;**
+** 2**  **#include ****&lt;stdlib.h&gt;**
+** 3**  **#include ****&lt;termios.h&gt;**
+** 4**  **#include ****&lt;time.h&gt;**
+** 5**
+** 6**
+** 7**  **int** main (**int** argc, **char*** argv[])
+** 8**  {
+** 9**      **struct** termios init_setting;
+**10**      **struct** termios pend_setting;
+**11**
+**12**      **if** (tcgetattr(**0**, &amp;init_setting) &lt; **0**)
+**13**      {
+**14**          fprintf (**stderr**, **&quot;Error~~~****\n****&quot;**);
+**15**          exit (**1**);
+**16**      }
+**17**      pend_setting = init_setting;
+**18**
+**19**      printf (**&quot;Pending for 5 secone!****\n****&quot;**);
+**20**      pend_setting.c_lflag &amp;= ~ECHO;
+**21**      tcsetattr (**0**, TCSANOW, &amp;pend_setting);
+**22**      sleep (**5**);
+**23**
+**24**      **return** **0**;
+**25**  }
+</code></pre>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/324/"> &lt; 骑行，在后海 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/322/"> 迷路在北京，再次 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/323\/';
+    var disqus_title = 'Linux终端不回显';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/323\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

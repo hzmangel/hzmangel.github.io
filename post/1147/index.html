@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Tunning Rails with DTrace &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1147/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2012-05-24T09:25:42Z" />
+
+            
+                <meta property="og:article:tag" content="dtrace" />
+            
+                <meta property="og:article:tag" content="performance" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="rails" />
+            
+                <meta property="og:article:tag" content="ruby" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Tunning Rails with DTrace
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1147/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1147/'> Tunning Rails with DTrace</a> </h2>
+        <div class="post-meta">发表于2012-05-24 09:25:42 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>This post will talk about how to do performance test of Rails program with
+DTrace tool. The testing will be separated into Ruby program part and database
+operations part. Please make sure all the tested program has provided probes
+to the DTrace.</p>
+
+<p><strong>NOTICE</strong>: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.## DTrace</p>
+
+<p>DTrace is a dynamic tracing tool, which is safe to use in production systems
+and it does not require restarting either the system or application. DTrace
+consists of 4 parts: front-end, libdtrace library, in-kernel DTrace framework
+and DTrace provider.</p>
+
+<p>DTrace is built on a foundation of objects called probes. Probes are event
+handlers that will be triggered when their particular event occurs, and DTrace
+can bind some actions to the probe to get needed information.</p>
+
+<h3 id="basic-syntax:b89c7748fef3f1027a4932ac99003df1">Basic syntax</h3>
+
+<p>A typically D language script contains three sections, the <code>BEGIN</code> section,
+<code>END</code> section and probe section. Sections are surrounded by braces. Each probe
+description is made of four fields, separated by colon character:</p>
+
+<pre><code>provider:module:function:name
+</code></pre>
+
+<ul>
+<li><code>privider</code>: Instrumented layer</li>
+<li><code>module</code>: Instrumented module</li>
+<li><code>function</code>: Instrumented function</li>
+<li><code>name</code>: location in the function, typically is enter, return, tick-nsec</li>
+</ul>
+
+<p>The provider field is needed, which others are optional. Pattern matching
+characters such as *, ?, […] and \ can be used. For example, this script will
+get all call of <code>write*</code> function:</p>
+
+<pre><code>syscall::write*:entry
+{
+    printf(&quot;(%d): %s write call called&quot;, pid, execname);
+}
+</code></pre>
+
+<p>Here is a sample script:</p>
+
+<pre><code>#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+pid$target::fopen*:entry
+{
+    printf(&quot;(%d):%s open\n&quot;, pid, execname);
+}
+
+pid$target::fwrite*:entry
+{
+    printf(&quot;(%d):%s write\n&quot;, pid, execname);
+}
+
+pid$target::fread*:entry
+{
+    printf(&quot;(%d):%s read\n&quot;, pid, execname);
+}
+</code></pre>
+
+<p>And here is a testing C program:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char* argv[]) {
+    char buffer[64];
+    int size = 0;
+
+    FILE *fp = fopen(&quot;bar.c&quot;, &quot;r&quot;);
+    fread(buffer, sizeof(buffer), sizeof(char), fp);
+    fclose(fp);
+
+    FILE *fp2 = fopen(&quot;/tmp/foobar&quot;, &quot;w&quot;);
+    fwrite(buffer, sizeof(buffer), sizeof(char), fp2);
+    fclose(fp2);
+}
+</code></pre>
+
+<p>Here is the result of running the program with given script:</p>
+
+<pre><code>$ sudo ./foo.d -c `pwd`/bar
+(3001):bar open
+(3001):bar read
+(3001):bar open
+(3001):bar write
+</code></pre>
+
+<p>It also can support some predication before the action, for example:</p>
+
+<pre><code>/ pid == 12345 /
+/ execname == &quot;bash&quot; /
+</code></pre>
+
+<p>For more information, please refer to reference section:</p>
+
+<h2 id="rails:b89c7748fef3f1027a4932ac99003df1">Rails</h2>
+
+<h3 id="probes-for-ruby-and-rails-application:b89c7748fef3f1027a4932ac99003df1">Probes for Ruby and Rails application</h3>
+
+<p><strong>NOTICE</strong>: Make sure the Ruby you are using provides the DTrace probes, or the testing below can <strong>NOT</strong> be continued.</p>
+
+<p><strong>NOTICE</strong>: The Ruby 1.9.3 currently do not support DTrace, please follow this discussion for more information <a href="http://bugs.ruby-lang.org/issues/2565">http://bugs.ruby-lang.org/issues/2565</a></p>
+
+<p>I have applied the patch mentioned above to Ruby 1.9.3 and regenerate the
+<code>configure</code> file with <code>autoconf</code> command, then compile the binary and install
+it to replace the Ruby installed by <em>homebrew</em>.</p>
+
+<p>Probes provided by Ruby is list below:</p>
+
+<ul>
+<li><code>function-entry</code></li>
+<li><code>function-return</code></li>
+<li><code>gc-begin</code></li>
+<li><code>gc-end</code></li>
+<li><code>line</code></li>
+<li><code>object-create-start</code></li>
+<li><code>object-create-end</code></li>
+<li><code>object-free</code></li>
+<li><code>raise</code></li>
+<li><code>rescue</code></li>
+<li><code>ruby-probe</code></li>
+</ul>
+
+<p>The list can be get by this command: <code>sudo dtrace -lP 'ruby*'</code>. The <code>-P</code>
+argument is used to specify the provider.</p>
+
+<p><strong>NOTICE</strong>: The probe name may different than above list in different system, please refer to the output of command while writing the script.</p>
+
+<p>The <code>function*</code>, <code>object*</code> and <code>gc*</code> probes can be used to analyse performance
+while the <code>raise</code> and <code>rescue</code> can be used to analyse error. Since the probes
+for Ruby my have some errors while running on my system, so I only choose
+<code>function</code> related probes in the script, and a summary will be printed out
+after test completed.</p>
+
+<p>Here is the script used for testing, thanks to <a href="http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-
+leopard-snow-leopard">this
+article</a> and <a href="http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-
+dtrace/">this
+article</a>, the script used here is based on their version.</p>
+
+<pre><code>#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+BEGIN
+{
+    printf(&quot;==========================\n&quot;);
+    printf(&quot;Trace started: %Y\n&quot;, walltimestamp);
+    printf(&quot;==========================\n&quot;);
+    depth = 0;
+}
+
+ruby*:::function-entry
+{
+    k = copyinstr(arg0);
+    m = copyinstr(arg1);
+    @[k, m] = count();
+    self-&gt;depth++;
+    self-&gt;start[k, m, self-&gt;depth] = timestamp;
+    printf(&quot;-&gt; %s::%s (%s:%d)\n&quot;, k, m, copyinstr(arg2), arg3);
+}
+
+tick-5000hz
+/k != 0/
+{
+      @[k, m] = count();
+}
+
+ruby*:::function-return
+/(this-&gt;class = copyinstr(arg0)) != NULL &amp;&amp; \
+ (this-&gt;func  = copyinstr(arg1)) != NULL &amp;&amp; \
+ self-&gt;start[this-&gt;class, this-&gt;func, self-&gt;depth]/
+{
+    this-&gt;elapsed = timestamp - self-&gt;start[this-&gt;class, this-&gt;func, self-&gt;depth];
+
+    this-&gt;file = copyinstr(arg2);
+    this-&gt;line = arg3;
+    @num[this-&gt;file, this-&gt;line] = count();
+    @eavg[this-&gt;file, this-&gt;line] = avg(this-&gt;elapsed);
+    @esum[this-&gt;file, this-&gt;line] = sum(this-&gt;elapsed);
+
+    self-&gt;start[this-&gt;class, this-&gt;func, self-&gt;depth] = 0;
+    self-&gt;depth--;
+}
+
+END
+{
+    printf(&quot;==========================\n&quot;);
+    printf(&quot;Trace ended: %Y\n&quot;, walltimestamp);
+    printf(&quot;==========================\n&quot;);
+    normalize(@eavg, 1000);
+    normalize(@esum, 1000);
+    setopt(&quot;aggsortpos&quot;, &quot;2&quot;);
+    printf(&quot;%-33s %123s\n&quot;, &quot;___ OVERLAP TIMES: ___&quot;,
+            &quot;______ ELAPSED _____&quot;);
+    printf(&quot;%-120s %5s %6s %10s %12s\n&quot;, &quot;FILE&quot;, &quot;LINE&quot;,
+            &quot;COUNT&quot;, &quot;AVG(us)&quot;, &quot;SUM(us)&quot;);
+    printa(&quot;%-120.120s %5d %@6d %@10d %@12d\n&quot;, @num, @eavg, @esum);
+}
+</code></pre>
+
+<p>Probes primely used in the script is <code>function-entry</code> and <code>function-return</code>,
+and the action inside the probe is to calculate the elapsed time. And some
+summary information will be printed after trace end.</p>
+
+<h3 id="probes-for-database-operations:b89c7748fef3f1027a4932ac99003df1">Probes for database operations</h3>
+
+<p>The performance test is also needed on Database server, MySQL has provide one
+method to use DTrace to the database, please refer <a href="http://dev.mysql.com/tech-
+resources/articles/getting_started_dtrace_saha.html">this
+page</a> for reference. Here is
+the script used for tracing MySQL database.</p>
+
+<pre><code>#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+BEGIN
+{
+    printf(&quot;==========================\n&quot;);
+    printf(&quot;Trace started: %Y\n&quot;, walltimestamp);
+    printf(&quot;==========================\n&quot;);
+    depth = 0;
+}
+
+pid$target::*mysql_parse*:entry
+{
+    self-&gt;query = copyinstr(arg1);
+}
+
+mysql*:::query-start
+{
+    self-&gt;query = copyinstr(arg0);
+    self-&gt;connid = arg1;
+    self-&gt;db = copyinstr(arg2);
+    self-&gt;who = strjoin(copyinstr(arg3),strjoin(&quot;@&quot;,copyinstr(arg4)));
+    self-&gt;start = timestamp;
+}
+
+mysql*:::query-done
+/ self-&gt;start /
+{
+    this-&gt;elapsed = timestamp - self-&gt;start;
+    @time[self-&gt;query] = quantize(this-&gt;elapsed);
+    printf(&quot;%-20s %-20s %-40s %-9d\n&quot;, self-&gt;who, self-&gt;db, self-&gt;query, this-&gt;elapsed / 1000000);
+    self-&gt;query = 0;
+    self-&gt;start = 0;
+}
+
+
+END
+{
+    printf(&quot;==========================\n&quot;);
+    printf(&quot;Trace ended: %Y\n&quot;, walltimestamp);
+    printf(&quot;==========================\n&quot;);
+
+    printf(&quot;MySQL query execution latency (ns):\n&quot;);
+    printa(@time);
+}
+</code></pre>
+
+<p>This script will print out time consumed by query command. There are some more
+detailed probe, which can be used to monitor the time consumbed by each type
+of command, please check the document if more information is needed.</p>
+
+<h3 id="result-analysis:b89c7748fef3f1027a4932ac99003df1">Result analysis</h3>
+
+<p>The output is different from the two script listed above. In the log message
+of Ruby, the filename and line number information are saved, which can be used
+to locate the bottle neck. While the MySQL probe is easy to use, after
+separating the command type, the performance can be optimized.</p>
+
+<p>The testing data is still under development, and I will update the blog after
+get the result.</p>
+
+<h2 id="reference:b89c7748fef3f1027a4932ac99003df1">Reference</h2>
+
+<ul>
+<li><a href="http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/">http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/</a></li>
+<li><a href="http://en.oreilly.com/rails2008/public/schedule/detail/1945">http://en.oreilly.com/rails2008/public/schedule/detail/1945</a></li>
+<li><a href="http://docs.oracle.com/cd/E19253-01/819-5488/gcfgt/index.html">http://docs.oracle.com/cd/E19253-01/819-5488/gcfgt/index.html</a></li>
+<li><a href="http://www.tablespace.net/quicksheet/dtrace-quickstart.html">http://www.tablespace.net/quicksheet/dtrace-quickstart.html</a></li>
+<li><a href="http://www.princeton.edu/~unix/Solaris/troubleshoot/dtrace.html">http://www.princeton.edu/~unix/Solaris/troubleshoot/dtrace.html</a></li>
+<li><a href="http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html">http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html</a></li>
+<li><a href="http://www.youtube.com/watch?v=mRf4bpEtI6I">http://www.youtube.com/watch?v=mRf4bpEtI6I</a></li>
+<li><a href="http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-leopard-snow-leopard">http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-leopard-snow-leopard</a></li>
+<li><a href="http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html">http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html</a></li>
+</ul>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/dtrace"><span class="label label-default">dtrace</span></a></li>  <li><a href="/tags/performance"><span class="label label-default">performance</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/rails"><span class="label label-default">rails</span></a></li>  <li><a href="/tags/ruby"><span class="label label-default">ruby</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1159/"> &lt; Playing MongoDB with Rails </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1133/"> Deploy RoR application with Nginx &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1147\/';
+    var disqus_title = 'Tunning Rails with DTrace';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1147\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/657/'> 端午内蒙之达里诺尔湖</a> </h2>
+        <div class="post-meta">发表于2010-06-19 15:02:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>端午，除了粽子外就是那三天假期了吧。被内蒙活动的照片诱惑了，于是背上了新败的脚架上了大巴。</p>
+
+<p>略去无聊的路上，14号清晨到了内蒙，快4点的时候天已然开始蒙蒙亮，可惜没时间下车拍照，4点半左右太阳就整个蹦出来了，到这时候才发现，这边的天，真蓝~</p>
+
+<p>继续略去经棚难吃到死的馄饨，早上8点多的时候，车终于停了。拎着相机下车，看着通透的蓝天上飘着的像棉花糖一样的云，还有一望无际的草原，啥也不说了，拿起相机按呗
+。一边按一边感慨，这能见度就是高啊，一眼望过去能把你视线挡住的，也只有山了。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/657/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/627/'> 朝圣东方红</a> </h2>
+        <div class="post-meta">发表于2010-05-30 01:20:19 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>骑车也有段时间了，但一直没有去传说中的东方红朝圣，终于在这次踏上了测试赛的道路~</p>
+
+<p>其实，在来之前并是十分想走这一趟，因为对比赛十分的没感觉。但是想想骑了这么久还没有走过东方红，实在有些说不过去哇，所以，就当出来活动活动了，成绩是次要的嘛，重在掺和，hoho。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/627/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/618/'> Reuse the TIME_WAIT Port</a> </h2>
+        <div class="post-meta">发表于2010-05-05 15:08:38 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西： net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存 sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。 话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/614/'> The Capital S in Linux Permission Bitmap</a> </h2>
+        <div class="post-meta">发表于2010-03-25 17:22:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~ 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。 最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/610/'> Using sudo in rsh&#39;s command</a> </h2>
+        <div class="post-meta">发表于2010-03-22 17:47:21 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉 Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/608/'> 飞沙飘雪望京塔</a> </h2>
+        <div class="post-meta">发表于2010-03-21 20:34:40 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>上周连续几天熬夜把一小块代码弄了个七七八八，于是心又收不住了。周五早早睡下，准备周六阳台山凤凰岭探路。</p>
+
+<p>周五晚上就听说会扬沙，也没考虑太多，晚上睡到迷迷糊糊的时候好像听到外面的风很大，于是迷迷糊糊的去把窗口给关了翻身继续睡。早上6点出门的时候才发现，空气里都是
+沙子的味道，所有露天摆放的东西上都积了一层薄薄的黄沙。纠结了一会，觉得城外应该会好些吧，就走上了去公交站的路。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/608/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/593/'> Translate errno to error string</a> </h2>
+        <div class="post-meta">发表于2010-03-18 12:56:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">没几行的程序，就是输出errno数字所表示的对应含义 #include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&quot;Please give a number, Thanks~~~\n&quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &quot;errno %3d&quot;, errno); perror(tmp_str); }</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/584/'> Simple Process with Mercurial Build-in Server</a> </h2>
+        <div class="post-meta">发表于2010-03-10 21:54:02 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库 hg init 然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口 hg serve -p3456 然后在本地就可以找个目录直接把那边的东西拷过来了 hg clone &lt;host&gt; &lt;local_dir&gt; 使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。 [paths] default = &lt;host&gt;:&lt;port&gt; 在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log hg ci &lt;-m &quot;log message&quot;&gt; 在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行 [web] push_ssl = false allow_push = * 根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。 hg push &lt;url&gt; 在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令 hg up 然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。 hg pull &lt;url&gt;</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/583/'> Mask Mouse on Linux</a> </h2>
+        <div class="post-meta">发表于2010-01-13 23:58:21 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法： 不显示 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头 屏蔽响应事件 虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令 xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo; 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。 就这两条命令，具体的没的细究，有空再看吧。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/582/'> 2010计划</a> </h2>
+        <div class="post-meta">发表于2010-01-13 23:29:39 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去 实现~ 读书计划 去年列下了5本非技术书的想法，虽然达成了，但是总感觉有些不务正业，于是乎今年列些技术的。其实不多，就两本 1. SICP，边学习这本书边用haskell去折腾之 2. 具体数学，高爷爷的书，当冷馒头啃都不行了，要当石头啃，试试吧。 以我的智商而言，估计这两本书都有难度，能看多少是多少吧，争取看完，然后再去复习复习算法导论。呵呵，看着这计划，自己都怕哇。至于非技术书嘛，找到就看吧，当休闲 用。 码农基本功 虽然单位的代码是C++的，但是说真的，实在不想折腾那玩意，太杀脑细胞了，所以今年的计划继续无视之，工作中学习吧（其实是偷懒的借口），嘿嘿。今年的计划也是差不 多两个吧 1. 记账软件，大概是BS结构，大概会折腾Flex/Android。嗯，宏愿，做多少看食言的程度 –_-!!! 2. 找个用的人多的开源项目去掺和。类似的愿望在去年也有，只是最后只折腾了一些小patch，残念哇，期望的项目是 Python/CLI 相关的，不想做界面，太累~ 游山玩水 这个，不确定性太多了哇，先列上两个吧，可实现度，呵呵，不知道了哇 1. 小五台金莲花 2. 8月份去青海湖看油菜花 差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/post/page/5/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/7/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

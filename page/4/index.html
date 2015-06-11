@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | 蓝天，小湖，湖水中一方小筑
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/954/'> Using LOCAL in the LOAD DATA SQL command</a> </h2>
+        <div class="post-meta">发表于2011-04-29 01:22:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。 今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1 然后，就能用LOCAL了，然后就没有然后了…… PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/939/'> 早春二月下江南之古镇西塘</a> </h2>
+        <div class="post-meta">发表于2011-03-28 01:06:35 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>不知从何时起，莫名的对江南的水乡有了不同于其它地方的一份向往，向往那石桥碧水，青砖白瓦，向往那斜风细雨，翠竹细柳。这份向往，经常会在春暖花开时，从记忆的某个角落中蹦出来透透气，然后在我心里种下一把又一把的草……</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/939/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/882/'> 散伙 &amp;&amp; 饭 &amp;&amp; 酒</a> </h2>
+        <div class="post-meta">发表于2011-03-13 23:07:01 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>不知不觉工作已经有了三年，只是在昨天去吃车版联合BG时才蓦然发现，又一轮的毕业季，来了。</p>
+
+<p>记忆中属于自己的散伙饭，一直只有本科毕业那一次，同样是在福口居，同样是那两张桌子。已经记不清当时吃了什么，只记得那天把所有人都喝了一遍，虽然在一起四年了，但是还是有很多话想和他们说，真的好想一直就那么拿着酒杯，一直喝下去，一直说下去……</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/882/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/879/'> Use TaobaoAPI in SAE</a> </h2>
+        <div class="post-meta">发表于2011-03-13 16:07:18 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。</p>
+
+<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/879/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/876/'> Disable Arial in Chrome</a> </h2>
+        <div class="post-meta">发表于2011-01-23 14:45:27 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/876/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/861/'> 2011，箭扣开年</a> </h2>
+        <div class="post-meta">发表于2011-01-07 01:32:29 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>又是一个想了好久却又因为各种原因没有去成直到这次才成行的地方。虽然是冬天，但是依然义无反顾的报了名，虽然报名后到出行前有了各种各样的想法理由来劝说自己取消行
+程，但最后还是头晕战胜了理智，在2号的14:00前站在了东直门的长途汽车站旁。（对了，!#$%^&amp;*的sogo地图告诉我从北四环打车到东直门要1个小
+时然后我就傻傻的相信了于是不止是午饭没吃好而且还多花掉我30块大洋，诶，真是郁闷）</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/861/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/786/'> 2010：不给力的我</a> </h2>
+        <div class="post-meta">发表于2010-12-31 12:59:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/786/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/782/'> 2010：那些给力的山山水水</a> </h2>
+        <div class="post-meta">发表于2010-12-31 01:15:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>时针和分针不经意间的一次邂逅，带来了2010年最后一天，也给这篇文章开了个头。本想一个人躲在温暖的小屋中，凌晨时分就把这些文字写完发出，可惜周公过于热情招呼
+我去陪他聊天，只好把剩下的部分留到了晚上~~~</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/782/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/781/'> Using Django in bluehost</a> </h2>
+        <div class="post-meta">发表于2010-12-19 00:59:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。 1. Install Python environment bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。 wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本 2. Install Django in bluehost 安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。 3. Prepare the Django project 安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。 bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写） #! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run() 编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。 4. Configure the Apache server 折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的： AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !-f RewriteRule ^(.*)$ run.fcgi/$1 [QSA,L] 第一行设置fcgi的handler，然后后续的行都在设置rewrite模块。具体的我不太懂，于是略过。需要更改的地方可能就是static fie setting中那个目录，那个media是将admin的资源文件目录链接过来的地方（其实具体我也不太清楚rewrite模块是怎么做的，不过目前可以工作了）。 5.</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/781/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/778/'> try-except-finally block in python 2.4</a> </h2>
+        <div class="post-meta">发表于2010-12-09 09:50:54 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了： #/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally' 从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/page/3/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/page/5/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 说说回调 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/197/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2007-06-14T09:37:03Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | 说说回调
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/197/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/197/'> 说说回调</a> </h2>
+        <div class="post-meta">发表于2007-06-14 09:37:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近做个项目，在设计的时候想到有可能要用到回调，对于这个东西已经弄不懂很久了，于是就上网找资料看，经过一个程序的磨炼后，差不多弄懂了，说说吧。默认情况下，函数调用的过程是这样的：程序中某懒人A想做件事，但是不想自己去做，于是用了个时髦的方法，外包给B（函数调用），然后B辛辛苦苦的把事情做完后，把结
+果再恭恭敬敬的送给（return）一直在那等着（阻塞调用）的A，然后A把剩下的钱给B，两清了。经过了这次事情，这两人就有了业务上的联系，A经常把事情外包给B
+，B也经常从A那拿到钱，皆大欢喜。但是突然有一天，A扔给了B一个任务，与往常不同的是，A还扔给了B一个联系方式，上面写着怎么去找C（函数的地址）。原来A发现
+这个活有些地方B不一定做的好，而C可以做好，为了不让B自己在那瞎折腾，顺便把C的地址也给了他。后面的嘛，自然，B在C的帮助下做好了这件事，按时完工。<br />
+差不多就是这样，调用者A在传给B的参数中加上了一个指向函数的指针C，在B中要调用C来完成工作。想看例子的话，可以去看STL中的qsort，它的最后一个参数就
+是一个函数指针，要利用传递进去的函数来做比较，进行排序。从网上找一段：</p>
+
+<p>函数之类本是为调用者准备的美餐，其烹制者应对食客了如指掌，但实情并非如此。例如，写一个快速排序函数供他人调用，其中必包含比较大小。麻烦来了：此时并不知要比较
+的是何类数据&ndash;整数、浮点数、字符串？于是只好为每类数据制作一个不同的排序函数。更通行的办法是在函数参数中列一个回调函数地址，并通知调用者：君需自己准备一个
+比较函数，其中包含两个指针类参数，函数要比较此二指针所指数据之大小，并由函数返回值说明比较结果。排序函数借此调用者提供的函数来比较大小，借指针传递参数，可以
+全然不管所比较的数据类型。被调用者回头调用调用者的函数（够咬嘴的），故称其为回调（callback）。</p>
+
+<p>回调函数的作用差不多弄明白了，下面就要开始写了。刚啃回调的时候看不懂，请教了身边的几个人，清一色告诉我说回调是Windos下的，要用WinAPI，当时那叫一
+个郁闷啊。后来仔细一下，不对，于是开始满世界的google，最后终于被我找到了一个例子，拿来，看差不多明白了，自己随便改了一下，发上来吧</p>
+
+<pre><code>**19 ****#include ****&lt;string&gt;**  
+
+**20 ****#include ****&lt;iostream&gt;**  
+
+**21 ****#include ****&lt;boost/function.hpp&gt;**  
+
+**22 **  
+
+**23 ****using** **namespace** std;  
+
+**24 ****using** **namespace** boost;  
+
+**25 **  
+
+**26 ****static** **void** foo()  
+
+**27 **{  
+
+**28 **    cout &lt;&lt; **&quot;Hello World&quot;** &lt;&lt; endl;  
+
+**29 **}  
+
+**30 **  
+
+**31 ****static** **void** bar(**int** f_times, boost::function&lt;**void** ()&gt; f_fun)  
+
+**32 **{  
+
+**33 **    **for** (**int** i = **0**; i &lt; f_times; i++)  
+
+**34 **    {  
+
+**35 **        f_fun();  
+
+**36 **    }  
+
+**37 **}  
+
+**38 **  
+
+**39 ****int** main()  
+
+**40 **{  
+
+**41 **    bar(**10**, foo);  
+
+**42 **    **return** **0**;  
+
+**43 **}  
+</code></pre>
+
+<p>前面的注释没弄上来，foo函数是我自己定义的一个函数，而bar就是传说中的回调函数，传递给它的参数中有一个函数指针，用的是boost库的东西，然后bar在执
+行的过程中调用foo，看上去应该还算清楚。</p>
+
+<p>都是自己琢磨的东西，希望木有错。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/198/"> &lt; 重新开始wxWidgets </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/196/"> 传说中的content_type &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/197\/';
+    var disqus_title = '说说回调';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/197\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

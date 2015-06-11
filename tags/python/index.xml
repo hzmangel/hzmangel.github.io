@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/python/</link>
+    <description>Recent content in Python on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Mon, 19 Dec 2011 10:41:55 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>List all CVS tags</title>
+      <link>http://hzmangel.github.io/post/1052/</link>
+      <pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1052/</guid>
+      <description>&lt;p&gt;最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;a href=&#34;http://docs.codehaus.org/display/ninja/List+CVS+Tags&#34; target=&#34;_blank&#34;&gt;Perl脚本&lt;/a&gt;，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。脚本的原理就是检查一个working
+directory中所有文件的status，然后把输出的内容去重。脚本运行需要设置好CVSROOT环境变量，而且需要提供一个CVS的工作目录作为参数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/python
+
+import re
+import os
+import sys
+import subprocess as sp
+
+def get_all_tags(cvs_wdir):
+    is_tag_line = False
+    cvs_cmd = &#39;cvs -Q status -R -v&#39;
+    cvs_tag_pattern = re.compile(r&#39;(\w+)\s+&#39;)
+    tmp_tags = []
+
+    os.chdir(cvs_wdir)
+    cmd_pipe = sp.Popen(cvs_cmd, shell=True, stdout=sp.PIPE)
+
+    for line in cmd_pipe.stdout.readlines():
+        if &#39;Existing Tags&#39; in line:
+            is_tag_line = True
+            continue
+
+        if not is_tag_line:
+            continue
+
+        if &#39;============&#39; in line and is_tag_line == True:
+            is_tag_line = 0
+            continue
+
+        line = line.strip()
+        if line != &#39;&#39;:
+            try:
+                tag = cvs_tag_pattern.findall(line.strip())[0]
+            except IndexError:
+                print line
+                raise
+            tmp_tags.append(tag)
+
+    return set(tmp_tags)
+
+if __name__ == &#39;__main__&#39;:
+    print &#39;\n&#39;.join(sorted(get_all_tags(sys.argv[1])))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;话说，有人能提供更好的办法吗？然后，有人可以告诉我，这个东西取出来的东西是全部的tag吗？没用过CVS&amp;hellip;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Remove packages installed by setup.py install</title>
+      <link>http://hzmangel.github.io/post/999/</link>
+      <pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/999/</guid>
+      <description>&lt;p&gt;从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G
+神，在stackoverflow上找到了&lt;a href=&#34;http://stackoverflow.com/questions/1550226/python-
+setup-py-uninstall&#34;&gt;折衷的办法&lt;/a&gt;：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ python setup.py install --record foo.txt
+$ cat foo.txt | xargs rm -f
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;没找到怎么让它输出到stdout，只好用临时文件弄了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Django in bluehost</title>
+      <link>http://hzmangel.github.io/post/781/</link>
+      <pubDate>Sun, 19 Dec 2010 00:59:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/781/</guid>
+      <description>&lt;p&gt;最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;1. Install Python environment&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做
+法去查网站帮助吧。&lt;/p&gt;
+
+&lt;p&gt;wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p
+ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;2. Install Django in bluehost&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;3. Prepare the Django project&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。
+如果工程中没有绝对路径，应该不需要对工程做任何更改。&lt;/p&gt;
+
+&lt;p&gt;bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的
+（具体的我没研究过，所以不知道怎么写）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!
+#coding:utf-8
+import sys, os
+from os.path import abspath,dirname
+import sys
+sys.path.append(dirname(dirname(abspath(__file__))))
+os.environ[&#39;DJANGO_SETTINGS_MODULE&#39;] = &amp;quot;settings&amp;quot;
+from django.core.handlers.wsgi import WSGIHandler
+from flup.server.fcgi import WSGIServer
+WSGIServer(WSGIHandler()).run() 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;4. Configure the Apache server&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;AddHandler fcgid-script .fcgi
+RewriteEngine On
+RewriteBase /
+#static file setting
+RewriteRule ^(media/.*)$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ run.fcgi/$1 [QSA,L]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一行设置fcgi的handler，然后后续的行都在设置rewrite模块。具体的我不太懂，于是略过。需要更改的地方可能就是static fie
+setting中那个目录，那个media是将admin的资源文件目录链接过来的地方（其实具体我也不太清楚rewrite模块是怎么做的，不过目前可以工作了）。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;5. Assign a domain to the site&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;最后就是给它加一个域名了。我使用的是二级域名，域名直接指向Django工程的目录，然后，就可以了~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>try-except-finally block in python 2.4</title>
+      <link>http://hzmangel.github.io/post/778/</link>
+      <pubDate>Thu, 09 Dec 2010 09:50:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/778/</guid>
+      <description>&lt;p&gt;try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try-
+finally。为了让脚本有更好的兼容性，只好绕过去了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#/usr/bin/python2.6
+
+try:
+    print &#39;try&#39;
+except:
+    print &#39;except&#39;
+finally:
+    print &#39;finally&#39;
+
+
+
+#/usr/bin/python2.4
+
+try:
+    try:
+        print &#39;try&#39;
+    except:
+        print &#39;except&#39;
+finally:
+    print &#39;finally&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从Chromium的代码库(&lt;a href=&#34;http://codereview.chromium.org/140005/diff/1/tool
+s/grit/grit/scons.py&#34;&gt;Issue 140005&lt;/a&gt;)中找到的方法，呵呵。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>初用 Google App Engine</title>
+      <link>http://hzmangel.github.io/post/268/</link>
+      <pubDate>Wed, 09 Apr 2008 00:27:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/268/</guid>
+      <description>&lt;p&gt;在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep
+3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。&lt;br /&gt;
+下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he
+lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application: sonic
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /.*
+  script: helloworld.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han
+dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用
+了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。&lt;/p&gt;
+
+&lt;p&gt;然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;print &#39;Content-Type: text/plain&#39;
+print &#39;&#39;
+print &#39;Hello, world!&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务
+了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import wsgiref.handlers
+from google.appengine.ext import webapp
+
+class MainPage(webapp.RequestHandler):
+    def get(self):
+        self.response.headers[&#39;Content-Type&#39;] = &#39;text/plain&#39;
+        self.response.out.write(&#39;Hello, webapp World!&#39;)
+
+def main():
+    application = webapp.WSGIApplication([(&#39;/&#39;, MainPage)], debug=True)
+    wsgiref.handlers.CGIHandler().run(application)
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    main()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP
+GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。&lt;/p&gt;
+
+&lt;p&gt;最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传
+，输入邮箱，密码啥的。然后就可以通过 http://.appspot.com/ 访问了。满好玩的，继续折腾。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>给iphone传电子书</title>
+      <link>http://hzmangel.github.io/post/255/</link>
+      <pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/255/</guid>
+      <description>&lt;p&gt;没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章&lt;a href=&#34;http://hzmangel.cn/2008/03/16/%e8%bd
+%ac%e6%8d%a2%e6%96%87%e4%bb%b6%e5%90%8d%e6%a0%bc%e5%bc%8f/&#34;&gt;转换文件名格式&lt;/a&gt;说了怎么转换文件格式，其实文本的格式也
+需要转换的。把用的脚本写出来吧。&lt;br /&gt;
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(&lt;a href=&#34;http://www.rejetto.com/hfs/&#34;&gt;www.rejetto.co
+m/hfs/&lt;/a&gt;)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的
+wget后下载居然是乱码，从文件名到内容，只好自力更生了。&lt;br /&gt;
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。&lt;br /&gt;
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量
+转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/python2.5
+
+import glob
+import os
+
+filenames = glob.glob(&#39;*.txt&#39;)
+
+for foo in filenames:
+    tmp_name = foo.replace(&#39;Download\\&#39;, &#39;&#39;)
+    cmd_str = &#39;iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;&#39; % (foo, tmp_name)
+    os.system(cmd_str)
+    os.system(&#39;rm &amp;quot;%s&amp;quot;&#39; % foo)
+    print tmp_name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执
+行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些
+真的是方便至极。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python中的静态成员函数</title>
+      <link>http://hzmangel.github.io/post/230/</link>
+      <pubDate>Wed, 17 Oct 2007 22:01:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/230/</guid>
+      <description>&lt;p&gt;被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
+没有这么玩的啊，于是查自带的文档，居然被我找到了。在Python2.4之后，系统中加入了函数修饰符这个东西，使用Java中的@符号来作为指示器，用来修饰函数。一个修饰符就是一个函数，它将被修饰的函数参数，并
+返回修饰后的同名函数或者其它可调用的对象。修饰符必须出现在函数定义前一行，而不允许和函数定义在同一行。也就是说下面的两条语句中，第二条是非法的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@A
+def f():
+
+@A def f():
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修饰器可以自定义，只需要符合上面所说的规定，传入一个函数为参数，返回修饰后的同名函数或者其它可调用的对象。下面就是这样的一个例子。在命令行中运行就可以看到，
+函数 f 有一个属性是attr，值是 decorated。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def deco(func):
+   func.attr = &#39;decorated&#39;
+return func
+
+@deco
+def f(): pass
+&amp;gt;&amp;gt;&amp;gt; f
+
+&amp;gt;&amp;gt;&amp;gt; f.attr
+&#39;decorated&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面开始说说静态成员函数，在C++中，静态成员函数就是可以不用新建实例即可以使用的成员函数，我也就是用到了它这个特性，于是在文档中看到了使用
+@staticmethod 修饰符来修饰函数即可，成员函数中不需要写第一个默认参数
+self（NND，一个方法加一个，累死老子了），其它和普通的方法相同。它可以被类直接调用，也可以使用实例来调用。&lt;br /&gt;
+差不多就这样子，满有用的，也满好玩的，看来 Python 还有许多东西没用到啊，呵呵 。&lt;/p&gt;
+
+&lt;p&gt;btw: 折腾了N久的那段小程序，用 Python 基本上可以说是一个下午弄完了，除去设计的那些时间，Python
+也比C++要快上许多啊，呵呵，不知道这个项目能不能改。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

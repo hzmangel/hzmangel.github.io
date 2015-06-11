@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regexp on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/regexp/</link>
+    <description>Recent content in Regexp on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Mon, 02 Nov 2009 17:35:40 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/regexp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Vim中的非贪婪匹配</title>
+      <link>http://hzmangel.github.io/post/487/</link>
+      <pubDate>Mon, 02 Nov 2009 17:35:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/487/</guid>
+      <description>&lt;p&gt;折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助
+的指引下折腾出来了。其实很简单，在&lt;code&gt;:h non-greedy&lt;/code&gt;一条中有说，使用&lt;code&gt;{-}&lt;/code&gt;来匹配，和&lt;code&gt;*&lt;/code&gt;的功能类似，于是乎就有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt;&lt;/li&gt;
+&lt;li&gt;使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

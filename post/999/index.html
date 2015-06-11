@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Remove packages installed by setup.py install &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/999/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2011-07-03T01:27:23Z" />
+
+            
+                <meta property="og:article:tag" content="linux" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="python" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Remove packages installed by setup.py install
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/999/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/999/'> Remove packages installed by setup.py install</a> </h2>
+        <div class="post-meta">发表于2011-07-03 01:27:23 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G
+神，在stackoverflow上找到了<a href="http://stackoverflow.com/questions/1550226/python-
+setup-py-uninstall">折衷的办法</a>：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。</p>
+
+<pre><code>$ python setup.py install --record foo.txt
+$ cat foo.txt | xargs rm -f
+</code></pre>
+
+<p>没找到怎么让它输出到stdout，只好用临时文件弄了。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/linux"><span class="label label-default">linux</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/python"><span class="label label-default">python</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1031/"> &lt; 木兰围场塞罕坝 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/996/"> 端午夜秦淮 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/999\/';
+    var disqus_title = 'Remove packages installed by setup.py install';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/999\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

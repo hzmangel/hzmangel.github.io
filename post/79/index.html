@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" VIM LaTeX Suite &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/79/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2005-05-03T04:33:24Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | VIM LaTeX Suite
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/79/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/79/'> VIM LaTeX Suite</a> </h2>
+        <div class="post-meta">发表于2005-05-03 04:33:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>今天在xia又学到了一招，VIM Latex-Suite的使用，以及在其中加上正向、反向搜索的方法。刚用了一下，感觉不错^_^</p>
+
+<p>声明：==之间的内容摘自<a href="mailto:edyfox@xia.net">edyfox@xia.net</a>所发表的贴子_**VIM LaTeX Suite</p>
+
+<h1 id="中正向-反向搜索的配置-gt-本人只是使用时查到了-顺便转载一下-版-权归原作者所有:dbb535d86dafe743fd4da5047af0efc9">中正向、反向搜索的配置&gt;**_。本人只是使用时查到了，顺便转载一下，版 权归原作者所有。</h1>
+
+<p>首先去下载Latex-Suite，网址是<a href="http://vim-latex.source
+forge.net/">http://vim-latex.sourceforge.net</a>，下载压缩包，解压到~/vimfiles(Windowz)或~/.vim(<em>nix)文件夹，我使用的是Windoze下的Gvim
+，在菜单里面就出现了Latex-Suite的菜单，是一些命令的快捷输入，有时还是满有用的^_^<br />
+在xia上看到了正向、反向搜索，转贴一下下：<br />
+首先，要让双向搜索正常运行，要将VIM运行在remote模式下，具体方式在两个系统下有不同，基本都是在VIM后加上参数--servername
+latex-suite &ndash;remote-silent
+&lt;文件名&gt;，这样VIM在打开文件的时候就不会开一个.swp文件了，这样就可以打开多个副本。<br />
+在*nix下，修改.vimrc文件，使其支持xdvi，在调用latex的时候，加上-src-
+specials参数以生成带行号信息的dvi文件。在.vimrc文件中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src-
+specials -interaction=nonstopmode $</em>&ldquo;
+。反向搜索为了让xdvi知道工作在remote模式下，要在.vimrc中加上let g:Tex<em>ViewRule_dvi=&ldquo;xdvi -editor
+&lsquo;gvim &ndash;servername latex-suite &ndash;remote-silent&rsquo;&ldquo;；如果是Windoz，则在_vimrc中加上let
+g:Tex_CompileRule_dvi=&ldquo;latex -src-pecials -interaction=nonstopmode $*&rdquo;
+即可。(其实我也不清楚加上那些是什么意思，只是从那篇文章里面直接Copy过来的^</em>^)。<br />
+在Windowz下还需要配置yap，具体方法是打开yap，在View-&gt;Option选项中，找到Inverse<br />
+Search页，在Command里输入gvim.exe &ndash;servername latex-suite &ndash;remote-silent +%l
+%f，这样就可以在yap中执行反向搜索了。<br />
+用remote模式下的VIM打开一个.tex文件，在normal模式下键入\ll即可编译文件，\ls就可以调用一个dvi的窗口来查看，而且页面停留在输入\l
+s时，光标所指内容生成的内容上。在*nix下，在xdvi窗口中用Ctrl+左键可以调用VIM查看源码；在Windoz中，双击yap页面上相应的位置即可转到源
+码中的位置。============================================================</p>
+
+<p>今天主要学了Latex-
+Suite的使用，现在有点感觉不爽的是在VIM中输入{}、()等符号时，后面会自动加上&lt;++&gt;，目前还不清楚在什么地方改，再说吧^_^</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex">好东东LaTeX</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/80/"> &lt; LaTeX统计字数 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/78/"> 论文页面搞定一半啦^_^ &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/79\/';
+    var disqus_title = 'VIM LaTeX Suite';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/79\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

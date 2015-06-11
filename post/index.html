@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a> </h2>
+        <div class="post-meta">发表于2014-04-19 23:23:51 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
+，但是终归感觉这样的办法不靠谱。继续翻文档发现<code>bufferred channel</code>用在这不错。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1239/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a> </h2>
+        <div class="post-meta">发表于2014-02-20 01:44:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1233/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a> </h2>
+        <div class="post-meta">发表于2014-02-17 01:40:16 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p><code>channel</code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1230/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a> </h2>
+        <div class="post-meta">发表于2013-12-01 15:03:37 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><h3 id="tl-dr:5ab4430131db8e4e631503ef790e7c02">tl;dr</h3>
+
+<p>The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.</p>
+
+<p>The source code is available at <a href="https://github.com/hzmangel/base64_image_carrierwave">github
+repo</a></p>
+
+<p>Next is the full version.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1224/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1220/'> Ajax loading multi series to jqPlot</a> </h2>
+        <div class="post-meta">发表于2013-07-14 11:21:07 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference. In the example, The function used to load ajax data is ajaxDataRenderer, which returns array of data. For multi series, just return more than one data array. Here is a sample data set: [ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1220/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1214/'> Some failed attempts on PNaCl</a> </h2>
+        <div class="post-meta">发表于2013-06-20 20:03:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Google has released his <a href="http://www.chromium.org/nativeclient/pnacl
+/building-and-testing-portable-native-client">PNaCl</a> project on Google I/O 2013,
+which can allow user to write portable native client application. The portable
+native client application can be translated to native client program and
+executed on supported architecture.</p>
+
+<p>The official toolchain contains clang frontend, which can only be used to
+compile C/C++ code to PNaCl application. But the PNaCl application is a subset
+of LLVM so I have tried some other languages have LLVM frontend. I am still
+working on the solution, and this article is just recording some failed
+attempts.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1214/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1210/'> Uploading multiple attachments with carrierwave/mongoid/nested_form</a> </h2>
+        <div class="post-meta">发表于2013-05-07 23:30:25 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose <code>carrierwave</code> finally.
+Also, I selected <code>nested_form</code> to manage uploading and deleting multiple
+attachments.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1210/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1205/'> Using Rails with Redis</a> </h2>
+        <div class="post-meta">发表于2013-04-25 16:56:17 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>I have met an issue recently that the Rails site always returns 502 error for
+some page. After some investigation, I have found that the problem is caused
+by a long time query of database, which exceeds the timeout value of unicorn
+configuration, then the unicorn worker process will be killed and the Nginx
+returns 502 to user.</p>
+
+<p>So the solution for this kind prblem is to put the job into some background
+task, and use some other method to inform the frontend when job done. Finally
+I choose the Redis for this task.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1205/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1201/'> iOS Code Snippets - UITableView</a> </h2>
+        <div class="post-meta">发表于2013-03-12 00:06:08 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at <a href="http://goo.gl/0ZrcA">http://goo.gl/0ZrcA</a>. The text above is the introduction text for that project, please reference the code for detailed information.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1201/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1195/'> @property and its attributes</a> </h2>
+        <div class="post-meta">发表于2013-02-10 00:06:18 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Recently working on iOS project, and have met some problems while using the
+attributes of <code>@property</code>. I have searched some documents and here is my idea
+about this.</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1195/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/2/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

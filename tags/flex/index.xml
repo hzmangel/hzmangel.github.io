@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flex on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/flex/</link>
+    <description>Recent content in Flex on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Fri, 12 Jun 2009 00:59:44 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/flex/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>调整Flex默认Application的长宽</title>
+      <link>http://hzmangel.github.io/post/425/</link>
+      <pubDate>Fri, 12 Jun 2009 00:59:44 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/425/</guid>
+      <description>&lt;p&gt;Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati
+on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在&lt;a href=&#34;http://ww
+w.finosstudio.com/?p=13&amp;amp;a=view&amp;amp;r=27&#34;&gt;这找到一篇文章&lt;/a&gt;讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入-
+default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：&lt;/p&gt;
+
+&lt;p&gt;mxmlc.exe foobar.mxml -default-size 800 600&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

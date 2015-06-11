@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Linux again &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/26/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2004-10-29T21:19:24Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Linux again
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/26/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/26/'> Linux again</a> </h2>
+        <div class="post-meta">发表于2004-10-29 21:19:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Haven&rsquo;t here for a long time, because of the exam, although i hate them very much :(
+and haven&rsquo;t under Linux for a long time, too, Because for the grub.</p>
+
+<p>Today, i repair the GRUB, I do it successfully, the first time, so i want to write sth here ^_^</p>
+
+<p>1st, i think i should find a bootable disk, a CD, because i have no floopy, and my motherboard do not support boot from USB port :(
+2nd, i find grub<em>for_dos, it is a useful tool, which is a grub prog with a DOS shell.
+3rd, use bootable disk boot my computer, then enter the pure DOS(grub must be installed under the real mode, not the vm86 mod).
+4th, change dir to the grub_for_dos, under the promote &lsquo;grub&gt;&rsquo;, input two command:
+&gt;root (hd0,4)
+&gt;setup (hd0)
+the first command is to define the root director of the grub(of course we can install this from the grub_for_dos, but i have a installed grub, and my session is to install it to MBR.), the second command is to setup the grub to the MBR, if (hd0) replaced by (hd0,4), the GRUB will install to the partition. and, that&rsquo;s all ^</em>^</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/27/"> &lt; re-install Successfuly </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/25/"> 食堂涨价之四 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/26\/';
+    var disqus_title = 'Linux again';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/26\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

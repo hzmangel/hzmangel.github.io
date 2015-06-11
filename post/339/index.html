@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Ubiquity &#43; dict.cn 查字典 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/339/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2008-09-02T09:56:59Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Ubiquity &#43; dict.cn 查字典
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/339/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/339/'> Ubiquity &#43; dict.cn 查字典</a> </h2>
+        <div class="post-meta">发表于2008-09-02 09:56:59 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： ubiquity, dict.cn</p>
+
+<p>前天装上了个<a href="https://wiki.mozilla.org/Labs/Ubiquity">ubiquity</a>，觉得满好玩的，于是就想做一个查词的东西，因
+为它里面默认的东西用的是Gtrans，对于单个单词的释义感觉有时看着云里雾里的，于是就萌生了自己写一个命令的想法，然后就做了。</p>
+
+<p>看了几分钟教程，就开始折腾了，先从一个HelloWorld开始，然后慢慢扩展。其实没啥难的，按着例子把想要的东西加上就是了。赞一下<a href="htt
+p://dict.cn">dict.cn</a>，不止提供了地址栏直接查询，还加上了XML接口。一开始用的是普通的查询，结果页面返回的结果是GBK编码的，在<a href="h
+ttps://wiki.mozilla.org/Labs/Ubiquity">ubiquity</a>里面直接乱码，当时把我郁闷的不行了。还给它的客服扔了封信，问能不能提供XML或者
+JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提供了。一开始我用的还是一个简单的查询页面，返回结果还是GBK的编码，当时被郁闷弄傻了，直接从论坛上
+找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。</p>
+
+<p>代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
+1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。1 CmdUtils.CreateCommand<br />
+2 ({<br />
+3  name: &ldquo;dictcn&rdquo;,<br />
+4  author: { name: &ldquo;Hu Ziming&rdquo;, email: &ldquo;hzmangel@gmail.com&rdquo;},<br />
+5  contributors: [&ldquo;Hu Ziming&rdquo;],<br />
+6  description: &ldquo;Consulting the word from
+&lt;a&gt;<a href="http://dict.cn">http://dict.cn</a>&lt;/a&gt;.&ldquo;,<br />
+7  help: &ldquo;Consulting the word from &lt;a&gt;<a href="http://dict.cn">http://dict.cn</a>&lt;/a&gt;.&ldquo;,<br />
+8  preview: &ldquo;Consulting the word from &lt;a&gt;<a href="http://dict.cn">http://dict.cn</a>&lt;/a&gt;&rdquo;,<br />
+9  takes: {&ldquo;eng_word&rdquo;: noun_arb_text},<br />
+10  license: &ldquo;MPL&rdquo;,<br />
+11  preview: function( pblock, direct_obj)<br />
+12  {<br />
+13  var eng_word = direct_obj.text;<br />
+14  var url = &ldquo;<a href="http://dict.cn/ws.php?q=">http://dict.cn/ws.php?q=</a>&rdquo;;<br />
+15  url += eng_word;<br />
+16<br />
+17  var pre_template = &ldquo;&lt;style&gt; #container {background-color: #73bFE6;}
+#word {font-family: arial black; color: maroon;font-size: x-large;}
+#explanation {color: midnightblue; font-size: medium; font-family:
+tahoma;padding:3px;} #sent {color: maroon;} .orig {background-color:
+#B6C5F2;padding: 2px; color: firebrick;} .trans {background-color: #2D4488;
+color: white; padding: 2px;} &lt;/style&gt; &lt;div id=\&ldquo;container\&rdquo;&gt;
+&lt;div id=\&ldquo;word\&rdquo;&gt;${w.word}&lt;/div&gt; &lt;div
+id=\&ldquo;explanation\&rdquo;&gt;${w.def}&lt;/div&gt;{for foo in w.sents}&lt;div
+id=\&ldquo;sent\&rdquo;&gt; &lt;div class=\&ldquo;orig\&rdquo;&gt;${foo.orig}&lt;/div&gt; &lt;div
+class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;{/for}&ldquo;;<br />
+18<br />
+19  jQuery.get(url, function(data)<br />
+20  {<br />
+21  var rslt = jQuery(data).find(&ldquo;dict&rdquo;);<br />
+22  var sent_len = rslt.find(&ldquo;sent&rdquo;).length;<br />
+23<br />
+24  var sents = <strong>new</strong> <strong>Array</strong>(sent_len);<br />
+25<br />
+26  //pblock.innerHTML = rslt.find(&ldquo;sent&rdquo;).slice(0).find(&ldquo;orig&rdquo;).text();<br />
+27<br />
+28  <strong>for</strong> (i = 0; i &lt; sent_len; i++)<br />
+29  {<br />
+30  sents[i] = {<br />
+31  orig : rslt.find(&ldquo;sent&rdquo;).slice(i).find(&ldquo;orig&rdquo;).text(),<br />
+32  trans : rslt.find(&ldquo;sent&rdquo;).slice(i).find(&ldquo;trans&rdquo;).text(),<br />
+33  };<br />
+34  }<br />
+35<br />
+36<br />
+37  var foobar = {<br />
+38  word : rslt.find(&ldquo;key&rdquo;).text(),<br />
+39  prons : rslt.find(&ldquo;pron&rdquo;).text(),<br />
+40  def : rslt.find(&ldquo;def&rdquo;).text(),<br />
+41  sents : sents<br />
+42  };<br />
+43<br />
+44   0; pblock.innerHTML = CmdUtils.renderTemplate(pre_template, {w:foobar});<br />
+45<br />
+46  }, &ldquo;xml&rdquo;);<br />
+47  },<br />
+48<br />
+49  execute: function( direct_obj )<br />
+50  {<br />
+51  var eng_word = direct_obj.text;<br />
+52  var url = &ldquo;<a href="http://dict.cn/">http://dict.cn/</a>&rdquo;;<br />
+53  url += eng_word;<br />
+54<br />
+55  Utils.openUrlInBrowser( url );<br />
+56  }<br />
+57<br />
+58 });</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/340/"> &lt; 0901，记忆中开学的日子 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/338/"> Starship Troopers 2 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/339\/';
+    var disqus_title = 'Ubiquity \x2b dict.cn 查字典';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/339\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

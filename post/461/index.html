@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Android中使用自定义Adapter &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/461/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2009-09-14T22:59:50Z" />
+
+            
+                <meta property="og:article:tag" content="android" />
+            
+                <meta property="og:article:tag" content="java" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Android中使用自定义Adapter
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/461/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/461/'> Android中使用自定义Adapter</a> </h2>
+        <div class="post-meta">发表于2009-09-14 22:59:50 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>算是对这段折腾android的一次小结吧，呵呵。</p>
+
+<p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
+tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
+来了一个fooAdapter，顺便还有这篇文章。首先是最简单的框架，一个布局的xml文件，然后一个主程序，在其中实现一个继承于Activity的类，在类中的onCreate()方法中把布局给画出来。</p>
+
+<pre><code>public class Cover extends Activity {
+    /** Called when the activity is first created. */
+    @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.cover);
+            ListView lv = (ListView) findViewById(R.id.summary);
+            fooAdapter adapter = new fooAdapter(this);
+            lv.setAdapter(adapter);
+        }
+}
+</code></pre>
+
+<p>接下来就是cover.xml的layout文件，很简单的一个东西，里面就一个TextView用来放东西，一个ListView用来和fooAdapter绑定。</p>
+
+<p>下面就开始编写fooAdapter这个类了，先新建一个类，继承于BaseAdapter，然后把getCount/getItem/getItemId/getV
+iew这几个架子搭好，用eclipse+ADT的方式开发的话可以自动生成，默认生成的东西不可用。在fooAdapter中加上一个数据源，然后就可以去完善这些
+方法了。我用的数据源是个很简单的String[]，同时在类中还加上了一个Context类型的变量_ctx，此变量将在ctor时被赋值（所以还加了一个ctor
+，呵呵）。架子搭好了就可以填东西了，先放个简单的TextView吧，这里对getView做修改就可以了。</p>
+
+<pre><code>class fooAdapter extends BaseAdapter {
+    private Context _ctx = null;
+    private String[] _data = { &quot;foo&quot;, &quot;bar&quot;, &quot;foobar&quot;, &quot;barfoo&quot; };
+    public fooAdapter(Context context) {
+        _ctx = context;
+    }
+    @Override
+    public int getCount() {
+        return _data.length;
+    }
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView tv = null;
+        if (null == convertView) {
+            tv = new TextView(_ctx);
+            Log.v(&quot;huzim&quot;, &quot;Pos1 is &quot; + position);
+        } else {
+            tv = (TextView) convertView;
+        }
+        tv.setText(_data[position]);
+        return tv;
+    }
+}
+</code></pre>
+
+<p>下一步折腾多一些东西，每次调用getView会返回一个LinearLayout，里面包含有两个TextView。</p>
+
+<pre><code>@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    LinearLayout lay = null;
+    // Set the sub-views to be displayed
+    TextView tv_l = new TextView(_ctx);
+    TextView tv_r = new TextView(_ctx);
+    tv_l.setText(&quot;* &quot;);
+    tv_r.setText(_data[position]);
+    tv_r.setGravity(Gravity.RIGHT);
+    if (null == convertView) {
+        lay = new LinearLayout(_ctx);
+        lay.addView(tv_l);
+        lay.addView(tv_r);
+    } else {
+        lay = (LinearLayout) convertView;
+    }
+    return lay;
+}
+</code></pre>
+
+<p>最后，差不多满足我的一个东西，每次返回一个TableLayout，暂时里面只有两列。用TableLayout是因为有些列可能需要右对齐，好像在TextVie
+w里面做不了。有一点需要注意的就是，在TableLayout中如果要设置右对齐的话，一定需要给对应列设置ColumnStretchable属性，要不然内容不
+会展开。昨天晚上折腾了好久才在<a href="http://developerlife.com/tutorials/?p=307">这个页面</a>上看到的解决方法，上面还详细
+说了TableLayout几个属性的差别，推荐细看。最后这个getView是这样的：</p>
+
+<pre><code>@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+    TableLayout lay = null;
+    // Set the sub-views to be displayed
+    TableRow tr = new TableRow(_ctx);
+    TextView tv_l = new TextView(_ctx);
+    TextView tv_r = new TextView(_ctx);
+    tv_l.setText(&quot;* &quot;);
+    tv_r.setText(_data[position]);
+    tv_r.setGravity(Gravity.RIGHT);
+    tv_r.setLayoutParams(new TableRow.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+    tr.addView(tv_l);
+    tr.addView(tv_r, new TableRow.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+    if (null == convertView) {
+        lay = new TableLayout(_ctx);
+        lay.addView(tr);
+    } else {
+        lay = (TableLayout) convertView;
+    }
+    lay.setColumnStretchable(1, true);
+    return lay;
+}
+</code></pre>
+
+<p>呵呵，差不多就这些了吧，加上了一个自定义的Adapter，可以按自己的意愿让伊显示，满好 :)</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/android"><span class="label label-default">android</span></a></li>  <li><a href="/tags/java"><span class="label label-default">java</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/481/"> &lt; 梦回东灵 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/460/"> 自虐周末第三天 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/461\/';
+    var disqus_title = 'Android中使用自定义Adapter';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/461\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | 蓝天，小湖，湖水中一方小筑
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/298/'> Break at other file in GDB</a> </h2>
+        <div class="post-meta">发表于2008-05-28 16:11:38 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">这几天在调程序，感觉跳到一个文件中再去给它下断下麻烦了，于是想着怎么在开始的时候把文件的断点给下了。看了看help，果然有这种方法，其实说起来也很简单，就是 在下断的时候，前面加上文件名，如b[foo.c]bar，后面可以用函数名，也可以用行号，很简单，但是很方便。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/297/'> Org mode under WinEmacs</a> </h2>
+        <div class="post-meta">发表于2008-05-27 23:44:34 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">虽然前几天折腾上了muse，但是又在网上看到了另一个org mode，而且以前也看别人提过一次，说它的表格功能很好用，所以心又痒了，于是乎，下载，安装。 和muse一样，解压后，在配置文件中加上两行就行了，一行指定org的el文件存放的位置，另一行设定对于org后缀的文件，使用org-mode打开。 新建一个foo.org的文件，然后开写，用的也是类似outline的模式，而且对每级都有不同的颜色，好看。比较方便的是光标放在哪个标题栏上按&lt;TAB&amp; gt;可以控制此级标题的显示与隐藏，很方便的一个功能。还有就是在它下面可以用-/+/*来显示无级列表，用1.来显示编号的列表，写完一个列表后按&lt;M-C R&gt;，它会在下面给添加一个同级的列表，如果是无序的则加一个标记，如果是有序的则数字加1，然后按&lt;M-LEFT&gt;和&lt;M-RIGHT&amp;g t;可以控制列表缩进的层次，说真的，比Word下那让人莫名其妙的列表层次要好多了。它还支持导出，&lt;C-c&gt;&lt;C-e&gt;后会有一个buf fer告诉你有啥命令可用，可以导出的格式还是满多的，不过目前我的需求，大概就是HTML了吧，还没弄明白能不能给代码加高亮，过过再折腾吧，最近先用它来记笔记。 一会再看看用它来做一下TODO。 再说说表格，由于目前还没怎么用到表格功能，所以只是从教程中感受到了它的方便与强大，而且还有计算功能，过段时间再折腾吧。 发现自己已经开始逐渐喜欢上了这个邪恶的Emacs了，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/296/'> Using muse in WinEmacs</a> </h2>
+        <div class="post-meta">发表于2008-05-26 22:54:00 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">网上找了一堆东西，都说要make啥的，实在不想再去整个cygwin/MinGW啥的了，于是继续转，转了一大圈，感觉还是自己去看目录啥的有用。在里面转了转，发 现它的el文件只在list文件夹下，于是直接把lisp那个目录拷到.emacs.d目录下，然后开始改.emacs文件。 按着网上的，在配置文件里面加了几行： (add-to-list 'load-path &quot;[path to Muse]&quot;) (require 'muse-mode) ; load authoring mode (require 'muse-html) ; load publishing styles I use (require 'muse-latex) (require 'muse-texinfo) (require 'muse-docbook) 第一行是说需要把muse读进来，第二行是一个muse-mode，然后下面几行就是需要用到的输出格式，具体的，我还没去折腾，再说，再说。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/295/'> Install gentoo with flash disk</a> </h2>
+        <div class="post-meta">发表于2008-05-25 19:02:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">这段时间想折腾Linux，最终选择了gentoo，尝试一下这个传说的发行版。 由于手边没有光盘，也不想浪费光盘了，所以就用上了前段时间做好的可以GRUB启动的U盘。在gentoo的官方wiki上用的是syslinux，但是它的官方发布 包用的是GRUB，于是只好再去找，后来找到一篇别的文章，得知，原来很简单，只要把文件都拷过去，然后用GRUB启动，那个menu.lst还是没有找到，只好手动 输入那一大堆命令行参数，还要检查是否有错。不过弄完就可以进去系统了，不知道为啥机器不能用X，只好在命令行下把东西装完了。 装的过程其实很简单，按它的handbook做就行了，先分区，然后把文件系统挂载到/mnt/gentoo目录下，然后解压stage3（官方的handbook是 用wget下载的，我是先用thunder下载到机器上然后cp的，嗯），再是Portage，弄完后就可以用chroot到新系统上去了，然后下载linux- source，编译，链接，说一下，make -j 4还是很爽的，呵呵。然后就是配置fstab，再配置网络，具体的内容，在学习中，以后再说，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/293/'> Grub on usb disk</a> </h2>
+        <div class="post-meta">发表于2008-05-23 00:14:17 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了几天，终于差不多把U盘上的GRUB弄好了。其实，没网上说的那么麻烦。主要步骤就是先把U盘格式化，一开始我用的是FAT32，后来大概是操作有误，发现弄不 了，然后在Linux下用mkdosfs把它弄成FAT16了，反正后来能用了，也不知道一开始是FAT32不行还是操作不对。然后把Linux下的那些个文件，主要 是/boot/grub/下的那几个文件拷过去，然后找个grub环境，进去，root一下U盘，然后setup一下U盘，就行了，嗯。过几天试试用FAT32行不行 ，应该不会有问题的，我感觉。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/292/'> 今天被吓个半死，嗯</a> </h2>
+        <div class="post-meta">发表于2008-05-23 00:03:11 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。 没有别的机器看文档，只好按着依稀的记忆知道要分区，于是删除系统中其它几个Linux分区，在它问要不要写分区表的时候，犹豫了好一会，终于闭着眼睛打了yes，心 想听天由命吧。 不过和以前几次不同的是，这次刚想完，天就来找我了，想把win的盘mount上看看东西还在不在，然后不知道U盘上的那个系统就出啥毛病了，PATH里面就没有了/ bin啥的目录，当时就看到了很壮观的刷屏，系统告诉我说，sleep找不到。切到另一个终端，输入/bin，结果丫告诉我说木有这个目录，于是就慌了。试了几条命令 未果，于是只好重启，halt是肯定没有的了，只是在祭出三指大法的时候，伊也告诉我说/sbin/shutdown目录下东西不存在，只好很郁闷的去按开关了。 本来以为事情就这样了，但是重启的时候突然发现，GRUB进不去了，原来把盘给格了，想了想，U盘里面还有个GRUB，看看能不能用吧。重启，U盘启动，进GRUB命 令行，敲boot后，丫直接给我没反应，这时已经有点慌了；找出DSL的盘，输入dsl 2后，屏幕上打出来两只小企鹅，然后也没反应了，等了一会还是不行，于是更慌 了；抱着最后一点希望把某次展会拿来的CentOS扔进了光驱，回车启动，终于起来了，进了X干的第一件事情就是先把Win盘mount上，还好没啥事情，于是开始想 怎么解决grub的问题。 最简单的应该就是用XP盘启动，然后fixmbr，但是还是想把grub留着，一开始想在Windows下新建一个grub目录，结果伊弹出来个框子告诉我，此分区只 读，FT。突然意识到机器里面的那两个Linux盘可以用来放grub，于是问题解决，mkfs.ext3，然后mkdir，从U盘里面把东西拷过去，进grub，r oot-&gt;setup，再重启，终于能进命令行了，继续试chainloader +1，终于进来了。 总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/291/'> 重定向strace的输出</a> </h2>
+        <div class="post-meta">发表于2008-05-19 16:50:30 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天折腾点东西，想看看strace的输出，结果用了&gt;和tee都不管用，于是man之，发现strace的那些个输出是扔到stderr上的，如果需要重定向 ，则或者使用2&gt;[filename]，或者使用-o参数，记下来，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/290/'> 国旗，为汶川而降</a> </h2>
+        <div class="post-meta">发表于2008-05-19 16:45:50 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">看到降半旗的天安门广场，心中夹杂着说不清的感觉。也许有为平民而降的国旗所带来的一丝感动，但是占据内心更大部分的，还是那份悼念，看着网上的图片与文字，不经意间 发现眼中已经啜满泪水。不想多说什么，只有祈祷，希望那些还活着的人们，能够坚强的活出新的未来；也希望那些已经去了另一个世界的人们，能够不再会有痛苦。bless ~~~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/289/'> bless地震中的人们</a> </h2>
+        <div class="post-meta">发表于2008-05-14 11:10:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">前天，正在单位迷迷糊糊的调代码，突然听到有人说地震了，于是乎开始上网找消息，紧接着就看到了汶川的消息，7.8级的浅源地震，不由让人又联想起唐山那时的情况。7 .8，看到了网上的新闻才知道是多么恐怖的一件事情。回头想想中国最近事情真的很多，转一段网上看到的：2月肆虐的雪灾，冻裂了中国大地；3月的西藏，烧伤了美丽的圣 地；4月的奥运火炬全球传递受阻，刺伤了中国人向世界张开的双臂；善变的5月，胶济铁路火车相撞，撞碎了多少旅人的梦；突然传遍全国的儿童手足口病，令全国父母心头纠 结；震动传及东南亚的四川大地震，撼及整个中国的灵魂…… 不想说什么了，只有祈祷，祈祷在地震中受灾的人们可以尽快脱险，祈祷伤亡人数可以尽可能的少，祈祷不再会有更多的灾害…… bless~~~~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/287/'> vim中删除包含某关键字的行</a> </h2>
+        <div class="post-meta">发表于2008-05-11 19:57:30 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天在BBS上逛，看到篇文章不错，但是我只要它中间某几行，先试的是g/XXX/p，但是觉得它输出的内容不好看，我也不知道怎么弄到别的缓冲区中去，于是想把不包括这个关键字的行给删了。想找一个类似grep -v的命令，查了一下，可以用g!/XXX/d，那个!表示不包含，最后的那个d表示删除，不错，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/page/17/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/page/19/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

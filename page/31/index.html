@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | 蓝天，小湖，湖水中一方小筑
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/151/'> 搭NFS服务器</a> </h2>
+        <div class="post-meta">发表于2006-08-17 23:47:20 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天终于算是把NFS服务器搭建的流程走了一遍，其实并没有什么难的，下个软件，改个配置文件，就可以了，主要是那个配置文件。过程什么的在这就不详细讲了，网上一抓 一大堆，主要是配置方面的一些问题吧。今天郁闷的一点就是配置文件中不能加空格，今天就是因为加了空格了，所以郁闷了老半天。已经被这习惯郁闷过不少次了，看来下次出 现问题首先要看看这方面的事情。 流程走了一遍，但是没有客户端来连，Windowz的NFS不会用，折腾了半天，最终都败在用户管理这一块了，它支持和UNIX主机共享用户信息，但是好像要求UNI X主机打开NIS服务，在配置的过程中，被那些个什么domain郁闷了N久，最后还是废弃了，最终的解决方案还是老老实实的用FTP，呵呵，又白忙了N久。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/150/'> 本地时间与UTC时间</a> </h2>
+        <div class="post-meta">发表于2006-08-17 00:45:58 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">刚真的晕了，用writer发布的文章时间显示完全不对，差8个小时，直接想到的就是时区的问题，一开始还以为是MS这个软件的问题，找了一圈设置的选项没找到，后来 又去WP的设置里面找，总算找到了，本网与服务器时间的差，本来还不知道是做什么的，这回算是知道了，调时差啊，害我把那些个文章又重发了一遍，FT btw: 这个软件好像发布的时候设置时间真的有问题，不试了，困了，睡觉&hellip;&hellip;.</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/149/'> 当开源成为一种习惯……</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:33:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天去LinuxWorld2006转了一圈，想写些东西，也不知道为什么，突然想到了这个名字，就用上了，呵呵。 从昨天的一些演讲中可以看到，不少商业公司的策略有一些转变。第一次接触到这种事情还是去年的那个Sun开发者大会，从那才知道，Open Solaris其实和Sun卖的那个Solaris是同源的，任何人都可以把Open Solaris的源代码下载下来，然后自己编译，发布(具体是不是这样我也不太 清楚，因为那个时候听的不是很认真)。当时没觉得什么，后来才有一些感觉，像昨天的SuSE发布会，才知道其实SuSE也有一个Open SuSE的版本，可以从网站上直接下载，也可以直接更新，和SuSE Enterprise Edition不同，它不提供技术支持，但是更新会很快，而企业版的更新需要去买，不过相应的也有更好的技术支持。 我用的最多的类似的东西应该算是Eclipse了吧，IBM直接把4kw的源代码，真的是很有魄力的一件事情，不过现在的事实也证明，这一决定的正确性，Eclips e开放的框架结构让它可以被灵活的配置在多种应用场合，而不是仅仅简单的开发Java程序。插件也很好的扩展了Eclipse的功能，像用cdt来开发C/C++程序 ，Together插件来做UML方面的开发，还有开发J2EE的插件，风河的新版workbench也使用的是Eclipse，还有Altera的NiosII开发 平台。个人感觉Eclipse的缺点就是战用资源较多，虽然在内存越来越便宜的今天不是什么大问题，但是还是存在像偶这种用着几年前的机器的人啊&hellip;.. 今天仔细看了看昨天拿到的IBM的宣传材料，发现有了WebSphere和DB2的Express版的下载，不知道这个概念是不是从MS那弄来的，只知道MS提供VC 2005的下载，免费的，当然，功能不会全，但估计对我这种人是决对够用了，更重要的是，这是正版的软件，这在一些公司里面还是很看重的。 写到这才觉得有些文不对题，只是曾经一度需要花费N多的软件推出了免费版本，和开源的关系不大，呵呵，不改了吧，谁让我懒呢。开源，给开发人员来的方便不是这几字节的 文字能表述完成的，只是想想每做一辆车都要去重新发明一次轮子的轮子的事情就让人郁闷的慌。不过从另一方面讲，开源也让开发人员的收入大大减少，如果没有稳定的收入来 源，开源大概只是一个梦想吧。 呵呵，胡言乱语的说了一些东西，本来我说的话就是胡说嘛，爱看的看吧，纯属自娱，如有不同意见，可以拍砖，8过嘛，嘿嘿，偶的地盘，偶做主，哈哈。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/148/'> 也说django</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:31:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。 btw: Apache的虚拟主机好像有点好玩，有空看看。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/147/'> Linux is OK</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:31:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了两天，总算是把Linux折腾到了那台机器上，其实想想，也没什么难度，主要是自己懒，没有刻盘，用手头上现有的盘折腾的，所以比较的郁闷，呵呵。 本来说是只想弄个能跑交叉编译环境的Linux，所以首先想到的是knopix，但是不知道怎么回事，这次装的knoppix用着很不爽，apt安装告诉我包依赖性没 有解决，但是看了它的安装软件列表，它需要的包就在那个列表里面，直接FT了。于是又想用回debian了，那台机器只有128的内存，我是没有信心在那上面跑个XP 再加个虚拟机，我知道我是不能忍那个速度的，于是想到了硬盘安装，一开始机器里面有Grub，看网上的说明直接改参数就可以启动安装进程。其实就是把那个vmlinu x和initrd文件放到Grub能找到的地方，然后加上参数root=/dev/ramdisk ramdisksize=XXX什么的启动参数，大概就可以了，我看到的那个文章在这后面还加有个参数，不清楚是什么意思。再就是写上initrd /path/t o/initrd/file，然后就可以boot了，它会自动寻找debian_netinstall的image文件，网上说是把那个东西放到根目录下，不过我是放 在和内核文件一个目录下的，也可以找到嘛 ^^ ，再后来就是安装了，装过多少遍的东西，不说了，等，然后重启，设置apt源，update，再就是install软件了。 btw: 这次考虑使用非root用户作为常用用户了，呵呵，咱也要学着professional一些嘛 :)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/146/'> Windows Live Writer</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:29:47 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">[](http://localhost:2270/blog/?p=162) MS刚发布的写blog的东西，我也是刚用上，感觉还是满不错的，所见即所得的东西，不过在打字过程中屏幕有时会闪烁，不知道是什么原因，刚发现还可以自动换行，别的 功能还没去发掘，应该还算是不错吧。虽然有时对MS没什么好感，但是它的东西在上手度方面还是很不错的，这也是不得不承认的一点 :) 。不过不知道是不是因为beta版的原因，有时会和输入法不兼容，机器上没有微软拼音，测试不了，不过极点五笔确实是有几次切不出来了，只有把 writer关了重启。 btw: 写的时候才想起来，一直想弄个软件方面的分类，就用它当做开篇的吧，不过说真的，我也不知道应该在这边写些啥，不知道和其它的分类会不会有冲突啊</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/145/'> Django起来啦</a> </h2>
+        <div class="post-meta">发表于2006-08-15 12:04:19 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了 btw: 建立站点后，要到站点的目录下运行managy.py runserver</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/144/'> YS6-The Ark of Napishtim</a> </h2>
+        <div class="post-meta">发表于2006-08-09 14:28:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">呵呵，算是第一次玩了两遍的游戏吧，不过并不是说它有多么的好，游戏应该是继承了Falcom一贯风格，轻松明快的画风，好听的音乐，爽快的操作，YS这个品牌还是不错的。不过至于玩第二遍的理由嘛，很简单，近期没心情玩RPG，所以也只好玩玩这个算是不用动脑子的游戏了，呵呵，YS的扇子们不要拍我。在打Boss前用修改器改出来了所有的装备，不知道下次还有没有心情去打全物品了，没有YS2里面的那个羽毛，还是有些不爽啊，不过也许由于它的地图小才没弄这个东西吧。机器里面还有ED6FC，幻三2还是想再玩一遍的，至于仙1轩辕12加外是放在机器里面收藏的，什么时候玩再说吧，不知道一剑凌云山海情怎么样，反正现在网上骂声一片，等什么时候有时间了，玩玩吧。不写了，干活了^_^</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/143/'> Intel嵌入式大赛</a> </h2>
+        <div class="post-meta">发表于2006-08-09 14:20:28 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天跟着去看了看Intel嵌入式大赛的颁奖典礼，10个一等奖和两个特等奖的作品放在那展示。转了几圈，感觉这次竞赛得奖的作品在创意上拿的分要多一些，而技术上的 好像是只要做的完成度高，拿奖的可能性就大。还有就是一些与现实关系紧密的也是比较好的题材。发现现在做东西idea难弄啊^_^ btw: 组委会的经费会少成那样吗？够极品了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/142/'> 完美结局</a> </h2>
+        <div class="post-meta">发表于2006-07-29 16:12:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">从网上下了个存档，看完了幻三2的完美结局，感觉上和小棠结局差不多，就是最后多了一段多年后重聚首的故事，应该已经算是比较完美的结局了，8过人生在世，又能有多少 完美的事情呢，也许，小棠结局应该就是能够达到的最完美的吧，即使用永恒的时间等待，我也愿再见你一面，呵呵，也许只是痴心妄想吧。 btw: 游戏不错，我也并不是不想再玩一遍，但是发现现在的心态实在调整不到最佳状态，那段奈何桥的video看着很压抑，不知道原因，呵呵，想好好玩玩游戏现在大 概也是一种奢望了吧。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/page/30/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/page/32/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Reuse the TIME_WAIT Port &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/618/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2010-05-05T15:08:38Z" />
+
+            
+                <meta property="og:article:tag" content="admin" />
+            
+                <meta property="og:article:tag" content="linux" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Reuse the TIME_WAIT Port
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/618/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/618/'> Reuse the TIME_WAIT Port</a> </h2>
+        <div class="post-meta">发表于2010-05-05 15:08:38 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA
+IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会
+将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da
+emon启动错误的信息。</p>
+
+<p>解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou
+t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中
+的东西：</p>
+
+<pre><code>net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+</code></pre>
+
+<p>其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo
+东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存</p>
+
+<pre><code>sysctl -w net.ipv4.route.flush=1
+</code></pre>
+
+<p>差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。</p>
+
+<p>话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/admin"><span class="label label-default">admin</span></a></li>  <li><a href="/tags/linux"><span class="label label-default">linux</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/627/"> &lt; 朝圣东方红 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/614/"> The Capital S in Linux Permission Bitmap &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/618\/';
+    var disqus_title = 'Reuse the TIME_WAIT Port';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/618\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

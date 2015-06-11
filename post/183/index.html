@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" TeXLive中的XeTeX &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/183/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2007-05-01T23:50:11Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | TeXLive中的XeTeX
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/183/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/183/'> TeXLive中的XeTeX</a> </h2>
+        <div class="post-meta">发表于2007-05-01 23:50:11 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>前段时间看到smth上有人说XeTeX直接支持TTF字体，心里一阵痒痒的，本来XeTeX是给Apple的人用的，现在咱终于有的用了，就带在TeXLive2007里面。昨天把TeXLive2007折腾完了，本来心里面想难道是直接用的是XeTeX引擎，后来用的时候才知道，直接用latex命令使用的还是fpTex，如果要用XeTeX的话，需要使用xetex和xelatex命令。昨天没空，全折腾字体去了，今天刚好有些时间空出来了，就换个东西折腾了 ^<em>^先在newsmth上找了个beamer的例子，于是开始编译。xelatex
+test.tex，结果它告诉我说找不到xelatex.fmt，而且最后的错误是mkdir error，老习惯，转向google，第一次找到的页面是XeTeX
+的FAQ，那上面很直接的告诉我说，介个文件是安装的时候生成的，要是没有就是出错了，你丫重装吧，在最后一句，提到了一个方法，改language.dat，当时我
+叫一个郁闷啊，如果XeTeX那玩意是我装的，我倒还真不怕了，但是我是从TeXLive里面直接拷出来的撒，不得已转向第二个方法，改文件，那会在等网页的时候，已
+经在Linux下把那个文件编译完成了，效果还行，想想Windowz下的一大把字体，总不能全上我上传吧，更坚定了我在Windowz下要把它折腾出来的决心。 想
+想Linux下能用了，比较下两个系统中的language.dat吧，一比，更FT了，两个文件的大小差了5倍，更加不敢折腾了。这时候又打开个页面，也是XeTe
+X官网中的某个，它里面有说用fmtutil生成fmt文件，一看有戏，照着做吧。看看它的步骤，发现前面的安装什么的应该都不用做了，于是直奔主题，生成fmt文件
+。它给的方法是fmtutil &ndash;enablefmt
+xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，倒。比较了一下两个系统上的这个命令，参数还真的不一样，只好自己接着摸了。看看它的选项，有一个
+&ndash;byfmt &hellip;..，试试吧。输入后，一运行，一堆文字滚动过后，同样的错误，mkdir error。最后想了半天，祭出FileMon，最后终于被我找到
+原因了，在$HOME$下新建目录出错，当时我叫一个郁闷啊，还能犯这种错。于是按它要建的目录结构给他建好，运行fmtutil
+&ndash;all，等结束后，再次运行xelatex test.tex，一切正常，总算成功了。试了几个字体，感觉还是满不错的，这几天看来又有的玩了 ^</em>^</p>
+
+<p>对了，xetex带了一个fc-list命令，可以看到系统中可用的字体，生成出来的东西是utf-
+8编码的，第一列就是可用的字体名称。还可以在fonts.conf文件中加</p>
+
+<p>以增加目录。很不错的东西，嗯。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex">好东东LaTeX</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/184/"> &lt; Wordpress搬家完毕 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/182/"> 初用TeXLive2007 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/183\/';
+    var disqus_title = 'TeXLive中的XeTeX';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/183\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

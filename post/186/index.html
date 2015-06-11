@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 一个echobot，哈哈 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/186/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2007-05-11T14:10:28Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | 一个echobot，哈哈
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/186/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/186/'> 一个echobot，哈哈</a> </h2>
+        <div class="post-meta">发表于2007-05-11 14:10:28 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧这种小玩意，当然是用 python 做啦，又快又好玩，8过也从另一方面说明我很懒，哈哈。在网上找了一下，发现 python 关于 XMPP
+协议的模块有两个，一个是 sf(<a href="http://xmpppy.sf.net">http://xmpppy.sf.net</a>)
+上的，另一个是某单独网站(<a href="http://pyxmpp.jajcus.net)上的，本来想用后面一个，但是用它的例子连接">http://pyxmpp.jajcus.net)上的，本来想用后面一个，但是用它的例子连接</a> gtalk 的时候，总告诉我说木有
+TLS 认证，总让我很FT，于是转向 sf 上的那个了。 先是看它自己带的例子，没有一点悬念的看不懂，继续 google
+，终于在某些论坛上看到使用这个包的例子，一路照抄，抄的结果就是能够发消息了，短短的几行，真是简单啊。代码如下：</p>
+
+<pre><code>#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import xmpp
+
+conn = xmpp.Client('gmail.com', debug=[])
+conn.connect(server=('talk.google.com', 5223))
+conn.auth('########@gmail.com', '**********', 'Test')
+conn.sendInitPresence()
+conn.send(xmpp.Message('@gmail.com', 'Test'))
+</code></pre>
+
+<p>哈哈，简单吧，于是我的 gtalk 下午收到了N多 Test -<em>-!!!
+光能发也不行啊，还要能收，要是按这样的东西只能做个发消息器，或者有另一个名字，垃圾消息发送器 ^</em>^，但是 google
+到的网页上木有说，只好去看它的例子了，有了这个小东西的基础，发现它的程序还是满好懂的，看了一下，它收消息的函数是自己写的，然后用了一个
+RegisterHandler
+注册，找到了就依样画吧。看了看它例子中的消息处理函数，好烦，还有编码判断什么的，统统删掉，最后就直接把收到的消息回传，试了试，成，于是，一个新的
+echobot 诞生，哈哈。代码嘛，就在下面：</p>
+
+<pre><code>#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import xmpp
+
+def process_msg(conn, msg):
+    text = msg.getBody()
+    user = msg.getFrom()
+    conn.send(xmpp.Message(user, text))
+
+def StepOn(conn):
+    try:
+        conn.Process(1)
+    except KeyboardInterrupt: return 0
+    return 1
+
+def GoOn(conn):
+    while StepOn(conn): pass
+
+conn = xmpp.Client('gmail.com', debug=[])
+conn.connect(server=('talk.google.com', 5223))
+conn.RegisterHandler('message', process_msg)
+conn.auth('#######', '*******', 'Test')
+conn.sendInitPresence()
+conn.send(xmpp.Message('$$$$$$$@gmail.com', 'Test'))
+GoOn(conn)
+</code></pre>
+
+<p>看看，是不是比我说的还要简单。正在考虑给伊加上些什么功能 ^_^</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/187/"> &lt; Moinmoin的章节编号 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/185/"> Wordpress应该算差不多了吧… &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/186\/';
+    var disqus_title = '一个echobot，哈哈';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/186\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

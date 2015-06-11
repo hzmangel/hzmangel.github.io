@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Gentoo Install Notes (1) &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/312/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2008-06-24T23:58:43Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Gentoo Install Notes (1)
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/312/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/312/'> Gentoo Install Notes (1)</a> </h2>
+        <div class="post-meta">发表于2008-06-24 23:58:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。其实，在gentoo的官方网站上有一份详细的说明文档(<a href="http://www.gentoo.org/doc/en/hand
+book/index.xml">Gentoo Handbook</a>)，说明安装的过程，而且有<a href="http://www.gentoo.org/doc/zh_cn/handbook/">中文版</a>的，
+所以我的步骤大部分是按着来的，写下弄的过程中碰到的问题吧。</p>
+
+<p>首先在开始安装上，没有选择用光盘启动等方法，主要是想着一自己不方便刻录，二是不想浪费一张光盘，所以考虑从U盘或从硬盘走。不知道为什么，把U盘插到机器上死活给
+我报GRUB出错，把盘重新格式化一遍告诉我说分区表不正确，很是FT，于是只好另想办法。在网上逛了一会，想到了Grub4Dos，于是下载下来，看了看，好像很好
+用，只要把它的两个文件，grldr和menu.lst拷到C盘根目录下，然后在boot.ini里面加上一句就行了，具体的在别的文章里面写吧。在启动的时候选择新
+加上去的一项就可以读入那个menu.lst，然后出现像grub一样的菜单了。有了这个就简单了，新建一个分区，把gentoo的安装CD解压到那里面，然后在me
+nu.lst中加上一项，就是把livecd的那个gentoo的menu.lst的东西复制过来，但是需要改一下磁盘的root参数，把它改成正确的磁盘设备，然后
+在启动的时候就可以选择了。反正比上次在TP上装的时候手动输入要舒服多了，嗯。</p>
+
+<p>话说在这里的时候还有一小段事情，一开始想着看能不能用X来装，所以拷到那个分区的是livecd的文件，但是在用GRUB启动的时候伊会告诉我找不到CD，郁闷的重
+启了很多次还是不行，最后在临睡前想到换成installcd试试，结果就成了，于是关机睡觉，等着第二天晚上折腾。</p>
+
+<p>第二天，开始装系统，一开始配置网络啥的都比较顺利，因为是用有线连接的，不像上次在TP上弄，在折腾了半天无线网络后转向有线。由于想折腾点新的东西，所以选用了l
+vm，于是就因为这个事情，发生了我装Linux史来最大的一次惨剧。首先，就是对硬盘分区，新的320G的盘，分了大概一半给Linux。然后就是细分了，64M给
+了/boot，再分了512M的swap，最后给/分了5个G，然后就开始折腾了。把所有剩下的分成了一个大区，然后在上面开始折腾lvm，刚好gentoo文档区有
+一份<a href="http://www.gentoo.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xm
+l">lvm的安装文档</a>，于是就按着走了（把它里面的RAID部分不看即可，嗯）。先pvcreate一个物理卷(physical
+vilumes)，然后在上面用vgcreate新建一个卷组(volumn group)，最后在卷组上用lvcreate新建逻辑卷(logic volumn)
+，看上去很简单，可是，但是，我居然在这犯了一个严重的错误：在pvcreate的时候，也不知道是脑子里面哪根筋不通，还是被啥啥啥附体了，命令后面跟的设备名居然
+写错了，而且错成是我Windowz下的数据盘，偶滴个神啊，一个分区就这样变成示格式化的了，虽然快速格式化后用FinalData找到了些东西，但是全盘扫描太费
+时间，哪天有空再折腾吧，就算弄成了，目录结构也全废了，郁闷啊。回到正题，其实那几条命令一敲就行了，分区也就是按<a href="http://www.gento
+o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的写法：<br />
+|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|<br />
+| mount point            | disk size | remark                        |<br />
+|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|<br />
+| /usr                   | 8G        | ext3                          |<br />
+| /usr/portage           | 2G        | ext3, small block, many inode |<br />
+| /usr/portage/distfiles | 4G        | ext3, large block, less inode |<br />
+| /home                  | 20G       | ext3                          |<br />
+| /opt                   | 5G        | ext3                          |<br />
+| /var                   | 4G        | ext3                          |<br />
+| /var/tmp               | 6G        | ext3                          |<br />
+| /tmp                   | 2G        | ext3                          |<br />
+|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|</p>
+
+<p>然后敲了一大堆mount命令，把磁盘挂载好，嗯，就可以准备安装了。先写到这，后面的明天写 :)</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅Linux</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/313/"> &lt; Gentoo Install Notes (2) </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/311/"> 0620-0622自虐日记 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/312\/';
+    var disqus_title = 'Gentoo Install Notes (1)';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/312\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

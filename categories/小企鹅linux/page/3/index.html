@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 小企鹅linux &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/categories/e5b08fe4bc81e9b985linux/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | 小企鹅linux
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/categories/e5b08fe4bc81e9b985linux/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/344/'> 使用NFS在AIX上挂载Linux分区</a> </h2>
+        <div class="post-meta">发表于2008-09-18 13:30:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： AIX, NFS, Not owner 起因很简单，因为在折腾机器，在AIX上解压怎么也不对，只好想到了NFS的方式。首先保证两台机器能互相通信（也就是能ping通啦），然后编辑NFS服务器即Li nux机器上的/etc/exports的文件，在其中加上一行：&lt;path&gt; &lt;hostname/ip&gt;(&lt;option&gt; )，第一个是在Linux服务器上的路径，第二个是需要挂载此文件夹主机的主机名或者IP地址，最后括号中是选项，一般是rw, async。改完后重启NFS的服务器，此时在服务器上用exportfs命令应该能看到刚加到配置文件中的一行。此时服务器端应该算是设置完成了。 在客户端的AIX机器上，首先需要确定portmap和nfs后台进程的存在，命令嘛就是startsrc -s portmap和startsrc -g nfs，然后就是用mount命令了，不用加-t nfs，直接就是mount &lt;ip&gt;:&lt;path&gt; &lt;mount_point&gt;。 简单吧，不过需要说说vmount: Not owner这个问题（以下解答转自zhaolin日志）出现这个问题的原因是linux操作系统在响应AIX操作系统的mount请求时，需要用到此nfs保留端口，该端 口在默认情况下是不会开放的。所以需要在AIX客户端设置一下： # nfso -o nfs_use_reserved_ports=1 Setting nfs_use_reserved_ports to 1 然后再重新mount就没问题了。还有就是可能需要在AIX的/etc/hosts下添加服务器地址和IP映射，否则有可能会找不到，嗯。 目前只是挂载上，能读，至于能不能写再说吧，嘿嘿。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/341/'> patch的-p参数</a> </h2>
+        <div class="post-meta">发表于2008-09-05 14:02:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： patch, 用法 先用diff比较两个目录，在patch的时候，如果要打补丁的目录和diff时的目录放的地方不一样，它会报找不到文件的错，此时需要用到-p的参数，-p后面跟一 个数字作为参数，表示忽略diff文件中第几个/前的东西。如-p5表示忽略第5个/前的东西。比如在diff的时候，比较的是a/foo和b/foo两个文件夹，那 么输出的diff文件中，文件名是a/foo/XXXX，此时如果要给c/foo下的一个东西打补丁，那么直接打就不行了。此时应该到c目录中，然后用patch -p1命令来打，嗯。 外一则，如果被打补丁的目录中有些文件不存在了，patch会停下来问你咋办，如果在命令行中加上- t的参数，那么它就不会停而是直接跳过，开始打下一个文件的补丁了。 记一笔，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/332/'> 无密码scp(ssh)</a> </h2>
+        <div class="post-meta">发表于2008-08-13 14:49:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： linux, scp, 无密码 其实很早就想把怎么配无密码 scp 给记下来，可是一直忘，所以今天趁热打铁一下吧。其实很简单，首先，生成一对密钥对，然后把私钥扔到本机 ~/.ssh/ 目录下，好像还要把属性设成 600 ，最后把公钥加到要连接服务器的 ~/.ssh/authorized_keys 文件中，如果是 SSH2 则应该是 authorized_keys2 ，然后就行了，嗯。如果要从那台机器连回来，还要依样再来一遍。 当前，前提是那台服务器的 SSH 可以用公钥密钥对进行认证。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/328/'> 无密码rsh</a> </h2>
+        <div class="post-meta">发表于2008-07-18 09:52:20 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：/etc/hosts.equiv和家目录下的.rhosts文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/323/'> Linux终端不回显</a> </h2>
+        <div class="post-meta">发表于2008-07-04 09:29:36 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： Linux, 终端属性, 回显 一直想写段程序试试输入不回显的东西，但是一直被一些事情所羁绊（其实是自己懒，玩游戏去了），直到最近要在公司的代码上加东西。 于是乎，一轮 google 以后，终于找到了答案，其实是因为自己看APUE看的头晕了。代码很简单，先用 tcgetattr 取到现有的属性，然后在现有属性上设置 XXX.c_lflag &amp;= ~ECHO ，再用 tcsetattr 把新属性给设置上去，就行了，对于两个终端相关的函数，需要提供 fd ，对于 stdin 而言是 0 ，话说不知道为啥昨天直接写 stdin 不行，下面呢，木有了~~~~ PS：突然想到，代码贴上来是不是好一点？于是下面又有了： ** 1** **#include ****&lt;stdio.h&gt;** ** 2** **#include ****&lt;stdlib.h&gt;** ** 3** **#include ****&lt;termios.h&gt;** ** 4** **#include ****&lt;time.h&gt;** ** 5** ** 6** ** 7** **int** main (**int** argc, **char*** argv[]) ** 8** { ** 9** **struct** termios init_setting; **10** **struct** termios pend_setting; **11** **12** **if** (tcgetattr(**0**, &amp;init_setting)</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/323/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/320/'> USE flag for individual package</a> </h2>
+        <div class="post-meta">发表于2008-06-29 23:37:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">keyword: gentoo, USE for package, mysql 在升级系统的时候要装mysql，于是emerge mysql，刷了一堆字后丫告诉我出错，看了看信息原来是BDB不再支持，然后也不知道怎么回事丫就出错。一开始 在make.conf中把berkdb关键字给去掉了，但是还是不行，emerge &ndash;info看了一下关键字还在，大概是哪个上层哪个配置文件中的事情，于是乎只 好再去找Handbook，在USE一节中找到了，其实就 是在/etc/portage/package.use中加上dev-db/mysql -berkdb就行了，告诉编译器对于mysql不要用berkdb编译选项 。手册里面还说package.use可能不是一个文件，而是目录，没细看说明了，碰到再说吧，嗯。就这样，单独为某个包设置USE标记。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/319/'> 放弃Compiz，嗯</a> </h2>
+        <div class="post-meta">发表于2008-06-29 01:48:00 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了好久，发现折腾X没啥意思，够用就行了，以后还是开始折腾程序吧，这才是有用的，嗯。ATI的驱动装上了，能跑glxgears，我已经很欣慰了，过段时间再说 别的吧，先把欠在版上的东西完成了。快餐店准备开张了~~~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/318/'> ACCEPT_KEYWORDS in gentoo</a> </h2>
+        <div class="post-meta">发表于2008-06-28 01:15:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge 今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/317/'> Emerge specific version of software</a> </h2>
+        <div class="post-meta">发表于2008-06-28 01:11:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo software emerge version 想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法： 先装gentoolkit，以找到equery这个工具，然后再equery list -p &lt;pkg name&gt;列出所有可用的版本，最后用emerge =&lt;pkg full name&gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/316/'> ATI on Gentoo</a> </h2>
+        <div class="post-meta">发表于2008-06-27 22:03:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo ATI 配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。 首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。 然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&ndash;initial &ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。 再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。 话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/categories/e5b08fe4bc81e9b985linux/page/2/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/categories/e5b08fe4bc81e9b985linux/page/4/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

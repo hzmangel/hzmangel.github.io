@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Ruby learning log &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1101/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2012-04-28T11:34:51Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="ruby" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Ruby learning log
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1101/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1101/'> Ruby learning log</a> </h2>
+        <div class="post-meta">发表于2012-04-28 11:34:51 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>Just studied Ruby with the tutorial on website <a href="http://rubylearning.com/" target="_blank">rubylearning.com</a> in the past week, and here are some knowledge gained those days.#### General</p>
+
+<ul>
+<li>Ruby is free format and case sensitive.</li>
+<li>Besides commenting one line code with leading #, Ruby can use <code>=being</code> and <code>=end</code> to define a comment block.</li>
+<li>Everything in Ruby is object. Which means 1.5 means a float number but 1.times can generate a enumerator.</li>
+<li>Ruby use <code>nil</code> to indicate a NULL object</li>
+<li>Only <code>false</code> and <code>nil</code> is false. Be careful, you have to face the fact that <code>if 0</code> will do not enter else branch in Ruby, which is different with other language I have learned.</li>
+<li>There is no <code>++</code> and <code>--</code> in Ruby, you can work around with <code>+=1</code> and <code>-=1</code> sometimes.</li>
+<li>Constant name must start with capital letter, and local variable must start with lowercase letter or underscore(<code>_</code>). Program can not be executed if name do not obey this rule (hmm&hellip; Python use force indent, while Ruby use force name type).</li>
+<li>In Ruby, constant, class and module are all treated as constant, so must follow the constant name rule.</li>
+
+<li><p>Parentheses are optional while defining or calling function, so all the code following is legal:</p>
+
+<p>foobar
+foobar()</p>
+
+<p>foobar(a, b, c)
+foobar a, b, c</p>
+
+<p>def foo bar
+    puts bar
+end</p>
+
+<p>def foo(bar)
+    puts bar
+end</p></li>
+
+<li><p><code>.to_i</code>, <code>.to_f</code> and <code>.to_s</code> are used to convert object to integer, float and string.</p></li>
+
+<li><p>You can insert underscore(_) in integer number to make it more readable.</p></li>
+</ul>
+
+<h4 id="variable-and-method:f00e6258aba7186dcca7ad1f671f53dd">Variable and method</h4>
+
+<ul>
+<li>Global, local, instance and class variable are defined in different way</li>
+<li>Variable with prefix <code>$</code> means global variable</li>
+<li>Variable with prefix <code>@</code> means instant variable in class, like <code>self.var</code> in Python</li>
+<li>Variable with prefix <code>@@</code> means the class variable, like static variable in C++</li>
+<li>Ruby also include some built in variable:</li>
+<li><code>$0</code> means the filename.</li>
+<li><code>$:</code> means search path, which is a list, like the <code>sys.path</code> in Python.</li>
+<li><code>$$</code> means the process id.</li>
+<li>Usually, a variable can be assigned default value with this syntax: <code>var ||=</code></li>
+<li>Only <code>?</code>, <code>!</code> and <code>=</code> can be used as suffix to the method</li>
+<li>method name ends with <code>?</code> means this method will return boolean value.</li>
+<li>method name ends with <code>!</code> means this method will do changes on original object instead of creating new copy.</li>
+<li>method name ends with <code>=</code> can used to define operator.</li>
+<li>If no <code>return</code> at last of function, the value of last expression will be returned as return value.</li>
+<li>Argument of method can be defined as <code>*args</code>, which means the method can accept uncertain number of argument.</li>
+<li>Seems there is no <code>**args</code> in Ruby, arguments passed with <code>*args</code> will lost information of argument name. The <code>**args</code> used in Python method can accept argument with name.</li>
+<li><code>alias</code> can be used to define a alias for a method/operator/global var/regular expression back-ref, but not local var/class var/constant. The object pointed by new name will NOT updated after updating old one.</li>
+</ul>
+
+<h4 id="string:f00e6258aba7186dcca7ad1f671f53dd">String</h4>
+
+<ul>
+<li>Ruby use <code>puts</code> to print string to screen, and <code>gets</code> to receive string from standard input.</li>
+<li><code>puts</code> is used like a keyword, but actually it is a method defined in Ruby kernel</li>
+<li><code>puts</code> method will invoke <code>to_s</code> method of an object</li>
+<li>Strings fetched with <code>gets</code> will usually be tidied by <code>chomp</code> method</li>
+<li>You can use <code>+</code> to connect string. Like Python, it will create a new string object, so the performance may downgrade if connecting too may string with <code>+</code></li>
+<li>String defined by single quota and double quota are different. A string defined by single quota only convert <code>\\\\</code> to <code>\\</code>, which means <code>'a\\\n'</code> == <code>'a\n'</code>, and all the three character will be printed out with <code>puts</code>. While the double quota will convert all escape string, further more, it will also handle the expression interpolation <code>#{}</code>.</li>
+<li>There are three methods to compare string, <code>==</code>, <code>eql?</code> and <code>equal?</code>. The first two methods compare string content while the last one compares object id.</li>
+<li>A magic keyword <code>%w</code> can be used to build string array, like this: %w{ab cd ef gh \n} == [&ldquo;ab&rdquo;, &ldquo;cd&rdquo;, &ldquo;ef&rdquo;, &ldquo;gh&rdquo;, &ldquo;\\n&rdquo;].</li>
+</ul>
+
+<h4 id="flow-control-and-code-block:f00e6258aba7186dcca7ad1f671f53dd">Flow control and code block</h4>
+
+<ul>
+<li><code>if..else..end</code>, and the else if is written as <code>elsif</code> in Ruby. (hmm&hellip; we have <code>else if</code>, <code>elseif</code> and <code>elif</code> yet, and now we have <code>elsif</code>, seems we only need elf now).</li>
+<li>There is reverse if, named <code>unless</code>, help to write complex logic?</li>
+<li>There is <code>cond ? a : b</code> operator in Ruby.</li>
+<li>There is a switch-case model in Ruby, <code>case..when..else..end</code></li>
+<li>Code blocks are defined in <code>{ }</code> (single line) or <code>do..end</code> (multiple line). The <code>{ }</code> has higher precedence than <code>do..end</code>.</li>
+<li>Code block followed by function will be executed after <code>yield</code> called in the function.</li>
+<li>Can pass argument to block by passing argument to <code>yield</code>.</li>
+<li>Method <code>block_given?</code> can be used in function to check whether this function has block followed.</li>
+</ul>
+
+<h4 id="array-range-and-hash:f00e6258aba7186dcca7ad1f671f53dd">Array, range and hash</h4>
+
+<ul>
+<li>Seems there is no index error in Ruby, you will get <code>nil</code> if try to access element out of array size.</li>
+<li><code>ARGV</code> means command line arguments, which is an array.</li>
+<li>Range can be generated via <code>a..b</code> or <code>a...b</code>, the list generated with three dots do not contain <code>b</code>.</li>
+<li><code>.to_a</code> method can convert a range object to array.</li>
+<li>There is a <code>===</code> operator in range object, check whether the element is included in range.</li>
+<li>Name start with <code>:</code> is a symbol, which is unique in global.</li>
+<li>There is a symbol table in Ruby, which contains function, class variable (variable start with <code>@</code>) and user defined symbol. <code>Symbol.all_symbols</code> can be used to get all symbol name, w/o colon.</li>
+<li>Symbol can not be used as a left value. It is just a symbol, can be used as right value.</li>
+<li>For string comparison and hash index, a temp string will create a new object each time, which may reduce the performance.</li>
+<li>There is a <code>to_s</code> method for symbol, and a <code>to_sym</code> method for string.</li>
+<li>Save information in string if take more concern on content, and symbol for object id.</li>
+<li>Hash (dict in python) can use any object as key, which is different with Python.</li>
+<li>It is recommended to use symbol to replace the string index</li>
+<li>Hash can be defined via <code>{key: val}</code> or <code>{key =&amp;gt; val}</code>. If using the first method, the <code>key</code> can not be a string, but a name obey the variable rule, and Ruby will convert it to symbol. That is: {a: 2} == {:a =&gt; 2}</li>
+</ul>
+
+<h4 id="file:f00e6258aba7186dcca7ad1f671f53dd">File</h4>
+
+<ul>
+<li>Usual way for using File: <code>File.open() do |f| .. end</code></li>
+<li>Can define file encoding and internal encoding in the open command, which is better than built-in <code>open</code> of Python</li>
+<li><code>Find.find()</code> will traverse the directory, include sub directory.</li>
+<li><code>File.new()</code> can open a random access file, which can response to <code>.seek</code> method.</li>
+</ul>
+
+<h4 id="regular-expression:f00e6258aba7186dcca7ad1f671f53dd">Regular expression</h4>
+
+<ul>
+<li>Pattern enclosed by slash is an regular expression object, <code>/foobar/</code></li>
+<li>Both string and regular expression has match method. RE use <code>match</code> while string use <code>=~</code>.</li>
+<li><code>.match</code> in RE will return <code>MatchData</code> object of matched, or <code>nil</code> for not found.</li>
+<li><code>=~</code> in string will return index if found, or <code>nil</code> for not found.</li>
+</ul>
+
+<h4 id="class:f00e6258aba7186dcca7ad1f671f53dd">Class</h4>
+
+<ul>
+<li>class is a first-class object in Ruby, which is an object of Class.</li>
+<li>As mentioned before, the class name must has first character uppercased.</li>
+<li>Create a new object with <code>ClassName.new</code>, which will invoke <code>allocate</code> method to allocate space and <code>initalize</code> method for initialization.</li>
+<li>Variable with prefix <code>@</code> is class variable, which can be used in the whole object, seems like the <code>self.</code> variable in Python, but in Ruby, name with <code>self.</code> must function, then, the first character must be uppercased.</li>
+<li><code>methods</code> method can be used to printed out all methods in class, like the <code>dir</code> in Python.</li>
+<li><code>responsed_to?</code> method can be used to check whether the method exists in the object. If not, Ruby first will check whether there is <code>method_mission</code> method first, and then throw exception of not found.</li>
+<li>Every class in Ruby is open, which means you can update any class, include built-in class like string, at anytime. But make sure you will not bring the conflict into exist class.</li>
+<li>A more safer way is define a sub-class, and override the needed method.</li>
+<li>In Ruby, one class can only be inherit from a single class. However, module can be used as multi inherit, seems like the interface in Java.</li>
+<li>If calling <code>super</code> in one class, the method in parent class will be executed, but different syntax can cause different result:</li>
+<li>Calling <code>super</code> with no parentheses, then the argument in sub method will be passed to parent method.</li>
+<li>Calling <code>super</code> with empty parentheses, then the default value of parent method will be used, and error will be reported if no default value defined.</li>
+<li>Calling <code>super</code> with value, then pass this value to parent method.</li>
+<li>Abstract class, seems more like syntax sugar. Calling undefined method in parent class, and implement the method in subclass.</li>
+<li>The default access rule for method in class is public, can add protect/private before def if needed.</li>
+<li>Those access type can be only applied to method, the instance/class variable is private by default.</li>
+</ul>
+
+<h4 id="proc:f00e6258aba7186dcca7ad1f671f53dd">Proc</h4>
+
+<ul>
+<li>Like lambda in Python, but named Proc in Ruby.</li>
+<li>Each code block created by <code>lambda</code> is a object of <code>Proc</code> class, which can be executed by calling <code>.call</code> method.</li>
+<li>Here is a example for lambda with argument: <code>lambda {|x| &quot;Hello #{x}&quot;}</code>.call &ldquo;Hell&rdquo;`</li>
+</ul>
+
+<h4 id="load-and-require:f00e6258aba7186dcca7ad1f671f53dd">Load and require</h4>
+
+<ul>
+<li><code>load</code> and <code>require</code> are methods defined in <code>Object</code>, but more like a keyword during usage.</li>
+<li>File included by <code>load</code> will be loaded every time program executed, while <code>require</code> only once.</li>
+<li>Pass filename w/o suffix to <code>require</code>, and <code>require</code> will find the file in the path. If the suffix is rb, then imported as source file. For library suffix, like .so, .dll, <code>require</code> will import them as Ruby extension.</li>
+<li><code>require</code> will return <code>true</code> or <code>false</code> after execution complete.</li>
+</ul>
+
+<h4 id="exception:f00e6258aba7186dcca7ad1f671f53dd">Exception</h4>
+
+<ul>
+<li>A special class, user can throw it via <code>raise</code>.</li>
+<li>Default exception type is <code>RuntimeError</code>, but can be changed by passing class name to <code>raise</code></li>
+<li>Use <code>rescue</code> to handle the exception.</li>
+</ul>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/ruby"><span class="label label-default">ruby</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1113/"> &lt; RoR learning log (1) </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1078/"> 2012，魔都开年 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1101\/';
+    var disqus_title = 'Ruby learning log';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1101\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

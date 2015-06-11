@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Linux &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/tags/linux/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Linux
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/tags/linux/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1052/'> List all CVS tags</a> </h2>
+        <div class="post-meta">发表于2011-12-19 10:41:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1052/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1035/'> Blocking/Non-Blocking IO and SYN/ASYN IO</a> </h2>
+        <div class="post-meta">发表于2011-09-04 22:18:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>这是我上个月<a title="linuxfb" href="http://linuxfb.net" target="_blank">linuxfb</a>版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/1035/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/999/'> Remove packages installed by setup.py install</a> </h2>
+        <div class="post-meta">发表于2011-07-03 01:27:23 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。 $ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/984/'> Get Return Value from popen System Call</a> </h2>
+        <div class="post-meta">发表于2011-05-30 17:09:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。 int status = pclose(fp); if (status == -1) { printf(&quot;Error reported by pclose()\n&quot;); exit(1); } else { printf(&quot;Process exited? %s\n&quot;, WIFEXITED(status) ? &quot;yes&quot; : &quot;no&quot;); printf(&quot;Process status: %d\n&quot;, WEXITSTATUS(status)); } 其实是满早前问的一个问题，忘更新过来了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/876/'> Disable Arial in Chrome</a> </h2>
+        <div class="post-meta">发表于2011-01-23 14:45:27 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/876/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/721/'> Merge Two Hg Repositories</a> </h2>
+        <div class="post-meta">发表于2010-07-09 01:54:31 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有： A: hg pull –f &lt;repo B&gt; A: hg merge A: hg ci 关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/618/'> Reuse the TIME_WAIT Port</a> </h2>
+        <div class="post-meta">发表于2010-05-05 15:08:38 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西： net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存 sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。 话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/614/'> The Capital S in Linux Permission Bitmap</a> </h2>
+        <div class="post-meta">发表于2010-03-25 17:22:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~ 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。 最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/610/'> Using sudo in rsh&#39;s command</a> </h2>
+        <div class="post-meta">发表于2010-03-22 17:47:21 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉 Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/583/'> Mask Mouse on Linux</a> </h2>
+        <div class="post-meta">发表于2010-01-13 23:58:21 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法： 不显示 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头 屏蔽响应事件 虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令 xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo; 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。 就这两条命令，具体的没的细究，有空再看吧。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/tags/linux/page/2/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

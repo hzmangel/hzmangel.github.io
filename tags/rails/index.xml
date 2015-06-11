@@ -1,0 +1,1189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rails on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/rails/</link>
+    <description>Recent content in Rails on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Sun, 01 Dec 2013 15:03:37 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/rails/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
+      <link>http://hzmangel.github.io/post/1224/</link>
+      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1224/</guid>
+      <description>
+
+&lt;h3 id=&#34;tl-dr:5ab4430131db8e4e631503ef790e7c02&#34;&gt;tl;dr&lt;/h3&gt;
+
+&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.&lt;/p&gt;
+
+&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
+repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next is the full version.### The problem&lt;/p&gt;
+
+&lt;p&gt;Recently I have faced a task to upload a image by a rich format text editor.
+The web server is Rails, so I selected
+&lt;a href=&#34;https://github.com/carrierwaveuploader/carrierwave&#34;&gt;carrierwave&lt;/a&gt; as the
+upload gem, and &lt;a href=&#34;http://mindmup.github.io/bootstrap-
+wysiwyg/&#34;&gt;bootstrap-wysiwyg&lt;/a&gt; as rich format text editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bootstrap-wysiwyg&lt;/code&gt; supports inserting image into edit area, and uploaded
+image via base64. Every thing is okay in development enviromnent, but I have
+met problem while deploying to production server.&lt;/p&gt;
+
+&lt;p&gt;The root cause of the problem is response size exceed the max limitation. The
+uploaded base64 encoded image are saved as string, and will be returned in
+response body. I have tried increasing response body size limitation but take
+no effect, so I switched to method that saving image to file.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution:5ab4430131db8e4e631503ef790e7c02&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;This section only shows how to get image and save via carrierwave, please
+refer to the source of the other contents.&lt;/p&gt;
+
+&lt;p&gt;The sample project is a simple post manage system, each post contains &lt;code&gt;title&lt;/code&gt;
+and &lt;code&gt;content&lt;/code&gt; field, and the &lt;code&gt;content&lt;/code&gt; field is rich format text.&lt;/p&gt;
+
+&lt;p&gt;The passed in base64 encoded image is started with this string:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;data:image/jpeg;base64,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then following the image data.&lt;/p&gt;
+
+&lt;p&gt;The image uploaded is surrounded by &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag, so I added a pre processing
+to the content uploaded. The logic is simple: save found &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag to a file
+with carrierwave, and replace the base64 data to file path. The primary code
+is here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def process_base64_content content
+  return if content.nil?
+  return content if not content.match /&amp;lt;/
+  rslt = &#39;&#39;
+  content.split(&amp;quot;&amp;lt;&amp;quot;).each do |elem_str|
+    if elem_str[0..2] == &amp;quot;img&amp;quot;
+      if elem_str.match(%r{data:(.*?);(.*?),(.*?)&amp;quot;&amp;gt;$})
+        img_data = {
+          :type =&amp;gt;      $1, # &amp;quot;image/png&amp;quot;
+          :encoder =&amp;gt;   $2, # &amp;quot;base64&amp;quot;
+          :data_str =&amp;gt;  $3, # data string
+          :extension =&amp;gt; $1.split(&#39;/&#39;)[1] # &amp;quot;png&amp;quot;
+        }
+
+        other_img = PostImage.new
+        img_data_str = img_data[:data_str]
+        img_data_sio = CarrierStringIO.new(Base64.decode64(img_data_str))
+        other_img.image = img_data_sio
+        other_img.save
+        rslt += view_context.image_tag(other_img.image.url)
+      else
+        rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+      end
+    else
+      rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+    end
+  end
+
+  rslt
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;PostImage&lt;/code&gt; is a model used for saving image. &lt;code&gt;CarrierStringIO&lt;/code&gt; is also a user
+defined class to provide functions &lt;code&gt;original_filename&lt;/code&gt; and &lt;code&gt;content_type&lt;/code&gt;,
+which are required by &lt;code&gt;carrierwave&lt;/code&gt;. Here is the definition of this class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CarrierStringIO &amp;lt; StringIO
+  def original_filename
+    # the real name does not matter
+    &amp;quot;image.jpeg&amp;quot;
+  end
+
+  def content_type
+    # this should reflect real content type, but for this example it&#39;s ok
+    &amp;quot;image/jpeg&amp;quot;
+  end
+end
+
+class PostImage
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  def image_data=(data)
+    sio = CarrierStringIO.new(Base64.decode64(data))
+    self.image = sio
+  end
+
+  mount_uploader :image, PostImageUploader
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last thing is the carrierwave uploader: &lt;code&gt;PostImageUploader&lt;/code&gt;. This is a
+simple uploader that only save the image to file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: utf-8
+
+class PostImageUploader &amp;lt; CarrierWave::Uploader::Base
+
+  storage :file
+
+  def store_dir
+    &amp;quot;uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}&amp;quot;
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the sample project, the file type and file name are hard coded in
+&lt;code&gt;CarrierStringIO&lt;/code&gt;, please feel free to modify code as needed.&lt;/p&gt;
+
+&lt;p&gt;Note: There is an bug of the code: The image can&amp;rsquo;t be extracted out if
+inserted into a text paragraph. I will fix this once I have time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title>
+      <link>http://hzmangel.github.io/post/1210/</link>
+      <pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1210/</guid>
+      <description>
+
+&lt;p&gt;Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose &lt;code&gt;carrierwave&lt;/code&gt; finally.
+Also, I selected &lt;code&gt;nested_form&lt;/code&gt; to manage uploading and deleting multiple
+attachments.### Gemfile&lt;/p&gt;
+
+&lt;p&gt;First thing to use those gems is updating &lt;code&gt;Gemfile&lt;/code&gt; in the project, so those
+lines have been added to the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Mongoid
+gem &amp;quot;mongoid&amp;quot;
+
+# File upload
+gem &#39;carrierwave&#39;
+gem &#39;carrierwave-mongoid&#39;, :require =&amp;gt; &#39;carrierwave/mongoid&#39;
+gem &amp;quot;mini_magick&amp;quot;
+
+# Form for multi model
+gem &#39;nested_form&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the modification, remember to run &lt;code&gt;bundle update&lt;/code&gt; to update/install the
+gems and dependencies.&lt;/p&gt;
+
+&lt;h3 id=&#34;model:b5edfa6373c50342486587e36ad49b10&#34;&gt;Model&lt;/h3&gt;
+
+&lt;p&gt;The next step is creating the models. For simplicity, there are only two
+models in the project. One model named &lt;code&gt;Foo&lt;/code&gt;, which contains a title field and
+a relationship field with the other model &lt;code&gt;FooImage&lt;/code&gt;. Here is the definition
+of model &lt;code&gt;Foo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo
+  include Mongoid::Document
+
+  field :title, type: String
+
+  has_many :foo_images # Photoes of the dish
+  accepts_nested_attributes_for :foo_images, :allow_destroy =&amp;gt; true
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;accepts_nested_attributes_for&lt;/code&gt; keyword enables saving associated records
+though the parent, while the &lt;code&gt;:allow_destroy&lt;/code&gt; parameter allows deleting
+associated though attributes hash.&lt;/p&gt;
+
+&lt;p&gt;Here comes the &lt;code&gt;FooImage&lt;/code&gt; model:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class FooImage
+  include Mongoid::Document
+
+  attr_accessible :image
+  mount_uploader :image, FooUploader
+
+  belongs_to :foo
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This model only contains one field &lt;code&gt;:image&lt;/code&gt;, and the difference between others
+is the &lt;code&gt;mount_uploader&lt;/code&gt; keyword, which is used to mount given uploader to the
+given column, then assigning and reading from this field will upload and
+retrieve files. The &lt;em&gt;uploader&lt;/em&gt; is introduced by &lt;code&gt;carrierwave&lt;/code&gt;, which will be
+introduced in next section.&lt;/p&gt;
+
+&lt;h3 id=&#34;uploader:b5edfa6373c50342486587e36ad49b10&#34;&gt;Uploader&lt;/h3&gt;
+
+&lt;p&gt;Uploader is used to handle the file uploaded to the server, which will save
+the file to specified location with multiple version. A uploader can be
+created by the command listed below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails g uploader Foo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A new uploader &lt;code&gt;foo_uploader.rb&lt;/code&gt; will be generated under directory
+&lt;code&gt;app/uploaders/&lt;/code&gt; after command return. The uploader generated by default can
+handle file uploading, and you can add some other function, such as scaling
+image, set whitelisted extension, in the uploader. Remember to remove the
+comment character from either &lt;code&gt;CarrierWave::RMagick&lt;/code&gt; or
+&lt;code&gt;CarrierWave::MiniMagick&lt;/code&gt; line to enable scaling function. &lt;code&gt;Carrierwave&lt;/code&gt; alwo
+support uploading file to cloud storage such as s3 directly, please refer to
+the document for detail. In this uploader, I scale the uploaded image to
+&lt;code&gt;800x600&lt;/code&gt; and add a thumbnail version with size &lt;code&gt;80x60&lt;/code&gt;, here is the code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;process :resize_to_fill =&amp;gt; [800, 600]
+
+version :thumb do
+  process :resize_to_fill =&amp;gt; [80, 60]
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The generated uploader uses &lt;code&gt;scale&lt;/code&gt; for resizing, remember to replace it with existing function like &lt;code&gt;resize_to_fill&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;views:b5edfa6373c50342486587e36ad49b10&#34;&gt;Views&lt;/h3&gt;
+
+&lt;p&gt;The last thing is the view. I plan to use two views in the project. Since this
+is just a simple demo, I have only created one record and shown the title and
+images with table.&lt;/p&gt;
+
+&lt;p&gt;By the way, if you want to deploy this application on production environment,
+please make sure those two configuration:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Make sure your web server, such as &lt;code&gt;Nginx&lt;/code&gt;, &lt;code&gt;Apache&lt;/code&gt;, has write permission to its temp path. If you don&amp;rsquo;t know which directory is it, you can use this simple method to determine: First, check whether the production server can complete process of uploading attachment (Just uploading only, showing of image may have another problem which will be talked about below ). If there is no error, then the permission issue has already done. But if error occurred, please refer to the error log or access log of web server for tracing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now the second problem, showing the image. After uploading successfully, you may can&amp;rsquo;t see the uploaded file. The problem is because production server do not serve static files. The quick fix for this is changing line &lt;code&gt;config.serve_static_assets = false&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt;, but it is not the recommended way, since the production server can&amp;rsquo;t server static file efficiently. The better method is configuring web server to serve those static file directly, please refer to web server&amp;rsquo;s manual for detail.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So, that&amp;rsquo;s it. Thanks for reading, and here is the &lt;a href=&#34;https://github.com/hzmangel/carrierwave-nestedform-mongoid&#34;&gt;link of project on
+GitHub&lt;/a&gt;, any
+comments are appreciated.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Rails with Redis</title>
+      <link>http://hzmangel.github.io/post/1205/</link>
+      <pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1205/</guid>
+      <description>&lt;p&gt;I have met an issue recently that the Rails site always returns 502 error for
+some page. After some investigation, I have found that the problem is caused
+by a long time query of database, which exceeds the timeout value of unicorn
+configuration, then the unicorn worker process will be killed and the Nginx
+returns 502 to user.&lt;/p&gt;
+
+&lt;p&gt;So the solution for this kind prblem is to put the job into some background
+task, and use some other method to inform the frontend when job done. Finally
+I choose the Redis for this task.First of all, the Redis server should be run on the server, I am using ubuntu
+on the server so the command is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install redis-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After installion done, the server will be started as service in the server.&lt;/p&gt;
+
+&lt;p&gt;Then the Rails part. I am using a gem called
+&lt;a href=&#34;https://github.com/resque/resque&#34;&gt;&lt;code&gt;resque&lt;/code&gt;&lt;/a&gt; for creating background jobs. I
+have followed the &lt;a href=&#34;http://railscasts.com/episodes/271-resque&#34;&gt;RailsCasts #271&lt;/a&gt;
+to setup my project, and here is a brief instruction for Rails part:&lt;/p&gt;
+
+&lt;p&gt;First a rake task for resque it is needed, which is also listed in the rails
+casts site.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;quot;resque/tasks&amp;quot;
+
+task &amp;quot;resque:setup&amp;quot; =&amp;gt; :environment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then create workers for the long time tasks in &lt;code&gt;app/worker&lt;/code&gt; directory. I am
+using &lt;code&gt;sleep&lt;/code&gt; method to simulate the long time task, and then the script will
+write some data into Rails cache. Here is the file content of
+&lt;code&gt;app/worker/cache_writer.rb&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CacheWriter
+  @queue = :rails_cache
+  def self.perform(cache_key)
+    sleep 10
+    Rails.cache.write(cache_key, &amp;quot;foobar&amp;quot;)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After worker creation done, I need to update code in the controller to enqueue
+job to Redis. Now in the controller, I just need to enque the task to Redis
+queue with &lt;code&gt;Resque.enqueue&lt;/code&gt; and return:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class TestCachesController &amp;lt; ApplicationController
+  def index
+    @foo = Rails.cache.read(&amp;quot;foo&amp;quot;)
+    if @foo.nil?
+      Resque.enqueue(CacheWriter, &amp;quot;foo&amp;quot;)
+    end
+  end
+
+  def show
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the task can be added to the queue, and we need worker to handle it. The
+&lt;code&gt;bin/resque work&lt;/code&gt; will start a worker process, and the parameter &lt;code&gt;--queues=&lt;/code&gt;
+or &lt;code&gt;--queue=&lt;/code&gt; can be added to specify the working queue. I have copied some
+code from &lt;a href=&#34;https://gist.github.com/J-Gull/1060167&#34;&gt;this page&lt;/a&gt; to make the rake
+can start/stop the workers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Playing MongoDB with Rails</title>
+      <link>http://hzmangel.github.io/post/1159/</link>
+      <pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1159/</guid>
+      <description>
+
+&lt;p&gt;This post will try to implement a web app used for recording mobile phone of
+cheaters. This idea is came from cooler@linuxfb, and I have used this for a
+presentation about GAE on 2009, and here is the
+&lt;a href=&#34;http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477&#34;&gt;slide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;NOTE: Code still under developing, the Git repo is shown at the end of
+article.Creating Rails project has been talked in previous post, so this post will
+focus on others.&lt;/p&gt;
+
+&lt;h2 id=&#34;mongodb:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;MongoDB&lt;/h2&gt;
+
+&lt;p&gt;Thought I have heard MongoDB before, I just start to use it recently. It is a
+document based NoSQL database, and it is developer friendly. Detailed
+information can be get from its &lt;a href=&#34;http://www.mongodb.org/&#34;&gt;website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install MongoDB on MacOS&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;On MacOS, the MongoDB can be installed via
+&lt;a href=&#34;http://mxcl.github.com/homebrew/&#34;&gt;homebrew&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;brew install mongodb&lt;/p&gt;
+
+&lt;p&gt;The MongoDB will be installed if no error occurred. Now we should configure
+the MongoDB started up while system starts up.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install driver&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For using MongoDB with Ruby, the gem &lt;code&gt;mongo&lt;/code&gt; and &lt;code&gt;bson_ext&lt;/code&gt; is needed, the
+second gem is used to improve performance. The gem &lt;code&gt;mongo&lt;/code&gt; is the driver for
+MongoDB while &lt;code&gt;bson_ext&lt;/code&gt; is used to improve performance.&lt;/p&gt;
+
+&lt;p&gt;gem install mongo gem install bson_ext&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install Mongoid gem&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This gem can be used to provide object mapper to the Rails, which can provide
+more useful features such as &lt;strong&gt;validations&lt;/strong&gt;, &lt;strong&gt;associations&lt;/strong&gt; and other high-
+level data modeling functions. Like other gems, you can install &lt;code&gt;Mongoid&lt;/code&gt; via
+gem easily.&lt;/p&gt;
+
+&lt;p&gt;gem install mongoid&lt;/p&gt;
+
+&lt;p&gt;Besides Mongoid, there are also some other mappers, which can be linked from
+the doucment page of MongoDB.&lt;/p&gt;
+
+&lt;p&gt;After those steps done, the system is ready for playing MongoDB with Rails,
+let&amp;rsquo;s go.&lt;/p&gt;
+
+&lt;h2 id=&#34;web-app:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;Web App&lt;/h2&gt;
+
+&lt;h3 id=&#34;prepare-the-rails-gem:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;Prepare the Rails Gem&lt;/h3&gt;
+
+&lt;p&gt;After creating the Rails application with &lt;code&gt;--skip-active-record&lt;/code&gt; option, the
+&lt;code&gt;Gemfile&lt;/code&gt; should also be updated to include MongoDB related gems. Here is the
+new added lines in the &lt;code&gt;Gemfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &#39;mongo&#39;
+gem &#39;bson_ext&#39;
+gem &amp;quot;mongoid&amp;quot;, &amp;quot;~&amp;gt; 3.0.0.rc&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After adding those lines into &lt;code&gt;Gemfile&lt;/code&gt;, remember to run &lt;code&gt;bundle install&lt;/code&gt; for
+checking the dependencies.&lt;/p&gt;
+
+&lt;h3 id=&#34;generate-configuration-file-for-mongoid:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;Generate Configuration File for &lt;code&gt;mongoid&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The configuration file of &lt;code&gt;mongoid&lt;/code&gt; can be generated with command &lt;code&gt;rails g
+mongoid:config&lt;/code&gt;, then the file &lt;code&gt;config/mongoid.yml&lt;/code&gt; will be generated. The
+generated file has some options and plenty of comments, so it is easy to
+modify it as requirements.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-web-app:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;The Web App&lt;/h3&gt;
+
+&lt;h4 id=&#34;the-model:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;The Model&lt;/h4&gt;
+
+&lt;p&gt;For fast developing, we are using &lt;code&gt;scaffold&lt;/code&gt; here. This web app should save
+two type of data, one is cheater and the other is provider. The &lt;code&gt;Cheaters&lt;/code&gt;
+collection will save the information about cheaters, which contains the mobile
+phone number to identify, the description , and how many votes have been
+applied to this record. The &lt;code&gt;Providers&lt;/code&gt; collection will save E-mail address of
+provider and how many mobile phones have been submitted. Here is the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails g scaffold cheater mobile:string desc:string vote_up:integer vote_down:integer -T -O
+rails g scaffold provider email:string -T -O
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The generator will generate the model with &lt;code&gt;mongoid&lt;/code&gt; module, instead of
+&lt;code&gt;ActiveRecord&lt;/code&gt; module. The &lt;code&gt;Cheaters&lt;/code&gt; and &lt;code&gt;Providers&lt;/code&gt; should have &lt;strong&gt;many-to-
+many&lt;/strong&gt; relationship, which is specified by keyword &lt;code&gt;has_and_belongs_to_many&lt;/code&gt;,
+so the generated model file should be updated to this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Cheater
+  include Mongoid::Document
+  field :mobile, type: String
+  field :desc, type: String
+  field :vote_up, type: Integer
+  field :vote_down, type: Integer
+
+  has_and_belongs_to_many :providers
+end
+
+
+class Provider
+  include Mongoid::Document
+  field :email, type: String
+
+  has_and_belongs_to_many :cheaters
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Do not like the SQL database, there is no migration needed for MongoDB, which
+is more convenient during the development and upgrade.&lt;/p&gt;
+
+&lt;h4 id=&#34;the-controller-and-viewers:9c891c3667928d9a98ce25e09d55dbc7&#34;&gt;The Controller and Viewers&lt;/h4&gt;
+
+&lt;p&gt;The scaffold generated contains controllers, views and URL mapping, now we are
+going to go though the controller. The file &lt;code&gt;config/routers.rb&lt;/code&gt; dispatch the
+URL mapping to the model controller by using &lt;code&gt;resources&lt;/code&gt; keyword, and the
+server will response to URL &lt;code&gt;/providers&lt;/code&gt; and &lt;code&gt;/cheaters&lt;/code&gt;. The generated view
+can perform basic operations to the data. The prime tasks here is complete the
+basic operations of data and create a index page about this application.&lt;/p&gt;
+
+&lt;p&gt;I plan to use the controller generated as scaffold only sending and receiving
+JSON data, so a new controller named &lt;code&gt;smedia&lt;/code&gt; (means static media, I prefer
+this name for this) will be created.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails g controller smedia -T -O
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The root path will be set to the smedia page after the controller generated.
+Remember to remove the &lt;code&gt;public/index.html&lt;/code&gt; before enabling the root routings.&lt;/p&gt;
+
+&lt;p&gt;In the index page, there will be two blocks. One block is used to display the
+cheaters ordered by top positive vote, and the other block is used for
+submitting new cheater information. Gem &lt;a href=&#34;https://github.com/seyhunak/twitter-bootstrap-rails&#34;&gt;&lt;code&gt;twitter-bootstrap-
+rails&lt;/code&gt;&lt;/a&gt; will be used to
+beautify the web page. As mentioned in the document page, those two commands
+can be used to initialize the bootstrap framework:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails g bootstrap:install
+rails g bootstrap:layout application fixed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line will prepare the bootstrap assets, and the second is creating
+layout with bootstrap template. Please follow the &lt;a href=&#34;https://github.com/seyhunak/twitter-bootstrap-rails&#34;&gt;document
+page&lt;/a&gt; for more detail.&lt;/p&gt;
+
+&lt;p&gt;The web page will show the cheater&amp;rsquo;s list by default, and there is a form to
+submit the cheater information. The &lt;code&gt;vote&lt;/code&gt; field in &lt;code&gt;Cheaters&lt;/code&gt; collection is
+used to record how many agreement or disagreement to this possible cheater.
+The detail implementation can be referred from the source code:
+&lt;a href=&#34;https://github.com/hzmangel/cheater-recorder&#34;&gt;https://github.com/hzmangel/cheater-recorder&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tunning Rails with DTrace</title>
+      <link>http://hzmangel.github.io/post/1147/</link>
+      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1147/</guid>
+      <description>
+
+&lt;p&gt;This post will talk about how to do performance test of Rails program with
+DTrace tool. The testing will be separated into Ruby program part and database
+operations part. Please make sure all the tested program has provided probes
+to the DTrace.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.## DTrace&lt;/p&gt;
+
+&lt;p&gt;DTrace is a dynamic tracing tool, which is safe to use in production systems
+and it does not require restarting either the system or application. DTrace
+consists of 4 parts: front-end, libdtrace library, in-kernel DTrace framework
+and DTrace provider.&lt;/p&gt;
+
+&lt;p&gt;DTrace is built on a foundation of objects called probes. Probes are event
+handlers that will be triggered when their particular event occurs, and DTrace
+can bind some actions to the probe to get needed information.&lt;/p&gt;
+
+&lt;h3 id=&#34;basic-syntax:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Basic syntax&lt;/h3&gt;
+
+&lt;p&gt;A typically D language script contains three sections, the &lt;code&gt;BEGIN&lt;/code&gt; section,
+&lt;code&gt;END&lt;/code&gt; section and probe section. Sections are surrounded by braces. Each probe
+description is made of four fields, separated by colon character:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;provider:module:function:name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;privider&lt;/code&gt;: Instrumented layer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;module&lt;/code&gt;: Instrumented module&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;function&lt;/code&gt;: Instrumented function&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;: location in the function, typically is enter, return, tick-nsec&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The provider field is needed, which others are optional. Pattern matching
+characters such as *, ?, […] and \ can be used. For example, this script will
+get all call of &lt;code&gt;write*&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;syscall::write*:entry
+{
+    printf(&amp;quot;(%d): %s write call called&amp;quot;, pid, execname);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is a sample script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+pid$target::fopen*:entry
+{
+    printf(&amp;quot;(%d):%s open\n&amp;quot;, pid, execname);
+}
+
+pid$target::fwrite*:entry
+{
+    printf(&amp;quot;(%d):%s write\n&amp;quot;, pid, execname);
+}
+
+pid$target::fread*:entry
+{
+    printf(&amp;quot;(%d):%s read\n&amp;quot;, pid, execname);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is a testing C program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int main(int argc, char* argv[]) {
+    char buffer[64];
+    int size = 0;
+
+    FILE *fp = fopen(&amp;quot;bar.c&amp;quot;, &amp;quot;r&amp;quot;);
+    fread(buffer, sizeof(buffer), sizeof(char), fp);
+    fclose(fp);
+
+    FILE *fp2 = fopen(&amp;quot;/tmp/foobar&amp;quot;, &amp;quot;w&amp;quot;);
+    fwrite(buffer, sizeof(buffer), sizeof(char), fp2);
+    fclose(fp2);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the result of running the program with given script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo ./foo.d -c `pwd`/bar
+(3001):bar open
+(3001):bar read
+(3001):bar open
+(3001):bar write
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It also can support some predication before the action, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/ pid == 12345 /
+/ execname == &amp;quot;bash&amp;quot; /
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information, please refer to reference section:&lt;/p&gt;
+
+&lt;h2 id=&#34;rails:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Rails&lt;/h2&gt;
+
+&lt;h3 id=&#34;probes-for-ruby-and-rails-application:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for Ruby and Rails application&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: Make sure the Ruby you are using provides the DTrace probes, or the testing below can &lt;strong&gt;NOT&lt;/strong&gt; be continued.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The Ruby 1.9.3 currently do not support DTrace, please follow this discussion for more information &lt;a href=&#34;http://bugs.ruby-lang.org/issues/2565&#34;&gt;http://bugs.ruby-lang.org/issues/2565&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have applied the patch mentioned above to Ruby 1.9.3 and regenerate the
+&lt;code&gt;configure&lt;/code&gt; file with &lt;code&gt;autoconf&lt;/code&gt; command, then compile the binary and install
+it to replace the Ruby installed by &lt;em&gt;homebrew&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Probes provided by Ruby is list below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;function-entry&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;function-return&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gc-begin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gc-end&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;line&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;object-create-start&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;object-create-end&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;object-free&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;raise&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rescue&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ruby-probe&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The list can be get by this command: &lt;code&gt;sudo dtrace -lP &#39;ruby*&#39;&lt;/code&gt;. The &lt;code&gt;-P&lt;/code&gt;
+argument is used to specify the provider.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The probe name may different than above list in different system, please refer to the output of command while writing the script.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;function*&lt;/code&gt;, &lt;code&gt;object*&lt;/code&gt; and &lt;code&gt;gc*&lt;/code&gt; probes can be used to analyse performance
+while the &lt;code&gt;raise&lt;/code&gt; and &lt;code&gt;rescue&lt;/code&gt; can be used to analyse error. Since the probes
+for Ruby my have some errors while running on my system, so I only choose
+&lt;code&gt;function&lt;/code&gt; related probes in the script, and a summary will be printed out
+after test completed.&lt;/p&gt;
+
+&lt;p&gt;Here is the script used for testing, thanks to &lt;a href=&#34;http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-
+leopard-snow-leopard&#34;&gt;this
+article&lt;/a&gt; and &lt;a href=&#34;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-
+dtrace/&#34;&gt;this
+article&lt;/a&gt;, the script used here is based on their version.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+BEGIN
+{
+    printf(&amp;quot;==========================\n&amp;quot;);
+    printf(&amp;quot;Trace started: %Y\n&amp;quot;, walltimestamp);
+    printf(&amp;quot;==========================\n&amp;quot;);
+    depth = 0;
+}
+
+ruby*:::function-entry
+{
+    k = copyinstr(arg0);
+    m = copyinstr(arg1);
+    @[k, m] = count();
+    self-&amp;gt;depth++;
+    self-&amp;gt;start[k, m, self-&amp;gt;depth] = timestamp;
+    printf(&amp;quot;-&amp;gt; %s::%s (%s:%d)\n&amp;quot;, k, m, copyinstr(arg2), arg3);
+}
+
+tick-5000hz
+/k != 0/
+{
+      @[k, m] = count();
+}
+
+ruby*:::function-return
+/(this-&amp;gt;class = copyinstr(arg0)) != NULL &amp;amp;&amp;amp; \
+ (this-&amp;gt;func  = copyinstr(arg1)) != NULL &amp;amp;&amp;amp; \
+ self-&amp;gt;start[this-&amp;gt;class, this-&amp;gt;func, self-&amp;gt;depth]/
+{
+    this-&amp;gt;elapsed = timestamp - self-&amp;gt;start[this-&amp;gt;class, this-&amp;gt;func, self-&amp;gt;depth];
+
+    this-&amp;gt;file = copyinstr(arg2);
+    this-&amp;gt;line = arg3;
+    @num[this-&amp;gt;file, this-&amp;gt;line] = count();
+    @eavg[this-&amp;gt;file, this-&amp;gt;line] = avg(this-&amp;gt;elapsed);
+    @esum[this-&amp;gt;file, this-&amp;gt;line] = sum(this-&amp;gt;elapsed);
+
+    self-&amp;gt;start[this-&amp;gt;class, this-&amp;gt;func, self-&amp;gt;depth] = 0;
+    self-&amp;gt;depth--;
+}
+
+END
+{
+    printf(&amp;quot;==========================\n&amp;quot;);
+    printf(&amp;quot;Trace ended: %Y\n&amp;quot;, walltimestamp);
+    printf(&amp;quot;==========================\n&amp;quot;);
+    normalize(@eavg, 1000);
+    normalize(@esum, 1000);
+    setopt(&amp;quot;aggsortpos&amp;quot;, &amp;quot;2&amp;quot;);
+    printf(&amp;quot;%-33s %123s\n&amp;quot;, &amp;quot;___ OVERLAP TIMES: ___&amp;quot;,
+            &amp;quot;______ ELAPSED _____&amp;quot;);
+    printf(&amp;quot;%-120s %5s %6s %10s %12s\n&amp;quot;, &amp;quot;FILE&amp;quot;, &amp;quot;LINE&amp;quot;,
+            &amp;quot;COUNT&amp;quot;, &amp;quot;AVG(us)&amp;quot;, &amp;quot;SUM(us)&amp;quot;);
+    printa(&amp;quot;%-120.120s %5d %@6d %@10d %@12d\n&amp;quot;, @num, @eavg, @esum);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Probes primely used in the script is &lt;code&gt;function-entry&lt;/code&gt; and &lt;code&gt;function-return&lt;/code&gt;,
+and the action inside the probe is to calculate the elapsed time. And some
+summary information will be printed after trace end.&lt;/p&gt;
+
+&lt;h3 id=&#34;probes-for-database-operations:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for database operations&lt;/h3&gt;
+
+&lt;p&gt;The performance test is also needed on Database server, MySQL has provide one
+method to use DTrace to the database, please refer &lt;a href=&#34;http://dev.mysql.com/tech-
+resources/articles/getting_started_dtrace_saha.html&#34;&gt;this
+page&lt;/a&gt; for reference. Here is
+the script used for tracing MySQL database.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/sbin/dtrace -s
+
+#pragma D option quiet
+
+BEGIN
+{
+    printf(&amp;quot;==========================\n&amp;quot;);
+    printf(&amp;quot;Trace started: %Y\n&amp;quot;, walltimestamp);
+    printf(&amp;quot;==========================\n&amp;quot;);
+    depth = 0;
+}
+
+pid$target::*mysql_parse*:entry
+{
+    self-&amp;gt;query = copyinstr(arg1);
+}
+
+mysql*:::query-start
+{
+    self-&amp;gt;query = copyinstr(arg0);
+    self-&amp;gt;connid = arg1;
+    self-&amp;gt;db = copyinstr(arg2);
+    self-&amp;gt;who = strjoin(copyinstr(arg3),strjoin(&amp;quot;@&amp;quot;,copyinstr(arg4)));
+    self-&amp;gt;start = timestamp;
+}
+
+mysql*:::query-done
+/ self-&amp;gt;start /
+{
+    this-&amp;gt;elapsed = timestamp - self-&amp;gt;start;
+    @time[self-&amp;gt;query] = quantize(this-&amp;gt;elapsed);
+    printf(&amp;quot;%-20s %-20s %-40s %-9d\n&amp;quot;, self-&amp;gt;who, self-&amp;gt;db, self-&amp;gt;query, this-&amp;gt;elapsed / 1000000);
+    self-&amp;gt;query = 0;
+    self-&amp;gt;start = 0;
+}
+
+
+END
+{
+    printf(&amp;quot;==========================\n&amp;quot;);
+    printf(&amp;quot;Trace ended: %Y\n&amp;quot;, walltimestamp);
+    printf(&amp;quot;==========================\n&amp;quot;);
+
+    printf(&amp;quot;MySQL query execution latency (ns):\n&amp;quot;);
+    printa(@time);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This script will print out time consumed by query command. There are some more
+detailed probe, which can be used to monitor the time consumbed by each type
+of command, please check the document if more information is needed.&lt;/p&gt;
+
+&lt;h3 id=&#34;result-analysis:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Result analysis&lt;/h3&gt;
+
+&lt;p&gt;The output is different from the two script listed above. In the log message
+of Ruby, the filename and line number information are saved, which can be used
+to locate the bottle neck. While the MySQL probe is easy to use, after
+separating the command type, the performance can be optimized.&lt;/p&gt;
+
+&lt;p&gt;The testing data is still under development, and I will update the blog after
+get the result.&lt;/p&gt;
+
+&lt;h2 id=&#34;reference:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&#34;&gt;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.oreilly.com/rails2008/public/schedule/detail/1945&#34;&gt;http://en.oreilly.com/rails2008/public/schedule/detail/1945&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/cd/E19253-01/819-5488/gcfgt/index.html&#34;&gt;http://docs.oracle.com/cd/E19253-01/819-5488/gcfgt/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.tablespace.net/quicksheet/dtrace-quickstart.html&#34;&gt;http://www.tablespace.net/quicksheet/dtrace-quickstart.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.princeton.edu/~unix/Solaris/troubleshoot/dtrace.html&#34;&gt;http://www.princeton.edu/~unix/Solaris/troubleshoot/dtrace.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html&#34;&gt;http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=mRf4bpEtI6I&#34;&gt;http://www.youtube.com/watch?v=mRf4bpEtI6I&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-leopard-snow-leopard&#34;&gt;http://andyjeffries.co.uk/articles/dtrace-and-ruby-on-rails-with-leopard-snow-leopard&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html&#34;&gt;http://dev.mysql.com/tech-resources/articles/getting_started_dtrace_saha.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploy RoR application with Nginx</title>
+      <link>http://hzmangel.github.io/post/1133/</link>
+      <pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1133/</guid>
+      <description>
+
+&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.### Deploy RoR on local machine&lt;/p&gt;
+
+&lt;p&gt;Like deploying other website, the static file is served via nginx, and the
+Ruby logic will be handled via some middle-wares, here is the list:&lt;/p&gt;
+
+&lt;h4 id=&#34;thin:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Thin&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install the &lt;code&gt;thin&lt;/code&gt; via &lt;code&gt;homebrew&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; gem install thin
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the thin server. Since this is a testing deploy, I just execute thin in the project directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; thin start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After the command executed, you can find some information printed via &lt;code&gt;thin&lt;/code&gt;
+command. The default port of the server is &lt;em&gt;3000&lt;/em&gt;, which should be used to
+fill the nginx configuration file.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Update the configuration file for nginx. The &lt;code&gt;upstream&lt;/code&gt; section should be put in &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; upstream todo_app {
+ server http://127.0.0.1:3000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;}&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The &lt;code&gt;location&lt;/code&gt; section should be put in &lt;code&gt;server&lt;/code&gt; block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     location / {
+     proxy_set_header  X-Real-IP  $remote_addr;
+     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+     proxy_set_header  Host $http_host;
+     proxy_redirect    off;
+
+     try_files $uri $uri/index.html $uri.html @ruby;     
+ }
+
+ location @ruby {
+     proxy_pass http://todo_app
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;proxy_pass&lt;/code&gt; will pass all ruby request to the upstream server. &lt;code&gt;Unix
+socket&lt;/code&gt; can also be used in the &lt;code&gt;upstream&lt;/code&gt; section.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Restart the nginx server, the RoR project can be shown in the web browser now.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;passenger:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Passenger&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install passenger via gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; gem install passenger
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install passenger module for nginx&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; passenger-install-nginx-module
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Or you can install nginx and passenger module with brew like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     brew install nginx --with-passenger
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If nginx still report the error that can not find the &lt;code&gt;PassengerLoggingAgent&lt;/code&gt;,
+try to use &lt;code&gt;passenger package-runtime&lt;/code&gt; and then get the agent from package
+&lt;code&gt;passenger-standalone/XXX/support.tar.gz&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;em&gt;http&lt;/em&gt; section, you should specify the value of &lt;code&gt;passenger_root&lt;/code&gt; and
+&lt;code&gt;passenger_ruby&lt;/code&gt;. Here is the configuration in my laptop:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+ passenger_ruby /usr/local/bin/ruby;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE:&lt;/strong&gt; Make sure to set &lt;code&gt;rails_env&lt;/code&gt; variable is set to the same stage with development, seems the default value is &lt;code&gt;production&lt;/code&gt;. Here is my configuration section in nginx:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+ passenger_ruby /usr/local/bin/ruby;
+
+ server {
+     listen       8080;
+     server_name  localhost;
+     root /Users/ziming/tmp/learn_rb/rails/todo_app/public;
+     passenger_enabled on;
+     rails_env development;
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;unicorn:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Unicorn&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install unicorn via gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; gem install unicorn
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Get the sample configuration file from unicorn website&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; curl -o config/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And update the &lt;code&gt;working_directory&lt;/code&gt;, &lt;code&gt;pid&lt;/code&gt;, &lt;code&gt;stderr_path&lt;/code&gt; and &lt;code&gt;stdout_path&lt;/code&gt; in
+the sample configuration file. &lt;strong&gt;NOTICE&lt;/strong&gt;: Need absolute path here.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The left step is the same with Thin, a &lt;code&gt;upstream&lt;/code&gt; section should be added to nginx.conf, and redirection should be added to &lt;code&gt;location&lt;/code&gt; section.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;deploy-remotely-via-capistrano:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Deploy remotely via Capistrano&lt;/h3&gt;
+
+&lt;p&gt;Capistrano is a useful tool for deploying RoR application to remote server(s).
+The Capistrany package provides several tasks for simplfying the deploying
+jobs.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Prepare the RoR application&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Before deploying, we should prepare the application. Since this only show how
+to deploy, so we just use the generated project. I have create a repository on
+bitbucket, and the scm used for this application is mercurial.&lt;/p&gt;
+
+&lt;p&gt;First I create the repository DailyCheckIn on butbucket, then I clone the
+project to local directory &lt;code&gt;dailycheckin&lt;/code&gt;. The directory is an empty directory
+except some mercurial information. After directory ready, I create RoR
+application via &lt;code&gt;rails new&lt;/code&gt; command. Before doing the initialization commit, I
+should create a &lt;code&gt;.hgignore&lt;/code&gt; file based on the &lt;code&gt;.gitignore&lt;/code&gt; (Just add &lt;code&gt;syntax:
+glob&lt;/code&gt; at the first line, remove the leader slash in the path, and rename
+&lt;code&gt;.gitignore&lt;/code&gt; to &lt;code&gt;.hgignore&lt;/code&gt;). After all things done, commit the new added file
+and push to the server, then we have a RoR application.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Capify the RoR project&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The project should be &amp;lsquo;capified&amp;rsquo; before deplying via Captistrano, which can be
+done via command &lt;code&gt;capify .&lt;/code&gt; easily. This command will create &lt;code&gt;Capfile&lt;/code&gt; and
+&lt;code&gt;config/deploy.rb&lt;/code&gt; file in current directory. The &lt;code&gt;Capfile&lt;/code&gt; is the wrapper,
+and the tasks is written in file &lt;code&gt;deploy.rb&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Configure the Capistrano&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here are the information should be checked before deploying:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;* Application name
+* Server information 
+  * Application layer
+  * Wer server
+  * Database
+* SCM information 
+  * Repository location
+  * SCM type
+* Directory the project should be deployed to
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is a sample configuration file for the project&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    set :application, &amp;quot;DailyCheckIn&amp;quot;
+set :repository,  
+set :scm, :mercurial
+server , :web, :app, :db, :primary =&amp;gt; true
+set :deploy_to, 
+set :use_sudo, false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The detailed information of configuration can be found in &lt;a href=&#34;https://github.com/capistrano/capistrano/wiki/2.x-From-The-
+Beginning&#34;&gt;Capistrano
+document&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Deploy the application&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Next step is deploy the application. The first step is setting up the server,
+Capistrano provide task &lt;code&gt;cap deploy:setup&lt;/code&gt; to do this. This task will do a
+series of &lt;code&gt;mkdir&lt;/code&gt; calls. Make sure the permission of directory.&lt;/p&gt;
+
+&lt;p&gt;After setting up completed, it is recommended to check the dependencies via
+&lt;code&gt;cap deploy:check&lt;/code&gt; command. Re-run this command after any change to the
+environment to make sure all check passed.&lt;/p&gt;
+
+&lt;p&gt;The next step should be done manually, you should login to the server and make
+sure the database can meet the requirement configured in the
+&lt;code&gt;config/database.yml&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;After environment ready, task &lt;code&gt;deploy:update&lt;/code&gt; can be used to clone the code to
+server. The clone operation will create a new snapshot in the &lt;code&gt;releases&lt;/code&gt;
+directory, and link it with symbol link &lt;code&gt;current&lt;/code&gt; in top level of depoly
+directory. Then &lt;code&gt;cap deploy:start&lt;/code&gt; can be used to start the services.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RoR learning log (2)</title>
+      <link>http://hzmangel.github.io/post/1125/</link>
+      <pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1125/</guid>
+      <description>&lt;p&gt;This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.&lt;/p&gt;
+
+&lt;p&gt;Here is &lt;a href=&#34;http://www.hzmangel.info/blog/archives/1113&#34;&gt;to RoR learning log (1)&lt;/a&gt;According to the requirements, the length of ToDo account should less than 100
+characters and the status of ToDo can only be chosen from 0 or 1, so some
+validator should be added to the model. With the validator, the model code
+should be looked like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;STATUS_OPTION = [0, 1]
+
+class ToDo &amp;lt; ActiveRecord::Base
+  attr_accessible :content, :status
+  validates :content, :presence =&amp;gt; true,
+                      :length =&amp;gt; { maximum: 100 }
+  validates :status, :presence =&amp;gt; true,
+                     :numericality =&amp;gt; { :only_integer =&amp;gt; true },
+                     :inclusion =&amp;gt; { :in =&amp;gt; STATUS_OPTION }
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Statements started with &lt;code&gt;validates&lt;/code&gt; keyword are validator. The available
+condition list can be checked at &lt;a href=&#34;http://guides.rubyonrails.org/active_record_validations_callbacks.html&#34;&gt;this
+page&lt;/a&gt;.
+If the value passed in break the rule, the error message will be shown in the
+page.&lt;/p&gt;
+
+&lt;p&gt;With the validators, the value saved can be guaranteed to be correct. But
+seems radio box or drop down box is better than the text field, so we plan to
+modify the template page. The template is placed under &lt;code&gt;app/views/to_dos&lt;/code&gt;
+directory, which is a HTML file with some template control commands. By
+default, when viewing the URL http://[address]/index, the template with the
+same name, index.html.erb, will be rendered. The generated form is saved in
+file &lt;code&gt;_form.html.erb&lt;/code&gt;, the default type of status is &lt;code&gt;number_field&lt;/code&gt;, which
+should be updated to &lt;code&gt;select&lt;/code&gt;. The document for &lt;code&gt;select&lt;/code&gt; is &lt;a href=&#34;http://api.
+rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#M001593&#34;&gt;here&lt;/a&gt;,
+according the document, the option list should be provided, and here we can
+use the constant &lt;code&gt;STATUS_OPTION&lt;/code&gt; defined in model file. Here is the updated
+&lt;code&gt;status&lt;/code&gt; field in the form object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;%= f.label :status %&amp;gt;  
+
+  &amp;lt;%= f.select :status, ToDo::STATUS_OPTION %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The form type will change from text field to drop down menu after updating the
+form.&lt;/p&gt;
+
+&lt;p&gt;Congratulations, a simple ToDo application has been worked out. It is a very
+simple application, which do not contain the static files, user
+authentication, unit test and so on. In next step, I plan to re-write the
+&lt;a href=&#34;http://www.linuxfb.org&#34;&gt;linuxfb&lt;/a&gt; website with more better structure, hope can
+touch more features in RoR.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RoR learning log (1)</title>
+      <link>http://hzmangel.github.io/post/1113/</link>
+      <pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1113/</guid>
+      <description>
+
+&lt;p&gt;Just back from vacation, so the study log for this week is simple.### Build development environment&lt;/p&gt;
+
+&lt;p&gt;The whole process is tested on Mac OS, and I think this may have little
+difference with Linux.&lt;/p&gt;
+
+&lt;p&gt;Ruby should be installed before trying Rails. To separate with the Ruby used
+by system, it is recommended to use RVM (Ruby version manager) to build the
+local Ruby environment (seems like the virtualenv in Python). Here is the
+install script from &lt;a href=&#34;https://rvm.io//rvm/install/&#34;&gt;RVM installing page&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L get.rvm.io | bash -s stable
+$ source ~/.rvm/scripts/rvm
+$ rvm requirements
+$ rvm install 1.9.3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After installing, the command &lt;code&gt;rvm use&lt;/code&gt; can be used to select the version of
+Ruby.&lt;/p&gt;
+
+&lt;p&gt;Next per-requisite is gem, which can be get from &lt;a href=&#34;http://rubyforge.org/frs/?group_id=126&#34;&gt;this
+page&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Then we can use gem to install rails&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install rails
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;a-simple-todo-list:df917a890c422c6cd0235a1af97613d2&#34;&gt;A simple TODO list&lt;/h3&gt;
+
+&lt;p&gt;This section will implement a todo list application, which is copied from
+&lt;a href=&#34;http://bottlepy.org/docs/dev/tutorial_app.html&#34;&gt;bottle tutorial page&lt;/a&gt;. Here
+is the goal copied from that page:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;At the end of this tutorial, we will have a simple, web-based ToDo list. The
+list contains a text (with max 100 characters) and a status (0 for closed, 1
+for open) for each item. Through the web-based user interface, open items can
+be view and edited and new items can be added.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This log only create the default controller, and some other thing such as
+adding validator and modifying template will be shown in next log.&lt;/p&gt;
+
+&lt;p&gt;First, we have to create the directory for application. We named the
+application to &lt;code&gt;todo_app&lt;/code&gt;, and we run this command to do the initialization:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rails new todo_app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After plenty of output message, we have a new directory named todo_app, and
+the directory structure has been initialized in it. After running &lt;code&gt;rails
+server&lt;/code&gt; in the directory, we can access the default website via
+&lt;a href=&#34;http://127.0.0.1:3000&#34;&gt;http://127.0.0.1:3000&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next step is generate database schema for this application. As mentioned
+above, the schema contains two fields, one is record content, the other is
+status of record. Rails provide a generator script to simplify the operation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rails generate scaffold ToDo content:string status:integer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then use rake command to migrate the database&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This script will generate URL mapping, model and default view for the ToDo
+table. You can use &lt;a href=&#34;http://127.0.0.1:3000/to_dos&#34;&gt;http://127.0.0.1:3000/to_dos&lt;/a&gt; to access the new added things
+(You can check the config/routes.rb to find the correct mapping). There is no
+data currently, but there is a link to add new record, which is linked to
+&lt;a href=&#34;http://127.0.0.1:3000/to_dos/new&#34;&gt;http://127.0.0.1:3000/to_dos/new&lt;/a&gt;. And after record added, there will be show,
+edit and destroy action to each record.&lt;/p&gt;
+
+&lt;p&gt;The controller, view and model is saved in app directory. The file
+app/controllers/to_dos_controller.rb will handle the request sent from
+browser, the file app/models/to_do.rb is the model of ToDo record, and the
+files under app/views/to_dos/ will show the returned record. In this demo
+project, we need add some validation while adding ToDo record, and modify the
+list page for updating the ToDo record.&lt;/p&gt;
+
+&lt;p&gt;For now, there is a simple web application, can use generated
+view/controller/model to manager ToDo list. In the next log, this application
+will have a validator and new template.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

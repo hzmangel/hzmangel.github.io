@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" List all CVS tags &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1052/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2011-12-19T10:41:55Z" />
+
+            
+                <meta property="og:article:tag" content="linux" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="python" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | List all CVS tags
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1052/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1052/'> List all CVS tags</a> </h2>
+        <div class="post-meta">发表于2011-12-19 10:41:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。脚本的原理就是检查一个working
+directory中所有文件的status，然后把输出的内容去重。脚本运行需要设置好CVSROOT环境变量，而且需要提供一个CVS的工作目录作为参数。</p>
+
+<pre><code>#!/usr/bin/python
+
+import re
+import os
+import sys
+import subprocess as sp
+
+def get_all_tags(cvs_wdir):
+    is_tag_line = False
+    cvs_cmd = 'cvs -Q status -R -v'
+    cvs_tag_pattern = re.compile(r'(\w+)\s+')
+    tmp_tags = []
+
+    os.chdir(cvs_wdir)
+    cmd_pipe = sp.Popen(cvs_cmd, shell=True, stdout=sp.PIPE)
+
+    for line in cmd_pipe.stdout.readlines():
+        if 'Existing Tags' in line:
+            is_tag_line = True
+            continue
+
+        if not is_tag_line:
+            continue
+
+        if '============' in line and is_tag_line == True:
+            is_tag_line = 0
+            continue
+
+        line = line.strip()
+        if line != '':
+            try:
+                tag = cvs_tag_pattern.findall(line.strip())[0]
+            except IndexError:
+                print line
+                raise
+            tmp_tags.append(tag)
+
+    return set(tmp_tags)
+
+if __name__ == '__main__':
+    print '\n'.join(sorted(get_all_tags(sys.argv[1])))
+</code></pre>
+
+<p>话说，有人能提供更好的办法吗？然后，有人可以告诉我，这个东西取出来的东西是全部的tag吗？没用过CVS&hellip;&hellip;</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/linux"><span class="label label-default">linux</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/python"><span class="label label-default">python</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1078/"> &lt; 2012，魔都开年 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1049/"> Simple Life Game in HTML5 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1052\/';
+    var disqus_title = 'List all CVS tags';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1052\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

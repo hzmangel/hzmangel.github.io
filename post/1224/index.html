@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Save base64 image with carrierwave and bootstrap-wysiwyg &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1224/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2013-12-01T15:03:37Z" />
+
+            
+                <meta property="og:article:tag" content="base64" />
+            
+                <meta property="og:article:tag" content="carrierwave" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="rails" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Save base64 image with carrierwave and bootstrap-wysiwyg
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1224/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a> </h2>
+        <div class="post-meta">发表于2013-12-01 15:03:37 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<h3 id="tl-dr:5ab4430131db8e4e631503ef790e7c02">tl;dr</h3>
+
+<p>The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.</p>
+
+<p>The source code is available at <a href="https://github.com/hzmangel/base64_image_carrierwave">github
+repo</a></p>
+
+<p>Next is the full version.### The problem</p>
+
+<p>Recently I have faced a task to upload a image by a rich format text editor.
+The web server is Rails, so I selected
+<a href="https://github.com/carrierwaveuploader/carrierwave">carrierwave</a> as the
+upload gem, and <a href="http://mindmup.github.io/bootstrap-
+wysiwyg/">bootstrap-wysiwyg</a> as rich format text editor.</p>
+
+<p><code>bootstrap-wysiwyg</code> supports inserting image into edit area, and uploaded
+image via base64. Every thing is okay in development enviromnent, but I have
+met problem while deploying to production server.</p>
+
+<p>The root cause of the problem is response size exceed the max limitation. The
+uploaded base64 encoded image are saved as string, and will be returned in
+response body. I have tried increasing response body size limitation but take
+no effect, so I switched to method that saving image to file.</p>
+
+<h3 id="solution:5ab4430131db8e4e631503ef790e7c02">Solution</h3>
+
+<p>This section only shows how to get image and save via carrierwave, please
+refer to the source of the other contents.</p>
+
+<p>The sample project is a simple post manage system, each post contains <code>title</code>
+and <code>content</code> field, and the <code>content</code> field is rich format text.</p>
+
+<p>The passed in base64 encoded image is started with this string:</p>
+
+<pre><code>data:image/jpeg;base64,
+</code></pre>
+
+<p>Then following the image data.</p>
+
+<p>The image uploaded is surrounded by <code>&lt;img&gt;</code> tag, so I added a pre processing
+to the content uploaded. The logic is simple: save found <code>&lt;img&gt;</code> tag to a file
+with carrierwave, and replace the base64 data to file path. The primary code
+is here:</p>
+
+<pre><code>def process_base64_content content
+  return if content.nil?
+  return content if not content.match /&lt;/
+  rslt = ''
+  content.split(&quot;&lt;&quot;).each do |elem_str|
+    if elem_str[0..2] == &quot;img&quot;
+      if elem_str.match(%r{data:(.*?);(.*?),(.*?)&quot;&gt;$})
+        img_data = {
+          :type =&gt;      $1, # &quot;image/png&quot;
+          :encoder =&gt;   $2, # &quot;base64&quot;
+          :data_str =&gt;  $3, # data string
+          :extension =&gt; $1.split('/')[1] # &quot;png&quot;
+        }
+
+        other_img = PostImage.new
+        img_data_str = img_data[:data_str]
+        img_data_sio = CarrierStringIO.new(Base64.decode64(img_data_str))
+        other_img.image = img_data_sio
+        other_img.save
+        rslt += view_context.image_tag(other_img.image.url)
+      else
+        rslt += &quot;&lt;#{elem_str}&quot; if not elem_str.empty?
+      end
+    else
+      rslt += &quot;&lt;#{elem_str}&quot; if not elem_str.empty?
+    end
+  end
+
+  rslt
+end
+</code></pre>
+
+<p><code>PostImage</code> is a model used for saving image. <code>CarrierStringIO</code> is also a user
+defined class to provide functions <code>original_filename</code> and <code>content_type</code>,
+which are required by <code>carrierwave</code>. Here is the definition of this class:</p>
+
+<pre><code>class CarrierStringIO &lt; StringIO
+  def original_filename
+    # the real name does not matter
+    &quot;image.jpeg&quot;
+  end
+
+  def content_type
+    # this should reflect real content type, but for this example it's ok
+    &quot;image/jpeg&quot;
+  end
+end
+
+class PostImage
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  def image_data=(data)
+    sio = CarrierStringIO.new(Base64.decode64(data))
+    self.image = sio
+  end
+
+  mount_uploader :image, PostImageUploader
+end
+</code></pre>
+
+<p>The last thing is the carrierwave uploader: <code>PostImageUploader</code>. This is a
+simple uploader that only save the image to file.</p>
+
+<pre><code># encoding: utf-8
+
+class PostImageUploader &lt; CarrierWave::Uploader::Base
+
+  storage :file
+
+  def store_dir
+    &quot;uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}&quot;
+  end
+
+end
+</code></pre>
+
+<p>In the sample project, the file type and file name are hard coded in
+<code>CarrierStringIO</code>, please feel free to modify code as needed.</p>
+
+<p>Note: There is an bug of the code: The image can&rsquo;t be extracted out if
+inserted into a text paragraph. I will fix this once I have time.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/base64"><span class="label label-default">base64</span></a></li>  <li><a href="/tags/carrierwave"><span class="label label-default">carrierwave</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/rails"><span class="label label-default">rails</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1230/"> &lt; goroutines &#43; channel </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1220/"> Ajax loading multi series to jqPlot &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1224\/';
+    var disqus_title = 'Save base64 image with carrierwave and bootstrap-wysiwyg';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1224\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

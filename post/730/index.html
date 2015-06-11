@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" [剧透] Inception &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/730/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2010-09-10T02:24:31Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="总结" />
+            
+                <meta property="og:article:tag" content="感想" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | [剧透] Inception
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/730/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/730/'> [剧透] Inception</a> </h2>
+        <div class="post-meta">发表于2010-09-10 02:24:31 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>晚上去看了传说中的 Inception，先不涉及情节的小评论一下：情节中上（因为几年前就看过这类的小说），场面一般（不知道IMAX会不会好些），别的没啥了吧
+。然后，现在正式开始剧透，而且本文属于纯无聊加剧透的产物，所以无论看过还是没看过的都要慎入啊~其实真的是无聊了，等程序的过程中写了这个玩意，嗯，所以就表再说我无聊鸟，哈哈~</p>
+
+<p>首先是主线~</p>
+
+<pre><code>def main():
+  # 下面开始主循环~
+  while True:
+    # 首先要去偷那个日本老板的梦
+    try:
+      extract(objective = 'Saito')
+    except missionFailException:
+      # 结果被识破
+      if not accept_offer(offer_from = 'Saito'):
+        # 任务失败了就只有挂了嘛
+        game_over(objective = 'Cobb')
+      else:
+        # 不过那个老板能量很大
+        try:
+          inception(objective = 'Robert Fischer')
+        except missionFailException:
+          game_over(objective = 'Cobb')
+
+        # 任务完成了，木有犯罪记录了，可以回家了
+        clean_criminal_rcds(owner = 'Cobb')
+        back_home(objective = 'Cobb')
+
+    # 最后那个扣子留的啊......
+    to_be_continued('dreaming or not dreaming, that is the question')
+</code></pre>
+
+<p>然后是inception的过程</p>
+
+<pre><code>def inception(person):
+  # 找forger，为了在梦里变形，找到Eames
+  # 找architect，构建梦境，找到Ariadne
+  # 找chemist，配镇静剂，找到Yusuf
+  (forger, architect, chemist) = find_teammember()
+
+  # 开始查资料
+  #  Robert Fischer: 被inception的目标，被改造成败家子
+  #  Maurice Fischer: 败家子（筹）他爹，挂ing
+  #  Peter Browning: 败家子（筹）的教父，被forger假份后用来策反败家子
+  background_info = collect_info(['Robert Fischer', 'Maurice Fischer', 'Peter Browning'])
+
+  init_members = {
+        'Cobb': 'health',
+        'Arthur': 'health',
+        'Eames': 'health',
+        'Yusuf': 'health',
+        'Saito': 'health',
+        'Ariadne': 'health',
+        'Robert Fischer': 'health',
+      }
+
+  # 一些前期工作，如要收买空姐地勤结果把航空公司收买了之类
+  pre_inception()
+
+  try:
+    while True:
+      # 在飞机上开始折腾，第一层梦（如果不算最外面一层的话）
+      anaesthetize('Robert Fischer')
+      dream_scene = DreamSence(scene = 'flight from Sydeny to Los Angel',
+          team = init_members, depth = 1, owner = 'Yusuf')
+      dream_scene.dream_in_flight()
+  except AnMaNiBaMiHong:
+    # 男猪脚都跳出来了，自然就结束了啦~
+    return 
+</code></pre>
+
+<p>最后是那个做梦的类，有些地方用程序不好表示啊，凑合看吧，嘿嘿。男猪脚最后退出的方式很牛，可惜Python中木有goto，只好用exception代替了~</p>
+
+<pre><code>class DreamSence:
+  def __init__(self, scene, team, depth, owner):
+    self.scene = scene # 场景
+    self.team = team  # 梦中人
+    self.depth = depth # 深度
+    self.owner = owner # 梦境的所有人
+
+  def dream_in_flight(self):
+    # 唔，一堆defender，还都是武装过的
+    self.fight_with_defenders(owner = 'Robert Fischer', level = 'armed')
+    # 于是日本老板中弹了，但还不能让他死
+    self.team['Saito'] = 'dying'
+    # 开始夺命狂奔
+    self.start_running()
+    # 第二层梦
+    # Yusuf留在外面开车
+    self.team.pop('Yusuf')
+    dream_scene = DreamSence(scene = 'Running Car', team = self.team,
+        depth = 2, owner = 'Arthur')
+    dream_scene.dream_in_car()
+
+  def dream_in_car(self):
+    # 告诉Fischer丫在梦里
+    invokeMrSecure(objective = 'Robert Fischer')
+    # 第三层梦
+    # Arthur留外面叫他们起床
+    self.team.pop('Arthur')
+    dream_scene = DreamSence(scene = 'Hotel', team = self.team, depth = 3,
+        owner = 'Eames')
+    dream_scene.dream_in_hotel()
+    # 被叫醒~
+    self.be_kicked()
+
+  def dream_in_hotel(self):
+    # 还是要和那帮defender打啊，而且武器更精良了
+    self.fight_with_defenders(owner = 'Robert Fischer', level = 'army')
+    # Fischer挂了，被Cobb老婆Mal杀的
+    self.kill_person(killer = 'Mal', objective = 'Robert Fischer')
+    self.team['Robert Fischer'] = 'dead'
+    # Saito也挂了，也算在Mal头上吧
+    self.kill_person(killer = 'Mal', objective = 'Saito')
+    self.team['Saito'] = 'dead'
+    # 第四层梦
+    # Eames留上面电Fischer玩
+    self.team.pop('Eames')
+    dream_scene = DreamSence(scene = 'SnowMountain', team = self.team,
+        depth = 4, owner = 'Cobb')
+    dream_scene.dream_in_mountain()
+    # 被叫醒
+    self.be_kicked()
+
+  def dream_in_mountain(self):
+    # 先找老婆
+    find_person(objective = 'Mal')
+    # 认清身处梦中
+    clearify_state(objective = 'Cobb')
+    # 救Fischer
+    self.be_kicked('Robert Fischer')
+    # Ariadne自己出去了
+    self.be_kicked('Ariadne')
+    # 救Saito
+    self.be_kicked('Saito')
+    # 唔，男猪脚终于牛了一把，直接跳出这一堆梦中
+    if self.owner == 'Cobb':
+      raise AnMaNiBaMiHong
+
+  def be_kicked(objective = None):
+    # 被踢醒之前还是需要恢复健康滴~
+    if objective == None:
+        for i in self.team:
+            self.team[i] = 'health'
+    else:
+        self.team[objective] = 'health'
+
+    wake_up()
+</code></pre>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十^_^</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/%E6%80%BB%E7%BB%93"><span class="label label-default">总结</span></a></li>  <li><a href="/tags/%E6%84%9F%E6%83%B3"><span class="label label-default">感想</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/757/"> &lt; 补一篇，扫兴的丰宁坝上 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/729/"> 一个人的世界 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/730\/';
+    var disqus_title = '[剧透] Inception';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/730\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

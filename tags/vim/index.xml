@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/vim/</link>
+    <description>Recent content in Vim on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Mon, 23 Aug 2010 13:08:03 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>让win下的vim支持非等宽字体</title>
+      <link>http://hzmangel.github.io/post/724/</link>
+      <pubDate>Mon, 23 Aug 2010 13:08:03 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/724/</guid>
+      <description>&lt;p&gt;最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~
+问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei
+Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。
+改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diff -r 96b2b1cca7cd src/os_mswin.c
+--- a/src/os_mswin.c    Mon Aug 23 12:55:47 2010 +0800
++++ b/src/os_mswin.c    Mon Aug 23 13:05:17 2010 +0800
+@@ -3288,8 +3288,11 @@
+
+ #ifndef FEAT_PROPORTIONAL_FONTS
+     /* Ignore non-monospace fonts without further ado */
++    /*
++     * hzmangel: I need non-monospace fonts!
+     if ((ntm-&amp;gt;tmPitchAndFamily &amp;amp; 1) != 0)
+        return 1;
++    */
+ #endif
+
+     /* Remember this LOGFONT as a &amp;quot;possible&amp;quot; */
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ &lt;strong&gt;Update at
+2010-09-18&lt;/strong&gt; 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 &lt;http://xbeta.info/gvim-
+powerword-ciba.htm&gt; 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽
+字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diff -r 6768ebd0bc04 -r 213b33df021a src/gui_w32.c
+--- a/src/gui_w32.c     Sun Aug 08 16:38:42 2010 +0200
++++ b/src/gui_w32.c     Sat Sep 18 10:37:41 2010 +0800
+@@ -2298,7 +2298,11 @@
+     /* On NT, tell the font renderer not to &amp;quot;help&amp;quot; us with Hebrew and Arabic
+      * text.  This doesn&#39;t work in 9x, so we have to deal with it manually on
+      * those systems. */
+-    if (os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
++    if (
++#ifdef FEAT_RIGHTLEFT
++            curwin-&amp;gt;w_p_rl &amp;amp;&amp;amp;
++#endif
++    os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
+        foptions |= ETO_IGNORELANGUAGE;
+
+     /*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后是编译好的gvim，安装官方的包后直接丢到安装目录下替换原文件即可，Enjoy~~
+&lt;a href=&#34;http://www.hzmangel.info/blog/wp-
+content/uploads/2011/11/gvim20111115.zip&#34;&gt;gvim20111115&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vim居中光标所在行</title>
+      <link>http://hzmangel.github.io/post/491/</link>
+      <pubDate>Fri, 04 Dec 2009 11:12:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/491/</guid>
+      <description>&lt;p&gt;曾经用Emacs的时候发现那个Ctrl-
+L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~&lt;/p&gt;
+
+&lt;p&gt;zz: 将当前行置于屏幕中间（不是转载…）&lt;br /&gt;
+zt: 将当前行置于屏幕顶端（不是猪头~）&lt;br /&gt;
+zb：底端啦~&lt;/p&gt;
+
+&lt;p&gt;还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vim中的大小写切换</title>
+      <link>http://hzmangel.github.io/post/490/</link>
+      <pubDate>Fri, 04 Dec 2009 01:07:05 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/490/</guid>
+      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\
+L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)&lt;/p&gt;
+
+&lt;p&gt;例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;:%s/^\(\w\)\(.*\)/\u\1\L\2/g&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是
+EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午
+试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;:%s/&lt;em&gt;\([a-z]\)&lt;/em&gt;\(.*\)/&lt;em&gt;\U\1\l&lt;/em&gt;\2/g&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vim中的非贪婪匹配</title>
+      <link>http://hzmangel.github.io/post/487/</link>
+      <pubDate>Mon, 02 Nov 2009 17:35:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/487/</guid>
+      <description>&lt;p&gt;折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助
+的指引下折腾出来了。其实很简单，在&lt;code&gt;:h non-greedy&lt;/code&gt;一条中有说，使用&lt;code&gt;{-}&lt;/code&gt;来匹配，和&lt;code&gt;*&lt;/code&gt;的功能类似，于是乎就有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt;&lt;/li&gt;
+&lt;li&gt;使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

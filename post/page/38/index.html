@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/80/'> LaTeX统计字数</a> </h2>
+        <div class="post-meta">发表于2005-05-04 00:59:28 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">原来LaTeX也可以统计字数的啊，命令是charcnt filename.dvi，不过偶的cmd不知道为什么默认代码页是437-OEM-US了，虽然可以用chcp 936将其改成中文的，但是多了一条命令，不爽。再说吧^_^</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/79/'> VIM LaTeX Suite</a> </h2>
+        <div class="post-meta">发表于2005-05-03 04:33:24 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天在xia又学到了一招，VIM Latex-Suite的使用，以及在其中加上正向、反向搜索的方法。刚用了一下，感觉不错^_^ 声明：==之间的内容摘自edyfox@xia.net所发表的贴子_**VIM LaTeX Suite 中正向、反向搜索的配置&gt;**_。本人只是使用时查到了，顺便转载一下，版 权归原作者所有。 首先去下载Latex-Suite，网址是http://vim-latex.sourceforge.net，下载压缩包，解压到~/vimfiles(Windowz)或~/.vim(nix)文件夹，我使用的是Windoze下的Gvim ，在菜单里面就出现了Latex-Suite的菜单，是一些命令的快捷输入，有时还是满有用的^_^ 在xia上看到了正向、反向搜索，转贴一下下： 首先，要让双向搜索正常运行，要将VIM运行在remote模式下，具体方式在两个系统下有不同，基本都是在VIM后加上参数--servername latex-suite &ndash;remote-silent &lt;文件名&gt;，这样VIM在打开文件的时候就不会开一个.swp文件了，这样就可以打开多个副本。 在*nix下，修改.vimrc文件，使其支持xdvi，在调用latex的时候，加上-src- specials参数以生成带行号信息的dvi文件。在.vimrc文件中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src- specials -interaction=nonstopmode $&ldquo; 。反向搜索为了让xdvi知道工作在remote模式下，要在.vimrc中加上let g:TexViewRule_dvi=&ldquo;xdvi -editor &lsquo;gvim &ndash;servername latex-suite &ndash;remote-silent&rsquo;&ldquo;；如果是Windoz，则在_vimrc中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src-pecials -interaction=nonstopmode $*&rdquo; 即可。(其实我也不清楚加上那些是什么意思，只是从那篇文章里面直接Copy过来的^^)。 在Windowz下还需要配置yap，具体方法是打开yap，在View-&gt;Option选项中，找到Inverse Search页，在Command里输入gvim.exe &ndash;servername latex-suite &ndash;remote-silent +%l %f，这样就可以在yap中执行反向搜索了。 用remote模式下的VIM打开一个.tex文件，在normal模式下键入\ll即可编译文件，\ls就可以调用一个dvi的窗口来查看，而且页面停留在输入\l s时，光标所指内容生成的内容上。在*nix下，在xdvi窗口中用Ctrl+左键可以调用VIM查看源码；在Windoz中，双击yap页面上相应的位置即可转到源 码中的位置。============================================================ 今天主要学了Latex- Suite的使用，现在有点感觉不爽的是在VIM中输入{}、()等符号时，后面会自动加上&lt;++&gt;，目前还不清楚在什么地方改，再说吧^_^</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/78/'> 论文页面搞定一半啦^_^</a> </h2>
+        <div class="post-meta">发表于2005-05-03 01:22:45 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">多亏CTeX的Neals，才能把这个页面设置好，要是光靠我自己不晕死才怪，贴一下代码吧，这样以后我也有的查，:-) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \documentclass[12pt,a4paper,twoside]{article} \usepackage{CJK} \usepackage{fancyhdr} \usepackage[%paperwidth=18.4cm, paperheight= 26cm, twosideshift=0 pt, margin=2.5cm, lines = 38 %headheight=1.0true cm ]{geometry} \begin{CJK*}{GBK}{song} % 构建新的页面格式 \newsavebox{\pagebox} \begin{lrbox}{\pagebox} \begin{tabular}{|p{3.00cm}|p{4.70cm}|p{3.00cm}|p{4.70cm}|}\hline \multicolumn{4}{|p{15.4cm}|}{\rule{0in}{24.5cm}\ }\\ \hline \rule{0pt}{.25in} 第一格 &amp; 第二格 &amp; 第三格&amp; 第四格\\ \hline \end{tabular} \end{lrbox} % 设置页面 \pagestyle{fancy}{% \fancyhead[C]{\setlength{\unitlength}{1cm} \begin{picture}(0,0) \put(-8.55,-13.35){\usebox{\pagebox}} \end{picture}}} \fancypagestyle{plain}{% \fancyhead[C]{\setlength{\unitlength}{1cm} \begin{picture}(0,0) \put(-8.55,-13.35){\usebox{\pagebox}} \end{picture}}} % 称除页眉的那条横线 \renewcommand{\headrulewidth}{0pt} \begin{document} \title{The title} \author{The author} \date{\today} \maketitle \newpage This is a test \newpage this is a test2 \newpage This</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/78/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/77/'> 好久没写这儿的了</a> </h2>
+        <div class="post-meta">发表于2005-05-02 00:39:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">自从上次食堂的事情后，有一大段时间没来了，其实心里面一直有想说的，但是一到这边就写不出来了，有时是有的说不想写，有时是想写了又没的说了。现在就是后一种情况。唉，这儿已经干旱很久了，就当来灌溉一下吧。还要在这个地方再呆3年，还有的写吧，就是不知道渐渐长大了，还有没有儿时的那些棱棱角角了，sigh~~~~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/76/'> 今天被B4了 :(</a> </h2>
+        <div class="post-meta">发表于2005-05-02 00:36:32 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">N久没搭电路了，搭个运放搭了一天多，真FT。我明明记得我的－15V是加上了的，但是为什么别人看没加上呢？真的不明白啊。 做硬件，一定要细心啊，不然就会像我一样，被别人B4 :(</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/75/'> 开始BM培训了</a> </h2>
+        <div class="post-meta">发表于2005-04-29 23:02:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天做了一下那些题目，感觉不是很难嘛，过过看能不能把考试过了吧，介样就是正式的BM了。 感觉newsmth越来越上正轨了，不知道ICP的事情怎么样了，不过现在老用户大概已经上来差不多了，不爽的就是在公网，教育网连特别的慢，用term按一次?还要等N大一会，没以前在教育网内的爽，不过忍了吧，能开已经不错了:) 希望它能越来越好，衷心的。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/74/'> 哈哈，蛋蛋</a> </h2>
+        <div class="post-meta">发表于2005-04-26 10:13:53 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">没想到newsmth居然用这种方法，还是满好玩的，zixia今天SMTH版都成蛋盟了。好玩。看着新水木一点点壮大，感觉真不错。不过可惜的是只能送3个，偶又没mj，本校的朋友们只有再等了。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/73/'> 又玩不了了</a> </h2>
+        <div class="post-meta">发表于2005-04-25 22:22:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">阿猫阿狗，不知道为什么又玩不了了，这已经是第二个这样的游戏了，第一个是新绝3。算了，等2吧，况且现在这时候的我基本玩不了什么游戏。现在能好好玩个游戏都成奢望了，不是没时间就是没心情，有时真不敢玩游戏，怕把一个游戏玩糟蹋了，已经有好几个游戏是这样了，幻三，格兰蒂亚2，仙3&hellip;&hellip;&hellip;总算体会到了为什么有些人说没游戏玩了。看看自己的机子，N多想玩的游戏，但是都没有心情去玩，可怜啊。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/72/'> 斯人已去</a> </h2>
+        <div class="post-meta">发表于2005-04-25 09:40:55 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天刚在zixia上看到那则消息，一开始还没觉得什么(不知道是不是因为自己已经麻木)，但是后来看着网友的回贴，心情逐渐沉重起来，忍不住想写点什么。 生命永远是脆弱的，随时都有N多种方法可以夺去生命，但同时生命也是灿烂的，只有好好的活下去，才能够让自己的生命出现最绚丽的光芒。 不知道那张贴子是不是那个MM的，其实可以有很多理由可以让你活下去的，不过现在都迟了，斯人已去，一路走好吧。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/71/'> 凤凰涅磐</a> </h2>
+        <div class="post-meta">发表于2005-04-24 13:46:29 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">?凰涅?(节选) 天方?古有神?名“菲尼克司”(Phoenix)， ?五百?後，集香木自焚， ??死灰中更生，?美?常，不再死。 按此?殆即中?所??凰；雄??，雌?凰。 《孔演?》??“?凰火精，生丹穴。” 《?雅》??“?凰……雄?曰即即，雌?曰足足。” ?凰更生歌 ?? 听潮?了，听潮?了， 死了的光明更生了。 春潮?了，春潮?了， 死了的宇宙更生了。 生潮?了，生潮?了， 死了的?凰更生了。 ?凰和? 我?更生了，我?更生了。 一切的一，更生了。 一的一切，更生了。 我?便是他，他?便是我， 我中也有你，你中也有我。 我便是你，你便是我。 火便是凰。?便是火。 翱翔！翱翔！ ?唱！?唱！ 我?新?，我??朗， 我??美，我?芬芳， 一切的一，芬芳。 一的一切，芬芳。 芬芳便是你，芬芳便是我。 芬芳便是他，芬芳便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！ 我???，我???。 我???，我?和?。 一切的一，和?。 一的一切，和?。 和?便是你，和?便是我。 和?便是他，和?便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！ 我?生?，我?自由。 我?雄?，我?悠久。 一切的一，悠久。 一的一切，悠久。 悠久便是你，悠久便是我。 悠久便是他，悠久便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！ 我??唱，我?翱翔。 我?翱翔，我??唱。 一切的一，常在?唱。 一的一切，常在?唱。 是你在?唱？是我在?唱？ 是他在?唱？是火在?唱？ ?唱在?唱！ ?唱在?唱！ 只有?唱！ 只有?唱！ ?唱！ ?唱！ ?唱！ 凤凰只有经过烈火的洗礼，才能够?磐，也只有经过烈火洗礼的才能够称为凤凰。对某事有感而发。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/post/page/37/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/39/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

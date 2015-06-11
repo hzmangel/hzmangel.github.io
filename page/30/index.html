@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | 蓝天，小湖，湖水中一方小筑
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/161/'> Django数据库中的FileField</a> </h2>
+        <div class="post-meta">发表于2006-09-05 00:32:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。 首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&lsquo;file&rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。 暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/160/'> Apache的虚拟主机</a> </h2>
+        <div class="post-meta">发表于2006-09-03 20:58:28 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>用Django的过程中，突然想用Apache+mod_python来玩玩，看了几篇文章，都是需要配置虚拟主机，于是就玩玩吧。主要就是在http.conf中加
+上一段虚拟主机的配置：</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/160/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/159/'> Python中的字符编码</a> </h2>
+        <div class="post-meta">发表于2006-09-03 00:09:47 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">想用Django做些东西，大概算是一个用于管理的网站吧。当然是要做个主页，首先是想在工程目录下放一个index.htm的文件，但是好像django自带的那个 服务器不认这个东西，只好写个模块，并改urls.py，让它能访问，我不想把主页写死在模块里面，所以写到了一个网页文件中，index.htm，然后再用模块从文 件中读数据进来，结果出现了乱码，其实也就是浏览器默认用的是utf8的编码，但是我的文件用的是GB2312的编码，所以乱码就横空出世了。一开始以为是那个ind ex.htm文件的问题，于是把它的编码也切成utf8，但是再次显示的时候还是乱码。上网查了一下，好像是python自动判断系统的编码，然后进行转换。后来加上 了这几句话就好了。不过不清楚为什么要加上那句reload，不知道是不是怕程序执行过程中系统环境发生变化。 import sys reload(sys) sys.setdefaultencoding(&lsquo;utf8&rsquo;)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/158/'> PSPad</a> </h2>
+        <div class="post-meta">发表于2006-09-02 23:54:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">小试了一下这个软件，第一感觉还是满不错的，和UE和长的很像，功能也不少，不过可惜的是自从用过VIM后就对其它的编辑器不再有兴趣，所以也只好把它作为替换品 了。不过还是推荐用UE或EP的人用一下，免费的软件，很不错的。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/157/'> 键盘上的Power键</a> </h2>
+        <div class="post-meta">发表于2006-09-02 23:52:06 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">以前一直被键盘上的那个按键郁闷着，一不小心碰一下就FT了，偏偏赶上那个键是在Break的位置，又容易被我按下去，真是郁闷，8过今天好像在论坛上看到一个方法， 控制面板-&gt;电源管理-&gt;高级选项 里面确实是有那个设置，设置了一下，8知道有没有用，偶现在用的键盘上可没这个键，也幸亏没这个键&hellip;&hellip;</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/156/'> Django出错</a> </h2>
+        <div class="post-meta">发表于2006-09-02 23:41:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include(&ldquo;)，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r&rsquo;^$&lsquo;, include(&lsquo;ilab.homepage.index&rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r&rsquo;^$&lsquo;, &lsquo;ilab.homepage.index&rsquo;), 原因嘛，嘿嘿，未知。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/155/'> 测试coolcode</a> </h2>
+        <div class="post-meta">发表于2006-08-30 23:23:22 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">刚用它好像有问题，现在试试看倒底是不是有问题 Hello World Hello World Again ps: 刚看了一下，好像没什么问题，不知道为什么刚才用不了</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/154/'> diff/patch</a> </h2>
+        <div class="post-meta">发表于2006-08-30 21:56:26 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>今天配置xoops的时候，发现几个模块之间好像有相同的配置文件，它们有相同的文件名，只是在不同的地方加上了一些代码，所以自然而然的就想到了用diff/pat
+ch。上网查了一上，还是满简单的，主要就是patch接受的diff文件有特定的格式，在用diff生成的时候要加上-
+u选项才可以被patch接受。例如目录下有1和2两个文件，下面是一些操作记录：</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/154/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/153/'> Apache&#43;MySQL还是满方便的嘛</a> </h2>
+        <div class="post-meta">发表于2006-08-18 22:25:05 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">前几天折腾机器，重装系统，从XP到2k3又到2k3 R2，现在感觉系统用起来爽多了，看来XP还是没有2k3合我的胃口啊。8过今天只是想说说LAMP里面的A和 M(不过我一直好像用的都是WAMP，呵呵)，重装系统后根本不要重装，只要在命令行重新运行一下命令就可以了，可以直接安装成系统报务，真的是很方便。多亏当时搭系 统的时候没有按网上那一堆文章说的，把dll什么的拷到C盘去，在这其中多亏了FileMon啊，不过估计把文件夹拷走还是有些困难的，因为我把网站的目录移到别的地 方去了，不过即使这样改的地方也算是很少，比重装一下也方便多啦 :)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/152/'> root敢死队</a> </h2>
+        <div class="post-meta">发表于2006-08-17 23:57:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">一直来，用Linux都是非root不用，所以一直也就被人称为root敢死队，今天想好好珍惜一下生命，于是开始配用户。配用户这事情我以前也做过，不过一直弄不清 那些个组的关系，最后的结果就是用了大概一天的su，在第二天后就把那个普通用户遗忘的一干二净。今天在配用户之前在网上转了转，找了点东西，把那个普通用户加到了一 堆组中去，像什么audio, video什么的，总算是能大概用一下了，8过后来碰到使用aptitude什么的命令还是被告知权限不够，又把sudo装上了，直接 配置成可以执行大部分的可执行程序，而且不用密码，也就是在配置文件中加进去了一行： &lt;username&gt; ALL=NOPASSWD:/bin/,NOPASSWD:/sbin/,NOPASSWD:/usr/bin* 呵呵，感觉和root差不多了，还是没有很把用户当作一回事啊，这个习惯看到要过很久一段时间才能改了 :) btw: 本来还想配置一下iptable来限制访问，结果直接把自己给ban了(我用的是ssh)，后来把自己的这条规则加上后，发现apt- get又不能用了，一怒之下又把iptable恢复到以前的状态了，呵呵，什么都不管。安全这个问题啊，还真是麻烦啊。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/page/29/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/page/31/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

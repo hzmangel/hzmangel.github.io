@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/171/'> 桌面的吸引力</a> </h2>
+        <div class="post-meta">发表于2006-09-11 00:23:05 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在不少人眼中，Linux就是那一条一条的命令行，我们对面屋一哥们就一直是这么认为的，8过在我给他看过SuSE的桌面后，这一切都成了历史。 找来了张SLED10的盘，其实也是我想玩玩那个XGL，昨天折腾了一会，在别人的一个本子上终于试成功了，用了一会，还是满炫的。先是e17，再加上XGL，不知道 吸引了多少的目光，也许其中就有那么些人开始玩Linux了，所以桌面的吸引力还是满大的啊。不知道能不能在e17上配置上xgl，我是指那些桌面立方体什么的，再打 开e17的那些模块，那才叫一个炫啊 :)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/170/'> Django中的静态文件</a> </h2>
+        <div class="post-meta">发表于2006-09-10 01:14:39 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">不知道应不应该叫这个名字，反正给我的感觉就是它是静态的页面，纯的html语言，没有python在里面，在刚开始用django的时候，就想把主页做成一个静态的 东西，那时候用的是step by step中第一讲的方法，只是把那个写死在程序中的字符串换成了一个文件的内容，然后改那个文件就可以更改主页，但是发现用不了外 部链接的css，虽然可以把css内嵌到html文件中，但总觉得的些不爽。后来往后翻了翻step by step，看到最后一讲有说怎么在一个view中渲染一个简单的模板并输出，也就在是urls.py中加上下面这条语句： (r&rsquo;^$&lsquo;, &lsquo;django.views.generic.simple.direct_to_template&rsquo;, {&lsquo;template&rsquo;: &lsquo;homepage/index.html&rsquo;}), 这时候才算找到了好一些的方法，在那个目录下面就可以按正常网页开发了，不过外部链接的文件都要使用基于templates的路径，也就是说那个index.html 要放在templatex/hompage目录下，如果下面要使用css文件，还不能使用相对于index.html的相对路径，有些郁闷，正在考虑是不是把所有的c ss文件什么的放到一个统一的目录下，目录结构大变动啊。呵呵，睡觉了，醒来再折腾吧:)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/169/'> Look’n’stop</a> </h2>
+        <div class="post-meta">发表于2006-09-10 00:57:25 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">号称世界排名第一的防火墙，上次用它由于上不了教育网直通车，换成了Tiny，最近配Tiny的规则配的很郁闷，所以考虑了半天，又换了回来，8过感觉这次好用多了。 看了一些文章，发现配置也没什么难的，和其它的防火墙感觉上应该差不多，也就是配端口，然后设规则，只不过它可以在规则中配置连接的源或目标端口和IP地址，而且可以 对各个程序分别配置，以前用过的防火墙不知道是没有这个东西还是我没找到。说真的，选择这个防火墙的时候，也考虑到了它的名气，但主要还是看上它的小巧，不像Tiny 那样起个管理界面就要死一会。不过它的设置确实比较的让人郁闷，首先在程序规则里面要设，然后还要再去开端口，而且规则添加进去的时候，默认是block的，我是被这 件事情郁闷了好几次。还有就是要对网络协议比较的了解，比如使用的端口，曾经开了个FTP服务器别人连不上，后来看了别人的规则里面才知道还要把数据口20打开(8过 我现在把20开了，还没看别人能不能连上)。 刚在调django，也碰到件比较郁闷的事情，django自带的服务器开起来后会有一个Error: (10022, &lsquo;Invalid argument&rsquo;)，不清楚是怎么回事，睡一觉起来后再折腾吧。 btw: 刚想起来，装完lns后BT的又装了一个防火墙，jetico，免费的，大家说不错，不过一会还是卸了吧，要不然那规则会郁闷死我，后天去实验室装吧，哈哈。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/168/'> 创新的数据总算导完了</a> </h2>
+        <div class="post-meta">发表于2006-09-09 00:08:59 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">先是存成sql语句，然后回来才想起来，PHP用的是我自己建的表，而Django中要用它的表，两个结构不同，用不了sql语句，于是想到用导入csv文件的办法， 刚好setp by step有这个例子，而且Django中可以直接导入csv文件，不用我再去写那些分隔什么的了，还是满方便的，所以就想到了导入csv文件。 想好了就要开工，那个例子以前做过，所以还有点印象。首先是写module，主要就是构建数据表的结构，想了好久，才觉得大概能够把表结构定下来了，不过还是相当于留 了两个备注字段，应该够用了吧，如果不够用需要倒数据的话那真要疯了。其实说疯也有些夸张，再写程序导吧，呵呵。 一开始写的module中没有主键，主要是看它的文档中说它会自己加上一个自增的主键，所以没去理会，但是在导入的时候，有一个filter要选择一条记录，一开始不 知道，使用第一个字段，即申请人做关键字，结果前面写进去的记录当碰到后面相同申请人的记录时，全部被覆盖(我的那个csv文件后面有一个空行，在导入的时候读入最后 一行的时候会出错，下标越界，不过还好，前面的数据都导入了)。后来把csv文件分成了大概10条一个的小文件，再导入的时候才发现是这个问题，再看看它的文档说是如 果用户自己没有设置自境的主键的话，系统会给设一个，不过我试了，不能调用，于是自己设一个吧(又把表结构重弄了一遍，真的很FT，还好没什么数据)，后来问题就解决 了。在module.py中的str方法中可以设置在管理界面中每一条记录显示的内容，step by step中说还有一个repr，但是我用了后没反应，不知道为什么。最后还要加上一个class Admin: pass以开启管理功能。 在使用导入csv功能的时候，那个urls的映射要弄好，要不然服务器会提示找不到匹配的模式，不予解析。一般是在根目录下的urls.py中设置如果要访问app， 则把app中的utls.py包含进来，然后再在urls.py中解析对应于app的地址映射。 本来想用sqlite数据库，不过用了一段时间，感觉上还是有些不方便的地方，一是管理工具不是很方便，二是性能上处于劣势，最后考虑了一会，还是选用了mysql， 导入的时候明显速度快了很多，不过那段导入的代码还是很有用的，到时候如果再换表结构的话，就又要用到它了。 数据方面总算折腾完了，现在要把原来的表的记录改动一下，让它适应新的表的结构，还有一些细节方面的问题，像文件上传，显示的图标什么的，慢慢做吧，不管怎么说，大头 数据导进来了，也没什么好怕的了。 btw: django中不能直接接收2000-01-01格式的字符串作为datetime类的输入，还要把它拆开成&rsquo;2000&rsquo;, &lsquo;01&rsquo;, &lsquo;01&rsquo;三个字串，不知道后续版本会不会把这个功能加上，虽然不加也能用，只要用下标把子串取出来就可以了，但总感觉有些不爽。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/167/'> CSS中的ID和class</a> </h2>
+        <div class="post-meta">发表于2006-09-07 22:47:15 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">本来以为它们两个是没什么太大区别的，但是今天上网上一查，发现还是有些区别的。最主要的大概就是在CSS定义中，ID是以#开头的，而class是以.开头的。而且 在网页编程中，一个ID只能出现一次，就像某个东西的标识符一样，在一个页面中，只能有一个，而class是可以出现多次的。看了一篇文章说，id是先找到结构或内容 ，再套用样式，而class是先定义好样式，再应用到多个结构或内容上，呵呵，还真有点这么回事 :)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/166/'> django的资源文件</a> </h2>
+        <div class="post-meta">发表于2006-09-06 23:54:28 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">刚看了怎么在django的工程中加入资源文件夹，即放一些静态内容，像html页面，css文件什么的，其实放在外面也可以，但是总感觉有些怪，还好step by step讲到了这一课，其实也没什么难的，它给的例子是在urls.py中加了一行，以解析URL，然后在settings.py中加上了一个相当于常量定义的命令， 把一个目录定义成常量，然后在网站根目录下建立了这个目录，于是，就可以了。urls.py中更改的和以前有些不太相同，使用了django.views.stati c.serve，而此参数需要一个参数，文档根目录，所以需要在后面加上{&lsquo;document_root&rsquo;: settings.STATIC_PATH})，那个settings.需要在开头加上import django.conf import settings以导入 模块。其它在网页中就可以使用/site_media来访问./media目录了，那个site_media是在urls.py中定义的，那个patten也有些不同 ，后面加上了一些东西，r&rsquo;^site_media/(?P&lt;path&gt;.*)$&lsquo;，还没太弄懂，过过再说。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/165/'> FileField的相关内容</a> </h2>
+        <div class="post-meta">发表于2006-09-06 23:48:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">由于要存储文件，所以使用了FileField类型的变量，后来学会了查db_api手册，知道了它的方法，比如想设个超链接，可以调用get_FOO_url得到它 的路径，不过在这之前要设置好settings.py中MEDIA_URL的值，否则得不到正确的结果，在设置的时候，需要在MEDIA_URL最后的那个目录后加一 个／，否则好像地址不能很好的识别。别的还有一些方法，像文件名什么的，另外还有ImageField特有的一些方法还是满不错的。不过不知道为什么我现在不能上传文 件名中有中文的文件，不知道是它不支持还是我设置的问题，有空去网上找找，实在不行就只有再骚扰limodou了。 ;) btw: 如果那个FileField需要提供下载的话，需要在app或整个工程的urls.py中设置一下patten，要不然会出错，系统不认。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/164/'> Django中CharField的choices</a> </h2>
+        <div class="post-meta">发表于2006-09-06 22:15:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">本来以为是比较难的问题，试了一堆记忆中的属性什么的，就是不认，后来骚扰了一下limodou才了解到原来是个这么简单的方法，而且在db- api手册中也有说。诶，看东西看的不仔细，丢人了啊。说说正题吧，就用step by step的例子说吧，本来显示的是M或F，因为直接调用的是address. gender，但是如果调用addres.get_gender_display就可以显示为男或女。简单吧，我怎么就没看到呢？</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/163/'> Django中的TIME_ZONE</a> </h2>
+        <div class="post-meta">发表于2006-09-05 23:06:50 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天在groups上看到有人在讨论这个问题，想想自己当时果然没有考虑到这个事情。在Django step by step中，写的是CCT，然后到django提供的网站上去查了一下，发现应该写成&rsquo;Asia/Shanghai PRC&rsquo;，但是好像还有一个选项是&rsquo;Etc/GM T+8&rsquo;，不知道这几个选项之间是什么关系。groups上有人说用CCT时会出现时间设置不对的问题，另外两个好像没有。我也没有试验，只是把这个东西写下来，算是 知道有这么个东西吧，呵呵 :)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/162/'> Django中的templates</a> </h2>
+        <div class="post-meta">发表于2006-09-05 22:47:52 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天想改一下模板的路径，主要是想在每个app中建立一个templates的目录，然后系统直接去那个目录寻找相应app的view的模板，按网上的方法，在set tings.py的TEMPLATE_DIRS项中加上了app的templates目录，但是在浏览器中查看的时候，它告诉我找不到模板，后来用Filemon看了 一下，它在app目录下的templates中也是按着默认的路径查找的，也就是templates/APP_NAME/ MODE_NAME_list.html文件，于是就把templates改回来了。不清楚是它只能这么找还是我的配置有误。</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/post/page/28/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/30/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

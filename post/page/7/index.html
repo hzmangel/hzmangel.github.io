@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Posts &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Posts
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/581/'> Set local dir as yum repo</a> </h2>
+        <div class="post-meta">发表于2010-01-13 13:38:19 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。 按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下： $ cat local.repo [local repo] name=Repository on lldev baseurl=file:///XXX/YYY/ZZZ enabled=1 gpgcheck=0 需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/580/'> Auth ssh with keys</a> </h2>
+        <div class="post-meta">发表于2010-01-13 13:17:46 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了… S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &gt;&gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴 这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~ Update at 2010-09-16: 可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &lt;pub key&gt; &lt;remote host&gt;，然后这个命令会做完上面的工作~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/579/'> 2010开年行之风雪夜归</a> </h2>
+        <div class="post-meta">发表于2010-01-06 20:44:06 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>2号在济南美美的睡了一觉，醒来就收到了北京大雪，高速封路的消息。出门后直奔火车站代售处，结果连晚上的站票都没了，只好无奈的走到了汽车站。</p>
+
+<p>车站倒是没有太多的不安，门口咨询台处的小姐一口咬定说发车完全没问题，但是在问到是否安全到达里又完全没有语言了，不过那会得到的消息是高速没封路，心里也安稳了一
+些。既然准备好坐汽车回去，一行人便开始了囤积吃喝。在忐忑的心情中等到了1点45，终于坐上了回北京的大巴。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/579/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/577/'> 2010开年行之徜徉济南</a> </h2>
+        <div class="post-meta">发表于2010-01-05 23:41:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>2号早上索道下山后，转大巴到了济南。本来在泰安还是阳光明媚，不知为何到了济南就变成了一股子阴冷，阴霾的天，冰冷的风，把刚从车上下来的我们冻了个哆嗦。</p>
+
+<p>在济南长途总站想买3号回北京的票，被告知只有下午4点始发的，在我们的再三追问下才知晓，路南路北两个站的票不是联网卖的，于是去路北买到了1点40的车。在订的酒
+店折腾好行李，几个人开始随便乱转了。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/577/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/567/'> 2010开年行之夜游东岳</a> </h2>
+        <div class="post-meta">发表于2010-01-04 23:35:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>终归还是闲不下来，加之一直对91年没看成日出耿耿于怀，于是义无反顾的报了元旦夜走泰山的队。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/567/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/540/'> 继续数落我的2009</a> </h2>
+        <div class="post-meta">发表于2009-12-31 22:28:06 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>2010年的大门已然在慢慢的打开，身后渐行渐远的是2009年的欢声笑语及愁眉苦脸。进门前，回头看看吧，要不然就见不着了~</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/540/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/538/'> 2009，我的户外元年</a> </h2>
+        <div class="post-meta">发表于2009-12-30 03:17:12 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>又见年末，上次的柳沟行应该为09年的骑行划上了一个不是十分完美的句号，而在一周又一周的琐事中错过的一次又次的散步也早早的为我的户外划上了一堆——省略号，不过
+怎么说，09年也算是我慢慢开始成为新驴的一年吧，所以08算热身，09算开元，嘿嘿。也没废话了，开列吧~</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/538/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/495/'> 在thickbox中关掉自己</a> </h2>
+        <div class="post-meta">发表于2009-12-16 00:24:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~ 最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾： parent.tb_remove() 于是就达成需求了……</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/491/'> Vim居中光标所在行</a> </h2>
+        <div class="post-meta">发表于2009-12-04 11:12:41 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">曾经用Emacs的时候发现那个Ctrl- L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~ zz: 将当前行置于屏幕中间（不是转载…） zt: 将当前行置于屏幕顶端（不是猪头~） zb：底端啦~ 还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/490/'> Vim中的大小写切换</a> </h2>
+        <div class="post-meta">发表于2009-12-04 01:07:05 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\ L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case) 例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾： :%s/^\(\w\)\(.*\)/\u\1\L\2/g 需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是 EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午 试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了： :%s/\([a-z]\)\(.*\)/\U\1\l\2/g \l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/post/page/6/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+                <h4 class="text-right"><a href="/post/page/8/">下一页</a></h4>
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

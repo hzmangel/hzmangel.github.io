@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" My first python script &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/112/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2005-11-27T21:25:43Z" />
+
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | My first python script
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/112/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/112/'> My first python script</a> </h2>
+        <div class="post-meta">发表于2005-11-27 21:25:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>Yesterday, I needed a shell script to do a demo of a program, and I thought
+about python, so my first script was released today. But I have to say, it is
+useless, because I haven&rsquo;t reach my goal :( .  The problem is not in the
+script but in the program, so the only thing I can do is to abort, although I
+do not want to say this word. I want to paste some code here because I want to
+leave some useful command in my own space, so I can re-read them later ^_^</p>
+
+<p>#!/usr/bin/python</p>
+
+<h1 id="import-some-useful-modules:8ae5a883a7b2e02fa882e6af32cb880c">import some useful modules</h1>
+
+<p>import os<br />
+import glob<br />
+import sys<br />
+import re<br />
+import shutil<br />
+import linecache</p>
+
+<h1 id="def-some-functions:8ae5a883a7b2e02fa882e6af32cb880c">def some functions</h1>
+
+<h1 id="get-the-filename-without-pathname:8ae5a883a7b2e02fa882e6af32cb880c">get the filename without pathname</h1>
+
+<p>def get_filename(f_fullname):<br />
+return os.path.split(f_fullname)[1]</p>
+
+<h1 id="generate-filename-by-replacing-the-str-in-filename:8ae5a883a7b2e02fa882e6af32cb880c">generate filename by replacing the str in filename</h1>
+
+<p>def gen_filename(f_filename, f_src_ext, f_dst_ext):<br />
+return re.sub(f_src_ext, f_dst_ext, f_filename)</p>
+
+<h1 id="filter-filename-by-extension-and-return-a-list:8ae5a883a7b2e02fa882e6af32cb880c">filter filename by extension and return a list</h1>
+
+<p>fullname = glob.glob(&lsquo;res/bmp/*.bmp&rsquo;)</p>
+
+<h1 id="get-the-filename-without-extension-and-return-a-new-list:8ae5a883a7b2e02fa882e6af32cb880c">get the filename(without extension) and return a new list</h1>
+
+<p>bmp_file = map(get_filename, fullname)</p>
+
+<h1 id="generate-some-filename:8ae5a883a7b2e02fa882e6af32cb880c">generate some filename</h1>
+
+<p>ppm_file = [gen_filename(file, &lsquo;bmp&rsquo;, &lsquo;ppm&rsquo;) for file in bmp_file]<br />
+pgm_file = [gen_filename(file, &lsquo;bmp&rsquo;, &lsquo;pgm&rsquo;) for file in bmp_file]<br />
+icp_file = [gen_filename(file, &lsquo;bmp&rsquo;, &lsquo;icp&rsquo;) for file in bmp_file] &hellip;&hellip;&hellip;.</p>
+
+<p>The module shutil allows u using copy and move, and the linecache module
+supports reading a whold line from a file, they both are useful</p>
+
+<p>Just seen some doc of python, it seems that this is a powerful tools, I hope
+that I can study it deeper ^_^</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/113/"> &lt; 在Metapost中用latex命令 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/111/"> 创新笔试了 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/112\/';
+    var disqus_title = 'My first python script';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/112\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

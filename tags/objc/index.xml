@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Objc on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/objc/</link>
+    <description>Recent content in Objc on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Thu, 24 Jan 2013 09:41:13 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/objc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Compile Object-C program in command line</title>
+      <link>http://hzmangel.github.io/post/1183/</link>
+      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1183/</guid>
+      <description>
+
+&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
+language itself. But it is inconvenient to start Xcode for each program,
+especially for program without UI elements in. So I want to set up a command
+line environment that can compile and execute ObjC program.### Prepare the code&lt;/p&gt;
+
+&lt;p&gt;First I have to prepare the ObjC file. I have created one file called
+&lt;em&gt;helloworld.m&lt;/em&gt; in current directory, and here is the content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    NSLog (@&amp;quot;Hello World!&amp;quot;);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay, the program does the same thing as the first program of other languages
+do: print out &lt;strong&gt;Hello World!&lt;/strong&gt; string.&lt;/p&gt;
+
+&lt;h3 id=&#34;compile-and-execute-the-program:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Compile and execute the program&lt;/h3&gt;
+
+&lt;h4 id=&#34;mac-os:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Mac OS&lt;/h4&gt;
+
+&lt;p&gt;I have installed Xcode before, so I don&amp;rsquo;t know whether those commands can be
+run successfully without Xcode command line tools.&lt;/p&gt;
+
+&lt;p&gt;There are two methods to compile ObjC program from command line in Mac OS, one
+is using &lt;code&gt;gcc&lt;/code&gt; and the other one is using &lt;code&gt;clang&lt;/code&gt;. Both commands below can
+generate ObjC executable file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;clang -framework Foundation helloworld.m -o helloworld_clang
+
+gcc -framework Foundation helloworld.m -o helloworld_gcc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On my side, the two binary file has the same size, and the execute results are
+the same except the timestamp:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./helloworld_clang
+2013-01-24 01:56:27.009 helloworld_clang[7845:707] Hello World!
+
+$ ./helloworld_gcc
+2013-01-24 01:56:29.744 helloworld_gcc[7846:707] Hello World!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;linux:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Linux&lt;/h4&gt;
+
+&lt;p&gt;With GCC, the command line compilation can also be done on Linux platform. I
+am using Debian and have set up the environment after refering &lt;a href=&#34;http://stpetrus27.wordpress.com/2011/06/20/compile-objective-c-programs-
+on-linux/&#34;&gt;this
+post&lt;/a&gt;. Here are the brief steps:&lt;/p&gt;
+
+&lt;p&gt;First Install those packages first to prepare the environment.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install gobjc gnustep gnustep-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then compile the program with command listed below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gcc `gnustep-config --objc-flags` helloworld.m -o helloworld_gcc `gnustep-config --objc-libs` -lgnustep-base
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the command return, you can find binary file &lt;code&gt;helloworld_gcc&lt;/code&gt; in the
+same directory.&lt;/p&gt;
+
+&lt;p&gt;So, with this feature, some simple program can be executed without running
+Xcode, a little convenient for language learning for me.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

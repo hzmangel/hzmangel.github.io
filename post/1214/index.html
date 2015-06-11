@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Some failed attempts on PNaCl &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1214/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2013-06-20T20:03:56Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Some failed attempts on PNaCl
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1214/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1214/'> Some failed attempts on PNaCl</a> </h2>
+        <div class="post-meta">发表于2013-06-20 20:03:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>Google has released his <a href="http://www.chromium.org/nativeclient/pnacl
+/building-and-testing-portable-native-client">PNaCl</a> project on Google I/O 2013,
+which can allow user to write portable native client application. The portable
+native client application can be translated to native client program and
+executed on supported architecture.</p>
+
+<p>The official toolchain contains clang frontend, which can only be used to
+compile C/C++ code to PNaCl application. But the PNaCl application is a subset
+of LLVM so I have tried some other languages have LLVM frontend. I am still
+working on the solution, and this article is just recording some failed
+attempts.### Install PNaCl toolchain</p>
+
+<p>PNaCl toolchain can be downloaded via <a href="https://developers.google.com/native-client/sdk/download">Native Client
+SDK</a>, please follow
+the instruction for downloading and installing. Here are the commands used
+here:</p>
+
+<ul>
+<li><code>./naclsdk install pepper_canary</code></li>
+<li><code>export NACL_SDK_ROOT=/where/you/put/the/pepper_canary</code></li>
+<li><code>cd pepper_canary/examples/hello_world; TOOLCHAIN=pnacl CONFIG=Release make</code></li>
+</ul>
+
+<p>Chrome is also needed some setup, which also can be found in that page. NOTICE
+that the <code>#enable-nacl-debug</code> flag can not be enabled, or the PNaCl
+application will not be able to
+loaded(<a href="http://www.ahwkong.com/post/43309281489/native-client-see-only-
+status-creating-embed">ref</a>).</p>
+
+<p>The samples are also avaliable in chrome store, and the link can also be found
+on <a href="http://www.chromium.org/nativeclient/pnacl/building-and-
+testing-portable-native-client">this page</a>.</p>
+
+<h3 id="golang-and-llgo:ecc7ba44f276ccb1834f8c4a85b5f6bd">Golang and llgo</h3>
+
+<p>The first language I tried is Golang. There is a Golang frontend for LLVM
+called <a href="https://github.com/axw/llgo">llgo</a>, and I have tried to use it for
+generating LLVM bitcode from Golang program.</p>
+
+<p><code>go get</code> is recommended to install the <code>llgo</code> package. The <code>CGO_CFLAGS</code> and
+<code>CGO_LDFLAGS</code> should be set before executing <code>go get</code>. I have followed the
+steps on the <a href="http://blog.awilkins.id.au/2013/05/llgo-on-
+go-11.html">author&rsquo;s blog</a> for installing:</p>
+
+<ul>
+<li>Install Go 1.1</li>
+<li>Get PNaCl sdk, which contains Clang and LLVM</li>
+<li>Run <code>go get github.com/axw/llgo/cmd/llgo-dist</code></li>
+<li>Run <code>llgo-dist</code> to build and install runtime</li>
+</ul>
+
+<p>I was tried it on MacOS 10.7.5, but got the error message said <code>No matching
+.ll file for &quot;asm_darwin_amd64.s&quot;</code>, I have <a href="https://github.com/axw/llgo/issues/36">filed an
+issue</a> and learned from response that I
+can set target triple to <code>x86_64-apple-macosx10.7.0</code> or <code>i386-apple-
+macosx10.7.0</code> for solving this.</p>
+
+<p>I have met compile error while compiling runtime by <code>llgo-dist</code> command, which
+seems because of upgrade of golang to 1.1. So I leave <code>llgo</code> there and waiting
+for some updates from author.</p>
+
+<h3 id="ruby:ecc7ba44f276ccb1834f8c4a85b5f6bd">Ruby</h3>
+
+<p>Another attempt is <code>ruby</code>. In ruby 2.0.0, the nacl support has been
+integrated, the document can be found <a href="https://github.com/csigi/learning
+ruby/blob/master/ruby2/ruby-2.0.0-rc1/nacl/README.nacl">here</a>. During compiling the
+ruby source, I have got an <code>rdoc</code> error, so I added <code>--disable-install-rdoc</code>
+to the configue command.</p>
+
+<pre><code>$ ./configure --prefix=/tmp/nacl-ruby --host=x86_64-nacl --with-baseruby=`which ruby` --disable-install-rdoc
+</code></pre>
+
+<p>Also I made a symbol link of all directories in includes PNaCl sdk directory
+to ruby for solving header file not found error.</p>
+
+<pre><code>$ ln -s /home/vagrant/source/nacl_sdk/pepper_canary/include/* ./
+</code></pre>
+
+<p>If running this command on 64-bit OS, please make sure the 32-bit glibc
+library is installed, or some binaries may get error.</p>
+
+<p>I have compiled the native executable for ruby, but it can&rsquo;t be executed by
+PNaCl binary. I am still investigating on this.</p>
+
+<h3 id="next-step:ecc7ba44f276ccb1834f8c4a85b5f6bd">Next step</h3>
+
+<p>I am still trying to write portable native client code with other languages. I
+saw the author of <code>llgo</code> has made some changes and I will do the test. I will
+update my post when got progress.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1220/"> &lt; Ajax loading multi series to jqPlot </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1210/"> Uploading multiple attachments with carrierwave/mongoid/nested_form &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1214\/';
+    var disqus_title = 'Some failed attempts on PNaCl';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1214\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

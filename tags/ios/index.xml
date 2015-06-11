@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ios on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/ios/</link>
+    <description>Recent content in Ios on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Tue, 12 Mar 2013 00:06:08 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>iOS Code Snippets - UITableView</title>
+      <link>http://hzmangel.github.io/post/1201/</link>
+      <pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1201/</guid>
+      <description>
+
+&lt;p&gt;Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href=&#34;http://goo.gl/0ZrcA&#34;&gt;http://goo.gl/0ZrcA&lt;/a&gt;. The text above is the introduction text for that project, please reference the code for detailed information.# SimpleTableView&lt;/p&gt;
+
+&lt;p&gt;This app is used to describe some basic feature of &lt;code&gt;UITableView&lt;/code&gt; in iOS
+framework, here is some points of this app:&lt;/p&gt;
+
+&lt;h2 id=&#34;a-tabbed-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;A tabbed view&lt;/h2&gt;
+
+&lt;p&gt;This app shows three different UITableViewController objects, which is
+organized by tabbed view. The table view of this app is created
+programmatically, which is built by this code segment in file &lt;code&gt;AppDelegate.m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+
+    UIViewController *vc_simple_table = [[SimpleTableViewController alloc] initWithNibName:@&amp;quot;SimpleTableViewController&amp;quot; bundle:nil];
+    UIViewController *vc_section_table = [[SectionTableViewController alloc] initWithNibName:@&amp;quot;SectionTableViewController&amp;quot; bundle:nil];
+    UIViewController *vc_grouped_table = [[GroupedTableViewController alloc] initWithNibName:@&amp;quot;GroupedTableViewController&amp;quot; bundle:nil];
+
+    self.tab_bar = [[UITabBarController alloc] init];
+    self.tab_bar.viewControllers = @[vc_simple_table, vc_section_table, vc_grouped_table];
+
+    [self.window addSubview:self.tab_bar.view];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: &lt;code&gt;setRootView&lt;/code&gt; for &lt;code&gt;self.window&lt;/code&gt; can&amp;rsquo;t add show the tabbed view in app, not sure why currently.&lt;/p&gt;
+
+&lt;h2 id=&#34;read-data-from-text-file:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Read data from text file&lt;/h2&gt;
+
+&lt;p&gt;The data source of the list is fetched from a text file by this code segment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NSArray *table_data;
+
+// Country list
+NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@&amp;quot;country_list&amp;quot; ofType:@&amp;quot;txt&amp;quot;] encoding:NSMacOSRomanStringEncoding error:nil];
+table_data = [fileText componentsSeparatedByString:@&amp;quot;\n&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;build-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Build table view&lt;/h2&gt;
+
+&lt;p&gt;Now the prime task, build table view. I have created three types of list, the
+plain, sectioned, and grouped. I want to apply it to some earlier version of
+iOS device, so haven&amp;rsquo;t use the storyboard. By the way, there is a &lt;a href=&#34;h
+ttp://developer.apple.com/library/ios/#documentation/userexperience/conceptual
+/tableview_iphone/AboutTableViewsiPhone/AboutTableViewsiPhone.html#//apple_ref
+/doc/uid/TP40007451-CH1-SW1&#34;&gt;document&lt;/a&gt; on apple development center which can give more
+information.&lt;/p&gt;
+
+&lt;h3 id=&#34;plain-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Plain table view&lt;/h3&gt;
+
+&lt;p&gt;This is the simplest table view, and here is my step:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a Object C class, with xib file. In this app, the created class is &lt;code&gt;SimpleTableViewController&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Modify the header file to make sure the class will implement protocol &lt;code&gt;UITableViewDelegate&lt;/code&gt; and &lt;code&gt;UITableViewDataSource&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Drag the UITableViewController widget to xib file, and associate with member variables.&lt;/li&gt;
+&lt;li&gt;Two functions &lt;code&gt;numberOfRowsInSection&lt;/code&gt; and &lt;code&gt;cellForRowAtIndexPath&lt;/code&gt; are needed for showing data in list.&lt;/li&gt;
+&lt;li&gt;Fill the data into &lt;code&gt;table_data&lt;/code&gt; array, and now you have a simple table list.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;sectioned-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Sectioned table view&lt;/h3&gt;
+
+&lt;p&gt;Class for sectioned table view is &lt;code&gt;SectionTableViewController&lt;/code&gt;, here is the
+prime changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use two-level data structure to save section title and row data. Currently an array is used for section title while a dictionary for detail data.&lt;/li&gt;
+&lt;li&gt;Two functions &lt;code&gt;numberOfSectionsInTableView&lt;/code&gt; and &lt;code&gt;titleForHeaderInSection&lt;/code&gt; are added for returning section count and section title&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;numberOfRowsInSection&lt;/code&gt; should be modified to return count in each section.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;grouped-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Grouped table view&lt;/h3&gt;
+
+&lt;p&gt;Class for grouped table view is &lt;code&gt;GroupedTableViewController&lt;/code&gt;, and here is the
+changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Modify the table view widget from &lt;em&gt;plain&lt;/em&gt; to &lt;em&gt;grouped&lt;/em&gt; in xib file&lt;/li&gt;
+&lt;li&gt;The other things are almost the same with section.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;add-the-index:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Add the index&lt;/h2&gt;
+
+&lt;p&gt;This will add an index to the right side of list, since it need a sectioned
+data, so I added it in section table view. Two functions are needed for adding
+index. * &lt;code&gt;sectionIndexTitlesForTableView&lt;/code&gt;: Set the section header string *
+&lt;code&gt;sectionForSectionIndexTitle&lt;/code&gt;: Return the section while clicking section
+title.&lt;/p&gt;
+
+&lt;h2 id=&#34;search-the-list:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Search the list&lt;/h2&gt;
+
+&lt;p&gt;Search function it added to simple table view. Here are the changes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add search bar to top of the table view&lt;/li&gt;
+&lt;li&gt;Add function &lt;code&gt;searchBarTextDidBeginEditing&lt;/code&gt; and &lt;code&gt;textDidChange&lt;/code&gt; to handle the typing event in search bar&lt;/li&gt;
+&lt;li&gt;Add function &lt;code&gt;searchBarSearchButtonClicked&lt;/code&gt; to handle search button clicked event&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This search result will be shown real time while typing character to the
+search bar.&lt;/p&gt;
+
+&lt;h2 id=&#34;response-to-user-click-event:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Response to user click event&lt;/h2&gt;
+
+&lt;p&gt;This is added to sectioned table view. Function &lt;code&gt;didSelectRowAtIndexPath&lt;/code&gt; will
+handle user click event.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>@property and its attributes</title>
+      <link>http://hzmangel.github.io/post/1195/</link>
+      <pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1195/</guid>
+      <description>
+
+&lt;p&gt;Recently working on iOS project, and have met some problems while using the
+attributes of &lt;code&gt;@property&lt;/code&gt;. I have searched some documents and here is my idea
+about this.### What is &lt;code&gt;@property&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So, first thing is to talk about the &lt;code&gt;@property&lt;/code&gt;. This will offer a way to
+encapsulate the class. With the @synthesize keyword, the compiler will
+generate a getter and setter function for the variable. For example, there is
+a class called FooTester, which contains a variable named foo, so here is
+piece of the code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Definiation
+@interface FooTester : NSObject
+@property int foo;
+@end
+
+// Implementation
+@implementation PropertyTester
+@synthesize foo;
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, the compiler will generate setter and getter for variable &lt;code&gt;foo&lt;/code&gt;,
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (int) foo {
+    return foo;
+}
+
+- (void) setFoo:(int) i {
+    foo = i;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is really a great function, which brings lots of convenience to
+development. Also, it can accept various attributes as its parameter, which is
+describing below.&lt;/p&gt;
+
+&lt;h3 id=&#34;attributes-of-property:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;Attributes of &lt;code&gt;@property&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The full syntax for @property is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@property (&amp;lt;#attribute_list&amp;gt;) &amp;lt;#variable_type&amp;gt; &amp;lt;#variable_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The attributes is used to define some behavior of the variable.&lt;/p&gt;
+
+&lt;h4 id=&#34;readonly-and-readwrite:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;readonly&lt;/em&gt; and &lt;em&gt;readwrite&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;As the meaning of the word, those two attributes are used to control read-
+write access of the property, while &lt;code&gt;readwrite&lt;/code&gt; is the default value.&lt;/p&gt;
+
+&lt;h4 id=&#34;atomic-and-nonatomic:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;atomic&lt;/em&gt; and &lt;em&gt;nonatomic&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;atomic&lt;/code&gt; and &lt;code&gt;nonatomic&lt;/code&gt; attributes are used to indicate whether the setter
+and getter function returns the whole value of variable. With &lt;code&gt;atomic&lt;/code&gt;, the
+synthesized getter and setter function will be guaranteed. For example, there
+two thread A and B, thread A is getting value in middle while thread B is
+setting value to the object. If the variable is declared with &lt;code&gt;atomic&lt;/code&gt;, the
+value returned to A should be a complete one, which means there is impossible
+to return a object combines the old and new value. Most likely, the getter
+will generate a auto-release copy and then return it.&lt;/p&gt;
+
+&lt;p&gt;There is no this guarantee for &lt;code&gt;nonatomic&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;p&gt;One more thing need to be aware is the &lt;code&gt;atomic&lt;/code&gt; do &lt;em&gt;not&lt;/em&gt; guarantee thread
+safety. It just guarantee the variable has atomic access. For example, if
+thread A, B and C are setting the variable to different value at almost same
+time, then the value of variable is unpredictable.&lt;/p&gt;
+
+&lt;p&gt;The default attribute is &lt;code&gt;atomic&lt;/code&gt;, in case &lt;code&gt;nonatomic&lt;/code&gt; is specified in the
+&lt;code&gt;@property&lt;/code&gt; declaration. And generally speaking, in &lt;code&gt;nonatomic&lt;/code&gt; case, the
+getter and setter function will a little more faster.&lt;/p&gt;
+
+&lt;h4 id=&#34;assign-copy-and-retain:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;assign&lt;/em&gt;, &lt;em&gt;copy&lt;/em&gt; and &lt;em&gt;retain&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Those three attributes are related to memory management, which are used for
+control behavior of setters. The &lt;code&gt;assign&lt;/code&gt; attribute is a simple assignment,
+without any other operations. The &lt;code&gt;copy&lt;/code&gt; attribute means the setter will
+assign the copy of the value to the object variable. The &lt;code&gt;retain&lt;/code&gt; attribute
+means it will assign the pointer to the object variable.&lt;/p&gt;
+
+&lt;p&gt;Hmm&amp;hellip; It is really confusion, so let&amp;rsquo;s write some code to make it more
+clearly.&lt;/p&gt;
+
+&lt;p&gt;First, we need a class with those property type, here are the declaration and
+implementation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+
+@interface PropertyTester : NSObject
+
+@property (assign) NSMutableString *str_assign;
+@property (copy) NSMutableString *str_copy;
+@property (retain) NSMutableString *str_retain;
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;-&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;quot;property.h&amp;quot;
+
+@implementation PropertyTester
+
+@synthesize str_assign;
+@synthesize str_copy;
+@synthesize str_retain;
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we have to prepare some code to test the class. I have written two simple
+code to test this class, one is focusing on the memory and the other is about
+reference count.&lt;/p&gt;
+
+&lt;p&gt;Here comes the program for memory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+#import &amp;quot;property.h&amp;quot;
+
+int main (int argc, const char * argv[])
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str = [NSMutableString stringWithFormat:@&amp;quot;first&amp;quot;];
+
+    property_tester.str_assign = tmp_str;
+    property_tester.str_copy = tmp_str;
+    property_tester.str_retain = tmp_str;
+
+    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [tmp_str appendString:@&amp;quot;second&amp;quot;];
+
+    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The logic for this program is simple. I created a &lt;code&gt;NSMutableString&lt;/code&gt; object
+named &lt;code&gt;tmp_str&lt;/code&gt; and assign it to three different type of property variables,
+then update the object. The information for class object will be printed out
+for examination. I have overloaded the &lt;code&gt;description&lt;/code&gt; of class to show some
+internal information, so the output of the program is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2013-02-08 16:39:14.557 property_update[66361:707] 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, first 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] 0x10fa15030, firstsecond
+2013-02-08 16:39:14.581 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, firstsecond 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, firstsecond
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;According to the screen log, the object &lt;code&gt;tmp_str&lt;/code&gt; has initialized value
+&lt;code&gt;first&lt;/code&gt;, while the memory address is &lt;code&gt;0x10fa15030&lt;/code&gt;. After the assignment
+operations, three variables all contains the same value of &lt;code&gt;tmp_str&lt;/code&gt;, but the
+memory address of &lt;code&gt;str_copy&lt;/code&gt; is different with original one. Then the original
+string &lt;code&gt;tmp_str&lt;/code&gt; updates its value to &lt;code&gt;firstsecond&lt;/code&gt;, while the value for
+variable &lt;code&gt;str_assign&lt;/code&gt; and &lt;code&gt;str_retain&lt;/code&gt; has also updated, but not the
+&lt;code&gt;str_copy&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As mentioned above, the &lt;code&gt;assign&lt;/code&gt; will do simple assignment, while &lt;code&gt;retain&lt;/code&gt;
+will assign the pointer, which is shown in the screen log. The two variable
+has the same value and memory address with original string, and will be
+updated if original string updated. However, &lt;code&gt;copy&lt;/code&gt; means assing a copied
+value to the property, so it contains different memory address, and will no
+update if original object updated.&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s use another program to show difference between &lt;code&gt;assign&lt;/code&gt; and
+&lt;code&gt;retain&lt;/code&gt;. The prime difference between &lt;code&gt;assign&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; is reference
+count, I will use &lt;code&gt;retainCount&lt;/code&gt; in the program to get the reference count.
+Here is the program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
+#import &amp;quot;property.h&amp;quot;
+
+void print_ref_cnt(NSObject *obj1, NSObject *obj2, void (^block)(void)) {
+    NSLog(@&amp;quot;====================&amp;quot;);
+    NSLog(@&amp;quot;Reference count of %@&amp;quot;, obj1);
+    NSLog(@&amp;quot;Before: obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    block();
+    NSLog(@&amp;quot;After : obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    NSLog(@&amp;quot;@@@@@@@@@@@@@@@@@@@@&amp;quot;);
+}
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str_assign = [NSMutableString stringWithFormat:@&amp;quot;assign&amp;quot;];
+    NSMutableString *tmp_str_copy = [NSMutableString stringWithFormat:@&amp;quot;copy&amp;quot;];
+    NSMutableString *tmp_str_retain = [NSMutableString stringWithFormat:@&amp;quot;retain&amp;quot;];
+
+    NSLog(@&amp;quot;\n\n\nAssign&amp;quot;);
+    print_ref_cnt(tmp_str_assign, property_tester.str_assign, ^(void) { property_tester.str_assign = tmp_str_assign; });
+    //print_ref_cnt(tmp_str, ^(void) { property_tester.str_assign.release; }); // Over release, seg fault
+
+    NSLog(@&amp;quot;\n\n\nCopy&amp;quot;);
+    print_ref_cnt(tmp_str_copy, property_tester.str_copy, ^(void) { property_tester.str_copy = tmp_str_copy; });
+
+    NSLog(@&amp;quot;\n\n\nRetain&amp;quot;);
+    print_ref_cnt(tmp_str_retain, property_tester.str_retain, ^(void) { property_tester.str_retain = tmp_str_retain; });
+
+    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The logic for this program is also simple, it creates three objects which will
+be used for &lt;code&gt;assign&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; separatedly, then the program will
+print out the reference count before and after invoking the setter function.
+Here is the result of the program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2013-02-09 10:18:57.058 property_ref[67671:707] 
+
+
+Assign
+2013-02-09 10:18:57.060 property_ref[67671:707] ====================
+2013-02-09 10:18:57.060 property_ref[67671:707] Reference count of assign
+2013-02-09 10:18:57.061 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.063 property_ref[67671:707] 
+
+
+Copy
+2013-02-09 10:18:57.064 property_ref[67671:707] ====================
+2013-02-09 10:18:57.064 property_ref[67671:707] Reference count of copy
+2013-02-09 10:18:57.064 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.066 property_ref[67671:707] 
+
+
+Retain
+2013-02-09 10:18:57.066 property_ref[67671:707] ====================
+2013-02-09 10:18:57.067 property_ref[67671:707] Reference count of retain
+2013-02-09 10:18:57.067 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.067 property_ref[67671:707] After : obj1: 2, obj2: 0
+2013-02-09 10:18:57.068 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.068 property_ref[67671:707] PropertyTester: 0x10b714760
+    assign: 0x10b715020, assign 
+    copy: 0x7fe234101390, copy 
+    retain: 0x10b715150, retain
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the &lt;code&gt;assign&lt;/code&gt;, the reference count for class object doesn&amp;rsquo;t change, while
+for &lt;code&gt;retain&lt;/code&gt;, the reference count increased 1 after invoking setter function,
+since the &lt;code&gt;@property&lt;/code&gt; with &lt;code&gt;retain&lt;/code&gt; will invoke &lt;code&gt;retain&lt;/code&gt; before assignment.&lt;/p&gt;
+
+&lt;h4 id=&#34;weak-and-strong:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;weak&lt;/em&gt; and &lt;em&gt;strong&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Another two attributes are &lt;code&gt;weak&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;, which is introduced from ARC
+feature. The attribute &lt;code&gt;strong&lt;/code&gt; is the same with &lt;code&gt;retain&lt;/code&gt;. While the attribute
+&lt;code&gt;weak&lt;/code&gt; is almost same with &lt;code&gt;assign&lt;/code&gt;. The minor difference between &lt;code&gt;weak&lt;/code&gt; and
+&lt;code&gt;assign&lt;/code&gt; is that the &lt;code&gt;weak&lt;/code&gt; will set object to nil after releasing, which is
+missed in &lt;code&gt;assign&lt;/code&gt; attribute.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Change font size of UITextView dynamically</title>
+      <link>http://hzmangel.github.io/post/1191/</link>
+      <pubDate>Tue, 29 Jan 2013 10:48:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1191/</guid>
+      <description>&lt;p&gt;I am working on a UITextView related problem recently, the widget, which have
+a fixed size, but need to show all content passed in. The text passed in have
+different length, so the font size should be different. The code snippet below
+will change the font size dynamically based on the text.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Set the text before setting font size
+my_text_view.text = foo_text;
+
+// Set the default font name and size
+int pre_defined_font_size = 14;
+my_text_view.font = [UIFont fontWithName:@&amp;quot;Helvetica&amp;quot; size:pre_defined_font_size];
+
+// Change the font size if needed
+if (my_text_view.contentSize.height &amp;gt; my_text_view.frame.size.height) {
+    int adjust_font_size = 1;
+    while (my_text_view.contentSize.height &amp;gt; my_text_view.frame.size.height) {
+        my_text_view.font = [UIFont fontWithName:@&amp;quot;Helvetica&amp;quot; size:pre_defined_font_size-adjust_font_size];
+        adjust_font_size++;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is a comparison between content height and frame height. If the content
+is higher than the frame, the font size will be reduced, and check again.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Show alert box in calendar operations of iOS6</title>
+      <link>http://hzmangel.github.io/post/1189/</link>
+      <pubDate>Thu, 24 Jan 2013 23:47:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1189/</guid>
+      <description>&lt;p&gt;With the new permission schema in iOS6, app should acquire authentication
+before accessing calendar. So the code for calendar operation should be
+surrounded like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EKEventStore *eventStore = [[EKEventStore alloc] init];
+EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+
+[eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    if (granted) {
+        // Calendar operation
+    }
+}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, the code for calendar operation is written in a block.&lt;/p&gt;
+
+&lt;p&gt;After the operation completed, you may want to show customer an alert box to
+say the operation is done. But, showing a UIAlertView object in block will not
+perform expected action. The reason is because of the event loop. I am still
+studying it, so will update it later.&lt;/p&gt;
+
+&lt;p&gt;The correct way to show an alert box is using &lt;code&gt;dispatch_async&lt;/code&gt; function to put
+the operation block to main queue, which looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    if (granted) {
+        // Calendar operation
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@&amp;quot;Event Added&amp;quot;
+                                  message:nil
+                                  delegate:nil
+                                  cancelButtonTitle:@&amp;quot;OK&amp;quot;
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
+
+    }
+}];
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Invoke map app in iOS app</title>
+      <link>http://hzmangel.github.io/post/1176/</link>
+      <pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1176/</guid>
+      <description>&lt;p&gt;最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&amp;ldquo;comgooglemaps://&amp;ldquo;]])
+        {
+            // iOS 6 with google map app installed
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;ldquo;comgooglemaps://?center=%f,%f&amp;rdquo;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        } else {
+            // Check whether it is iOS 6
+            Class mapItemClass = [MKMapItem class];
+            if (mapItemClass &amp;amp;&amp;amp; [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+            {
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, lng);
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+                MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+                [mapItem setName:venue_name];&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;            [mapItem openInMapsWithLaunchOptions:nil];
+        } else {
+            // Early than iOS 6
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;quot;http://maps.google.com/maps?ll=%f,%f&amp;quot;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;逻辑很简单，首先判断是否可以打开gmap app的&lt;a href=&#34;https://developers.google.com/maps/docum
+entation/ios/urlscheme&#34;&gt;URL schema&lt;/a&gt;，如果不行则试着创建iOS
+6新加入的MKMapItem，如果不能打开，则就是老的iOS了。因为只需要打开系统内建的map程序，所以就这样啦。&lt;/p&gt;
+
+&lt;p&gt;PS: MKMapItem那段程序是从网上找到的，嗯。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dismiss keyboard in UITextViewController</title>
+      <link>http://hzmangel.github.io/post/1166/</link>
+      <pubDate>Wed, 18 Jul 2012 14:43:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1166/</guid>
+      <description>&lt;p&gt;The method is collected from Internet and I just record it with my way.First create a single view project, then drag an UITextViewController, an
+UINavigationBar and an UINavigationItem into the storyboard. Link the three
+elements to the ViewController class by dragging with Ctrl key. The view
+controller should implement the UITextViewDelegate, then add some code to the
+function invoked while beginning and completing edit. This sample add one
+button on the navigation bar to dismiss the keyboard, and the button will be
+shown and hidden dynamically. Function &lt;code&gt;textViewDidBeginEditing&lt;/code&gt; and
+&lt;code&gt;textViewDidBeginEditing&lt;/code&gt; will be used to implement the feature:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (void) textViewDidBeginEditing:(UITextView *)textView {
+    UIBarButtonItem *send = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
+    self.navItem.rightBarButtonItem = send;
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    self.navItem.rightBarButtonItem = nil;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the function leaveEditMode, which will dismiss the keyboard.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- (void) leaveEditMode {
+    [self.content resignFirstResponder];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s all.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

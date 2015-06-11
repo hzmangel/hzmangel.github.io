@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Invoke map app in iOS app &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1176/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2012-12-26T11:28:34Z" />
+
+            
+                <meta property="og:article:tag" content="iOS" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Invoke map app in iOS app
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1176/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1176/'> Invoke map app in iOS app</a> </h2>
+        <div class="post-meta">发表于2012-12-26 11:28:34 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&ldquo;comgooglemaps://&ldquo;]])
+        {
+            // iOS 6 with google map app installed
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&ldquo;comgooglemaps://?center=%f,%f&rdquo;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        } else {
+            // Check whether it is iOS 6
+            Class mapItemClass = [MKMapItem class];
+            if (mapItemClass &amp;&amp; [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+            {
+                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, lng);
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+                MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+                [mapItem setName:venue_name];</p>
+
+<pre><code>            [mapItem openInMapsWithLaunchOptions:nil];
+        } else {
+            // Early than iOS 6
+            NSString *loc_path = [[NSString alloc] initWithFormat: @&quot;http://maps.google.com/maps?ll=%f,%f&quot;, lat, lng];
+            NSURL *loc_url = [NSURL URLWithString:loc_path];
+            [[UIApplication sharedApplication] openURL:loc_url];
+        }
+    }
+</code></pre>
+
+<p>逻辑很简单，首先判断是否可以打开gmap app的<a href="https://developers.google.com/maps/docum
+entation/ios/urlscheme">URL schema</a>，如果不行则试着创建iOS
+6新加入的MKMapItem，如果不能打开，则就是老的iOS了。因为只需要打开系统内建的map程序，所以就这样啦。</p>
+
+<p>PS: MKMapItem那段程序是从网上找到的，嗯。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/ios"><span class="label label-default">iOS</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1183/"> &lt; Compile Object-C program in command line </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1166/"> Dismiss keyboard in UITextViewController &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1176\/';
+    var disqus_title = 'Invoke map app in iOS app';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1176\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

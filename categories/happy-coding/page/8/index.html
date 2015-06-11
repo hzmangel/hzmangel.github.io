@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Happy Coding &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/categories/happy-coding/" />
+
+        
+            <meta property="og:type" content="website" />
+        
+
+        <title>
+            湖间小筑
+            
+                | Happy Coding
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/categories/happy-coding/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/156/'> Django出错</a> </h2>
+        <div class="post-meta">发表于2006-09-02 23:41:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include(&ldquo;)，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r&rsquo;^$&lsquo;, include(&lsquo;ilab.homepage.index&rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r&rsquo;^$&lsquo;, &lsquo;ilab.homepage.index&rsquo;), 原因嘛，嘿嘿，未知。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/148/'> 也说django</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:31:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。 btw: Apache的虚拟主机好像有点好玩，有空看看。</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/145/'> Django起来啦</a> </h2>
+        <div class="post-meta">发表于2006-08-15 12:04:19 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了 btw: 建立站点后，要到站点的目录下运行managy.py runserver</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/139/'> IE和PNG</a> </h2>
+        <div class="post-meta">发表于2006-07-02 15:20:05 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>也不知道盖茨大叔是怎么想的，IE6居然不支持PNG的透明背景，还好在网上找到了一个方法，用到了一个没见到过的滤镜，刚试了一下，效果还算不错，就把代码贴出来吧
+，方便以后查。主要起作用的是这个滤镜：</p>
+
+<p>filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&lsquo;aaa.png&rsquo;,
+sizingMethod=&lsquo;crop&rsquo;);</p>
+
+<p>由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。<br />
+首先是JavaScript的代码，用以生成HTML，以给图像加滤镜</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/139/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/112/'> My first python script</a> </h2>
+        <div class="post-meta">发表于2005-11-27 21:25:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">Yesterday, I needed a shell script to do a demo of a program, and I thought about python, so my first script was released today. But I have to say, it is useless, because I haven&rsquo;t reach my goal :( . The problem is not in the script but in the program, so the only thing I can do is to abort, although I do not want to say this word.</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/112/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/104/'> glut&#43;MinGW&#43;Windowz</a> </h2>
+        <div class="post-meta">发表于2005-10-29 19:13:11 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">Those days I have had a lot of faint things, coding with OpenGL is one of them. I do not want to use VC++ 6 as my develop environment, so I choosen the MinGW, and the IDE I use is Dev-Cpp, which is a good IDE. But in most time, I just use the MinGW environment command line to compile and execute the code, because I like it ^_^ At the beginning, I copy the code from NeHe tutorial to my Dev-Cpp project, at first the project I used is normal win32 project, so I have got a lot of errors.</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/104/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/103/'> 也说3D编程</a> </h2>
+        <div class="post-meta">发表于2005-10-28 15:01:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">这几天在看OpenGL，突然想起初中时的一些事情了，那时候学BASIC，在屏幕上输出一维和二维的数组，那时候就在想，如果把里面的那个数组换成三维的，不就可以输出三维的东西了吗。后来和边上一哥们讨论了好半天，讨论的问题是在，如果那个数组是四维的话&hellip;&hellip;..(呵呵，最后好像也没写程序验证一下)</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/102/'> OpenGL Tips</a> </h2>
+        <div class="post-meta">发表于2005-10-26 08:49:39 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); should put in the main circle, so if we change the display, the previous buffer can clear completely and the new image will draw correctly.</div>
+    </section>
+
+    
+
+</article>
+
+
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/45/'> 玩玩OpenGL</a> </h2>
+        <div class="post-meta">发表于2005-01-12 23:09:42 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">最后还是用了VC，因为大家都用的是这个，我用别的找不到人问。运行了几个例子，感觉还行。也就是考研看书看郁闷了，想玩玩别的东西吧^_^ 先写这么多，玩玩。等什么时候学到点东西再写吧，感觉现在BLOG里面堆了N多的东西，呵呵，不知道能不能学下来啊 :-)</div>
+    </section>
+
+    
+
+</article>
+
+
+
+<nav id="pager">
+    <div class="row">
+        <div class="col-md-6">
+            
+                <h4><a href="/categories/happy-coding/page/7/">上一页</a></h4>
+            
+        </div>
+
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+</nav>
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+

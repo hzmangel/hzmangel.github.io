@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" @property and its attributes &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1195/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2013-02-10T00:06:18Z" />
+
+            
+                <meta property="og:article:tag" content="iOS" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | @property and its attributes
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1195/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1195/'> @property and its attributes</a> </h2>
+        <div class="post-meta">发表于2013-02-10 00:06:18 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>Recently working on iOS project, and have met some problems while using the
+attributes of <code>@property</code>. I have searched some documents and here is my idea
+about this.### What is <code>@property</code></p>
+
+<p>So, first thing is to talk about the <code>@property</code>. This will offer a way to
+encapsulate the class. With the @synthesize keyword, the compiler will
+generate a getter and setter function for the variable. For example, there is
+a class called FooTester, which contains a variable named foo, so here is
+piece of the code:</p>
+
+<pre><code>// Definiation
+@interface FooTester : NSObject
+@property int foo;
+@end
+
+// Implementation
+@implementation PropertyTester
+@synthesize foo;
+@end
+</code></pre>
+
+<p>In this case, the compiler will generate setter and getter for variable <code>foo</code>,
+like this:</p>
+
+<pre><code>- (int) foo {
+    return foo;
+}
+
+- (void) setFoo:(int) i {
+    foo = i;
+}
+</code></pre>
+
+<p>It is really a great function, which brings lots of convenience to
+development. Also, it can accept various attributes as its parameter, which is
+describing below.</p>
+
+<h3 id="attributes-of-property:e851787095ad0b4d943bf0b89503bbd5">Attributes of <code>@property</code></h3>
+
+<p>The full syntax for @property is</p>
+
+<pre><code>@property (&lt;#attribute_list&gt;) &lt;#variable_type&gt; &lt;#variable_name&gt;
+</code></pre>
+
+<p>The attributes is used to define some behavior of the variable.</p>
+
+<h4 id="readonly-and-readwrite:e851787095ad0b4d943bf0b89503bbd5"><em>readonly</em> and <em>readwrite</em></h4>
+
+<p>As the meaning of the word, those two attributes are used to control read-
+write access of the property, while <code>readwrite</code> is the default value.</p>
+
+<h4 id="atomic-and-nonatomic:e851787095ad0b4d943bf0b89503bbd5"><em>atomic</em> and <em>nonatomic</em></h4>
+
+<p><code>atomic</code> and <code>nonatomic</code> attributes are used to indicate whether the setter
+and getter function returns the whole value of variable. With <code>atomic</code>, the
+synthesized getter and setter function will be guaranteed. For example, there
+two thread A and B, thread A is getting value in middle while thread B is
+setting value to the object. If the variable is declared with <code>atomic</code>, the
+value returned to A should be a complete one, which means there is impossible
+to return a object combines the old and new value. Most likely, the getter
+will generate a auto-release copy and then return it.</p>
+
+<p>There is no this guarantee for <code>nonatomic</code> property.</p>
+
+<p>One more thing need to be aware is the <code>atomic</code> do <em>not</em> guarantee thread
+safety. It just guarantee the variable has atomic access. For example, if
+thread A, B and C are setting the variable to different value at almost same
+time, then the value of variable is unpredictable.</p>
+
+<p>The default attribute is <code>atomic</code>, in case <code>nonatomic</code> is specified in the
+<code>@property</code> declaration. And generally speaking, in <code>nonatomic</code> case, the
+getter and setter function will a little more faster.</p>
+
+<h4 id="assign-copy-and-retain:e851787095ad0b4d943bf0b89503bbd5"><em>assign</em>, <em>copy</em> and <em>retain</em></h4>
+
+<p>Those three attributes are related to memory management, which are used for
+control behavior of setters. The <code>assign</code> attribute is a simple assignment,
+without any other operations. The <code>copy</code> attribute means the setter will
+assign the copy of the value to the object variable. The <code>retain</code> attribute
+means it will assign the pointer to the object variable.</p>
+
+<p>Hmm&hellip; It is really confusion, so let&rsquo;s write some code to make it more
+clearly.</p>
+
+<p>First, we need a class with those property type, here are the declaration and
+implementation:</p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface PropertyTester : NSObject
+
+@property (assign) NSMutableString *str_assign;
+@property (copy) NSMutableString *str_copy;
+@property (retain) NSMutableString *str_retain;
+
+@end
+</code></pre>
+
+<p>-</p>
+
+<pre><code>#import &quot;property.h&quot;
+
+@implementation PropertyTester
+
+@synthesize str_assign;
+@synthesize str_copy;
+@synthesize str_retain;
+
+@end
+</code></pre>
+
+<p>Then we have to prepare some code to test the class. I have written two simple
+code to test this class, one is focusing on the memory and the other is about
+reference count.</p>
+
+<p>Here comes the program for memory:</p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+#import &quot;property.h&quot;
+
+int main (int argc, const char * argv[])
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str = [NSMutableString stringWithFormat:@&quot;first&quot;];
+
+    property_tester.str_assign = tmp_str;
+    property_tester.str_copy = tmp_str;
+    property_tester.str_retain = tmp_str;
+
+    NSLog (@&quot;%p, %@&quot;, tmp_str, tmp_str);
+    NSLog (@&quot;%@&quot;, property_tester);
+
+    [tmp_str appendString:@&quot;second&quot;];
+
+    NSLog (@&quot;%p, %@&quot;, tmp_str, tmp_str);
+    NSLog (@&quot;%@&quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+</code></pre>
+
+<p>The logic for this program is simple. I created a <code>NSMutableString</code> object
+named <code>tmp_str</code> and assign it to three different type of property variables,
+then update the object. The information for class object will be printed out
+for examination. I have overloaded the <code>description</code> of class to show some
+internal information, so the output of the program is:</p>
+
+<pre><code>2013-02-08 16:39:14.557 property_update[66361:707] 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, first 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, first
+2013-02-08 16:39:14.580 property_update[66361:707] 0x10fa15030, firstsecond
+2013-02-08 16:39:14.581 property_update[66361:707] PropertyTester: 0x10fa11b70
+    assign: 0x10fa15030, firstsecond 
+    copy: 0x10fa14e80, first 
+    retain: 0x10fa15030, firstsecond
+</code></pre>
+
+<p>According to the screen log, the object <code>tmp_str</code> has initialized value
+<code>first</code>, while the memory address is <code>0x10fa15030</code>. After the assignment
+operations, three variables all contains the same value of <code>tmp_str</code>, but the
+memory address of <code>str_copy</code> is different with original one. Then the original
+string <code>tmp_str</code> updates its value to <code>firstsecond</code>, while the value for
+variable <code>str_assign</code> and <code>str_retain</code> has also updated, but not the
+<code>str_copy</code>.</p>
+
+<p>As mentioned above, the <code>assign</code> will do simple assignment, while <code>retain</code>
+will assign the pointer, which is shown in the screen log. The two variable
+has the same value and memory address with original string, and will be
+updated if original string updated. However, <code>copy</code> means assing a copied
+value to the property, so it contains different memory address, and will no
+update if original object updated.</p>
+
+<p>Now let&rsquo;s use another program to show difference between <code>assign</code> and
+<code>retain</code>. The prime difference between <code>assign</code> and <code>retain</code> is reference
+count, I will use <code>retainCount</code> in the program to get the reference count.
+Here is the program:</p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+#import &quot;property.h&quot;
+
+void print_ref_cnt(NSObject *obj1, NSObject *obj2, void (^block)(void)) {
+    NSLog(@&quot;====================&quot;);
+    NSLog(@&quot;Reference count of %@&quot;, obj1);
+    NSLog(@&quot;Before: obj1: %ld, obj2: %ld&quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    block();
+    NSLog(@&quot;After : obj1: %ld, obj2: %ld&quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
+    NSLog(@&quot;@@@@@@@@@@@@@@@@@@@@&quot;);
+}
+
+int main (int argc, const char * argv[]) {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+    PropertyTester *property_tester = [[PropertyTester alloc] init];
+    NSMutableString *tmp_str_assign = [NSMutableString stringWithFormat:@&quot;assign&quot;];
+    NSMutableString *tmp_str_copy = [NSMutableString stringWithFormat:@&quot;copy&quot;];
+    NSMutableString *tmp_str_retain = [NSMutableString stringWithFormat:@&quot;retain&quot;];
+
+    NSLog(@&quot;\n\n\nAssign&quot;);
+    print_ref_cnt(tmp_str_assign, property_tester.str_assign, ^(void) { property_tester.str_assign = tmp_str_assign; });
+    //print_ref_cnt(tmp_str, ^(void) { property_tester.str_assign.release; }); // Over release, seg fault
+
+    NSLog(@&quot;\n\n\nCopy&quot;);
+    print_ref_cnt(tmp_str_copy, property_tester.str_copy, ^(void) { property_tester.str_copy = tmp_str_copy; });
+
+    NSLog(@&quot;\n\n\nRetain&quot;);
+    print_ref_cnt(tmp_str_retain, property_tester.str_retain, ^(void) { property_tester.str_retain = tmp_str_retain; });
+
+    NSLog (@&quot;%@&quot;, property_tester);
+
+    [pool drain];
+    return 0;
+}
+</code></pre>
+
+<p>The logic for this program is also simple, it creates three objects which will
+be used for <code>assign</code>, <code>copy</code> and <code>retain</code> separatedly, then the program will
+print out the reference count before and after invoking the setter function.
+Here is the result of the program:</p>
+
+<pre><code>2013-02-09 10:18:57.058 property_ref[67671:707] 
+
+
+Assign
+2013-02-09 10:18:57.060 property_ref[67671:707] ====================
+2013-02-09 10:18:57.060 property_ref[67671:707] Reference count of assign
+2013-02-09 10:18:57.061 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.062 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.063 property_ref[67671:707] 
+
+
+Copy
+2013-02-09 10:18:57.064 property_ref[67671:707] ====================
+2013-02-09 10:18:57.064 property_ref[67671:707] Reference count of copy
+2013-02-09 10:18:57.064 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] After : obj1: 1, obj2: 0
+2013-02-09 10:18:57.065 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.066 property_ref[67671:707] 
+
+
+Retain
+2013-02-09 10:18:57.066 property_ref[67671:707] ====================
+2013-02-09 10:18:57.067 property_ref[67671:707] Reference count of retain
+2013-02-09 10:18:57.067 property_ref[67671:707] Before: obj1: 1, obj2: 0
+2013-02-09 10:18:57.067 property_ref[67671:707] After : obj1: 2, obj2: 0
+2013-02-09 10:18:57.068 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
+2013-02-09 10:18:57.068 property_ref[67671:707] PropertyTester: 0x10b714760
+    assign: 0x10b715020, assign 
+    copy: 0x7fe234101390, copy 
+    retain: 0x10b715150, retain
+</code></pre>
+
+<p>For the <code>assign</code>, the reference count for class object doesn&rsquo;t change, while
+for <code>retain</code>, the reference count increased 1 after invoking setter function,
+since the <code>@property</code> with <code>retain</code> will invoke <code>retain</code> before assignment.</p>
+
+<h4 id="weak-and-strong:e851787095ad0b4d943bf0b89503bbd5"><em>weak</em> and <em>strong</em></h4>
+
+<p>Another two attributes are <code>weak</code> and <code>string</code>, which is introduced from ARC
+feature. The attribute <code>strong</code> is the same with <code>retain</code>. While the attribute
+<code>weak</code> is almost same with <code>assign</code>. The minor difference between <code>weak</code> and
+<code>assign</code> is that the <code>weak</code> will set object to nil after releasing, which is
+missed in <code>assign</code> attribute.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/ios"><span class="label label-default">iOS</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1201/"> &lt; iOS Code Snippets - UITableView </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1191/"> Change font size of UITextView dynamically &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1195\/';
+    var disqus_title = '@property and its attributes';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1195\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

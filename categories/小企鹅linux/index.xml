@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小企鹅linux on 湖间小筑</title>
+    <link>http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/</link>
+    <description>Recent content in 小企鹅linux on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Sun, 03 Jul 2011 01:27:23 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Remove packages installed by setup.py install</title>
+      <link>http://hzmangel.github.io/post/999/</link>
+      <pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/999/</guid>
+      <description>&lt;p&gt;从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G
+神，在stackoverflow上找到了&lt;a href=&#34;http://stackoverflow.com/questions/1550226/python-
+setup-py-uninstall&#34;&gt;折衷的办法&lt;/a&gt;：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ python setup.py install --record foo.txt
+$ cat foo.txt | xargs rm -f
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;没找到怎么让它输出到stdout，只好用临时文件弄了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using LOCAL in the LOAD DATA SQL command</title>
+      <link>http://hzmangel.github.io/post/954/</link>
+      <pubDate>Fri, 29 Apr 2011 01:22:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/954/</guid>
+      <description>&lt;p&gt;LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE
+XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE
+XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。&lt;/p&gt;
+
+&lt;p&gt;今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD
+DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数
+&amp;ndash;local-infile=1&lt;/p&gt;
+
+&lt;p&gt;然后，就能用LOCAL了，然后就没有然后了……&lt;/p&gt;
+
+&lt;p&gt;PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Disable Arial in Chrome</title>
+      <link>http://hzmangel.github.io/post/876/</link>
+      <pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/876/</guid>
+      <description>&lt;p&gt;最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。chrome在有CSS的情况下默认使用的是CSS的设置，而google家的网页里赫然把arial写在CSS的第一位，然后呢，arial在linux下的效果那
+叫一个惨不忍睹啊（或者是我没配好），于是每次在linux下看gmail都是一种煎熬。&lt;/p&gt;
+
+&lt;p&gt;在网上转了一圈，找到了&lt;a href=&#34;http://wdicc.com/some-font-configuration-for-chrome/&#34;&gt;这篇文章&lt;/a&gt;，按着来了一下
+感觉没起啥作用，于是就去找fontconfig的配置说明，然后把匹配的字符串从字体名改成了arial之类的family名，搞定~&lt;/p&gt;
+
+&lt;p&gt;配置文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;                        Arial
+
+
+                        sans-serif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实很简单，匹配所有arial的family，然后把它换成sans-
+serif，不过这样估计系统的字体也被改掉了，反正arial在linux下看就没一个好看的，改掉就改掉吧，嘿嘿。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reuse the TIME_WAIT Port</title>
+      <link>http://hzmangel.github.io/post/618/</link>
+      <pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/618/</guid>
+      <description>&lt;p&gt;最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA
+IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会
+将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da
+emon启动错误的信息。&lt;/p&gt;
+
+&lt;p&gt;解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou
+t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中
+的东西：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo
+东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sysctl -w net.ipv4.route.flush=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。&lt;/p&gt;
+
+&lt;p&gt;话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Capital S in Linux Permission Bitmap</title>
+      <link>http://hzmangel.github.io/post/614/</link>
+      <pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/614/</guid>
+      <description>&lt;p&gt;昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是-
+rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~&lt;/p&gt;
+
+&lt;p&gt;首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我
+常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr-
+xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。&lt;/p&gt;
+
+&lt;p&gt;最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using sudo in rsh&#39;s command</title>
+      <link>http://hzmangel.github.io/post/610/</link>
+      <pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/610/</guid>
+      <description>&lt;p&gt;公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的
+把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Defaults    requiretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后说一句，最好用visudo编辑，而不要手动改~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mask Mouse on Linux</title>
+      <link>http://hzmangel.github.io/post/583/</link>
+      <pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/583/</guid>
+      <description>&lt;p&gt;最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;不显示&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的
+那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;屏蔽响应事件&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm
+ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。&lt;/p&gt;
+
+&lt;p&gt;这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo;
+可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令&lt;/p&gt;
+
+&lt;p&gt;xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。&lt;/p&gt;
+
+&lt;p&gt;就这两条命令，具体的没的细究，有空再看吧。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set local dir as yum repo</title>
+      <link>http://hzmangel.github.io/post/581/</link>
+      <pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/581/</guid>
+      <description>&lt;p&gt;新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。&lt;/p&gt;
+
+&lt;p&gt;按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下：&lt;/p&gt;
+
+&lt;p&gt;$ cat local.repo&lt;br /&gt;
+[local repo]&lt;br /&gt;
+name=Repository on lldev&lt;br /&gt;
+baseurl=file:///XXX/YYY/ZZZ&lt;br /&gt;
+enabled=1&lt;br /&gt;
+gpgcheck=0&lt;/p&gt;
+
+&lt;p&gt;需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server
+目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Auth ssh with keys</title>
+      <link>http://hzmangel.github.io/post/580/</link>
+      <pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/580/</guid>
+      <description>&lt;p&gt;每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起
+ssh连接请求的机器，S自然是服务端了…&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;S: mkdir ~/.ssh # create the directory for keys&lt;/li&gt;
+&lt;li&gt;S: chmod 700 ~/.ssh # 必需滴，要不然不起作用&lt;/li&gt;
+&lt;li&gt;C: ssh-keygen –d # generate dsa key, the type is changable&lt;/li&gt;
+&lt;li&gt;C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host&lt;/li&gt;
+&lt;li&gt;S: chmod 600 ~/.ssh/authorized_keys # 必需滴&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or
+modes云云(log文件在/var/log/secure)，当然就连不上了~&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update at 2010-09-16:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote
+host&amp;gt;，然后这个命令会做完上面的工作~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>强制umount无响应NFS分区</title>
+      <link>http://hzmangel.github.io/post/482/</link>
+      <pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/482/</guid>
+      <description>
+
+&lt;p&gt;折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。&lt;br /&gt;
+直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：&lt;br /&gt;
+`# fuser -km /mnt/dir&lt;/p&gt;
+
+&lt;h1 id=&#34;umount-f-mnt-dir:49a2bdae285b9bbbddd90f01e10b75f2&#34;&gt;umount -f /mnt/dir`&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Updated at 2011-01-11&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;唔，在网上又找到了一个办法&lt;/p&gt;
+
+&lt;p&gt;umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy
+now, and cleanup all references to the filesystem as soon as it is not busy
+anymore.&lt;/p&gt;
+
+&lt;p&gt;试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linux下的十六进制编辑器</title>
+      <link>http://hzmangel.github.io/post/379/</link>
+      <pubDate>Sat, 03 Jan 2009 20:45:48 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/379/</guid>
+      <description>&lt;p&gt;关键字： Linux, hex editor, cli&lt;/p&gt;
+
+&lt;p&gt;折腾东西，需要找一个命令行下的十六进制编辑器，最后在&lt;a href=&#34;http://ox0spy.blogspot.com/2008/02/linux_27.h
+tml&#34;&gt;这篇文章&lt;/a&gt;中找到了办法。其实就是在用xxd看了，编辑完后，用xxd -r命令把它给恢复回去，然后再写回文件就行了，嗯。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim file
+:%!xxd
+...
+edit
+...
+:%!xxd -r
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>在Moin中使用pygments</title>
+      <link>http://hzmangel.github.io/post/372/</link>
+      <pubDate>Thu, 18 Dec 2008 19:22:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/372/</guid>
+      <description>&lt;p&gt;关键字： MoinMoin, pygments&lt;/p&gt;
+
+&lt;p&gt;想给自己的东西分个类，于是又一次架起了MoinMoin，不满足于里面自带的parser，想起来了pygments好像有对MoinMoin的支持，于是乎就去找
+了。&lt;/p&gt;
+
+&lt;p&gt;找到了结果，其实很简单，把pygments的external文件夹下的一个文件拷到自己wiki的data/plugin/parser下，然后改成你想要的名字
+（如code.py）就可以了，然后写代码就包在{{{}}}块中，然后加上#!code
+&amp;lt;foobar&amp;gt;，以告诉它用那个东西处理，处理的语言是foobar，然后记得把css加到想要的地方就行了，嗯。&lt;/p&gt;
+
+&lt;p&gt;很简单，但是比原来的好看多了，不过还是要把它CSS中pre的默认字体改一下，嗯。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>BLUG - Coding4fun</title>
+      <link>http://hzmangel.github.io/post/368/</link>
+      <pubDate>Sat, 29 Nov 2008 22:24:12 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/368/</guid>
+      <description>&lt;p&gt;关键字： coding, fun, exoweb, BLUG&lt;/p&gt;
+
+&lt;p&gt;对BLUG的这项活动，早就有所耳闻，也一直很想去体验一下，于是今天就去了。&lt;/p&gt;
+
+&lt;p&gt;活动是11点开始，早上9点多出门的，本来以为可以轻松在规定时间内赶到，结果郁闷的事情再次发生了，我又迷路了。在问了N多人后终于找到了正确的方向，期间走过的冤
+枉路就不说了，因为太多了，后来为了赶时间，尽管气喘吁吁了还是在一路狂蹬，居然在某处飚到了44kmh的速度。本来是去Coding4Fun的，结果先来了段Cra
+sy4Finding。其实更郁闷的是，当我赶上楼的时候，居然只来了三个人，而且大门还没开，FT啊FT。注，本文纯流水，嗯。等了一会进门了，门开的迟的原因是因为Exoweb的帅哥感冒了，bless一下。话说exoweb在二楼的新办公室不知道是在我那次去面试后新弄的还是原来就有，感
+觉很不错，诶，看着那环境就眼馋，呵呵。其实上次面试的时候就开始眼馋，只是现在更眼馋而已了。&lt;/p&gt;
+
+&lt;p&gt;言归正传，开始人不是很多，在Pockey的提议下先来了轮自我介绍，过程中有人陆陆续续的到来，差不多的时候开始了正式的自我介绍，由于在场有老外，所以能用鸟语的
+就用鸟语了，不过好像大家用的都是鸟语，呵呵。然后就是等着订的饭送过来，在这期间先是折腾Exoweb的无线网络，折腾了好半天才能上，然后就是去骚扰Quadco
+pter的两个帅哥，听听他们讲Quadcopter，又把我的瘾给勾起来了，呵呵，不过只能有空看了吧。一是资金，二是时间，诶~~~~&lt;/p&gt;
+
+&lt;p&gt;吃完午饭，开始折腾自己的blog，不停的吃零食，不停的闲聊，就是没咋开始写程序，最后晚上看看，好像就写了20来行代码，还是HTML的，呵呵，有些汗啊。&lt;/p&gt;
+
+&lt;p&gt;总结一下，活动很好玩，嗯，不过感觉主要还是去和别人交流的，而不是自己一个人闷头写程序，这次这方面做的不够，下次再说。话说，下次应该不会再迷路了吧，NND。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>在Django的模板中使用m2m</title>
+      <link>http://hzmangel.github.io/post/366/</link>
+      <pubDate>Sat, 22 Nov 2008 02:57:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/366/</guid>
+      <description>&lt;p&gt;关键字： django, many-to-many, template, m2m&lt;/p&gt;
+
+&lt;p&gt;最近在写自己的blog系统，自然就想到加上了tags。在我的数据库中，把tag扔在一个单独的表Tags中，然后在Articles表中有一个字段以m2m的关系
+连到Tags表中。已经把post, list等页面写完了，但是在写detail的时候，发现如果直接用article.tags引用，模板系统会报m2m的对象不
+能遍历的错，放狗找了一圈才知道需要使用article.tags.all作为for遍历的变量集，剩下的没啥说的了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>root可写NFS目录</title>
+      <link>http://hzmangel.github.io/post/365/</link>
+      <pubDate>Wed, 19 Nov 2008 11:13:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/365/</guid>
+      <description>&lt;p&gt;关键字： root, NFS, 权限&lt;/p&gt;
+
+&lt;p&gt;最近在挂NFS，root默认在里面没权限。因为默认会加上root_squash选项，这个选项的含义就是把客户机上的root映射为服务器端的nobody用户，
+所以自然就没有权限了，解决方案也很简单，加上no_root_squash即可，这个选项表示不把root映射为nobody，自然在那边就还是root了，ove
+r。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

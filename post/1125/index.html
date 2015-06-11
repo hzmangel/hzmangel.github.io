@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" RoR learning log (2) &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1125/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2012-05-07T23:57:16Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="rails" />
+            
+                <meta property="og:article:tag" content="ruby" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | RoR learning log (2)
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1125/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1125/'> RoR learning log (2)</a> </h2>
+        <div class="post-meta">发表于2012-05-07 23:57:16 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.</p>
+
+<p>Here is <a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)</a>According to the requirements, the length of ToDo account should less than 100
+characters and the status of ToDo can only be chosen from 0 or 1, so some
+validator should be added to the model. With the validator, the model code
+should be looked like:</p>
+
+<pre><code>STATUS_OPTION = [0, 1]
+
+class ToDo &lt; ActiveRecord::Base
+  attr_accessible :content, :status
+  validates :content, :presence =&gt; true,
+                      :length =&gt; { maximum: 100 }
+  validates :status, :presence =&gt; true,
+                     :numericality =&gt; { :only_integer =&gt; true },
+                     :inclusion =&gt; { :in =&gt; STATUS_OPTION }
+end
+</code></pre>
+
+<p>Statements started with <code>validates</code> keyword are validator. The available
+condition list can be checked at <a href="http://guides.rubyonrails.org/active_record_validations_callbacks.html">this
+page</a>.
+If the value passed in break the rule, the error message will be shown in the
+page.</p>
+
+<p>With the validators, the value saved can be guaranteed to be correct. But
+seems radio box or drop down box is better than the text field, so we plan to
+modify the template page. The template is placed under <code>app/views/to_dos</code>
+directory, which is a HTML file with some template control commands. By
+default, when viewing the URL http://[address]/index, the template with the
+same name, index.html.erb, will be rendered. The generated form is saved in
+file <code>_form.html.erb</code>, the default type of status is <code>number_field</code>, which
+should be updated to <code>select</code>. The document for <code>select</code> is <a href="http://api.
+rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#M001593">here</a>,
+according the document, the option list should be provided, and here we can
+use the constant <code>STATUS_OPTION</code> defined in model file. Here is the updated
+<code>status</code> field in the form object:</p>
+
+<pre><code>  &lt;%= f.label :status %&gt;  
+
+  &lt;%= f.select :status, ToDo::STATUS_OPTION %&gt;
+</code></pre>
+
+<p>The form type will change from text field to drop down menu after updating the
+form.</p>
+
+<p>Congratulations, a simple ToDo application has been worked out. It is a very
+simple application, which do not contain the static files, user
+authentication, unit test and so on. In next step, I plan to re-write the
+<a href="http://www.linuxfb.org">linuxfb</a> website with more better structure, hope can
+touch more features in RoR.</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/rails"><span class="label label-default">rails</span></a></li>  <li><a href="/tags/ruby"><span class="label label-default">ruby</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1133/"> &lt; Deploy RoR application with Nginx </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1113/"> RoR learning log (1) &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1125\/';
+    var disqus_title = 'RoR learning log (2)';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1125\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

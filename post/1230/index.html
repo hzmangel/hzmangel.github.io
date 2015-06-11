@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" goroutines &#43; channel &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1230/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2014-02-17T01:40:16Z" />
+
+            
+                <meta property="og:article:tag" content="golang" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | goroutines &#43; channel
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1230/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a> </h2>
+        <div class="post-meta">发表于2014-02-17 01:40:16 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p><code>channel</code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。<code>channel</code>是需要和<code>goroutines</code>一起使用的。</p>
+
+<h3 id="goroutines:c6debf44b3ea0c5c4c8edcf6064ff030">goroutines</h3>
+
+<p>先说<code>goroutines</code>吧。golang的并行模型使用的是<strong>CSP</strong>（官方的说法是Newsqueak-Alef-Limbo，和原始的CSP有一些区别
+。具体的差别还没有细查。参见<a href="http://talks.golang.org/2012/concurrency.slide#10">此张幻灯片</a> ），<code>go
+routines</code>是一个独立运行的函数，不是进程也不是线程。它在被调用或者说被启动后直接返回，而不用等待函数运行结束。这是官方对它的一段<a href="htt
+p://talks.golang.org/2012/concurrency.slide#17">简要介绍</a></p>
+
+<ul>
+<li>What is a goroutine? It&rsquo;s an independently executing function, launched by a go statement.</li>
+<li>It has its own call stack, which grows and shrinks as required.</li>
+<li>It&rsquo;s very cheap. It&rsquo;s practical to have thousands, even hundreds of thousands of goroutines.</li>
+<li>It&rsquo;s not a thread.</li>
+<li>There might be only one thread in a program with thousands of goroutines.</li>
+<li>Instead, goroutines are multiplexed dynamically onto threads as needed to keep all the goroutines running.</li>
+<li>But if you think of it as a very cheap thread, you won&rsquo;t be far off.</li>
+</ul>
+
+<p><code>goroutines</code>使用<code>go</code>关键字来创建，创建完后就自己蹲一边运行去了，主程序也不用理它，自己往下走就行。光看文字太枯燥，读程序看输出吧。</p>
+
+<pre><code>package main
+
+import &quot;fmt&quot;
+import &quot;time&quot;
+
+func main() {
+     fmt.Println(&quot;START 1&quot;)
+     for i := 0; i &lt; 3; i++ {
+          foo(i)
+     }
+     fmt.Println(&quot;END 1&quot;)
+
+     fmt.Println(&quot;START 2&quot;)
+     for i := 0; i &lt; 3; i++ {
+          go foo(i)
+     }
+     fmt.Println(&quot;END 2&quot;)
+
+     time.Sleep(1 * time.Second)
+}
+
+func foo(i int) {
+     time.Sleep(1)
+     fmt.Printf(&quot;Call index: %d\n&quot;, i)
+}
+</code></pre>
+
+<p>程序的输出是这样的：</p>
+
+<pre><code>START 1
+Call index: 0
+Call index: 1
+Call index: 2
+END 1
+START 2
+END 2
+Call index: 0
+Call index: 2
+Call index: 1
+</code></pre>
+
+<p>代码中，main函数中用了两个循环，分别调用了3次foo()函数，但是两次调用的方式不同，第一次是直接调用，第二次是使用了<code>goroutine</code>。从输出看，
+前段输出是正常的顺序，但是从后一段输出可以看到，函数调用是立即返回的，而且最后输出的顺序也是不固定的（3次可能看到的效果比较一致，如果把循环次数涨到10次就
+能看的比较明显了）。在第19行加上sleep的原因是因为main函数在执行完成后会直接退出，不会等待所有<code>goroutines</code>执行完毕，所以此处需要让程序
+等一等。不方便在本机运行的可以<a href="http://play.golang.org/p/8BT6RVR7-w">见这里</a></p>
+
+<h3 id="channel:c6debf44b3ea0c5c4c8edcf6064ff030">channel</h3>
+
+<p>拿sleep来不让main函数退出也不是个事，毕竟时间不好控制，睡多了睡少了都不行，所以这里就引入了<code>channel</code>。</p>
+
+<p>就像文章开头说的，<code>channel</code>就像是一个Semaphore或者FIFO的东西，更通俗的理解就是一条传送带或者管道，用于在<code>goroutines</code>之间传
+递消息。把上面的程序改一下（顺序调用的那个就先去掉了，减少长度，嗯）：</p>
+
+<pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+
+    foo_channel := make(chan string)
+    channel_cnt := 3
+
+    fmt.Println(&quot;Start launching goroutines&quot;)
+    for i := 0; i &lt; channel_cnt; i++ {
+        go foo(i, foo_channel)
+    }
+    fmt.Println(&quot;Finish launching goroutines&quot;)
+
+    for i := 0; i &lt; channel_cnt; i++ {
+        fmt.Println(&lt;-foo_channel)
+    }
+
+}
+
+func foo(i int, foo_channel chan string) {
+    s := fmt.Sprintf(&quot;Call index %d&quot;, i)
+    foo_channel &lt;- s
+}
+</code></pre>
+
+<p>输入是介样的：</p>
+
+<pre><code>Start launching goroutines
+Finish launching goroutines
+Call index 0
+Call index 1
+Call index 2
+</code></pre>
+
+<p>在这个程序里面，没有使用<code>sleep</code>，程序也做到了等待所有<code>goroutines</code>运行完毕才退出这个需求，就是靠的main函数最后几行。blog上不知道为
+啥没有行号了，程序<a href="http://play.golang.org/p/FzHuVttKnB">见这里吧</a>。在第7行的时候创建了一个<code>channel</code>，并把它
+传入了<code>foo()</code>函数中。而<code>foo()</code>函数也不像上一次那样直接输出一个字符串，它把需要输出的字符串放到一个string中，然后通过<code>channel</code>传
+了回来。这条语句：</p>
+
+<pre><code>foo_channel &lt;- s
+</code></pre>
+
+<p>做的就是把字符串放到channel中去，而这条语句：</p>
+
+<pre><code>fmt.Println(&lt;-foo_channel)
+</code></pre>
+
+<p>做的就是把字符串从channel中取出来，并把它输出。在执行<code>&lt;-channel</code>时，如果<code>channel</code>上没有数据，这条语句是被blocked的，这样就
+能保证main函数在所有goroutines执行完毕前不会退出。而且当channel中有值而且没有被读出的时候，对这个channel的写操作也是被block
+ed的。这时的channel，可以用来做Semaphore。</p>
+
+<p>上面介绍的channel是没有缓存的，golang中还有一种channel是可以加上缓存的，<a href="htt
+p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是Erlang的mailboxes</a>，因为不懂Erlang，所以只好把话贴在这以后两手一摊。目前
+在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于<code>select</code>的文章，目前时间未定，因为还没用到～</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/golang"><span class="label label-default">golang</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1233/"> &lt; Golang and JSON API </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1224/"> Save base64 image with carrierwave and bootstrap-wysiwyg &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1230\/';
+    var disqus_title = 'goroutines \x2b channel';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1230\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

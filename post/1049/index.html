@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Simple Life Game in HTML5 &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/1049/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2011-11-29T02:13:59Z" />
+
+            
+                <meta property="og:article:tag" content="javascript" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Simple Life Game in HTML5
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/1049/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1049/'> Simple Life Game in HTML5</a> </h2>
+        <div class="post-meta">发表于2011-11-29 02:13:59 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>想着好久没写blog了，刚好在看<a title="计算中的上帝-豆瓣" href="http://book.douban.com/subject/1140726/" target="_blank">计算中的上帝</a>时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。先说说HTML5。看过一堆HTML5的应用，也想着自己做一些东西出来，挑来捡去最后还是选中的Canvas，可能还是对音视频不是十分感冒吧。Canvas是HTML5中新加的一个元素，主要作用就是在网页上直接画画。Canvas是一个矩形的区域，可以通过JavaScript程序控制上面的每一个像素。个人感觉和普通的GUI程序十分类似。</p>
+
+<p>下面是Life Game，wiki链接<a title="GameOfLife" href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">在此</a>。这是一个零玩家游戏，其实它就是一个简单的状态机。在一个点阵中，每个点都有0, 1两种状态，分别表示这个点的死与生。某个点的下一步的状态由它周围的8个点决定。周围的点数过多或者过少都会造成此点的死亡（生命是多么的不容易啊~）。规则很简单，只有4条，但是由这4条规则可以演化出许多好玩的东西，据说如果时间够长的话，可以看到从混沌到有序这一神奇的过程，唔，我是还没看到大规模有序的出现，以后再说吧~</p>
+
+<p>至于算法&hellip;..就是拿JS写了个最简单的，把所有状态存放在一个二维数组中，每一步去遍历这个数组，然后根据周边点的状态决定被遍历点下一步该是生还是灭。很暴力的直接循环了，三年前的小破本T61还是能跑的起来的，嗯~</p>
+
+<p>目前程序的初始状态是随机生成5e4个点放在Canvas中，以后如果有空的话，会考虑从本地文件中载入点的座标以及存储点到本地文件中，可以以后接着算，据说HTML5有对本地存储据做支持，就当继续学吧。</p>
+
+<p>网页的地址在 <a href="http://www.hzmangel.info/html5/life/life.html">http://www.hzmangel.info/html5/life/life.html</a> ，start开始跑，stop停止，每刷新一次会重新生成一堆随机点。size表示点的边长，最小值是2吧，其实算是在程序里面hard code的了，下面那个speed是每一步的时间，如果有更改记得改完后点update。程序是用HTML5(Canvas+FormWidget)+CSS3(圆角框)+WebFonts(G家的服务)弄的，所以请自行选择靠谱的浏览器和网络环境~</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/javascript"><span class="label label-default">javascript</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/1052/"> &lt; List all CVS tags </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/1035/"> Blocking/Non-Blocking IO and SYN/ASYN IO &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/1049\/';
+    var disqus_title = 'Simple Life Game in HTML5';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/1049\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

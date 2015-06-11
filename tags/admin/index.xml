@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Admin on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/admin/</link>
+    <description>Recent content in Admin on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Wed, 05 May 2010 15:08:38 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/admin/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reuse the TIME_WAIT Port</title>
+      <link>http://hzmangel.github.io/post/618/</link>
+      <pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/618/</guid>
+      <description>&lt;p&gt;最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA
+IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会
+将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da
+emon启动错误的信息。&lt;/p&gt;
+
+&lt;p&gt;解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou
+t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中
+的东西：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo
+东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sysctl -w net.ipv4.route.flush=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。&lt;/p&gt;
+
+&lt;p&gt;话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using sudo in rsh&#39;s command</title>
+      <link>http://hzmangel.github.io/post/610/</link>
+      <pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/610/</guid>
+      <description>&lt;p&gt;公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的
+把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Defaults    requiretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后说一句，最好用visudo编辑，而不要手动改~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>强制umount无响应NFS分区</title>
+      <link>http://hzmangel.github.io/post/482/</link>
+      <pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/482/</guid>
+      <description>
+
+&lt;p&gt;折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。&lt;br /&gt;
+直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：&lt;br /&gt;
+`# fuser -km /mnt/dir&lt;/p&gt;
+
+&lt;h1 id=&#34;umount-f-mnt-dir:49a2bdae285b9bbbddd90f01e10b75f2&#34;&gt;umount -f /mnt/dir`&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Updated at 2011-01-11&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;唔，在网上又找到了一个办法&lt;/p&gt;
+
+&lt;p&gt;umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy
+now, and cleanup all references to the filesystem as soon as it is not busy
+anymore.&lt;/p&gt;
+
+&lt;p&gt;试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无密码rsh</title>
+      <link>http://hzmangel.github.io/post/328/</link>
+      <pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/328/</guid>
+      <description>&lt;p&gt;最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：&lt;span style=&#34;font-family: &#39;Courier New&#39;;&#34;&gt;/etc/hosts.equiv&lt;/span&gt;和家目录下的&lt;span style=&#34;font-family: &#39;Courier New&#39;;&#34;&gt;.rhosts&lt;/span&gt;文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

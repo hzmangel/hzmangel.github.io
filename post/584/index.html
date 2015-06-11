@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Simple Process with Mercurial Build-in Server &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/584/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2010-03-10T21:54:02Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="tools" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Simple Process with Mercurial Build-in Server
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/584/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/584/'> Simple Process with Mercurial Build-in Server</a> </h2>
+        <div class="post-meta">发表于2010-03-10 21:54:02 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带
+的web服务器。首先在远端某个目录里面新建一个Hg版本库</p>
+
+<pre><code>hg init
+</code></pre>
+
+<p>然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口</p>
+
+<pre><code>hg serve -p3456
+</code></pre>
+
+<p>然后在本地就可以找个目录直接把那边的东西拷过来了</p>
+
+<pre><code>hg clone &lt;host&gt; &lt;local_dir&gt;
+</code></pre>
+
+<p>使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。</p>
+
+<pre><code>[paths]
+default = &lt;host&gt;:&lt;port&gt;
+</code></pre>
+
+<p>在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log</p>
+
+<pre><code>hg ci &lt;-m &quot;log message&quot;&gt;
+</code></pre>
+
+<p>在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使
+用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行</p>
+
+<pre><code>[web]
+push_ssl = false
+allow_push = *
+</code></pre>
+
+<p>根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要
+指定url参数（嗯，适合我这种懒人）。</p>
+
+<pre><code>hg push &lt;url&gt;
+</code></pre>
+
+<p>在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令</p>
+
+<pre><code>hg up
+</code></pre>
+
+<p>然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。</p>
+
+<pre><code>hg pull &lt;url&gt;
+</code></pre>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/tools"><span class="label label-default">tools</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/593/"> &lt; Translate errno to error string </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/583/"> Mask Mouse on Linux &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/584\/';
+    var disqus_title = 'Simple Process with Mercurial Build-in Server';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/584\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

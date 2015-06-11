@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" 初用 Google App Engine &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/268/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2008-04-09T00:27:00Z" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="python" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | 初用 Google App Engine
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/268/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/268/'> 初用 Google App Engine</a> </h2>
+        <div class="post-meta">发表于2008-04-09 00:27:00 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep
+3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。<br />
+下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he
+lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：</p>
+
+<pre><code>application: sonic
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /.*
+  script: helloworld.py
+</code></pre>
+
+<p>version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han
+dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用
+了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。</p>
+
+<p>然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。</p>
+
+<pre><code>print 'Content-Type: text/plain'
+print ''
+print 'Hello, world!'
+</code></pre>
+
+<p>反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务
+了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。</p>
+
+<pre><code>import wsgiref.handlers
+from google.appengine.ext import webapp
+
+class MainPage(webapp.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.out.write('Hello, webapp World!')
+
+def main():
+    application = webapp.WSGIApplication([('/', MainPage)], debug=True)
+    wsgiref.handlers.CGIHandler().run(application)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+
+<p>在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP
+GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。</p>
+
+<p>最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传
+，输入邮箱，密码啥的。然后就可以通过 http://.appspot.com/ 访问了。满好玩的，继续折腾。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/python"><span class="label label-default">python</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/270/"> &lt; 在 App Engine 中使用模板和静态文件 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/267/"> Python取当前循环次数 &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/268\/';
+    var disqus_title = '初用 Google App Engine';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/268\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

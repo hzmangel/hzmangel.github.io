@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Use TaobaoAPI in SAE &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/879/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2011-03-13T16:07:18Z" />
+
+            
+                <meta property="og:article:tag" content="php" />
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Use TaobaoAPI in SAE
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/879/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+
+
+<section>
+    <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/879/'> Use TaobaoAPI in SAE</a> </h2>
+        <div class="post-meta">发表于2011-03-13 16:07:18 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。</p>
+
+<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。在论坛上逛了逛发现主要用到的就是这个框架里的autoloader的功能，就是可以把指定目录下的文件load进来。把脑子里那仅有的一点PHP的知识过一遍后，觉得可以用require来折腾它，于是就开工。</p>
+
+<p>最后的结果是成功的，至少到目前为止我需要的功能都能干活，方法就是用一堆 require() 替代 TopSdk.php 文件的内容，然后把lotus的框架目录删了。当然，在top/TopClient.php 中有一些log相关的东西也用到了这个框架，所以也需要注释掉。</p>
+
+<p>目前发现最大的不方便就是，出错的话在log查不到了，以我的PHP的水平，只能在网页里面print了……</p>
+
+<p>PS: 淘宝店铺上传的限制有点小，一天只让上传100个，不知道是不是和店铺的等级有关</p>
+
+<p>PS2: 木有SAE的邀请码，嗯。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/php"><span class="label label-default">php</span></a></li>  <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                 <a class="previous" href="http://hzmangel.github.io/post/882/"> &lt; 散伙 &amp;&amp; 饭 &amp;&amp; 酒 </a> 
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/876/"> Disable Arial in Chrome &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'hzmangel';
+    var disqus_identifier = 'http:\/\/hzmangel.github.io\/post\/879\/';
+    var disqus_title = 'Use TaobaoAPI in SAE';
+    var disqus_url = 'http:\/\/hzmangel.github.io\/post\/879\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</section>
+
+<aside>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Base64 on 湖间小筑</title>
+    <link>http://hzmangel.github.io/tags/base64/</link>
+    <description>Recent content in Base64 on 湖间小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>Copyright - ©2015 - hzmangel</copyright>
+    <lastBuildDate>Sun, 01 Dec 2013 15:03:37 +0000</lastBuildDate>
+    <atom:link href="http://hzmangel.github.io/tags/base64/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
+      <link>http://hzmangel.github.io/post/1224/</link>
+      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1224/</guid>
+      <description>
+
+&lt;h3 id=&#34;tl-dr:5ab4430131db8e4e631503ef790e7c02&#34;&gt;tl;dr&lt;/h3&gt;
+
+&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.&lt;/p&gt;
+
+&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
+repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next is the full version.### The problem&lt;/p&gt;
+
+&lt;p&gt;Recently I have faced a task to upload a image by a rich format text editor.
+The web server is Rails, so I selected
+&lt;a href=&#34;https://github.com/carrierwaveuploader/carrierwave&#34;&gt;carrierwave&lt;/a&gt; as the
+upload gem, and &lt;a href=&#34;http://mindmup.github.io/bootstrap-
+wysiwyg/&#34;&gt;bootstrap-wysiwyg&lt;/a&gt; as rich format text editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bootstrap-wysiwyg&lt;/code&gt; supports inserting image into edit area, and uploaded
+image via base64. Every thing is okay in development enviromnent, but I have
+met problem while deploying to production server.&lt;/p&gt;
+
+&lt;p&gt;The root cause of the problem is response size exceed the max limitation. The
+uploaded base64 encoded image are saved as string, and will be returned in
+response body. I have tried increasing response body size limitation but take
+no effect, so I switched to method that saving image to file.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution:5ab4430131db8e4e631503ef790e7c02&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;This section only shows how to get image and save via carrierwave, please
+refer to the source of the other contents.&lt;/p&gt;
+
+&lt;p&gt;The sample project is a simple post manage system, each post contains &lt;code&gt;title&lt;/code&gt;
+and &lt;code&gt;content&lt;/code&gt; field, and the &lt;code&gt;content&lt;/code&gt; field is rich format text.&lt;/p&gt;
+
+&lt;p&gt;The passed in base64 encoded image is started with this string:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;data:image/jpeg;base64,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then following the image data.&lt;/p&gt;
+
+&lt;p&gt;The image uploaded is surrounded by &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag, so I added a pre processing
+to the content uploaded. The logic is simple: save found &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag to a file
+with carrierwave, and replace the base64 data to file path. The primary code
+is here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def process_base64_content content
+  return if content.nil?
+  return content if not content.match /&amp;lt;/
+  rslt = &#39;&#39;
+  content.split(&amp;quot;&amp;lt;&amp;quot;).each do |elem_str|
+    if elem_str[0..2] == &amp;quot;img&amp;quot;
+      if elem_str.match(%r{data:(.*?);(.*?),(.*?)&amp;quot;&amp;gt;$})
+        img_data = {
+          :type =&amp;gt;      $1, # &amp;quot;image/png&amp;quot;
+          :encoder =&amp;gt;   $2, # &amp;quot;base64&amp;quot;
+          :data_str =&amp;gt;  $3, # data string
+          :extension =&amp;gt; $1.split(&#39;/&#39;)[1] # &amp;quot;png&amp;quot;
+        }
+
+        other_img = PostImage.new
+        img_data_str = img_data[:data_str]
+        img_data_sio = CarrierStringIO.new(Base64.decode64(img_data_str))
+        other_img.image = img_data_sio
+        other_img.save
+        rslt += view_context.image_tag(other_img.image.url)
+      else
+        rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+      end
+    else
+      rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
+    end
+  end
+
+  rslt
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;PostImage&lt;/code&gt; is a model used for saving image. &lt;code&gt;CarrierStringIO&lt;/code&gt; is also a user
+defined class to provide functions &lt;code&gt;original_filename&lt;/code&gt; and &lt;code&gt;content_type&lt;/code&gt;,
+which are required by &lt;code&gt;carrierwave&lt;/code&gt;. Here is the definition of this class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CarrierStringIO &amp;lt; StringIO
+  def original_filename
+    # the real name does not matter
+    &amp;quot;image.jpeg&amp;quot;
+  end
+
+  def content_type
+    # this should reflect real content type, but for this example it&#39;s ok
+    &amp;quot;image/jpeg&amp;quot;
+  end
+end
+
+class PostImage
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  def image_data=(data)
+    sio = CarrierStringIO.new(Base64.decode64(data))
+    self.image = sio
+  end
+
+  mount_uploader :image, PostImageUploader
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last thing is the carrierwave uploader: &lt;code&gt;PostImageUploader&lt;/code&gt;. This is a
+simple uploader that only save the image to file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: utf-8
+
+class PostImageUploader &amp;lt; CarrierWave::Uploader::Base
+
+  storage :file
+
+  def store_dir
+    &amp;quot;uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}&amp;quot;
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the sample project, the file type and file name are hard coded in
+&lt;code&gt;CarrierStringIO&lt;/code&gt;, please feel free to modify code as needed.&lt;/p&gt;
+
+&lt;p&gt;Note: There is an bug of the code: The image can&amp;rsquo;t be extracted out if
+inserted into a text paragraph. I will fix this once I have time.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
