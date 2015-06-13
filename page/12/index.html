@@ -23,6 +23,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
+
         <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
 
         
@@ -59,6 +62,22 @@
 
 <div class="row">
     <div class="col-md-9">
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/361/'> sed打印替换后的内容</a> </h2>
+        <div class="post-meta">发表于2008-11-10 14:38:25 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： sed, text process 一个文件，首先需要将某一特定行中的一些字符给删除，然后再将删除后的这一行内容打印出来，也不知道自己发什么神经不想用管道，反正在放狗N分钟后得到如下结果： sed -n 's/^hostname:[ \t]*\(.*\)/\1/p' conf.ini 首先让sed进入安静模式，然后正则查找，把找到的那个东西\1打印出来，本来老想着先查找，再p，再替换，所以总是走不通。没想到s//后面还能跟p，真像那个ma n手册里面说的一样，sed的瑞士军刀啊。</div>
+    </section>
+
+    
+
+</article>
+
         
             <article class="post">
 
@@ -239,22 +258,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/351/'> 配置crontab</a> </h2>
-        <div class="post-meta">发表于2008-10-10 10:16:14 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： crontab crontab -e编辑当前用户的crontab，这个应该没啥说的了，设置环境变量EDITOR可以更改编辑crontab的编辑器。 文件里面就是一行算是一个任务，前面5列是执行的时间，分别是 分 时 日 月 星期，在man 5 crontab里面能看到允许的值。如果是 * 则表示是所有值。然后就是这样了，如果我有一个任务需要每天的10点运行，则就写成 0 10 * * * XXX ，如果要每2小时跑一次，可以写成 0 */2 * * * XXX 。 还要说一下最后运行的那个命令，它会新开一个进程跑，那个进程只有USER, HOME, SHELL这三个环境变量，所以写命令的时候需要考虑到这一点。 下面，没有了&hellip;&hellip;</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -282,6 +285,8 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/post-title/'> Blog搬(zhe)家(teng)记</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
@@ -289,8 +294,6 @@
             <li><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1220/'> Ajax loading multi series to jqPlot</a></li>
         
         </ul>
     </div>
@@ -311,7 +314,7 @@
         
             <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
         
-            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(139)</li>
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
         
             <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
         
@@ -347,6 +350,10 @@
 
         <script src="http://code.jquery.com/jquery-git2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
         <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

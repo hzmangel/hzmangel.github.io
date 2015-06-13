@@ -7,8 +7,94 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 13 Mar 2011 23:07:01 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog搬(zhe)家(teng)记</title>
+      <link>http://hzmangel.github.io/post/post-title/</link>
+      <pubDate>Sat, 13 Jun 2015 11:36:18 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/post-title/</guid>
+      <description>
+
+&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
+
+&lt;p&gt;当初想把blog搬家的主要需求也就下面这些：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;能用Markdown写。除了写着舒服外，这不是还能装13嘛～&lt;/li&gt;
+&lt;li&gt;之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。&lt;/li&gt;
+&lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Hugo&lt;/h2&gt;
+
+&lt;p&gt;最开始的时候也想着用 &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 或者 &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt; ，但是在转换的时候，发现有些&lt;code&gt;Latex&lt;/code&gt;的代码中的行末注释&lt;code&gt;{%&lt;/code&gt;会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&amp;hellip;&amp;hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。&lt;/p&gt;
+
+&lt;h2 id=&#34;wp2hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;wp2hugo&lt;/h2&gt;
+
+&lt;p&gt;敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， &lt;a href=&#34;https://github.com/jekyll/jekyll-import&#34;&gt;Jekyll Import&lt;/a&gt; ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&amp;hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： &lt;a href=&#34;https://github.com/hzmangel/wp2hugo&#34;&gt;wp2hugo&lt;/a&gt; 。这货主要干的事情是：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;解析Wordpress导出的XML文件。&lt;/li&gt;
+&lt;li&gt;将站点信息存到&lt;code&gt;config.yaml&lt;/code&gt;中。&lt;/li&gt;
+&lt;li&gt;将文章存放到带有元信息的Markdown文件中（使用 &lt;a href=&#34;https://pypi.python.org/pypi/html2text&#34;&gt;html2text&lt;/a&gt; 将原来的HTML内容转成Markdown ），使用 &lt;strong&gt;post id&lt;/strong&gt; 作为文件名。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。&lt;/p&gt;
+
+&lt;h2 id=&#34;twenty-ten:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Twenty Ten&lt;/h2&gt;
+
+&lt;p&gt;原来的Blog用的模板是WP自带的 &lt;a href=&#34;https://wordpress.org/themes/twentyten/&#34;&gt;Twenty Ten&lt;/a&gt; ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten&#34;&gt;GitHub repo&lt;/a&gt; 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。&lt;/p&gt;
+
+&lt;h3 id=&#34;分页:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;分页&lt;/h3&gt;
+
+&lt;p&gt;Hugo内置了分页，就是在页面中加入 &lt;code&gt;{{ template &amp;quot;_internal/pagination.html&amp;quot; . }}&lt;/code&gt; ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用&lt;code&gt;...&lt;/code&gt;代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。&lt;/p&gt;
+
+&lt;h3 id=&#34;标签云:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;标签云&lt;/h3&gt;
+
+&lt;p&gt;Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html&#34;&gt;sidebar.html&lt;/a&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;sidebar-block&amp;quot;&amp;gt;
+  &amp;lt;h5&amp;gt;标签&amp;lt;/h5&amp;gt;
+  &amp;lt;div id=&amp;quot;tag_cloud&amp;quot; data-tags=&amp;quot;{{ range $key, $value := .Site.Taxonomies.tags }} [&#39;{{$key}}&#39;, {{len $value}}, &#39;/tags/{{ $key | urlize }}&#39;]; {{ end }}&amp;quot; /&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后生成标签云的js是这样的：&lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/static/js/index.js&#34;&gt;index.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$( document ).ready(function() {
+    var tag_list = eval($(&amp;quot;#tag_cloud&amp;quot;).data(&#39;tags&#39;).split(&#39;;&#39;));
+    tag_list.pop();
+
+    var tag_json = [];
+    var total_cnt = 0;
+    $.each(tag_list, function( idx, val ) {
+        foo = eval(val);
+        tag_json.push(foo);
+        total_cnt += foo[1];
+    })
+    generate_tag_cloud(tag_json, total_cnt);
+});
+
+var generate_tag_cloud = function(tag_json, total_cnt) {
+    tag_cloud_str = &amp;quot;&amp;lt;div id=&#39;tag_cloud_canvas&#39;&amp;gt;&amp;quot;;
+
+    $.each(tag_json, function(idx, val) {
+        font_size = 8 + Math.log(val[1])/Math.log(total_cnt) * 18;
+        tag_cloud_str += &amp;quot;&amp;lt;a style=\&amp;quot;font-size:&amp;quot; + font_size +&amp;quot;pt\&amp;quot; href=&amp;quot; + val[2] + &amp;quot;&amp;gt;&amp;quot; + val[0] + &amp;quot;&amp;lt;/a&amp;gt;&amp;amp;nbsp; &amp;quot;;
+    });
+
+    tag_cloud_str += &amp;quot;&amp;lt;/div&amp;gt;&amp;quot;;
+
+    $(&amp;quot;#tag_cloud&amp;quot;).append(tag_cloud_str);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;目前差不多就是这样了，偶尔想到啥新的东西再往上加吧，嘿嘿。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>散伙 &amp;&amp; 饭 &amp;&amp; 酒</title>
@@ -479,44 +565,6 @@ ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿
       <description>&lt;p&gt;晚上下班，出公司门就感觉风声不对，果然一出门就被好好的吹了一回。刚骑上的车的时候还好，不过转了一个弯立马来了一阵大风，人还没啥感觉呢，眼泪就下来了，这次是真
 真正正泪奔了一回，呵呵。&lt;br /&gt;
 PS：还好回去的路上多是顺风，不过在荷清路上那一段的风还是那么的诡异，诶。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>鸡兔同笼另解</title>
-      <link>http://hzmangel.github.io/post/381/</link>
-      <pubDate>Sun, 04 Jan 2009 18:10:23 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/381/</guid>
-      <description>&lt;p&gt;关键字： 数学&lt;/p&gt;
-
-&lt;p&gt;在等编译结果的时候逛&lt;a href=&#34;http://songshuhui.net/&#34;&gt;科学松鼠会&lt;/a&gt;，看到&lt;a href=&#34;http://songshuhui.net/arc
-hives/5989.html&#34;&gt;这样一篇文章&lt;/a&gt;，很有才啊，于是，转撒。当然，版权嘛，人家是CC的，俺可是加上原始链接了哈 ^_^阳春三月，正是郊游的好时候，孔老师和我们共同外出游玩，大伙儿边走边看，说说笑笑，不知不觉来到了一个小村庄旁。听着村里传来的鸡鸣狗叫声，孔老师感慨地说：”老子
-说过，他理想中的社会是‘邻邦相望，鸡犬之声相闻，民至老死不相往来’，我实在是无法赞同呀！要是人们都这样的话，那怎么能互相取长补短，传播知识呢？！”&lt;br /&gt;
-同学们恭恭敬敬地围着他，听他抒发感慨。&lt;br /&gt;
-“我给你们举个例子吧，‘鸡兔同笼’问题，你们听说过没有？”&lt;br /&gt;
-大伙儿都点了点头，颜回说：”就是知道鸡和兔子的总头数和总脚数，求鸡和兔子各多少只，可以用假设法来求，也可以列出方程来解决。”&lt;/p&gt;
-
-&lt;p&gt;孔老师赞许地说：”颜回说得很好，可以看出他平时经常读数学的书籍。解法确实是非常多的，但是前几天我听一个南方的客人介绍了一种新的思路，非常有趣呢！我们刚才说到
-鸡犬之声，那我就改一改，用鸡犬来出题吧……嗯，村里李大伯家养了鸡和狗，按头数一共有25只，数脚一共有56只，那么鸡和狗各有多少只呢？”&lt;br /&gt;
-同学们都叽里咕噜地开始在心里默算，性急的子路已经蹲下来，在地上画开了。&lt;br /&gt;
-孔老师微微笑起来，说：”不用急，我刚才说过了，我们换一种算法，你们先闭上眼睛吧。”&lt;br /&gt;
-大伙儿安静下来，微闭双眼，听孔老师的下一步指令。&lt;br /&gt;
-“让所有的鸡和狗排成一队。”&lt;br /&gt;
-“好了。”&lt;br /&gt;
-“让它们各举起一只脚来！”&lt;br /&gt;
-孔老师的儿子孔鲤”扑哧”一声笑出来，说：”那鸡都变成金鸡独立了！”&lt;br /&gt;
-“呵呵，这个成语用得好。”孔老师摸摸他的头，高兴地说。&lt;br /&gt;
-孔鲤又调皮地说：”不过，小狗狗翘起一条脚，可就有些难看了，那不是在‘嘘嘘’吗？”&lt;br /&gt;
-同学们都哈哈大笑起来，孔老师也笑着说：”好了，只可意会，不可言传……来，再让鸡和狗再举起一只脚来！”&lt;br /&gt;
-“啊？！”孔鲤叫起来，”再举起一只脚，那鸡就变成浮在半空中了，狗变成象人一样站起来了。”&lt;br /&gt;
-“对，现实中，要让鸡和狗这样做到是很难的。但是我们人类号称万物灵长，只要靠思想，就可以在想象中实现这种巧妙的画面。”听了孔老师的话，同学们都若有所思。&lt;br /&gt;
-“现在，站在地上的还有几只脚？”&lt;br /&gt;
-子路抢着说：”从56里两次减去25，剩下6只脚，都是狗腿。”我怎么觉得这个词有些难听……&lt;br /&gt;
-又听孔老师问：”准确，刚才说每只狗都象人一样用两只脚站着，那么一共有几只狗呢？”&lt;br /&gt;
-“三只！”同学们异口同声地说。&lt;br /&gt;
-“鸡呢？”&amp;rdquo;二十二只！”&lt;br /&gt;
-这次郊游之后一段时间内，同学们见面时，都爱这样打招呼：”你好，举起脚来！”&lt;/p&gt;
 </description>
     </item>
     

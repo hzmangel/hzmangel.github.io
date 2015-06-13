@@ -23,6 +23,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
+
         <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
 
         
@@ -59,6 +62,22 @@
 
 <div class="row">
     <div class="col-md-9">
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/162/'> Django中的templates</a> </h2>
+        <div class="post-meta">发表于2006-09-05 22:47:52 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天想改一下模板的路径，主要是想在每个app中建立一个templates的目录，然后系统直接去那个目录寻找相应app的view的模板，按网上的方法，在set tings.py的TEMPLATE_DIRS项中加上了app的templates目录，但是在浏览器中查看的时候，它告诉我找不到模板，后来用Filemon看了 一下，它在app目录下的templates中也是按着默认的路径查找的，也就是templates/APP_NAME/ MODE_NAME_list.html文件，于是就把templates改回来了。不清楚是它只能这么找还是我的配置有误。</div>
+    </section>
+
+    
+
+</article>
+
         
             <article class="post">
 
@@ -217,22 +236,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/152/'> root敢死队</a> </h2>
-        <div class="post-meta">发表于2006-08-17 23:57:43 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">一直来，用Linux都是非root不用，所以一直也就被人称为root敢死队，今天想好好珍惜一下生命，于是开始配用户。配用户这事情我以前也做过，不过一直弄不清 那些个组的关系，最后的结果就是用了大概一天的su，在第二天后就把那个普通用户遗忘的一干二净。今天在配用户之前在网上转了转，找了点东西，把那个普通用户加到了一 堆组中去，像什么audio, video什么的，总算是能大概用一下了，8过后来碰到使用aptitude什么的命令还是被告知权限不够，又把sudo装上了，直接 配置成可以执行大部分的可执行程序，而且不用密码，也就是在配置文件中加进去了一行： &lt;username&gt; ALL=NOPASSWD:/bin/,NOPASSWD:/sbin/,NOPASSWD:/usr/bin* 呵呵，感觉和root差不多了，还是没有很把用户当作一回事啊，这个习惯看到要过很久一段时间才能改了 :) btw: 本来还想配置一下iptable来限制访问，结果直接把自己给ban了(我用的是ssh)，后来把自己的这条规则加上后，发现apt- get又不能用了，一怒之下又把iptable恢复到以前的状态了，呵呵，什么都不管。安全这个问题啊，还真是麻烦啊。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -260,6 +263,8 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/post-title/'> Blog搬(zhe)家(teng)记</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
@@ -267,8 +272,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
             <li><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1220/'> Ajax loading multi series to jqPlot</a></li>
         
         </ul>
     </div>
@@ -289,7 +292,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         
             <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
         
-            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(139)</li>
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
         
             <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
         
@@ -325,6 +328,10 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 
         <script src="http://code.jquery.com/jquery-git2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
         <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

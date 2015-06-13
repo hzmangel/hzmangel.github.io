@@ -23,6 +23,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
+
         <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
 
         
@@ -59,6 +62,22 @@
 
 <div class="row">
     <div class="col-md-9">
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/202/'> List的Iterator</a> </h2>
+        <div class="post-meta">发表于2007-08-15 17:09:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">写个小程序，用到了List，而且要用到它的Iterator，由于以前有用vector的经验，想当然的在Iterator上做了一个+3的操作，结果报错。当时F T，然后开始写测试程序，顺便上网去转转，结果程序写到一半的时候，看到篇文章比较各种Iterator，然后明白了，List的Iterator是双向的，而vec tor的Iterator是random的，就有了对+n这一操作支持的不同，而从前没看过的我就稀里糊涂的FT了。写下来，防止以后再稀里糊涂，嗯。</div>
+    </section>
+
+    
+
+</article>
+
         
             <article class="post">
 
@@ -235,26 +254,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/192/'> 初识 Google Map API</a> </h2>
-        <div class="post-meta">发表于2007-06-01 09:07:38 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">昨天去 google dev day 晃了一圈，分会场上主要听的是 Google 的新产品发布会，感觉那个 map api 有点意思，可以在上面做点东西玩玩，于是晚上回来小看了一下例子，做了一个玩玩，还是满简单的，代码如下。 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;&lt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&gt;&quot;&gt; &lt;html xmlns=&quot;&lt;http://www.w3.org/1999/xhtml&gt;&quot;&gt; &lt;head&gt; &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt; &lt;title&gt;Google Maps JavaScript API Example&lt;/title&gt; &lt;script src=&quot;&lt;http://ditu.google.com/maps?file=api&gt;&amp;amp;v=2&amp;amp;key=*****&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; //&lt;![CDATA[ function load() { if (GBrowserIsCompatible()) { var map = new GMap2(document.getElementById(&quot;map&quot;)); map.addControl(new GLargeMapControl()); map.addControl(new GScaleControl()); GEvent.addListener(map, &quot;moveend&quot;, function() { document.getElementById(&quot;center&quot;).innerHTML = map.getCenter(); }); map.setCenter(new GLatLng(39.96255, 116.358969), 17); } } //]]&gt; &lt;/script&gt; &lt;/head&gt; &lt;body onload=&quot;load()&quot;</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/192/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -282,6 +281,8 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/post-title/'> Blog搬(zhe)家(teng)记</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
@@ -289,8 +290,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
             <li><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1220/'> Ajax loading multi series to jqPlot</a></li>
         
         </ul>
     </div>
@@ -311,7 +310,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         
             <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
         
-            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(139)</li>
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
         
             <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
         
@@ -347,6 +346,10 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 
         <script src="http://code.jquery.com/jquery-git2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
         <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
