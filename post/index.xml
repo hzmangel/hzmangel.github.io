@@ -7,8 +7,151 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2015 17:10:58 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MMDS Notes: W1 - Link Analysis
+</title>
+      <link>http://hzmangel.github.io/post/mmds-w1-link-analysis/</link>
+      <pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid>
+      <description>
+
+&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;
+
+&lt;p&gt;互联网在某种意义上是一个有向图，每个页面是图上的节点，而页面间的链接就是图的边。在经历了早期的目录式页面分类后，web现在进入了以Search为主的的组织方式。下面问题来了：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;怎么确定找到的信息是可以信赖的（或者相对可以信赖的）。&lt;/li&gt;
+&lt;li&gt;当我们查找某个词时，哪个才是最好的结果。&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;搜索技术哪家强？&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以这里引入了给页面排序的做法，以确定页面的重要性。&lt;/p&gt;
+
+&lt;h2 id=&#34;pagerank:b45bcfea51201690689ab7d1025dd751&#34;&gt;PageRank&lt;/h2&gt;
+
+&lt;p&gt;PageRank，Google家的看家算法。核心思路是，如果一个页面是重要的，那么它指向的那个页面应该也是重要的。也就是用其它页面来证明这个页面的重要性。&lt;/p&gt;
+
+&lt;h3 id=&#34;flow-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
+
+&lt;p&gt;在一张图中，假设有节点&lt;code&gt;$i$&lt;/code&gt;，它的PR值是&lt;code&gt;$r_{i}$&lt;/code&gt;，它有&lt;code&gt;$d_{i}$&lt;/code&gt;条出链，其中一条指向节点&lt;code&gt;$j$&lt;/code&gt;。那么&lt;code&gt;$j$&lt;/code&gt;上由&lt;code&gt;$i$&lt;/code&gt;带来的PR值即为&lt;code&gt;$\frac{r_{i}}{d_{i}}$&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;根据这个需求，可以列出来一个方程组。显然，图中有几个节点，这个方程组就会有几个方程，为了给这个方程求得一个固定解，我们会人为的加上一个条件 &lt;code&gt;$\sum{r_{i}} = 1$&lt;/code&gt;，这样就可以求解出每个节点的PR值了。&lt;/p&gt;
+
+&lt;p&gt;这个方法比较易于理解，但是对于大规模的页面集不适用，所以引入了&lt;em&gt;Matrix&lt;/em&gt; Formulation。&lt;/p&gt;
+
+&lt;h3 id=&#34;matrix-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
+
+&lt;p&gt;首先，把所有页面之间的跳转都用一个&lt;strong&gt;列随机矩阵(column stochastic matrix)&lt;/strong&gt;来表示，记为&lt;code&gt;$M$&lt;/code&gt;。对于每条链路&lt;code&gt;$i\rightarrow j$&lt;/code&gt;，都有相应的&lt;code&gt;$M_{ji} = 1/d_{i}$&lt;/code&gt;，其中&lt;code&gt;$d$&lt;/code&gt;是&lt;code&gt;$i$&lt;/code&gt;的出链路条数。下一步是&lt;strong&gt;Rank向量&lt;/strong&gt;，记为&lt;code&gt;$r$&lt;/code&gt;它是一个1维的列向量，每一个元素的值就是表示此节点的Rank值，记为&lt;code&gt;$r_{i}$&lt;/code&gt;，此向量满足&lt;code&gt;$\sum_{i}r_{i} = 1$&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;有此定义后，上面介绍的*Flow*方程可以转换成这样： &lt;code&gt;$r = M \cdot r$&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;由矩阵的定义，这个&lt;code&gt;$r$&lt;/code&gt;是矩阵&lt;code&gt;$M$&lt;/code&gt;的&lt;strong&gt;单位向量(eigenvector)&lt;/strong&gt;。即，页面的PageRank值，就是这些页面之间转移矩阵的单位向量，解出了这个向量，也就确定了这些页面的PageRank值。&lt;/p&gt;
+
+&lt;p&gt;求解特征向量使用的是被称为*Power Iteration*的方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;初始化： &lt;code&gt;$r^{(0)} = [1/N, \ldots , 1/N]^{T}$&lt;/code&gt; ，其中&lt;code&gt;$N$&lt;/code&gt;是图中的节点数，也即所有页面个数。&lt;/li&gt;
+&lt;li&gt;迭代： &lt;code&gt;$r^{(t+1)} = M \cdot r^{(t)}$&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;停止条件： &lt;code&gt;$|r^{(t+1) = r^{(t)}}|_{1} &amp;lt; \epsilon$&lt;/code&gt;。其中&lt;code&gt;$|x_{i}|_{1} ＝ \sum_{i}|x_{i}|$&lt;/code&gt;是向量&lt;code&gt;$i$&lt;/code&gt;的 &lt;em&gt;L1范数&lt;/em&gt; （其实就是绝对值相加，范数的定义就是 &lt;code&gt;$|x_{i}|_{p} = (\sum_{i}|x_{i}|^{p})^{\frac{1}{p}}$&lt;/code&gt;）。此处可以使用其它的范数，如L2范数，即欧氏距离。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;teleports:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;如果图中有 &lt;em&gt;dead end&lt;/em&gt; 节点，即只有进链没有出链；或者是在多个节点之间存在环，那么上面的迭代就会收敛到一个错误的结果上。解决方案就是，对于每次跳转，有&lt;code&gt;$\beta$&lt;/code&gt;的概率跟随链路去跳，而有&lt;code&gt;$1-\beta$&lt;/code&gt;的概率是一次随机传送 (&lt;em&gt;Teleports&lt;/em&gt;)，这样就解决上面提到的两个问题了。在实际使用中，一般&lt;code&gt;$\beta$&lt;/code&gt;取值为&lt;code&gt;0.8&lt;/code&gt;或&lt;code&gt;0.9&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;在计算上，就是引入一个Teleports矩阵，其中的每个值都是&lt;code&gt;$1/N$&lt;/code&gt;，&lt;code&gt;$N$&lt;/code&gt;为节点数目。而之前的转移矩阵&lt;code&gt;$M$&lt;/code&gt;则变为&lt;code&gt;$\beta M + (1-\beta)\frac{1}{N}e \cdot e^{T}$&lt;/code&gt;，记为&lt;code&gt;$A$&lt;/code&gt;。同样，状态跳转的迭代公式也变为&lt;code&gt;$r = A \cdot r$&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;实际使用的样子:b45bcfea51201690689ab7d1025dd751&#34;&gt;实际使用的样子&lt;/h3&gt;
+
+&lt;p&gt;以上说的都是理论，在那个神奇的世界里，计算机的内存都是无限大的，计算速度都是无限NB的，一句话，TA们都是超限界的。在回到了位于爬行界的真实世界后，还有其它需要考虑的东西。假设节点数目是 &lt;strong&gt;1 billion&lt;/strong&gt; ，那么计算前和后的向量各需要&lt;strong&gt;1 billion&lt;/strong&gt;，但是对于那个矩阵，它可是&lt;strong&gt;1 billion * 1 billion&lt;/strong&gt;，也就是&lt;strong&gt;10^18&lt;/strong&gt;。这个内存，有点贵哈～&lt;/p&gt;
+
+&lt;p&gt;一般来说，转移矩阵都是稀疏的，这样在存储的时候可以不用存多少东西，但是加了那个Teleports后，它变成每个位置都有值了，这内存使用就duang的一下上来了。还好经过计算，发现公式&lt;code&gt;$r = A \cdot r$&lt;/code&gt; 可以改写成：&lt;code&gt;$r = \beta M \cdot r + [ \frac{1-\beta}{N} ]_{N}$&lt;/code&gt;。这就是说，矩阵还是那个稀疏的矩阵，但是在每次算完后，需要在向量上加上Teleports的结果。这样一来，占用的内存又回去了吧。&lt;/p&gt;
+
+&lt;p&gt;基本上就是这样了~&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MMDS Notes: W1 - HDFS &amp; MR
+</title>
+      <link>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</link>
+      <pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid>
+      <description>
+
+&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
+
+&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;
+
+&lt;h2 id=&#34;dfs:328f502a6f9088599afe3ec330de3e9a&#34;&gt;DFS&lt;/h2&gt;
+
+&lt;p&gt;课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。&lt;/p&gt;
+
+&lt;p&gt;现在较为通用的分布式架构就是使用不那么NB的Linux机器组建Cluster，然后用不那么NB的网络把它们连接起来。而在分布式存储的情况下，把数据在不同节点之间复制是需要时间的，所以让程序去找数据就是一个比较正确的解决方案了。&lt;/p&gt;
+
+&lt;p&gt;DFS中的节点有两类，&lt;code&gt;Chunk Server&lt;/code&gt;用来存放数据，&lt;code&gt;Master Node&lt;/code&gt;用来存放文件和&lt;code&gt;Chunk Server&lt;/code&gt;的对应关系。一个文件会被分成多处连续的&lt;code&gt;chunks&lt;/code&gt;，典型的大小是16~64MB。每一个&lt;code&gt;chunk&lt;/code&gt;都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而&lt;code&gt;Master Node&lt;/code&gt;就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从&lt;code&gt;Master Node&lt;/code&gt;处取到&lt;code&gt;Chunk Server&lt;/code&gt;的信息，再从相应的server上获取文件内容。&lt;/p&gt;
+
+&lt;h2 id=&#34;map-reduce:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce&lt;/h2&gt;
+
+&lt;p&gt;MR是一种编程模型，典型的应用场景就是 &lt;strong&gt;Word Cound&lt;/strong&gt; 。将MR应用到 WordCount 的先决条件为：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文件过大，不能完整的放到内存中去&lt;/li&gt;
+&lt;li&gt;但是所有的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对可以完全放到内存中&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;算法流程:328f502a6f9088599afe3ec330de3e9a&#34;&gt;算法流程&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;将数据分块读入&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; ：创建&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;数据对。在本例中，即创建出一系列的&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Group by Key&lt;/code&gt; ：对&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;进行排序。本例中即将同样key的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对放在一起。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; ：将同一个&lt;code&gt;key&lt;/code&gt;的&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;对合并到一起，并对&lt;code&gt;v&lt;/code&gt;做相应处理，在本例中，就是把所有的值相加。&lt;/li&gt;
+&lt;li&gt;输出结果&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在具体实现上，程序需要指定&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个方法，这两个方法的参数都是&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对。例如&lt;code&gt;Map&lt;/code&gt;函数的&lt;code&gt;key&lt;/code&gt;可以是文件名，&lt;code&gt;value&lt;/code&gt;是对应的某一行或者某一块文字。而在&lt;code&gt;Reduce&lt;/code&gt;函数中，输入的&lt;code&gt;key&lt;/code&gt;是某个单词，而&lt;code&gt;value&lt;/code&gt;是1。&lt;code&gt;Reduce&lt;/code&gt;负责归并结果，并输出。&lt;/p&gt;
+
+&lt;h3 id=&#34;map-reduce的环境:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce的环境&lt;/h3&gt;
+
+&lt;p&gt;除了根据逻辑实现&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;把输入数据分块&lt;/li&gt;
+&lt;li&gt;在机器前调度程序运行&lt;/li&gt;
+&lt;li&gt;处理 &lt;strong&gt;Group by key&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;处理机器故障&lt;/li&gt;
+&lt;li&gt;管理机器间通信&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;出错处理:328f502a6f9088599afe3ec330de3e9a&#34;&gt;出错处理&lt;/h3&gt;
+
+&lt;p&gt;MR出错分几种，处理方式也不同：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; Worker出错：MasterNode会将此块数据标为未完成，并等待下一轮调度&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; Worker出错：MasterNode会将正在运行中的任务置为无效，并等待下一轮调度&lt;/li&gt;
+&lt;li&gt;MasterNode：任务直接退出。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;map-和-reduce-的数目:328f502a6f9088599afe3ec330de3e9a&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Mapper&lt;/code&gt;的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Reduce&lt;/code&gt;的数目没有具体要求，但是一般会比&lt;code&gt;Mapper&lt;/code&gt;的数目要少。&lt;/p&gt;
+
+&lt;h3 id=&#34;改良:328f502a6f9088599afe3ec330de3e9a&#34;&gt;改良&lt;/h3&gt;
+
+&lt;p&gt;还是拿WC作为例子。在&lt;code&gt;Reduce&lt;/code&gt;函数处，原始的办法需要传一堆&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给&lt;code&gt;Reduce&lt;/code&gt;之前先归并一下，相当于多级&lt;code&gt;Reduce&lt;/code&gt;，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。&lt;/p&gt;
+
+&lt;p&gt;注意，此种方式并不适用所有计算，例如对多个数取平均值就不可以使用。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Blog搬(zhe)家(teng)记</title>
@@ -1406,127 +1549,6 @@ the operation block to main queue, which looks like this:&lt;/p&gt;
     }
 }];
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Compile Object-C program in command line</title>
-      <link>http://hzmangel.github.io/post/1183/</link>
-      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1183/</guid>
-      <description>
-
-&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
-language itself. But it is inconvenient to start Xcode for each program,
-especially for program without UI elements in. So I want to set up a command
-line environment that can compile and execute ObjC program.### Prepare the code&lt;/p&gt;
-
-&lt;p&gt;First I have to prepare the ObjC file. I have created one file called
-&lt;em&gt;helloworld.m&lt;/em&gt; in current directory, and here is the content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
-
-int main (int argc, const char * argv[]) {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    NSLog (@&amp;quot;Hello World!&amp;quot;);
-
-    [pool drain];
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Okay, the program does the same thing as the first program of other languages
-do: print out &lt;strong&gt;Hello World!&lt;/strong&gt; string.&lt;/p&gt;
-
-&lt;h3 id=&#34;compile-and-execute-the-program:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Compile and execute the program&lt;/h3&gt;
-
-&lt;h4 id=&#34;mac-os:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Mac OS&lt;/h4&gt;
-
-&lt;p&gt;I have installed Xcode before, so I don&amp;rsquo;t know whether those commands can be
-run successfully without Xcode command line tools.&lt;/p&gt;
-
-&lt;p&gt;There are two methods to compile ObjC program from command line in Mac OS, one
-is using &lt;code&gt;gcc&lt;/code&gt; and the other one is using &lt;code&gt;clang&lt;/code&gt;. Both commands below can
-generate ObjC executable file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;clang -framework Foundation helloworld.m -o helloworld_clang
-
-gcc -framework Foundation helloworld.m -o helloworld_gcc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;On my side, the two binary file has the same size, and the execute results are
-the same except the timestamp:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./helloworld_clang
-2013-01-24 01:56:27.009 helloworld_clang[7845:707] Hello World!
-
-$ ./helloworld_gcc
-2013-01-24 01:56:29.744 helloworld_gcc[7846:707] Hello World!
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;linux:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Linux&lt;/h4&gt;
-
-&lt;p&gt;With GCC, the command line compilation can also be done on Linux platform. I
-am using Debian and have set up the environment after refering &lt;a href=&#34;http://stpetrus27.wordpress.com/2011/06/20/compile-objective-c-programs-
-on-linux/&#34;&gt;this
-post&lt;/a&gt;. Here are the brief steps:&lt;/p&gt;
-
-&lt;p&gt;First Install those packages first to prepare the environment.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install gobjc gnustep gnustep-devel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then compile the program with command listed below:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gcc `gnustep-config --objc-flags` helloworld.m -o helloworld_gcc `gnustep-config --objc-libs` -lgnustep-base
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After the command return, you can find binary file &lt;code&gt;helloworld_gcc&lt;/code&gt; in the
-same directory.&lt;/p&gt;
-
-&lt;p&gt;So, with this feature, some simple program can be executed without running
-Xcode, a little convenient for language learning for me.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Invoke map app in iOS app</title>
-      <link>http://hzmangel.github.io/post/1176/</link>
-      <pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1176/</guid>
-      <description>&lt;p&gt;最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&amp;ldquo;comgooglemaps://&amp;ldquo;]])
-        {
-            // iOS 6 with google map app installed
-            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;ldquo;comgooglemaps://?center=%f,%f&amp;rdquo;, lat, lng];
-            NSURL *loc_url = [NSURL URLWithString:loc_path];
-            [[UIApplication sharedApplication] openURL:loc_url];
-        } else {
-            // Check whether it is iOS 6
-            Class mapItemClass = [MKMapItem class];
-            if (mapItemClass &amp;amp;&amp;amp; [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
-            {
-                CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, lng);
-                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
-                MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-                [mapItem setName:venue_name];&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;            [mapItem openInMapsWithLaunchOptions:nil];
-        } else {
-            // Early than iOS 6
-            NSString *loc_path = [[NSString alloc] initWithFormat: @&amp;quot;http://maps.google.com/maps?ll=%f,%f&amp;quot;, lat, lng];
-            NSURL *loc_url = [NSURL URLWithString:loc_path];
-            [[UIApplication sharedApplication] openURL:loc_url];
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;逻辑很简单，首先判断是否可以打开gmap app的&lt;a href=&#34;https://developers.google.com/maps/docum
-entation/ios/urlscheme&#34;&gt;URL schema&lt;/a&gt;，如果不行则试着创建iOS
-6新加入的MKMapItem，如果不能打开，则就是老的iOS了。因为只需要打开系统内建的map程序，所以就这样啦。&lt;/p&gt;
-
-&lt;p&gt;PS: MKMapItem那段程序是从网上找到的，嗯。&lt;/p&gt;
 </description>
     </item>
     

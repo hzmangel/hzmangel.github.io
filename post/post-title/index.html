@@ -4,13 +4,13 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" Blog搬(zhe)家(teng)记 &middot;  湖间小筑" />
+        <meta property="og:title" content=" mmds w1 link analysis &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://localhost:1313/post/post-title/" />
 
         
             <meta property="og:type" content="article" />
-            <meta property="og:article:published_time" content="2015-06-13T11:36:18&#43;08:00" />
+            <meta property="og:article:published_time" content="2015-06-14T17:10:58&#43;08:00" />
 
             
         
@@ -18,7 +18,7 @@
         <title>
             湖间小筑
             
-                | Blog搬(zhe)家(teng)记
+                | mmds w1 link analysis
             
         </title>
 
@@ -66,89 +66,12 @@
             <article class="post">
 
     <header>
-        <h2 class="post-title"><a href='http://localhost:1313/post/post-title/'> Blog搬(zhe)家(teng)记</a> </h2>
-        <div class="post-meta">发表于2015-06-13 11:36:18 </div>
+        <h2 class="post-title"><a href='http://localhost:1313/post/post-title/'> mmds w1 link analysis</a> </h2>
+        <div class="post-meta">发表于2015-06-14 17:10:58 </div>
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。</p>
-
-<p>当初想把blog搬家的主要需求也就下面这些：</p>
-
-<ul>
-<li>能用Markdown写。除了写着舒服外，这不是还能装13嘛～</li>
-<li>之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。</li>
-<li>模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。</li>
-</ul>
-
-<h2 id="hugo:1b3cc112b24de2a8fac8b7e8858afbfb">Hugo</h2>
-
-<p>最开始的时候也想着用 <a href="http://jekyllrb.com/">Jekyll</a> 或者 <a href="http://octopress.org/">Octopress</a> ，但是在转换的时候，发现有些<code>Latex</code>的代码中的行末注释<code>{%</code>会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&hellip;&hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 <a href="http://gohugo.io/">Hugo</a>。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。</p>
-
-<h2 id="wp2hugo:1b3cc112b24de2a8fac8b7e8858afbfb">wp2hugo</h2>
-
-<p>敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， <a href="https://github.com/jekyll/jekyll-import">Jekyll Import</a> ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： <a href="https://github.com/hzmangel/wp2hugo">wp2hugo</a> 。这货主要干的事情是：</p>
-
-<ul>
-<li>解析Wordpress导出的XML文件。</li>
-<li>将站点信息存到<code>config.yaml</code>中。</li>
-<li>将文章存放到带有元信息的Markdown文件中（使用 <a href="https://pypi.python.org/pypi/html2text">html2text</a> 将原来的HTML内容转成Markdown ），使用 <strong>post id</strong> 作为文件名。</li>
-</ul>
-
-<p>基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。</p>
-
-<h2 id="twenty-ten:1b3cc112b24de2a8fac8b7e8858afbfb">Twenty Ten</h2>
-
-<p>原来的Blog用的模板是WP自带的 <a href="https://wordpress.org/themes/twentyten/">Twenty Ten</a> ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 <a href="https://github.com/hzmangel/hugo-twenty-ten">GitHub repo</a> 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。</p>
-
-<h3 id="分页:1b3cc112b24de2a8fac8b7e8858afbfb">分页</h3>
-
-<p>Hugo内置了分页，就是在页面中加入 <code>{{ template &quot;_internal/pagination.html&quot; . }}</code> ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用<code>...</code>代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。</p>
-
-<h3 id="标签云:1b3cc112b24de2a8fac8b7e8858afbfb">标签云</h3>
-
-<p>Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： <a href="https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html">sidebar.html</a>：</p>
-
-<pre><code>&lt;div class=&quot;sidebar-block&quot;&gt;
-  &lt;h5&gt;标签&lt;/h5&gt;
-  &lt;div id=&quot;tag_cloud&quot; data-tags=&quot;{{ range $key, $value := .Site.Taxonomies.tags }} ['{{$key}}', {{len $value}}, '/tags/{{ $key | urlize }}']; {{ end }}&quot; /&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>最后生成标签云的js是这样的：<a href="https://github.com/hzmangel/hugo-twenty-ten/blob/master/static/js/index.js">index.js</a></p>
-
-<pre><code class="language-javascript">$( document ).ready(function() {
-    var tag_list = eval($(&quot;#tag_cloud&quot;).data('tags').split(';'));
-    tag_list.pop();
-
-    var tag_json = [];
-    var total_cnt = 0;
-    $.each(tag_list, function( idx, val ) {
-        foo = eval(val);
-        tag_json.push(foo);
-        total_cnt += foo[1];
-    })
-    generate_tag_cloud(tag_json, total_cnt);
-});
-
-var generate_tag_cloud = function(tag_json, total_cnt) {
-    tag_cloud_str = &quot;&lt;div id='tag_cloud_canvas'&gt;&quot;;
-
-    $.each(tag_json, function(idx, val) {
-        font_size = 8 + Math.log(val[1])/Math.log(total_cnt) * 18;
-        tag_cloud_str += &quot;&lt;a style=\&quot;font-size:&quot; + font_size +&quot;pt\&quot; href=&quot; + val[2] + &quot;&gt;&quot; + val[0] + &quot;&lt;/a&gt;&amp;nbsp; &quot;;
-    });
-
-    tag_cloud_str += &quot;&lt;/div&gt;&quot;;
-
-    $(&quot;#tag_cloud&quot;).append(tag_cloud_str);
-}
-</code></pre>
-
-<p>目前差不多就是这样了，偶尔想到啥新的东西再往上加吧，嘿嘿。</p>
-</div>
+        <div class="post-summary"></div>
     </section>
 
     <footer>
@@ -173,7 +96,8 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://localhost:1313/post/1239/"> Control Goroutines amount via bufferred channel &gt;</a> 
+                 <a class="next" href="http://localhost:1313/post/mmds-w1-hdfs-mr/"> MMDS Notes: W1 - HDFS &amp; MR
+ &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -207,15 +131,16 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://localhost:1313/post/post-title/'> Blog搬(zhe)家(teng)记</a></li>
+            <li><a href='http://localhost:1313/post/post-title/'> mmds w1 link analysis</a></li>
+        
+            <li><a href='http://localhost:1313/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
+</a></li>
+        
+            <li><a href='http://localhost:1313/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
             <li><a href='http://localhost:1313/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://localhost:1313/post/1233/'> Golang and JSON API</a></li>
-        
-            <li><a href='http://localhost:1313/post/1230/'> goroutines &#43; channel</a></li>
-        
-            <li><a href='http://localhost:1313/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
         
         </ul>
     </div>
@@ -226,7 +151,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(79)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(80)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -236,7 +161,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
         
             <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
         
-            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(141)</li>
         
             <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
         
@@ -251,7 +176,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 45, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 1, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 47, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 1, '/tags/studylog'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

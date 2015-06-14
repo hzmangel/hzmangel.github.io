@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/353/'> 给beamer加背景</a> </h2>
+        <div class="post-meta">发表于2008-10-12 23:59:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： beamer, latex, 背景 一直以为给beamer加背景是很难的事情，后来在网上翻了翻才知道原来是很简单的，只需要重新设置一下beamer的background变量就行了，代码很简单： \setbeamertemplate{background}% {\includegraphics[height=\paperheight]{pics/background_title.jpg}} 后面的includegraphics也可以换成别的包含图片的命令，像xelatex里面的\XeTeXpicfile什么的。话说后来发现，手册里面也有说这东西 ，所以有空还是要把手册给读读啊~~~</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/352/'> 最后一个666</a> </h2>
+        <div class="post-meta">发表于2008-10-12 23:38:47 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： BBS, ID, 666 不知道KBS刚开始的时候为什么会选择这个数字做为5年ID的生命值，我只知道我的最后一个ID也达到了这个数字。基本应该算是和论坛同岁了吧。只是突然发现，当最后 一个ID变成666的时候，找不到地方灌水了，也许是没有了那种心情，但更主要的是没有了那些一起灌水的人，没有了一个舒服的灌水的环境。大概也就剩下在这自娱自乐一 下了吧，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/351/'> 配置crontab</a> </h2>
         <div class="post-meta">发表于2008-10-10 10:16:14 </div>
     </header>
@@ -191,38 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/342/'> 雾锁妙峰</a> </h2>
-        <div class="post-meta">发表于2008-09-16 10:50:39 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： 出行, 妙峰山, 雾 中秋三天假，不想宅三天，于是以编外身份友情参加了某罐组织的妙峰山一日游（某罐大叫：是强行加入，然后被暴扁）。 由于是第二次去那边了（无聊吧），所以基本算是轻车熟路。6点钟就把2点钟睡的自己给折腾起来了，磨叽磨叽7点到学校，找某罐吃完早饭后就开始等，嗯。话说某些同志家 里面的表大概慢了，所以我们就多等了会。然后，公车倒城铁再倒地铁到了苹果园，期间由于人多，所以木有怎么关照罐子，嗯。 下车后虽然不是从上次那个口出来的，但是还好没带着大部队迷路，成功的找到了929车站。不过没抢上第一轮来的车，在后面一辆918上坐了一会，被告知不到丁家滩，于 是集体冲下车，看到那还在继续伸长的队伍，大家心里一凉，于是被忽悠上了黑车，单程30每人。 路上和司机师傅商量了一会，决定到了涧沟村下车然后自己往上走，就是我上次走的那条路，只是要花钱买门票，嗯。 带着他们在村子里面一阵乱转，把大家都弄的晕头转向的时候，告诉他们，开始爬山了，然后我就冲到前面去了，我太邪恶了，嗯。话说那天由于是阴天，山顶云雾缭绕（感觉有 一部分应该是烟，嗯），若隐若现，过了玉皇顶就基本上是在雾里面穿行了，山边的小草上挂的都是水珠，可惜相机是自动对焦的，对了几次都没对上，于是只好放弃拍照的想法 。 然后，就顺利登顶了，放眼望去都是白茫茫的一片，别有一番意思。下到玉皇顶后又去旁边的玫瑰园转了一圈，居然还能看到一两朵花，奇异到诡异了，呵呵。 再，就没啥了，坐车下山到苹果园，城铁倒公车回学校。去大粥锅小腐败一下后，又去赶同学的场了。 结论：一定要勤加锻炼啊，要不然山都爬不动~~~~</div>
-    </section>
-
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/341/'> patch的-p参数</a> </h2>
-        <div class="post-meta">发表于2008-09-05 14:02:24 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： patch, 用法 先用diff比较两个目录，在patch的时候，如果要打补丁的目录和diff时的目录放的地方不一样，它会报找不到文件的错，此时需要用到-p的参数，-p后面跟一 个数字作为参数，表示忽略diff文件中第几个/前的东西。如-p5表示忽略第5个/前的东西。比如在diff的时候，比较的是a/foo和b/foo两个文件夹，那 么输出的diff文件中，文件名是a/foo/XXXX，此时如果要给c/foo下的一个东西打补丁，那么直接打就不行了。此时应该到c目录中，然后用patch -p1命令来打，嗯。 外一则，如果被打补丁的目录中有些文件不存在了，patch会停下来问你咋办，如果在命令行中加上- t的参数，那么它就不会停而是直接跳过，开始打下一个文件的补丁了。 记一笔，嗯。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,15 +250,17 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
         
         </ul>
     </div>
@@ -269,7 +271,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(79)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(81)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -294,7 +296,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 46, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 48, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
@@ -318,6 +320,33 @@
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
+
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+        </script>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Queue(function() {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+        </script>
 
         <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
         <script>

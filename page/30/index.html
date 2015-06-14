@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/164/'> Django中CharField的choices</a> </h2>
+        <div class="post-meta">发表于2006-09-06 22:15:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">本来以为是比较难的问题，试了一堆记忆中的属性什么的，就是不认，后来骚扰了一下limodou才了解到原来是个这么简单的方法，而且在db- api手册中也有说。诶，看东西看的不仔细，丢人了啊。说说正题吧，就用step by step的例子说吧，本来显示的是M或F，因为直接调用的是address. gender，但是如果调用addres.get_gender_display就可以显示为男或女。简单吧，我怎么就没看到呢？</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/163/'> Django中的TIME_ZONE</a> </h2>
+        <div class="post-meta">发表于2006-09-05 23:06:50 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天在groups上看到有人在讨论这个问题，想想自己当时果然没有考虑到这个事情。在Django step by step中，写的是CCT，然后到django提供的网站上去查了一下，发现应该写成&rsquo;Asia/Shanghai PRC&rsquo;，但是好像还有一个选项是&rsquo;Etc/GM T+8&rsquo;，不知道这几个选项之间是什么关系。groups上有人说用CCT时会出现时间设置不对的问题，另外两个好像没有。我也没有试验，只是把这个东西写下来，算是 知道有这么个东西吧，呵呵 :)</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/162/'> Django中的templates</a> </h2>
         <div class="post-meta">发表于2006-09-05 22:47:52 </div>
     </header>
@@ -197,45 +229,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/154/'> diff/patch</a> </h2>
-        <div class="post-meta">发表于2006-08-30 21:56:26 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>今天配置xoops的时候，发现几个模块之间好像有相同的配置文件，它们有相同的文件名，只是在不同的地方加上了一些代码，所以自然而然的就想到了用diff/pat
-ch。上网查了一上，还是满简单的，主要就是patch接受的diff文件有特定的格式，在用diff生成的时候要加上-
-u选项才可以被patch接受。例如目录下有1和2两个文件，下面是一些操作记录：</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/154/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/153/'> Apache&#43;MySQL还是满方便的嘛</a> </h2>
-        <div class="post-meta">发表于2006-08-18 22:25:05 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">前几天折腾机器，重装系统，从XP到2k3又到2k3 R2，现在感觉系统用起来爽多了，看来XP还是没有2k3合我的胃口啊。8过今天只是想说说LAMP里面的A和 M(不过我一直好像用的都是WAMP，呵呵)，重装系统后根本不要重装，只要在命令行重新运行一下命令就可以了，可以直接安装成系统报务，真的是很方便。多亏当时搭系 统的时候没有按网上那一堆文章说的，把dll什么的拷到C盘去，在这其中多亏了FileMon啊，不过估计把文件夹拷走还是有些困难的，因为我把网站的目录移到别的地 方去了，不过即使这样改的地方也算是很少，比重装一下也方便多啦 :)</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -263,15 +256,17 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
             <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1230/'> goroutines &#43; channel</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/1224/'> Save base64 image with carrierwave and bootstrap-wysiwyg</a></li>
         
         </ul>
     </div>
@@ -282,7 +277,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(79)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(81)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -307,7 +302,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 46, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 48, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
@@ -331,6 +326,33 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
+
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+        </script>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Queue(function() {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+        </script>
 
         <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
         <script>
