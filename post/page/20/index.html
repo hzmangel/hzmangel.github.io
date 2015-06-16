@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/280/'> 上来看看</a> </h2>
+        <div class="post-meta">发表于2008-04-25 15:48:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">租的房子开了宽带还没给装，郁闷了。今天为了回入职的邮件，只有到网吧来上网了。顺便发篇吧，嗯。动手做饭的感觉满好玩的，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/279/'> 在宿舍的最后一晚</a> </h2>
         <div class="post-meta">发表于2008-04-17 02:32:15 </div>
     </header>
@@ -207,22 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/270/'> 在 App Engine 中使用模板和静态文件</a> </h2>
-        <div class="post-meta">发表于2008-04-09 02:21:49 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">看到App Engine支持模板，扫了一眼，和Django的就是一样的，它下面的链接也直接说了，用的就是Django的模板系统。看来这次又有便宜可占了，直接 上手，不错不错。 和Django中一样，需要使用静态文件，但是在yaml文件中设置了static_dir再起服务器死活就是开不起来，直接去google.com找未果，然后想到 了它的开发group，果然碰到一群和我碰到同样问题的人。后来好像说原因是因为Windowz下用的是 \ 作为路径分隔符，在某个正则中变了转义，所以就那个啥了 。一种解决方法是在yaml文件中把所有的静态文件写进去，看着头就大；还好有人想到了用正则，于是就有了一种新的方法。 - url: /stylesheets/(.*) static_files: stylesheets/\1 upload: stylesheets/(.*) 查了一下，upload参数的意思没看太明白，好像是说如果文件匹配此参数后面的正则，就被这个handler接管，主要用处是确定和url和static_file s后面正则匹配的路径对应于哪个文件。汗自己的英语理解力，反正先用上了，确定能用了。然后按教程中写的，直接渲染吧。 居然发现了一个bug，呵呵，有意思。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +250,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
 </a></li>
         
@@ -260,8 +263,6 @@
         
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
-        
         </ul>
     </div>
 
@@ -271,7 +272,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(81)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(82)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -296,7 +297,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 48, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 49, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

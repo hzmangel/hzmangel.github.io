@@ -7,8 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Mon, 19 Dec 2011 10:41:55 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2015 23:40:10 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set timezone in Python
+</title>
+      <link>http://hzmangel.github.io/post/timezone-in-python/</link>
+      <pubDate>Tue, 16 Jun 2015 23:40:10 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/timezone-in-python/</guid>
+      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import os
+import datetime
+
+print(datetime.datetime.now())
+os.environ[&#39;TZ&#39;] = &#39;Asia/Shanghai&#39;
+print(datetime.datetime.now())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;TZ&lt;/code&gt;的环境变量让datetime输出了指定时区的时间。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>List all CVS tags</title>

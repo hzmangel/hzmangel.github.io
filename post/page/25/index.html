@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/218/'> 终于用上了Boost.test</a> </h2>
+        <div class="post-meta">发表于2007-09-30 15:59:32 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">终于用上了，虽然现在只是简单的做单元测试，但至少能用了，这够了。 首先apt-get install libboost-test，诶，不得不说一句，debian就是方便啊。然后写makefile，主要是我不想每次都写那么一大串的东西来编译。其实也没什么特殊的，记得链接一下test的库，具体的用dpkg -L查看吧。然后还需要加一个常量的定义，-DBOOST_TEST_DYN_LINK，否则丫会告诉你main没有定义，昨晚折腾了我一晚上，FT。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/217/'> 这个假期，有灾……</a> </h2>
         <div class="post-meta">发表于2007-09-30 15:56:41 </div>
     </header>
@@ -217,22 +233,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/205/'> pietty的Fn快捷键</a> </h2>
-        <div class="post-meta">发表于2007-08-25 23:22:07 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">由于某些原因，一直在用pietty登录到远端的服务器上做事，写程序，写文档什么的。但是有点郁闷的是总是设不好终端类型，于是总造成要不是这个功能键不能用，就是那个不能用。一直以来也都忍了，因为我需要的功能键一般也就是Home，End之类，PgUp和PgDn用的都不多，更不要说Fn了。可以最近在用TeX写文档，latexsuite需要用F5来自动补全，虽然一直是自己在敲，但是今天 也不知道怎么了突然不想敲了，找了个SecureCRT试了试，它能用，但是用着还是有些不爽，就再找到pietty，看了一下，只要把终端类型设置成Xterm就可以使用Fn的快捷键了，写了点东西，果然比自己手敲爽多了。再试了试Home和End，果然在Bash下有一个不太好用了，不过在Vim里面正常了，也算是一个好处吧。然后在网上转了转，发现Bash中可以用C-a和C-e到命令的首和尾，看来又学到了一招，嗯。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -260,6 +260,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
 </a></li>
         
@@ -270,8 +273,6 @@
         
             <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/1233/'> Golang and JSON API</a></li>
-        
         </ul>
     </div>
 
@@ -281,7 +282,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(81)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(82)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -306,7 +307,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 48, '/tags/programming'];  ['python', 7, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 49, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
