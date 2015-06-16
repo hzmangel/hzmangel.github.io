@@ -72,9 +72,14 @@
     </header>
 
     <section>
-        <div class="post-summary">今天在写一个脚本的时候，发现使用datetime.datetime.now()输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用pytz的解决方案： import os import datetime print(datetime.datetime.now()) os.environ['TZ'] = 'Asia/Shanghai' print(datetime.datetime.now()) TZ的环境变量让datetime输出了指定时区的时间。</div>
+        <div class="post-summary"><p>今天在写一个脚本的时候，发现使用<code>datetime.datetime.now()</code>输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用<code>pytz</code>的解决方案：</p>
+</div>
     </section>
 
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/timezone-in-python/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
     
 
 </article>
