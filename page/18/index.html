@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/304/'> Open File with Specified Encoding</a> </h2>
+        <div class="post-meta">发表于2008-06-13 00:00:21 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。 其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/303/'> Init Script for GDB</a> </h2>
         <div class="post-meta">发表于2008-06-12 23:47:55 </div>
     </header>
@@ -207,22 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/292/'> 今天被吓个半死，嗯</a> </h2>
-        <div class="post-meta">发表于2008-05-23 00:03:11 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。 没有别的机器看文档，只好按着依稀的记忆知道要分区，于是删除系统中其它几个Linux分区，在它问要不要写分区表的时候，犹豫了好一会，终于闭着眼睛打了yes，心 想听天由命吧。 不过和以前几次不同的是，这次刚想完，天就来找我了，想把win的盘mount上看看东西还在不在，然后不知道U盘上的那个系统就出啥毛病了，PATH里面就没有了/ bin啥的目录，当时就看到了很壮观的刷屏，系统告诉我说，sleep找不到。切到另一个终端，输入/bin，结果丫告诉我说木有这个目录，于是就慌了。试了几条命令 未果，于是只好重启，halt是肯定没有的了，只是在祭出三指大法的时候，伊也告诉我说/sbin/shutdown目录下东西不存在，只好很郁闷的去按开关了。 本来以为事情就这样了，但是重启的时候突然发现，GRUB进不去了，原来把盘给格了，想了想，U盘里面还有个GRUB，看看能不能用吧。重启，U盘启动，进GRUB命 令行，敲boot后，丫直接给我没反应，这时已经有点慌了；找出DSL的盘，输入dsl 2后，屏幕上打出来两只小企鹅，然后也没反应了，等了一会还是不行，于是更慌 了；抱着最后一点希望把某次展会拿来的CentOS扔进了光驱，回车启动，终于起来了，进了X干的第一件事情就是先把Win盘mount上，还好没啥事情，于是开始想 怎么解决grub的问题。 最简单的应该就是用XP盘启动，然后fixmbr，但是还是想把grub留着，一开始想在Windows下新建一个grub目录，结果伊弹出来个框子告诉我，此分区只 读，FT。突然意识到机器里面的那两个Linux盘可以用来放grub，于是问题解决，mkfs.ext3，然后mkdir，从U盘里面把东西拷过去，进grub，r oot-&gt;setup，再重启，终于能进命令行了，继续试chainloader +1，终于进来了。 总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +250,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
 </a></li>
         
@@ -261,8 +264,6 @@
         
             <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
-        
         </ul>
     </div>
 
@@ -272,7 +273,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(82)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -297,7 +298,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 49, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

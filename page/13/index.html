@@ -66,6 +66,30 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/355/'> 不一样的香山</a> </h2>
+        <div class="post-meta">发表于2008-10-27 17:35:30 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： 骑行, 香山, 山路</p>
+
+<p>上次妙峰后就回家了，所以没有跟十一的坝上之行，于是看到这次香山的召集贴后确定了一下时间就跟了。其实跟活动还有一个原因是因为活动的标题告诉我们，这次是休闲游，
+不过在后来我才知道这是一个美丽的谎言……</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/355/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/354/'> xetex设置字体</a> </h2>
         <div class="post-meta">发表于2008-10-13 22:45:51 </div>
     </header>
@@ -207,22 +231,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/344/'> 使用NFS在AIX上挂载Linux分区</a> </h2>
-        <div class="post-meta">发表于2008-09-18 13:30:03 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： AIX, NFS, Not owner 起因很简单，因为在折腾机器，在AIX上解压怎么也不对，只好想到了NFS的方式。首先保证两台机器能互相通信（也就是能ping通啦），然后编辑NFS服务器即Li nux机器上的/etc/exports的文件，在其中加上一行：&lt;path&gt; &lt;hostname/ip&gt;(&lt;option&gt; )，第一个是在Linux服务器上的路径，第二个是需要挂载此文件夹主机的主机名或者IP地址，最后括号中是选项，一般是rw, async。改完后重启NFS的服务器，此时在服务器上用exportfs命令应该能看到刚加到配置文件中的一行。此时服务器端应该算是设置完成了。 在客户端的AIX机器上，首先需要确定portmap和nfs后台进程的存在，命令嘛就是startsrc -s portmap和startsrc -g nfs，然后就是用mount命令了，不用加-t nfs，直接就是mount &lt;ip&gt;:&lt;path&gt; &lt;mount_point&gt;。 简单吧，不过需要说说vmount: Not owner这个问题（以下解答转自zhaolin日志）出现这个问题的原因是linux操作系统在响应AIX操作系统的mount请求时，需要用到此nfs保留端口，该端 口在默认情况下是不会开放的。所以需要在AIX客户端设置一下： # nfso -o nfs_use_reserved_ports=1 Setting nfs_use_reserved_ports to 1 然后再重新mount就没问题了。还有就是可能需要在AIX的/etc/hosts下添加服务器地址和IP映射，否则有可能会找不到，嗯。 目前只是挂载上，能读，至于能不能写再说吧，嘿嘿。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +258,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
 </a></li>
         
@@ -261,8 +272,6 @@
         
             <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
-        
         </ul>
     </div>
 
@@ -272,7 +281,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(82)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -297,7 +306,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 49, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

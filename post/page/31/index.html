@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/156/'> Django出错</a> </h2>
+        <div class="post-meta">发表于2006-09-02 23:41:44 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include(&ldquo;)，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r&rsquo;^$&lsquo;, include(&lsquo;ilab.homepage.index&rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r&rsquo;^$&lsquo;, &lsquo;ilab.homepage.index&rsquo;), 原因嘛，嘿嘿，未知。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/155/'> 测试coolcode</a> </h2>
         <div class="post-meta">发表于2006-08-30 23:23:22 </div>
     </header>
@@ -214,22 +230,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/146/'> Windows Live Writer</a> </h2>
-        <div class="post-meta">发表于2006-08-16 16:29:47 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">[](http://localhost:2270/blog/?p=162) MS刚发布的写blog的东西，我也是刚用上，感觉还是满不错的，所见即所得的东西，不过在打字过程中屏幕有时会闪烁，不知道是什么原因，刚发现还可以自动换行，别的 功能还没去发掘，应该还算是不错吧。虽然有时对MS没什么好感，但是它的东西在上手度方面还是很不错的，这也是不得不承认的一点 :) 。不过不知道是不是因为beta版的原因，有时会和输入法不兼容，机器上没有微软拼音，测试不了，不过极点五笔确实是有几次切不出来了，只有把 writer关了重启。 btw: 写的时候才想起来，一直想弄个软件方面的分类，就用它当做开篇的吧，不过说真的，我也不知道应该在这边写些啥，不知道和其它的分类会不会有冲突啊</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -257,6 +257,9 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
 </a></li>
         
@@ -268,8 +271,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         
             <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/1239/'> Control Goroutines amount via bufferred channel</a></li>
-        
         </ul>
     </div>
 
@@ -279,7 +280,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(82)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -304,7 +305,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 2, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 49, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 2, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
