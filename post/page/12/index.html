@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/366/'> 在Django的模板中使用m2m</a> </h2>
+        <div class="post-meta">发表于2008-11-22 02:57:40 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： django, many-to-many, template, m2m 最近在写自己的blog系统，自然就想到加上了tags。在我的数据库中，把tag扔在一个单独的表Tags中，然后在Articles表中有一个字段以m2m的关系 连到Tags表中。已经把post, list等页面写完了，但是在写detail的时候，发现如果直接用article.tags引用，模板系统会报m2m的对象不 能遍历的错，放狗找了一圈才知道需要使用article.tags.all作为for遍历的变量集，剩下的没啥说的了。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/365/'> root可写NFS目录</a> </h2>
         <div class="post-meta">发表于2008-11-19 11:13:42 </div>
     </header>
@@ -266,22 +282,6 @@ clean:
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/356/'> Farewell The EARTH</a> </h2>
-        <div class="post-meta">发表于2008-11-03 15:51:32 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： 歌曲, 心情 一首曲子，来自Lost Emipre Saga。很好听，但是，也许我现在的心情不适合听，所以听完后会有一丝淡淡的失落。 原因嘛，已经不清楚了，只是知道已经有很久没再有这种感觉了，突然发现，已经有好久没有找个地方找段时间好好想一些事情了，自己不光被ThinkPad惯坏了，更是被 电脑和网络惯坏了，也许，找个时间，一个人出去静静是个不错的选择，希望自己不要食言…… 在写之前想了许多许多，但是真到要写的时候却不知道从什么地方开始，呵呵，被惯坏的人啊。最后推荐一下这首曲子，很好听，适合一个人慢慢的去欣赏，嗯。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -309,6 +309,9 @@ clean:
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
 </a></li>
         
@@ -321,8 +324,6 @@ clean:
             <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
-        
         </ul>
     </div>
 
@@ -332,7 +333,7 @@ clean:
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -357,7 +358,7 @@ clean:
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

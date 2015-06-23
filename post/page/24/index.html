@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/234/'> Linux中的权限</a> </h2>
+        <div class="post-meta">发表于2007-10-18 19:05:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天给对面屋一哥们开了个用户，可是他说进不去一个目录，今天看了看权限，估计是设置的时候没弄懂目录的权限，就上网找找，把结果放在这吧，方便以后查。 对于文件的那几个权限就不说了，rwx 还是满简单的，但是对于目录来说，r 表示可以读包含在目录中文件的名称，w 表示可以写信息到目录中去（如增加和删除索引节点），而 x 表示可以查找目录，即就是可以用目录名作为路径名去访问它包含的文件或子目录。那个哥们我一开始只给了他一个对目录的只读权限，所以进不去了，还需要加上一个 x 权限。 还有一些具体的东西：对一个目录有只读权限的，只能列出目录下的文件名，但不能得到其它信息，也不能写入文件，也不能更改目录中已有的文件。如果去掉了写权限，则 ls 的时候也会被告知权限不够，cat 也不行，写入那是更不行了。如果有 x 权限，则不能 ls，但是能够使用 cat 得到文件，写入不能。差不多就些了吧，其它一些高级的设置，下次有空再看吧。上面那几个都在机器上测试过，希望还没有脑子糊涂到测试错&hellip;&hellip;</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/233/'> 第一次笔试，继续被B4，嗯</a> </h2>
         <div class="post-meta">发表于2007-10-18 09:29:51 </div>
     </header>
@@ -213,27 +229,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/232/'> 用swig给C做单元测试</a> </h2>
-        <div class="post-meta">发表于2007-10-03 17:29:54 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/232/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -261,6 +256,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
 </a></li>
         
@@ -273,8 +271,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
-        
         </ul>
     </div>
 
@@ -284,7 +280,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -309,7 +305,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

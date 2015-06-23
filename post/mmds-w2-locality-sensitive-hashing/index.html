@@ -189,6 +189,39 @@ FOREACH columes:
 <h3 id="fingerprints:98fc395032abb3e5c8d913488aa084ef">Fingerprints</h3>
 
 <h3 id="similar-news-articles:98fc395032abb3e5c8d913488aa084ef">Similar News Articles</h3>
+
+<h2 id="距离计算:98fc395032abb3e5c8d913488aa084ef">距离计算</h2>
+
+<p>此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 <em>Jaccard Similarity</em> 并不是距离，用<code>1</code>减去它才是。一般说来，有两种类型的距离，它们是 <em>欧氏距离</em> 和 <em>非欧距离</em> 。</p>
+
+<ul>
+<li>欧氏距离是指欧氏空间的距离，欧氏空间包含有实实在在维度，和密集的点。</li>
+<li>欧空中，可以在两个点之间找到中点。</li>
+<li>欧氏距离是基于欧空中点的位置来确定的</li>
+<li>其它的空间即被称为非欧空间。在非欧空间中，距离的计算是通过点的其它一些特性来完成的，因为非欧空间并没有位置这个概念。</li>
+</ul>
+
+<p>假设 <code>$x$</code> ， <code>$y$</code> 和 <code>$z$</code> 是某个空间中的点，而 <code>$d$</code> 是计算距离的函数，那么它有如下特性：</p>
+
+<ul>
+<li><code>$d(x,y) \geq 0$</code> ：所有距离都是非负值。</li>
+<li>仅在 <code>$x$</code> ， <code>$y$</code> 是同一点时，才有 <code>$d(x,y) = 0$</code> 。</li>
+<li><code>$d(x,y) = d(y,x)$</code></li>
+<li><code>$d(x,z) \leq d(x,y) + d(y,z)$</code> ：三角定理。</li>
+</ul>
+
+<h3 id="欧氏距离:98fc395032abb3e5c8d913488aa084ef">欧氏距离</h3>
+
+<p><code>$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$</code> 。在<code>$r=2$</code>时，即变成平方各开根号，即熟悉的距离计算。此外还有<code>$L_{1}-norm$</code> 。</p>
+
+<h3 id="非欧距离:98fc395032abb3e5c8d913488aa084ef">非欧距离</h3>
+
+<ul>
+<li><em>Jaccard Distance</em></li>
+<li><em>余弦距离</em></li>
+<li><em>Edit Distance</em></li>
+<li><em>Hamming Distance</em></li>
+</ul>
 </div>
     </section>
 
@@ -210,7 +243,8 @@ FOREACH columes:
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                
+                 <a class="previous" href="http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/"> &lt; MMDS Notes: W2 - Nearest Neighbor Learning
+ </a> 
             </p>
 
             <p class="col-md-6">
@@ -249,6 +283,9 @@ FOREACH columes:
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
 </a></li>
         
@@ -261,8 +298,6 @@ FOREACH columes:
             <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/new-github-blog/'> Blog搬(zhe)家(teng)记</a></li>
-        
         </ul>
     </div>
 
@@ -272,7 +307,7 @@ FOREACH columes:
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(83)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -297,7 +332,7 @@ FOREACH columes:
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 3, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 50, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 3, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
