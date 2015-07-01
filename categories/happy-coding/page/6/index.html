@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/268/'> 初用 Google App Engine</a> </h2>
+        <div class="post-meta">发表于2008-04-09 00:27:00 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。 下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下： application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。 然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。 print 'Content-Type: text/plain' print '' print 'Hello, world!' 反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。 import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &quot;__main__&quot;: main() 在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。 最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.appspot.com/ 访问了。满好玩的，继续折腾。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/267/'> Python取当前循环次数</a> </h2>
+        <div class="post-meta">发表于2008-04-05 15:08:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在groups上瞎逛，看到了这个，觉得满有用的，于是复制到这里一份。 在循环中使用enumerate可以同时取得循环次数和循环变量的值，使用方法是这样的 1 for i,v in enumerate(['a','b']): 2 print i,v 内置的函数，从2.3版加上去的。在这记一笔……</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/260/'> 在ReST文档中使用pygments</a> </h2>
         <div class="post-meta">发表于2008-03-21 20:53:47 </div>
     </header>
@@ -210,51 +242,6 @@ idgets的timer，做了几个小例子后苦于其要依托于某widget，今天
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/198/'> 重新开始wxWidgets</a> </h2>
-        <div class="post-meta">发表于2007-06-14 19:37:25 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>因为项目原因，要找个跨平台的图形库，因为用过wxPython做过点东西，所以决定选择wxWidgets了。没有了wxPython的好环境，只好自己编译了，从
-官网上下到Windows下的安装包，然后安装。突然想到第一次装wxWidgets时的样子了，那会以为只要把那个安装包按win下程序的方法一路next下去就可
-以了，正因为这样想，所以连最后的那个安装说明都没看直接Finish了，然后找到安装包里面的sample，准备找个Hello
-World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会后，打开doc文件夹，才知道安装后还要编译，呵呵，那会，还什么都不知道呢 :)</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/198/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/197/'> 说说回调</a> </h2>
-        <div class="post-meta">发表于2007-06-14 09:37:03 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>最近做个项目，在设计的时候想到有可能要用到回调，对于这个东西已经弄不懂很久了，于是就上网找资料看，经过一个程序的磨炼后，差不多弄懂了，说说吧。</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/197/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -282,6 +269,12 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
@@ -289,12 +282,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
         </ul>
@@ -306,7 +293,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -331,7 +318,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

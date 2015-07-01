@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/274/'> App Engine中后台任务的实现</a> </h2>
+        <div class="post-meta">发表于2008-04-10 03:21:23 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">灌水灌上瘾了，没办法，呵呵，就再来一篇吧。 写的那个RSS聚合应用，想在后台运行一个单独的线程，用以从那些地址更新RSS信息，一开始很傻很天真的用thread来写，写了一半想起来了，去查查支持不支持。 去开发者论坛上一找background，还真有人在讨论。扫了一眼，就是现在还不支持，然后一帮人在Google Code的某个Issue上灌水，话说我也去加了一瓢，嘿嘿。 目前不支持，但我还是要用啊，继续转，果然找到了个折衷的方法，其实也很简单，就是把那个本来要写成thread的类映射到某个URL上，然后过一段时间访问一下，这 个可以在别的任何机器上用计划任务实现。刚试了一下，效果不错，暂时先这么用着吧，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/273/'> 在App Engine中访问外部网站</a> </h2>
+        <div class="post-meta">发表于2008-04-10 03:16:13 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">下午做RSS聚合网站时，需要从外部的地址抓feed，用的是feedparse的库。但是怎么弄都出错，所以很郁闷，想从RSS的字符串解析一次，看看有没有错。想 当然的使用了urllib，结果它也出错。由于有了昨天模板的经验，所以直接去找google的文档。果不其然，它不支持直接从外网获取内容，如果有此需求，则需要使 用它封装好的一个urlfetch库中的fecth方法。没办法啊，那就用吧，谁让人家的地盘人家做主呢。 抓取内容，判定返回值是否为200，取结果，到这一切顺利，于是就开始用feedparse解析。解析也没问题，但是郁闷的是，这样解析出来的东西没有时间信息了，就 是它得不到这个RSS的最后更新时间，去urlfetch的文档里面转了一圈，也没见有相关的内容，只好自己另想办法了。最后的解决办法是在FeedInfo中加入了 一个字段用以存放最后更新的时间，然后拿feed中的每个文章的updated_parse时间与这个时间比较，如果文章的时间较新则插入库中，否则不处理。在写时候 漏掉一条语句，调了好长时间，真郁闷。 PS：logging真的很好用，直接在服务器的终端窗口输出信息。其实我本来是想用printf的，结果伊居然不支持，FT。 PS2：如果loggin的消息调成debug，则在开服务器的时候需要加上- d选项，否则DEBUG的信息不输出，我为这折腾了10分钟，那几条logging语句一会加上一会删除，心里还直嘀咕，难道又被我找到个BUG&hellip;&hellip;.</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/272/'> 在App Engine中使用数据库</a> </h2>
         <div class="post-meta">发表于2008-04-10 03:04:57 </div>
     </header>
@@ -191,38 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/262/'> 毕业了？</a> </h2>
-        <div class="post-meta">发表于2008-04-02 01:14:00 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">在别人的地盘上狂灌一通后，想着总该给自己的一亩三分地浇点水吧，于是，就回来了。 最近大家的话题，总离不开毕业和工作，最近也就这俩件大事了。毕业了总有毕业的气氛吧，可惜，真的没有感觉到啥，比不上本科那会，没有那么多的离别之情，一方面也许是 因为大家都还在北京， 另一方面，难道是我们已经麻木了？再说工作，虽然经济独立很有诱惑力，但是想到工作后那么多的事情要考虑，头就继续变大。长大了，需要开始承担责任了，自己以后的路要 怎么走，自己应该做什么事情，基本上没有人可以在你身边指手画脚了，同时这也就意味着，一旦做出的决定出了什么事，处理的方法会更简单了，一个人扛吧。 这段时间走在学校中，经常会不经意的想到这样一个问题，为什么对于这样一个我呆了七年的地方，有时还是让我感觉到些许的陌生。七年，学校除了拆了几幢楼又盖了几幢楼， 加了几个牌子或是换了几个牌子，倒是没有什么太大的变化，但是有时总感觉自己融入不了主干道那汹涌的人流中，总觉得那些人和自己有着或多或少的距离。我也不知道为什么 ，呵呵。 住宿舍的日子已经是一天比一天少了，实验室的女生们基本不见了踪影，同宿舍的一哥们也要滚蛋了，下次再见谁也不知道是什么时候。倒是计划好了一系列的节目，但是真正能 够做的，同样是谁也不清楚有几个，计划总赶不上变化，尤其是对于我们这些将要告别学生生涯的人。还好大部队都在北京，目前只能奢望着周六周日，还能尽量的和学生时期一 样，有机会出去玩玩。 总在失去的时候才感觉到珍贵，现在又一次有了很好的例子。上学的时候周六周日一个一个宅在屋子里面，挥霍着大把大把的时间。等着要滚蛋了，才发现，已经失去了太多的东 西，而且毕业的这些活动，也找不到充足的时间了。目前能做的，就是一切随缘吧。 想着4月底就要正式去工作了，心中也是迷惘，虽然在别人的地方说了迷惘是过客，但是其实自己心里面的迷惘，就像影子一样，走到哪都扔不掉，也许最好的办法就是去忘掉它 ，做好手头的工作吧。不过说起来容易，做起来，呵呵。就这几次在公司培训的过程来看，感觉还满不错的，但是一想到温水煮青蛙这句话，心里面就有些虚，希望自己不会是那 只青蛙吧，不过，这同样是件who knows的事情，自己的雄心壮志，谁知道会不会被时间，被制度，被其它的任何东西磨掉？这两天看完了圈子圈套，第一感觉就是，商 场，太TMD复杂了，社会，是更TMD复杂。对你笑的不一定是你的贵人，同样给你脸色的也不一定是你的对头。没有永远的朋友，只有永远的利益。以后出去后，要先学会做 人啊，不是说遵纪守法，而是学会在这个社会中生存。同样还有一点需要记住的是，公司不是慈善机构，也不是司法机构，无论公司做出什么决定，它一定是需要为它的利益服务 的。公司的老板不会给你讨回公道，他只会寻找出以最小的损失解决问题的方法。前段时间看了点经济方面的东西，那里面的所有假设都是基于一个命题：人是自私的，所有人都 会在条件允许的情况下让自己的利益最大化。没有什么伦理道德的东西，有的只是赤裸裸的现实，残酷的现实。 乱七八糟的写了这么多，自己也不知道写了些啥，夜深了，学校也睡了。虽然对它还有些陌生感，但是回忆录总是要写的，毕竟是在这呆了七年。再说吧，慢慢来，但是，总是要 写的。</div>
-    </section>
-
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/261/'> Vim中交换奇偶行</a> </h2>
-        <div class="post-meta">发表于2008-03-29 01:38:38 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">在水木上看到了，记下来，以后可能会用到，嗯。答案来自vale@newsmth.org :g/^/+1m-1 g/^/：匹配所有行 +1：定位到下一行 m-1：移到上面去</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +250,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
@@ -257,12 +263,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
         </ul>
@@ -274,7 +274,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -299,7 +299,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

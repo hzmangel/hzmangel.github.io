@@ -7,8 +7,246 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 24 Jun 2015 02:20:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2015 18:20:21 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MMDS Notes: W2 - Frequent Itemsets - Part II
+</title>
+      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</link>
+      <pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid>
+      <description>
+
+&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;
+
+&lt;p&gt;前一篇中所说的两种计算数据对次数的办法，都是 &lt;em&gt;one-pass&lt;/em&gt; 的，程序在读入数据的同时，生成数据对，然后在数据对对应的计数上加1。这样数据读取完成后，直接查找计数的数即可得知结果。但是这个方法在在数据量过大时会超过主存的大小，从而在计算时引发换页，降低效率。而本篇要介绍的 &lt;em&gt;A-Priori&lt;/em&gt; 算法，通过减少需要计算的数据对个数，从而减少对内存的需求。&lt;/p&gt;
+
+&lt;p&gt;这个算法的核心思想是 &lt;em&gt;monotonicity&lt;/em&gt; ，即如果 &lt;code&gt;{I}&lt;/code&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的所有子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。反过来说，如果一个元素不是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么任何包含它的集合都不可能是。&lt;/p&gt;
+
+&lt;h2 id=&#34;基本算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本算法&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;A-Priori&lt;/em&gt; 是一个 &lt;em&gt;two-pass&lt;/em&gt; 算法，&lt;/p&gt;
+
+&lt;h3 id=&#34;first-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+
+&lt;p&gt;在读取的过程中创建两张Hash表，一张表是将所有 &lt;code&gt;item&lt;/code&gt; 映射为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;n&lt;/code&gt; 的索引，减少后面引用时占用的内存。第二张表是将 &lt;code&gt;item&lt;/code&gt; 的索引与 &lt;code&gt;item&lt;/code&gt; 出现的次数对应起来。&lt;/p&gt;
+
+&lt;h3 id=&#34;between-passes:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+
+&lt;p&gt;检查索引和出现次数映射的表，找出其中所有的 &lt;em&gt;frequent itemset&lt;/em&gt; ，并将它们重新索引为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;m&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;second-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+
+&lt;p&gt;计算所有使用 &lt;em&gt;frequent itemset&lt;/em&gt; 表中元素组成的数据对的 &lt;em&gt;support&lt;/em&gt; 值。具体流程如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;对每一个 &lt;em&gt;basket&lt;/em&gt; ，找出其中属于 &lt;em&gt;frequent itemset&lt;/em&gt; 表中的元素。&lt;/li&gt;
+&lt;li&gt;为找到的元素构建数据对。&lt;/li&gt;
+&lt;li&gt;找到数据对对应的计数值，加上它出现的次数。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最后，只需要检查第二次生成的数据就好。另外，如果需要求多于2个元素的 &lt;em&gt;itemset&lt;/em&gt; ，可以按上述办法将算法级联计算。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;基本算法介绍完成，下面就是改进了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Mutation: it is the key to our evolution.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;pcy:f42a6776e590235dbcf00cc877498b66&#34;&gt;PCY&lt;/h2&gt;
+
+&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 的时候，内存中有很多空闲的地方，所以在给 &lt;em&gt;item&lt;/em&gt; 计数的同时，生成出所有的 &lt;em&gt;pair&lt;/em&gt; ，取 Hash 后，给对应的 &lt;em&gt;bucket&lt;/em&gt; 加1 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，只处理如下的数据对：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; 和 &lt;code&gt;j&lt;/code&gt; 都是 &lt;em&gt;frequent items&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{i, j}&lt;/code&gt; 被 Hash 的 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这样 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据又能少一些了。&lt;/p&gt;
+
+&lt;p&gt;这个算法的原理是，如果一个 &lt;em&gt;pair&lt;/em&gt; 是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它对应的 &lt;em&gt;bucket&lt;/em&gt; 一定超过 &lt;em&gt;support&lt;/em&gt; 的阈值。而如果一个 &lt;em&gt;bucket&lt;/em&gt; 没有超过阈值，那么里面的所有 &lt;em&gt;pair&lt;/em&gt; 一定不是 &lt;em&gt;frequent pair&lt;/em&gt; 。 注意：一个 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt; 并不能保证其中的 &lt;em&gt;pair&lt;/em&gt; 都是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&#34;first-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;for b in buckets
+  for item in b:
+    count[item]++
+  end
+
+  for pair in b:
+    bucket(hash(pair))++
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;between-passes-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+
+&lt;p&gt;除了找出 &lt;em&gt;frequent item&lt;/em&gt; 外，还会把上一步中的 &lt;em&gt;hash bucket&lt;/em&gt; 替换为 &lt;em&gt;bitmap&lt;/em&gt; ，&lt;code&gt;1&lt;/code&gt; 表示 &lt;em&gt;frequent bucket&lt;/em&gt; ， &lt;code&gt;0&lt;/code&gt; 表示不是。这样可以进一步减少内存空间的占用（从 &lt;code&gt;32bit&lt;/code&gt; 降到 &lt;code&gt;1bit&lt;/code&gt;）。&lt;/p&gt;
+
+&lt;h3 id=&#34;second-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+
+&lt;p&gt;根据上面列出的条件，找到 &lt;em&gt;canidate pair&lt;/em&gt; ，计算。&lt;/p&gt;
+
+&lt;p&gt;PCY算法还有两个变种：&lt;/p&gt;
+
+&lt;h2 id=&#34;multistage:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multistage&lt;/h2&gt;
+
+&lt;p&gt;这个算法的核心在于，在PCY算法的 &lt;em&gt;first pass&lt;/em&gt; 后，并不开始对 &lt;em&gt;bucket&lt;/em&gt; 做筛选，而是将其中属于 &lt;em&gt;frequent bucket&lt;/em&gt; 的 &lt;em&gt;pair&lt;/em&gt; 挑出来，再做一次 Hash ，从而进一步减少 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据量。从定义上来看，这个算法可能会有多个 &lt;em&gt;pass&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;multihash:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multihash&lt;/h2&gt;
+
+&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用多个独立的Hash函数来计算 &lt;em&gt;bucket&lt;/em&gt; 。相比物 Multistage ，它还是 &lt;em&gt;two pass&lt;/em&gt; 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 &lt;em&gt;frequent bucket&lt;/em&gt; 。如果它能保证 &lt;em&gt;frequent bucket&lt;/em&gt; 的数目足够小，那么我们就能在 &lt;em&gt;two pass&lt;/em&gt; 获得 Multistage 的优点。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;算法的另一个发展趋势是获取到大部分的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，使用降低精确性的办法来换取效率。&lt;/p&gt;
+
+&lt;h2 id=&#34;基本想法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本想法&lt;/h2&gt;
+
+&lt;p&gt;对样本 &lt;em&gt;basket&lt;/em&gt; 进行随机抽样，并在内存中对样本进行 &lt;em&gt;A-Priori&lt;/em&gt; 或其改进版本的计算，此处需要计算所有的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，而不仅仅是 &lt;em&gt;pair&lt;/em&gt; 。计算时使用的 &lt;em&gt;support threshold&lt;/em&gt; 需要根据样本容量处理，例如抽样率为 &lt;code&gt;1/100&lt;/code&gt; ，那么阈值也相应的变成 &lt;code&gt;s/100&lt;/code&gt; 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，可以使用整体数据来验证是否找到的真的是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;这个算法有个问题有些 &lt;em&gt;set&lt;/em&gt; 可能在样本中不是 &lt;em&gt;frequent&lt;/em&gt; 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 &lt;em&gt;support&lt;/em&gt; 阈值，例如从 &lt;code&gt;s/100&lt;/code&gt; 降为 &lt;code&gt;s/125&lt;/code&gt; ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&amp;hellip;&amp;hellip;）&lt;/p&gt;
+
+&lt;h2 id=&#34;son-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;SON 算法&lt;/h2&gt;
+
+&lt;p&gt;这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 &lt;em&gt;frequent pair&lt;/em&gt; 置于候选的位置。而在 &lt;em&gt;second pass&lt;/em&gt; ，计算这些候选 &lt;em&gt;pair&lt;/em&gt; 并得出最后结果。这个算法的核心是，任何一个 &lt;em&gt;pair&lt;/em&gt; 如果是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它一定会在某个子集中是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;这个算法可以让计算并行化，以提高处理效率。&lt;/p&gt;
+
+&lt;h2 id=&#34;toivonen-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;Toivonen 算法&lt;/h2&gt;
+
+&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 &lt;code&gt;s/125&lt;/code&gt;，以尽可能的不要遗漏在全集中是 &lt;em&gt;frequent set&lt;/em&gt; 的数据。此后设置一个 &lt;em&gt;negative border&lt;/em&gt; 区间，以存放所有子集是 &lt;em&gt;frequent set&lt;/em&gt; 但是本身不是的集合。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，计算所有候选 &lt;em&gt;frequent itemsets&lt;/em&gt; 和 &lt;em&gt;negative border&lt;/em&gt; 中的数据。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果 &lt;em&gt;negative border&lt;/em&gt; 中没有数据是 &lt;em&gt;frequent itemsets&lt;/em&gt; ，那么所得就是所需的 &lt;em&gt;frequent itemsets&lt;/em&gt; .&lt;/li&gt;
+&lt;li&gt;如果在 &lt;em&gt;negative border&lt;/em&gt; 中找到了 &lt;em&gt;frequent itesmsets&lt;/em&gt; ，那么就需要重新取样进行计算，直到满足前一条的条件为止。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;证明：假设 &lt;code&gt;S&lt;/code&gt; 是一个在全集中的 &lt;em&gt;frequent itemset&lt;/em&gt; ，但是在抽样样本中，它既不属于 &lt;em&gt;frequent itemsets&lt;/em&gt; 也不是 &lt;em&gt;negative border&lt;/em&gt; 。那么可以找到一个 &lt;code&gt;T&lt;/code&gt; ，它是在样本中非 &lt;em&gt;frequent&lt;/em&gt; 的 &lt;code&gt;S&lt;/code&gt; 最小子集。即比 &lt;code&gt;T&lt;/code&gt; 小的子集在样本中都是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那根据 &lt;em&gt;negative border&lt;/em&gt; 的定义，&lt;code&gt;T&lt;/code&gt; 一定会在 &lt;em&gt;negative border&lt;/em&gt; 中，否则它就不是是最小子集。由于空集总是 &lt;em&gt;frequent itemset&lt;/em&gt; ，所以 &lt;code&gt;T&lt;/code&gt; 一定存在。这样就有一个 &lt;code&gt;T&lt;/code&gt; ，它在全集中是 &lt;em&gt;frequent itemset&lt;/em&gt; ，在样本中是 &lt;em&gt;negative border&lt;/em&gt; ，于是，重新抽样吧。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MMDS Notes: W2 - Frequent Itemsets - Part I
+</title>
+      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</link>
+      <pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid>
+      <description>
+
+&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;
+
+&lt;h2 id=&#34;market-basket-模型:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
+
+&lt;p&gt;这个模型一般用来描述两种数据之间的 &lt;em&gt;m2m&lt;/em&gt; 关系。其中的一个数据是 &lt;em&gt;item&lt;/em&gt; ，而另一个是 &lt;em&gt;baskets&lt;/em&gt; 。每一个 &lt;em&gt;basket&lt;/em&gt; 中包含有多个 &lt;em&gt;items&lt;/em&gt; ，即为 &lt;em&gt;itemset&lt;/em&gt; 。 通常认为：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 中的 &lt;em&gt;items&lt;/em&gt; 数量较少，远小于整体 &lt;em&gt;items&lt;/em&gt; 的数量。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 的数量较大，不能完全的放于内存中。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这是一个模型的例子：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Market&lt;/em&gt; ：一个超级市场。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Item&lt;/em&gt; ：市场中售卖的所有东西。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Basket&lt;/em&gt; ：用户的订单。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;frequent-itemsets:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt; 即指在 &lt;em&gt;baskets&lt;/em&gt; 中经常出现的 &lt;em&gt;itemset&lt;/em&gt; ，它的定义为：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;假设 &lt;em&gt;I&lt;/em&gt; 是一个 &lt;em&gt;itemset&lt;/em&gt; ，定义 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;support&lt;/em&gt; 为包含 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;basket&lt;/em&gt; 个数。定义数字 &lt;em&gt;s&lt;/em&gt; 为 &lt;em&gt;support threshold&lt;/em&gt; ，所有 &lt;em&gt;support&lt;/em&gt; 数超过 &lt;em&gt;s&lt;/em&gt; 的 &lt;em&gt;I&lt;/em&gt; 即为 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：一个 &lt;em&gt;basket&lt;/em&gt; 可能包含有多个 &lt;em&gt;itemset&lt;/em&gt; ，并不是说一个 &lt;em&gt;basket&lt;/em&gt; 中包含的就是一个 &lt;em&gt;itemset&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;一个 &lt;em&gt;itemset&lt;/em&gt; 可以包含有不定个元素。如果一个 &lt;em&gt;itemset&lt;/em&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的的任何子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;h4 id=&#34;应用场景:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;应用场景&lt;/h4&gt;
+
+&lt;h5 id=&#34;超市商品:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;超市商品&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：超市商品。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：用户订单，上面包含有一个或多个商品。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过分析订单中的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，可以得出哪些商品会经常被同时购买。&lt;/p&gt;
+
+&lt;h5 id=&#34;相关内容查找:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;相关内容查找&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：单词&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：文档，如网页，blog，tweets等。包含一系列的单词。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 中，肯定包含有一些 common word，除去这些词后，可以揭示出一些单词之间的关系。&lt;/p&gt;
+
+&lt;h5 id=&#34;剽窃检测:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;剽窃检测&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;itme&lt;/em&gt; ：文档&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：句子。如果一个文档包含这个句子，那么它在这个 &lt;em&gt;basket&lt;/em&gt; 中。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 表示这些文档中有大量的句子相似，可以检测抄袭的方法。&lt;/p&gt;
+
+&lt;h5 id=&#34;生物标记:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;生物标记&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：生物标记，如基因，血蛋白，疾病等。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：病人数据，如基因检测，生化指标等。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;找到的包含疾病和生物标记的 &lt;em&gt;frequent itemset&lt;/em&gt; 可以用于疾病检测。&lt;/p&gt;
+
+&lt;h3 id=&#34;association-rule:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;定义 &lt;code&gt;$I \rightarrow j$&lt;/code&gt; ，表示如果一个 &lt;em&gt;basket&lt;/em&gt; 包含有 &lt;code&gt;{I}&lt;/code&gt; 中所有的元素，那么它就有可能包含 &lt;code&gt;j&lt;/code&gt; 。即 &lt;code&gt;{I}&lt;/code&gt; 是一组元素，而 &lt;code&gt;j&lt;/code&gt; 是一个元素。这个推断，就是一个 &lt;em&gt;association rule&lt;/em&gt; 。 &lt;em&gt;association rule&lt;/em&gt; 有一个属性为 &lt;em&gt;Confidence&lt;/em&gt; ，它表示给了 &lt;code&gt;{I}&lt;/code&gt; 后出现 &lt;code&gt;j&lt;/code&gt; 的概率，即在所有包含&lt;code&gt;{I}&lt;/code&gt;的 &lt;em&gt;basket&lt;/em&gt; 中同时包含&lt;code&gt;j&lt;/code&gt;的概率。&lt;/p&gt;
+
+&lt;p&gt;现在问题来了：找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 且 &lt;em&gt;confidence &amp;gt;= c&lt;/em&gt; 的 &lt;em&gt;association rule&lt;/em&gt; 。此处的 &lt;em&gt;support&lt;/em&gt; 是指 &lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support&lt;/em&gt; ，而不是 &lt;code&gt;{I, j}&lt;/code&gt; 的。&lt;/p&gt;
+
+&lt;p&gt;计算过程的描述如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= sc&lt;/em&gt; 的集合&lt;/li&gt;
+&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的集合&lt;/li&gt;
+&lt;li&gt;如果 &lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support &amp;gt;= cs&lt;/em&gt; ，那么找到它少一个元素，而且 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的子集。&lt;/li&gt;
+&lt;li&gt;当且仅当下面条件都满足时， &lt;code&gt;$I \rightarrow j$&lt;/code&gt; 才是一个被接受的 &lt;em&gt;rule&lt;/em&gt; 。
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support s1 &amp;gt;= s&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support s2 &amp;gt;= sc&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;s2/s1 &amp;gt;= c&lt;/em&gt; （此比值即为 &lt;em&gt;confidence&lt;/em&gt; 的定义）.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在实现上，数据通常是以普通文件方式存储于磁盘上的，存储的方式是按 &lt;em&gt;basket&lt;/em&gt; 排列。在读入数据时，即将数据切分成不同长度的集合。不难看出，磁盘IO是数据读取过程中主要的开销。在实践中，数据是多次读取的。所以在计算时，读取次数也是一个需要考虑的部分。&lt;/p&gt;
+
+&lt;p&gt;在计算过程中，由于设置的阈值比较高，所以通常能找到的就是 &lt;em&gt;frequent pair&lt;/em&gt; ，所以这也是需要面对的最大问题。&lt;/p&gt;
+
+&lt;h4 id=&#34;一般算法:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;一般算法&lt;/h4&gt;
+
+&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 &lt;em&gt;n**2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
+
+&lt;p&gt;在计算上，有两种方式：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;计算所有数据对出现的次数，并存放于三角矩阵中。&lt;/li&gt;
+&lt;li&gt;使用类似稀疏矩阵的存储方法，使用坐标+次数的方式存储。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;第一种方式每个数据对需要 &lt;code&gt;4&lt;/code&gt; 个字节（假设一个整型数使用4个字节）。第二种方式每对需要12字节（坐标及计数），但是只有存在的数据对才会占用空间。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MMDS Notes: W2 - Nearest Neighbor Learning
@@ -1197,406 +1435,6 @@ end
 or &lt;code&gt;--queue=&lt;/code&gt; can be added to specify the working queue. I have copied some
 code from &lt;a href=&#34;https://gist.github.com/J-Gull/1060167&#34;&gt;this page&lt;/a&gt; to make the rake
 can start/stop the workers.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>iOS Code Snippets - UITableView</title>
-      <link>http://hzmangel.github.io/post/1201/</link>
-      <pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1201/</guid>
-      <description>
-
-&lt;p&gt;Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href=&#34;http://goo.gl/0ZrcA&#34;&gt;http://goo.gl/0ZrcA&lt;/a&gt;. The text above is the introduction text for that project, please reference the code for detailed information.# SimpleTableView&lt;/p&gt;
-
-&lt;p&gt;This app is used to describe some basic feature of &lt;code&gt;UITableView&lt;/code&gt; in iOS
-framework, here is some points of this app:&lt;/p&gt;
-
-&lt;h2 id=&#34;a-tabbed-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;A tabbed view&lt;/h2&gt;
-
-&lt;p&gt;This app shows three different UITableViewController objects, which is
-organized by tabbed view. The table view of this app is created
-programmatically, which is built by this code segment in file &lt;code&gt;AppDelegate.m&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-
-    UIViewController *vc_simple_table = [[SimpleTableViewController alloc] initWithNibName:@&amp;quot;SimpleTableViewController&amp;quot; bundle:nil];
-    UIViewController *vc_section_table = [[SectionTableViewController alloc] initWithNibName:@&amp;quot;SectionTableViewController&amp;quot; bundle:nil];
-    UIViewController *vc_grouped_table = [[GroupedTableViewController alloc] initWithNibName:@&amp;quot;GroupedTableViewController&amp;quot; bundle:nil];
-
-    self.tab_bar = [[UITabBarController alloc] init];
-    self.tab_bar.viewControllers = @[vc_simple_table, vc_section_table, vc_grouped_table];
-
-    [self.window addSubview:self.tab_bar.view];
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: &lt;code&gt;setRootView&lt;/code&gt; for &lt;code&gt;self.window&lt;/code&gt; can&amp;rsquo;t add show the tabbed view in app, not sure why currently.&lt;/p&gt;
-
-&lt;h2 id=&#34;read-data-from-text-file:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Read data from text file&lt;/h2&gt;
-
-&lt;p&gt;The data source of the list is fetched from a text file by this code segment:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;NSArray *table_data;
-
-// Country list
-NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@&amp;quot;country_list&amp;quot; ofType:@&amp;quot;txt&amp;quot;] encoding:NSMacOSRomanStringEncoding error:nil];
-table_data = [fileText componentsSeparatedByString:@&amp;quot;\n&amp;quot;];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;build-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Build table view&lt;/h2&gt;
-
-&lt;p&gt;Now the prime task, build table view. I have created three types of list, the
-plain, sectioned, and grouped. I want to apply it to some earlier version of
-iOS device, so haven&amp;rsquo;t use the storyboard. By the way, there is a &lt;a href=&#34;h
-ttp://developer.apple.com/library/ios/#documentation/userexperience/conceptual
-/tableview_iphone/AboutTableViewsiPhone/AboutTableViewsiPhone.html#//apple_ref
-/doc/uid/TP40007451-CH1-SW1&#34;&gt;document&lt;/a&gt; on apple development center which can give more
-information.&lt;/p&gt;
-
-&lt;h3 id=&#34;plain-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Plain table view&lt;/h3&gt;
-
-&lt;p&gt;This is the simplest table view, and here is my step:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Create a Object C class, with xib file. In this app, the created class is &lt;code&gt;SimpleTableViewController&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Modify the header file to make sure the class will implement protocol &lt;code&gt;UITableViewDelegate&lt;/code&gt; and &lt;code&gt;UITableViewDataSource&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Drag the UITableViewController widget to xib file, and associate with member variables.&lt;/li&gt;
-&lt;li&gt;Two functions &lt;code&gt;numberOfRowsInSection&lt;/code&gt; and &lt;code&gt;cellForRowAtIndexPath&lt;/code&gt; are needed for showing data in list.&lt;/li&gt;
-&lt;li&gt;Fill the data into &lt;code&gt;table_data&lt;/code&gt; array, and now you have a simple table list.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;sectioned-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Sectioned table view&lt;/h3&gt;
-
-&lt;p&gt;Class for sectioned table view is &lt;code&gt;SectionTableViewController&lt;/code&gt;, here is the
-prime changes:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use two-level data structure to save section title and row data. Currently an array is used for section title while a dictionary for detail data.&lt;/li&gt;
-&lt;li&gt;Two functions &lt;code&gt;numberOfSectionsInTableView&lt;/code&gt; and &lt;code&gt;titleForHeaderInSection&lt;/code&gt; are added for returning section count and section title&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;numberOfRowsInSection&lt;/code&gt; should be modified to return count in each section.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;grouped-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Grouped table view&lt;/h3&gt;
-
-&lt;p&gt;Class for grouped table view is &lt;code&gt;GroupedTableViewController&lt;/code&gt;, and here is the
-changes:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Modify the table view widget from &lt;em&gt;plain&lt;/em&gt; to &lt;em&gt;grouped&lt;/em&gt; in xib file&lt;/li&gt;
-&lt;li&gt;The other things are almost the same with section.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;add-the-index:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Add the index&lt;/h2&gt;
-
-&lt;p&gt;This will add an index to the right side of list, since it need a sectioned
-data, so I added it in section table view. Two functions are needed for adding
-index. * &lt;code&gt;sectionIndexTitlesForTableView&lt;/code&gt;: Set the section header string *
-&lt;code&gt;sectionForSectionIndexTitle&lt;/code&gt;: Return the section while clicking section
-title.&lt;/p&gt;
-
-&lt;h2 id=&#34;search-the-list:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Search the list&lt;/h2&gt;
-
-&lt;p&gt;Search function it added to simple table view. Here are the changes:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add search bar to top of the table view&lt;/li&gt;
-&lt;li&gt;Add function &lt;code&gt;searchBarTextDidBeginEditing&lt;/code&gt; and &lt;code&gt;textDidChange&lt;/code&gt; to handle the typing event in search bar&lt;/li&gt;
-&lt;li&gt;Add function &lt;code&gt;searchBarSearchButtonClicked&lt;/code&gt; to handle search button clicked event&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This search result will be shown real time while typing character to the
-search bar.&lt;/p&gt;
-
-&lt;h2 id=&#34;response-to-user-click-event:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Response to user click event&lt;/h2&gt;
-
-&lt;p&gt;This is added to sectioned table view. Function &lt;code&gt;didSelectRowAtIndexPath&lt;/code&gt; will
-handle user click event.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>@property and its attributes</title>
-      <link>http://hzmangel.github.io/post/1195/</link>
-      <pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1195/</guid>
-      <description>
-
-&lt;p&gt;Recently working on iOS project, and have met some problems while using the
-attributes of &lt;code&gt;@property&lt;/code&gt;. I have searched some documents and here is my idea
-about this.### What is &lt;code&gt;@property&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;So, first thing is to talk about the &lt;code&gt;@property&lt;/code&gt;. This will offer a way to
-encapsulate the class. With the @synthesize keyword, the compiler will
-generate a getter and setter function for the variable. For example, there is
-a class called FooTester, which contains a variable named foo, so here is
-piece of the code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// Definiation
-@interface FooTester : NSObject
-@property int foo;
-@end
-
-// Implementation
-@implementation PropertyTester
-@synthesize foo;
-@end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In this case, the compiler will generate setter and getter for variable &lt;code&gt;foo&lt;/code&gt;,
-like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- (int) foo {
-    return foo;
-}
-
-- (void) setFoo:(int) i {
-    foo = i;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It is really a great function, which brings lots of convenience to
-development. Also, it can accept various attributes as its parameter, which is
-describing below.&lt;/p&gt;
-
-&lt;h3 id=&#34;attributes-of-property:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;Attributes of &lt;code&gt;@property&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;The full syntax for @property is&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;@property (&amp;lt;#attribute_list&amp;gt;) &amp;lt;#variable_type&amp;gt; &amp;lt;#variable_name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The attributes is used to define some behavior of the variable.&lt;/p&gt;
-
-&lt;h4 id=&#34;readonly-and-readwrite:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;readonly&lt;/em&gt; and &lt;em&gt;readwrite&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;As the meaning of the word, those two attributes are used to control read-
-write access of the property, while &lt;code&gt;readwrite&lt;/code&gt; is the default value.&lt;/p&gt;
-
-&lt;h4 id=&#34;atomic-and-nonatomic:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;atomic&lt;/em&gt; and &lt;em&gt;nonatomic&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;atomic&lt;/code&gt; and &lt;code&gt;nonatomic&lt;/code&gt; attributes are used to indicate whether the setter
-and getter function returns the whole value of variable. With &lt;code&gt;atomic&lt;/code&gt;, the
-synthesized getter and setter function will be guaranteed. For example, there
-two thread A and B, thread A is getting value in middle while thread B is
-setting value to the object. If the variable is declared with &lt;code&gt;atomic&lt;/code&gt;, the
-value returned to A should be a complete one, which means there is impossible
-to return a object combines the old and new value. Most likely, the getter
-will generate a auto-release copy and then return it.&lt;/p&gt;
-
-&lt;p&gt;There is no this guarantee for &lt;code&gt;nonatomic&lt;/code&gt; property.&lt;/p&gt;
-
-&lt;p&gt;One more thing need to be aware is the &lt;code&gt;atomic&lt;/code&gt; do &lt;em&gt;not&lt;/em&gt; guarantee thread
-safety. It just guarantee the variable has atomic access. For example, if
-thread A, B and C are setting the variable to different value at almost same
-time, then the value of variable is unpredictable.&lt;/p&gt;
-
-&lt;p&gt;The default attribute is &lt;code&gt;atomic&lt;/code&gt;, in case &lt;code&gt;nonatomic&lt;/code&gt; is specified in the
-&lt;code&gt;@property&lt;/code&gt; declaration. And generally speaking, in &lt;code&gt;nonatomic&lt;/code&gt; case, the
-getter and setter function will a little more faster.&lt;/p&gt;
-
-&lt;h4 id=&#34;assign-copy-and-retain:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;assign&lt;/em&gt;, &lt;em&gt;copy&lt;/em&gt; and &lt;em&gt;retain&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;Those three attributes are related to memory management, which are used for
-control behavior of setters. The &lt;code&gt;assign&lt;/code&gt; attribute is a simple assignment,
-without any other operations. The &lt;code&gt;copy&lt;/code&gt; attribute means the setter will
-assign the copy of the value to the object variable. The &lt;code&gt;retain&lt;/code&gt; attribute
-means it will assign the pointer to the object variable.&lt;/p&gt;
-
-&lt;p&gt;Hmm&amp;hellip; It is really confusion, so let&amp;rsquo;s write some code to make it more
-clearly.&lt;/p&gt;
-
-&lt;p&gt;First, we need a class with those property type, here are the declaration and
-implementation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
-
-@interface PropertyTester : NSObject
-
-@property (assign) NSMutableString *str_assign;
-@property (copy) NSMutableString *str_copy;
-@property (retain) NSMutableString *str_retain;
-
-@end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#import &amp;quot;property.h&amp;quot;
-
-@implementation PropertyTester
-
-@synthesize str_assign;
-@synthesize str_copy;
-@synthesize str_retain;
-
-@end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then we have to prepare some code to test the class. I have written two simple
-code to test this class, one is focusing on the memory and the other is about
-reference count.&lt;/p&gt;
-
-&lt;p&gt;Here comes the program for memory:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
-#import &amp;quot;property.h&amp;quot;
-
-int main (int argc, const char * argv[])
-{
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
-    PropertyTester *property_tester = [[PropertyTester alloc] init];
-    NSMutableString *tmp_str = [NSMutableString stringWithFormat:@&amp;quot;first&amp;quot;];
-
-    property_tester.str_assign = tmp_str;
-    property_tester.str_copy = tmp_str;
-    property_tester.str_retain = tmp_str;
-
-    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
-    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
-
-    [tmp_str appendString:@&amp;quot;second&amp;quot;];
-
-    NSLog (@&amp;quot;%p, %@&amp;quot;, tmp_str, tmp_str);
-    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
-
-    [pool drain];
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The logic for this program is simple. I created a &lt;code&gt;NSMutableString&lt;/code&gt; object
-named &lt;code&gt;tmp_str&lt;/code&gt; and assign it to three different type of property variables,
-then update the object. The information for class object will be printed out
-for examination. I have overloaded the &lt;code&gt;description&lt;/code&gt; of class to show some
-internal information, so the output of the program is:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;2013-02-08 16:39:14.557 property_update[66361:707] 0x10fa15030, first
-2013-02-08 16:39:14.580 property_update[66361:707] PropertyTester: 0x10fa11b70
-    assign: 0x10fa15030, first 
-    copy: 0x10fa14e80, first 
-    retain: 0x10fa15030, first
-2013-02-08 16:39:14.580 property_update[66361:707] 0x10fa15030, firstsecond
-2013-02-08 16:39:14.581 property_update[66361:707] PropertyTester: 0x10fa11b70
-    assign: 0x10fa15030, firstsecond 
-    copy: 0x10fa14e80, first 
-    retain: 0x10fa15030, firstsecond
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;According to the screen log, the object &lt;code&gt;tmp_str&lt;/code&gt; has initialized value
-&lt;code&gt;first&lt;/code&gt;, while the memory address is &lt;code&gt;0x10fa15030&lt;/code&gt;. After the assignment
-operations, three variables all contains the same value of &lt;code&gt;tmp_str&lt;/code&gt;, but the
-memory address of &lt;code&gt;str_copy&lt;/code&gt; is different with original one. Then the original
-string &lt;code&gt;tmp_str&lt;/code&gt; updates its value to &lt;code&gt;firstsecond&lt;/code&gt;, while the value for
-variable &lt;code&gt;str_assign&lt;/code&gt; and &lt;code&gt;str_retain&lt;/code&gt; has also updated, but not the
-&lt;code&gt;str_copy&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;As mentioned above, the &lt;code&gt;assign&lt;/code&gt; will do simple assignment, while &lt;code&gt;retain&lt;/code&gt;
-will assign the pointer, which is shown in the screen log. The two variable
-has the same value and memory address with original string, and will be
-updated if original string updated. However, &lt;code&gt;copy&lt;/code&gt; means assing a copied
-value to the property, so it contains different memory address, and will no
-update if original object updated.&lt;/p&gt;
-
-&lt;p&gt;Now let&amp;rsquo;s use another program to show difference between &lt;code&gt;assign&lt;/code&gt; and
-&lt;code&gt;retain&lt;/code&gt;. The prime difference between &lt;code&gt;assign&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; is reference
-count, I will use &lt;code&gt;retainCount&lt;/code&gt; in the program to get the reference count.
-Here is the program:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#import &amp;lt;Foundation/Foundation.h&amp;gt;
-#import &amp;quot;property.h&amp;quot;
-
-void print_ref_cnt(NSObject *obj1, NSObject *obj2, void (^block)(void)) {
-    NSLog(@&amp;quot;====================&amp;quot;);
-    NSLog(@&amp;quot;Reference count of %@&amp;quot;, obj1);
-    NSLog(@&amp;quot;Before: obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
-    block();
-    NSLog(@&amp;quot;After : obj1: %ld, obj2: %ld&amp;quot;, (unsigned long)obj1.retainCount, (unsigned long)obj2.retainCount);
-    NSLog(@&amp;quot;@@@@@@@@@@@@@@@@@@@@&amp;quot;);
-}
-
-int main (int argc, const char * argv[]) {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
-    PropertyTester *property_tester = [[PropertyTester alloc] init];
-    NSMutableString *tmp_str_assign = [NSMutableString stringWithFormat:@&amp;quot;assign&amp;quot;];
-    NSMutableString *tmp_str_copy = [NSMutableString stringWithFormat:@&amp;quot;copy&amp;quot;];
-    NSMutableString *tmp_str_retain = [NSMutableString stringWithFormat:@&amp;quot;retain&amp;quot;];
-
-    NSLog(@&amp;quot;\n\n\nAssign&amp;quot;);
-    print_ref_cnt(tmp_str_assign, property_tester.str_assign, ^(void) { property_tester.str_assign = tmp_str_assign; });
-    //print_ref_cnt(tmp_str, ^(void) { property_tester.str_assign.release; }); // Over release, seg fault
-
-    NSLog(@&amp;quot;\n\n\nCopy&amp;quot;);
-    print_ref_cnt(tmp_str_copy, property_tester.str_copy, ^(void) { property_tester.str_copy = tmp_str_copy; });
-
-    NSLog(@&amp;quot;\n\n\nRetain&amp;quot;);
-    print_ref_cnt(tmp_str_retain, property_tester.str_retain, ^(void) { property_tester.str_retain = tmp_str_retain; });
-
-    NSLog (@&amp;quot;%@&amp;quot;, property_tester);
-
-    [pool drain];
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The logic for this program is also simple, it creates three objects which will
-be used for &lt;code&gt;assign&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt; and &lt;code&gt;retain&lt;/code&gt; separatedly, then the program will
-print out the reference count before and after invoking the setter function.
-Here is the result of the program:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;2013-02-09 10:18:57.058 property_ref[67671:707] 
-
-
-Assign
-2013-02-09 10:18:57.060 property_ref[67671:707] ====================
-2013-02-09 10:18:57.060 property_ref[67671:707] Reference count of assign
-2013-02-09 10:18:57.061 property_ref[67671:707] Before: obj1: 1, obj2: 0
-2013-02-09 10:18:57.062 property_ref[67671:707] After : obj1: 1, obj2: 0
-2013-02-09 10:18:57.062 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
-2013-02-09 10:18:57.063 property_ref[67671:707] 
-
-
-Copy
-2013-02-09 10:18:57.064 property_ref[67671:707] ====================
-2013-02-09 10:18:57.064 property_ref[67671:707] Reference count of copy
-2013-02-09 10:18:57.064 property_ref[67671:707] Before: obj1: 1, obj2: 0
-2013-02-09 10:18:57.065 property_ref[67671:707] After : obj1: 1, obj2: 0
-2013-02-09 10:18:57.065 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
-2013-02-09 10:18:57.066 property_ref[67671:707] 
-
-
-Retain
-2013-02-09 10:18:57.066 property_ref[67671:707] ====================
-2013-02-09 10:18:57.067 property_ref[67671:707] Reference count of retain
-2013-02-09 10:18:57.067 property_ref[67671:707] Before: obj1: 1, obj2: 0
-2013-02-09 10:18:57.067 property_ref[67671:707] After : obj1: 2, obj2: 0
-2013-02-09 10:18:57.068 property_ref[67671:707] @@@@@@@@@@@@@@@@@@@@
-2013-02-09 10:18:57.068 property_ref[67671:707] PropertyTester: 0x10b714760
-    assign: 0x10b715020, assign 
-    copy: 0x7fe234101390, copy 
-    retain: 0x10b715150, retain
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For the &lt;code&gt;assign&lt;/code&gt;, the reference count for class object doesn&amp;rsquo;t change, while
-for &lt;code&gt;retain&lt;/code&gt;, the reference count increased 1 after invoking setter function,
-since the &lt;code&gt;@property&lt;/code&gt; with &lt;code&gt;retain&lt;/code&gt; will invoke &lt;code&gt;retain&lt;/code&gt; before assignment.&lt;/p&gt;
-
-&lt;h4 id=&#34;weak-and-strong:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;weak&lt;/em&gt; and &lt;em&gt;strong&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;Another two attributes are &lt;code&gt;weak&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;, which is introduced from ARC
-feature. The attribute &lt;code&gt;strong&lt;/code&gt; is the same with &lt;code&gt;retain&lt;/code&gt;. While the attribute
-&lt;code&gt;weak&lt;/code&gt; is almost same with &lt;code&gt;assign&lt;/code&gt;. The minor difference between &lt;code&gt;weak&lt;/code&gt; and
-&lt;code&gt;assign&lt;/code&gt; is that the &lt;code&gt;weak&lt;/code&gt; will set object to nil after releasing, which is
-missed in &lt;code&gt;assign&lt;/code&gt; attribute.&lt;/p&gt;
 </description>
     </item>
     

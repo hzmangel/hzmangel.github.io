@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/347/'> 在iptables中配置nat包转发</a> </h2>
+        <div class="post-meta">发表于2008-09-23 11:08:16 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：iptables, nat, 包转发 两台机器，一台有多块网卡，能连外网，算是A吧，另一台连在A上，就叫B吧。现在的情况就是，有一台机器C，机器A能连上，机器B连不上，于是就要在A上做一个转发， 把B发来的到C的包都转出去。 于是就有了一句iptables: iptables -t nat -A POSTROUTING \ -s [ip of addr B] -d \ [ip addr if C] -j SNAT \ --to-source [outer ip addr of A] 下面逐段解释一下，第一个选项-t表示要把东西加到nat表中，iptables默认使用的是filter表；选项A表示是要把这条规则加到POSTROUTING链 中的，系统在决定了数据包的路由后执行该链中的规则；-s选项表示源目的地址，在这个配置中就是内网机器B的地址；-d选项指定目的地址，即C的地址；SNAT操作表 示改变包的源地址；最后&ndash;to-source写的是机器A的地址，然后就配完了，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/346/'> 被ThinkPad惯坏了</a> </h2>
+        <div class="post-meta">发表于2008-09-22 11:33:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：鼠标, 小红点 周六去村里试买硬盘，要试的时候拿到了台大概是HP的机器，上来先去找小红点，没找到，第二反应去旁边找鼠标，也没找到，然后问卖东西的：机器没鼠标，不会用。然后别 人过来告诉我，机器下面那个板可以用。诶，当时那叫一个郁闷啊&hellip;&hellip;</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/345/'> 登顶妙峰</a> </h2>
         <div class="post-meta">发表于2008-09-22 08:44:10 </div>
     </header>
@@ -208,50 +240,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/337/'> 798瑞士屋</a> </h2>
-        <div class="post-meta">发表于2008-08-25 16:16:15 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>关键字： 798, 瑞士屋</p>
-
-<p>昨天无聊，码表没买到又不想跑长途，刚好在网上看到有个瑞士屋，在798而且对公众开放，于是就过去了。从学校骑车过去，1小时左右就到了，只是在去798的路上再一
-次被转晕了，还好有路牌，所以没问人，呵呵。</p>
-
-<p>本来以为应该是一个类似party的地方，结果过去一看是展厅，而且门口和公共区的展厅一样，排着大长的队，8过和公共区的展厅不同的是，那边排队不是因为要控制人数
-，而是因为安检的过程有点小慢，呵呵。由于队伍不是很长，所以就没等多久，安检也就那样吧，虽然和8号线那时候差不多，不过水啊，吃的啥的还是让带进去的，嗯。声明一
-下，文章里面的一些名字啥的都是后来上网找的，看的当时不记事，嗯。</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/337/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/336/'> 20080808骑行昌平</a> </h2>
-        <div class="post-meta">发表于2008-08-20 13:40:19 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">关键字： 骑行, 昌平, 自虐, 奥运会 又一篇早该写的东西，拖到了现在，汗自己一下。 8号那天，大家都知道有个啥啥啥会，然后呢，俺们公司就放假一天。无聊，所以想出去骑车，所以拖上某排。本来说是去阳坊吃肉，结果走迟了，吃午饭的点还在回龙观得色呢，于是只好中途改目的地去昌平城区。 路上等红灯的时候碰到了米国队骑公路赛的运动员，聊了几句，同时对着他们的车狂流了一通口水，嗯。走的是八达岭高速旁边的那条辅路，由于某排车的原因，所以速度嘛，一个字：慢，两个字：很慢。呵呵，来回大概70公里差点，带上吃饭的时间啥的，用了快7个小时。不过骑在路上的感觉满舒服的，太阳不是很大，有风吹着，嗯嗯。 回来的时候因为快开幕式了，所以还没到五环就管制了，还好不管自行车，8过一帮警察叔叔在旁边全副武装的看着你骑过去，感觉也不爽的，嗯。 别的，没啥了，下次考虑走个全程100的，话说昨天看了一下公路赛的路程，单程居然100多，大概是在居庸关那边绕圈绕的吧，啥时候走一遍玩玩，嗯，8过我的下一个目标好像是顺义那个水上公园，嘿嘿。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -279,6 +267,12 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
@@ -286,12 +280,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
         </ul>
@@ -303,7 +291,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -328,7 +316,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

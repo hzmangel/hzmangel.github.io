@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/317/'> Emerge specific version of software</a> </h2>
+        <div class="post-meta">发表于2008-06-28 01:11:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo software emerge version 想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法： 先装gentoolkit，以找到equery这个工具，然后再equery list -p &lt;pkg name&gt;列出所有可用的版本，最后用emerge =&lt;pkg full name&gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/316/'> ATI on Gentoo</a> </h2>
+        <div class="post-meta">发表于2008-06-27 22:03:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字：Gentoo ATI 配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。 首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。 然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&ndash;initial &ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。 再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。 话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/315/'> Gentoo Install Notes (4)</a> </h2>
         <div class="post-meta">发表于2008-06-27 21:52:59 </div>
     </header>
@@ -233,38 +265,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/307/'> Search executable file with find command</a> </h2>
-        <div class="post-meta">发表于2008-06-16 16:24:15 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">今天在折腾程序，突然目录结构变了，所以想着把所有的编译生成的文件给删了，然后把源代码扔到另一个目录里面再去编译，一个一个手动删太累了，于是懒人我就想到了fi nd命令。 man了一下，找到了一个 -perm 选项，在后面可以像 chmod 一样指定421的权限位，于是乎就简单了，一条命令搞定： find . -perm /u+x -type f -exec -rm {} \; 千万记得在exec前要打印出来看看撒&hellip;&hellip;.</div>
-    </section>
-
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/306/'> 配电脑了，嗯</a> </h2>
-        <div class="post-meta">发表于2008-06-15 20:53:53 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">到现在第一次去村子里面给自己配了台新机器，呵呵，所以在这里写上一笔。5K还是很大一笔米的，诶，又要省吃俭用等发工资了，不过已经都差不多了，以后的东西再慢慢来 吧，呵呵。要开始学习新东西了，在公司的这台 Windowz 下已经浪费了太多的时间，诶。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -292,6 +292,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
@@ -299,12 +305,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
         </ul>
@@ -316,7 +316,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -341,7 +341,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

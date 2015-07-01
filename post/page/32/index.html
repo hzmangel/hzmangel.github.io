@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/149/'> 当开源成为一种习惯……</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:33:04 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天去LinuxWorld2006转了一圈，想写些东西，也不知道为什么，突然想到了这个名字，就用上了，呵呵。 从昨天的一些演讲中可以看到，不少商业公司的策略有一些转变。第一次接触到这种事情还是去年的那个Sun开发者大会，从那才知道，Open Solaris其实和Sun卖的那个Solaris是同源的，任何人都可以把Open Solaris的源代码下载下来，然后自己编译，发布(具体是不是这样我也不太 清楚，因为那个时候听的不是很认真)。当时没觉得什么，后来才有一些感觉，像昨天的SuSE发布会，才知道其实SuSE也有一个Open SuSE的版本，可以从网站上直接下载，也可以直接更新，和SuSE Enterprise Edition不同，它不提供技术支持，但是更新会很快，而企业版的更新需要去买，不过相应的也有更好的技术支持。 我用的最多的类似的东西应该算是Eclipse了吧，IBM直接把4kw的源代码，真的是很有魄力的一件事情，不过现在的事实也证明，这一决定的正确性，Eclips e开放的框架结构让它可以被灵活的配置在多种应用场合，而不是仅仅简单的开发Java程序。插件也很好的扩展了Eclipse的功能，像用cdt来开发C/C++程序 ，Together插件来做UML方面的开发，还有开发J2EE的插件，风河的新版workbench也使用的是Eclipse，还有Altera的NiosII开发 平台。个人感觉Eclipse的缺点就是战用资源较多，虽然在内存越来越便宜的今天不是什么大问题，但是还是存在像偶这种用着几年前的机器的人啊&hellip;.. 今天仔细看了看昨天拿到的IBM的宣传材料，发现有了WebSphere和DB2的Express版的下载，不知道这个概念是不是从MS那弄来的，只知道MS提供VC 2005的下载，免费的，当然，功能不会全，但估计对我这种人是决对够用了，更重要的是，这是正版的软件，这在一些公司里面还是很看重的。 写到这才觉得有些文不对题，只是曾经一度需要花费N多的软件推出了免费版本，和开源的关系不大，呵呵，不改了吧，谁让我懒呢。开源，给开发人员来的方便不是这几字节的 文字能表述完成的，只是想想每做一辆车都要去重新发明一次轮子的轮子的事情就让人郁闷的慌。不过从另一方面讲，开源也让开发人员的收入大大减少，如果没有稳定的收入来 源，开源大概只是一个梦想吧。 呵呵，胡言乱语的说了一些东西，本来我说的话就是胡说嘛，爱看的看吧，纯属自娱，如有不同意见，可以拍砖，8过嘛，嘿嘿，偶的地盘，偶做主，哈哈。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/148/'> 也说django</a> </h2>
+        <div class="post-meta">发表于2006-08-16 16:31:56 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。 btw: Apache的虚拟主机好像有点好玩，有空看看。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/147/'> Linux is OK</a> </h2>
         <div class="post-meta">发表于2006-08-16 16:31:24 </div>
     </header>
@@ -191,50 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/139/'> IE和PNG</a> </h2>
-        <div class="post-meta">发表于2006-07-02 15:20:05 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>也不知道盖茨大叔是怎么想的，IE6居然不支持PNG的透明背景，还好在网上找到了一个方法，用到了一个没见到过的滤镜，刚试了一下，效果还算不错，就把代码贴出来吧
-，方便以后查。主要起作用的是这个滤镜：</p>
-
-<p>filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&lsquo;aaa.png&rsquo;,
-sizingMethod=&lsquo;crop&rsquo;);</p>
-
-<p>由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。<br />
-首先是JavaScript的代码，用以生成HTML，以给图像加滤镜</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/139/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/137/'> 什么是命运？</a> </h2>
-        <div class="post-meta">发表于2006-06-27 16:52:21 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">应龙和女魃，两个天上的神，在黄帝与蚩尤之战中，协助黄帝打败了蚩尤，但却因沾染了人间的浊气而不能回到天上。按理说天上的世界中是不应该有情的，但是女魃爱上了应龙 ，两个相克的神注定不能在一起，于是悲剧注定就要发生了。应龙因罪被?于树上，而且双目失明，女魃天天到树下为其歌唱，在黄帝蚩尤之战后，女魃又暗中帮助应龙，使其能 够回到天上，而沾染了过多浊气的女魃，造成了所过之处，十年大旱的情景。应龙泰命讨伐女魃，直到死前应龙才发现，女魃就是那个为他唱歌的人。 以上摘自幻三2故事的背景。不知道为什么玩这个游戏的时候，总是感觉到一种命运的力量在中间做祟，注定不能在一起的两人，却又在几世轮回中，一再的相见，相识，相知， 但是始终走不到一起，命运就是这样的在玩弄他们，人们常说的造化弄人大概就是这样吧。 君河的身世之迷已经揭开，依依的面目也渐渐明了，而苍斐的目的也有了较合理的解释，游戏玩起来和昨天玩时的心情有了很大的差别，人是会变的，环境影响人，人也在影响环 境。还没玩到奈何桥那一段，但是玩的时候心里总有一种不是很舒服的感觉，相爱的人不能长相厮守，真的是一件很FZ的事情。 胡乱的不知道写了些什么，留着吧，算是在自己blog上的第一篇。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -262,6 +250,12 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
@@ -269,12 +263,6 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-link-analysis/'> MMDS Notes: W1 - Link Analysis
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w1-hdfs-mr/'> MMDS Notes: W1 - HDFS &amp; MR
 </a></li>
         
         </ul>
@@ -286,7 +274,7 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(84)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -311,7 +299,7 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 4, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 51, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 4, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
