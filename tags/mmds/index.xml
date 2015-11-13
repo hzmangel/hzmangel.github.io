@@ -7,8 +7,123 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 01 Jul 2015 18:20:21 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2015 23:53:33 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/tags/mmds/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MMDS Notes: W3 - Communities in Social Network (Basic)
+</title>
+      <link>http://hzmangel.github.io/post/mmds-w3-communities/</link>
+      <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/mmds-w3-communities/</guid>
+      <description>
+
+&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;
+
+&lt;p&gt;社交网络包含有用户和用户之间的联系。把用户看成顶点，把用户之间的联系看成边，就可以得到一个图 (&lt;em&gt;social graph&lt;/em&gt;)。像 Facebook 中的图就是无向图，而 Twitter/G+ 中的就是有向图。在 &lt;em&gt;Network&lt;/em&gt; 和 &lt;em&gt;Communities&lt;/em&gt; 这块，主要的任务有两类：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;给定一个模型，怎么去生成网络&lt;/li&gt;
+&lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;从模型生成网络:f49d83646bd9b5cfba098a76dc907562&#34;&gt;从模型生成网络&lt;/h2&gt;
+
+&lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
+
+&lt;h3 id=&#34;agm-affiliation-graph-model:f49d83646bd9b5cfba098a76dc907562&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+
+&lt;h4 id=&#34;参数:f49d83646bd9b5cfba098a76dc907562&#34;&gt;参数&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$C$&lt;/code&gt;: &lt;em&gt;Community&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$M$&lt;/code&gt;: 节点与 &lt;em&gt;Community&lt;/em&gt; 之间的关系&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;生成过程:f49d83646bd9b5cfba098a76dc907562&#34;&gt;生成过程&lt;/h4&gt;
+
+&lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
+
+&lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \upepsilon $&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;h4 id=&#34;适应性强:f49d83646bd9b5cfba098a76dc907562&#34;&gt;适应性强&lt;/h4&gt;
+
+&lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;无交集 (Non-overlapping)&lt;/li&gt;
+&lt;li&gt;有交集 (Overlapping)&lt;/li&gt;
+&lt;li&gt;内嵌 (Nested)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;从网络生成模型:f49d83646bd9b5cfba098a76dc907562&#34;&gt;从网络生成模型&lt;/h2&gt;
+
+&lt;h3 id=&#34;agm-affiliation-graph-model-1:f49d83646bd9b5cfba098a76dc907562&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+
+&lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
+
+&lt;h3 id=&#34;bigclam:f49d83646bd9b5cfba098a76dc907562&#34;&gt;BigCLAM&lt;/h3&gt;
+
+&lt;h4 id=&#34;membership-strength:f49d83646bd9b5cfba098a76dc907562&#34;&gt;Membership Strength&lt;/h4&gt;
+
+&lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;此处不是很明白为什么同 &lt;em&gt;Community&lt;/em&gt; 中节点的连通概率可以写成上面的方式，需要去书中相应章节找答案。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;上面介绍的是在同一个 &lt;em&gt;Community&lt;/em&gt; 中两个节点的联通概率，现在将要说的是在不同的 &lt;em&gt;Community&lt;/em&gt; 中如何确定联通概率。首先需要定义一个 &lt;em&gt;Community membership strength matrix&lt;/em&gt; ，它的列是 &lt;em&gt;Community&lt;/em&gt; ，行是节点。将矩阵记为 &lt;code&gt;$F$&lt;/code&gt;，某个位置 &lt;code&gt;$F_{vA}$&lt;/code&gt; 的值表示的是节点在这个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;strength&lt;/em&gt; ，所以任意一行 &lt;code&gt;$F_{u}$&lt;/code&gt; 则表示的是节点在多个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;membership strength&lt;/em&gt; 向量。&lt;/p&gt;
+
+&lt;p&gt;上面的公式计算的是两个节点在单 &lt;em&gt;Community&lt;/em&gt; 中的联通概率，两个节点之间存在至少相同的 &lt;em&gt;Community&lt;/em&gt; ，那么它们的联通概率即为 &lt;code&gt;$P(u,v)=1-\prod_{C}(1-P_{C}(u,v))$&lt;/code&gt; ，经过和上面的公式整合，简化，可以得到 &lt;code&gt;$P(u,v)=1-\exp (-F_{v} \cdot F_{v}^{T} )$&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;计算:f49d83646bd9b5cfba098a76dc907562&#34;&gt;计算&lt;/h4&gt;
+
+&lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$$ \nabla l(F_{u})=\sum_{v \in \mathcal{N}(u)} F_{v} \frac{\exp (-F_{u}F_{v}^{T})}{1- \exp (-F_{u}F_{v}^{T})} - \sum_{v \notin \mathcal{N}(u)} F_{v} $$&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;其中，&lt;code&gt;$\mathcal{N}(u)$&lt;/code&gt;表示节点 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点。&lt;/p&gt;
+
+&lt;p&gt;这个公式的问题在于，后面的一个求和操作是线性时间的，而且是和所有节点数目相关，这样会拖慢运算速度。式子的后一项是计算所有不在节点 &lt;code&gt;$u$&lt;/code&gt; 邻接节点中的节点的&lt;code&gt;$F$&lt;/code&gt;值的和，它可以替换为 &lt;code&gt;$\sum_{v} F_{v} - F_{u} - \sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; ，而这个式子的第一项 &lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 是可以预先计算得到的，而 &lt;code&gt;$\sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; 虽然也是线性时间，但是只和 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点数目想关，这个数值在真实网络中远小于整个网络的节点数的。所以在速度上有很大的改进。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;有点不明白，&lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 在开始的时候是怎么可以事先计算的，要求的不就是某个 &lt;code&gt;$F$&lt;/code&gt; 吗。后期实现的时候再看如何处理吧。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;其它阅读-graph-and-social-network:f49d83646bd9b5cfba098a76dc907562&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
+
+&lt;p&gt;一般认为，一个 &lt;em&gt;SN&lt;/em&gt; 可以看成一张图，但这并不是表示任意一个 &lt;em&gt;graph&lt;/em&gt; ，就能表示一个 &lt;em&gt;social network&lt;/em&gt; ，这个是由这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; 确定的。&lt;/p&gt;
+
+&lt;p&gt;检查一个 &lt;em&gt;graph&lt;/em&gt; 是不是 &lt;em&gt;SN&lt;/em&gt; ，则需要计算这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; （找不到这个词怎么翻译，先原样放这吧）。给定一个有 &lt;code&gt;$N$&lt;/code&gt; 节点， &lt;code&gt;$E$&lt;/code&gt; 条边的图，它的联通率是指，有三个点&lt;code&gt;$X$&lt;/code&gt;，&lt;code&gt;$Y$&lt;/code&gt;和&lt;code&gt;$Z$&lt;/code&gt;，在确定&lt;code&gt;$(X,Y)$&lt;/code&gt;和&lt;code&gt;$(X,Z)$&lt;/code&gt;联通的情况下，&lt;code&gt;$(Y,Z)$&lt;/code&gt;联通的概率。&lt;/p&gt;
+
+&lt;p&gt;此概率的计算有以下几步：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;理论联通率&lt;/strong&gt;：完全图会有&lt;code&gt;K=$\binom{N}{2}$&lt;/code&gt;条边，所以理论联通率应为 &lt;code&gt;$E/K$&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单条边的联通率&lt;/strong&gt;：在大规模的图中，一般认为理论联通率就是图的联通率，但是在小规模的图中，这个数值偏差有些大，所以需要重新计算。考虑给定条件，在已经确定有两条边的情况下，计算第三条边出现的条件概率，即为&lt;code&gt;$(E-2)/(K-2)$&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实际联通率&lt;/strong&gt;：实际概率的计算需要遍历图中的每个节点，假设为&lt;code&gt;$X$&lt;/code&gt;，再找到邻接节点 &lt;code&gt;$Y$&lt;/code&gt; 和 &lt;code&gt;$Z$&lt;/code&gt; ，最后计算 &lt;code&gt;$(Y,Z)$&lt;/code&gt; 出现的概率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;书中表示，最后算出来的实际概率大于单边理论概率，所以这张图可以看成是某 &lt;em&gt;SN&lt;/em&gt; 网络（可以表示 &lt;em&gt;SN&lt;/em&gt; 网络的 &lt;em&gt;locality&lt;/em&gt; ）。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;是不是说大规格图的联通率直接认为是理论联通率，所以就肯定可以表示 &lt;em&gt;SN&lt;/em&gt; 而不用再计算？&lt;/li&gt;
+&lt;li&gt;如果计算出来的联通率比单边联通率还要低，那是不是就说明这个图不能表示 &lt;em&gt;SN&lt;/em&gt; ？&lt;/li&gt;
+&lt;li&gt;是不是说实际联通率只要超过单边联通率就可以看成是 &lt;em&gt;SN&lt;/em&gt; ？还是说需要超过某个阈值才可以算？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>MMDS Notes: W2 - Frequent Itemsets - Part II

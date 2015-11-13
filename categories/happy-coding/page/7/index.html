@@ -66,6 +66,30 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/199/'> wxWidgets中的Timer</a> </h2>
+        <div class="post-meta">发表于2007-06-21 22:22:39 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>像前面说的，做项目要用到wxWidgets，于是装上用之，现在需要用Timer了，继续折腾吧。其实选Timer的时候经过了几次折腾，第一次是想用boost写
+一个timer出来，但是没想好怎么执行一定时间后调用某函数或方法，于是作罢。在网上瞎转后回宿舍和人讨论，某牛告诉我说QT里面有Timer，于是突然想到wxw
+idgets的timer，做了几个小例子后苦于其要依托于某widget，今天又想试试boost的thread，试了一天后，觉得我是没可能作出来这东西的，于是
+再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/199/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/198/'> 重新开始wxWidgets</a> </h2>
         <div class="post-meta">发表于2007-06-14 19:37:25 </div>
     </header>
@@ -234,22 +258,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/168/'> 创新的数据总算导完了</a> </h2>
-        <div class="post-meta">发表于2006-09-09 00:08:59 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">先是存成sql语句，然后回来才想起来，PHP用的是我自己建的表，而Django中要用它的表，两个结构不同，用不了sql语句，于是想到用导入csv文件的办法， 刚好setp by step有这个例子，而且Django中可以直接导入csv文件，不用我再去写那些分隔什么的了，还是满方便的，所以就想到了导入csv文件。 想好了就要开工，那个例子以前做过，所以还有点印象。首先是写module，主要就是构建数据表的结构，想了好久，才觉得大概能够把表结构定下来了，不过还是相当于留 了两个备注字段，应该够用了吧，如果不够用需要倒数据的话那真要疯了。其实说疯也有些夸张，再写程序导吧，呵呵。 一开始写的module中没有主键，主要是看它的文档中说它会自己加上一个自增的主键，所以没去理会，但是在导入的时候，有一个filter要选择一条记录，一开始不 知道，使用第一个字段，即申请人做关键字，结果前面写进去的记录当碰到后面相同申请人的记录时，全部被覆盖(我的那个csv文件后面有一个空行，在导入的时候读入最后 一行的时候会出错，下标越界，不过还好，前面的数据都导入了)。后来把csv文件分成了大概10条一个的小文件，再导入的时候才发现是这个问题，再看看它的文档说是如 果用户自己没有设置自境的主键的话，系统会给设一个，不过我试了，不能调用，于是自己设一个吧(又把表结构重弄了一遍，真的很FT，还好没什么数据)，后来问题就解决 了。在module.py中的str方法中可以设置在管理界面中每一条记录显示的内容，step by step中说还有一个repr，但是我用了后没反应，不知道为什么。最后还要加上一个class Admin: pass以开启管理功能。 在使用导入csv功能的时候，那个urls的映射要弄好，要不然服务器会提示找不到匹配的模式，不予解析。一般是在根目录下的urls.py中设置如果要访问app， 则把app中的utls.py包含进来，然后再在urls.py中解析对应于app的地址映射。 本来想用sqlite数据库，不过用了一段时间，感觉上还是有些不方便的地方，一是管理工具不是很方便，二是性能上处于劣势，最后考虑了一会，还是选用了mysql， 导入的时候明显速度快了很多，不过那段导入的代码还是很有用的，到时候如果再换表结构的话，就又要用到它了。 数据方面总算折腾完了，现在要把原来的表的记录改动一下，让它适应新的表的结构，还有一些细节方面的问题，像文件上传，显示的图标什么的，慢慢做吧，不管怎么说，大头 数据导进来了，也没什么好怕的了。 btw: django中不能直接接收2000-01-01格式的字符串作为datetime类的输入，还要把它拆开成&rsquo;2000&rsquo;, &lsquo;01&rsquo;, &lsquo;01&rsquo;三个字串，不知道后续版本会不会把这个功能加上，虽然不加也能用，只要用下标把子串取出来就可以了，但总感觉有些不爽。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -277,6 +285,9 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities/'> MMDS Notes: W3 - Communities in Social Network (Basic)
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
 </a></li>
         
@@ -289,9 +300,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
             <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
-</a></li>
-        
         </ul>
     </div>
 
@@ -301,7 +309,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(86)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(87)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -326,7 +334,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 6, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 53, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 6, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 54, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 7, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
