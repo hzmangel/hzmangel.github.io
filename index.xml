@@ -47,7 +47,7 @@
 
 &lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
 
-&lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \upepsilon $&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \epsilon $&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h4 id=&#34;适应性强:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;适应性强&lt;/h4&gt;
 
