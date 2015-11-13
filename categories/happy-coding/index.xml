@@ -13,10 +13,10 @@
     <item>
       <title>MMDS Notes: W3 - Communities in Social Network (Basic)
 </title>
-      <link>http://hzmangel.github.io/post/mmds-w3-communities/</link>
+      <link>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</link>
       <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
       
-      <guid>http://hzmangel.github.io/post/mmds-w3-communities/</guid>
+      <guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid>
       <description>
 
 &lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;
@@ -28,13 +28,13 @@
 &lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从模型生成网络:f49d83646bd9b5cfba098a76dc907562&#34;&gt;从模型生成网络&lt;/h2&gt;
+&lt;h2 id=&#34;从模型生成网络:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从模型生成网络&lt;/h2&gt;
 
 &lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model:f49d83646bd9b5cfba098a76dc907562&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
-&lt;h4 id=&#34;参数:f49d83646bd9b5cfba098a76dc907562&#34;&gt;参数&lt;/h4&gt;
+&lt;h4 id=&#34;参数:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;参数&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
@@ -43,13 +43,13 @@
 &lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;生成过程:f49d83646bd9b5cfba098a76dc907562&#34;&gt;生成过程&lt;/h4&gt;
+&lt;h4 id=&#34;生成过程:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;生成过程&lt;/h4&gt;
 
 &lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
 
 &lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \upepsilon $&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;h4 id=&#34;适应性强:f49d83646bd9b5cfba098a76dc907562&#34;&gt;适应性强&lt;/h4&gt;
+&lt;h4 id=&#34;适应性强:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;适应性强&lt;/h4&gt;
 
 &lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
 
@@ -59,15 +59,15 @@
 &lt;li&gt;内嵌 (Nested)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从网络生成模型:f49d83646bd9b5cfba098a76dc907562&#34;&gt;从网络生成模型&lt;/h2&gt;
+&lt;h2 id=&#34;从网络生成模型:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从网络生成模型&lt;/h2&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model-1:f49d83646bd9b5cfba098a76dc907562&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model-1:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
 &lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
 
-&lt;h3 id=&#34;bigclam:f49d83646bd9b5cfba098a76dc907562&#34;&gt;BigCLAM&lt;/h3&gt;
+&lt;h3 id=&#34;bigclam:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;BigCLAM&lt;/h3&gt;
 
-&lt;h4 id=&#34;membership-strength:f49d83646bd9b5cfba098a76dc907562&#34;&gt;Membership Strength&lt;/h4&gt;
+&lt;h4 id=&#34;membership-strength:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;Membership Strength&lt;/h4&gt;
 
 &lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
 
@@ -81,7 +81,7 @@
 
 &lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;计算:f49d83646bd9b5cfba098a76dc907562&#34;&gt;计算&lt;/h4&gt;
+&lt;h4 id=&#34;计算:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;计算&lt;/h4&gt;
 
 &lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
 
@@ -97,7 +97,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;其它阅读-graph-and-social-network:f49d83646bd9b5cfba098a76dc907562&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
+&lt;h2 id=&#34;其它阅读-graph-and-social-network:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
 
