@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/10/'> MDK10使用手记(1)</a> </h2>
+        <div class="post-meta">发表于2004-09-21 22:14:52 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">想学Linux下的编程，装个Linux装了三天，狂郁闷。 以前也有一次装系统装到抓狂的，那一次，两天装了九遍系统，其中1遍RH8，4遍RH9，还有4遍就是WindowsXP，那个时候是大菜鸟一只，不会改GRUB，所 以只有重装了*^_^*。装的我真要发狂了。 现在两种经历都有了，高密度的和低密度的:-) 一开始是用RH8上手的，后来用过RH9。那天在实验室装上了debian，觉得比较的好用。然后在寝室死活也配不上dhcp，郁闷之下就只有换了个发行版。换成了M andrake 10.1c，今天刚用上，只是稍微美化了一下，装了几个软件，感觉还不错，写点东西吧。 ^_^ 1、安装篇 可以说是第二次用非RH版的Linux了，第一次用的是debian，网络安装，装软件的时候真的是很方便，可以说让我惊诧不已，真好用。后来在寝室装的时候，也不知 道怎么回事，死也弄不上dhcp，还多出来一块网卡，装了几次不干了，听人说MDK10用着还行，就装了一个，才用了一段时间，觉得是还不错^_^ 首先说说安装的方法吧，我是从硬盘安装的。先从FTP或之类的地方下到4张iso文件，随便放到哪个盘下，也不用管什么fat或ntfs(这点MDK做的不错，上来就 支持ntfs)，然后把第一张iso中的isolinux的文件夹解出来，放到一个方便的地方(其实不放也行的，可以认出来，不过最好还是放到fat的分区里面)，我 是放在C盘根目录下的，然后更改LILO或GRUB(那天装的时候没找到98的启动盘，所以只好用这个了)，如果启动时是LILO，改的文件是/etc/lilo.c onf，加上下面几句 image=(hd0,0)/isolinux/alt0/vmlinuz label=&ldquo;MDK10 install&rdquo; root=/dev/ram3 initrd=/isolinux/alt0/all.rdz append=&ldquo;ramdisk_size=128000 acpi=ht&rdquo; vga=788 如果是GRUB，那编辑文件/boot/grub/menu.lst，加上如下语句： title Mandeaklinux 10 install kernel (hd0,0)/isolinux/alt0/vmlinuz ramdisk_size=128000 root=/dev/ram3 automatic=method:disk acpi=ht vga=788 initrd (hd0,0)/isolinux/alt0/all.rdz 然后在装的时候，选硬盘安装，键入路径(tips:下下来的iso文件，改一下名字，会方便许多)，只要第一张盘的路径就可以了，后来就可以自动换盘了。后面就可以选 软件包，正常安装了。 安装就写到这吧，下一篇是我用的美化方法。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/9/'> 我看中国的教育制度</a> </h2>
         <div class="post-meta">发表于2004-09-21 21:38:07 </div>
     </header>
@@ -186,6 +202,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
@@ -198,9 +217,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
-</a></li>
-        
         </ul>
     </div>
 
@@ -210,7 +226,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(87)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -235,7 +251,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 54, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 7, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

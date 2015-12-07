@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/161/'> Django数据库中的FileField</a> </h2>
+        <div class="post-meta">发表于2006-09-05 00:32:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。 首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&lsquo;file&rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。 暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/160/'> Apache的虚拟主机</a> </h2>
         <div class="post-meta">发表于2006-09-03 20:58:28 </div>
     </header>
@@ -220,22 +236,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/151/'> 搭NFS服务器</a> </h2>
-        <div class="post-meta">发表于2006-08-17 23:47:20 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">今天终于算是把NFS服务器搭建的流程走了一遍，其实并没有什么难的，下个软件，改个配置文件，就可以了，主要是那个配置文件。过程什么的在这就不详细讲了，网上一抓 一大堆，主要是配置方面的一些问题吧。今天郁闷的一点就是配置文件中不能加空格，今天就是因为加了空格了，所以郁闷了老半天。已经被这习惯郁闷过不少次了，看来下次出 现问题首先要看看这方面的事情。 流程走了一遍，但是没有客户端来连，Windowz的NFS不会用，折腾了半天，最终都败在用户管理这一块了，它支持和UNIX主机共享用户信息，但是好像要求UNI X主机打开NIS服务，在配置的过程中，被那些个什么domain郁闷了N久，最后还是废弃了，最终的解决方案还是老老实实的用FTP，呵呵，又白忙了N久。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -263,6 +263,9 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
@@ -275,9 +278,6 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
             <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
-</a></li>
-        
         </ul>
     </div>
 
@@ -287,7 +287,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(87)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -312,7 +312,7 @@ u选项才可以被patch接受。例如目录下有1和2两个文件，下面是
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 3, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 54, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 7, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

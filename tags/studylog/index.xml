@@ -7,8 +7,62 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 11 Nov 2015 23:53:33 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Dec 2015 21:15:45 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/tags/studylog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go generate study
+</title>
+      <link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link>
+      <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
+      <description>
+
+&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
+&lt;li&gt;同步代码中的字段和表结构&lt;/li&gt;
+&lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;
+
+&lt;p&gt;最开始是想用一个脚本解析struct，生成相应的代码，但是在查文档的时候发现golang在1.4版本中引入了 &lt;a href=&#34;https://golang.org/doc/go1.4#gogenerate&#34;&gt;generate&lt;/a&gt; 命令，它可以解析一个文件并生成另一个文件。官方给的说明里面是从yacc的语法生成go文件。想了想觉得它可以完成生成SQL命令，同步struct和SQL的功能，而且如果做了处理的话还可以方便的在DB间切换，那就试试吧。&lt;/p&gt;
+
+&lt;h2 id=&#34;语法:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;语法&lt;/h2&gt;
+
+&lt;p&gt;在介绍如何编写前，先介绍下调用的方式。要成功调用一次generate需要两个条件：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;已经安装的generator&lt;/li&gt;
+&lt;li&gt;在需要处理的代码中加上 &lt;code&gt;//go:generate&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这样在文件所在的目录下运行 &lt;code&gt;go generate&lt;/code&gt; 即可根据注释中所指示的方法，调用相应的生成器了。&lt;/p&gt;
+
+&lt;h2 id=&#34;编写:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;编写&lt;/h2&gt;
+
+&lt;p&gt;Golang给出的sample是一个字符串相关的东西，具体可以见 &lt;a href=&#34;https://godoc.org/golang.org/x/tools/cmd/stringer&#34;&gt;文档页&lt;/a&gt;。&lt;a href=&#34;http://www.onebigfluke.com/2014/12/generic-programming-go-generate.html&#34;&gt;另一个页面&lt;/a&gt; 也有一份具体的实现可以参考。它主要的思路就是用 &lt;code&gt;generate&lt;/code&gt; 去处理某个 &lt;code&gt;.go&lt;/code&gt; 文件，然后生成一些新的东西。主要是用内置的 &lt;em&gt;AST&lt;/em&gt; 解析文件，并生成相应的东西。&lt;/p&gt;
+
+&lt;h2 id=&#34;我的实现:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;我的实现&lt;/h2&gt;
+
+&lt;p&gt;回到最开始的问题，我有一个定义好的struct，需要去生成SQL命令。所以还是需要用到内置的AST解析器的。除此之外也就是一点点的区分类型型，做转换了。代码放在 &lt;a href=&#34;https://github.com/hzmangel/struct2schema&#34;&gt;https://github.com/hzmangel/struct2schema&lt;/a&gt; 这里，README还在编写中。目前代码支持将大部分Go内置的类型转换为SQL类型，不过可能还是有一些不支持的需要手动操作。在DB支持上，目前只看了sqlite3和MySQL。下一步要做的事情估计有这些：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;支持更多的DB类型，如PostgreSQL， MSSQL 等（Mongo这种无结构的就不需要了&amp;hellip;&amp;hellip;）&lt;/li&gt;
+&lt;li&gt;现在生成的SQL命令中，字段名和Go中的变量名一致，都是Camel String，拟在解析的时候将其变为下划线小写的方式来生成SQL命令（考虑从后面的json字段获取小写名）&lt;/li&gt;
+&lt;li&gt;支持更多的Go数据类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;目前生成出来的代码会直接打印到屏幕上，格式啥的，据说1.6上对模板会有一个更新， &lt;a href=&#34;https://github.com/golang/go/issues/9969&#34;&gt;讨论在此&lt;/a&gt; ，拭目以待。&lt;/p&gt;
+
+&lt;h2 id=&#34;后记:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;在写这篇文章的时候，突然反应过来这个 &lt;code&gt;go generate&lt;/code&gt; 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MMDS Notes: W3 - Communities in Social Network (Basic)

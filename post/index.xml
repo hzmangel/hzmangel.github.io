@@ -7,8 +7,62 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 11 Nov 2015 23:53:33 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Dec 2015 21:15:45 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go generate study
+</title>
+      <link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link>
+      <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
+      <description>
+
+&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
+&lt;li&gt;同步代码中的字段和表结构&lt;/li&gt;
+&lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;
+
+&lt;p&gt;最开始是想用一个脚本解析struct，生成相应的代码，但是在查文档的时候发现golang在1.4版本中引入了 &lt;a href=&#34;https://golang.org/doc/go1.4#gogenerate&#34;&gt;generate&lt;/a&gt; 命令，它可以解析一个文件并生成另一个文件。官方给的说明里面是从yacc的语法生成go文件。想了想觉得它可以完成生成SQL命令，同步struct和SQL的功能，而且如果做了处理的话还可以方便的在DB间切换，那就试试吧。&lt;/p&gt;
+
+&lt;h2 id=&#34;语法:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;语法&lt;/h2&gt;
+
+&lt;p&gt;在介绍如何编写前，先介绍下调用的方式。要成功调用一次generate需要两个条件：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;已经安装的generator&lt;/li&gt;
+&lt;li&gt;在需要处理的代码中加上 &lt;code&gt;//go:generate&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这样在文件所在的目录下运行 &lt;code&gt;go generate&lt;/code&gt; 即可根据注释中所指示的方法，调用相应的生成器了。&lt;/p&gt;
+
+&lt;h2 id=&#34;编写:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;编写&lt;/h2&gt;
+
+&lt;p&gt;Golang给出的sample是一个字符串相关的东西，具体可以见 &lt;a href=&#34;https://godoc.org/golang.org/x/tools/cmd/stringer&#34;&gt;文档页&lt;/a&gt;。&lt;a href=&#34;http://www.onebigfluke.com/2014/12/generic-programming-go-generate.html&#34;&gt;另一个页面&lt;/a&gt; 也有一份具体的实现可以参考。它主要的思路就是用 &lt;code&gt;generate&lt;/code&gt; 去处理某个 &lt;code&gt;.go&lt;/code&gt; 文件，然后生成一些新的东西。主要是用内置的 &lt;em&gt;AST&lt;/em&gt; 解析文件，并生成相应的东西。&lt;/p&gt;
+
+&lt;h2 id=&#34;我的实现:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;我的实现&lt;/h2&gt;
+
+&lt;p&gt;回到最开始的问题，我有一个定义好的struct，需要去生成SQL命令。所以还是需要用到内置的AST解析器的。除此之外也就是一点点的区分类型型，做转换了。代码放在 &lt;a href=&#34;https://github.com/hzmangel/struct2schema&#34;&gt;https://github.com/hzmangel/struct2schema&lt;/a&gt; 这里，README还在编写中。目前代码支持将大部分Go内置的类型转换为SQL类型，不过可能还是有一些不支持的需要手动操作。在DB支持上，目前只看了sqlite3和MySQL。下一步要做的事情估计有这些：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;支持更多的DB类型，如PostgreSQL， MSSQL 等（Mongo这种无结构的就不需要了&amp;hellip;&amp;hellip;）&lt;/li&gt;
+&lt;li&gt;现在生成的SQL命令中，字段名和Go中的变量名一致，都是Camel String，拟在解析的时候将其变为下划线小写的方式来生成SQL命令（考虑从后面的json字段获取小写名）&lt;/li&gt;
+&lt;li&gt;支持更多的Go数据类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;目前生成出来的代码会直接打印到屏幕上，格式啥的，据说1.6上对模板会有一个更新， &lt;a href=&#34;https://github.com/golang/go/issues/9969&#34;&gt;讨论在此&lt;/a&gt; ，拭目以待。&lt;/p&gt;
+
+&lt;h2 id=&#34;后记:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;在写这篇文章的时候，突然反应过来这个 &lt;code&gt;go generate&lt;/code&gt; 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MMDS Notes: W3 - Communities in Social Network (Basic)
@@ -1343,106 +1397,6 @@ array. Here is a sample data set:&lt;/p&gt;
   ]
 ]
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Some failed attempts on PNaCl</title>
-      <link>http://hzmangel.github.io/post/1214/</link>
-      <pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1214/</guid>
-      <description>
-
-&lt;p&gt;Google has released his &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl
-/building-and-testing-portable-native-client&#34;&gt;PNaCl&lt;/a&gt; project on Google I/O 2013,
-which can allow user to write portable native client application. The portable
-native client application can be translated to native client program and
-executed on supported architecture.&lt;/p&gt;
-
-&lt;p&gt;The official toolchain contains clang frontend, which can only be used to
-compile C/C++ code to PNaCl application. But the PNaCl application is a subset
-of LLVM so I have tried some other languages have LLVM frontend. I am still
-working on the solution, and this article is just recording some failed
-attempts.### Install PNaCl toolchain&lt;/p&gt;
-
-&lt;p&gt;PNaCl toolchain can be downloaded via &lt;a href=&#34;https://developers.google.com/native-client/sdk/download&#34;&gt;Native Client
-SDK&lt;/a&gt;, please follow
-the instruction for downloading and installing. Here are the commands used
-here:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;./naclsdk install pepper_canary&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;export NACL_SDK_ROOT=/where/you/put/the/pepper_canary&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd pepper_canary/examples/hello_world; TOOLCHAIN=pnacl CONFIG=Release make&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Chrome is also needed some setup, which also can be found in that page. NOTICE
-that the &lt;code&gt;#enable-nacl-debug&lt;/code&gt; flag can not be enabled, or the PNaCl
-application will not be able to
-loaded(&lt;a href=&#34;http://www.ahwkong.com/post/43309281489/native-client-see-only-
-status-creating-embed&#34;&gt;ref&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;The samples are also avaliable in chrome store, and the link can also be found
-on &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl/building-and-
-testing-portable-native-client&#34;&gt;this page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;golang-and-llgo:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Golang and llgo&lt;/h3&gt;
-
-&lt;p&gt;The first language I tried is Golang. There is a Golang frontend for LLVM
-called &lt;a href=&#34;https://github.com/axw/llgo&#34;&gt;llgo&lt;/a&gt;, and I have tried to use it for
-generating LLVM bitcode from Golang program.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;go get&lt;/code&gt; is recommended to install the &lt;code&gt;llgo&lt;/code&gt; package. The &lt;code&gt;CGO_CFLAGS&lt;/code&gt; and
-&lt;code&gt;CGO_LDFLAGS&lt;/code&gt; should be set before executing &lt;code&gt;go get&lt;/code&gt;. I have followed the
-steps on the &lt;a href=&#34;http://blog.awilkins.id.au/2013/05/llgo-on-
-go-11.html&#34;&gt;author&amp;rsquo;s blog&lt;/a&gt; for installing:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install Go 1.1&lt;/li&gt;
-&lt;li&gt;Get PNaCl sdk, which contains Clang and LLVM&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;go get github.com/axw/llgo/cmd/llgo-dist&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;llgo-dist&lt;/code&gt; to build and install runtime&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I was tried it on MacOS 10.7.5, but got the error message said &lt;code&gt;No matching
-.ll file for &amp;quot;asm_darwin_amd64.s&amp;quot;&lt;/code&gt;, I have &lt;a href=&#34;https://github.com/axw/llgo/issues/36&#34;&gt;filed an
-issue&lt;/a&gt; and learned from response that I
-can set target triple to &lt;code&gt;x86_64-apple-macosx10.7.0&lt;/code&gt; or &lt;code&gt;i386-apple-
-macosx10.7.0&lt;/code&gt; for solving this.&lt;/p&gt;
-
-&lt;p&gt;I have met compile error while compiling runtime by &lt;code&gt;llgo-dist&lt;/code&gt; command, which
-seems because of upgrade of golang to 1.1. So I leave &lt;code&gt;llgo&lt;/code&gt; there and waiting
-for some updates from author.&lt;/p&gt;
-
-&lt;h3 id=&#34;ruby:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Ruby&lt;/h3&gt;
-
-&lt;p&gt;Another attempt is &lt;code&gt;ruby&lt;/code&gt;. In ruby 2.0.0, the nacl support has been
-integrated, the document can be found &lt;a href=&#34;https://github.com/csigi/learning
-ruby/blob/master/ruby2/ruby-2.0.0-rc1/nacl/README.nacl&#34;&gt;here&lt;/a&gt;. During compiling the
-ruby source, I have got an &lt;code&gt;rdoc&lt;/code&gt; error, so I added &lt;code&gt;--disable-install-rdoc&lt;/code&gt;
-to the configue command.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure --prefix=/tmp/nacl-ruby --host=x86_64-nacl --with-baseruby=`which ruby` --disable-install-rdoc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also I made a symbol link of all directories in includes PNaCl sdk directory
-to ruby for solving header file not found error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ln -s /home/vagrant/source/nacl_sdk/pepper_canary/include/* ./
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If running this command on 64-bit OS, please make sure the 32-bit glibc
-library is installed, or some binaries may get error.&lt;/p&gt;
-
-&lt;p&gt;I have compiled the native executable for ruby, but it can&amp;rsquo;t be executed by
-PNaCl binary. I am still investigating on this.&lt;/p&gt;
-
-&lt;h3 id=&#34;next-step:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Next step&lt;/h3&gt;
-
-&lt;p&gt;I am still trying to write portable native client code with other languages. I
-saw the author of &lt;code&gt;llgo&lt;/code&gt; has made some changes and I will do the test. I will
-update my post when got progress.&lt;/p&gt;
 </description>
     </item>
     
