@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/582/'> 2010计划</a> </h2>
+        <div class="post-meta">发表于2010-01-13 23:29:39 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去 实现~ 读书计划 去年列下了5本非技术书的想法，虽然达成了，但是总感觉有些不务正业，于是乎今年列些技术的。其实不多，就两本 1. SICP，边学习这本书边用haskell去折腾之 2. 具体数学，高爷爷的书，当冷馒头啃都不行了，要当石头啃，试试吧。 以我的智商而言，估计这两本书都有难度，能看多少是多少吧，争取看完，然后再去复习复习算法导论。呵呵，看着这计划，自己都怕哇。至于非技术书嘛，找到就看吧，当休闲 用。 码农基本功 虽然单位的代码是C++的，但是说真的，实在不想折腾那玩意，太杀脑细胞了，所以今年的计划继续无视之，工作中学习吧（其实是偷懒的借口），嘿嘿。今年的计划也是差不 多两个吧 1. 记账软件，大概是BS结构，大概会折腾Flex/Android。嗯，宏愿，做多少看食言的程度 –_-!!! 2. 找个用的人多的开源项目去掺和。类似的愿望在去年也有，只是最后只折腾了一些小patch，残念哇，期望的项目是 Python/CLI 相关的，不想做界面，太累~ 游山玩水 这个，不确定性太多了哇，先列上两个吧，可实现度，呵呵，不知道了哇 1. 小五台金莲花 2. 8月份去青海湖看油菜花 差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/581/'> Set local dir as yum repo</a> </h2>
         <div class="post-meta">发表于2010-01-13 13:38:19 </div>
     </header>
@@ -239,22 +255,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/490/'> Vim中的大小写切换</a> </h2>
-        <div class="post-meta">发表于2009-12-04 01:07:05 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\ L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case) 例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾： :%s/^\(\w\)\(.*\)/\u\1\L\2/g 需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是 EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午 试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了： :%s/\([a-z]\)\(.*\)/\U\1\l\2/g \l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -282,6 +282,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -294,9 +297,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -306,7 +306,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -331,7 +331,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

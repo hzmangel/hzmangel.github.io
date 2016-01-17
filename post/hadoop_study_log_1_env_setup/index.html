@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Hadoop Study Log 1: Env Setup
+ &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2016-01-17T07:22:32&#43;08:00" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="Hadoop" />
+            
+                <meta property="og:article:tag" content="StudyLog" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Hadoop Study Log 1: Env Setup
+
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
+
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <section>
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a> </h2>
+        <div class="post-meta">发表于2016-01-17 07:22:32 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>最近想折腾数据，于是决定从基础的Hadoop开始。</p>
+
+<h2 id="基本概念:74e8de6387e3558e8f2adccd19a50c6d">基本概念</h2>
+
+<p>这里只是一些我之前可能弄混淆的概念，其它的一些东西可能需要去hadoop官网看了。</p>
+
+<ul>
+<li>Hadoop是一个编程框架或者叫库，主要用于下面类型程序的编写
+
+<ul>
+<li>大规模数据集</li>
+<li>分布式</li>
+<li>简单任务模型</li>
+</ul></li>
+<li>Hadoop的核心项目<a href="https://hadoop.apache.org/">包含下面几个</a>：
+
+<ul>
+<li>Common: 一些通用组件，工具类</li>
+<li>HDFS：分布式文件系统</li>
+<li>YARN：任务调度及资源管理</li>
+<li>MapReduce：并行编程模型</li>
+</ul></li>
+<li>还有一些衍生项目，具体<a href="https://hadoop.apache.org/">参见网页</a></li>
+</ul>
+
+<h2 id="环境配置:74e8de6387e3558e8f2adccd19a50c6d">环境配置</h2>
+
+<p>鉴于之前在osx上装东西碰上过坑，所以选择了virtualbox+ubuntu的方案。系统的版本是Ubuntu 15.05，Hadoop选择的是2.6.3（截止写文章的时候它的Release Date最新）。具体步骤如下：</p>
+
+<ol>
+<li><p>下载及安装</p>
+
+<pre><code class="language-bash"># Download package from Hadoop site
+$ wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz
+
+# Decompress it
+$ tar zxvf hadoop-2.6.3.tar.gz
+
+# Move the package files to system directory, and change owner
+$ sudo mv hadoop-2.6.3 /opt/hadoop
+$ sudo chown -R vagrant:vagrant /opt/hadoop
+</code></pre></li>
+
+<li><p>配置服务（Single Node）</p>
+
+<pre><code class="language-bash"># Export JAVA_HOME env variable
+$ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+</code></pre>
+
+<p>并根据<a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html">此页面</a>中的内容，修改相应文件并配置SSH服务。</p>
+
+<ul>
+<li>etc/hadoop/core-site.xml:</li>
+<li>etc/hadoop/hdfs-site.xml:</li>
+</ul></li>
+
+<li><p>格式化namenode</p>
+
+<pre><code class="language-bash">$ bin/hdfs namenode -format
+</code></pre></li>
+
+<li><p>设置<code>etc/hadoop/hadoop-env.sh</code>中的<code>JAVA_HOME</code>变量</p></li>
+
+<li><p>开启dfs服务</p>
+
+<pre><code class="language-bash">$ sbin/start-dfs.sh
+</code></pre></li>
+</ol>
+
+<p>至此，一个运行在单节点环境的Hadoop环境就ok了。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/hadoop"><span class="label label-default">Hadoop</span></a></li>  <li><a href="/tags/studylog"><span class="label label-default">StudyLog</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/go-generate-struct-to-schema/"> Go generate study
+ &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = "hzmangel";
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+        </section>
+    </div>
+
+    <div class="col-md-3">
+        <aside id="sidebar">
+
+    <div class="sidebar-block">
+        <h5>新鲜出炉</h5>
+        <ul class="list-unstyled">
+        
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
+</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="sidebar-block">
+        <h5>分类</h5>
+        <ul class="list-unstyled">
+        
+            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+        
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
+        
+            <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
+        
+            <li><a href="/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex">好东东latex</a> &nbsp;(20)</li>
+        
+            <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅linux</a> &nbsp;(73)</li>
+        
+            <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
+        
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
+        
+            <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
+        
+            <li><a href="/categories/%E9%82%A3%E5%B1%B1%E9%82%A3%E6%B0%B4">那山那水</a> &nbsp;(52)</li>
+        
+            <li><a href="/categories/%E9%A3%8E%E9%9B%A8%E8%80%83%E7%A0%94%E8%B7%AF">风雨考研路</a> &nbsp;(11)</li>
+        
+            <li><a href="/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB">饕餮之享</a> &nbsp;(4)</li>
+        
+        </ul>
+    </div>
+
+    <div class="sidebar-block">
+        <h5>标签</h5>
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+    </div>
+
+</aside>
+
+
+
+    </div>
+</div>
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+        </script>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Queue(function() {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+        </script>
+
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-1847567-5', 'auto');
+            ga('send', 'pageview');
+        </script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

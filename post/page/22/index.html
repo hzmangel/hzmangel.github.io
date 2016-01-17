@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/266/'> 没有雨的清明</a> </h2>
+        <div class="post-meta">发表于2008-04-05 01:02:37 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">应该是在北京过的第七个清明吧，只知道这是第一个有假放的清明，于是乎，北京的大街小巷上又充斥着一堆一堆又一堆的人，各种口音，各种肤色，把本就已经熙熙攘攘的街道 ，商场，景点等能放的下人的地方，变的更加拥挤。 在来北京之前，一直固执的认为，清明就应该是在如丝的细雨中度过的，静静的小雨，把天地间的一切东西都蒙在一层淡淡的雾中。行走在雨中，能感觉到轻抚在身上的雨丝，很 舒服。在脑海中还会浮现出这样一个场景：一个牧童，骑在青牛上，吹着用青竹削制的牧笛（指不指杏花村，无所谓了啦）。这一切就是是一幅活动的水墨画卷。丝丝的小雨在我 们那倒是比较常见，刚好清明前后那几天总会有几天大概是样的天气，所以也就一直没有更改自己的想法。但是等到了这边，才知道，清明并不是非要雨纷纷的，太阳公公在这段 时间也是可以露脸的，虽然感觉有些不舒服。其实感觉到更不舒服的就是太阳公公好勤劳啊，一年365天基本上天天上班。 已经忘记了江南水乡的春天，7年的日子，改变了我很多，虽然没有真正喜欢上这个地方，但是还是慢慢的在被迫熟悉于它的一切。就要走到人生的第一个转折点了，希望我能走 好，不知道几年后，我会不会对这个地方产生感情，同样也不知道几年后，我是否会换一个地方继续漂着，还有不知道几年后，我会走哪一条路，做什么样的工作。太多的不确定 因素，使我已经不敢对我的未来做出期望，最多也就是可以在脑海中憧憬一下某些场景，然后继续回到残酷的现实中，是不是只有等自己过上了清明节，才能说的上是不会变了呢 ，因为大家都说盖棺定论嘛…… 也已经有7年没有在清明的时候，给家里面那些搬到另一个世界的老人们烧纸了，虽然知道这也许只是一种给活人的寄托，但是，又没有理由让它消失，那就放那放着吧。怀念爷 爷他们，不知道在那边过的好不好（老人家好像没托梦，应该还行吧，呵呵），晚辈在此给您几位请安了。 PS1：发现自己总是忘不了家乡的春雨，都快成月经贴了…… PS2：同样固执的认为，清明就是在4月5号，但是今天从老妈的电话中得知，今年的清明是今天…… PS3：阳光明媚的清明，总是找不到某些感觉，加上现在的假期，估计以后就更难找了。话说，哪怕给个阴天也好啊……</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/265/'> 香山 -&gt; 六郎庄，穿越？</a> </h2>
         <div class="post-meta">发表于2008-04-05 00:13:34 </div>
     </header>
@@ -212,22 +228,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/255/'> 给iphone传电子书</a> </h2>
-        <div class="post-meta">发表于2008-03-17 10:21:25 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。 #!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -255,6 +255,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -267,9 +270,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -279,7 +279,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -304,7 +304,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

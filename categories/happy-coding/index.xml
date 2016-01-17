@@ -7,8 +7,90 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Mon, 07 Dec 2015 21:15:45 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 17 Jan 2016 07:22:32 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hadoop Study Log 1: Env Setup
+</title>
+      <link>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</link>
+      <pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid>
+      <description>
+
+&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;
+
+&lt;h2 id=&#34;基本概念:74e8de6387e3558e8f2adccd19a50c6d&#34;&gt;基本概念&lt;/h2&gt;
+
+&lt;p&gt;这里只是一些我之前可能弄混淆的概念，其它的一些东西可能需要去hadoop官网看了。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Hadoop是一个编程框架或者叫库，主要用于下面类型程序的编写
+
+&lt;ul&gt;
+&lt;li&gt;大规模数据集&lt;/li&gt;
+&lt;li&gt;分布式&lt;/li&gt;
+&lt;li&gt;简单任务模型&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hadoop的核心项目&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;包含下面几个&lt;/a&gt;：
+
+&lt;ul&gt;
+&lt;li&gt;Common: 一些通用组件，工具类&lt;/li&gt;
+&lt;li&gt;HDFS：分布式文件系统&lt;/li&gt;
+&lt;li&gt;YARN：任务调度及资源管理&lt;/li&gt;
+&lt;li&gt;MapReduce：并行编程模型&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;还有一些衍生项目，具体&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;参见网页&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;环境配置:74e8de6387e3558e8f2adccd19a50c6d&#34;&gt;环境配置&lt;/h2&gt;
+
+&lt;p&gt;鉴于之前在osx上装东西碰上过坑，所以选择了virtualbox+ubuntu的方案。系统的版本是Ubuntu 15.05，Hadoop选择的是2.6.3（截止写文章的时候它的Release Date最新）。具体步骤如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;下载及安装&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Download package from Hadoop site
+$ wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz
+
+# Decompress it
+$ tar zxvf hadoop-2.6.3.tar.gz
+
+# Move the package files to system directory, and change owner
+$ sudo mv hadoop-2.6.3 /opt/hadoop
+$ sudo chown -R vagrant:vagrant /opt/hadoop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;配置服务（Single Node）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Export JAVA_HOME env variable
+$ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并根据&lt;a href=&#34;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html&#34;&gt;此页面&lt;/a&gt;中的内容，修改相应文件并配置SSH服务。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;etc/hadoop/core-site.xml:&lt;/li&gt;
+&lt;li&gt;etc/hadoop/hdfs-site.xml:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;格式化namenode&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ bin/hdfs namenode -format
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;设置&lt;code&gt;etc/hadoop/hadoop-env.sh&lt;/code&gt;中的&lt;code&gt;JAVA_HOME&lt;/code&gt;变量&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;开启dfs服务&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sbin/start-dfs.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;至此，一个运行在单节点环境的Hadoop环境就ok了。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Go generate study
@@ -404,7 +486,7 @@ end
 
 &lt;h4 id=&#34;一般算法:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;一般算法&lt;/h4&gt;
 
-&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 &lt;em&gt;n**2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
+&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
 
 &lt;p&gt;在计算上，有两种方式：&lt;/p&gt;
 
@@ -516,7 +598,7 @@ end
 
 &lt;p&gt;此后直接介绍了一个 &lt;em&gt;Minhashing&lt;/em&gt; 的函数簇。假设前述的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 的行排列是随机的，我们定义一个 &lt;em&gt;Minhashing&lt;/em&gt; 函数 &lt;code&gt;h(S)&lt;/code&gt; ，它的值是在特定排列下，列 &lt;code&gt;S&lt;/code&gt; 中第一次出现 &lt;code&gt;1&lt;/code&gt; 的行数。使用多个独立的哈希函数（如100个），即可为每一个集合创建一个 &lt;em&gt;signatures&lt;/em&gt; ，而多个集合的结果合并后可以生成一个新的矩阵， &lt;em&gt;signatures matrix&lt;/em&gt; 。这个矩阵的列是各个集合，而行是某一次计算 &lt;em&gt;Minhashing&lt;/em&gt; 时的结果。&lt;/p&gt;
 
-&lt;p&gt;下面来分析下 &lt;em&gt;Jaccard Similarity*。首先看 *Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;下面来分析下 *Jaccard Similarity*。首先看 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;然后再来看 &lt;em&gt;signatures matrix&lt;/em&gt; 。在某个特定的排列下，如果两个集合的 &lt;em&gt;Minhashing&lt;/em&gt; 值相同，那第它们一定是 &lt;code&gt;(1,1)&lt;/code&gt; 形式的，而其它三种形式不会有此结果）注意，此处只能保证， &lt;em&gt;Minhashing&lt;/em&gt; 值相同时，能保证这一行是 &lt;code&gt;(1,1)&lt;/code&gt;，但是一行是&lt;code&gt;(1,1)&lt;/code&gt;并不能说明这一行是 &lt;em&gt;Minhashing&lt;/em&gt; 值）。所以可以得知，两个集合 &lt;em&gt;Minhashing&lt;/em&gt; 值相等的概率，也就是两个集合的 &lt;em&gt;Jaccard&lt;/em&gt; 相似度，都是 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt; 。&lt;/p&gt;
 
@@ -1311,106 +1393,6 @@ array. Here is a sample data set:&lt;/p&gt;
   ]
 ]
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Some failed attempts on PNaCl</title>
-      <link>http://hzmangel.github.io/post/1214/</link>
-      <pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1214/</guid>
-      <description>
-
-&lt;p&gt;Google has released his &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl
-/building-and-testing-portable-native-client&#34;&gt;PNaCl&lt;/a&gt; project on Google I/O 2013,
-which can allow user to write portable native client application. The portable
-native client application can be translated to native client program and
-executed on supported architecture.&lt;/p&gt;
-
-&lt;p&gt;The official toolchain contains clang frontend, which can only be used to
-compile C/C++ code to PNaCl application. But the PNaCl application is a subset
-of LLVM so I have tried some other languages have LLVM frontend. I am still
-working on the solution, and this article is just recording some failed
-attempts.### Install PNaCl toolchain&lt;/p&gt;
-
-&lt;p&gt;PNaCl toolchain can be downloaded via &lt;a href=&#34;https://developers.google.com/native-client/sdk/download&#34;&gt;Native Client
-SDK&lt;/a&gt;, please follow
-the instruction for downloading and installing. Here are the commands used
-here:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;./naclsdk install pepper_canary&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;export NACL_SDK_ROOT=/where/you/put/the/pepper_canary&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd pepper_canary/examples/hello_world; TOOLCHAIN=pnacl CONFIG=Release make&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Chrome is also needed some setup, which also can be found in that page. NOTICE
-that the &lt;code&gt;#enable-nacl-debug&lt;/code&gt; flag can not be enabled, or the PNaCl
-application will not be able to
-loaded(&lt;a href=&#34;http://www.ahwkong.com/post/43309281489/native-client-see-only-
-status-creating-embed&#34;&gt;ref&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;The samples are also avaliable in chrome store, and the link can also be found
-on &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl/building-and-
-testing-portable-native-client&#34;&gt;this page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;golang-and-llgo:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Golang and llgo&lt;/h3&gt;
-
-&lt;p&gt;The first language I tried is Golang. There is a Golang frontend for LLVM
-called &lt;a href=&#34;https://github.com/axw/llgo&#34;&gt;llgo&lt;/a&gt;, and I have tried to use it for
-generating LLVM bitcode from Golang program.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;go get&lt;/code&gt; is recommended to install the &lt;code&gt;llgo&lt;/code&gt; package. The &lt;code&gt;CGO_CFLAGS&lt;/code&gt; and
-&lt;code&gt;CGO_LDFLAGS&lt;/code&gt; should be set before executing &lt;code&gt;go get&lt;/code&gt;. I have followed the
-steps on the &lt;a href=&#34;http://blog.awilkins.id.au/2013/05/llgo-on-
-go-11.html&#34;&gt;author&amp;rsquo;s blog&lt;/a&gt; for installing:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install Go 1.1&lt;/li&gt;
-&lt;li&gt;Get PNaCl sdk, which contains Clang and LLVM&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;go get github.com/axw/llgo/cmd/llgo-dist&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;llgo-dist&lt;/code&gt; to build and install runtime&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I was tried it on MacOS 10.7.5, but got the error message said &lt;code&gt;No matching
-.ll file for &amp;quot;asm_darwin_amd64.s&amp;quot;&lt;/code&gt;, I have &lt;a href=&#34;https://github.com/axw/llgo/issues/36&#34;&gt;filed an
-issue&lt;/a&gt; and learned from response that I
-can set target triple to &lt;code&gt;x86_64-apple-macosx10.7.0&lt;/code&gt; or &lt;code&gt;i386-apple-
-macosx10.7.0&lt;/code&gt; for solving this.&lt;/p&gt;
-
-&lt;p&gt;I have met compile error while compiling runtime by &lt;code&gt;llgo-dist&lt;/code&gt; command, which
-seems because of upgrade of golang to 1.1. So I leave &lt;code&gt;llgo&lt;/code&gt; there and waiting
-for some updates from author.&lt;/p&gt;
-
-&lt;h3 id=&#34;ruby:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Ruby&lt;/h3&gt;
-
-&lt;p&gt;Another attempt is &lt;code&gt;ruby&lt;/code&gt;. In ruby 2.0.0, the nacl support has been
-integrated, the document can be found &lt;a href=&#34;https://github.com/csigi/learning
-ruby/blob/master/ruby2/ruby-2.0.0-rc1/nacl/README.nacl&#34;&gt;here&lt;/a&gt;. During compiling the
-ruby source, I have got an &lt;code&gt;rdoc&lt;/code&gt; error, so I added &lt;code&gt;--disable-install-rdoc&lt;/code&gt;
-to the configue command.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ./configure --prefix=/tmp/nacl-ruby --host=x86_64-nacl --with-baseruby=`which ruby` --disable-install-rdoc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also I made a symbol link of all directories in includes PNaCl sdk directory
-to ruby for solving header file not found error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ln -s /home/vagrant/source/nacl_sdk/pepper_canary/include/* ./
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If running this command on 64-bit OS, please make sure the 32-bit glibc
-library is installed, or some binaries may get error.&lt;/p&gt;
-
-&lt;p&gt;I have compiled the native executable for ruby, but it can&amp;rsquo;t be executed by
-PNaCl binary. I am still investigating on this.&lt;/p&gt;
-
-&lt;h3 id=&#34;next-step:ecc7ba44f276ccb1834f8c4a85b5f6bd&#34;&gt;Next step&lt;/h3&gt;
-
-&lt;p&gt;I am still trying to write portable native client code with other languages. I
-saw the author of &lt;code&gt;llgo&lt;/code&gt; has made some changes and I will do the test. I will
-update my post when got progress.&lt;/p&gt;
 </description>
     </item>
     

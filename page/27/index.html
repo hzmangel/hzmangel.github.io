@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/202/'> List的Iterator</a> </h2>
+        <div class="post-meta">发表于2007-08-15 17:09:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">写个小程序，用到了List，而且要用到它的Iterator，由于以前有用vector的经验，想当然的在Iterator上做了一个+3的操作，结果报错。当时F T，然后开始写测试程序，顺便上网去转转，结果程序写到一半的时候，看到篇文章比较各种Iterator，然后明白了，List的Iterator是双向的，而vec tor的Iterator是random的，就有了对+n这一操作支持的不同，而从前没看过的我就稀里糊涂的FT了。写下来，防止以后再稀里糊涂，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/201/'> TexLive书签的乱码</a> </h2>
         <div class="post-meta">发表于2007-08-05 12:01:40 </div>
     </header>
@@ -238,26 +254,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/192/'> 初识 Google Map API</a> </h2>
-        <div class="post-meta">发表于2007-06-01 09:07:38 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">昨天去 google dev day 晃了一圈，分会场上主要听的是 Google 的新产品发布会，感觉那个 map api 有点意思，可以在上面做点东西玩玩，于是晚上回来小看了一下例子，做了一个玩玩，还是满简单的，代码如下。 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;&lt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&gt;&quot;&gt; &lt;html xmlns=&quot;&lt;http://www.w3.org/1999/xhtml&gt;&quot;&gt; &lt;head&gt; &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt; &lt;title&gt;Google Maps JavaScript API Example&lt;/title&gt; &lt;script src=&quot;&lt;http://ditu.google.com/maps?file=api&gt;&amp;amp;v=2&amp;amp;key=*****&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; //&lt;![CDATA[ function load() { if (GBrowserIsCompatible()) { var map = new GMap2(document.getElementById(&quot;map&quot;)); map.addControl(new GLargeMapControl()); map.addControl(new GScaleControl()); GEvent.addListener(map, &quot;moveend&quot;, function() { document.getElementById(&quot;center&quot;).innerHTML = map.getCenter(); }); map.setCenter(new GLatLng(39.96255, 116.358969), 17); } } //]]&gt; &lt;/script&gt; &lt;/head&gt; &lt;body onload=&quot;load()&quot;</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/192/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -285,6 +281,9 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -297,9 +296,6 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -309,7 +305,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -334,7 +330,7 @@ World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

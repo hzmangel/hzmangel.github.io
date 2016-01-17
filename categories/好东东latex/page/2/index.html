@@ -167,7 +167,7 @@
     </header>
 
     <section>
-        <div class="post-summary">今天在xia又学到了一招，VIM Latex-Suite的使用，以及在其中加上正向、反向搜索的方法。刚用了一下，感觉不错^_^ 声明：==之间的内容摘自edyfox@xia.net所发表的贴子_**VIM LaTeX Suite 中正向、反向搜索的配置&gt;**_。本人只是使用时查到了，顺便转载一下，版 权归原作者所有。 首先去下载Latex-Suite，网址是http://vim-latex.sourceforge.net，下载压缩包，解压到~/vimfiles(Windowz)或~/.vim(nix)文件夹，我使用的是Windoze下的Gvim ，在菜单里面就出现了Latex-Suite的菜单，是一些命令的快捷输入，有时还是满有用的^_^ 在xia上看到了正向、反向搜索，转贴一下下： 首先，要让双向搜索正常运行，要将VIM运行在remote模式下，具体方式在两个系统下有不同，基本都是在VIM后加上参数--servername latex-suite &ndash;remote-silent &lt;文件名&gt;，这样VIM在打开文件的时候就不会开一个.swp文件了，这样就可以打开多个副本。 在*nix下，修改.vimrc文件，使其支持xdvi，在调用latex的时候，加上-src- specials参数以生成带行号信息的dvi文件。在.vimrc文件中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src- specials -interaction=nonstopmode $&ldquo; 。反向搜索为了让xdvi知道工作在remote模式下，要在.vimrc中加上let g:TexViewRule_dvi=&ldquo;xdvi -editor &lsquo;gvim &ndash;servername latex-suite &ndash;remote-silent&rsquo;&ldquo;；如果是Windoz，则在_vimrc中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src-pecials -interaction=nonstopmode $*&rdquo; 即可。(其实我也不清楚加上那些是什么意思，只是从那篇文章里面直接Copy过来的^^)。 在Windowz下还需要配置yap，具体方法是打开yap，在View-&gt;Option选项中，找到Inverse Search页，在Command里输入gvim.exe &ndash;servername latex-suite &ndash;remote-silent +%l %f，这样就可以在yap中执行反向搜索了。 用remote模式下的VIM打开一个.tex文件，在normal模式下键入\ll即可编译文件，\ls就可以调用一个dvi的窗口来查看，而且页面停留在输入\l s时，光标所指内容生成的内容上。在*nix下，在xdvi窗口中用Ctrl+左键可以调用VIM查看源码；在Windoz中，双击yap页面上相应的位置即可转到源 码中的位置。============================================================ 今天主要学了Latex- Suite的使用，现在有点感觉不爽的是在VIM中输入{}、()等符号时，后面会自动加上&lt;++&gt;，目前还不清楚在什么地方改，再说吧^_^</div>
+        <div class="post-summary">今天在xia又学到了一招，VIM Latex-Suite的使用，以及在其中加上正向、反向搜索的方法。刚用了一下，感觉不错^_^ 声明：==之间的内容摘自edyfox@xia.net所发表的贴子_**VIM LaTeX Suite 中正向、反向搜索的配置&gt;**_。本人只是使用时查到了，顺便转载一下，版 权归原作者所有。 首先去下载Latex-Suite，网址是http://vim-latex.sourceforge.net，下载压缩包，解压到~/vimfiles(Windowz)或~/.vim(*nix)文件夹，我使用的是Windoze下的Gvim ，在菜单里面就出现了Latex-Suite的菜单，是一些命令的快捷输入，有时还是满有用的^_^ 在xia上看到了正向、反向搜索，转贴一下下： 首先，要让双向搜索正常运行，要将VIM运行在remote模式下，具体方式在两个系统下有不同，基本都是在VIM后加上参数--servername latex-suite &ndash;remote-silent &lt;文件名&gt;，这样VIM在打开文件的时候就不会开一个.swp文件了，这样就可以打开多个副本。 在nix下，修改.vimrc文件，使其支持xdvi，在调用latex的时候，加上-src- specials参数以生成带行号信息的dvi文件。在.vimrc文件中加上let g:Tex_CompileRule_dvi=&ldquo;latex -src- specials -interaction=nonstopmode $&ldquo; 。反向搜索为了让xdvi知道工作在remote模式下，要在.vimrc中加上let g:Tex_ViewRule_dvi=&ldquo;xdvi -editor &lsquo;gvim &ndash;servername latex-suite &ndash;remote-silent&rsquo;&ldquo;；如果是Windoz，则在_vimrc中加上let g:Tex_CompileRuledvi=&ldquo;latex -src-pecials -interaction=nonstopmode $*&rdquo; 即可。(其实我也不清楚加上那些是什么意思，只是从那篇文章里面直接Copy过来的^^)。 在Windowz下还需要配置yap，具体方法是打开yap，在View-&gt;Option选项中，找到Inverse Search页，在Command里输入gvim.exe &ndash;servername latex-suite &ndash;remote-silent +%l %f，这样就可以在yap中执行反向搜索了。 用remote模式下的VIM打开一个.tex文件，在normal模式下键入\ll即可编译文件，\ls就可以调用一个dvi的窗口来查看，而且页面停留在输入\l s时，光标所指内容生成的内容上。在*nix下，在xdvi窗口中用Ctrl+左键可以调用VIM查看源码；在Windoz中，双击yap页面上相应的位置即可转到源 码中的位置。============================================================ 今天主要学了Latex- Suite的使用，现在有点感觉不爽的是在VIM中输入{}、()等符号时，后面会自动加上&lt;++&gt;，目前还不清楚在什么地方改，再说吧^_^</div>
     </section>
 
     
@@ -252,6 +252,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -264,9 +267,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -276,7 +276,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -301,7 +301,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

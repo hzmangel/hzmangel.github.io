@@ -350,7 +350,7 @@ end
 
 &lt;h4 id=&#34;一般算法:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;一般算法&lt;/h4&gt;
 
-&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 &lt;em&gt;n**2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
+&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
 
 &lt;p&gt;在计算上，有两种方式：&lt;/p&gt;
 
@@ -462,7 +462,7 @@ end
 
 &lt;p&gt;此后直接介绍了一个 &lt;em&gt;Minhashing&lt;/em&gt; 的函数簇。假设前述的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 的行排列是随机的，我们定义一个 &lt;em&gt;Minhashing&lt;/em&gt; 函数 &lt;code&gt;h(S)&lt;/code&gt; ，它的值是在特定排列下，列 &lt;code&gt;S&lt;/code&gt; 中第一次出现 &lt;code&gt;1&lt;/code&gt; 的行数。使用多个独立的哈希函数（如100个），即可为每一个集合创建一个 &lt;em&gt;signatures&lt;/em&gt; ，而多个集合的结果合并后可以生成一个新的矩阵， &lt;em&gt;signatures matrix&lt;/em&gt; 。这个矩阵的列是各个集合，而行是某一次计算 &lt;em&gt;Minhashing&lt;/em&gt; 时的结果。&lt;/p&gt;
 
-&lt;p&gt;下面来分析下 &lt;em&gt;Jaccard Similarity*。首先看 *Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;下面来分析下 *Jaccard Similarity*。首先看 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;然后再来看 &lt;em&gt;signatures matrix&lt;/em&gt; 。在某个特定的排列下，如果两个集合的 &lt;em&gt;Minhashing&lt;/em&gt; 值相同，那第它们一定是 &lt;code&gt;(1,1)&lt;/code&gt; 形式的，而其它三种形式不会有此结果）注意，此处只能保证， &lt;em&gt;Minhashing&lt;/em&gt; 值相同时，能保证这一行是 &lt;code&gt;(1,1)&lt;/code&gt;，但是一行是&lt;code&gt;(1,1)&lt;/code&gt;并不能说明这一行是 &lt;em&gt;Minhashing&lt;/em&gt; 值）。所以可以得知，两个集合 &lt;em&gt;Minhashing&lt;/em&gt; 值相等的概率，也就是两个集合的 &lt;em&gt;Jaccard&lt;/em&gt; 相似度，都是 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt; 。&lt;/p&gt;
 

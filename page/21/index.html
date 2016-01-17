@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/277/'> GAE上的blog</a> </h2>
+        <div class="post-meta">发表于2008-04-12 00:10:29 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">折腾了两天发现后来发现没有用的东西，还是比较郁闷的事情。不过还好，没有被打击，又开了个新的东西。有了前面的一个经验，还是满快的，嗯。 做了一个十分简单的blog系统，说说里面有用的东西吧，由于blog很简单，所以只用了两张表，一张放文章，一张放Tags。其实本来懒到只想用一张表的，但是想想只有文章，那和留言板也没什么区别了，所以，加了个tag。文章中的taglist是用ListProperty建的，list的类型本来想用db.Key，但是查询那段代码写着太麻烦了，所以最后用了简单的字符串，没办法，我比较懒，呵呵。 还用到的一个模块就是认证，也是很简单的，传到服务器上后直接用google帐户的认证，满不错的，也满方便的，于是我就直接用了。在get时判断是否登录，如果登录了就显示表单，否则给个要登录的链接。两个用的是一个页面，用到了模板中的判断{% if %}，也很方便。从表单取数据直接用self.request.get(&lt;name&gt;)就行了，没啥好说的。 还有个地方就是URL的正则匹配，在app.yaml中有，在webapp的main()函数中也有，我是在app.yaml中把所有的URL映射到了一个地址下，然后在webapp中细分。它的正则匹配就是在函数中按顺序匹配()中的内容，变量名随便起，然后可以直接在函数中用。 别的，没有啥了，嗯。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/276/'> 火炬·某独·某投</a> </h2>
         <div class="post-meta">发表于2008-04-10 23:43:24 </div>
     </header>
@@ -207,22 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/266/'> 没有雨的清明</a> </h2>
-        <div class="post-meta">发表于2008-04-05 01:02:37 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">应该是在北京过的第七个清明吧，只知道这是第一个有假放的清明，于是乎，北京的大街小巷上又充斥着一堆一堆又一堆的人，各种口音，各种肤色，把本就已经熙熙攘攘的街道 ，商场，景点等能放的下人的地方，变的更加拥挤。 在来北京之前，一直固执的认为，清明就应该是在如丝的细雨中度过的，静静的小雨，把天地间的一切东西都蒙在一层淡淡的雾中。行走在雨中，能感觉到轻抚在身上的雨丝，很 舒服。在脑海中还会浮现出这样一个场景：一个牧童，骑在青牛上，吹着用青竹削制的牧笛（指不指杏花村，无所谓了啦）。这一切就是是一幅活动的水墨画卷。丝丝的小雨在我 们那倒是比较常见，刚好清明前后那几天总会有几天大概是样的天气，所以也就一直没有更改自己的想法。但是等到了这边，才知道，清明并不是非要雨纷纷的，太阳公公在这段 时间也是可以露脸的，虽然感觉有些不舒服。其实感觉到更不舒服的就是太阳公公好勤劳啊，一年365天基本上天天上班。 已经忘记了江南水乡的春天，7年的日子，改变了我很多，虽然没有真正喜欢上这个地方，但是还是慢慢的在被迫熟悉于它的一切。就要走到人生的第一个转折点了，希望我能走 好，不知道几年后，我会不会对这个地方产生感情，同样也不知道几年后，我是否会换一个地方继续漂着，还有不知道几年后，我会走哪一条路，做什么样的工作。太多的不确定 因素，使我已经不敢对我的未来做出期望，最多也就是可以在脑海中憧憬一下某些场景，然后继续回到残酷的现实中，是不是只有等自己过上了清明节，才能说的上是不会变了呢 ，因为大家都说盖棺定论嘛…… 也已经有7年没有在清明的时候，给家里面那些搬到另一个世界的老人们烧纸了，虽然知道这也许只是一种给活人的寄托，但是，又没有理由让它消失，那就放那放着吧。怀念爷 爷他们，不知道在那边过的好不好（老人家好像没托梦，应该还行吧，呵呵），晚辈在此给您几位请安了。 PS1：发现自己总是忘不了家乡的春雨，都快成月经贴了…… PS2：同样固执的认为，清明就是在4月5号，但是今天从老妈的电话中得知，今年的清明是今天…… PS3：阳光明媚的清明，总是找不到某些感觉，加上现在的假期，估计以后就更难找了。话说，哪怕给个阴天也好啊……</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +250,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -262,9 +265,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -274,7 +274,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -299,7 +299,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

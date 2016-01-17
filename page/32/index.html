@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/152/'> root敢死队</a> </h2>
+        <div class="post-meta">发表于2006-08-17 23:57:43 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">一直来，用Linux都是非root不用，所以一直也就被人称为root敢死队，今天想好好珍惜一下生命，于是开始配用户。配用户这事情我以前也做过，不过一直弄不清 那些个组的关系，最后的结果就是用了大概一天的su，在第二天后就把那个普通用户遗忘的一干二净。今天在配用户之前在网上转了转，找了点东西，把那个普通用户加到了一 堆组中去，像什么audio, video什么的，总算是能大概用一下了，8过后来碰到使用aptitude什么的命令还是被告知权限不够，又把sudo装上了，直接 配置成可以执行大部分的可执行程序，而且不用密码，也就是在配置文件中加进去了一行： &lt;username&gt; ALL=NOPASSWD:/bin/,NOPASSWD:/sbin/,NOPASSWD:/usr/bin* 呵呵，感觉和root差不多了，还是没有很把用户当作一回事啊，这个习惯看到要过很久一段时间才能改了 :) btw: 本来还想配置一下iptable来限制访问，结果直接把自己给ban了(我用的是ssh)，后来把自己的这条规则加上后，发现apt- get又不能用了，一怒之下又把iptable恢复到以前的状态了，呵呵，什么都不管。安全这个问题啊，还真是麻烦啊。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/151/'> 搭NFS服务器</a> </h2>
         <div class="post-meta">发表于2006-08-17 23:47:20 </div>
     </header>
@@ -135,7 +151,7 @@
     </header>
 
     <section>
-        <div class="post-summary">折腾了两天，总算是把Linux折腾到了那台机器上，其实想想，也没什么难度，主要是自己懒，没有刻盘，用手头上现有的盘折腾的，所以比较的郁闷，呵呵。 本来说是只想弄个能跑交叉编译环境的Linux，所以首先想到的是knopix，但是不知道怎么回事，这次装的knoppix用着很不爽，apt安装告诉我包依赖性没 有解决，但是看了它的安装软件列表，它需要的包就在那个列表里面，直接FT了。于是又想用回debian了，那台机器只有128的内存，我是没有信心在那上面跑个XP 再加个虚拟机，我知道我是不能忍那个速度的，于是想到了硬盘安装，一开始机器里面有Grub，看网上的说明直接改参数就可以启动安装进程。其实就是把那个vmlinu x和initrd文件放到Grub能找到的地方，然后加上参数root=/dev/ramdisk ramdisksize=XXX什么的启动参数，大概就可以了，我看到的那个文章在这后面还加有个参数，不清楚是什么意思。再就是写上initrd /path/t o/initrd/file，然后就可以boot了，它会自动寻找debian_netinstall的image文件，网上说是把那个东西放到根目录下，不过我是放 在和内核文件一个目录下的，也可以找到嘛 ^^ ，再后来就是安装了，装过多少遍的东西，不说了，等，然后重启，设置apt源，update，再就是install软件了。 btw: 这次考虑使用非root用户作为常用用户了，呵呵，咱也要学着professional一些嘛 :)</div>
+        <div class="post-summary">折腾了两天，总算是把Linux折腾到了那台机器上，其实想想，也没什么难度，主要是自己懒，没有刻盘，用手头上现有的盘折腾的，所以比较的郁闷，呵呵。 本来说是只想弄个能跑交叉编译环境的Linux，所以首先想到的是knopix，但是不知道怎么回事，这次装的knoppix用着很不爽，apt安装告诉我包依赖性没 有解决，但是看了它的安装软件列表，它需要的包就在那个列表里面，直接FT了。于是又想用回debian了，那台机器只有128的内存，我是没有信心在那上面跑个XP 再加个虚拟机，我知道我是不能忍那个速度的，于是想到了硬盘安装，一开始机器里面有Grub，看网上的说明直接改参数就可以启动安装进程。其实就是把那个vmlinu x和initrd文件放到Grub能找到的地方，然后加上参数root=/dev/ramdisk ramdisk_size=XXX什么的启动参数，大概就可以了，我看到的那个文章在这后面还加有个参数，不清楚是什么意思。再就是写上initrd /path/t o/initrd/file，然后就可以boot了，它会自动寻找debiannetinstall的image文件，网上说是把那个东西放到根目录下，不过我是放 在和内核文件一个目录下的，也可以找到嘛 ^^ ，再后来就是安装了，装过多少遍的东西，不说了，等，然后重启，设置apt源，update，再就是install软件了。 btw: 这次考虑使用非root用户作为常用用户了，呵呵，咱也要学着professional一些嘛 :)</div>
     </section>
 
     
@@ -207,22 +223,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/142/'> 完美结局</a> </h2>
-        <div class="post-meta">发表于2006-07-29 16:12:43 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">从网上下了个存档，看完了幻三2的完美结局，感觉上和小棠结局差不多，就是最后多了一段多年后重聚首的故事，应该已经算是比较完美的结局了，8过人生在世，又能有多少 完美的事情呢，也许，小棠结局应该就是能够达到的最完美的吧，即使用永恒的时间等待，我也愿再见你一面，呵呵，也许只是痴心妄想吧。 btw: 游戏不错，我也并不是不想再玩一遍，但是发现现在的心态实在调整不到最佳状态，那段奈何桥的video看着很压抑，不知道原因，呵呵，想好好玩玩游戏现在大 概也是一种奢望了吧。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -250,6 +250,9 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
 </a></li>
         
@@ -262,9 +265,6 @@
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/'> MMDS Notes: W2 - Nearest Neighbor Learning
-</a></li>
-        
         </ul>
     </div>
 
@@ -274,7 +274,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(88)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -299,7 +299,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 55, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 8, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
