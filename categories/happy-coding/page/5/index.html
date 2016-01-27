@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/495/'> 在thickbox中关掉自己</a> </h2>
+        <div class="post-meta">发表于2009-12-16 00:24:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~ 最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾： parent.tb_remove() 于是就达成需求了……</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/461/'> Android中使用自定义Adapter</a> </h2>
         <div class="post-meta">发表于2009-09-14 22:59:50 </div>
     </header>
@@ -233,22 +249,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/273/'> 在App Engine中访问外部网站</a> </h2>
-        <div class="post-meta">发表于2008-04-10 03:16:13 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">下午做RSS聚合网站时，需要从外部的地址抓feed，用的是feedparse的库。但是怎么弄都出错，所以很郁闷，想从RSS的字符串解析一次，看看有没有错。想 当然的使用了urllib，结果它也出错。由于有了昨天模板的经验，所以直接去找google的文档。果不其然，它不支持直接从外网获取内容，如果有此需求，则需要使 用它封装好的一个urlfetch库中的fecth方法。没办法啊，那就用吧，谁让人家的地盘人家做主呢。 抓取内容，判定返回值是否为200，取结果，到这一切顺利，于是就开始用feedparse解析。解析也没问题，但是郁闷的是，这样解析出来的东西没有时间信息了，就 是它得不到这个RSS的最后更新时间，去urlfetch的文档里面转了一圈，也没见有相关的内容，只好自己另想办法了。最后的解决办法是在FeedInfo中加入了 一个字段用以存放最后更新的时间，然后拿feed中的每个文章的updated_parse时间与这个时间比较，如果文章的时间较新则插入库中，否则不处理。在写时候 漏掉一条语句，调了好长时间，真郁闷。 PS：logging真的很好用，直接在服务器的终端窗口输出信息。其实我本来是想用printf的，结果伊居然不支持，FT。 PS2：如果loggin的消息调成debug，则在开服务器的时候需要加上- d选项，否则DEBUG的信息不输出，我为这折腾了10分钟，那几条logging语句一会加上一会删除，心里还直嘀咕，难道又被我找到个BUG&hellip;&hellip;.</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -276,6 +276,9 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
 </a></li>
         
@@ -288,9 +291,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
             <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/'> MMDS Notes: W2 - Frequent Itemsets - Part I
-</a></li>
-        
         </ul>
     </div>
 
@@ -300,7 +300,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(89)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(90)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -325,7 +325,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 56, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 8, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['studylog', 9, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 57, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 9, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 1, '/tags/rubyonrails'];  ['studylog', 10, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

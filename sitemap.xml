@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://hzmangel.github.io/</loc>
-    <lastmod>2016-01-17T07:22:32+08:00</lastmod>
+    <lastmod>2016-01-27T23:21:42+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</loc>
+    <lastmod>2016-01-27T23:21:42+08:00</lastmod>
   </url>
   
   <url>

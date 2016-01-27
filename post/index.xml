@@ -7,8 +7,98 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 17 Jan 2016 07:22:32 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 27 Jan 2016 23:21:42 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use Different Auth Method In Rails API Controller
+</title>
+      <link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link>
+      <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
+      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;
+
+&lt;p&gt;基本想法是对于网页端的请求，继续使用devise进行认证，而对于某些同时提供API接口的Action，则使用token来验证。除此之外，对于POST请求，还需要跳过CSRF token的检查。基本上代码就是这样的（为了测试方便，使用了自己定义的&lt;code&gt;before_action&lt;/code&gt; ，同时设置所有的检查都基于请求中的 &lt;em&gt;token&lt;/em&gt; 字段。）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class WelcomeController &amp;lt; ApplicationController
+  before_action :auth_user!, only: [:foo], unless: -&amp;gt; { request.format.json? }
+  before_action :auth_by_token!, if: -&amp;gt; { request.format.json? }
+
+  def foo
+    render json: params
+  end
+
+  def bar
+    render json: params
+  end
+
+  private
+
+  def auth_user!
+    head :forbidden if params[:token] != &#39;24&#39;
+  end
+
+  def auth_by_token!
+    head :forbidden if params[:token] != &#39;42&#39;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时，如果使用浏览器访问 &lt;em&gt;foo&lt;/em&gt; , &lt;code&gt;request.format&lt;/code&gt; 为 &lt;em&gt;text/html&lt;/em&gt; ，此时就会调用 &lt;code&gt;auth_user!&lt;/code&gt; ，而访问 &lt;em&gt;bar&lt;/em&gt; 时，即使是使用浏览器，也不会调用 &lt;code&gt;auth_user!&lt;/code&gt; 。而对于API请求，统一都会调用 &lt;code&gt;auth_by_token!&lt;/code&gt; 进行邓处理。&lt;/p&gt;
+
+&lt;p&gt;下面是一个简单的测试用例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;rails_helper&amp;quot;
+
+RSpec.describe WelcomeController, :type =&amp;gt; :controller do
+  describe &#39;GET #foo.html&#39; do
+    it &#39;responds forbidden if not given valid token&#39; do
+      get :foo
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it &#39;responds forbidden if given wrong token&#39; do
+      get :foo, {token: 42}
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    # auth_user! is invoked
+    it &#39;responds success if given correct token&#39; do
+      get :foo, {token: 24}
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe &#39;GET #foo.json&#39; do
+    before :each do
+      request.env[&amp;quot;HTTP_ACCEPT&amp;quot;] = &#39;application/json&#39;
+    end
+
+    it &#39;responds forbidden if not given valid token&#39; do
+      get :foo
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it &#39;responds forbidden if given wrong token&#39; do
+      get :foo, {token: 24}
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    # auth_by_token! is invoked
+    it &#39;responds success if given correct token&#39; do
+      get :foo, {token: 42}
+      expect(response).to have_http_status(:ok)
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在老版本的Rails上，有一个&lt;a href=&#34;https://github.com/rails/rails/issues/9703&#34;&gt;bug#9703&lt;/a&gt;，就是它的判断会把 if/unless 和 only/except 分开处理。在这种情况下需要根据 &lt;a href=&#34;https://github.com/rails/rails/issues/9703#issuecomment-15830313&#34;&gt;此条评论&lt;/a&gt; 中的内容对代码做相应改动。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hadoop Study Log 1: Env Setup
@@ -1333,145 +1423,6 @@ ed的。这时的channel，可以用来做Semaphore。&lt;/p&gt;
 &lt;p&gt;上面介绍的channel是没有缓存的，golang中还有一种channel是可以加上缓存的，&lt;a href=&#34;htt
 p://talks.golang.org/2012/concurrency.slide#22A&#34;&gt;官方文档说这个就像是Erlang的mailboxes&lt;/a&gt;，因为不懂Erlang，所以只好把话贴在这以后两手一摊。目前
 在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于&lt;code&gt;select&lt;/code&gt;的文章，目前时间未定，因为还没用到～&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
-      <link>http://hzmangel.github.io/post/1224/</link>
-      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1224/</guid>
-      <description>
-
-&lt;h3 id=&#34;tl-dr:5ab4430131db8e4e631503ef790e7c02&#34;&gt;tl;dr&lt;/h3&gt;
-
-&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
-response size limitation of server. This article is talking about save image
-to file with carrierwave.&lt;/p&gt;
-
-&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
-repo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Next is the full version.### The problem&lt;/p&gt;
-
-&lt;p&gt;Recently I have faced a task to upload a image by a rich format text editor.
-The web server is Rails, so I selected
-&lt;a href=&#34;https://github.com/carrierwaveuploader/carrierwave&#34;&gt;carrierwave&lt;/a&gt; as the
-upload gem, and &lt;a href=&#34;http://mindmup.github.io/bootstrap-
-wysiwyg/&#34;&gt;bootstrap-wysiwyg&lt;/a&gt; as rich format text editor.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;bootstrap-wysiwyg&lt;/code&gt; supports inserting image into edit area, and uploaded
-image via base64. Every thing is okay in development enviromnent, but I have
-met problem while deploying to production server.&lt;/p&gt;
-
-&lt;p&gt;The root cause of the problem is response size exceed the max limitation. The
-uploaded base64 encoded image are saved as string, and will be returned in
-response body. I have tried increasing response body size limitation but take
-no effect, so I switched to method that saving image to file.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution:5ab4430131db8e4e631503ef790e7c02&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;This section only shows how to get image and save via carrierwave, please
-refer to the source of the other contents.&lt;/p&gt;
-
-&lt;p&gt;The sample project is a simple post manage system, each post contains &lt;code&gt;title&lt;/code&gt;
-and &lt;code&gt;content&lt;/code&gt; field, and the &lt;code&gt;content&lt;/code&gt; field is rich format text.&lt;/p&gt;
-
-&lt;p&gt;The passed in base64 encoded image is started with this string:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;data:image/jpeg;base64,
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then following the image data.&lt;/p&gt;
-
-&lt;p&gt;The image uploaded is surrounded by &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag, so I added a pre processing
-to the content uploaded. The logic is simple: save found &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag to a file
-with carrierwave, and replace the base64 data to file path. The primary code
-is here:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;def process_base64_content content
-  return if content.nil?
-  return content if not content.match /&amp;lt;/
-  rslt = &#39;&#39;
-  content.split(&amp;quot;&amp;lt;&amp;quot;).each do |elem_str|
-    if elem_str[0..2] == &amp;quot;img&amp;quot;
-      if elem_str.match(%r{data:(.*?);(.*?),(.*?)&amp;quot;&amp;gt;$})
-        img_data = {
-          :type =&amp;gt;      $1, # &amp;quot;image/png&amp;quot;
-          :encoder =&amp;gt;   $2, # &amp;quot;base64&amp;quot;
-          :data_str =&amp;gt;  $3, # data string
-          :extension =&amp;gt; $1.split(&#39;/&#39;)[1] # &amp;quot;png&amp;quot;
-        }
-
-        other_img = PostImage.new
-        img_data_str = img_data[:data_str]
-        img_data_sio = CarrierStringIO.new(Base64.decode64(img_data_str))
-        other_img.image = img_data_sio
-        other_img.save
-        rslt += view_context.image_tag(other_img.image.url)
-      else
-        rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
-      end
-    else
-      rslt += &amp;quot;&amp;lt;#{elem_str}&amp;quot; if not elem_str.empty?
-    end
-  end
-
-  rslt
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;PostImage&lt;/code&gt; is a model used for saving image. &lt;code&gt;CarrierStringIO&lt;/code&gt; is also a user
-defined class to provide functions &lt;code&gt;original_filename&lt;/code&gt; and &lt;code&gt;content_type&lt;/code&gt;,
-which are required by &lt;code&gt;carrierwave&lt;/code&gt;. Here is the definition of this class:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class CarrierStringIO &amp;lt; StringIO
-  def original_filename
-    # the real name does not matter
-    &amp;quot;image.jpeg&amp;quot;
-  end
-
-  def content_type
-    # this should reflect real content type, but for this example it&#39;s ok
-    &amp;quot;image/jpeg&amp;quot;
-  end
-end
-
-class PostImage
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
-  def image_data=(data)
-    sio = CarrierStringIO.new(Base64.decode64(data))
-    self.image = sio
-  end
-
-  mount_uploader :image, PostImageUploader
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The last thing is the carrierwave uploader: &lt;code&gt;PostImageUploader&lt;/code&gt;. This is a
-simple uploader that only save the image to file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# encoding: utf-8
-
-class PostImageUploader &amp;lt; CarrierWave::Uploader::Base
-
-  storage :file
-
-  def store_dir
-    &amp;quot;uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}&amp;quot;
-  end
-
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the sample project, the file type and file name are hard coded in
-&lt;code&gt;CarrierStringIO&lt;/code&gt;, please feel free to modify code as needed.&lt;/p&gt;
-
-&lt;p&gt;Note: There is an bug of the code: The image can&amp;rsquo;t be extracted out if
-inserted into a text paragraph. I will fix this once I have time.&lt;/p&gt;
 </description>
     </item>
     
