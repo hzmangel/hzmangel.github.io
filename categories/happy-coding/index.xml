@@ -7,14 +7,14 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Fri, 05 Feb 2016 11:29:42 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 23 Feb 2016 00:52:42 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Integrate Rails with Elasticsearch - Indexing
 </title>
       <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
-      <pubDate>Fri, 05 Feb 2016 11:29:42 +0800</pubDate>
+      <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
       <description>
