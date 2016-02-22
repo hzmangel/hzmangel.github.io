@@ -7,8 +7,143 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 27 Jan 2016 23:21:42 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2016 11:29:42 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Integrate Rails with Elasticsearch - Indexing
+</title>
+      <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
+      <pubDate>Fri, 05 Feb 2016 11:29:42 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
+      <description>
+
+&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用Elasticsearch，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装elasticsearch:7534e3005bc051c63c374ef8164540b2&#34;&gt;安装Elasticsearch&lt;/h2&gt;
+
+&lt;p&gt;这块其实没有太多需要说的，两种方法，从官网下编译好的&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html&#34;&gt;二进制解压&lt;/a&gt;，或者用&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html&#34;&gt;操作系统的安装源&lt;/a&gt;。如果是OSX，可以使用 &lt;em&gt;homebrew&lt;/em&gt; 安装，命令为 &lt;code&gt;brew install elasticsearch&lt;/code&gt; ，安装后的启动可以使用 &lt;code&gt;brew info elasticsearch&lt;/code&gt; 查看。&lt;/p&gt;
+
+&lt;p&gt;安装并启动服务后，可以用下面的命令查看系统是否成功启动：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -X GET &#39;http://localhost:9200&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果一切正常，会返回服务器的状态信息。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;配置rails:7534e3005bc051c63c374ef8164540b2&#34;&gt;配置Rails&lt;/h2&gt;
+
+&lt;h3 id=&#34;gem:7534e3005bc051c63c374ef8164540b2&#34;&gt;Gem&lt;/h3&gt;
+
+&lt;p&gt;Elasticsearch提供了两个Gem用于和Rails集成，分别是 &lt;code&gt;elasticsearch-rails&lt;/code&gt; 和 &lt;code&gt;elasticsearch-model&lt;/code&gt; ，两个Gem的作用如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;model-enable-indexes-in-es:7534e3005bc051c63c374ef8164540b2&#34;&gt;Model - Enable indexes in ES&lt;/h3&gt;
+
+&lt;p&gt;Elasticsearch是一个单独的服务器，所以在使用前需要考虑以下几点：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;有哪些Model需要被索引&lt;/li&gt;
+&lt;li&gt;每个Model有哪些字段需要被索引&lt;/li&gt;
+&lt;li&gt;如何在数据库中记录更新后同步Elasticsearch的索引&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果不使用Elasticsearch提供的gem，需要手动去完成上面的几个步骤，但是Elasticsearch的Gem提供了一系列方便使用的函数。&lt;/p&gt;
+
+&lt;p&gt;对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。下面是一个Sample&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
+
+class Blog &amp;lt; ActiveRecord::Base
+  include Elasticsearch::Model
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在加入了这几行代码后，这个Model就可以通过 &lt;code&gt;__elasticsearch__&lt;/code&gt; 来调用Elasticsearch的API了。例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.__elasticsearch__.client.cluster.health
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至此，只是在Blog中导入了一些Elasticsearch相关的配置，但是还没有将具体的数据导入到Elasticsearch服务器中。可以使用下面的命令导入数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.__elasticsearch__.create_index! force: true
+Blog.__elasticsearch__.refresh_index!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由于Elasticsearch的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.first.__elasticsearch__.index_document
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中引入相应的文件即可：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;include Elasticsearch::Model::Callbacks
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在加入这行代码后，调用 &lt;strong&gt;一次&lt;/strong&gt; &lt;code&gt;Blog.import&lt;/code&gt; 即可完成下面的几步操作：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;将 &lt;em&gt;Blog&lt;/em&gt; 中的数据导入 Elasticsearch 中&lt;/li&gt;
+&lt;li&gt;加入相应的 &lt;em&gt;callback&lt;/em&gt; 函数，在Model数据有更新时，同步索引&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在运行完上述的命令（手动更新或自动索引）后，即可在Elasticsearch服务器中查找到相应的内容了。&lt;/p&gt;
+
+&lt;h3 id=&#34;model-choose-indexed-fields:7534e3005bc051c63c374ef8164540b2&#34;&gt;Model - Choose indexed fields&lt;/h3&gt;
+
+&lt;p&gt;在默认情况下，所有字段都会被索引。但是在实际使用中，并不是所有的字段都需要索引。Elasticsearch提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 &lt;code&gt;as_indexed_json&lt;/code&gt; 。这个函数是在 &lt;code&gt;Elasticsearch::Model::Serializing&lt;/code&gt; 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。下面是一个例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
+
+class Blog &amp;lt; ActiveRecord::Base
+  include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content]
+    )
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在上面的例子中，无论我的Blog记录中还有什么字段，只有 &lt;em&gt;title&lt;/em&gt; 和 &lt;em&gt;content&lt;/em&gt; 字段会被放入Elasticsearch的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外， &lt;code&gt;elasticsearch-model&lt;/code&gt; 还支持将函数中方法的返回值也加入索引中，如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
+
+class Blog &amp;lt; ActiveRecord::Base include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content],
+      methods: [:author_name, :tag_count]
+    )
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时在索引的字段和返回的结果中，会多出 &lt;em&gt;author_name&lt;/em&gt; 以及 &lt;em&gt;tag_count&lt;/em&gt; 的返回值。这种方式可以指定关联记录的索引信息。除此之外，还可以在 &lt;code&gt;include&lt;/code&gt; 中使用嵌套的字段来标明关系记录。例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
+
+class Blog &amp;lt; ActiveRecord::Base
+  include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content],
+      include: { author: {only: :name}, tag: {methods: [:count]} }
+    )
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至此，基本的索引构建应该差不多了，后续会记一些查询的东西。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Use Different Auth Method In Rails API Controller
@@ -1281,148 +1416,6 @@ g.org/ref/spec#Type_assertions&#34;&gt;&lt;em&gt;type assertions&lt;/em&gt;&lt;/
 
 &lt;p&gt;到这，差不多就完成了，POST请求的事情还没用到，等用到后发现有什么需要写的再写吧。另外需要注意的一点是，&lt;a href=&#34;http://play.golang.org/&#34;&gt;http://play.golang.org/&lt;/a&gt;
 网站上是不允许使用&lt;code&gt;net/http&lt;/code&gt;库的，所以我后面的程序才没有给出代码链接，有兴趣的可以在自己机器上试验，记得要科学上网哦，要不然就会返回奇怪的结果了～&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>goroutines &#43; channel</title>
-      <link>http://hzmangel.github.io/post/1230/</link>
-      <pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1230/</guid>
-      <description>
-
-&lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
-近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;code&gt;channel&lt;/code&gt;是需要和&lt;code&gt;goroutines&lt;/code&gt;一起使用的。&lt;/p&gt;
-
-&lt;h3 id=&#34;goroutines:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;goroutines&lt;/h3&gt;
-
-&lt;p&gt;先说&lt;code&gt;goroutines&lt;/code&gt;吧。golang的并行模型使用的是&lt;strong&gt;CSP&lt;/strong&gt;（官方的说法是Newsqueak-Alef-Limbo，和原始的CSP有一些区别
-。具体的差别还没有细查。参见&lt;a href=&#34;http://talks.golang.org/2012/concurrency.slide#10&#34;&gt;此张幻灯片&lt;/a&gt; ），&lt;code&gt;go
-routines&lt;/code&gt;是一个独立运行的函数，不是进程也不是线程。它在被调用或者说被启动后直接返回，而不用等待函数运行结束。这是官方对它的一段&lt;a href=&#34;htt
-p://talks.golang.org/2012/concurrency.slide#17&#34;&gt;简要介绍&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;What is a goroutine? It&amp;rsquo;s an independently executing function, launched by a go statement.&lt;/li&gt;
-&lt;li&gt;It has its own call stack, which grows and shrinks as required.&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s very cheap. It&amp;rsquo;s practical to have thousands, even hundreds of thousands of goroutines.&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s not a thread.&lt;/li&gt;
-&lt;li&gt;There might be only one thread in a program with thousands of goroutines.&lt;/li&gt;
-&lt;li&gt;Instead, goroutines are multiplexed dynamically onto threads as needed to keep all the goroutines running.&lt;/li&gt;
-&lt;li&gt;But if you think of it as a very cheap thread, you won&amp;rsquo;t be far off.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;goroutines&lt;/code&gt;使用&lt;code&gt;go&lt;/code&gt;关键字来创建，创建完后就自己蹲一边运行去了，主程序也不用理它，自己往下走就行。光看文字太枯燥，读程序看输出吧。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package main
-
-import &amp;quot;fmt&amp;quot;
-import &amp;quot;time&amp;quot;
-
-func main() {
-     fmt.Println(&amp;quot;START 1&amp;quot;)
-     for i := 0; i &amp;lt; 3; i++ {
-          foo(i)
-     }
-     fmt.Println(&amp;quot;END 1&amp;quot;)
-
-     fmt.Println(&amp;quot;START 2&amp;quot;)
-     for i := 0; i &amp;lt; 3; i++ {
-          go foo(i)
-     }
-     fmt.Println(&amp;quot;END 2&amp;quot;)
-
-     time.Sleep(1 * time.Second)
-}
-
-func foo(i int) {
-     time.Sleep(1)
-     fmt.Printf(&amp;quot;Call index: %d\n&amp;quot;, i)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;程序的输出是这样的：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;START 1
-Call index: 0
-Call index: 1
-Call index: 2
-END 1
-START 2
-END 2
-Call index: 0
-Call index: 2
-Call index: 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;代码中，main函数中用了两个循环，分别调用了3次foo()函数，但是两次调用的方式不同，第一次是直接调用，第二次是使用了&lt;code&gt;goroutine&lt;/code&gt;。从输出看，
-前段输出是正常的顺序，但是从后一段输出可以看到，函数调用是立即返回的，而且最后输出的顺序也是不固定的（3次可能看到的效果比较一致，如果把循环次数涨到10次就
-能看的比较明显了）。在第19行加上sleep的原因是因为main函数在执行完成后会直接退出，不会等待所有&lt;code&gt;goroutines&lt;/code&gt;执行完毕，所以此处需要让程序
-等一等。不方便在本机运行的可以&lt;a href=&#34;http://play.golang.org/p/8BT6RVR7-w&#34;&gt;见这里&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;channel:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;channel&lt;/h3&gt;
-
-&lt;p&gt;拿sleep来不让main函数退出也不是个事，毕竟时间不好控制，睡多了睡少了都不行，所以这里就引入了&lt;code&gt;channel&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;就像文章开头说的，&lt;code&gt;channel&lt;/code&gt;就像是一个Semaphore或者FIFO的东西，更通俗的理解就是一条传送带或者管道，用于在&lt;code&gt;goroutines&lt;/code&gt;之间传
-递消息。把上面的程序改一下（顺序调用的那个就先去掉了，减少长度，嗯）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package main
-
-import &amp;quot;fmt&amp;quot;
-
-func main() {
-
-    foo_channel := make(chan string)
-    channel_cnt := 3
-
-    fmt.Println(&amp;quot;Start launching goroutines&amp;quot;)
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        go foo(i, foo_channel)
-    }
-    fmt.Println(&amp;quot;Finish launching goroutines&amp;quot;)
-
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        fmt.Println(&amp;lt;-foo_channel)
-    }
-
-}
-
-func foo(i int, foo_channel chan string) {
-    s := fmt.Sprintf(&amp;quot;Call index %d&amp;quot;, i)
-    foo_channel &amp;lt;- s
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输入是介样的：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Start launching goroutines
-Finish launching goroutines
-Call index 0
-Call index 1
-Call index 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在这个程序里面，没有使用&lt;code&gt;sleep&lt;/code&gt;，程序也做到了等待所有&lt;code&gt;goroutines&lt;/code&gt;运行完毕才退出这个需求，就是靠的main函数最后几行。blog上不知道为
-啥没有行号了，程序&lt;a href=&#34;http://play.golang.org/p/FzHuVttKnB&#34;&gt;见这里吧&lt;/a&gt;。在第7行的时候创建了一个&lt;code&gt;channel&lt;/code&gt;，并把它
-传入了&lt;code&gt;foo()&lt;/code&gt;函数中。而&lt;code&gt;foo()&lt;/code&gt;函数也不像上一次那样直接输出一个字符串，它把需要输出的字符串放到一个string中，然后通过&lt;code&gt;channel&lt;/code&gt;传
-了回来。这条语句：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;foo_channel &amp;lt;- s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;做的就是把字符串放到channel中去，而这条语句：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;fmt.Println(&amp;lt;-foo_channel)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;做的就是把字符串从channel中取出来，并把它输出。在执行&lt;code&gt;&amp;lt;-channel&lt;/code&gt;时，如果&lt;code&gt;channel&lt;/code&gt;上没有数据，这条语句是被blocked的，这样就
-能保证main函数在所有goroutines执行完毕前不会退出。而且当channel中有值而且没有被读出的时候，对这个channel的写操作也是被block
-ed的。这时的channel，可以用来做Semaphore。&lt;/p&gt;
-
-&lt;p&gt;上面介绍的channel是没有缓存的，golang中还有一种channel是可以加上缓存的，&lt;a href=&#34;htt
-p://talks.golang.org/2012/concurrency.slide#22A&#34;&gt;官方文档说这个就像是Erlang的mailboxes&lt;/a&gt;，因为不懂Erlang，所以只好把话贴在这以后两手一摊。目前
-在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于&lt;code&gt;select&lt;/code&gt;的文章，目前时间未定，因为还没用到～&lt;/p&gt;
 </description>
     </item>
     

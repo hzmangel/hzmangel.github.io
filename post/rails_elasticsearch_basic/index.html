@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content=" Integrate Rails with Elasticsearch - Indexing
+ &middot;  湖间小筑" />
+        <meta property="og:site_name" content="湖间小筑" />
+        <meta property="og:url" content="http://hzmangel.github.io/post/rails_elasticsearch_basic/" />
+
+        
+            <meta property="og:type" content="article" />
+            <meta property="og:article:published_time" content="2016-02-05T11:29:42&#43;08:00" />
+
+            
+                <meta property="og:article:tag" content="Programming" />
+            
+                <meta property="og:article:tag" content="Rails" />
+            
+                <meta property="og:article:tag" content="RubyOnRails" />
+            
+                <meta property="og:article:tag" content="StudyLog" />
+            
+                <meta property="og:article:tag" content="Elasticsearch" />
+            
+        
+
+        <title>
+            湖间小筑
+            
+                | Integrate Rails with Elasticsearch - Indexing
+
+            
+        </title>
+
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
+
+        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
+
+        
+
+        <link rel="canonical" href="http://hzmangel.github.io/post/rails_elasticsearch_basic/" />
+    </head>
+
+    <body>
+        <div class="container" id="site-wrapper">
+            <header>
+    <div class="row">
+        <div class="col-md-6" id="site-title">
+            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
+        </div>
+
+        <div class="col-md-6" id="site-description">
+            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
+        </div>
+    </div>
+
+    <img src="/img/banner.jpg" class="img-responsive">
+</header>
+
+            <nav role="navigation">
+
+</nav>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <section>
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/rails_elasticsearch_basic/'> Integrate Rails with Elasticsearch - Indexing
+</a> </h2>
+        <div class="post-meta">发表于2016-02-05 11:29:42 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">
+
+<p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用Elasticsearch，比之前想像的要简单，记点东西在这吧。</p>
+
+<h2 id="安装elasticsearch:2edad3e2d1e7dc7375e8349969bb76b1">安装Elasticsearch</h2>
+
+<p>这块其实没有太多需要说的，两种方法，从官网下编译好的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html">二进制解压</a>，或者用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html">操作系统的安装源</a>。如果是OSX，可以使用 <em>homebrew</em> 安装，命令为 <code>brew install elasticsearch</code> ，安装后的启动可以使用 <code>brew info elasticsearch</code> 查看。</p>
+
+<p>安装并启动服务后，可以用下面的命令查看系统是否成功启动：</p>
+
+<pre><code>$ curl -X GET 'http://localhost:9200'
+</code></pre>
+
+<p>如果一切正常，会返回服务器的状态信息。</p>
+
+<hr />
+
+<h2 id="配置rails:2edad3e2d1e7dc7375e8349969bb76b1">配置Rails</h2>
+
+<h3 id="gem:2edad3e2d1e7dc7375e8349969bb76b1">Gem</h3>
+
+<p>Elasticsearch提供了两个Gem用于和Rails集成，分别是 <code>elasticsearch-rails</code> 和 <code>elasticsearch-model</code> ，两个Gem的作用如下：</p>
+
+<p><strong>TODO</strong></p>
+
+<h3 id="model-enable-indexes-in-es:2edad3e2d1e7dc7375e8349969bb76b1">Model - Enable indexes in ES</h3>
+
+<p>Elasticsearch是一个单独的服务器，所以在使用前需要考虑以下几点：</p>
+
+<ul>
+<li>有哪些Model需要被索引</li>
+<li>每个Model有哪些字段需要被索引</li>
+<li>如何在数据库中记录更新后同步Elasticsearch的索引</li>
+</ul>
+
+<p>如果不使用Elasticsearch提供的gem，需要手动去完成上面的几个步骤，但是Elasticsearch的Gem提供了一系列方便使用的函数。</p>
+
+<p>对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。下面是一个Sample</p>
+
+<pre><code class="language-ruby">require 'elasticsearch/model'
+
+class Blog &lt; ActiveRecord::Base
+  include Elasticsearch::Model
+end
+</code></pre>
+
+<p>在加入了这几行代码后，这个Model就可以通过 <code>__elasticsearch__</code> 来调用Elasticsearch的API了。例如：</p>
+
+<pre><code class="language-ruby">Blog.__elasticsearch__.client.cluster.health
+</code></pre>
+
+<p>至此，只是在Blog中导入了一些Elasticsearch相关的配置，但是还没有将具体的数据导入到Elasticsearch服务器中。可以使用下面的命令导入数据：</p>
+
+<pre><code class="language-ruby">Blog.__elasticsearch__.create_index! force: true
+Blog.__elasticsearch__.refresh_index!
+</code></pre>
+
+<p>由于Elasticsearch的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：</p>
+
+<pre><code class="language-ruby">Blog.first.__elasticsearch__.index_document
+</code></pre>
+
+<p>不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中引入相应的文件即可：</p>
+
+<pre><code class="language-ruby">include Elasticsearch::Model::Callbacks
+</code></pre>
+
+<p>在加入这行代码后，调用 <strong>一次</strong> <code>Blog.import</code> 即可完成下面的几步操作：</p>
+
+<ul>
+<li>将 <em>Blog</em> 中的数据导入 Elasticsearch 中</li>
+<li>加入相应的 <em>callback</em> 函数，在Model数据有更新时，同步索引</li>
+</ul>
+
+<p>在运行完上述的命令（手动更新或自动索引）后，即可在Elasticsearch服务器中查找到相应的内容了。</p>
+
+<h3 id="model-choose-indexed-fields:2edad3e2d1e7dc7375e8349969bb76b1">Model - Choose indexed fields</h3>
+
+<p>在默认情况下，所有字段都会被索引。但是在实际使用中，并不是所有的字段都需要索引。Elasticsearch提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 <code>as_indexed_json</code> 。这个函数是在 <code>Elasticsearch::Model::Serializing</code> 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。下面是一个例子：</p>
+
+<pre><code class="language-ruby">require 'elasticsearch/model'
+
+class Blog &lt; ActiveRecord::Base
+  include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content]
+    )
+  end
+end
+</code></pre>
+
+<p>在上面的例子中，无论我的Blog记录中还有什么字段，只有 <em>title</em> 和 <em>content</em> 字段会被放入Elasticsearch的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外， <code>elasticsearch-model</code> 还支持将函数中方法的返回值也加入索引中，如下所示：</p>
+
+<pre><code class="language-ruby">require 'elasticsearch/model'
+
+class Blog &lt; ActiveRecord::Base include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content],
+      methods: [:author_name, :tag_count]
+    )
+  end
+end
+</code></pre>
+
+<p>此时在索引的字段和返回的结果中，会多出 <em>author_name</em> 以及 <em>tag_count</em> 的返回值。这种方式可以指定关联记录的索引信息。除此之外，还可以在 <code>include</code> 中使用嵌套的字段来标明关系记录。例如：</p>
+
+<pre><code class="language-ruby">require 'elasticsearch/model'
+
+class Blog &lt; ActiveRecord::Base
+  include Elasticsearch::Model
+
+  def as_indexed_json(options = {})
+    as_json(
+      only: [:title, :content],
+      include: { author: {only: :name}, tag: {methods: [:count]} }
+    )
+  end
+end
+</code></pre>
+
+<p>至此，基本的索引构建应该差不多了，后续会记一些查询的东西。</p>
+</div>
+    </section>
+
+    <footer>
+        <div class="post-meta">
+            分类：
+            <ul class="list-inline">
+                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
+            </ul>
+        </div>
+
+        <div class="post-meta">
+            标签：
+            <ul class="list-inline">
+                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/rails"><span class="label label-default">Rails</span></a></li>  <li><a href="/tags/rubyonrails"><span class="label label-default">RubyOnRails</span></a></li>  <li><a href="/tags/studylog"><span class="label label-default">StudyLog</span></a></li>  <li><a href="/tags/elasticsearch"><span class="label label-default">Elasticsearch</span></a></li> 
+            </ul>
+        </div>
+
+        <br/>
+        <nav class="post-meta">
+            <p class="col-md-6">
+                
+            </p>
+
+            <p class="col-md-6">
+                 <a class="next" href="http://hzmangel.github.io/post/different_auth_method_in_rails_api/"> Use Different Auth Method In Rails API Controller
+ &gt;</a> 
+            </p>
+        </nav>
+        <br/>
+
+    </footer>
+
+</article>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = "hzmangel";
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+        </section>
+    </div>
+
+    <div class="col-md-3">
+        <aside id="sidebar">
+
+    <div class="sidebar-block">
+        <h5>新鲜出炉</h5>
+        <ul class="list-unstyled">
+        
+            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_basic/'> Integrate Rails with Elasticsearch - Indexing
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
+</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="sidebar-block">
+        <h5>分类</h5>
+        <ul class="list-unstyled">
+        
+            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+        
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+        
+            <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
+        
+            <li><a href="/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex">好东东latex</a> &nbsp;(20)</li>
+        
+            <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅linux</a> &nbsp;(73)</li>
+        
+            <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
+        
+            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
+        
+            <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
+        
+            <li><a href="/categories/%E9%82%A3%E5%B1%B1%E9%82%A3%E6%B0%B4">那山那水</a> &nbsp;(52)</li>
+        
+            <li><a href="/categories/%E9%A3%8E%E9%9B%A8%E8%80%83%E7%A0%94%E8%B7%AF">风雨考研路</a> &nbsp;(11)</li>
+        
+            <li><a href="/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB">饕餮之享</a> &nbsp;(4)</li>
+        
+        </ul>
+    </div>
+
+    <div class="sidebar-block">
+        <h5>标签</h5>
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+    </div>
+
+</aside>
+
+
+
+    </div>
+</div>
+
+        <footer class="site-footer clearfix">
+            <div id="colophon">
+                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
+                
+                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
+                
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+        </script>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Queue(function() {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+        </script>
+
+        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-1847567-5', 'auto');
+            ga('send', 'pageview');
+        </script>
+
+    </div> 
+
+</body>
+</html>
+
+
+

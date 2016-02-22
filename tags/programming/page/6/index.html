@@ -66,6 +66,22 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/584/'> Simple Process with Mercurial Build-in Server</a> </h2>
+        <div class="post-meta">发表于2010-03-10 21:54:02 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库 hg init 然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口 hg serve -p3456 然后在本地就可以找个目录直接把那边的东西拷过来了 hg clone &lt;host&gt; &lt;local_dir&gt; 使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。 [paths] default = &lt;host&gt;:&lt;port&gt; 在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log hg ci &lt;-m &quot;log message&quot;&gt; 在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行 [web] push_ssl = false allow_push = * 根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。 hg push &lt;url&gt; 在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令 hg up 然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。 hg pull &lt;url&gt;</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/583/'> Mask Mouse on Linux</a> </h2>
         <div class="post-meta">发表于2010-01-13 23:58:21 </div>
     </header>
@@ -215,6 +231,9 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
 </a></li>
         
@@ -227,9 +246,6 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
             <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
-            <li><a href='http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/'> MMDS Notes: W2 - Frequent Itemsets - Part II
-</a></li>
-        
         </ul>
     </div>
 
@@ -239,7 +255,7 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(90)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -264,7 +280,7 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 57, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 9, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 1, '/tags/rubyonrails'];  ['studylog', 10, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
