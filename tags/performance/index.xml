@@ -34,7 +34,7 @@ and DTrace provider.&lt;/p&gt;
 handlers that will be triggered when their particular event occurs, and DTrace
 can bind some actions to the probe to get needed information.&lt;/p&gt;
 
-&lt;h3 id=&#34;basic-syntax:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Basic syntax&lt;/h3&gt;
+&lt;h3 id=&#34;basic-syntax&#34;&gt;Basic syntax&lt;/h3&gt;
 
 &lt;p&gt;A typically D language script contains three sections, the &lt;code&gt;BEGIN&lt;/code&gt; section,
 &lt;code&gt;END&lt;/code&gt; section and probe section. Sections are surrounded by braces. Each probe
@@ -118,9 +118,9 @@ int main(int argc, char* argv[]) {
 
 &lt;p&gt;For more information, please refer to reference section:&lt;/p&gt;
 
-&lt;h2 id=&#34;rails:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Rails&lt;/h2&gt;
+&lt;h2 id=&#34;rails&#34;&gt;Rails&lt;/h2&gt;
 
-&lt;h3 id=&#34;probes-for-ruby-and-rails-application:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for Ruby and Rails application&lt;/h3&gt;
+&lt;h3 id=&#34;probes-for-ruby-and-rails-application&#34;&gt;Probes for Ruby and Rails application&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: Make sure the Ruby you are using provides the DTrace probes, or the testing below can &lt;strong&gt;NOT&lt;/strong&gt; be continued.&lt;/p&gt;
 
@@ -228,7 +228,7 @@ END
 and the action inside the probe is to calculate the elapsed time. And some
 summary information will be printed after trace end.&lt;/p&gt;
 
-&lt;h3 id=&#34;probes-for-database-operations:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for database operations&lt;/h3&gt;
+&lt;h3 id=&#34;probes-for-database-operations&#34;&gt;Probes for database operations&lt;/h3&gt;
 
 &lt;p&gt;The performance test is also needed on Database server, MySQL has provide one
 method to use DTrace to the database, please refer &lt;a href=&#34;http://dev.mysql.com/tech-
@@ -288,7 +288,7 @@ END
 detailed probe, which can be used to monitor the time consumbed by each type
 of command, please check the document if more information is needed.&lt;/p&gt;
 
-&lt;h3 id=&#34;result-analysis:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Result analysis&lt;/h3&gt;
+&lt;h3 id=&#34;result-analysis&#34;&gt;Result analysis&lt;/h3&gt;
 
 &lt;p&gt;The output is different from the two script listed above. In the log message
 of Ruby, the filename and line number information are saved, which can be used
@@ -298,7 +298,7 @@ separating the command type, the performance can be optimized.&lt;/p&gt;
 &lt;p&gt;The testing data is still under development, and I will update the blog after
 get the result.&lt;/p&gt;
 
-&lt;h2 id=&#34;reference:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Reference&lt;/h2&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&#34;&gt;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&lt;/a&gt;&lt;/li&gt;

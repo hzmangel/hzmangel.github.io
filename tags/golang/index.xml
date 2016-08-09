@@ -31,7 +31,7 @@
 
 &lt;p&gt;最开始是想用一个脚本解析struct，生成相应的代码，但是在查文档的时候发现golang在1.4版本中引入了 &lt;a href=&#34;https://golang.org/doc/go1.4#gogenerate&#34;&gt;generate&lt;/a&gt; 命令，它可以解析一个文件并生成另一个文件。官方给的说明里面是从yacc的语法生成go文件。想了想觉得它可以完成生成SQL命令，同步struct和SQL的功能，而且如果做了处理的话还可以方便的在DB间切换，那就试试吧。&lt;/p&gt;
 
-&lt;h2 id=&#34;语法:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;语法&lt;/h2&gt;
+&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
 
 &lt;p&gt;在介绍如何编写前，先介绍下调用的方式。要成功调用一次generate需要两个条件：&lt;/p&gt;
 
@@ -42,11 +42,11 @@
 
 &lt;p&gt;这样在文件所在的目录下运行 &lt;code&gt;go generate&lt;/code&gt; 即可根据注释中所指示的方法，调用相应的生成器了。&lt;/p&gt;
 
-&lt;h2 id=&#34;编写:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;编写&lt;/h2&gt;
+&lt;h2 id=&#34;编写&#34;&gt;编写&lt;/h2&gt;
 
 &lt;p&gt;Golang给出的sample是一个字符串相关的东西，具体可以见 &lt;a href=&#34;https://godoc.org/golang.org/x/tools/cmd/stringer&#34;&gt;文档页&lt;/a&gt;。&lt;a href=&#34;http://www.onebigfluke.com/2014/12/generic-programming-go-generate.html&#34;&gt;另一个页面&lt;/a&gt; 也有一份具体的实现可以参考。它主要的思路就是用 &lt;code&gt;generate&lt;/code&gt; 去处理某个 &lt;code&gt;.go&lt;/code&gt; 文件，然后生成一些新的东西。主要是用内置的 &lt;em&gt;AST&lt;/em&gt; 解析文件，并生成相应的东西。&lt;/p&gt;
 
-&lt;h2 id=&#34;我的实现:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;我的实现&lt;/h2&gt;
+&lt;h2 id=&#34;我的实现&#34;&gt;我的实现&lt;/h2&gt;
 
 &lt;p&gt;回到最开始的问题，我有一个定义好的struct，需要去生成SQL命令。所以还是需要用到内置的AST解析器的。除此之外也就是一点点的区分类型型，做转换了。代码放在 &lt;a href=&#34;https://github.com/hzmangel/struct2schema&#34;&gt;https://github.com/hzmangel/struct2schema&lt;/a&gt; 这里，README还在编写中。目前代码支持将大部分Go内置的类型转换为SQL类型，不过可能还是有一些不支持的需要手动操作。在DB支持上，目前只看了sqlite3和MySQL。下一步要做的事情估计有这些：&lt;/p&gt;
 
@@ -58,7 +58,7 @@
 
 &lt;p&gt;目前生成出来的代码会直接打印到屏幕上，格式啥的，据说1.6上对模板会有一个更新， &lt;a href=&#34;https://github.com/golang/go/issues/9969&#34;&gt;讨论在此&lt;/a&gt; ，拭目以待。&lt;/p&gt;
 
-&lt;h2 id=&#34;后记:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;后记&lt;/h2&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
 
 &lt;p&gt;在写这篇文章的时候，突然反应过来这个 &lt;code&gt;go generate&lt;/code&gt; 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。&lt;/p&gt;
 </description>
@@ -161,7 +161,7 @@ func userinfo_api(account_id string, access_token string) string {
 为止还不需要科学上网的技能。还是一样，如果不想在本机测试结果，可以到&lt;a href=&#34;http://play.golang.org/p/mhBQxRwTmF&#34;&gt;这个地址&lt;/a&gt;去
 瞧一瞧看一看。&lt;/p&gt;
 
-&lt;h3 id=&#34;调用api:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;调用API&lt;/h3&gt;
+&lt;h3 id=&#34;调用api&#34;&gt;调用API&lt;/h3&gt;
 
 &lt;p&gt;在网上查了查发现大家对golang自带的http库表示比较满意，所以本着少用第三方库的原则，就直接使用了内置的&lt;code&gt;http&lt;/code&gt;库来获取JSON。程序如下：&lt;/p&gt;
 
@@ -222,7 +222,7 @@ content, err := ioutil.ReadAll(resp.Body)
 
 &lt;p&gt;此时屏幕上显示的即是正常的JSON响应了。&lt;/p&gt;
 
-&lt;h3 id=&#34;处理json数据:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;处理JSON数据&lt;/h3&gt;
+&lt;h3 id=&#34;处理json数据&#34;&gt;处理JSON数据&lt;/h3&gt;
 
 &lt;p&gt;此时的JSON数据还只是一个字符串，程序并不认为它和其它的字符串有什么不同，此时就需要使用内置的JSON库去解码，解码所得的结果放于&lt;code&gt;map&lt;/code&gt;结构中。&lt;/p&gt;
 
@@ -306,7 +306,7 @@ g.org/ref/spec#Type_assertions&#34;&gt;&lt;em&gt;type assertions&lt;/em&gt;&lt;/
 &lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
 近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;code&gt;channel&lt;/code&gt;是需要和&lt;code&gt;goroutines&lt;/code&gt;一起使用的。&lt;/p&gt;
 
-&lt;h3 id=&#34;goroutines:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;goroutines&lt;/h3&gt;
+&lt;h3 id=&#34;goroutines&#34;&gt;goroutines&lt;/h3&gt;
 
 &lt;p&gt;先说&lt;code&gt;goroutines&lt;/code&gt;吧。golang的并行模型使用的是&lt;strong&gt;CSP&lt;/strong&gt;（官方的说法是Newsqueak-Alef-Limbo，和原始的CSP有一些区别
 。具体的差别还没有细查。参见&lt;a href=&#34;http://talks.golang.org/2012/concurrency.slide#10&#34;&gt;此张幻灯片&lt;/a&gt; ），&lt;code&gt;go
@@ -371,7 +371,7 @@ Call index: 1
 能看的比较明显了）。在第19行加上sleep的原因是因为main函数在执行完成后会直接退出，不会等待所有&lt;code&gt;goroutines&lt;/code&gt;执行完毕，所以此处需要让程序
 等一等。不方便在本机运行的可以&lt;a href=&#34;http://play.golang.org/p/8BT6RVR7-w&#34;&gt;见这里&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;channel:c6debf44b3ea0c5c4c8edcf6064ff030&#34;&gt;channel&lt;/h3&gt;
+&lt;h3 id=&#34;channel&#34;&gt;channel&lt;/h3&gt;
 
 &lt;p&gt;拿sleep来不让main函数退出也不是个事，毕竟时间不好控制，睡多了睡少了都不行，所以这里就引入了&lt;code&gt;channel&lt;/code&gt;。&lt;/p&gt;
 

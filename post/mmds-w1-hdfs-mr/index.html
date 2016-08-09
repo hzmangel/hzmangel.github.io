@@ -86,7 +86,7 @@
 
 <p>课程总共7周，这篇整理的第一周的 <code>HDFS</code> 和 <code>MR</code> 部分。</p>
 
-<h2 id="dfs:328f502a6f9088599afe3ec330de3e9a">DFS</h2>
+<h2 id="dfs">DFS</h2>
 
 <p>课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。</p>
 
@@ -94,7 +94,7 @@
 
 <p>DFS中的节点有两类，<code>Chunk Server</code>用来存放数据，<code>Master Node</code>用来存放文件和<code>Chunk Server</code>的对应关系。一个文件会被分成多处连续的<code>chunks</code>，典型的大小是16~64MB。每一个<code>chunk</code>都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而<code>Master Node</code>就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从<code>Master Node</code>处取到<code>Chunk Server</code>的信息，再从相应的server上获取文件内容。</p>
 
-<h2 id="map-reduce:328f502a6f9088599afe3ec330de3e9a">Map Reduce</h2>
+<h2 id="map-reduce">Map Reduce</h2>
 
 <p>MR是一种编程模型，典型的应用场景就是 <strong>Word Cound</strong> 。将MR应用到 WordCount 的先决条件为：</p>
 
@@ -103,7 +103,7 @@
 <li>但是所有的<code>&lt;key, value&gt;</code>对可以完全放到内存中</li>
 </ul>
 
-<h3 id="算法流程:328f502a6f9088599afe3ec330de3e9a">算法流程</h3>
+<h3 id="算法流程">算法流程</h3>
 
 <ol>
 <li>将数据分块读入</li>
@@ -115,7 +115,7 @@
 
 <p>在具体实现上，程序需要指定<code>Map</code>和<code>Reduce</code>两个方法，这两个方法的参数都是<code>&lt;key, value&gt;</code>对。例如<code>Map</code>函数的<code>key</code>可以是文件名，<code>value</code>是对应的某一行或者某一块文字。而在<code>Reduce</code>函数中，输入的<code>key</code>是某个单词，而<code>value</code>是1。<code>Reduce</code>负责归并结果，并输出。</p>
 
-<h3 id="map-reduce的环境:328f502a6f9088599afe3ec330de3e9a">Map Reduce的环境</h3>
+<h3 id="map-reduce的环境">Map Reduce的环境</h3>
 
 <p>除了根据逻辑实现<code>Map</code>和<code>Reduce</code>两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：</p>
 
@@ -127,7 +127,7 @@
 <li>管理机器间通信</li>
 </ul>
 
-<h3 id="出错处理:328f502a6f9088599afe3ec330de3e9a">出错处理</h3>
+<h3 id="出错处理">出错处理</h3>
 
 <p>MR出错分几种，处理方式也不同：</p>
 
@@ -137,13 +137,13 @@
 <li>MasterNode：任务直接退出。</li>
 </ul>
 
-<h3 id="map-和-reduce-的数目:328f502a6f9088599afe3ec330de3e9a"><code>Map</code>和<code>Reduce</code>的数目</h3>
+<h3 id="map-和-reduce-的数目"><code>Map</code>和<code>Reduce</code>的数目</h3>
 
 <p><code>Mapper</code>的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。</p>
 
 <p><code>Reduce</code>的数目没有具体要求，但是一般会比<code>Mapper</code>的数目要少。</p>
 
-<h3 id="改良:328f502a6f9088599afe3ec330de3e9a">改良</h3>
+<h3 id="改良">改良</h3>
 
 <p>还是拿WC作为例子。在<code>Reduce</code>函数处，原始的办法需要传一堆<code>&lt;word, 1&gt;</code>对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给<code>Reduce</code>之前先归并一下，相当于多级<code>Reduce</code>，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。</p>
 
@@ -208,6 +208,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -215,12 +221,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -232,7 +232,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -257,7 +257,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

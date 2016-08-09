@@ -34,7 +34,7 @@ and DTrace provider.&lt;/p&gt;
 handlers that will be triggered when their particular event occurs, and DTrace
 can bind some actions to the probe to get needed information.&lt;/p&gt;
 
-&lt;h3 id=&#34;basic-syntax:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Basic syntax&lt;/h3&gt;
+&lt;h3 id=&#34;basic-syntax&#34;&gt;Basic syntax&lt;/h3&gt;
 
 &lt;p&gt;A typically D language script contains three sections, the &lt;code&gt;BEGIN&lt;/code&gt; section,
 &lt;code&gt;END&lt;/code&gt; section and probe section. Sections are surrounded by braces. Each probe
@@ -118,9 +118,9 @@ int main(int argc, char* argv[]) {
 
 &lt;p&gt;For more information, please refer to reference section:&lt;/p&gt;
 
-&lt;h2 id=&#34;rails:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Rails&lt;/h2&gt;
+&lt;h2 id=&#34;rails&#34;&gt;Rails&lt;/h2&gt;
 
-&lt;h3 id=&#34;probes-for-ruby-and-rails-application:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for Ruby and Rails application&lt;/h3&gt;
+&lt;h3 id=&#34;probes-for-ruby-and-rails-application&#34;&gt;Probes for Ruby and Rails application&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: Make sure the Ruby you are using provides the DTrace probes, or the testing below can &lt;strong&gt;NOT&lt;/strong&gt; be continued.&lt;/p&gt;
 
@@ -228,7 +228,7 @@ END
 and the action inside the probe is to calculate the elapsed time. And some
 summary information will be printed after trace end.&lt;/p&gt;
 
-&lt;h3 id=&#34;probes-for-database-operations:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Probes for database operations&lt;/h3&gt;
+&lt;h3 id=&#34;probes-for-database-operations&#34;&gt;Probes for database operations&lt;/h3&gt;
 
 &lt;p&gt;The performance test is also needed on Database server, MySQL has provide one
 method to use DTrace to the database, please refer &lt;a href=&#34;http://dev.mysql.com/tech-
@@ -288,7 +288,7 @@ END
 detailed probe, which can be used to monitor the time consumbed by each type
 of command, please check the document if more information is needed.&lt;/p&gt;
 
-&lt;h3 id=&#34;result-analysis:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Result analysis&lt;/h3&gt;
+&lt;h3 id=&#34;result-analysis&#34;&gt;Result analysis&lt;/h3&gt;
 
 &lt;p&gt;The output is different from the two script listed above. In the log message
 of Ruby, the filename and line number information are saved, which can be used
@@ -298,7 +298,7 @@ separating the command type, the performance can be optimized.&lt;/p&gt;
 &lt;p&gt;The testing data is still under development, and I will update the blog after
 get the result.&lt;/p&gt;
 
-&lt;h2 id=&#34;reference:b89c7748fef3f1027a4932ac99003df1&#34;&gt;Reference&lt;/h2&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&#34;&gt;http://tenderlovemaking.com/2011/12/05/profiling-rails-startup-with-dtrace/&lt;/a&gt;&lt;/li&gt;
@@ -410,7 +410,7 @@ page&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;gem install rails
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;a-simple-todo-list:df917a890c422c6cd0235a1af97613d2&#34;&gt;A simple TODO list&lt;/h3&gt;
+&lt;h3 id=&#34;a-simple-todo-list&#34;&gt;A simple TODO list&lt;/h3&gt;
 
 &lt;p&gt;This section will implement a todo list application, which is copied from
 &lt;a href=&#34;http://bottlepy.org/docs/dev/tutorial_app.html&#34;&gt;bottle tutorial page&lt;/a&gt;. Here
@@ -510,7 +510,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;You can insert underscore(_) in integer number to make it more readable.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;variable-and-method:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Variable and method&lt;/h4&gt;
+&lt;h4 id=&#34;variable-and-method&#34;&gt;Variable and method&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Global, local, instance and class variable are defined in different way&lt;/li&gt;
@@ -532,7 +532,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;alias&lt;/code&gt; can be used to define a alias for a method/operator/global var/regular expression back-ref, but not local var/class var/constant. The object pointed by new name will NOT updated after updating old one.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;string:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;String&lt;/h4&gt;
+&lt;h4 id=&#34;string&#34;&gt;String&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Ruby use &lt;code&gt;puts&lt;/code&gt; to print string to screen, and &lt;code&gt;gets&lt;/code&gt; to receive string from standard input.&lt;/li&gt;
@@ -545,7 +545,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;A magic keyword &lt;code&gt;%w&lt;/code&gt; can be used to build string array, like this: %w{ab cd ef gh \n} == [&amp;ldquo;ab&amp;rdquo;, &amp;ldquo;cd&amp;rdquo;, &amp;ldquo;ef&amp;rdquo;, &amp;ldquo;gh&amp;rdquo;, &amp;ldquo;\\n&amp;rdquo;].&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;flow-control-and-code-block:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Flow control and code block&lt;/h4&gt;
+&lt;h4 id=&#34;flow-control-and-code-block&#34;&gt;Flow control and code block&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;if..else..end&lt;/code&gt;, and the else if is written as &lt;code&gt;elsif&lt;/code&gt; in Ruby. (hmm&amp;hellip; we have &lt;code&gt;else if&lt;/code&gt;, &lt;code&gt;elseif&lt;/code&gt; and &lt;code&gt;elif&lt;/code&gt; yet, and now we have &lt;code&gt;elsif&lt;/code&gt;, seems we only need elf now).&lt;/li&gt;
@@ -558,7 +558,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;Method &lt;code&gt;block_given?&lt;/code&gt; can be used in function to check whether this function has block followed.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;array-range-and-hash:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Array, range and hash&lt;/h4&gt;
+&lt;h4 id=&#34;array-range-and-hash&#34;&gt;Array, range and hash&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Seems there is no index error in Ruby, you will get &lt;code&gt;nil&lt;/code&gt; if try to access element out of array size.&lt;/li&gt;
@@ -577,7 +577,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;Hash can be defined via &lt;code&gt;{key: val}&lt;/code&gt; or &lt;code&gt;{key =&amp;amp;gt; val}&lt;/code&gt;. If using the first method, the &lt;code&gt;key&lt;/code&gt; can not be a string, but a name obey the variable rule, and Ruby will convert it to symbol. That is: {a: 2} == {:a =&amp;gt; 2}&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;file:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;File&lt;/h4&gt;
+&lt;h4 id=&#34;file&#34;&gt;File&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Usual way for using File: &lt;code&gt;File.open() do |f| .. end&lt;/code&gt;&lt;/li&gt;
@@ -586,7 +586,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;File.new()&lt;/code&gt; can open a random access file, which can response to &lt;code&gt;.seek&lt;/code&gt; method.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;regular-expression:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Regular expression&lt;/h4&gt;
+&lt;h4 id=&#34;regular-expression&#34;&gt;Regular expression&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Pattern enclosed by slash is an regular expression object, &lt;code&gt;/foobar/&lt;/code&gt;&lt;/li&gt;
@@ -595,7 +595,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;=~&lt;/code&gt; in string will return index if found, or &lt;code&gt;nil&lt;/code&gt; for not found.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;class:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Class&lt;/h4&gt;
+&lt;h4 id=&#34;class&#34;&gt;Class&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;class is a first-class object in Ruby, which is an object of Class.&lt;/li&gt;
@@ -616,7 +616,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;Those access type can be only applied to method, the instance/class variable is private by default.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;proc:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Proc&lt;/h4&gt;
+&lt;h4 id=&#34;proc&#34;&gt;Proc&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Like lambda in Python, but named Proc in Ruby.&lt;/li&gt;
@@ -624,7 +624,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;Here is a example for lambda with argument: &lt;code&gt;lambda {|x| &amp;quot;Hello #{x}&amp;quot;}&lt;/code&gt;.call &amp;ldquo;Hell&amp;rdquo;`&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;load-and-require:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Load and require&lt;/h4&gt;
+&lt;h4 id=&#34;load-and-require&#34;&gt;Load and require&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;load&lt;/code&gt; and &lt;code&gt;require&lt;/code&gt; are methods defined in &lt;code&gt;Object&lt;/code&gt;, but more like a keyword during usage.&lt;/li&gt;
@@ -633,7 +633,7 @@ end&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;require&lt;/code&gt; will return &lt;code&gt;true&lt;/code&gt; or &lt;code&gt;false&lt;/code&gt; after execution complete.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;exception:f00e6258aba7186dcca7ad1f671f53dd&#34;&gt;Exception&lt;/h4&gt;
+&lt;h4 id=&#34;exception&#34;&gt;Exception&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;A special class, user can throw it via &lt;code&gt;raise&lt;/code&gt;.&lt;/li&gt;

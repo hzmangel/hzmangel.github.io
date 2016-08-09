@@ -3,8 +3,17 @@
   
   <url>
     <loc>http://hzmangel.github.io/</loc>
-    <lastmod>2016-02-23T00:52:42+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/post/grape_n_strong_parameter/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</loc>
+    <lastmod>2016-04-17T12:59:42+08:00</lastmod>
   </url>
   
   <url>

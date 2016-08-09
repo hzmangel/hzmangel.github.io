@@ -66,6 +66,38 @@
             <article class="post">
 
     <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/344/'> 使用NFS在AIX上挂载Linux分区</a> </h2>
+        <div class="post-meta">发表于2008-09-18 13:30:03 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">关键字： AIX, NFS, Not owner 起因很简单，因为在折腾机器，在AIX上解压怎么也不对，只好想到了NFS的方式。首先保证两台机器能互相通信（也就是能ping通啦），然后编辑NFS服务器即Li nux机器上的/etc/exports的文件，在其中加上一行：&lt;path&gt; &lt;hostname/ip&gt;(&lt;option&gt; )，第一个是在Linux服务器上的路径，第二个是需要挂载此文件夹主机的主机名或者IP地址，最后括号中是选项，一般是rw, async。改完后重启NFS的服务器，此时在服务器上用exportfs命令应该能看到刚加到配置文件中的一行。此时服务器端应该算是设置完成了。 在客户端的AIX机器上，首先需要确定portmap和nfs后台进程的存在，命令嘛就是startsrc -s portmap和startsrc -g nfs，然后就是用mount命令了，不用加-t nfs，直接就是mount &lt;ip&gt;:&lt;path&gt; &lt;mount_point&gt;。 简单吧，不过需要说说vmount: Not owner这个问题（以下解答转自zhaolin日志）出现这个问题的原因是linux操作系统在响应AIX操作系统的mount请求时，需要用到此nfs保留端口，该端 口在默认情况下是不会开放的。所以需要在AIX客户端设置一下： # nfso -o nfs_use_reserved_ports=1 Setting nfs_use_reserved_ports to 1 然后再重新mount就没问题了。还有就是可能需要在AIX的/etc/hosts下添加服务器地址和IP映射，否则有可能会找不到，嗯。 目前只是挂载上，能读，至于能不能写再说吧，嘿嘿。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/343/'> 奥运，结束了</a> </h2>
+        <div class="post-meta">发表于2008-09-17 21:20:35 </div>
+    </header>
+
+    <section>
+        <div class="post-summary">嗯，有些失落，有些感伤，有些兴奋，所以我也不知道是啥心情了。记一笔，然后继续干活，呵呵。</div>
+    </section>
+
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
         <h2 class="post-title"><a href='http://hzmangel.github.io/post/342/'> 雾锁妙峰</a> </h2>
         <div class="post-meta">发表于2008-09-16 10:50:39 </div>
     </header>
@@ -227,53 +259,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/334/'> 雨中的公共区（二）</a> </h2>
-        <div class="post-meta">发表于2008-08-16 01:34:54 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>关键字： 洗澡, 奥林匹克公园, 公共区</p>
-
-<p>接上回，嗯</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/334/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/333/'> 雨中的公共区（一）</a> </h2>
-        <div class="post-meta">发表于2008-08-15 09:15:18 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>关键字： 洗澡, 奥林匹克公园, 公共区</p>
-
-<p>偶然的机会弄到了张公共区的票，虽然是12点知道第二天（其实是当天）会有张只能在那天用的票，而且处理单位的事情弄到了3点多才睡，但是还是感觉不错，嗯，所以就翘
-班去转了转，嗯。</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/333/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -301,6 +286,12 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -308,12 +299,6 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -325,7 +310,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -350,7 +335,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

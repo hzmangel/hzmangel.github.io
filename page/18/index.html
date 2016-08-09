@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head>
+	<meta name="generator" content="Hugo 0.16" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -62,6 +63,52 @@
 
 <div class="row">
     <div class="col-md-9">
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/314/'> Gentoo Install Notes (3)</a> </h2>
+        <div class="post-meta">发表于2008-06-26 23:52:51 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>又到了讲故事的时间了，嗯。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/314/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/313/'> Gentoo Install Notes (2)</a> </h2>
+        <div class="post-meta">发表于2008-06-26 00:07:14 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>关键字： gentoo lvm install</p>
+
+<p>让我们继续昨晚的故事。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/313/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
         
             <article class="post">
 
@@ -212,38 +259,6 @@
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/304/'> Open File with Specified Encoding</a> </h2>
-        <div class="post-meta">发表于2008-06-13 00:00:21 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。 其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</div>
-    </section>
-
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/303/'> Init Script for GDB</a> </h2>
-        <div class="post-meta">发表于2008-06-12 23:47:55 </div>
-    </header>
-
-    <section>
-        <div class="post-summary">在单位调程序，加了 -g 的参数，但是要把可执行文件从别的机器拷过来，但又不想把整棵源文件树拷过来，只拷了个别要调的文件，于是出现了要在执行 gdb 前设置一堆 dir 的事情，每次都做做了一天，实在受不了了，于是上网找，还真给找到了脚本。 其实很简单，在当前目录下放个 .gdbinit 文件，则 gdb 在启动的时候会自动读入里面的内容，并且执行它，所以只要把 dir 命令放到里面就行了。还有一种方法是进 gdb 后用 source 命令来指定要执行的脚本文件。于是乎用 find . -type d 把目录输出，其实是想找条命令把输出用 : 接起来的，但那会没找到，于是用 vim 的全局替换了，反正能用就行。剩下的，就调程序吧，不知道 GDB 有没有啥命令可以把文件树整个给搬个家的，有空再找吧，呵呵。</div>
-    </section>
-
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -271,6 +286,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -278,12 +299,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -295,7 +310,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -320,7 +335,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

@@ -28,13 +28,13 @@
 &lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从模型生成网络:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从模型生成网络&lt;/h2&gt;
+&lt;h2 id=&#34;从模型生成网络&#34;&gt;从模型生成网络&lt;/h2&gt;
 
 &lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
-&lt;h4 id=&#34;参数:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;参数&lt;/h4&gt;
+&lt;h4 id=&#34;参数&#34;&gt;参数&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
@@ -43,13 +43,13 @@
 &lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;生成过程:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;生成过程&lt;/h4&gt;
+&lt;h4 id=&#34;生成过程&#34;&gt;生成过程&lt;/h4&gt;
 
 &lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
 
 &lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \epsilon $&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;h4 id=&#34;适应性强:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;适应性强&lt;/h4&gt;
+&lt;h4 id=&#34;适应性强&#34;&gt;适应性强&lt;/h4&gt;
 
 &lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
 
@@ -59,15 +59,15 @@
 &lt;li&gt;内嵌 (Nested)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从网络生成模型:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从网络生成模型&lt;/h2&gt;
+&lt;h2 id=&#34;从网络生成模型&#34;&gt;从网络生成模型&lt;/h2&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model-1:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model-1&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
 &lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
 
-&lt;h3 id=&#34;bigclam:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;BigCLAM&lt;/h3&gt;
+&lt;h3 id=&#34;bigclam&#34;&gt;BigCLAM&lt;/h3&gt;
 
-&lt;h4 id=&#34;membership-strength:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;Membership Strength&lt;/h4&gt;
+&lt;h4 id=&#34;membership-strength&#34;&gt;Membership Strength&lt;/h4&gt;
 
 &lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
 
@@ -81,7 +81,7 @@
 
 &lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;计算:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;计算&lt;/h4&gt;
+&lt;h4 id=&#34;计算&#34;&gt;计算&lt;/h4&gt;
 
 &lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
 
@@ -97,7 +97,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;其它阅读-graph-and-social-network:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
+&lt;h2 id=&#34;其它阅读-graph-and-social-network&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
 
@@ -140,19 +140,19 @@
 
 &lt;p&gt;这个算法的核心思想是 &lt;em&gt;monotonicity&lt;/em&gt; ，即如果 &lt;code&gt;{I}&lt;/code&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的所有子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。反过来说，如果一个元素不是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么任何包含它的集合都不可能是。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本算法&lt;/h2&gt;
+&lt;h2 id=&#34;基本算法&#34;&gt;基本算法&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;A-Priori&lt;/em&gt; 是一个 &lt;em&gt;two-pass&lt;/em&gt; 算法，&lt;/p&gt;
 
-&lt;h3 id=&#34;first-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+&lt;h3 id=&#34;first-pass&#34;&gt;First Pass&lt;/h3&gt;
 
 &lt;p&gt;在读取的过程中创建两张Hash表，一张表是将所有 &lt;code&gt;item&lt;/code&gt; 映射为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;n&lt;/code&gt; 的索引，减少后面引用时占用的内存。第二张表是将 &lt;code&gt;item&lt;/code&gt; 的索引与 &lt;code&gt;item&lt;/code&gt; 出现的次数对应起来。&lt;/p&gt;
 
-&lt;h3 id=&#34;between-passes:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+&lt;h3 id=&#34;between-passes&#34;&gt;Between Passes&lt;/h3&gt;
 
 &lt;p&gt;检查索引和出现次数映射的表，找出其中所有的 &lt;em&gt;frequent itemset&lt;/em&gt; ，并将它们重新索引为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;m&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;second-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+&lt;h3 id=&#34;second-pass&#34;&gt;Second Pass&lt;/h3&gt;
 
 &lt;p&gt;计算所有使用 &lt;em&gt;frequent itemset&lt;/em&gt; 表中元素组成的数据对的 &lt;em&gt;support&lt;/em&gt; 值。具体流程如下：&lt;/p&gt;
 
@@ -172,7 +172,7 @@
 &lt;p&gt;Mutation: it is the key to our evolution.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;pcy:f42a6776e590235dbcf00cc877498b66&#34;&gt;PCY&lt;/h2&gt;
+&lt;h2 id=&#34;pcy&#34;&gt;PCY&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 的时候，内存中有很多空闲的地方，所以在给 &lt;em&gt;item&lt;/em&gt; 计数的同时，生成出所有的 &lt;em&gt;pair&lt;/em&gt; ，取 Hash 后，给对应的 &lt;em&gt;bucket&lt;/em&gt; 加1 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，只处理如下的数据对：&lt;/p&gt;
 
@@ -185,7 +185,7 @@
 
 &lt;p&gt;这个算法的原理是，如果一个 &lt;em&gt;pair&lt;/em&gt; 是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它对应的 &lt;em&gt;bucket&lt;/em&gt; 一定超过 &lt;em&gt;support&lt;/em&gt; 的阈值。而如果一个 &lt;em&gt;bucket&lt;/em&gt; 没有超过阈值，那么里面的所有 &lt;em&gt;pair&lt;/em&gt; 一定不是 &lt;em&gt;frequent pair&lt;/em&gt; 。 注意：一个 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt; 并不能保证其中的 &lt;em&gt;pair&lt;/em&gt; 都是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;first-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+&lt;h3 id=&#34;first-pass-1&#34;&gt;First Pass&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;for b in buckets
   for item in b:
@@ -198,21 +198,21 @@
 end
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;between-passes-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+&lt;h3 id=&#34;between-passes-1&#34;&gt;Between Passes&lt;/h3&gt;
 
 &lt;p&gt;除了找出 &lt;em&gt;frequent item&lt;/em&gt; 外，还会把上一步中的 &lt;em&gt;hash bucket&lt;/em&gt; 替换为 &lt;em&gt;bitmap&lt;/em&gt; ，&lt;code&gt;1&lt;/code&gt; 表示 &lt;em&gt;frequent bucket&lt;/em&gt; ， &lt;code&gt;0&lt;/code&gt; 表示不是。这样可以进一步减少内存空间的占用（从 &lt;code&gt;32bit&lt;/code&gt; 降到 &lt;code&gt;1bit&lt;/code&gt;）。&lt;/p&gt;
 
-&lt;h3 id=&#34;second-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+&lt;h3 id=&#34;second-pass-1&#34;&gt;Second Pass&lt;/h3&gt;
 
 &lt;p&gt;根据上面列出的条件，找到 &lt;em&gt;canidate pair&lt;/em&gt; ，计算。&lt;/p&gt;
 
 &lt;p&gt;PCY算法还有两个变种：&lt;/p&gt;
 
-&lt;h2 id=&#34;multistage:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multistage&lt;/h2&gt;
+&lt;h2 id=&#34;multistage&#34;&gt;Multistage&lt;/h2&gt;
 
 &lt;p&gt;这个算法的核心在于，在PCY算法的 &lt;em&gt;first pass&lt;/em&gt; 后，并不开始对 &lt;em&gt;bucket&lt;/em&gt; 做筛选，而是将其中属于 &lt;em&gt;frequent bucket&lt;/em&gt; 的 &lt;em&gt;pair&lt;/em&gt; 挑出来，再做一次 Hash ，从而进一步减少 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据量。从定义上来看，这个算法可能会有多个 &lt;em&gt;pass&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;multihash:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multihash&lt;/h2&gt;
+&lt;h2 id=&#34;multihash&#34;&gt;Multihash&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用多个独立的Hash函数来计算 &lt;em&gt;bucket&lt;/em&gt; 。相比物 Multistage ，它还是 &lt;em&gt;two pass&lt;/em&gt; 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 &lt;em&gt;frequent bucket&lt;/em&gt; 。如果它能保证 &lt;em&gt;frequent bucket&lt;/em&gt; 的数目足够小，那么我们就能在 &lt;em&gt;two pass&lt;/em&gt; 获得 Multistage 的优点。&lt;/p&gt;
 
@@ -220,19 +220,19 @@ end
 
 &lt;p&gt;算法的另一个发展趋势是获取到大部分的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，使用降低精确性的办法来换取效率。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本想法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本想法&lt;/h2&gt;
+&lt;h2 id=&#34;基本想法&#34;&gt;基本想法&lt;/h2&gt;
 
 &lt;p&gt;对样本 &lt;em&gt;basket&lt;/em&gt; 进行随机抽样，并在内存中对样本进行 &lt;em&gt;A-Priori&lt;/em&gt; 或其改进版本的计算，此处需要计算所有的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，而不仅仅是 &lt;em&gt;pair&lt;/em&gt; 。计算时使用的 &lt;em&gt;support threshold&lt;/em&gt; 需要根据样本容量处理，例如抽样率为 &lt;code&gt;1/100&lt;/code&gt; ，那么阈值也相应的变成 &lt;code&gt;s/100&lt;/code&gt; 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，可以使用整体数据来验证是否找到的真的是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
 &lt;p&gt;这个算法有个问题有些 &lt;em&gt;set&lt;/em&gt; 可能在样本中不是 &lt;em&gt;frequent&lt;/em&gt; 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 &lt;em&gt;support&lt;/em&gt; 阈值，例如从 &lt;code&gt;s/100&lt;/code&gt; 降为 &lt;code&gt;s/125&lt;/code&gt; ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&amp;hellip;&amp;hellip;）&lt;/p&gt;
 
-&lt;h2 id=&#34;son-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;SON 算法&lt;/h2&gt;
+&lt;h2 id=&#34;son-算法&#34;&gt;SON 算法&lt;/h2&gt;
 
 &lt;p&gt;这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 &lt;em&gt;frequent pair&lt;/em&gt; 置于候选的位置。而在 &lt;em&gt;second pass&lt;/em&gt; ，计算这些候选 &lt;em&gt;pair&lt;/em&gt; 并得出最后结果。这个算法的核心是，任何一个 &lt;em&gt;pair&lt;/em&gt; 如果是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它一定会在某个子集中是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
 &lt;p&gt;这个算法可以让计算并行化，以提高处理效率。&lt;/p&gt;
 
-&lt;h2 id=&#34;toivonen-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;Toivonen 算法&lt;/h2&gt;
+&lt;h2 id=&#34;toivonen-算法&#34;&gt;Toivonen 算法&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 &lt;code&gt;s/125&lt;/code&gt;，以尽可能的不要遗漏在全集中是 &lt;em&gt;frequent set&lt;/em&gt; 的数据。此后设置一个 &lt;em&gt;negative border&lt;/em&gt; 区间，以存放所有子集是 &lt;em&gt;frequent set&lt;/em&gt; 但是本身不是的集合。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，计算所有候选 &lt;em&gt;frequent itemsets&lt;/em&gt; 和 &lt;em&gt;negative border&lt;/em&gt; 中的数据。&lt;/p&gt;
 
@@ -256,7 +256,7 @@ end
 
 &lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;
 
-&lt;h2 id=&#34;market-basket-模型:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
+&lt;h2 id=&#34;market-basket-模型&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
 
 &lt;p&gt;这个模型一般用来描述两种数据之间的 &lt;em&gt;m2m&lt;/em&gt; 关系。其中的一个数据是 &lt;em&gt;item&lt;/em&gt; ，而另一个是 &lt;em&gt;baskets&lt;/em&gt; 。每一个 &lt;em&gt;basket&lt;/em&gt; 中包含有多个 &lt;em&gt;items&lt;/em&gt; ，即为 &lt;em&gt;itemset&lt;/em&gt; 。 通常认为：&lt;/p&gt;
 
@@ -273,7 +273,7 @@ end
 &lt;li&gt;&lt;em&gt;Basket&lt;/em&gt; ：用户的订单。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;frequent-itemsets:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;frequent-itemsets&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt; 即指在 &lt;em&gt;baskets&lt;/em&gt; 中经常出现的 &lt;em&gt;itemset&lt;/em&gt; ，它的定义为：&lt;/p&gt;
 
@@ -285,9 +285,9 @@ end
 
 &lt;p&gt;一个 &lt;em&gt;itemset&lt;/em&gt; 可以包含有不定个元素。如果一个 &lt;em&gt;itemset&lt;/em&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的的任何子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h4 id=&#34;应用场景:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;应用场景&lt;/h4&gt;
+&lt;h4 id=&#34;应用场景&#34;&gt;应用场景&lt;/h4&gt;
 
-&lt;h5 id=&#34;超市商品:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;超市商品&lt;/h5&gt;
+&lt;h5 id=&#34;超市商品&#34;&gt;超市商品&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：超市商品。&lt;/li&gt;
@@ -296,7 +296,7 @@ end
 
 &lt;p&gt;通过分析订单中的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，可以得出哪些商品会经常被同时购买。&lt;/p&gt;
 
-&lt;h5 id=&#34;相关内容查找:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;相关内容查找&lt;/h5&gt;
+&lt;h5 id=&#34;相关内容查找&#34;&gt;相关内容查找&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：单词&lt;/li&gt;
@@ -305,7 +305,7 @@ end
 
 &lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 中，肯定包含有一些 common word，除去这些词后，可以揭示出一些单词之间的关系。&lt;/p&gt;
 
-&lt;h5 id=&#34;剽窃检测:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;剽窃检测&lt;/h5&gt;
+&lt;h5 id=&#34;剽窃检测&#34;&gt;剽窃检测&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;itme&lt;/em&gt; ：文档&lt;/li&gt;
@@ -314,7 +314,7 @@ end
 
 &lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 表示这些文档中有大量的句子相似，可以检测抄袭的方法。&lt;/p&gt;
 
-&lt;h5 id=&#34;生物标记:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;生物标记&lt;/h5&gt;
+&lt;h5 id=&#34;生物标记&#34;&gt;生物标记&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：生物标记，如基因，血蛋白，疾病等。&lt;/li&gt;
@@ -323,7 +323,7 @@ end
 
 &lt;p&gt;找到的包含疾病和生物标记的 &lt;em&gt;frequent itemset&lt;/em&gt; 可以用于疾病检测。&lt;/p&gt;
 
-&lt;h3 id=&#34;association-rule:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;association-rule&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;定义 &lt;code&gt;$I \rightarrow j$&lt;/code&gt; ，表示如果一个 &lt;em&gt;basket&lt;/em&gt; 包含有 &lt;code&gt;{I}&lt;/code&gt; 中所有的元素，那么它就有可能包含 &lt;code&gt;j&lt;/code&gt; 。即 &lt;code&gt;{I}&lt;/code&gt; 是一组元素，而 &lt;code&gt;j&lt;/code&gt; 是一个元素。这个推断，就是一个 &lt;em&gt;association rule&lt;/em&gt; 。 &lt;em&gt;association rule&lt;/em&gt; 有一个属性为 &lt;em&gt;Confidence&lt;/em&gt; ，它表示给了 &lt;code&gt;{I}&lt;/code&gt; 后出现 &lt;code&gt;j&lt;/code&gt; 的概率，即在所有包含&lt;code&gt;{I}&lt;/code&gt;的 &lt;em&gt;basket&lt;/em&gt; 中同时包含&lt;code&gt;j&lt;/code&gt;的概率。&lt;/p&gt;
 
@@ -348,7 +348,7 @@ end
 
 &lt;p&gt;在计算过程中，由于设置的阈值比较高，所以通常能找到的就是 &lt;em&gt;frequent pair&lt;/em&gt; ，所以这也是需要面对的最大问题。&lt;/p&gt;
 
-&lt;h4 id=&#34;一般算法:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;一般算法&lt;/h4&gt;
+&lt;h4 id=&#34;一般算法&#34;&gt;一般算法&lt;/h4&gt;
 
 &lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
 
@@ -374,11 +374,11 @@ end
 
 &lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;
 
-&lt;h2 id=&#34;supervised-learning:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Supervised Learning&lt;/h2&gt;
+&lt;h2 id=&#34;supervised-learning&#34;&gt;Supervised Learning&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Supervised learning&lt;/em&gt; 是机器学习中的一种方法（还有两种分别是 &lt;a href=&#34;https://en.wikipedia.org/wiki/Unsupervised_learning&#34;&gt;Unsupervised learning&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Reinforcement_learning&#34;&gt;Reinforcement learning&lt;/a&gt; , via &lt;a href=&#34;https://en.wikipedia.org/wiki/Machine_learning&#34;&gt;wikipedia&lt;/a&gt; 。这个如果将来看了相应的课再写。）,它通过训练数据集建立一种模式或叫函数，再通过此模式去匹配待查询数据集从而得出预测结果。&lt;/p&gt;
 
-&lt;h2 id=&#34;instance-based-learning:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Instance Based Learning&lt;/h2&gt;
+&lt;h2 id=&#34;instance-based-learning&#34;&gt;Instance Based Learning&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Instance Based Learning&lt;/em&gt; 是机器学习的一种方法，也叫 &lt;em&gt;Memory Based Learning&lt;/em&gt; 。它不生成完整的匹配模式，而是在从训练数据中找到和待查询数据相近的数据（这些数据通常存放于内存中），并输出结果。将要说到的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 即是其中的一种。此方法也分为 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 和 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 。进行计算需要了解如下4个元素：&lt;/p&gt;
 
@@ -389,11 +389,11 @@ end
 &lt;li&gt;如何确定输出？&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
+&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
 
 &lt;p&gt;在 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 的情况下，距离使用欧氏距离，寻找最近的&lt;code&gt;1&lt;/code&gt;个 &lt;em&gt;Neighbor&lt;/em&gt; ，各点权重相同，直接以最近 &lt;em&gt;Neighbor&lt;/em&gt; 的输出为查询数据的输出。而在 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 中，查找的节点变成了 &lt;em&gt;k&lt;/em&gt; 个，而输出出变成了 &lt;em&gt;k&lt;/em&gt; 个节点的平均值。&lt;/p&gt;
 
-&lt;h3 id=&#34;kernel-regression:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Kernel Regression&lt;/h3&gt;
+&lt;h3 id=&#34;kernel-regression&#34;&gt;Kernel Regression&lt;/h3&gt;
 
 &lt;p&gt;核回归，统计中的一种方法，具体的算法及使用场景没看太明白，此处暂时仅为记录而用。对于这个算法，它所涉及到的4个参量是：&lt;/p&gt;
 
@@ -417,7 +417,7 @@ end
 
 &lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;
 
-&lt;h2 id=&#34;相似数据集:98fc395032abb3e5c8d913488aa084ef&#34;&gt;相似数据集&lt;/h2&gt;
+&lt;h2 id=&#34;相似数据集&#34;&gt;相似数据集&lt;/h2&gt;
 
 &lt;p&gt;许多数据挖掘的问题都能简化为查找相似数据集的问题，如：&lt;/p&gt;
 
@@ -438,7 +438,7 @@ end
 
 &lt;p&gt;文档相似性可以使用 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 来衡量。对于两个集合 &lt;code&gt;$S$&lt;/code&gt; 和 &lt;code&gt;$T$&lt;/code&gt; 来说，它们之间的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 为 &lt;code&gt;$|S \cap T| / |S \cup T|$&lt;/code&gt;，记为 &lt;em&gt;SIM(S,T)&lt;/em&gt; 或 &lt;em&gt;J(S,T)&lt;/em&gt; 。不难看出，当此值为&lt;code&gt;0&lt;/code&gt;时表示两个集合没有交集，而为&lt;code&gt;1&lt;/code&gt;时则表示两个集合相等。&lt;/p&gt;
 
-&lt;h3 id=&#34;k-shingling或叫k-gram:98fc395032abb3e5c8d913488aa084ef&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
+&lt;h3 id=&#34;k-shingling或叫k-gram&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;k-shingling&lt;/em&gt; 是指把文档按连续的 &lt;em&gt;k&lt;/em&gt; 个字母拆成子集的方法。&lt;/p&gt;
@@ -452,7 +452,7 @@ end
 
 &lt;p&gt;对于shingling中的元素，可以直接使用字符串，但是更好的办法是把它通过hash变化映射到某个bucket中，而将这个bucket的编号作为shingling元素进行比较。这样可以在shingling元素空间不变的情况下，降低运行时占用的内存。而且在比较上，整数比字符串要更有优势。这一步叫做 &lt;strong&gt;Compressing Shinglings&lt;/strong&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;minhashing:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Minhashing&lt;/h3&gt;
+&lt;h3 id=&#34;minhashing&#34;&gt;Minhashing&lt;/h3&gt;
 
 &lt;p&gt;这一段是从 &lt;a href=&#34;https://en.wikipedia.org/wiki/MinHash&#34;&gt;wikipedia&lt;/a&gt; 上看到的定义：&lt;/p&gt;
 
@@ -477,7 +477,7 @@ FOREACH columes:
     SIG(i, c) = min( SIG(i, c), hi(r) )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;locality-sensitive-hash:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
+&lt;h3 id=&#34;locality-sensitive-hash&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;By Me: 此处的概念还有些模糊，需要再啃啃。&lt;/em&gt;&lt;/p&gt;
 
@@ -495,7 +495,7 @@ FOREACH columes:
 
 &lt;p&gt;这个曲线是一个S型的连续曲线，我们需要做的就是通过挑选&lt;code&gt;b&lt;/code&gt;和&lt;code&gt;r&lt;/code&gt;，让这条曲线在两端尽量的平缓，而在中间部分尽可能的陡峭。这样就不会有过多的 &lt;em&gt;False Positive&lt;/em&gt; 或者 &lt;em&gt;False Negative&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h2 id=&#34;具体使用流程:98fc395032abb3e5c8d913488aa084ef&#34;&gt;具体使用流程&lt;/h2&gt;
+&lt;h2 id=&#34;具体使用流程&#34;&gt;具体使用流程&lt;/h2&gt;
 
 &lt;p&gt;综上所述，在实际应用中会有下面几步工作（文档比较）：&lt;/p&gt;
 
@@ -513,17 +513,17 @@ FOREACH columes:
 &lt;li&gt;检查选择出来的特征对，确定它们的相似度都大于 &lt;code&gt;$t$&lt;/code&gt; 。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;实例:98fc395032abb3e5c8d913488aa084ef&#34;&gt;实例&lt;/h2&gt;
+&lt;h2 id=&#34;实例&#34;&gt;实例&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;注：此处只是列出课程中出现的示例，后续会尝试使用程序完成，再补齐说明。&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;entity-resolution:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Entity Resolution&lt;/h3&gt;
+&lt;h3 id=&#34;entity-resolution&#34;&gt;Entity Resolution&lt;/h3&gt;
 
-&lt;h3 id=&#34;fingerprints:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Fingerprints&lt;/h3&gt;
+&lt;h3 id=&#34;fingerprints&#34;&gt;Fingerprints&lt;/h3&gt;
 
-&lt;h3 id=&#34;similar-news-articles:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Similar News Articles&lt;/h3&gt;
+&lt;h3 id=&#34;similar-news-articles&#34;&gt;Similar News Articles&lt;/h3&gt;
 
-&lt;h2 id=&#34;距离计算:98fc395032abb3e5c8d913488aa084ef&#34;&gt;距离计算&lt;/h2&gt;
+&lt;h2 id=&#34;距离计算&#34;&gt;距离计算&lt;/h2&gt;
 
 &lt;p&gt;此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 并不是距离，用&lt;code&gt;1&lt;/code&gt;减去它才是。一般说来，有两种类型的距离，它们是 &lt;em&gt;欧氏距离&lt;/em&gt; 和 &lt;em&gt;非欧距离&lt;/em&gt; 。&lt;/p&gt;
 
@@ -543,11 +543,11 @@ FOREACH columes:
 &lt;li&gt;&lt;code&gt;$d(x,z) \leq d(x,y) + d(y,z)$&lt;/code&gt; ：三角定理。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;欧氏距离:98fc395032abb3e5c8d913488aa084ef&#34;&gt;欧氏距离&lt;/h3&gt;
+&lt;h3 id=&#34;欧氏距离&#34;&gt;欧氏距离&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$&lt;/code&gt; 。在&lt;code&gt;$r=2$&lt;/code&gt;时，即变成平方各开根号，即熟悉的距离计算。此外还有&lt;code&gt;$L_{1}-norm$&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;非欧距离:98fc395032abb3e5c8d913488aa084ef&#34;&gt;非欧距离&lt;/h3&gt;
+&lt;h3 id=&#34;非欧距离&#34;&gt;非欧距离&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Jaccard Distance&lt;/em&gt;&lt;/li&gt;
@@ -579,11 +579,11 @@ FOREACH columes:
 
 &lt;p&gt;所以这里引入了给页面排序的做法，以确定页面的重要性。&lt;/p&gt;
 
-&lt;h2 id=&#34;pagerank:b45bcfea51201690689ab7d1025dd751&#34;&gt;PageRank&lt;/h2&gt;
+&lt;h2 id=&#34;pagerank&#34;&gt;PageRank&lt;/h2&gt;
 
 &lt;p&gt;PageRank，Google家的看家算法。核心思路是，如果一个页面是重要的，那么它指向的那个页面应该也是重要的。也就是用其它页面来证明这个页面的重要性。&lt;/p&gt;
 
-&lt;h3 id=&#34;flow-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
+&lt;h3 id=&#34;flow-formulation&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
 
 &lt;p&gt;在一张图中，假设有节点&lt;code&gt;$i$&lt;/code&gt;，它的PR值是&lt;code&gt;$r_{i}$&lt;/code&gt;，它有&lt;code&gt;$d_{i}$&lt;/code&gt;条出链，其中一条指向节点&lt;code&gt;$j$&lt;/code&gt;。那么&lt;code&gt;$j$&lt;/code&gt;上由&lt;code&gt;$i$&lt;/code&gt;带来的PR值即为&lt;code&gt;$\frac{r_{i}}{d_{i}}$&lt;/code&gt;。&lt;/p&gt;
 
@@ -591,7 +591,7 @@ FOREACH columes:
 
 &lt;p&gt;这个方法比较易于理解，但是对于大规模的页面集不适用，所以引入了&lt;em&gt;Matrix&lt;/em&gt; Formulation。&lt;/p&gt;
 
-&lt;h3 id=&#34;matrix-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
+&lt;h3 id=&#34;matrix-formulation&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
 
 &lt;p&gt;首先，把所有页面之间的跳转都用一个&lt;strong&gt;列随机矩阵(column stochastic matrix)&lt;/strong&gt;来表示，记为&lt;code&gt;$M$&lt;/code&gt;。对于每条链路&lt;code&gt;$i\rightarrow j$&lt;/code&gt;，都有相应的&lt;code&gt;$M_{ji} = 1/d_{i}$&lt;/code&gt;，其中&lt;code&gt;$d$&lt;/code&gt;是&lt;code&gt;$i$&lt;/code&gt;的出链路条数。下一步是&lt;strong&gt;Rank向量&lt;/strong&gt;，记为&lt;code&gt;$r$&lt;/code&gt;它是一个1维的列向量，每一个元素的值就是表示此节点的Rank值，记为&lt;code&gt;$r_{i}$&lt;/code&gt;，此向量满足&lt;code&gt;$\sum_{i}r_{i} = 1$&lt;/code&gt;。&lt;/p&gt;
 
@@ -607,13 +607,13 @@ FOREACH columes:
 &lt;li&gt;停止条件： &lt;code&gt;$|r^{(t+1) = r^{(t)}}|_{1} &amp;lt; \epsilon$&lt;/code&gt;。其中&lt;code&gt;$|x_{i}|_{1} ＝ \sum_{i}|x_{i}|$&lt;/code&gt;是向量&lt;code&gt;$i$&lt;/code&gt;的 &lt;em&gt;L1范数&lt;/em&gt; （其实就是绝对值相加，范数的定义就是 &lt;code&gt;$|x_{i}|_{p} = (\sum_{i}|x_{i}|^{p})^{\frac{1}{p}}$&lt;/code&gt;）。此处可以使用其它的范数，如L2范数，即欧氏距离。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;teleports:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;teleports&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;如果图中有 &lt;em&gt;dead end&lt;/em&gt; 节点，即只有进链没有出链；或者是在多个节点之间存在环，那么上面的迭代就会收敛到一个错误的结果上。解决方案就是，对于每次跳转，有&lt;code&gt;$\beta$&lt;/code&gt;的概率跟随链路去跳，而有&lt;code&gt;$1-\beta$&lt;/code&gt;的概率是一次随机传送 (&lt;em&gt;Teleports&lt;/em&gt;)，这样就解决上面提到的两个问题了。在实际使用中，一般&lt;code&gt;$\beta$&lt;/code&gt;取值为&lt;code&gt;0.8&lt;/code&gt;或&lt;code&gt;0.9&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;在计算上，就是引入一个Teleports矩阵，其中的每个值都是&lt;code&gt;$1/N$&lt;/code&gt;，&lt;code&gt;$N$&lt;/code&gt;为节点数目。而之前的转移矩阵&lt;code&gt;$M$&lt;/code&gt;则变为&lt;code&gt;$\beta M + (1-\beta)\frac{1}{N}e \cdot e^{T}$&lt;/code&gt;，记为&lt;code&gt;$A$&lt;/code&gt;。同样，状态跳转的迭代公式也变为&lt;code&gt;$r = A \cdot r$&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;实际使用的样子:b45bcfea51201690689ab7d1025dd751&#34;&gt;实际使用的样子&lt;/h3&gt;
+&lt;h3 id=&#34;实际使用的样子&#34;&gt;实际使用的样子&lt;/h3&gt;
 
 &lt;p&gt;以上说的都是理论，在那个神奇的世界里，计算机的内存都是无限大的，计算速度都是无限NB的，一句话，TA们都是超限界的。在回到了位于爬行界的真实世界后，还有其它需要考虑的东西。假设节点数目是 &lt;strong&gt;1 billion&lt;/strong&gt; ，那么计算前和后的向量各需要&lt;strong&gt;1 billion&lt;/strong&gt;，但是对于那个矩阵，它可是&lt;strong&gt;1 billion * 1 billion&lt;/strong&gt;，也就是&lt;strong&gt;10^18&lt;/strong&gt;。这个内存，有点贵哈～&lt;/p&gt;
 
@@ -636,7 +636,7 @@ FOREACH columes:
 
 &lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;
 
-&lt;h2 id=&#34;dfs:328f502a6f9088599afe3ec330de3e9a&#34;&gt;DFS&lt;/h2&gt;
+&lt;h2 id=&#34;dfs&#34;&gt;DFS&lt;/h2&gt;
 
 &lt;p&gt;课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。&lt;/p&gt;
 
@@ -644,7 +644,7 @@ FOREACH columes:
 
 &lt;p&gt;DFS中的节点有两类，&lt;code&gt;Chunk Server&lt;/code&gt;用来存放数据，&lt;code&gt;Master Node&lt;/code&gt;用来存放文件和&lt;code&gt;Chunk Server&lt;/code&gt;的对应关系。一个文件会被分成多处连续的&lt;code&gt;chunks&lt;/code&gt;，典型的大小是16~64MB。每一个&lt;code&gt;chunk&lt;/code&gt;都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而&lt;code&gt;Master Node&lt;/code&gt;就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从&lt;code&gt;Master Node&lt;/code&gt;处取到&lt;code&gt;Chunk Server&lt;/code&gt;的信息，再从相应的server上获取文件内容。&lt;/p&gt;
 
-&lt;h2 id=&#34;map-reduce:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce&lt;/h2&gt;
+&lt;h2 id=&#34;map-reduce&#34;&gt;Map Reduce&lt;/h2&gt;
 
 &lt;p&gt;MR是一种编程模型，典型的应用场景就是 &lt;strong&gt;Word Cound&lt;/strong&gt; 。将MR应用到 WordCount 的先决条件为：&lt;/p&gt;
 
@@ -653,7 +653,7 @@ FOREACH columes:
 &lt;li&gt;但是所有的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对可以完全放到内存中&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;算法流程:328f502a6f9088599afe3ec330de3e9a&#34;&gt;算法流程&lt;/h3&gt;
+&lt;h3 id=&#34;算法流程&#34;&gt;算法流程&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;将数据分块读入&lt;/li&gt;
@@ -665,7 +665,7 @@ FOREACH columes:
 
 &lt;p&gt;在具体实现上，程序需要指定&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个方法，这两个方法的参数都是&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对。例如&lt;code&gt;Map&lt;/code&gt;函数的&lt;code&gt;key&lt;/code&gt;可以是文件名，&lt;code&gt;value&lt;/code&gt;是对应的某一行或者某一块文字。而在&lt;code&gt;Reduce&lt;/code&gt;函数中，输入的&lt;code&gt;key&lt;/code&gt;是某个单词，而&lt;code&gt;value&lt;/code&gt;是1。&lt;code&gt;Reduce&lt;/code&gt;负责归并结果，并输出。&lt;/p&gt;
 
-&lt;h3 id=&#34;map-reduce的环境:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce的环境&lt;/h3&gt;
+&lt;h3 id=&#34;map-reduce的环境&#34;&gt;Map Reduce的环境&lt;/h3&gt;
 
 &lt;p&gt;除了根据逻辑实现&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：&lt;/p&gt;
 
@@ -677,7 +677,7 @@ FOREACH columes:
 &lt;li&gt;管理机器间通信&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;出错处理:328f502a6f9088599afe3ec330de3e9a&#34;&gt;出错处理&lt;/h3&gt;
+&lt;h3 id=&#34;出错处理&#34;&gt;出错处理&lt;/h3&gt;
 
 &lt;p&gt;MR出错分几种，处理方式也不同：&lt;/p&gt;
 
@@ -687,13 +687,13 @@ FOREACH columes:
 &lt;li&gt;MasterNode：任务直接退出。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;map-和-reduce-的数目:328f502a6f9088599afe3ec330de3e9a&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
+&lt;h3 id=&#34;map-和-reduce-的数目&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;Mapper&lt;/code&gt;的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;Reduce&lt;/code&gt;的数目没有具体要求，但是一般会比&lt;code&gt;Mapper&lt;/code&gt;的数目要少。&lt;/p&gt;
 
-&lt;h3 id=&#34;改良:328f502a6f9088599afe3ec330de3e9a&#34;&gt;改良&lt;/h3&gt;
+&lt;h3 id=&#34;改良&#34;&gt;改良&lt;/h3&gt;
 
 &lt;p&gt;还是拿WC作为例子。在&lt;code&gt;Reduce&lt;/code&gt;函数处，原始的办法需要传一堆&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给&lt;code&gt;Reduce&lt;/code&gt;之前先归并一下，相当于多级&lt;code&gt;Reduce&lt;/code&gt;，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。&lt;/p&gt;
 

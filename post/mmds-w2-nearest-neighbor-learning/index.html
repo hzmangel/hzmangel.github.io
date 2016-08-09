@@ -84,11 +84,11 @@
 
 <p>第二周的 <em>Nearest Neighbor Learning</em> 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。</p>
 
-<h2 id="supervised-learning:e415793b7fb7c6a9af71ea301a4a0120">Supervised Learning</h2>
+<h2 id="supervised-learning">Supervised Learning</h2>
 
 <p><em>Supervised learning</em> 是机器学习中的一种方法（还有两种分别是 <a href="https://en.wikipedia.org/wiki/Unsupervised_learning">Unsupervised learning</a> 和 <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">Reinforcement learning</a> , via <a href="https://en.wikipedia.org/wiki/Machine_learning">wikipedia</a> 。这个如果将来看了相应的课再写。）,它通过训练数据集建立一种模式或叫函数，再通过此模式去匹配待查询数据集从而得出预测结果。</p>
 
-<h2 id="instance-based-learning:e415793b7fb7c6a9af71ea301a4a0120">Instance Based Learning</h2>
+<h2 id="instance-based-learning">Instance Based Learning</h2>
 
 <p><em>Instance Based Learning</em> 是机器学习的一种方法，也叫 <em>Memory Based Learning</em> 。它不生成完整的匹配模式，而是在从训练数据中找到和待查询数据相近的数据（这些数据通常存放于内存中），并输出结果。将要说到的 <em>Nearest Neighbor Learning</em> 即是其中的一种。此方法也分为 <em>1-Nearest Neighbor</em> 和 <em>k-Nearest Neighbor</em> 。进行计算需要了解如下4个元素：</p>
 
@@ -99,11 +99,11 @@
 <li>如何确定输出？</li>
 </ul>
 
-<h3 id="1-nearest-neighbor-和-k-nearest-neighbor:e415793b7fb7c6a9af71ea301a4a0120">1-Nearest Neighbor 和 k-Nearest Neighbor</h3>
+<h3 id="1-nearest-neighbor-和-k-nearest-neighbor">1-Nearest Neighbor 和 k-Nearest Neighbor</h3>
 
 <p>在 <em>1-Nearest Neighbor</em> 的情况下，距离使用欧氏距离，寻找最近的<code>1</code>个 <em>Neighbor</em> ，各点权重相同，直接以最近 <em>Neighbor</em> 的输出为查询数据的输出。而在 <em>k-Nearest Neighbor</em> 中，查找的节点变成了 <em>k</em> 个，而输出出变成了 <em>k</em> 个节点的平均值。</p>
 
-<h3 id="kernel-regression:e415793b7fb7c6a9af71ea301a4a0120">Kernel Regression</h3>
+<h3 id="kernel-regression">Kernel Regression</h3>
 
 <p>核回归，统计中的一种方法，具体的算法及使用场景没看太明白，此处暂时仅为记录而用。对于这个算法，它所涉及到的4个参量是：</p>
 
@@ -174,6 +174,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -181,12 +187,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -198,7 +198,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -223,7 +223,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

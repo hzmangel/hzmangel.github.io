@@ -18,7 +18,7 @@
       <guid>http://hzmangel.github.io/post/1224/</guid>
       <description>
 
-&lt;h3 id=&#34;tl-dr:5ab4430131db8e4e631503ef790e7c02&#34;&gt;tl;dr&lt;/h3&gt;
+&lt;h3 id=&#34;tl-dr&#34;&gt;tl;dr&lt;/h3&gt;
 
 &lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
 response size limitation of server. This article is talking about save image
@@ -44,7 +44,7 @@ uploaded base64 encoded image are saved as string, and will be returned in
 response body. I have tried increasing response body size limitation but take
 no effect, so I switched to method that saving image to file.&lt;/p&gt;
 
-&lt;h3 id=&#34;solution:5ab4430131db8e4e631503ef790e7c02&#34;&gt;Solution&lt;/h3&gt;
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
 
 &lt;p&gt;This section only shows how to get image and save via carrierwave, please
 refer to the source of the other contents.&lt;/p&gt;

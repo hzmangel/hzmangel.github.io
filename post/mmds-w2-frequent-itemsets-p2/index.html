@@ -88,19 +88,19 @@
 
 <p>这个算法的核心思想是 <em>monotonicity</em> ，即如果 <code>{I}</code> 是 <em>frequent itemset</em> ，那么它的所有子集都是 <em>frequent itemset</em> 。反过来说，如果一个元素不是 <em>frequent itemset</em> ，那么任何包含它的集合都不可能是。</p>
 
-<h2 id="基本算法:f42a6776e590235dbcf00cc877498b66">基本算法</h2>
+<h2 id="基本算法">基本算法</h2>
 
 <p><em>A-Priori</em> 是一个 <em>two-pass</em> 算法，</p>
 
-<h3 id="first-pass:f42a6776e590235dbcf00cc877498b66">First Pass</h3>
+<h3 id="first-pass">First Pass</h3>
 
 <p>在读取的过程中创建两张Hash表，一张表是将所有 <code>item</code> 映射为 <code>1</code> 到 <code>n</code> 的索引，减少后面引用时占用的内存。第二张表是将 <code>item</code> 的索引与 <code>item</code> 出现的次数对应起来。</p>
 
-<h3 id="between-passes:f42a6776e590235dbcf00cc877498b66">Between Passes</h3>
+<h3 id="between-passes">Between Passes</h3>
 
 <p>检查索引和出现次数映射的表，找出其中所有的 <em>frequent itemset</em> ，并将它们重新索引为 <code>1</code> 到 <code>m</code></p>
 
-<h3 id="second-pass:f42a6776e590235dbcf00cc877498b66">Second Pass</h3>
+<h3 id="second-pass">Second Pass</h3>
 
 <p>计算所有使用 <em>frequent itemset</em> 表中元素组成的数据对的 <em>support</em> 值。具体流程如下：</p>
 
@@ -120,7 +120,7 @@
 <p>Mutation: it is the key to our evolution.</p>
 </blockquote>
 
-<h2 id="pcy:f42a6776e590235dbcf00cc877498b66">PCY</h2>
+<h2 id="pcy">PCY</h2>
 
 <p>在 <em>first pass</em> 的时候，内存中有很多空闲的地方，所以在给 <em>item</em> 计数的同时，生成出所有的 <em>pair</em> ，取 Hash 后，给对应的 <em>bucket</em> 加1 。在 <em>second pass</em> 的时候，只处理如下的数据对：</p>
 
@@ -133,7 +133,7 @@
 
 <p>这个算法的原理是，如果一个 <em>pair</em> 是 <em>frequent pair</em> ，那么它对应的 <em>bucket</em> 一定超过 <em>support</em> 的阈值。而如果一个 <em>bucket</em> 没有超过阈值，那么里面的所有 <em>pair</em> 一定不是 <em>frequent pair</em> 。 注意：一个 <em>bucket</em> 是 <em>frequent bucket</em> 并不能保证其中的 <em>pair</em> 都是 <em>frequent pair</em> 。</p>
 
-<h3 id="first-pass-1:f42a6776e590235dbcf00cc877498b66">First Pass</h3>
+<h3 id="first-pass-1">First Pass</h3>
 
 <pre><code>for b in buckets
   for item in b:
@@ -146,21 +146,21 @@
 end
 </code></pre>
 
-<h3 id="between-passes-1:f42a6776e590235dbcf00cc877498b66">Between Passes</h3>
+<h3 id="between-passes-1">Between Passes</h3>
 
 <p>除了找出 <em>frequent item</em> 外，还会把上一步中的 <em>hash bucket</em> 替换为 <em>bitmap</em> ，<code>1</code> 表示 <em>frequent bucket</em> ， <code>0</code> 表示不是。这样可以进一步减少内存空间的占用（从 <code>32bit</code> 降到 <code>1bit</code>）。</p>
 
-<h3 id="second-pass-1:f42a6776e590235dbcf00cc877498b66">Second Pass</h3>
+<h3 id="second-pass-1">Second Pass</h3>
 
 <p>根据上面列出的条件，找到 <em>canidate pair</em> ，计算。</p>
 
 <p>PCY算法还有两个变种：</p>
 
-<h2 id="multistage:f42a6776e590235dbcf00cc877498b66">Multistage</h2>
+<h2 id="multistage">Multistage</h2>
 
 <p>这个算法的核心在于，在PCY算法的 <em>first pass</em> 后，并不开始对 <em>bucket</em> 做筛选，而是将其中属于 <em>frequent bucket</em> 的 <em>pair</em> 挑出来，再做一次 Hash ，从而进一步减少 <em>second pass</em> 中需要处理的数据量。从定义上来看，这个算法可能会有多个 <em>pass</em></p>
 
-<h2 id="multihash:f42a6776e590235dbcf00cc877498b66">Multihash</h2>
+<h2 id="multihash">Multihash</h2>
 
 <p>在 <em>first pass</em> 中，使用多个独立的Hash函数来计算 <em>bucket</em> 。相比物 Multistage ，它还是 <em>two pass</em> 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 <em>frequent bucket</em> 。如果它能保证 <em>frequent bucket</em> 的数目足够小，那么我们就能在 <em>two pass</em> 获得 Multistage 的优点。</p>
 
@@ -168,19 +168,19 @@ end
 
 <p>算法的另一个发展趋势是获取到大部分的 <em>frequent itemsets</em> ，使用降低精确性的办法来换取效率。</p>
 
-<h2 id="基本想法:f42a6776e590235dbcf00cc877498b66">基本想法</h2>
+<h2 id="基本想法">基本想法</h2>
 
 <p>对样本 <em>basket</em> 进行随机抽样，并在内存中对样本进行 <em>A-Priori</em> 或其改进版本的计算，此处需要计算所有的 <em>frequent itemsets</em> ，而不仅仅是 <em>pair</em> 。计算时使用的 <em>support threshold</em> 需要根据样本容量处理，例如抽样率为 <code>1/100</code> ，那么阈值也相应的变成 <code>s/100</code> 。在 <em>second pass</em> 的时候，可以使用整体数据来验证是否找到的真的是 <em>frequent pair</em> 。</p>
 
 <p>这个算法有个问题有些 <em>set</em> 可能在样本中不是 <em>frequent</em> 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 <em>support</em> 阈值，例如从 <code>s/100</code> 降为 <code>s/125</code> ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&hellip;&hellip;）</p>
 
-<h2 id="son-算法:f42a6776e590235dbcf00cc877498b66">SON 算法</h2>
+<h2 id="son-算法">SON 算法</h2>
 
 <p>这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 <em>frequent pair</em> 置于候选的位置。而在 <em>second pass</em> ，计算这些候选 <em>pair</em> 并得出最后结果。这个算法的核心是，任何一个 <em>pair</em> 如果是 <em>frequent pair</em> ，那么它一定会在某个子集中是 <em>frequent pair</em> 。</p>
 
 <p>这个算法可以让计算并行化，以提高处理效率。</p>
 
-<h2 id="toivonen-算法:f42a6776e590235dbcf00cc877498b66">Toivonen 算法</h2>
+<h2 id="toivonen-算法">Toivonen 算法</h2>
 
 <p>在 <em>first pass</em> 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 <code>s/125</code>，以尽可能的不要遗漏在全集中是 <em>frequent set</em> 的数据。此后设置一个 <em>negative border</em> 区间，以存放所有子集是 <em>frequent set</em> 但是本身不是的集合。在 <em>second pass</em> 的时候，计算所有候选 <em>frequent itemsets</em> 和 <em>negative border</em> 中的数据。</p>
 
@@ -251,6 +251,12 @@ end
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -258,12 +264,6 @@ end
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -275,7 +275,7 @@ end
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -300,7 +300,7 @@ end
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

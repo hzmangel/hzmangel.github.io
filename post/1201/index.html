@@ -82,7 +82,7 @@
 <p>This app is used to describe some basic feature of <code>UITableView</code> in iOS
 framework, here is some points of this app:</p>
 
-<h2 id="a-tabbed-view:72a3d7d7d643095ccd61a620eedac4ab">A tabbed view</h2>
+<h2 id="a-tabbed-view">A tabbed view</h2>
 
 <p>This app shows three different UITableViewController objects, which is
 organized by tabbed view. The table view of this app is created
@@ -108,7 +108,7 @@ programmatically, which is built by this code segment in file <code>AppDelegate.
 
 <p><strong>NOTICE</strong>: <code>setRootView</code> for <code>self.window</code> can&rsquo;t add show the tabbed view in app, not sure why currently.</p>
 
-<h2 id="read-data-from-text-file:72a3d7d7d643095ccd61a620eedac4ab">Read data from text file</h2>
+<h2 id="read-data-from-text-file">Read data from text file</h2>
 
 <p>The data source of the list is fetched from a text file by this code segment:</p>
 
@@ -119,7 +119,7 @@ NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] p
 table_data = [fileText componentsSeparatedByString:@&quot;\n&quot;];
 </code></pre>
 
-<h2 id="build-table-view:72a3d7d7d643095ccd61a620eedac4ab">Build table view</h2>
+<h2 id="build-table-view">Build table view</h2>
 
 <p>Now the prime task, build table view. I have created three types of list, the
 plain, sectioned, and grouped. I want to apply it to some earlier version of
@@ -129,7 +129,7 @@ ttp://developer.apple.com/library/ios/#documentation/userexperience/conceptual
 /doc/uid/TP40007451-CH1-SW1">document</a> on apple development center which can give more
 information.</p>
 
-<h3 id="plain-table-view:72a3d7d7d643095ccd61a620eedac4ab">Plain table view</h3>
+<h3 id="plain-table-view">Plain table view</h3>
 
 <p>This is the simplest table view, and here is my step:</p>
 
@@ -141,7 +141,7 @@ information.</p>
 <li>Fill the data into <code>table_data</code> array, and now you have a simple table list.</li>
 </ol>
 
-<h3 id="sectioned-table-view:72a3d7d7d643095ccd61a620eedac4ab">Sectioned table view</h3>
+<h3 id="sectioned-table-view">Sectioned table view</h3>
 
 <p>Class for sectioned table view is <code>SectionTableViewController</code>, here is the
 prime changes:</p>
@@ -152,7 +152,7 @@ prime changes:</p>
 <li><code>numberOfRowsInSection</code> should be modified to return count in each section.</li>
 </ul>
 
-<h3 id="grouped-table-view:72a3d7d7d643095ccd61a620eedac4ab">Grouped table view</h3>
+<h3 id="grouped-table-view">Grouped table view</h3>
 
 <p>Class for grouped table view is <code>GroupedTableViewController</code>, and here is the
 changes:</p>
@@ -162,7 +162,7 @@ changes:</p>
 <li>The other things are almost the same with section.</li>
 </ul>
 
-<h2 id="add-the-index:72a3d7d7d643095ccd61a620eedac4ab">Add the index</h2>
+<h2 id="add-the-index">Add the index</h2>
 
 <p>This will add an index to the right side of list, since it need a sectioned
 data, so I added it in section table view. Two functions are needed for adding
@@ -170,7 +170,7 @@ index. * <code>sectionIndexTitlesForTableView</code>: Set the section header str
 <code>sectionForSectionIndexTitle</code>: Return the section while clicking section
 title.</p>
 
-<h2 id="search-the-list:72a3d7d7d643095ccd61a620eedac4ab">Search the list</h2>
+<h2 id="search-the-list">Search the list</h2>
 
 <p>Search function it added to simple table view. Here are the changes:</p>
 
@@ -183,7 +183,7 @@ title.</p>
 <p>This search result will be shown real time while typing character to the
 search bar.</p>
 
-<h2 id="response-to-user-click-event:72a3d7d7d643095ccd61a620eedac4ab">Response to user click event</h2>
+<h2 id="response-to-user-click-event">Response to user click event</h2>
 
 <p>This is added to sectioned table view. Function <code>didSelectRowAtIndexPath</code> will
 handle user click event.</p>
@@ -246,6 +246,12 @@ handle user click event.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -253,12 +259,6 @@ handle user click event.</p>
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -270,7 +270,7 @@ handle user click event.</p>
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -295,7 +295,7 @@ handle user click event.</p>
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

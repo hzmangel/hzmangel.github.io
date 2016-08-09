@@ -86,11 +86,22 @@
     <section>
         <div class="post-summary">
 
-<p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用Elasticsearch，比之前想像的要简单，记点东西在这吧。</p>
+<p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。</p>
 
-<h2 id="安装elasticsearch:7534e3005bc051c63c374ef8164540b2">安装Elasticsearch</h2>
+<p>这篇东西会包含下面几项内容：</p>
 
-<p>这块其实没有太多需要说的，两种方法，从官网下编译好的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html">二进制解压</a>，或者用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html">操作系统的安装源</a>。如果是OSX，可以使用 <em>homebrew</em> 安装，命令为 <code>brew install elasticsearch</code> ，安装后的启动可以使用 <code>brew info elasticsearch</code> 查看。</p>
+<ul>
+<li>安装 Elasticsearch</li>
+<li>关联 Rails 与 Elasticsearch</li>
+<li>配置索引内容</li>
+<li>Custom Analyzer</li>
+</ul>
+
+<p>本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。</p>
+
+<h2 id="安装elasticsearch">安装Elasticsearch</h2>
+
+<p>两种方法，从官网下编译好的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html">二进制解压</a>，或者用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html">操作系统的安装源</a>。如果是OSX，可以使用 <em>homebrew</em> 安装，命令为 <code>brew install elasticsearch</code> ，安装后的启动可以使用 <code>brew info elasticsearch</code> 查看。</p>
 
 <p>安装并启动服务后，可以用下面的命令查看系统是否成功启动：</p>
 
@@ -101,27 +112,35 @@
 
 <hr />
 
-<h2 id="配置rails:7534e3005bc051c63c374ef8164540b2">配置Rails</h2>
+<h2 id="关联-rails-与-elasticsearch">关联 Rails 与 Elasticsearch</h2>
 
-<h3 id="gem:7534e3005bc051c63c374ef8164540b2">Gem</h3>
+<h3 id="gem">Gem</h3>
 
-<p>Elasticsearch提供了两个Gem用于和Rails集成，分别是 <code>elasticsearch-rails</code> 和 <code>elasticsearch-model</code> ，两个Gem的作用如下：</p>
+<p>Elasticsearch提供了两个Gem用于和Rails集成，分别是 <a href="https://github.com/elastic/elasticsearch-rails"><em>elasticsearch-rails</em></a> 和 <a href="https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model"><em>elasticsearch-model</em></a> 。其中， <em>elasticsearch-rails</em> 为 Rails 的模块加入了 Elasticsearch 的功能，而 <em>elasticsearch-model</em> 则为 Ruby 的类提供了一些简化的连接 <em>Elasticsearch</em> 的方法，使得相应的类可以通过 <code>__elasticsearch__</code> 直接访问 <em>Elasticsearch</em> 服务器的资源。</p>
 
-<p><strong>TODO</strong></p>
+<h3 id="model-enable-indexes-in-elasticsearch">Model - Enable indexes in Elasticsearch</h3>
 
-<h3 id="model-enable-indexes-in-es:7534e3005bc051c63c374ef8164540b2">Model - Enable indexes in ES</h3>
-
-<p>Elasticsearch是一个单独的服务器，所以在使用前需要考虑以下几点：</p>
+<p>由于 Elasticsearch 是一个单独的服务器，所以在使用前需要考虑以下几点：</p>
 
 <ul>
 <li>有哪些Model需要被索引</li>
 <li>每个Model有哪些字段需要被索引</li>
-<li>如何在数据库中记录更新后同步Elasticsearch的索引</li>
+<li>如何在数据库中记录更新后同步 Elasticsearch 的索引</li>
 </ul>
 
-<p>如果不使用Elasticsearch提供的gem，需要手动去完成上面的几个步骤，但是Elasticsearch的Gem提供了一系列方便使用的函数。</p>
+<p>如果不使用 Elasticsearch 提供的 gem，需要手动去完成上面的几个步骤，但是上面提到的两个 gem 提供了一系列方便使用的函数。代码的东西对着说比较好弄，所以这里有一个 [Demo Project]()，对着来说吧。</p>
 
-<p>对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。下面是一个Sample</p>
+<p>这个app就是一个简单的blog，由于只是为了介绍 Elasticsearch ，所以只引入了最简单的部分。</p>
+
+<p>在 <code>app/models/blog.rb</code> 中可以看到，需要索引一个 model 需要三步：</p>
+
+<ol>
+<li>在代码中加入 Elasticsearch 的模块。</li>
+<li>设置需要索引的模块。</li>
+<li>导入数据至 Elasticsearch 。</li>
+</ol>
+
+<p>对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。可以在 <code>app/models/blog.rb</code> 中看到下面的代码：</p>
 
 <pre><code class="language-ruby">require 'elasticsearch/model'
 
@@ -137,32 +156,35 @@ end
 
 <p>至此，只是在Blog中导入了一些Elasticsearch相关的配置，但是还没有将具体的数据导入到Elasticsearch服务器中。可以使用下面的命令导入数据：</p>
 
+<pre><code class="language-ruby">Blog.import force: true
+</code></pre>
+
+<p>或者逐步完成：</p>
+
 <pre><code class="language-ruby">Blog.__elasticsearch__.create_index! force: true
 Blog.__elasticsearch__.refresh_index!
 </code></pre>
 
-<p>由于Elasticsearch的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：</p>
+<p>但是由于 Elasticsearch 的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：</p>
 
 <pre><code class="language-ruby">Blog.first.__elasticsearch__.index_document
 </code></pre>
 
-<p>不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中引入相应的文件即可：</p>
+<p>不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中加入如下代码：</p>
 
 <pre><code class="language-ruby">include Elasticsearch::Model::Callbacks
 </code></pre>
 
-<p>在加入这行代码后，调用 <strong>一次</strong> <code>Blog.import</code> 即可完成下面的几步操作：</p>
+<p>即可在每次数据有更新时，自动更新索引。在Gem的文档中还有一些更详细的用法，如异步索引，自定义索引等供查阅。</p>
 
-<ul>
-<li>将 <em>Blog</em> 中的数据导入 Elasticsearch 中</li>
-<li>加入相应的 <em>callback</em> 函数，在Model数据有更新时，同步索引</li>
-</ul>
+<p>在数据导入完成后即可尝试在 Elasticsearch 查找导入的数据了：</p>
 
-<p>在运行完上述的命令（手动更新或自动索引）后，即可在Elasticsearch服务器中查找到相应的内容了。</p>
+<pre><code class="language-ruby">Blog.search('*').records.records
+</code></pre>
 
-<h3 id="model-choose-indexed-fields:7534e3005bc051c63c374ef8164540b2">Model - Choose indexed fields</h3>
+<h3 id="model-choose-indexed-fields">Model - Choose indexed fields</h3>
 
-<p>在默认情况下，所有字段都会被索引。但是在实际使用中，并不是所有的字段都需要索引。Elasticsearch提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 <code>as_indexed_json</code> 。这个函数是在 <code>Elasticsearch::Model::Serializing</code> 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。下面是一个例子：</p>
+<p>默认情况下，所有字段都会被加入 Elasticsearch 的索引。但是在实际使用情况中，可能会碰到只索引某些数据的场景。 Elasticsearch 提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 <code>as_indexed_json</code> 。这个函数是在 <code>Elasticsearch::Model::Serializing</code> 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。如下所示：</p>
 
 <pre><code class="language-ruby">require 'elasticsearch/model'
 
@@ -177,16 +199,17 @@ class Blog &lt; ActiveRecord::Base
 end
 </code></pre>
 
-<p>在上面的例子中，无论我的Blog记录中还有什么字段，只有 <em>title</em> 和 <em>content</em> 字段会被放入Elasticsearch的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外， <code>elasticsearch-model</code> 还支持将函数中方法的返回值也加入索引中，如下所示：</p>
+<p>在上面的例子中，无论我的Blog记录中还有什么字段，只有 <em>title</em> 和 <em>content</em> 字段会被放入 Elasticsearch 的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外，还支持将函数中方法的返回值也加入索引中，如下所示：</p>
 
 <pre><code class="language-ruby">require 'elasticsearch/model'
 
-class Blog &lt; ActiveRecord::Base include Elasticsearch::Model
+class Blog &lt; ActiveRecord::Base
+  include Elasticsearch::Model
 
   def as_indexed_json(options = {})
     as_json(
       only: [:title, :content],
-      methods: [:author_name, :tag_count]
+      methods: [:author_name, :tag_count],
     )
   end
 end
@@ -208,7 +231,40 @@ class Blog &lt; ActiveRecord::Base
 end
 </code></pre>
 
-<p>至此，基本的索引构建应该差不多了，后续会记一些查询的东西。</p>
+<p>至此，基本的索引构建应该差不多了，在调用过 <em>import</em> 后，就可以用基本的查询功能去查找了。</p>
+
+<h2 id="analyzer-和-mapping"><em>Analyzer</em> 和 <em>Mapping</em></h2>
+
+<h3 id="analyzer"><em>Analyzer</em></h3>
+
+<p>对每一条被索引的内容， ES 都会通过 <em>Analyzer</em> 把内容分词后放入服务器（因为ES中是使用 <a href="https://zh.wikipedia.org/wiki/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95">反向索引</a> 来查找的，而反向索引的 <em>token</em> 就是输入文字经过 <em>Analyzer</em> 处理的结果）。而在查询时，如果是全文检索，那么 ES 会将和分析内容时使用的相同的 <em>Analyzer</em> 应用于检索词上，并将分词后的检索词用于查找以提高查找的准确性。而如果查询的类型是精确匹配， ES 将不会处理检索词。</p>
+
+<p>根据 <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/analysis-intro.html">文档</a> 的介绍，每一个 <em>Analyzer</em> 由 <strong>3</strong> 步组成，分别是：</p>
+
+<ul>
+<li><em>Character filters</em> : 对输入的内容按字符处理，包含有 <em>Mapping Char Filter</em>, <em>HTML Strip Char Filter</em> 和 <em>Pattern Replace Char Filter</em> ，具体介绍请参阅 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-charfilters.html">文档</a></li>
+<li><em>Tokenizer</em> : 分词器，根据不同的规则，将输入内容分为不同的 token ，<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenizers.html">文档</a></li>
+<li><em>Token filters</em> : 应用于上面分割开的 <em>token</em> 上的 filter。 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenfilters.html">文档</a></li>
+</ul>
+
+<p>ES 还提供了一些内置的 <em>Analyzer</em> ，可以在 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html">这里</a> 查到。由于 Rails 中的代码实例会牵涉到 <em>Mapping</em> 相关的内容，所以会在下一节中贴代码。</p>
+
+<h3 id="mapping"><em>Mapping</em></h3>
+
+<p>对于输入的文本内容，ES会默认将此字段映射为 <em>string</em> 类型，并使用 <em>standard analyzer</em> ，如果需要一些特殊处理，就需要引入 <em>Mapping</em> 了。 <em>Mapping</em> 的作用是告诉 ES 某个字段需要按什么样的规则处理。例如一个手机号， ES 的默认处理是按长整形，但是可能需要按字符串处理，这时就需要指定 <em>Mapping</em> 了。</p>
+
+<p>在 Rails 的 Model 中，可以通过下面的方法来设置字段的 <em>Analyzer</em> 和 <em>Mapping Type</em> ，如下所示：</p>
+
+<pre><code class="language-ruby">settings do
+  mappings do
+    indexes :title, analyzer: 'english'
+  end
+end
+</code></pre>
+
+<p>在上述的例子中，原本 <em>title</em> 字段的 <em>analyzer</em> 被指定为 <em>english</em> 而不是默认的 <em>string</em> 。</p>
+
+<p>Q: 为什么设定了type后，import返回值为1，而不设的时候返回是0？</p>
 </div>
     </section>
 
@@ -230,7 +286,8 @@ end
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                
+                 <a class="previous" href="http://hzmangel.github.io/post/rails_reload_parent_in_iframe/"> &lt; Rails - Reload Parent Page in iframe
+ </a> 
             </p>
 
             <p class="col-md-6">
@@ -269,6 +326,12 @@ end
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -276,12 +339,6 @@ end
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -293,7 +350,7 @@ end
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -318,7 +375,7 @@ end
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

@@ -23,7 +23,7 @@
 &lt;p&gt;This app is used to describe some basic feature of &lt;code&gt;UITableView&lt;/code&gt; in iOS
 framework, here is some points of this app:&lt;/p&gt;
 
-&lt;h2 id=&#34;a-tabbed-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;A tabbed view&lt;/h2&gt;
+&lt;h2 id=&#34;a-tabbed-view&#34;&gt;A tabbed view&lt;/h2&gt;
 
 &lt;p&gt;This app shows three different UITableViewController objects, which is
 organized by tabbed view. The table view of this app is created
@@ -49,7 +49,7 @@ programmatically, which is built by this code segment in file &lt;code&gt;AppDel
 
 &lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: &lt;code&gt;setRootView&lt;/code&gt; for &lt;code&gt;self.window&lt;/code&gt; can&amp;rsquo;t add show the tabbed view in app, not sure why currently.&lt;/p&gt;
 
-&lt;h2 id=&#34;read-data-from-text-file:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Read data from text file&lt;/h2&gt;
+&lt;h2 id=&#34;read-data-from-text-file&#34;&gt;Read data from text file&lt;/h2&gt;
 
 &lt;p&gt;The data source of the list is fetched from a text file by this code segment:&lt;/p&gt;
 
@@ -60,7 +60,7 @@ NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] p
 table_data = [fileText componentsSeparatedByString:@&amp;quot;\n&amp;quot;];
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;build-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Build table view&lt;/h2&gt;
+&lt;h2 id=&#34;build-table-view&#34;&gt;Build table view&lt;/h2&gt;
 
 &lt;p&gt;Now the prime task, build table view. I have created three types of list, the
 plain, sectioned, and grouped. I want to apply it to some earlier version of
@@ -70,7 +70,7 @@ ttp://developer.apple.com/library/ios/#documentation/userexperience/conceptual
 /doc/uid/TP40007451-CH1-SW1&#34;&gt;document&lt;/a&gt; on apple development center which can give more
 information.&lt;/p&gt;
 
-&lt;h3 id=&#34;plain-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Plain table view&lt;/h3&gt;
+&lt;h3 id=&#34;plain-table-view&#34;&gt;Plain table view&lt;/h3&gt;
 
 &lt;p&gt;This is the simplest table view, and here is my step:&lt;/p&gt;
 
@@ -82,7 +82,7 @@ information.&lt;/p&gt;
 &lt;li&gt;Fill the data into &lt;code&gt;table_data&lt;/code&gt; array, and now you have a simple table list.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;sectioned-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Sectioned table view&lt;/h3&gt;
+&lt;h3 id=&#34;sectioned-table-view&#34;&gt;Sectioned table view&lt;/h3&gt;
 
 &lt;p&gt;Class for sectioned table view is &lt;code&gt;SectionTableViewController&lt;/code&gt;, here is the
 prime changes:&lt;/p&gt;
@@ -93,7 +93,7 @@ prime changes:&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;numberOfRowsInSection&lt;/code&gt; should be modified to return count in each section.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;grouped-table-view:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Grouped table view&lt;/h3&gt;
+&lt;h3 id=&#34;grouped-table-view&#34;&gt;Grouped table view&lt;/h3&gt;
 
 &lt;p&gt;Class for grouped table view is &lt;code&gt;GroupedTableViewController&lt;/code&gt;, and here is the
 changes:&lt;/p&gt;
@@ -103,7 +103,7 @@ changes:&lt;/p&gt;
 &lt;li&gt;The other things are almost the same with section.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;add-the-index:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Add the index&lt;/h2&gt;
+&lt;h2 id=&#34;add-the-index&#34;&gt;Add the index&lt;/h2&gt;
 
 &lt;p&gt;This will add an index to the right side of list, since it need a sectioned
 data, so I added it in section table view. Two functions are needed for adding
@@ -111,7 +111,7 @@ index. * &lt;code&gt;sectionIndexTitlesForTableView&lt;/code&gt;: Set the sectio
 &lt;code&gt;sectionForSectionIndexTitle&lt;/code&gt;: Return the section while clicking section
 title.&lt;/p&gt;
 
-&lt;h2 id=&#34;search-the-list:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Search the list&lt;/h2&gt;
+&lt;h2 id=&#34;search-the-list&#34;&gt;Search the list&lt;/h2&gt;
 
 &lt;p&gt;Search function it added to simple table view. Here are the changes:&lt;/p&gt;
 
@@ -124,7 +124,7 @@ title.&lt;/p&gt;
 &lt;p&gt;This search result will be shown real time while typing character to the
 search bar.&lt;/p&gt;
 
-&lt;h2 id=&#34;response-to-user-click-event:72a3d7d7d643095ccd61a620eedac4ab&#34;&gt;Response to user click event&lt;/h2&gt;
+&lt;h2 id=&#34;response-to-user-click-event&#34;&gt;Response to user click event&lt;/h2&gt;
 
 &lt;p&gt;This is added to sectioned table view. Function &lt;code&gt;didSelectRowAtIndexPath&lt;/code&gt; will
 handle user click event.&lt;/p&gt;
@@ -176,7 +176,7 @@ like this:&lt;/p&gt;
 development. Also, it can accept various attributes as its parameter, which is
 describing below.&lt;/p&gt;
 
-&lt;h3 id=&#34;attributes-of-property:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;Attributes of &lt;code&gt;@property&lt;/code&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;attributes-of-property&#34;&gt;Attributes of &lt;code&gt;@property&lt;/code&gt;&lt;/h3&gt;
 
 &lt;p&gt;The full syntax for @property is&lt;/p&gt;
 
@@ -185,12 +185,12 @@ describing below.&lt;/p&gt;
 
 &lt;p&gt;The attributes is used to define some behavior of the variable.&lt;/p&gt;
 
-&lt;h4 id=&#34;readonly-and-readwrite:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;readonly&lt;/em&gt; and &lt;em&gt;readwrite&lt;/em&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;readonly-and-readwrite&#34;&gt;&lt;em&gt;readonly&lt;/em&gt; and &lt;em&gt;readwrite&lt;/em&gt;&lt;/h4&gt;
 
 &lt;p&gt;As the meaning of the word, those two attributes are used to control read-
 write access of the property, while &lt;code&gt;readwrite&lt;/code&gt; is the default value.&lt;/p&gt;
 
-&lt;h4 id=&#34;atomic-and-nonatomic:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;atomic&lt;/em&gt; and &lt;em&gt;nonatomic&lt;/em&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;atomic-and-nonatomic&#34;&gt;&lt;em&gt;atomic&lt;/em&gt; and &lt;em&gt;nonatomic&lt;/em&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;atomic&lt;/code&gt; and &lt;code&gt;nonatomic&lt;/code&gt; attributes are used to indicate whether the setter
 and getter function returns the whole value of variable. With &lt;code&gt;atomic&lt;/code&gt;, the
@@ -212,7 +212,7 @@ time, then the value of variable is unpredictable.&lt;/p&gt;
 &lt;code&gt;@property&lt;/code&gt; declaration. And generally speaking, in &lt;code&gt;nonatomic&lt;/code&gt; case, the
 getter and setter function will a little more faster.&lt;/p&gt;
 
-&lt;h4 id=&#34;assign-copy-and-retain:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;assign&lt;/em&gt;, &lt;em&gt;copy&lt;/em&gt; and &lt;em&gt;retain&lt;/em&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;assign-copy-and-retain&#34;&gt;&lt;em&gt;assign&lt;/em&gt;, &lt;em&gt;copy&lt;/em&gt; and &lt;em&gt;retain&lt;/em&gt;&lt;/h4&gt;
 
 &lt;p&gt;Those three attributes are related to memory management, which are used for
 control behavior of setters. The &lt;code&gt;assign&lt;/code&gt; attribute is a simple assignment,
@@ -400,7 +400,7 @@ Retain
 for &lt;code&gt;retain&lt;/code&gt;, the reference count increased 1 after invoking setter function,
 since the &lt;code&gt;@property&lt;/code&gt; with &lt;code&gt;retain&lt;/code&gt; will invoke &lt;code&gt;retain&lt;/code&gt; before assignment.&lt;/p&gt;
 
-&lt;h4 id=&#34;weak-and-strong:e851787095ad0b4d943bf0b89503bbd5&#34;&gt;&lt;em&gt;weak&lt;/em&gt; and &lt;em&gt;strong&lt;/em&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;weak-and-strong&#34;&gt;&lt;em&gt;weak&lt;/em&gt; and &lt;em&gt;strong&lt;/em&gt;&lt;/h4&gt;
 
 &lt;p&gt;Another two attributes are &lt;code&gt;weak&lt;/code&gt; and &lt;code&gt;string&lt;/code&gt;, which is introduced from ARC
 feature. The attribute &lt;code&gt;strong&lt;/code&gt; is the same with &lt;code&gt;retain&lt;/code&gt;. While the attribute

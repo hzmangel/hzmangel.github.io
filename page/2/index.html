@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head>
+	<meta name="generator" content="Hugo 0.16" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -62,6 +63,50 @@
 
 <div class="row">
     <div class="col-md-9">
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'> MMDS Notes: W2 - Locality-Sensitive Hashing
+</a> </h2>
+        <div class="post-meta">发表于2015-06-17 08:02:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
+        
+            <article class="post">
+
+    <header>
+        <h2 class="post-title"><a href='http://hzmangel.github.io/post/timezone-in-python/'> Set timezone in Python
+</a> </h2>
+        <div class="post-meta">发表于2015-06-16 23:40:10 </div>
+    </header>
+
+    <section>
+        <div class="post-summary"><p>今天在写一个脚本的时候，发现使用<code>datetime.datetime.now()</code>输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用<code>pytz</code>的解决方案：</p>
+</div>
+    </section>
+
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/timezone-in-python/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
+    
+
+</article>
+
         
             <article class="post">
 
@@ -211,7 +256,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><h3 id="tl-dr:5ab4430131db8e4e631503ef790e7c02">tl;dr</h3>
+        <div class="post-summary"><h3 id="tl-dr">tl;dr</h3>
 
 <p>The pasted image will be converted to base64 encoded format, which will hit
 response size limitation of server. This article is talking about save image
@@ -253,61 +298,6 @@ repo</a></p>
 </article>
 
         
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1214/'> Some failed attempts on PNaCl</a> </h2>
-        <div class="post-meta">发表于2013-06-20 20:03:56 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>Google has released his <a href="http://www.chromium.org/nativeclient/pnacl
-/building-and-testing-portable-native-client">PNaCl</a> project on Google I/O 2013,
-which can allow user to write portable native client application. The portable
-native client application can be translated to native client program and
-executed on supported architecture.</p>
-
-<p>The official toolchain contains clang frontend, which can only be used to
-compile C/C++ code to PNaCl application. But the PNaCl application is a subset
-of LLVM so I have tried some other languages have LLVM frontend. I am still
-working on the solution, and this article is just recording some failed
-attempts.</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/1214/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1210/'> Uploading multiple attachments with carrierwave/mongoid/nested_form</a> </h2>
-        <div class="post-meta">发表于2013-05-07 23:30:25 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>Recently I have met a requirement that need to upload multiple attachments to
-a rails project. After some investigations, I choose <code>carrierwave</code> finally.
-Also, I selected <code>nested_form</code> to manage uploading and deleting multiple
-attachments.</p>
-</div>
-    </section>
-
-    
-        <footer>
-            <p><a href='http://hzmangel.github.io/post/1210/'><nobr>继续阅读 →</nobr></a></p>
-        </footer>
-    
-
-</article>
-
-        
 
         <nav id="pager">
     <div class="row">
@@ -335,6 +325,12 @@ attachments.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -342,12 +338,6 @@ attachments.</p>
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -359,7 +349,7 @@ attachments.</p>
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -384,7 +374,7 @@ attachments.</p>
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

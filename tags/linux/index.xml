@@ -350,7 +350,7 @@ host&amp;gt;，然后这个命令会做完上面的工作~&lt;/p&gt;
 直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：&lt;br /&gt;
 `# fuser -km /mnt/dir&lt;/p&gt;
 
-&lt;h1 id=&#34;umount-f-mnt-dir:49a2bdae285b9bbbddd90f01e10b75f2&#34;&gt;umount -f /mnt/dir`&lt;/h1&gt;
+&lt;h1 id=&#34;umount-f-mnt-dir&#34;&gt;umount -f /mnt/dir`&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;Updated at 2011-01-11&lt;/strong&gt;&lt;/p&gt;
 

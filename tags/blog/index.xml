@@ -28,11 +28,11 @@
 &lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Hugo&lt;/h2&gt;
+&lt;h2 id=&#34;hugo&#34;&gt;Hugo&lt;/h2&gt;
 
 &lt;p&gt;最开始的时候也想着用 &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 或者 &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt; ，但是在转换的时候，发现有些&lt;code&gt;Latex&lt;/code&gt;的代码中的行末注释&lt;code&gt;{%&lt;/code&gt;会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&amp;hellip;&amp;hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。&lt;/p&gt;
 
-&lt;h2 id=&#34;wp2hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;wp2hugo&lt;/h2&gt;
+&lt;h2 id=&#34;wp2hugo&#34;&gt;wp2hugo&lt;/h2&gt;
 
 &lt;p&gt;敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， &lt;a href=&#34;https://github.com/jekyll/jekyll-import&#34;&gt;Jekyll Import&lt;/a&gt; ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&amp;hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： &lt;a href=&#34;https://github.com/hzmangel/wp2hugo&#34;&gt;wp2hugo&lt;/a&gt; 。这货主要干的事情是：&lt;/p&gt;
 
@@ -44,15 +44,15 @@
 
 &lt;p&gt;基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。&lt;/p&gt;
 
-&lt;h2 id=&#34;twenty-ten:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Twenty Ten&lt;/h2&gt;
+&lt;h2 id=&#34;twenty-ten&#34;&gt;Twenty Ten&lt;/h2&gt;
 
 &lt;p&gt;原来的Blog用的模板是WP自带的 &lt;a href=&#34;https://wordpress.org/themes/twentyten/&#34;&gt;Twenty Ten&lt;/a&gt; ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten&#34;&gt;GitHub repo&lt;/a&gt; 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。&lt;/p&gt;
 
-&lt;h3 id=&#34;分页:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;分页&lt;/h3&gt;
+&lt;h3 id=&#34;分页&#34;&gt;分页&lt;/h3&gt;
 
 &lt;p&gt;Hugo内置了分页，就是在页面中加入 &lt;code&gt;{{ template &amp;quot;_internal/pagination.html&amp;quot; . }}&lt;/code&gt; ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用&lt;code&gt;...&lt;/code&gt;代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。&lt;/p&gt;
 
-&lt;h3 id=&#34;标签云:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;标签云&lt;/h3&gt;
+&lt;h3 id=&#34;标签云&#34;&gt;标签云&lt;/h3&gt;
 
 &lt;p&gt;Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html&#34;&gt;sidebar.html&lt;/a&gt;：&lt;/p&gt;
 

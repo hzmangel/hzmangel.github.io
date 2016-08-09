@@ -7,8 +7,45 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Tue, 23 Feb 2016 00:52:42 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
     <atom:link href="http://hzmangel.github.io/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</title>
+      <link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link>
+      <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
+      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;
+
+&lt;p&gt;细看了眼原因，因为在Rails中，默认传递的params类型为 &lt;code&gt;ActionController::Parameters&lt;/code&gt; ，而在这个类下可以直接调用 &lt;code&gt;permit&lt;/code&gt; 或 &lt;code&gt;permit!&lt;/code&gt; 的方法来完成参数设置，同时会提供 &lt;code&gt;permitted?&lt;/code&gt; 函数来检查参数是否有效。而 grape 默认传入的参数类型是 &lt;code&gt;Hashie::Mash&lt;/code&gt; ，并没有提供 &lt;code&gt;permit&lt;/code&gt; 函数。好在 Ruby 支持 &lt;em&gt;Monkey Patch&lt;/em&gt; 所以新增的这个 gem 在 &lt;code&gt;Hashie::Mash&lt;/code&gt; 类中加上了对函数 &lt;code&gt;:permitted?&lt;/code&gt; 的响应，从而解决了这个问题。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rails - Reload Parent Page in iframe
+</title>
+      <link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link>
+      <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
+      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooController &amp;lt; ApplicationController
+  def parent_reload
+    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.reload();&amp;lt;/script&amp;gt;&amp;quot;
+  end
+
+  def parent_redirect_to(url)
+    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.href=&#39;#{url}&#39;;&amp;lt;/script&amp;gt;&amp;quot;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就是直接把 Javascript 以 HTML 的形式返回给浏览器端，浏览器端在收到内容后自动执行其中的脚本。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Integrate Rails with Elasticsearch - Indexing
@@ -19,11 +56,22 @@
       <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
       <description>
 
-&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用Elasticsearch，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
+&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
 
-&lt;h2 id=&#34;安装elasticsearch:7534e3005bc051c63c374ef8164540b2&#34;&gt;安装Elasticsearch&lt;/h2&gt;
+&lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
 
-&lt;p&gt;这块其实没有太多需要说的，两种方法，从官网下编译好的&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html&#34;&gt;二进制解压&lt;/a&gt;，或者用&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html&#34;&gt;操作系统的安装源&lt;/a&gt;。如果是OSX，可以使用 &lt;em&gt;homebrew&lt;/em&gt; 安装，命令为 &lt;code&gt;brew install elasticsearch&lt;/code&gt; ，安装后的启动可以使用 &lt;code&gt;brew info elasticsearch&lt;/code&gt; 查看。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装 Elasticsearch&lt;/li&gt;
+&lt;li&gt;关联 Rails 与 Elasticsearch&lt;/li&gt;
+&lt;li&gt;配置索引内容&lt;/li&gt;
+&lt;li&gt;Custom Analyzer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装elasticsearch&#34;&gt;安装Elasticsearch&lt;/h2&gt;
+
+&lt;p&gt;两种方法，从官网下编译好的&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html&#34;&gt;二进制解压&lt;/a&gt;，或者用&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html&#34;&gt;操作系统的安装源&lt;/a&gt;。如果是OSX，可以使用 &lt;em&gt;homebrew&lt;/em&gt; 安装，命令为 &lt;code&gt;brew install elasticsearch&lt;/code&gt; ，安装后的启动可以使用 &lt;code&gt;brew info elasticsearch&lt;/code&gt; 查看。&lt;/p&gt;
 
 &lt;p&gt;安装并启动服务后，可以用下面的命令查看系统是否成功启动：&lt;/p&gt;
 
@@ -34,27 +82,35 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;配置rails:7534e3005bc051c63c374ef8164540b2&#34;&gt;配置Rails&lt;/h2&gt;
+&lt;h2 id=&#34;关联-rails-与-elasticsearch&#34;&gt;关联 Rails 与 Elasticsearch&lt;/h2&gt;
 
-&lt;h3 id=&#34;gem:7534e3005bc051c63c374ef8164540b2&#34;&gt;Gem&lt;/h3&gt;
+&lt;h3 id=&#34;gem&#34;&gt;Gem&lt;/h3&gt;
 
-&lt;p&gt;Elasticsearch提供了两个Gem用于和Rails集成，分别是 &lt;code&gt;elasticsearch-rails&lt;/code&gt; 和 &lt;code&gt;elasticsearch-model&lt;/code&gt; ，两个Gem的作用如下：&lt;/p&gt;
+&lt;p&gt;Elasticsearch提供了两个Gem用于和Rails集成，分别是 &lt;a href=&#34;https://github.com/elastic/elasticsearch-rails&#34;&gt;&lt;em&gt;elasticsearch-rails&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model&#34;&gt;&lt;em&gt;elasticsearch-model&lt;/em&gt;&lt;/a&gt; 。其中， &lt;em&gt;elasticsearch-rails&lt;/em&gt; 为 Rails 的模块加入了 Elasticsearch 的功能，而 &lt;em&gt;elasticsearch-model&lt;/em&gt; 则为 Ruby 的类提供了一些简化的连接 &lt;em&gt;Elasticsearch&lt;/em&gt; 的方法，使得相应的类可以通过 &lt;code&gt;__elasticsearch__&lt;/code&gt; 直接访问 &lt;em&gt;Elasticsearch&lt;/em&gt; 服务器的资源。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;model-enable-indexes-in-elasticsearch&#34;&gt;Model - Enable indexes in Elasticsearch&lt;/h3&gt;
 
-&lt;h3 id=&#34;model-enable-indexes-in-es:7534e3005bc051c63c374ef8164540b2&#34;&gt;Model - Enable indexes in ES&lt;/h3&gt;
-
-&lt;p&gt;Elasticsearch是一个单独的服务器，所以在使用前需要考虑以下几点：&lt;/p&gt;
+&lt;p&gt;由于 Elasticsearch 是一个单独的服务器，所以在使用前需要考虑以下几点：&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;有哪些Model需要被索引&lt;/li&gt;
 &lt;li&gt;每个Model有哪些字段需要被索引&lt;/li&gt;
-&lt;li&gt;如何在数据库中记录更新后同步Elasticsearch的索引&lt;/li&gt;
+&lt;li&gt;如何在数据库中记录更新后同步 Elasticsearch 的索引&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;如果不使用Elasticsearch提供的gem，需要手动去完成上面的几个步骤，但是Elasticsearch的Gem提供了一系列方便使用的函数。&lt;/p&gt;
+&lt;p&gt;如果不使用 Elasticsearch 提供的 gem，需要手动去完成上面的几个步骤，但是上面提到的两个 gem 提供了一系列方便使用的函数。代码的东西对着说比较好弄，所以这里有一个 [Demo Project]()，对着来说吧。&lt;/p&gt;
 
-&lt;p&gt;对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。下面是一个Sample&lt;/p&gt;
+&lt;p&gt;这个app就是一个简单的blog，由于只是为了介绍 Elasticsearch ，所以只引入了最简单的部分。&lt;/p&gt;
+
+&lt;p&gt;在 &lt;code&gt;app/models/blog.rb&lt;/code&gt; 中可以看到，需要索引一个 model 需要三步：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在代码中加入 Elasticsearch 的模块。&lt;/li&gt;
+&lt;li&gt;设置需要索引的模块。&lt;/li&gt;
+&lt;li&gt;导入数据至 Elasticsearch 。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。可以在 &lt;code&gt;app/models/blog.rb&lt;/code&gt; 中看到下面的代码：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
 
@@ -70,32 +126,35 @@ end
 
 &lt;p&gt;至此，只是在Blog中导入了一些Elasticsearch相关的配置，但是还没有将具体的数据导入到Elasticsearch服务器中。可以使用下面的命令导入数据：&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.import force: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者逐步完成：&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.__elasticsearch__.create_index! force: true
 Blog.__elasticsearch__.refresh_index!
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;由于Elasticsearch的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：&lt;/p&gt;
+&lt;p&gt;但是由于 Elasticsearch 的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.first.__elasticsearch__.index_document
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中引入相应的文件即可：&lt;/p&gt;
+&lt;p&gt;不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中加入如下代码：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;include Elasticsearch::Model::Callbacks
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;在加入这行代码后，调用 &lt;strong&gt;一次&lt;/strong&gt; &lt;code&gt;Blog.import&lt;/code&gt; 即可完成下面的几步操作：&lt;/p&gt;
+&lt;p&gt;即可在每次数据有更新时，自动更新索引。在Gem的文档中还有一些更详细的用法，如异步索引，自定义索引等供查阅。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;将 &lt;em&gt;Blog&lt;/em&gt; 中的数据导入 Elasticsearch 中&lt;/li&gt;
-&lt;li&gt;加入相应的 &lt;em&gt;callback&lt;/em&gt; 函数，在Model数据有更新时，同步索引&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;在数据导入完成后即可尝试在 Elasticsearch 查找导入的数据了：&lt;/p&gt;
 
-&lt;p&gt;在运行完上述的命令（手动更新或自动索引）后，即可在Elasticsearch服务器中查找到相应的内容了。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.search(&#39;*&#39;).records.records
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;model-choose-indexed-fields:7534e3005bc051c63c374ef8164540b2&#34;&gt;Model - Choose indexed fields&lt;/h3&gt;
+&lt;h3 id=&#34;model-choose-indexed-fields&#34;&gt;Model - Choose indexed fields&lt;/h3&gt;
 
-&lt;p&gt;在默认情况下，所有字段都会被索引。但是在实际使用中，并不是所有的字段都需要索引。Elasticsearch提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 &lt;code&gt;as_indexed_json&lt;/code&gt; 。这个函数是在 &lt;code&gt;Elasticsearch::Model::Serializing&lt;/code&gt; 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。下面是一个例子：&lt;/p&gt;
+&lt;p&gt;默认情况下，所有字段都会被加入 Elasticsearch 的索引。但是在实际使用情况中，可能会碰到只索引某些数据的场景。 Elasticsearch 提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 &lt;code&gt;as_indexed_json&lt;/code&gt; 。这个函数是在 &lt;code&gt;Elasticsearch::Model::Serializing&lt;/code&gt; 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。如下所示：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
 
@@ -110,16 +169,17 @@ class Blog &amp;lt; ActiveRecord::Base
 end
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;在上面的例子中，无论我的Blog记录中还有什么字段，只有 &lt;em&gt;title&lt;/em&gt; 和 &lt;em&gt;content&lt;/em&gt; 字段会被放入Elasticsearch的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外， &lt;code&gt;elasticsearch-model&lt;/code&gt; 还支持将函数中方法的返回值也加入索引中，如下所示：&lt;/p&gt;
+&lt;p&gt;在上面的例子中，无论我的Blog记录中还有什么字段，只有 &lt;em&gt;title&lt;/em&gt; 和 &lt;em&gt;content&lt;/em&gt; 字段会被放入 Elasticsearch 的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外，还支持将函数中方法的返回值也加入索引中，如下所示：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
 
-class Blog &amp;lt; ActiveRecord::Base include Elasticsearch::Model
+class Blog &amp;lt; ActiveRecord::Base
+  include Elasticsearch::Model
 
   def as_indexed_json(options = {})
     as_json(
       only: [:title, :content],
-      methods: [:author_name, :tag_count]
+      methods: [:author_name, :tag_count],
     )
   end
 end
@@ -141,7 +201,40 @@ class Blog &amp;lt; ActiveRecord::Base
 end
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;至此，基本的索引构建应该差不多了，后续会记一些查询的东西。&lt;/p&gt;
+&lt;p&gt;至此，基本的索引构建应该差不多了，在调用过 &lt;em&gt;import&lt;/em&gt; 后，就可以用基本的查询功能去查找了。&lt;/p&gt;
+
+&lt;h2 id=&#34;analyzer-和-mapping&#34;&gt;&lt;em&gt;Analyzer&lt;/em&gt; 和 &lt;em&gt;Mapping&lt;/em&gt;&lt;/h2&gt;
+
+&lt;h3 id=&#34;analyzer&#34;&gt;&lt;em&gt;Analyzer&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;对每一条被索引的内容， ES 都会通过 &lt;em&gt;Analyzer&lt;/em&gt; 把内容分词后放入服务器（因为ES中是使用 &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95&#34;&gt;反向索引&lt;/a&gt; 来查找的，而反向索引的 &lt;em&gt;token&lt;/em&gt; 就是输入文字经过 &lt;em&gt;Analyzer&lt;/em&gt; 处理的结果）。而在查询时，如果是全文检索，那么 ES 会将和分析内容时使用的相同的 &lt;em&gt;Analyzer&lt;/em&gt; 应用于检索词上，并将分词后的检索词用于查找以提高查找的准确性。而如果查询的类型是精确匹配， ES 将不会处理检索词。&lt;/p&gt;
+
+&lt;p&gt;根据 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/guide/current/analysis-intro.html&#34;&gt;文档&lt;/a&gt; 的介绍，每一个 &lt;em&gt;Analyzer&lt;/em&gt; 由 &lt;strong&gt;3&lt;/strong&gt; 步组成，分别是：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Character filters&lt;/em&gt; : 对输入的内容按字符处理，包含有 &lt;em&gt;Mapping Char Filter&lt;/em&gt;, &lt;em&gt;HTML Strip Char Filter&lt;/em&gt; 和 &lt;em&gt;Pattern Replace Char Filter&lt;/em&gt; ，具体介绍请参阅 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-charfilters.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Tokenizer&lt;/em&gt; : 分词器，根据不同的规则，将输入内容分为不同的 token ，&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenizers.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Token filters&lt;/em&gt; : 应用于上面分割开的 &lt;em&gt;token&lt;/em&gt; 上的 filter。 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenfilters.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ES 还提供了一些内置的 &lt;em&gt;Analyzer&lt;/em&gt; ，可以在 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html&#34;&gt;这里&lt;/a&gt; 查到。由于 Rails 中的代码实例会牵涉到 &lt;em&gt;Mapping&lt;/em&gt; 相关的内容，所以会在下一节中贴代码。&lt;/p&gt;
+
+&lt;h3 id=&#34;mapping&#34;&gt;&lt;em&gt;Mapping&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;对于输入的文本内容，ES会默认将此字段映射为 &lt;em&gt;string&lt;/em&gt; 类型，并使用 &lt;em&gt;standard analyzer&lt;/em&gt; ，如果需要一些特殊处理，就需要引入 &lt;em&gt;Mapping&lt;/em&gt; 了。 &lt;em&gt;Mapping&lt;/em&gt; 的作用是告诉 ES 某个字段需要按什么样的规则处理。例如一个手机号， ES 的默认处理是按长整形，但是可能需要按字符串处理，这时就需要指定 &lt;em&gt;Mapping&lt;/em&gt; 了。&lt;/p&gt;
+
+&lt;p&gt;在 Rails 的 Model 中，可以通过下面的方法来设置字段的 &lt;em&gt;Analyzer&lt;/em&gt; 和 &lt;em&gt;Mapping Type&lt;/em&gt; ，如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;settings do
+  mappings do
+    indexes :title, analyzer: &#39;english&#39;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在上述的例子中，原本 &lt;em&gt;title&lt;/em&gt; 字段的 &lt;em&gt;analyzer&lt;/em&gt; 被指定为 &lt;em&gt;english&lt;/em&gt; 而不是默认的 &lt;em&gt;string&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;Q: 为什么设定了type后，import返回值为1，而不设的时候返回是0？&lt;/p&gt;
 </description>
     </item>
     
@@ -252,7 +345,7 @@ end
 &lt;li&gt;2016.01.22: 按照&lt;a href=&#34;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html&#34;&gt;Hadoop官方wiki&lt;/a&gt;配置的环境在尝试运行程序时会报连不上Node的错误，不知道是哪里的问题。后来在&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-on-ubuntu-13-10&#34;&gt;DigitalOcean的文档&lt;/a&gt;中发现了需要改Namenode和Datanode的配置才可以。已经将文中的链接和所需修改的文件列表更新。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;基本概念:74e8de6387e3558e8f2adccd19a50c6d&#34;&gt;基本概念&lt;/h2&gt;
+&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
 
 &lt;p&gt;这里只是一些我之前可能弄混淆的概念，其它的一些东西可能需要去hadoop官网看了。&lt;/p&gt;
 
@@ -275,7 +368,7 @@ end
 &lt;li&gt;还有一些衍生项目，具体&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;参见网页&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;环境配置:74e8de6387e3558e8f2adccd19a50c6d&#34;&gt;环境配置&lt;/h2&gt;
+&lt;h2 id=&#34;环境配置&#34;&gt;环境配置&lt;/h2&gt;
 
 &lt;p&gt;鉴于之前在osx上装东西碰上过坑，所以选择了virtualbox+ubuntu的方案。系统的版本是Ubuntu 15.05，Hadoop选择的是2.6.3（截止写文章的时候它的Release Date最新）。具体步骤如下：&lt;/p&gt;
 
@@ -357,7 +450,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;最开始是想用一个脚本解析struct，生成相应的代码，但是在查文档的时候发现golang在1.4版本中引入了 &lt;a href=&#34;https://golang.org/doc/go1.4#gogenerate&#34;&gt;generate&lt;/a&gt; 命令，它可以解析一个文件并生成另一个文件。官方给的说明里面是从yacc的语法生成go文件。想了想觉得它可以完成生成SQL命令，同步struct和SQL的功能，而且如果做了处理的话还可以方便的在DB间切换，那就试试吧。&lt;/p&gt;
 
-&lt;h2 id=&#34;语法:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;语法&lt;/h2&gt;
+&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
 
 &lt;p&gt;在介绍如何编写前，先介绍下调用的方式。要成功调用一次generate需要两个条件：&lt;/p&gt;
 
@@ -368,11 +461,11 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;这样在文件所在的目录下运行 &lt;code&gt;go generate&lt;/code&gt; 即可根据注释中所指示的方法，调用相应的生成器了。&lt;/p&gt;
 
-&lt;h2 id=&#34;编写:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;编写&lt;/h2&gt;
+&lt;h2 id=&#34;编写&#34;&gt;编写&lt;/h2&gt;
 
 &lt;p&gt;Golang给出的sample是一个字符串相关的东西，具体可以见 &lt;a href=&#34;https://godoc.org/golang.org/x/tools/cmd/stringer&#34;&gt;文档页&lt;/a&gt;。&lt;a href=&#34;http://www.onebigfluke.com/2014/12/generic-programming-go-generate.html&#34;&gt;另一个页面&lt;/a&gt; 也有一份具体的实现可以参考。它主要的思路就是用 &lt;code&gt;generate&lt;/code&gt; 去处理某个 &lt;code&gt;.go&lt;/code&gt; 文件，然后生成一些新的东西。主要是用内置的 &lt;em&gt;AST&lt;/em&gt; 解析文件，并生成相应的东西。&lt;/p&gt;
 
-&lt;h2 id=&#34;我的实现:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;我的实现&lt;/h2&gt;
+&lt;h2 id=&#34;我的实现&#34;&gt;我的实现&lt;/h2&gt;
 
 &lt;p&gt;回到最开始的问题，我有一个定义好的struct，需要去生成SQL命令。所以还是需要用到内置的AST解析器的。除此之外也就是一点点的区分类型型，做转换了。代码放在 &lt;a href=&#34;https://github.com/hzmangel/struct2schema&#34;&gt;https://github.com/hzmangel/struct2schema&lt;/a&gt; 这里，README还在编写中。目前代码支持将大部分Go内置的类型转换为SQL类型，不过可能还是有一些不支持的需要手动操作。在DB支持上，目前只看了sqlite3和MySQL。下一步要做的事情估计有这些：&lt;/p&gt;
 
@@ -384,7 +477,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;目前生成出来的代码会直接打印到屏幕上，格式啥的，据说1.6上对模板会有一个更新， &lt;a href=&#34;https://github.com/golang/go/issues/9969&#34;&gt;讨论在此&lt;/a&gt; ，拭目以待。&lt;/p&gt;
 
-&lt;h2 id=&#34;后记:ccc7399e1d95744ff35922b65c36cc73&#34;&gt;后记&lt;/h2&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
 
 &lt;p&gt;在写这篇文章的时候，突然反应过来这个 &lt;code&gt;go generate&lt;/code&gt; 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。&lt;/p&gt;
 </description>
@@ -408,13 +501,13 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 &lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从模型生成网络:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从模型生成网络&lt;/h2&gt;
+&lt;h2 id=&#34;从模型生成网络&#34;&gt;从模型生成网络&lt;/h2&gt;
 
 &lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
-&lt;h4 id=&#34;参数:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;参数&lt;/h4&gt;
+&lt;h4 id=&#34;参数&#34;&gt;参数&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
@@ -423,13 +516,13 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 &lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;生成过程:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;生成过程&lt;/h4&gt;
+&lt;h4 id=&#34;生成过程&#34;&gt;生成过程&lt;/h4&gt;
 
 &lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
 
 &lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \epsilon $&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;h4 id=&#34;适应性强:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;适应性强&lt;/h4&gt;
+&lt;h4 id=&#34;适应性强&#34;&gt;适应性强&lt;/h4&gt;
 
 &lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
 
@@ -439,15 +532,15 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 &lt;li&gt;内嵌 (Nested)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;从网络生成模型:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;从网络生成模型&lt;/h2&gt;
+&lt;h2 id=&#34;从网络生成模型&#34;&gt;从网络生成模型&lt;/h2&gt;
 
-&lt;h3 id=&#34;agm-affiliation-graph-model-1:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
+&lt;h3 id=&#34;agm-affiliation-graph-model-1&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
 
 &lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
 
-&lt;h3 id=&#34;bigclam:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;BigCLAM&lt;/h3&gt;
+&lt;h3 id=&#34;bigclam&#34;&gt;BigCLAM&lt;/h3&gt;
 
-&lt;h4 id=&#34;membership-strength:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;Membership Strength&lt;/h4&gt;
+&lt;h4 id=&#34;membership-strength&#34;&gt;Membership Strength&lt;/h4&gt;
 
 &lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
 
@@ -461,7 +554,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;计算:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;计算&lt;/h4&gt;
+&lt;h4 id=&#34;计算&#34;&gt;计算&lt;/h4&gt;
 
 &lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
 
@@ -477,7 +570,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;其它阅读-graph-and-social-network:6f5ccd4dcd8169ad30902566c7400598&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
+&lt;h2 id=&#34;其它阅读-graph-and-social-network&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
 
@@ -520,19 +613,19 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;这个算法的核心思想是 &lt;em&gt;monotonicity&lt;/em&gt; ，即如果 &lt;code&gt;{I}&lt;/code&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的所有子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。反过来说，如果一个元素不是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么任何包含它的集合都不可能是。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本算法&lt;/h2&gt;
+&lt;h2 id=&#34;基本算法&#34;&gt;基本算法&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;A-Priori&lt;/em&gt; 是一个 &lt;em&gt;two-pass&lt;/em&gt; 算法，&lt;/p&gt;
 
-&lt;h3 id=&#34;first-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+&lt;h3 id=&#34;first-pass&#34;&gt;First Pass&lt;/h3&gt;
 
 &lt;p&gt;在读取的过程中创建两张Hash表，一张表是将所有 &lt;code&gt;item&lt;/code&gt; 映射为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;n&lt;/code&gt; 的索引，减少后面引用时占用的内存。第二张表是将 &lt;code&gt;item&lt;/code&gt; 的索引与 &lt;code&gt;item&lt;/code&gt; 出现的次数对应起来。&lt;/p&gt;
 
-&lt;h3 id=&#34;between-passes:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+&lt;h3 id=&#34;between-passes&#34;&gt;Between Passes&lt;/h3&gt;
 
 &lt;p&gt;检查索引和出现次数映射的表，找出其中所有的 &lt;em&gt;frequent itemset&lt;/em&gt; ，并将它们重新索引为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;m&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;second-pass:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+&lt;h3 id=&#34;second-pass&#34;&gt;Second Pass&lt;/h3&gt;
 
 &lt;p&gt;计算所有使用 &lt;em&gt;frequent itemset&lt;/em&gt; 表中元素组成的数据对的 &lt;em&gt;support&lt;/em&gt; 值。具体流程如下：&lt;/p&gt;
 
@@ -552,7 +645,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 &lt;p&gt;Mutation: it is the key to our evolution.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;pcy:f42a6776e590235dbcf00cc877498b66&#34;&gt;PCY&lt;/h2&gt;
+&lt;h2 id=&#34;pcy&#34;&gt;PCY&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 的时候，内存中有很多空闲的地方，所以在给 &lt;em&gt;item&lt;/em&gt; 计数的同时，生成出所有的 &lt;em&gt;pair&lt;/em&gt; ，取 Hash 后，给对应的 &lt;em&gt;bucket&lt;/em&gt; 加1 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，只处理如下的数据对：&lt;/p&gt;
 
@@ -565,7 +658,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 &lt;p&gt;这个算法的原理是，如果一个 &lt;em&gt;pair&lt;/em&gt; 是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它对应的 &lt;em&gt;bucket&lt;/em&gt; 一定超过 &lt;em&gt;support&lt;/em&gt; 的阈值。而如果一个 &lt;em&gt;bucket&lt;/em&gt; 没有超过阈值，那么里面的所有 &lt;em&gt;pair&lt;/em&gt; 一定不是 &lt;em&gt;frequent pair&lt;/em&gt; 。 注意：一个 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt; 并不能保证其中的 &lt;em&gt;pair&lt;/em&gt; 都是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;first-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;First Pass&lt;/h3&gt;
+&lt;h3 id=&#34;first-pass-1&#34;&gt;First Pass&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;for b in buckets
   for item in b:
@@ -578,21 +671,21 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 end
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;between-passes-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Between Passes&lt;/h3&gt;
+&lt;h3 id=&#34;between-passes-1&#34;&gt;Between Passes&lt;/h3&gt;
 
 &lt;p&gt;除了找出 &lt;em&gt;frequent item&lt;/em&gt; 外，还会把上一步中的 &lt;em&gt;hash bucket&lt;/em&gt; 替换为 &lt;em&gt;bitmap&lt;/em&gt; ，&lt;code&gt;1&lt;/code&gt; 表示 &lt;em&gt;frequent bucket&lt;/em&gt; ， &lt;code&gt;0&lt;/code&gt; 表示不是。这样可以进一步减少内存空间的占用（从 &lt;code&gt;32bit&lt;/code&gt; 降到 &lt;code&gt;1bit&lt;/code&gt;）。&lt;/p&gt;
 
-&lt;h3 id=&#34;second-pass-1:f42a6776e590235dbcf00cc877498b66&#34;&gt;Second Pass&lt;/h3&gt;
+&lt;h3 id=&#34;second-pass-1&#34;&gt;Second Pass&lt;/h3&gt;
 
 &lt;p&gt;根据上面列出的条件，找到 &lt;em&gt;canidate pair&lt;/em&gt; ，计算。&lt;/p&gt;
 
 &lt;p&gt;PCY算法还有两个变种：&lt;/p&gt;
 
-&lt;h2 id=&#34;multistage:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multistage&lt;/h2&gt;
+&lt;h2 id=&#34;multistage&#34;&gt;Multistage&lt;/h2&gt;
 
 &lt;p&gt;这个算法的核心在于，在PCY算法的 &lt;em&gt;first pass&lt;/em&gt; 后，并不开始对 &lt;em&gt;bucket&lt;/em&gt; 做筛选，而是将其中属于 &lt;em&gt;frequent bucket&lt;/em&gt; 的 &lt;em&gt;pair&lt;/em&gt; 挑出来，再做一次 Hash ，从而进一步减少 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据量。从定义上来看，这个算法可能会有多个 &lt;em&gt;pass&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;multihash:f42a6776e590235dbcf00cc877498b66&#34;&gt;Multihash&lt;/h2&gt;
+&lt;h2 id=&#34;multihash&#34;&gt;Multihash&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用多个独立的Hash函数来计算 &lt;em&gt;bucket&lt;/em&gt; 。相比物 Multistage ，它还是 &lt;em&gt;two pass&lt;/em&gt; 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 &lt;em&gt;frequent bucket&lt;/em&gt; 。如果它能保证 &lt;em&gt;frequent bucket&lt;/em&gt; 的数目足够小，那么我们就能在 &lt;em&gt;two pass&lt;/em&gt; 获得 Multistage 的优点。&lt;/p&gt;
 
@@ -600,19 +693,19 @@ end
 
 &lt;p&gt;算法的另一个发展趋势是获取到大部分的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，使用降低精确性的办法来换取效率。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本想法:f42a6776e590235dbcf00cc877498b66&#34;&gt;基本想法&lt;/h2&gt;
+&lt;h2 id=&#34;基本想法&#34;&gt;基本想法&lt;/h2&gt;
 
 &lt;p&gt;对样本 &lt;em&gt;basket&lt;/em&gt; 进行随机抽样，并在内存中对样本进行 &lt;em&gt;A-Priori&lt;/em&gt; 或其改进版本的计算，此处需要计算所有的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，而不仅仅是 &lt;em&gt;pair&lt;/em&gt; 。计算时使用的 &lt;em&gt;support threshold&lt;/em&gt; 需要根据样本容量处理，例如抽样率为 &lt;code&gt;1/100&lt;/code&gt; ，那么阈值也相应的变成 &lt;code&gt;s/100&lt;/code&gt; 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，可以使用整体数据来验证是否找到的真的是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
 &lt;p&gt;这个算法有个问题有些 &lt;em&gt;set&lt;/em&gt; 可能在样本中不是 &lt;em&gt;frequent&lt;/em&gt; 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 &lt;em&gt;support&lt;/em&gt; 阈值，例如从 &lt;code&gt;s/100&lt;/code&gt; 降为 &lt;code&gt;s/125&lt;/code&gt; ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&amp;hellip;&amp;hellip;）&lt;/p&gt;
 
-&lt;h2 id=&#34;son-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;SON 算法&lt;/h2&gt;
+&lt;h2 id=&#34;son-算法&#34;&gt;SON 算法&lt;/h2&gt;
 
 &lt;p&gt;这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 &lt;em&gt;frequent pair&lt;/em&gt; 置于候选的位置。而在 &lt;em&gt;second pass&lt;/em&gt; ，计算这些候选 &lt;em&gt;pair&lt;/em&gt; 并得出最后结果。这个算法的核心是，任何一个 &lt;em&gt;pair&lt;/em&gt; 如果是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它一定会在某个子集中是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
 
 &lt;p&gt;这个算法可以让计算并行化，以提高处理效率。&lt;/p&gt;
 
-&lt;h2 id=&#34;toivonen-算法:f42a6776e590235dbcf00cc877498b66&#34;&gt;Toivonen 算法&lt;/h2&gt;
+&lt;h2 id=&#34;toivonen-算法&#34;&gt;Toivonen 算法&lt;/h2&gt;
 
 &lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 &lt;code&gt;s/125&lt;/code&gt;，以尽可能的不要遗漏在全集中是 &lt;em&gt;frequent set&lt;/em&gt; 的数据。此后设置一个 &lt;em&gt;negative border&lt;/em&gt; 区间，以存放所有子集是 &lt;em&gt;frequent set&lt;/em&gt; 但是本身不是的集合。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，计算所有候选 &lt;em&gt;frequent itemsets&lt;/em&gt; 和 &lt;em&gt;negative border&lt;/em&gt; 中的数据。&lt;/p&gt;
 
@@ -636,7 +729,7 @@ end
 
 &lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;
 
-&lt;h2 id=&#34;market-basket-模型:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
+&lt;h2 id=&#34;market-basket-模型&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
 
 &lt;p&gt;这个模型一般用来描述两种数据之间的 &lt;em&gt;m2m&lt;/em&gt; 关系。其中的一个数据是 &lt;em&gt;item&lt;/em&gt; ，而另一个是 &lt;em&gt;baskets&lt;/em&gt; 。每一个 &lt;em&gt;basket&lt;/em&gt; 中包含有多个 &lt;em&gt;items&lt;/em&gt; ，即为 &lt;em&gt;itemset&lt;/em&gt; 。 通常认为：&lt;/p&gt;
 
@@ -653,7 +746,7 @@ end
 &lt;li&gt;&lt;em&gt;Basket&lt;/em&gt; ：用户的订单。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;frequent-itemsets:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;frequent-itemsets&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt; 即指在 &lt;em&gt;baskets&lt;/em&gt; 中经常出现的 &lt;em&gt;itemset&lt;/em&gt; ，它的定义为：&lt;/p&gt;
 
@@ -665,9 +758,9 @@ end
 
 &lt;p&gt;一个 &lt;em&gt;itemset&lt;/em&gt; 可以包含有不定个元素。如果一个 &lt;em&gt;itemset&lt;/em&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的的任何子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h4 id=&#34;应用场景:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;应用场景&lt;/h4&gt;
+&lt;h4 id=&#34;应用场景&#34;&gt;应用场景&lt;/h4&gt;
 
-&lt;h5 id=&#34;超市商品:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;超市商品&lt;/h5&gt;
+&lt;h5 id=&#34;超市商品&#34;&gt;超市商品&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：超市商品。&lt;/li&gt;
@@ -676,7 +769,7 @@ end
 
 &lt;p&gt;通过分析订单中的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，可以得出哪些商品会经常被同时购买。&lt;/p&gt;
 
-&lt;h5 id=&#34;相关内容查找:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;相关内容查找&lt;/h5&gt;
+&lt;h5 id=&#34;相关内容查找&#34;&gt;相关内容查找&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：单词&lt;/li&gt;
@@ -685,7 +778,7 @@ end
 
 &lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 中，肯定包含有一些 common word，除去这些词后，可以揭示出一些单词之间的关系。&lt;/p&gt;
 
-&lt;h5 id=&#34;剽窃检测:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;剽窃检测&lt;/h5&gt;
+&lt;h5 id=&#34;剽窃检测&#34;&gt;剽窃检测&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;itme&lt;/em&gt; ：文档&lt;/li&gt;
@@ -694,7 +787,7 @@ end
 
 &lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 表示这些文档中有大量的句子相似，可以检测抄袭的方法。&lt;/p&gt;
 
-&lt;h5 id=&#34;生物标记:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;生物标记&lt;/h5&gt;
+&lt;h5 id=&#34;生物标记&#34;&gt;生物标记&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：生物标记，如基因，血蛋白，疾病等。&lt;/li&gt;
@@ -703,7 +796,7 @@ end
 
 &lt;p&gt;找到的包含疾病和生物标记的 &lt;em&gt;frequent itemset&lt;/em&gt; 可以用于疾病检测。&lt;/p&gt;
 
-&lt;h3 id=&#34;association-rule:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;association-rule&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;定义 &lt;code&gt;$I \rightarrow j$&lt;/code&gt; ，表示如果一个 &lt;em&gt;basket&lt;/em&gt; 包含有 &lt;code&gt;{I}&lt;/code&gt; 中所有的元素，那么它就有可能包含 &lt;code&gt;j&lt;/code&gt; 。即 &lt;code&gt;{I}&lt;/code&gt; 是一组元素，而 &lt;code&gt;j&lt;/code&gt; 是一个元素。这个推断，就是一个 &lt;em&gt;association rule&lt;/em&gt; 。 &lt;em&gt;association rule&lt;/em&gt; 有一个属性为 &lt;em&gt;Confidence&lt;/em&gt; ，它表示给了 &lt;code&gt;{I}&lt;/code&gt; 后出现 &lt;code&gt;j&lt;/code&gt; 的概率，即在所有包含&lt;code&gt;{I}&lt;/code&gt;的 &lt;em&gt;basket&lt;/em&gt; 中同时包含&lt;code&gt;j&lt;/code&gt;的概率。&lt;/p&gt;
 
@@ -728,7 +821,7 @@ end
 
 &lt;p&gt;在计算过程中，由于设置的阈值比较高，所以通常能找到的就是 &lt;em&gt;frequent pair&lt;/em&gt; ，所以这也是需要面对的最大问题。&lt;/p&gt;
 
-&lt;h4 id=&#34;一般算法:5f0cf4b257bf00ac7ad2347da74e001b&#34;&gt;一般算法&lt;/h4&gt;
+&lt;h4 id=&#34;一般算法&#34;&gt;一般算法&lt;/h4&gt;
 
 &lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
 
@@ -754,11 +847,11 @@ end
 
 &lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;
 
-&lt;h2 id=&#34;supervised-learning:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Supervised Learning&lt;/h2&gt;
+&lt;h2 id=&#34;supervised-learning&#34;&gt;Supervised Learning&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Supervised learning&lt;/em&gt; 是机器学习中的一种方法（还有两种分别是 &lt;a href=&#34;https://en.wikipedia.org/wiki/Unsupervised_learning&#34;&gt;Unsupervised learning&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Reinforcement_learning&#34;&gt;Reinforcement learning&lt;/a&gt; , via &lt;a href=&#34;https://en.wikipedia.org/wiki/Machine_learning&#34;&gt;wikipedia&lt;/a&gt; 。这个如果将来看了相应的课再写。）,它通过训练数据集建立一种模式或叫函数，再通过此模式去匹配待查询数据集从而得出预测结果。&lt;/p&gt;
 
-&lt;h2 id=&#34;instance-based-learning:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Instance Based Learning&lt;/h2&gt;
+&lt;h2 id=&#34;instance-based-learning&#34;&gt;Instance Based Learning&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Instance Based Learning&lt;/em&gt; 是机器学习的一种方法，也叫 &lt;em&gt;Memory Based Learning&lt;/em&gt; 。它不生成完整的匹配模式，而是在从训练数据中找到和待查询数据相近的数据（这些数据通常存放于内存中），并输出结果。将要说到的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 即是其中的一种。此方法也分为 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 和 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 。进行计算需要了解如下4个元素：&lt;/p&gt;
 
@@ -769,11 +862,11 @@ end
 &lt;li&gt;如何确定输出？&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
+&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
 
 &lt;p&gt;在 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 的情况下，距离使用欧氏距离，寻找最近的&lt;code&gt;1&lt;/code&gt;个 &lt;em&gt;Neighbor&lt;/em&gt; ，各点权重相同，直接以最近 &lt;em&gt;Neighbor&lt;/em&gt; 的输出为查询数据的输出。而在 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 中，查找的节点变成了 &lt;em&gt;k&lt;/em&gt; 个，而输出出变成了 &lt;em&gt;k&lt;/em&gt; 个节点的平均值。&lt;/p&gt;
 
-&lt;h3 id=&#34;kernel-regression:e415793b7fb7c6a9af71ea301a4a0120&#34;&gt;Kernel Regression&lt;/h3&gt;
+&lt;h3 id=&#34;kernel-regression&#34;&gt;Kernel Regression&lt;/h3&gt;
 
 &lt;p&gt;核回归，统计中的一种方法，具体的算法及使用场景没看太明白，此处暂时仅为记录而用。对于这个算法，它所涉及到的4个参量是：&lt;/p&gt;
 
@@ -797,7 +890,7 @@ end
 
 &lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;
 
-&lt;h2 id=&#34;相似数据集:98fc395032abb3e5c8d913488aa084ef&#34;&gt;相似数据集&lt;/h2&gt;
+&lt;h2 id=&#34;相似数据集&#34;&gt;相似数据集&lt;/h2&gt;
 
 &lt;p&gt;许多数据挖掘的问题都能简化为查找相似数据集的问题，如：&lt;/p&gt;
 
@@ -818,7 +911,7 @@ end
 
 &lt;p&gt;文档相似性可以使用 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 来衡量。对于两个集合 &lt;code&gt;$S$&lt;/code&gt; 和 &lt;code&gt;$T$&lt;/code&gt; 来说，它们之间的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 为 &lt;code&gt;$|S \cap T| / |S \cup T|$&lt;/code&gt;，记为 &lt;em&gt;SIM(S,T)&lt;/em&gt; 或 &lt;em&gt;J(S,T)&lt;/em&gt; 。不难看出，当此值为&lt;code&gt;0&lt;/code&gt;时表示两个集合没有交集，而为&lt;code&gt;1&lt;/code&gt;时则表示两个集合相等。&lt;/p&gt;
 
-&lt;h3 id=&#34;k-shingling或叫k-gram:98fc395032abb3e5c8d913488aa084ef&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
+&lt;h3 id=&#34;k-shingling或叫k-gram&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;k-shingling&lt;/em&gt; 是指把文档按连续的 &lt;em&gt;k&lt;/em&gt; 个字母拆成子集的方法。&lt;/p&gt;
@@ -832,7 +925,7 @@ end
 
 &lt;p&gt;对于shingling中的元素，可以直接使用字符串，但是更好的办法是把它通过hash变化映射到某个bucket中，而将这个bucket的编号作为shingling元素进行比较。这样可以在shingling元素空间不变的情况下，降低运行时占用的内存。而且在比较上，整数比字符串要更有优势。这一步叫做 &lt;strong&gt;Compressing Shinglings&lt;/strong&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;minhashing:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Minhashing&lt;/h3&gt;
+&lt;h3 id=&#34;minhashing&#34;&gt;Minhashing&lt;/h3&gt;
 
 &lt;p&gt;这一段是从 &lt;a href=&#34;https://en.wikipedia.org/wiki/MinHash&#34;&gt;wikipedia&lt;/a&gt; 上看到的定义：&lt;/p&gt;
 
@@ -857,7 +950,7 @@ FOREACH columes:
     SIG(i, c) = min( SIG(i, c), hi(r) )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;locality-sensitive-hash:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
+&lt;h3 id=&#34;locality-sensitive-hash&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;By Me: 此处的概念还有些模糊，需要再啃啃。&lt;/em&gt;&lt;/p&gt;
 
@@ -875,7 +968,7 @@ FOREACH columes:
 
 &lt;p&gt;这个曲线是一个S型的连续曲线，我们需要做的就是通过挑选&lt;code&gt;b&lt;/code&gt;和&lt;code&gt;r&lt;/code&gt;，让这条曲线在两端尽量的平缓，而在中间部分尽可能的陡峭。这样就不会有过多的 &lt;em&gt;False Positive&lt;/em&gt; 或者 &lt;em&gt;False Negative&lt;/em&gt; 。&lt;/p&gt;
 
-&lt;h2 id=&#34;具体使用流程:98fc395032abb3e5c8d913488aa084ef&#34;&gt;具体使用流程&lt;/h2&gt;
+&lt;h2 id=&#34;具体使用流程&#34;&gt;具体使用流程&lt;/h2&gt;
 
 &lt;p&gt;综上所述，在实际应用中会有下面几步工作（文档比较）：&lt;/p&gt;
 
@@ -893,17 +986,17 @@ FOREACH columes:
 &lt;li&gt;检查选择出来的特征对，确定它们的相似度都大于 &lt;code&gt;$t$&lt;/code&gt; 。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;实例:98fc395032abb3e5c8d913488aa084ef&#34;&gt;实例&lt;/h2&gt;
+&lt;h2 id=&#34;实例&#34;&gt;实例&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;注：此处只是列出课程中出现的示例，后续会尝试使用程序完成，再补齐说明。&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;entity-resolution:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Entity Resolution&lt;/h3&gt;
+&lt;h3 id=&#34;entity-resolution&#34;&gt;Entity Resolution&lt;/h3&gt;
 
-&lt;h3 id=&#34;fingerprints:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Fingerprints&lt;/h3&gt;
+&lt;h3 id=&#34;fingerprints&#34;&gt;Fingerprints&lt;/h3&gt;
 
-&lt;h3 id=&#34;similar-news-articles:98fc395032abb3e5c8d913488aa084ef&#34;&gt;Similar News Articles&lt;/h3&gt;
+&lt;h3 id=&#34;similar-news-articles&#34;&gt;Similar News Articles&lt;/h3&gt;
 
-&lt;h2 id=&#34;距离计算:98fc395032abb3e5c8d913488aa084ef&#34;&gt;距离计算&lt;/h2&gt;
+&lt;h2 id=&#34;距离计算&#34;&gt;距离计算&lt;/h2&gt;
 
 &lt;p&gt;此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 并不是距离，用&lt;code&gt;1&lt;/code&gt;减去它才是。一般说来，有两种类型的距离，它们是 &lt;em&gt;欧氏距离&lt;/em&gt; 和 &lt;em&gt;非欧距离&lt;/em&gt; 。&lt;/p&gt;
 
@@ -923,11 +1016,11 @@ FOREACH columes:
 &lt;li&gt;&lt;code&gt;$d(x,z) \leq d(x,y) + d(y,z)$&lt;/code&gt; ：三角定理。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;欧氏距离:98fc395032abb3e5c8d913488aa084ef&#34;&gt;欧氏距离&lt;/h3&gt;
+&lt;h3 id=&#34;欧氏距离&#34;&gt;欧氏距离&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$&lt;/code&gt; 。在&lt;code&gt;$r=2$&lt;/code&gt;时，即变成平方各开根号，即熟悉的距离计算。此外还有&lt;code&gt;$L_{1}-norm$&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;h3 id=&#34;非欧距离:98fc395032abb3e5c8d913488aa084ef&#34;&gt;非欧距离&lt;/h3&gt;
+&lt;h3 id=&#34;非欧距离&#34;&gt;非欧距离&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Jaccard Distance&lt;/em&gt;&lt;/li&gt;
@@ -980,11 +1073,11 @@ print(datetime.datetime.now())
 
 &lt;p&gt;所以这里引入了给页面排序的做法，以确定页面的重要性。&lt;/p&gt;
 
-&lt;h2 id=&#34;pagerank:b45bcfea51201690689ab7d1025dd751&#34;&gt;PageRank&lt;/h2&gt;
+&lt;h2 id=&#34;pagerank&#34;&gt;PageRank&lt;/h2&gt;
 
 &lt;p&gt;PageRank，Google家的看家算法。核心思路是，如果一个页面是重要的，那么它指向的那个页面应该也是重要的。也就是用其它页面来证明这个页面的重要性。&lt;/p&gt;
 
-&lt;h3 id=&#34;flow-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
+&lt;h3 id=&#34;flow-formulation&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
 
 &lt;p&gt;在一张图中，假设有节点&lt;code&gt;$i$&lt;/code&gt;，它的PR值是&lt;code&gt;$r_{i}$&lt;/code&gt;，它有&lt;code&gt;$d_{i}$&lt;/code&gt;条出链，其中一条指向节点&lt;code&gt;$j$&lt;/code&gt;。那么&lt;code&gt;$j$&lt;/code&gt;上由&lt;code&gt;$i$&lt;/code&gt;带来的PR值即为&lt;code&gt;$\frac{r_{i}}{d_{i}}$&lt;/code&gt;。&lt;/p&gt;
 
@@ -992,7 +1085,7 @@ print(datetime.datetime.now())
 
 &lt;p&gt;这个方法比较易于理解，但是对于大规模的页面集不适用，所以引入了&lt;em&gt;Matrix&lt;/em&gt; Formulation。&lt;/p&gt;
 
-&lt;h3 id=&#34;matrix-formulation:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
+&lt;h3 id=&#34;matrix-formulation&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
 
 &lt;p&gt;首先，把所有页面之间的跳转都用一个&lt;strong&gt;列随机矩阵(column stochastic matrix)&lt;/strong&gt;来表示，记为&lt;code&gt;$M$&lt;/code&gt;。对于每条链路&lt;code&gt;$i\rightarrow j$&lt;/code&gt;，都有相应的&lt;code&gt;$M_{ji} = 1/d_{i}$&lt;/code&gt;，其中&lt;code&gt;$d$&lt;/code&gt;是&lt;code&gt;$i$&lt;/code&gt;的出链路条数。下一步是&lt;strong&gt;Rank向量&lt;/strong&gt;，记为&lt;code&gt;$r$&lt;/code&gt;它是一个1维的列向量，每一个元素的值就是表示此节点的Rank值，记为&lt;code&gt;$r_{i}$&lt;/code&gt;，此向量满足&lt;code&gt;$\sum_{i}r_{i} = 1$&lt;/code&gt;。&lt;/p&gt;
 
@@ -1008,13 +1101,13 @@ print(datetime.datetime.now())
 &lt;li&gt;停止条件： &lt;code&gt;$|r^{(t+1) = r^{(t)}}|_{1} &amp;lt; \epsilon$&lt;/code&gt;。其中&lt;code&gt;$|x_{i}|_{1} ＝ \sum_{i}|x_{i}|$&lt;/code&gt;是向量&lt;code&gt;$i$&lt;/code&gt;的 &lt;em&gt;L1范数&lt;/em&gt; （其实就是绝对值相加，范数的定义就是 &lt;code&gt;$|x_{i}|_{p} = (\sum_{i}|x_{i}|^{p})^{\frac{1}{p}}$&lt;/code&gt;）。此处可以使用其它的范数，如L2范数，即欧氏距离。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;teleports:b45bcfea51201690689ab7d1025dd751&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;teleports&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
 
 &lt;p&gt;如果图中有 &lt;em&gt;dead end&lt;/em&gt; 节点，即只有进链没有出链；或者是在多个节点之间存在环，那么上面的迭代就会收敛到一个错误的结果上。解决方案就是，对于每次跳转，有&lt;code&gt;$\beta$&lt;/code&gt;的概率跟随链路去跳，而有&lt;code&gt;$1-\beta$&lt;/code&gt;的概率是一次随机传送 (&lt;em&gt;Teleports&lt;/em&gt;)，这样就解决上面提到的两个问题了。在实际使用中，一般&lt;code&gt;$\beta$&lt;/code&gt;取值为&lt;code&gt;0.8&lt;/code&gt;或&lt;code&gt;0.9&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;在计算上，就是引入一个Teleports矩阵，其中的每个值都是&lt;code&gt;$1/N$&lt;/code&gt;，&lt;code&gt;$N$&lt;/code&gt;为节点数目。而之前的转移矩阵&lt;code&gt;$M$&lt;/code&gt;则变为&lt;code&gt;$\beta M + (1-\beta)\frac{1}{N}e \cdot e^{T}$&lt;/code&gt;，记为&lt;code&gt;$A$&lt;/code&gt;。同样，状态跳转的迭代公式也变为&lt;code&gt;$r = A \cdot r$&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;实际使用的样子:b45bcfea51201690689ab7d1025dd751&#34;&gt;实际使用的样子&lt;/h3&gt;
+&lt;h3 id=&#34;实际使用的样子&#34;&gt;实际使用的样子&lt;/h3&gt;
 
 &lt;p&gt;以上说的都是理论，在那个神奇的世界里，计算机的内存都是无限大的，计算速度都是无限NB的，一句话，TA们都是超限界的。在回到了位于爬行界的真实世界后，还有其它需要考虑的东西。假设节点数目是 &lt;strong&gt;1 billion&lt;/strong&gt; ，那么计算前和后的向量各需要&lt;strong&gt;1 billion&lt;/strong&gt;，但是对于那个矩阵，它可是&lt;strong&gt;1 billion * 1 billion&lt;/strong&gt;，也就是&lt;strong&gt;10^18&lt;/strong&gt;。这个内存，有点贵哈～&lt;/p&gt;
 
@@ -1037,7 +1130,7 @@ print(datetime.datetime.now())
 
 &lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;
 
-&lt;h2 id=&#34;dfs:328f502a6f9088599afe3ec330de3e9a&#34;&gt;DFS&lt;/h2&gt;
+&lt;h2 id=&#34;dfs&#34;&gt;DFS&lt;/h2&gt;
 
 &lt;p&gt;课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。&lt;/p&gt;
 
@@ -1045,7 +1138,7 @@ print(datetime.datetime.now())
 
 &lt;p&gt;DFS中的节点有两类，&lt;code&gt;Chunk Server&lt;/code&gt;用来存放数据，&lt;code&gt;Master Node&lt;/code&gt;用来存放文件和&lt;code&gt;Chunk Server&lt;/code&gt;的对应关系。一个文件会被分成多处连续的&lt;code&gt;chunks&lt;/code&gt;，典型的大小是16~64MB。每一个&lt;code&gt;chunk&lt;/code&gt;都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而&lt;code&gt;Master Node&lt;/code&gt;就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从&lt;code&gt;Master Node&lt;/code&gt;处取到&lt;code&gt;Chunk Server&lt;/code&gt;的信息，再从相应的server上获取文件内容。&lt;/p&gt;
 
-&lt;h2 id=&#34;map-reduce:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce&lt;/h2&gt;
+&lt;h2 id=&#34;map-reduce&#34;&gt;Map Reduce&lt;/h2&gt;
 
 &lt;p&gt;MR是一种编程模型，典型的应用场景就是 &lt;strong&gt;Word Cound&lt;/strong&gt; 。将MR应用到 WordCount 的先决条件为：&lt;/p&gt;
 
@@ -1054,7 +1147,7 @@ print(datetime.datetime.now())
 &lt;li&gt;但是所有的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对可以完全放到内存中&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;算法流程:328f502a6f9088599afe3ec330de3e9a&#34;&gt;算法流程&lt;/h3&gt;
+&lt;h3 id=&#34;算法流程&#34;&gt;算法流程&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;将数据分块读入&lt;/li&gt;
@@ -1066,7 +1159,7 @@ print(datetime.datetime.now())
 
 &lt;p&gt;在具体实现上，程序需要指定&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个方法，这两个方法的参数都是&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对。例如&lt;code&gt;Map&lt;/code&gt;函数的&lt;code&gt;key&lt;/code&gt;可以是文件名，&lt;code&gt;value&lt;/code&gt;是对应的某一行或者某一块文字。而在&lt;code&gt;Reduce&lt;/code&gt;函数中，输入的&lt;code&gt;key&lt;/code&gt;是某个单词，而&lt;code&gt;value&lt;/code&gt;是1。&lt;code&gt;Reduce&lt;/code&gt;负责归并结果，并输出。&lt;/p&gt;
 
-&lt;h3 id=&#34;map-reduce的环境:328f502a6f9088599afe3ec330de3e9a&#34;&gt;Map Reduce的环境&lt;/h3&gt;
+&lt;h3 id=&#34;map-reduce的环境&#34;&gt;Map Reduce的环境&lt;/h3&gt;
 
 &lt;p&gt;除了根据逻辑实现&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：&lt;/p&gt;
 
@@ -1078,7 +1171,7 @@ print(datetime.datetime.now())
 &lt;li&gt;管理机器间通信&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;出错处理:328f502a6f9088599afe3ec330de3e9a&#34;&gt;出错处理&lt;/h3&gt;
+&lt;h3 id=&#34;出错处理&#34;&gt;出错处理&lt;/h3&gt;
 
 &lt;p&gt;MR出错分几种，处理方式也不同：&lt;/p&gt;
 
@@ -1088,13 +1181,13 @@ print(datetime.datetime.now())
 &lt;li&gt;MasterNode：任务直接退出。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;map-和-reduce-的数目:328f502a6f9088599afe3ec330de3e9a&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
+&lt;h3 id=&#34;map-和-reduce-的数目&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;Mapper&lt;/code&gt;的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;Reduce&lt;/code&gt;的数目没有具体要求，但是一般会比&lt;code&gt;Mapper&lt;/code&gt;的数目要少。&lt;/p&gt;
 
-&lt;h3 id=&#34;改良:328f502a6f9088599afe3ec330de3e9a&#34;&gt;改良&lt;/h3&gt;
+&lt;h3 id=&#34;改良&#34;&gt;改良&lt;/h3&gt;
 
 &lt;p&gt;还是拿WC作为例子。在&lt;code&gt;Reduce&lt;/code&gt;函数处，原始的办法需要传一堆&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给&lt;code&gt;Reduce&lt;/code&gt;之前先归并一下，相当于多级&lt;code&gt;Reduce&lt;/code&gt;，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。&lt;/p&gt;
 
@@ -1120,11 +1213,11 @@ print(datetime.datetime.now())
 &lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Hugo&lt;/h2&gt;
+&lt;h2 id=&#34;hugo&#34;&gt;Hugo&lt;/h2&gt;
 
 &lt;p&gt;最开始的时候也想着用 &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 或者 &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt; ，但是在转换的时候，发现有些&lt;code&gt;Latex&lt;/code&gt;的代码中的行末注释&lt;code&gt;{%&lt;/code&gt;会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&amp;hellip;&amp;hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。&lt;/p&gt;
 
-&lt;h2 id=&#34;wp2hugo:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;wp2hugo&lt;/h2&gt;
+&lt;h2 id=&#34;wp2hugo&#34;&gt;wp2hugo&lt;/h2&gt;
 
 &lt;p&gt;敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， &lt;a href=&#34;https://github.com/jekyll/jekyll-import&#34;&gt;Jekyll Import&lt;/a&gt; ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&amp;hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： &lt;a href=&#34;https://github.com/hzmangel/wp2hugo&#34;&gt;wp2hugo&lt;/a&gt; 。这货主要干的事情是：&lt;/p&gt;
 
@@ -1136,15 +1229,15 @@ print(datetime.datetime.now())
 
 &lt;p&gt;基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。&lt;/p&gt;
 
-&lt;h2 id=&#34;twenty-ten:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;Twenty Ten&lt;/h2&gt;
+&lt;h2 id=&#34;twenty-ten&#34;&gt;Twenty Ten&lt;/h2&gt;
 
 &lt;p&gt;原来的Blog用的模板是WP自带的 &lt;a href=&#34;https://wordpress.org/themes/twentyten/&#34;&gt;Twenty Ten&lt;/a&gt; ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten&#34;&gt;GitHub repo&lt;/a&gt; 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。&lt;/p&gt;
 
-&lt;h3 id=&#34;分页:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;分页&lt;/h3&gt;
+&lt;h3 id=&#34;分页&#34;&gt;分页&lt;/h3&gt;
 
 &lt;p&gt;Hugo内置了分页，就是在页面中加入 &lt;code&gt;{{ template &amp;quot;_internal/pagination.html&amp;quot; . }}&lt;/code&gt; ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用&lt;code&gt;...&lt;/code&gt;代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。&lt;/p&gt;
 
-&lt;h3 id=&#34;标签云:1b3cc112b24de2a8fac8b7e8858afbfb&#34;&gt;标签云&lt;/h3&gt;
+&lt;h3 id=&#34;标签云&#34;&gt;标签云&lt;/h3&gt;
 
 &lt;p&gt;Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html&#34;&gt;sidebar.html&lt;/a&gt;：&lt;/p&gt;
 
@@ -1185,237 +1278,6 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;目前差不多就是这样了，偶尔想到啥新的东西再往上加吧，嘿嘿。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Control Goroutines amount via bufferred channel</title>
-      <link>http://hzmangel.github.io/post/1239/</link>
-      <pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1239/</guid>
-      <description>&lt;p&gt;最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
-，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。###  Bufferred Channel&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Bufferred channel&lt;/code&gt;和&lt;a href=&#34;http://www.hzmangel.info/blog/archives/1230&#34;&gt;前一篇文章&lt;/a&gt;中说的东西没
-有太大差别，只是那篇文章中说的channel是不带缓存的，也就是相当于Semaphore的用法，而加了缓存的就是管道。不多说了，直接上代码吧：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package main
-
-import &amp;quot;fmt&amp;quot;
-import &amp;quot;time&amp;quot;
-
-func main() {
-
-    channel_cnt := 10
-    concurrency_chan := make(chan bool, 2)
-    msg_chan := make(chan string)
-
-    fmt.Println(&amp;quot;Start launching goroutines&amp;quot;)
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        go foo(i, concurrency_chan, msg_chan)
-    }
-    fmt.Println(&amp;quot;Finish launching goroutines&amp;quot;)
-
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        fmt.Println(&amp;lt;-msg_chan)
-    }
-
-}
-
-func foo(i int, concurrency_chan chan bool, msg_chan chan string) {
-    concurrency_chan &amp;lt;- true
-    s := fmt.Sprintf(&amp;quot;%s: Call index %d&amp;quot;, time.Now(), i)
-    msg_chan &amp;lt;- s
-    time.Sleep(1 * time.Second)
-    &amp;lt;-concurrency_chan
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这段程序创建了两个&lt;code&gt;channel&lt;/code&gt;，而&lt;code&gt;concurrency_chan&lt;/code&gt;就是一个用来控制goroutine数量的&lt;code&gt;channel&lt;/code&gt;。在每个&lt;code&gt;gorout
-ine&lt;/code&gt;开始的时候，会往这个&lt;code&gt;channel&lt;/code&gt;中写入一个值，而在函数结束的时候从&lt;code&gt;channel&lt;/code&gt;中把东西取出来。当&lt;code&gt;channel&lt;/code&gt;中的缓存被占满的时候，
-后续的写入请求就会被阻塞，从而达到限制&lt;code&gt;goroutine&lt;/code&gt;个数的目的。代码和输出结果可以看&lt;a href=&#34;http://play.golang.org/p/8-
-qUxtH0gp&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Golang and JSON API</title>
-      <link>http://hzmangel.github.io/post/1233/</link>
-      <pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1233/</guid>
-      <description>
-
-&lt;p&gt;最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。### 生成URL&lt;/p&gt;
-
-&lt;p&gt;嗯，反正我的blog已经被墙了，所以这次就用不存在的网站来作为示例吧。这个网站的名字叫Facebook（其实是不想为国内的账号上传身份证，所以只有用国外的A
-PI了）。找了一圈，决定拿这个不存在的网站的CEO来测试。&lt;/p&gt;
-
-&lt;p&gt;用的是Facebook提供的&lt;a href=&#34;https://developers.facebook.com/docs/graph-
-api&#34;&gt;Graph API&lt;/a&gt;，下面演示的是如何用golang拼出来一个URL：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package main
-
-import (
-    &amp;quot;fmt&amp;quot;
-    &amp;quot;net/url&amp;quot;
-)
-
-func main() {
-    fmt.Println(userinfo_api(&amp;quot;4&amp;quot;, &amp;quot;&amp;quot;))
-}
-
-func userinfo_api(account_id string, access_token string) string {
-    base_url := &amp;quot;http://graph.facebook.com/&amp;quot;
-
-    params := make(url.Values)
-    params.Set(&amp;quot;fields&amp;quot;, &amp;quot;id,name,picture&amp;quot;)
-    if access_token != &amp;quot;&amp;quot; {
-        params.Set(&amp;quot;access_token&amp;quot;, access_token)
-    }
-
-    api_url := base_url + account_id + &amp;quot;?&amp;quot; + params.Encode()
-
-    return api_url
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;程序会在终端上打印出一个编码过的URL地址。这个地址直接贴到浏览器里面是会返回错误信息的，所以下一步我们需要在golang中去访问这个地址。多提一句，到目前
-为止还不需要科学上网的技能。还是一样，如果不想在本机测试结果，可以到&lt;a href=&#34;http://play.golang.org/p/mhBQxRwTmF&#34;&gt;这个地址&lt;/a&gt;去
-瞧一瞧看一看。&lt;/p&gt;
-
-&lt;h3 id=&#34;调用api:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;调用API&lt;/h3&gt;
-
-&lt;p&gt;在网上查了查发现大家对golang自带的http库表示比较满意，所以本着少用第三方库的原则，就直接使用了内置的&lt;code&gt;http&lt;/code&gt;库来获取JSON。程序如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package main
-
-import (
-    &amp;quot;fmt&amp;quot;
-    &amp;quot;net/http&amp;quot;
-    &amp;quot;net/url&amp;quot;
-)
-
-func main() {
-    info_api := userinfo_api(&amp;quot;4&amp;quot;, &amp;quot;&amp;quot;)
-    fmt.Println(info_api)
-    get_api_resp(info_api)
-}
-
-func userinfo_api(account_id string, access_token string) string {
-    base_url := &amp;quot;http://graph.facebook.com/&amp;quot;
-
-    params := make(url.Values)
-    params.Set(&amp;quot;fields&amp;quot;, &amp;quot;id,name,picture&amp;quot;)
-    if access_token != &amp;quot;&amp;quot; {
-        params.Set(&amp;quot;access_token&amp;quot;, access_token)
-    }
-
-    api_url := base_url + account_id + &amp;quot;?&amp;quot; + params.Encode()
-
-    return api_url
-}
-
-func get_api_resp(api_url string) {
-    resp, err := http.Get(api_url)
-    if err != nil {
-        panic(err)
-    }
-    defer resp.Body.Close()
-
-    fmt.Println(resp)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可以看到，直接使用&lt;code&gt;http.Get&lt;/code&gt;即可向服务器端发送GET请求。这个程序最后打印出来的&lt;code&gt;resp&lt;/code&gt;是一个&lt;code&gt;http.Response&lt;/code&gt;的类型，而我们真正
-需要的是这个响应所带来的内容，所以需要用下面的调用来取得真正的响应内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import &amp;quot;io/ioutil&amp;quot;
-
-...
-
-content, err := ioutil.ReadAll(resp.Body)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时得到的&lt;code&gt;content&lt;/code&gt;是&lt;code&gt;[]byte&lt;/code&gt;类型的数据，即&lt;code&gt;byte&lt;/code&gt;类型的数组，如果直接用&lt;code&gt;fmt.Println(content)&lt;/code&gt;打印出来则会在屏幕
-上显示数据的Ascii码，所以如果想以字符串的形式打印到屏幕上需要将其转换为string类型：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;fmt.Println(string(content))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时屏幕上显示的即是正常的JSON响应了。&lt;/p&gt;
-
-&lt;h3 id=&#34;处理json数据:2e6ed15c900da4872231994fbb6e0e50&#34;&gt;处理JSON数据&lt;/h3&gt;
-
-&lt;p&gt;此时的JSON数据还只是一个字符串，程序并不认为它和其它的字符串有什么不同，此时就需要使用内置的JSON库去解码，解码所得的结果放于&lt;code&gt;map&lt;/code&gt;结构中。&lt;/p&gt;
-
-&lt;p&gt;golang的解码有两种方式。第一种方式是明确知道返回JSON的数据格式，包括返回数据的结构，每一项的名称，以及值的类型，这种类型的返回数据可以直接解码到预
-先定义的&lt;code&gt;struct&lt;/code&gt;中，然后使用点操作符调用获取其中的值，如下所示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;type userinfo_api_resp struct {
-    Id      string
-    Name    string
-    Picture userinfo_picture_data_wrapper
-}
-
-type userinfo_picture_data_wrapper struct {
-    Data userinfo_picture_data_detail
-}
-
-type userinfo_picture_data_detail struct {
-    Url           string
-    Is_silhouette bool
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在定义好这些内容后，使用下面的代码负责把JSON内容填入其中：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// content saves json repsonse in []byte formated
-err = json.Unmarshal(content, &amp;amp;json_rslt)
-if err != nil {
-    panic(err)
-}
-fmt.Println(json_rslt)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时即可以像普通的struct那样调用JSON中的值了，如使用&lt;code&gt;json_rslt.Name&lt;/code&gt;可以获取到名字，用&lt;code&gt;json_rslt.Picture.Dat
-a.Url&lt;/code&gt;可以获取到图片的地址等。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;struct&lt;/code&gt;中字段名的首字母都需要大写，猜测是由于golang中非首字母大写的变量不会被导出。（话说，真的好想好想吐槽这个设定啊，实在不习惯看大小写混杂的变量名，诶。）&lt;/p&gt;
-
-&lt;p&gt;当JSON返回的格式未知，或者不想定义过多的struct时，可以使用第二种方法。&lt;code&gt;interface{}&lt;/code&gt;。这个东西是一个空的&lt;code&gt;interface&lt;/code&gt;，表示的
-是一个没有任何方法的&lt;code&gt;interface&lt;/code&gt;，因为任何golang的类型都至少实现了0个方法（唔，直接翻译过来的，读着有点拗口，回头揣摩明白了再回来改），所以
-这个类型实际可以用于任何类型的变量。第二种方法就是使用&lt;code&gt;interface{}&lt;/code&gt;来表示所有未定的类型，然后由程序去处理相应的数据。还是上面那段JSON数据，
-想取到图片地址，则需要这么处理：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;json_rslt := map[string]interface{}{}
-
-...
-
-for k1, v1 := range json_rslt {
-    if k1 == &amp;quot;picture&amp;quot; {
-        for k2, v2 := range v1.(map[string]interface{}) {
-            if k2 == &amp;quot;data&amp;quot; {
-                for k3, v3 := range v2.(map[string]interface{}) {
-                    if k3 == &amp;quot;url&amp;quot; {
-                        fmt.Println(v3)
-                    }
-                }
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;唔，其实也没简单到哪去的感觉&amp;hellip;&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;在&lt;code&gt;range&lt;/code&gt;后调用的诸如&lt;code&gt;v1.(map[string]interface{})&lt;/code&gt;被称为&lt;a href=&#34;http://golan
-g.org/ref/spec#Type_assertions&#34;&gt;&lt;em&gt;type assertions&lt;/em&gt;&lt;/a&gt;，它的意思是断言&lt;code&gt;v1&lt;/code&gt;非空而且&lt;code&gt;v1&lt;/code&gt;的类型是&lt;code&gt;(map[string]interface{
-})&lt;/code&gt;。文档中给出的更加精确的说法是&lt;code&gt;x.(T)&lt;/code&gt;表示&lt;code&gt;x&lt;/code&gt;的动态类型和&lt;code&gt;T&lt;/code&gt;一致，&lt;code&gt;T&lt;/code&gt;必需实现&lt;code&gt;x&lt;/code&gt;的所有接口。更加具体的代码请参考文档&lt;/p&gt;
-
-&lt;p&gt;到这，差不多就完成了，POST请求的事情还没用到，等用到后发现有什么需要写的再写吧。另外需要注意的一点是，&lt;a href=&#34;http://play.golang.org/&#34;&gt;http://play.golang.org/&lt;/a&gt;
-网站上是不允许使用&lt;code&gt;net/http&lt;/code&gt;库的，所以我后面的程序才没有给出代码链接，有兴趣的可以在自己机器上试验，记得要科学上网哦，要不然就会返回奇怪的结果了～&lt;/p&gt;
 </description>
     </item>
     

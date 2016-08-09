@@ -40,9 +40,9 @@ int main (int argc, const char * argv[]) {
 &lt;p&gt;Okay, the program does the same thing as the first program of other languages
 do: print out &lt;strong&gt;Hello World!&lt;/strong&gt; string.&lt;/p&gt;
 
-&lt;h3 id=&#34;compile-and-execute-the-program:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Compile and execute the program&lt;/h3&gt;
+&lt;h3 id=&#34;compile-and-execute-the-program&#34;&gt;Compile and execute the program&lt;/h3&gt;
 
-&lt;h4 id=&#34;mac-os:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Mac OS&lt;/h4&gt;
+&lt;h4 id=&#34;mac-os&#34;&gt;Mac OS&lt;/h4&gt;
 
 &lt;p&gt;I have installed Xcode before, so I don&amp;rsquo;t know whether those commands can be
 run successfully without Xcode command line tools.&lt;/p&gt;
@@ -66,7 +66,7 @@ $ ./helloworld_gcc
 2013-01-24 01:56:29.744 helloworld_gcc[7846:707] Hello World!
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;linux:cbaf7cc632ff6debbe929e03695103f2&#34;&gt;Linux&lt;/h4&gt;
+&lt;h4 id=&#34;linux&#34;&gt;Linux&lt;/h4&gt;
 
 &lt;p&gt;With GCC, the command line compilation can also be done on Linux platform. I
 am using Debian and have set up the environment after refering &lt;a href=&#34;http://stpetrus27.wordpress.com/2011/06/20/compile-objective-c-programs-

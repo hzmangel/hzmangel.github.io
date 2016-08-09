@@ -23,7 +23,7 @@
 &lt;p&gt;Like deploying other website, the static file is served via nginx, and the
 Ruby logic will be handled via some middle-wares, here is the list:&lt;/p&gt;
 
-&lt;h4 id=&#34;thin:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Thin&lt;/h4&gt;
+&lt;h4 id=&#34;thin&#34;&gt;Thin&lt;/h4&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Install the &lt;code&gt;thin&lt;/code&gt; via &lt;code&gt;homebrew&lt;/code&gt;&lt;/p&gt;
@@ -74,7 +74,7 @@ socket&lt;/code&gt; can also be used in the &lt;code&gt;upstream&lt;/code&gt; se
 &lt;li&gt;Restart the nginx server, the RoR project can be shown in the web browser now.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&#34;passenger:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Passenger&lt;/h4&gt;
+&lt;h4 id=&#34;passenger&#34;&gt;Passenger&lt;/h4&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Install passenger via gem&lt;/p&gt;
@@ -118,7 +118,7 @@ try to use &lt;code&gt;passenger package-runtime&lt;/code&gt; and then get the a
  }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;unicorn:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Unicorn&lt;/h4&gt;
+&lt;h4 id=&#34;unicorn&#34;&gt;Unicorn&lt;/h4&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Install unicorn via gem&lt;/p&gt;
@@ -139,7 +139,7 @@ the sample configuration file. &lt;strong&gt;NOTICE&lt;/strong&gt;: Need absolut
 &lt;li&gt;The left step is the same with Thin, a &lt;code&gt;upstream&lt;/code&gt; section should be added to nginx.conf, and redirection should be added to &lt;code&gt;location&lt;/code&gt; section.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;deploy-remotely-via-capistrano:b1a2d15ffeb639b3e5a3de0500377fd8&#34;&gt;Deploy remotely via Capistrano&lt;/h3&gt;
+&lt;h3 id=&#34;deploy-remotely-via-capistrano&#34;&gt;Deploy remotely via Capistrano&lt;/h3&gt;
 
 &lt;p&gt;Capistrano is a useful tool for deploying RoR application to remote server(s).
 The Capistrany package provides several tasks for simplfying the deploying
@@ -356,7 +356,7 @@ zb：底端啦~&lt;/p&gt;
       <pubDate>Fri, 04 Dec 2009 01:07:05 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/490/</guid>
-      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\
+      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和&lt;br /&gt;
 L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)&lt;/p&gt;
 
 &lt;p&gt;例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：&lt;/p&gt;

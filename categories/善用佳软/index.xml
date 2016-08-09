@@ -169,7 +169,7 @@ zb：底端啦~&lt;/p&gt;
       <pubDate>Fri, 04 Dec 2009 01:07:05 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/490/</guid>
-      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和\
+      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和&lt;br /&gt;
 L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)&lt;/p&gt;
 
 &lt;p&gt;例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：&lt;/p&gt;

@@ -86,7 +86,7 @@ presentation about GAE on 2009, and here is the
 article.Creating Rails project has been talked in previous post, so this post will
 focus on others.</p>
 
-<h2 id="mongodb:9c891c3667928d9a98ce25e09d55dbc7">MongoDB</h2>
+<h2 id="mongodb">MongoDB</h2>
 
 <p>Thought I have heard MongoDB before, I just start to use it recently. It is a
 document based NoSQL database, and it is developer friendly. Detailed
@@ -131,9 +131,9 @@ the doucment page of MongoDB.</p>
 <p>After those steps done, the system is ready for playing MongoDB with Rails,
 let&rsquo;s go.</p>
 
-<h2 id="web-app:9c891c3667928d9a98ce25e09d55dbc7">Web App</h2>
+<h2 id="web-app">Web App</h2>
 
-<h3 id="prepare-the-rails-gem:9c891c3667928d9a98ce25e09d55dbc7">Prepare the Rails Gem</h3>
+<h3 id="prepare-the-rails-gem">Prepare the Rails Gem</h3>
 
 <p>After creating the Rails application with <code>--skip-active-record</code> option, the
 <code>Gemfile</code> should also be updated to include MongoDB related gems. Here is the
@@ -147,16 +147,16 @@ gem &quot;mongoid&quot;, &quot;~&gt; 3.0.0.rc&quot;
 <p>After adding those lines into <code>Gemfile</code>, remember to run <code>bundle install</code> for
 checking the dependencies.</p>
 
-<h3 id="generate-configuration-file-for-mongoid:9c891c3667928d9a98ce25e09d55dbc7">Generate Configuration File for <code>mongoid</code></h3>
+<h3 id="generate-configuration-file-for-mongoid">Generate Configuration File for <code>mongoid</code></h3>
 
 <p>The configuration file of <code>mongoid</code> can be generated with command <code>rails g
 mongoid:config</code>, then the file <code>config/mongoid.yml</code> will be generated. The
 generated file has some options and plenty of comments, so it is easy to
 modify it as requirements.</p>
 
-<h3 id="the-web-app:9c891c3667928d9a98ce25e09d55dbc7">The Web App</h3>
+<h3 id="the-web-app">The Web App</h3>
 
-<h4 id="the-model:9c891c3667928d9a98ce25e09d55dbc7">The Model</h4>
+<h4 id="the-model">The Model</h4>
 
 <p>For fast developing, we are using <code>scaffold</code> here. This web app should save
 two type of data, one is cheater and the other is provider. The <code>Cheaters</code>
@@ -196,7 +196,7 @@ end
 <p>Do not like the SQL database, there is no migration needed for MongoDB, which
 is more convenient during the development and upgrade.</p>
 
-<h4 id="the-controller-and-viewers:9c891c3667928d9a98ce25e09d55dbc7">The Controller and Viewers</h4>
+<h4 id="the-controller-and-viewers">The Controller and Viewers</h4>
 
 <p>The scaffold generated contains controllers, views and URL mapping, now we are
 going to go though the controller. The file <code>config/routers.rb</code> dispatch the
@@ -294,6 +294,12 @@ The detail implementation can be referred from the source code:
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -301,12 +307,6 @@ The detail implementation can be referred from the source code:
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -318,7 +318,7 @@ The detail implementation can be referred from the source code:
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -343,7 +343,7 @@ The detail implementation can be referred from the source code:
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

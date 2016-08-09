@@ -84,7 +84,7 @@
 
 <p>Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。</p>
 
-<h2 id="相似数据集:98fc395032abb3e5c8d913488aa084ef">相似数据集</h2>
+<h2 id="相似数据集">相似数据集</h2>
 
 <p>许多数据挖掘的问题都能简化为查找相似数据集的问题，如：</p>
 
@@ -105,7 +105,7 @@
 
 <p>文档相似性可以使用 <em>Jaccard Similarity</em> 来衡量。对于两个集合 <code>$S$</code> 和 <code>$T$</code> 来说，它们之间的 <em>Jaccard Similarity</em> 为 <code>$|S \cap T| / |S \cup T|$</code>，记为 <em>SIM(S,T)</em> 或 <em>J(S,T)</em> 。不难看出，当此值为<code>0</code>时表示两个集合没有交集，而为<code>1</code>时则表示两个集合相等。</p>
 
-<h3 id="k-shingling或叫k-gram:98fc395032abb3e5c8d913488aa084ef">k-shingling或叫k-gram</h3>
+<h3 id="k-shingling或叫k-gram">k-shingling或叫k-gram</h3>
 
 <blockquote>
 <p><em>k-shingling</em> 是指把文档按连续的 <em>k</em> 个字母拆成子集的方法。</p>
@@ -119,7 +119,7 @@
 
 <p>对于shingling中的元素，可以直接使用字符串，但是更好的办法是把它通过hash变化映射到某个bucket中，而将这个bucket的编号作为shingling元素进行比较。这样可以在shingling元素空间不变的情况下，降低运行时占用的内存。而且在比较上，整数比字符串要更有优势。这一步叫做 <strong>Compressing Shinglings</strong> 。</p>
 
-<h3 id="minhashing:98fc395032abb3e5c8d913488aa084ef">Minhashing</h3>
+<h3 id="minhashing">Minhashing</h3>
 
 <p>这一段是从 <a href="https://en.wikipedia.org/wiki/MinHash">wikipedia</a> 上看到的定义：</p>
 
@@ -144,7 +144,7 @@ FOREACH columes:
     SIG(i, c) = min( SIG(i, c), hi(r) )
 </code></pre>
 
-<h3 id="locality-sensitive-hash:98fc395032abb3e5c8d913488aa084ef">Locality-Sensitive Hash</h3>
+<h3 id="locality-sensitive-hash">Locality-Sensitive Hash</h3>
 
 <p><em>By Me: 此处的概念还有些模糊，需要再啃啃。</em></p>
 
@@ -162,7 +162,7 @@ FOREACH columes:
 
 <p>这个曲线是一个S型的连续曲线，我们需要做的就是通过挑选<code>b</code>和<code>r</code>，让这条曲线在两端尽量的平缓，而在中间部分尽可能的陡峭。这样就不会有过多的 <em>False Positive</em> 或者 <em>False Negative</em> 。</p>
 
-<h2 id="具体使用流程:98fc395032abb3e5c8d913488aa084ef">具体使用流程</h2>
+<h2 id="具体使用流程">具体使用流程</h2>
 
 <p>综上所述，在实际应用中会有下面几步工作（文档比较）：</p>
 
@@ -180,17 +180,17 @@ FOREACH columes:
 <li>检查选择出来的特征对，确定它们的相似度都大于 <code>$t$</code> 。</li>
 </ol>
 
-<h2 id="实例:98fc395032abb3e5c8d913488aa084ef">实例</h2>
+<h2 id="实例">实例</h2>
 
 <p><em>注：此处只是列出课程中出现的示例，后续会尝试使用程序完成，再补齐说明。</em></p>
 
-<h3 id="entity-resolution:98fc395032abb3e5c8d913488aa084ef">Entity Resolution</h3>
+<h3 id="entity-resolution">Entity Resolution</h3>
 
-<h3 id="fingerprints:98fc395032abb3e5c8d913488aa084ef">Fingerprints</h3>
+<h3 id="fingerprints">Fingerprints</h3>
 
-<h3 id="similar-news-articles:98fc395032abb3e5c8d913488aa084ef">Similar News Articles</h3>
+<h3 id="similar-news-articles">Similar News Articles</h3>
 
-<h2 id="距离计算:98fc395032abb3e5c8d913488aa084ef">距离计算</h2>
+<h2 id="距离计算">距离计算</h2>
 
 <p>此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 <em>Jaccard Similarity</em> 并不是距离，用<code>1</code>减去它才是。一般说来，有两种类型的距离，它们是 <em>欧氏距离</em> 和 <em>非欧距离</em> 。</p>
 
@@ -210,11 +210,11 @@ FOREACH columes:
 <li><code>$d(x,z) \leq d(x,y) + d(y,z)$</code> ：三角定理。</li>
 </ul>
 
-<h3 id="欧氏距离:98fc395032abb3e5c8d913488aa084ef">欧氏距离</h3>
+<h3 id="欧氏距离">欧氏距离</h3>
 
 <p><code>$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$</code> 。在<code>$r=2$</code>时，即变成平方各开根号，即熟悉的距离计算。此外还有<code>$L_{1}-norm$</code> 。</p>
 
-<h3 id="非欧距离:98fc395032abb3e5c8d913488aa084ef">非欧距离</h3>
+<h3 id="非欧距离">非欧距离</h3>
 
 <ul>
 <li><em>Jaccard Distance</em></li>
@@ -283,6 +283,12 @@ FOREACH columes:
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -290,12 +296,6 @@ FOREACH columes:
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -307,7 +307,7 @@ FOREACH columes:
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -332,7 +332,7 @@ FOREACH columes:
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>

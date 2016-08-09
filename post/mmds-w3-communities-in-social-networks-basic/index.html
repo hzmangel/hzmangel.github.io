@@ -91,13 +91,13 @@
 <li>给定一个网络，怎么找到最好的 <em>Communities</em> 模型</li>
 </ul>
 
-<h2 id="从模型生成网络:6f5ccd4dcd8169ad30902566c7400598">从模型生成网络</h2>
+<h2 id="从模型生成网络">从模型生成网络</h2>
 
 <p>从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。</p>
 
-<h3 id="agm-affiliation-graph-model:6f5ccd4dcd8169ad30902566c7400598">AGM: Affiliation Graph Model</h3>
+<h3 id="agm-affiliation-graph-model">AGM: Affiliation Graph Model</h3>
 
-<h4 id="参数:6f5ccd4dcd8169ad30902566c7400598">参数</h4>
+<h4 id="参数">参数</h4>
 
 <ul>
 <li><code>$V$</code>: 节点</li>
@@ -106,13 +106,13 @@
 <li><code>$P_{c}$</code>: 某个 <em>Community</em> 的联通率，即都属于某个 <em>Community</em> 的节点之间联通的概率。</li>
 </ul>
 
-<h4 id="生成过程:6f5ccd4dcd8169ad30902566c7400598">生成过程</h4>
+<h4 id="生成过程">生成过程</h4>
 
 <p>遍历每个 <em>Community</em> <code>$A$</code> 中的节点对，以 <code>$P_{A}$</code> 的概率连接它们（边的生成）。</p>
 
 <p>任意两点间的连接概率为<code>$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $</code> 。其中，<code>$M_{u}$</code> 表示包含有节点 <code>$u$</code> 的 <em>Community</em> 集合。如果 <code>$u$</code> 和 <code>$v$</code> 没有共用的 <em>Community</em> ，则概率 <code>$P(u,v) = \epsilon $</code> 。</p>
 
-<h4 id="适应性强:6f5ccd4dcd8169ad30902566c7400598">适应性强</h4>
+<h4 id="适应性强">适应性强</h4>
 
 <p>可以用于生成多种 <em>Community</em> ：</p>
 
@@ -122,15 +122,15 @@
 <li>内嵌 (Nested)</li>
 </ul>
 
-<h2 id="从网络生成模型:6f5ccd4dcd8169ad30902566c7400598">从网络生成模型</h2>
+<h2 id="从网络生成模型">从网络生成模型</h2>
 
-<h3 id="agm-affiliation-graph-model-1:6f5ccd4dcd8169ad30902566c7400598">AGM: Affiliation Graph Model</h3>
+<h3 id="agm-affiliation-graph-model-1">AGM: Affiliation Graph Model</h3>
 
 <p>这个是mmds书本<a href="http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf">配套幻灯片</a>上的内容，占坑。</p>
 
-<h3 id="bigclam:6f5ccd4dcd8169ad30902566c7400598">BigCLAM</h3>
+<h3 id="bigclam">BigCLAM</h3>
 
-<h4 id="membership-strength:6f5ccd4dcd8169ad30902566c7400598">Membership Strength</h4>
+<h4 id="membership-strength">Membership Strength</h4>
 
 <p>引入一个新概念，某个节点 <code>$u$</code> 对某个 <em>Community</em> 的 <em>membership strength</em> ，记为 <code>$F_{u,A}$</code>，同时定义如果此值为0，则表明节点不在 <em>Community</em> 中。所以在某个 <em>Community</em> 中，两个节点的联通概率为 <code>$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$</code> 。</p>
 
@@ -144,7 +144,7 @@
 
 <p>所以问题就从如何从一个网络生成 <em>Community</em> 变成了如何从给定的网络中找到可以最大化 <em>likelihood</em> 的矩阵 <code>$F$</code> ，即 <code>$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$</code> 。通常这个 <em>likelihood</em> 会使用对数表示，记为 <code>$l(F)=\log P(G|F)$</code> 。最后问题就演变为找到可以使 <code>$l(F)$</code> 最大化的 <code>$F$</code>。而 <code>$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$</code></p>
 
-<h4 id="计算:6f5ccd4dcd8169ad30902566c7400598">计算</h4>
+<h4 id="计算">计算</h4>
 
 <p>考虑到需要求 <em>likelihood</em> 的极大值，所以考虑使用导数（ <em>gradient</em> ）来计算。将上式中的<code>$F_{u}$</code>看作变量，即某节点 <code>$u$</code> 的最大 <em>likelihood</em> 值，则对上面公式的求导后可变为</p>
 
@@ -160,7 +160,7 @@
 
 <hr />
 
-<h2 id="其它阅读-graph-and-social-network:6f5ccd4dcd8169ad30902566c7400598">其它阅读: Graph and Social Network</h2>
+<h2 id="其它阅读-graph-and-social-network">其它阅读: Graph and Social Network</h2>
 
 <p><strong>注</strong>：此处的内容并没有在课程讲义中，而对应书本的 <em>10.1.2 Social Networks as Graphs</em> 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。</p>
 
@@ -246,6 +246,12 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
+            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
+</a></li>
+        
+            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
+</a></li>
+        
             <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
 </a></li>
         
@@ -253,12 +259,6 @@
 </a></li>
         
             <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/go-generate-struct-to-schema/'> Go generate study
-</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/'> MMDS Notes: W3 - Communities in Social Network (Basic)
 </a></li>
         
         </ul>
@@ -270,7 +270,7 @@
         
             <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
         
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(91)</li>
+            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
             <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
         
@@ -295,7 +295,7 @@
 
     <div class="sidebar-block">
         <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 58, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 10, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 2, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 1, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
+        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
     </div>
 
 </aside>
