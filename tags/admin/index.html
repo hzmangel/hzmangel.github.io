@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" Admin &middot;  湖间小筑" />
+        <meta property="og:title" content=" admin &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/tags/admin/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | Admin
+                | admin
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,11 @@
     </header>
 
     <section>
-        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西： net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存 sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。 话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
+        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
+解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西：
+net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1  其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
+sysctl -w net.ipv4.route.flush=1  差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
+话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
     </section>
 
     
@@ -87,7 +91,8 @@
     </header>
 
     <section>
-        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉 Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</div>
+        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
+Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动改~</div>
     </section>
 
     
@@ -103,7 +108,13 @@
     </header>
 
     <section>
-        <div class="post-summary">折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。 直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了： `# fuser -km /mnt/dir umount -f /mnt/dir` Updated at 2011-01-11 唔，在网上又找到了一个办法 umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore. 试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</div>
+        <div class="post-summary">折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
+直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：
+`# fuser -km /mnt/dir
+umount -f /mnt/dir` Updated at 2011-01-11
+唔，在网上又找到了一个办法
+umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore.
+试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</div>
     </section>
 
     
@@ -150,20 +161,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -172,7 +178,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -241,11 +247,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

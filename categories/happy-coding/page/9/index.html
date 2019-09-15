@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" Happy Coding &middot;  湖间小筑" />
+        <meta property="og:title" content=" Happy coding &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/categories/happy-coding/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | Happy Coding
+                | Happy coding
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -103,7 +103,9 @@
     </header>
 
     <section>
-        <div class="post-summary">本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。 首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&lsquo;file&rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。 暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</div>
+        <div class="post-summary">本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。
+首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&lsquo;file&rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。
+暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</div>
     </section>
 
     
@@ -151,7 +153,8 @@
     </header>
 
     <section>
-        <div class="post-summary">昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。 btw: Apache的虚拟主机好像有点好玩，有空看看。</div>
+        <div class="post-summary">昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。
+btw: Apache的虚拟主机好像有点好玩，有空看看。</div>
     </section>
 
     
@@ -167,7 +170,8 @@
     </header>
 
     <section>
-        <div class="post-summary">呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了 btw: 建立站点后，要到站点的目录下运行managy.py runserver</div>
+        <div class="post-summary">呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了
+btw: 建立站点后，要到站点的目录下运行managy.py runserver</div>
     </section>
 
     
@@ -190,8 +194,7 @@
 sizingMethod=&lsquo;crop&rsquo;);</p>
 
 <p>由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。<br />
-首先是JavaScript的代码，用以生成HTML，以给图像加滤镜</p>
-</div>
+首先是JavaScript的代码，用以生成HTML，以给图像加滤镜</p></div>
     </section>
 
     
@@ -270,20 +273,15 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -292,7 +290,7 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -361,11 +359,11 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

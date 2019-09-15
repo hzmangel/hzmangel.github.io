@@ -34,7 +34,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -84,9 +84,7 @@
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。</p>
+        <div class="post-summary"><p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。</p>
 
 <p>这篇东西会包含下面几项内容：</p>
 
@@ -264,8 +262,7 @@ end
 
 <p>在上述的例子中，原本 <em>title</em> 字段的 <em>analyzer</em> 被指定为 <em>english</em> 而不是默认的 <em>string</em> 。</p>
 
-<p>Q: 为什么设定了type后，import返回值为1，而不设的时候返回是0？</p>
-</div>
+<p>Q: 为什么设定了type后，import返回值为1，而不设的时候返回是0？</p></div>
     </section>
 
     <footer>
@@ -286,12 +283,12 @@ end
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/rails_reload_parent_in_iframe/"> &lt; Rails - Reload Parent Page in iframe
+                 <a class="previous" href="http://hzmangel.github.io/post/different_auth_method_in_rails_api/"> &lt; Use Different Auth Method In Rails API Controller
  </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/different_auth_method_in_rails_api/"> Use Different Auth Method In Rails API Controller
+                 <a class="next" href="http://hzmangel.github.io/post/rails_reload_parent_in_iframe/"> Rails - Reload Parent Page in iframe
  &gt;</a> 
             </p>
         </nav>
@@ -326,20 +323,15 @@ end
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -348,7 +340,7 @@ end
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -417,11 +409,11 @@ end
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

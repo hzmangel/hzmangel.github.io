@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Happy Coding on 湖间小筑</title>
+    <title>Happy coding on 湖间小筑</title>
     <link>http://hzmangel.github.io/categories/happy-coding/</link>
-    <description>Recent content in Happy Coding on 湖间小筑</description>
+    <description>Recent content in Happy coding on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
@@ -17,10 +19,7 @@
       <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
-      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;
-
-&lt;p&gt;细看了眼原因，因为在Rails中，默认传递的params类型为 &lt;code&gt;ActionController::Parameters&lt;/code&gt; ，而在这个类下可以直接调用 &lt;code&gt;permit&lt;/code&gt; 或 &lt;code&gt;permit!&lt;/code&gt; 的方法来完成参数设置，同时会提供 &lt;code&gt;permitted?&lt;/code&gt; 函数来检查参数是否有效。而 grape 默认传入的参数类型是 &lt;code&gt;Hashie::Mash&lt;/code&gt; ，并没有提供 &lt;code&gt;permit&lt;/code&gt; 函数。好在 Ruby 支持 &lt;em&gt;Monkey Patch&lt;/em&gt; 所以新增的这个 gem 在 &lt;code&gt;Hashie::Mash&lt;/code&gt; 类中加上了对函数 &lt;code&gt;:permitted?&lt;/code&gt; 的响应，从而解决了这个问题。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,21 +29,7 @@
       <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
-      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooController &amp;lt; ApplicationController
-  def parent_reload
-    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.reload();&amp;lt;/script&amp;gt;&amp;quot;
-  end
-
-  def parent_redirect_to(url)
-    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.href=&#39;#{url}&#39;;&amp;lt;/script&amp;gt;&amp;quot;
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;就是直接把 Javascript 以 HTML 的形式返回给浏览器端，浏览器端在收到内容后自动执行其中的脚本。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,9 +39,7 @@ end
       <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
-      <description>
-
-&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
+      <description>&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
 
 &lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
 
@@ -67,175 +50,7 @@ end
 &lt;li&gt;Custom Analyzer&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;
-
-&lt;h2 id=&#34;安装elasticsearch&#34;&gt;安装Elasticsearch&lt;/h2&gt;
-
-&lt;p&gt;两种方法，从官网下编译好的&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html&#34;&gt;二进制解压&lt;/a&gt;，或者用&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/master/setup-repositories.html&#34;&gt;操作系统的安装源&lt;/a&gt;。如果是OSX，可以使用 &lt;em&gt;homebrew&lt;/em&gt; 安装，命令为 &lt;code&gt;brew install elasticsearch&lt;/code&gt; ，安装后的启动可以使用 &lt;code&gt;brew info elasticsearch&lt;/code&gt; 查看。&lt;/p&gt;
-
-&lt;p&gt;安装并启动服务后，可以用下面的命令查看系统是否成功启动：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ curl -X GET &#39;http://localhost:9200&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果一切正常，会返回服务器的状态信息。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;关联-rails-与-elasticsearch&#34;&gt;关联 Rails 与 Elasticsearch&lt;/h2&gt;
-
-&lt;h3 id=&#34;gem&#34;&gt;Gem&lt;/h3&gt;
-
-&lt;p&gt;Elasticsearch提供了两个Gem用于和Rails集成，分别是 &lt;a href=&#34;https://github.com/elastic/elasticsearch-rails&#34;&gt;&lt;em&gt;elasticsearch-rails&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model&#34;&gt;&lt;em&gt;elasticsearch-model&lt;/em&gt;&lt;/a&gt; 。其中， &lt;em&gt;elasticsearch-rails&lt;/em&gt; 为 Rails 的模块加入了 Elasticsearch 的功能，而 &lt;em&gt;elasticsearch-model&lt;/em&gt; 则为 Ruby 的类提供了一些简化的连接 &lt;em&gt;Elasticsearch&lt;/em&gt; 的方法，使得相应的类可以通过 &lt;code&gt;__elasticsearch__&lt;/code&gt; 直接访问 &lt;em&gt;Elasticsearch&lt;/em&gt; 服务器的资源。&lt;/p&gt;
-
-&lt;h3 id=&#34;model-enable-indexes-in-elasticsearch&#34;&gt;Model - Enable indexes in Elasticsearch&lt;/h3&gt;
-
-&lt;p&gt;由于 Elasticsearch 是一个单独的服务器，所以在使用前需要考虑以下几点：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;有哪些Model需要被索引&lt;/li&gt;
-&lt;li&gt;每个Model有哪些字段需要被索引&lt;/li&gt;
-&lt;li&gt;如何在数据库中记录更新后同步 Elasticsearch 的索引&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果不使用 Elasticsearch 提供的 gem，需要手动去完成上面的几个步骤，但是上面提到的两个 gem 提供了一系列方便使用的函数。代码的东西对着说比较好弄，所以这里有一个 [Demo Project]()，对着来说吧。&lt;/p&gt;
-
-&lt;p&gt;这个app就是一个简单的blog，由于只是为了介绍 Elasticsearch ，所以只引入了最简单的部分。&lt;/p&gt;
-
-&lt;p&gt;在 &lt;code&gt;app/models/blog.rb&lt;/code&gt; 中可以看到，需要索引一个 model 需要三步：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;在代码中加入 Elasticsearch 的模块。&lt;/li&gt;
-&lt;li&gt;设置需要索引的模块。&lt;/li&gt;
-&lt;li&gt;导入数据至 Elasticsearch 。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;对于需要索引的Model，只需要在代码中加上几行即可以调用 Elasticsearch 的功能。可以在 &lt;code&gt;app/models/blog.rb&lt;/code&gt; 中看到下面的代码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
-
-class Blog &amp;lt; ActiveRecord::Base
-  include Elasticsearch::Model
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在加入了这几行代码后，这个Model就可以通过 &lt;code&gt;__elasticsearch__&lt;/code&gt; 来调用Elasticsearch的API了。例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.__elasticsearch__.client.cluster.health
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;至此，只是在Blog中导入了一些Elasticsearch相关的配置，但是还没有将具体的数据导入到Elasticsearch服务器中。可以使用下面的命令导入数据：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.import force: true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者逐步完成：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.__elasticsearch__.create_index! force: true
-Blog.__elasticsearch__.refresh_index!
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但是由于 Elasticsearch 的索引是和model分开存放的，所以在每次数据有更新时，需要手动更新所更新文档的索引。如下所示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.first.__elasticsearch__.index_document
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;不过Elasticsearch提供了Callback的方式来处理这些操作，只需要在Model中加入如下代码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;include Elasticsearch::Model::Callbacks
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;即可在每次数据有更新时，自动更新索引。在Gem的文档中还有一些更详细的用法，如异步索引，自定义索引等供查阅。&lt;/p&gt;
-
-&lt;p&gt;在数据导入完成后即可尝试在 Elasticsearch 查找导入的数据了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Blog.search(&#39;*&#39;).records.records
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;model-choose-indexed-fields&#34;&gt;Model - Choose indexed fields&lt;/h3&gt;
-
-&lt;p&gt;默认情况下，所有字段都会被加入 Elasticsearch 的索引。但是在实际使用情况中，可能会碰到只索引某些数据的场景。 Elasticsearch 提供了一个函数用来指定需要索引的字段以及对应的值。函数的名称是 &lt;code&gt;as_indexed_json&lt;/code&gt; 。这个函数是在 &lt;code&gt;Elasticsearch::Model::Serializing&lt;/code&gt; 定义的，如果需要定制，直接在Model中重新定义自己的函数就好。如下所示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
-
-class Blog &amp;lt; ActiveRecord::Base
-  include Elasticsearch::Model
-
-  def as_indexed_json(options = {})
-    as_json(
-      only: [:title, :content]
-    )
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在上面的例子中，无论我的Blog记录中还有什么字段，只有 &lt;em&gt;title&lt;/em&gt; 和 &lt;em&gt;content&lt;/em&gt; 字段会被放入 Elasticsearch 的索引中，也只有这两个字段会返回在查询的结果中。除了内置字段外，还支持将函数中方法的返回值也加入索引中，如下所示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
-
-class Blog &amp;lt; ActiveRecord::Base
-  include Elasticsearch::Model
-
-  def as_indexed_json(options = {})
-    as_json(
-      only: [:title, :content],
-      methods: [:author_name, :tag_count],
-    )
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时在索引的字段和返回的结果中，会多出 &lt;em&gt;author_name&lt;/em&gt; 以及 &lt;em&gt;tag_count&lt;/em&gt; 的返回值。这种方式可以指定关联记录的索引信息。除此之外，还可以在 &lt;code&gt;include&lt;/code&gt; 中使用嵌套的字段来标明关系记录。例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;elasticsearch/model&#39;
-
-class Blog &amp;lt; ActiveRecord::Base
-  include Elasticsearch::Model
-
-  def as_indexed_json(options = {})
-    as_json(
-      only: [:title, :content],
-      include: { author: {only: :name}, tag: {methods: [:count]} }
-    )
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;至此，基本的索引构建应该差不多了，在调用过 &lt;em&gt;import&lt;/em&gt; 后，就可以用基本的查询功能去查找了。&lt;/p&gt;
-
-&lt;h2 id=&#34;analyzer-和-mapping&#34;&gt;&lt;em&gt;Analyzer&lt;/em&gt; 和 &lt;em&gt;Mapping&lt;/em&gt;&lt;/h2&gt;
-
-&lt;h3 id=&#34;analyzer&#34;&gt;&lt;em&gt;Analyzer&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;对每一条被索引的内容， ES 都会通过 &lt;em&gt;Analyzer&lt;/em&gt; 把内容分词后放入服务器（因为ES中是使用 &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95&#34;&gt;反向索引&lt;/a&gt; 来查找的，而反向索引的 &lt;em&gt;token&lt;/em&gt; 就是输入文字经过 &lt;em&gt;Analyzer&lt;/em&gt; 处理的结果）。而在查询时，如果是全文检索，那么 ES 会将和分析内容时使用的相同的 &lt;em&gt;Analyzer&lt;/em&gt; 应用于检索词上，并将分词后的检索词用于查找以提高查找的准确性。而如果查询的类型是精确匹配， ES 将不会处理检索词。&lt;/p&gt;
-
-&lt;p&gt;根据 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/guide/current/analysis-intro.html&#34;&gt;文档&lt;/a&gt; 的介绍，每一个 &lt;em&gt;Analyzer&lt;/em&gt; 由 &lt;strong&gt;3&lt;/strong&gt; 步组成，分别是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Character filters&lt;/em&gt; : 对输入的内容按字符处理，包含有 &lt;em&gt;Mapping Char Filter&lt;/em&gt;, &lt;em&gt;HTML Strip Char Filter&lt;/em&gt; 和 &lt;em&gt;Pattern Replace Char Filter&lt;/em&gt; ，具体介绍请参阅 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-charfilters.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Tokenizer&lt;/em&gt; : 分词器，根据不同的规则，将输入内容分为不同的 token ，&lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenizers.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Token filters&lt;/em&gt; : 应用于上面分割开的 &lt;em&gt;token&lt;/em&gt; 上的 filter。 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-tokenfilters.html&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ES 还提供了一些内置的 &lt;em&gt;Analyzer&lt;/em&gt; ，可以在 &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-analyzers.html&#34;&gt;这里&lt;/a&gt; 查到。由于 Rails 中的代码实例会牵涉到 &lt;em&gt;Mapping&lt;/em&gt; 相关的内容，所以会在下一节中贴代码。&lt;/p&gt;
-
-&lt;h3 id=&#34;mapping&#34;&gt;&lt;em&gt;Mapping&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;对于输入的文本内容，ES会默认将此字段映射为 &lt;em&gt;string&lt;/em&gt; 类型，并使用 &lt;em&gt;standard analyzer&lt;/em&gt; ，如果需要一些特殊处理，就需要引入 &lt;em&gt;Mapping&lt;/em&gt; 了。 &lt;em&gt;Mapping&lt;/em&gt; 的作用是告诉 ES 某个字段需要按什么样的规则处理。例如一个手机号， ES 的默认处理是按长整形，但是可能需要按字符串处理，这时就需要指定 &lt;em&gt;Mapping&lt;/em&gt; 了。&lt;/p&gt;
-
-&lt;p&gt;在 Rails 的 Model 中，可以通过下面的方法来设置字段的 &lt;em&gt;Analyzer&lt;/em&gt; 和 &lt;em&gt;Mapping Type&lt;/em&gt; ，如下所示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;settings do
-  mappings do
-    indexes :title, analyzer: &#39;english&#39;
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在上述的例子中，原本 &lt;em&gt;title&lt;/em&gt; 字段的 &lt;em&gt;analyzer&lt;/em&gt; 被指定为 &lt;em&gt;english&lt;/em&gt; 而不是默认的 &lt;em&gt;string&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;Q: 为什么设定了type后，import返回值为1，而不设的时候返回是0？&lt;/p&gt;
-</description>
+&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -245,87 +60,7 @@ end
       <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
-      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;
-
-&lt;p&gt;基本想法是对于网页端的请求，继续使用devise进行认证，而对于某些同时提供API接口的Action，则使用token来验证。除此之外，对于POST请求，还需要跳过CSRF token的检查。基本上代码就是这样的（为了测试方便，使用了自己定义的&lt;code&gt;before_action&lt;/code&gt; ，同时设置所有的检查都基于请求中的 &lt;em&gt;token&lt;/em&gt; 字段。）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class WelcomeController &amp;lt; ApplicationController
-  before_action :auth_user!, only: [:foo], unless: -&amp;gt; { request.format.json? }
-  before_action :auth_by_token!, if: -&amp;gt; { request.format.json? }
-
-  def foo
-    render json: params
-  end
-
-  def bar
-    render json: params
-  end
-
-  private
-
-  def auth_user!
-    head :forbidden if params[:token] != &#39;24&#39;
-  end
-
-  def auth_by_token!
-    head :forbidden if params[:token] != &#39;42&#39;
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时，如果使用浏览器访问 &lt;em&gt;foo&lt;/em&gt; , &lt;code&gt;request.format&lt;/code&gt; 为 &lt;em&gt;text/html&lt;/em&gt; ，此时就会调用 &lt;code&gt;auth_user!&lt;/code&gt; ，而访问 &lt;em&gt;bar&lt;/em&gt; 时，即使是使用浏览器，也不会调用 &lt;code&gt;auth_user!&lt;/code&gt; 。而对于API请求，统一都会调用 &lt;code&gt;auth_by_token!&lt;/code&gt; 进行邓处理。&lt;/p&gt;
-
-&lt;p&gt;下面是一个简单的测试用例&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;rails_helper&amp;quot;
-
-RSpec.describe WelcomeController, :type =&amp;gt; :controller do
-  describe &#39;GET #foo.html&#39; do
-    it &#39;responds forbidden if not given valid token&#39; do
-      get :foo
-      expect(response).to have_http_status(:forbidden)
-    end
-
-    it &#39;responds forbidden if given wrong token&#39; do
-      get :foo, {token: 42}
-      expect(response).to have_http_status(:forbidden)
-    end
-
-    # auth_user! is invoked
-    it &#39;responds success if given correct token&#39; do
-      get :foo, {token: 24}
-      expect(response).to have_http_status(:ok)
-    end
-  end
-
-  describe &#39;GET #foo.json&#39; do
-    before :each do
-      request.env[&amp;quot;HTTP_ACCEPT&amp;quot;] = &#39;application/json&#39;
-    end
-
-    it &#39;responds forbidden if not given valid token&#39; do
-      get :foo
-      expect(response).to have_http_status(:forbidden)
-    end
-
-    it &#39;responds forbidden if given wrong token&#39; do
-      get :foo, {token: 24}
-      expect(response).to have_http_status(:forbidden)
-    end
-
-    # auth_by_token! is invoked
-    it &#39;responds success if given correct token&#39; do
-      get :foo, {token: 42}
-      expect(response).to have_http_status(:ok)
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在老版本的Rails上，有一个&lt;a href=&#34;https://github.com/rails/rails/issues/9703&#34;&gt;bug#9703&lt;/a&gt;，就是它的判断会把 if/unless 和 only/except 分开处理。在这种情况下需要根据 &lt;a href=&#34;https://github.com/rails/rails/issues/9703#issuecomment-15830313&#34;&gt;此条评论&lt;/a&gt; 中的内容对代码做相应改动。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -335,98 +70,7 @@ end
       <pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid>
-      <description>
-
-&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;2016.01.22: 按照&lt;a href=&#34;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html&#34;&gt;Hadoop官方wiki&lt;/a&gt;配置的环境在尝试运行程序时会报连不上Node的错误，不知道是哪里的问题。后来在&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-on-ubuntu-13-10&#34;&gt;DigitalOcean的文档&lt;/a&gt;中发现了需要改Namenode和Datanode的配置才可以。已经将文中的链接和所需修改的文件列表更新。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
-
-&lt;p&gt;这里只是一些我之前可能弄混淆的概念，其它的一些东西可能需要去hadoop官网看了。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Hadoop是一个编程框架或者叫库，主要用于下面类型程序的编写
-
-&lt;ul&gt;
-&lt;li&gt;大规模数据集&lt;/li&gt;
-&lt;li&gt;分布式&lt;/li&gt;
-&lt;li&gt;简单任务模型&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Hadoop的核心项目&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;包含下面几个&lt;/a&gt;：
-
-&lt;ul&gt;
-&lt;li&gt;Common: 一些通用组件，工具类&lt;/li&gt;
-&lt;li&gt;HDFS：分布式文件系统&lt;/li&gt;
-&lt;li&gt;YARN：任务调度及资源管理&lt;/li&gt;
-&lt;li&gt;MapReduce：并行编程模型&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;还有一些衍生项目，具体&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;参见网页&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;环境配置&#34;&gt;环境配置&lt;/h2&gt;
-
-&lt;p&gt;鉴于之前在osx上装东西碰上过坑，所以选择了virtualbox+ubuntu的方案。系统的版本是Ubuntu 15.05，Hadoop选择的是2.6.3（截止写文章的时候它的Release Date最新）。具体步骤如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;下载及安装&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Download package from Hadoop site
-$ wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz
-
-# Decompress it
-$ tar zxvf hadoop-2.6.3.tar.gz
-
-# Move the package files to system directory, and change owner
-$ sudo mv hadoop-2.6.3 /opt/hadoop
-$ sudo chown -R vagrant:vagrant /opt/hadoop
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;配置服务（Single Node）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Export JAVA_HOME env variable
-$ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;并根据&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-on-ubuntu-13-10&#34;&gt;此页面&lt;/a&gt;中的内容，修改相应文件并配置SSH服务。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;etc/hadoop/core-site.xml&lt;/p&gt;
-
-&lt;p&gt;Hadoop启动时的设置，上面那个页面中给出的是 &lt;code&gt;fs.default.name&lt;/code&gt; ，不过在新的配置中，这个字段应该变成 &lt;code&gt;fs.defaultFS&lt;/code&gt; 。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/yarn-site.xml&lt;/p&gt;
-
-&lt;p&gt;一些MapReduce的设置选项。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/mapred-site.xml&lt;/p&gt;
-
-&lt;p&gt;配置使用Yarn作为ResManager&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/hdfs-site.xml&lt;/p&gt;
-
-&lt;p&gt;配置Namenode和Datanode的路径信息&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;格式化namenode&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ bin/hdfs namenode -format
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;设置&lt;code&gt;etc/hadoop/hadoop-env.sh&lt;/code&gt;中的&lt;code&gt;JAVA_HOME&lt;/code&gt;变量&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;开启dfs服务&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sbin/start-dfs.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;至此，一个运行在单节点环境的Hadoop环境就ok了。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -436,9 +80,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
       <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
-      <description>
-
-&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
+      <description>&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
@@ -446,41 +88,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 &lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;
-
-&lt;p&gt;最开始是想用一个脚本解析struct，生成相应的代码，但是在查文档的时候发现golang在1.4版本中引入了 &lt;a href=&#34;https://golang.org/doc/go1.4#gogenerate&#34;&gt;generate&lt;/a&gt; 命令，它可以解析一个文件并生成另一个文件。官方给的说明里面是从yacc的语法生成go文件。想了想觉得它可以完成生成SQL命令，同步struct和SQL的功能，而且如果做了处理的话还可以方便的在DB间切换，那就试试吧。&lt;/p&gt;
-
-&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
-
-&lt;p&gt;在介绍如何编写前，先介绍下调用的方式。要成功调用一次generate需要两个条件：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;已经安装的generator&lt;/li&gt;
-&lt;li&gt;在需要处理的代码中加上 &lt;code&gt;//go:generate&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这样在文件所在的目录下运行 &lt;code&gt;go generate&lt;/code&gt; 即可根据注释中所指示的方法，调用相应的生成器了。&lt;/p&gt;
-
-&lt;h2 id=&#34;编写&#34;&gt;编写&lt;/h2&gt;
-
-&lt;p&gt;Golang给出的sample是一个字符串相关的东西，具体可以见 &lt;a href=&#34;https://godoc.org/golang.org/x/tools/cmd/stringer&#34;&gt;文档页&lt;/a&gt;。&lt;a href=&#34;http://www.onebigfluke.com/2014/12/generic-programming-go-generate.html&#34;&gt;另一个页面&lt;/a&gt; 也有一份具体的实现可以参考。它主要的思路就是用 &lt;code&gt;generate&lt;/code&gt; 去处理某个 &lt;code&gt;.go&lt;/code&gt; 文件，然后生成一些新的东西。主要是用内置的 &lt;em&gt;AST&lt;/em&gt; 解析文件，并生成相应的东西。&lt;/p&gt;
-
-&lt;h2 id=&#34;我的实现&#34;&gt;我的实现&lt;/h2&gt;
-
-&lt;p&gt;回到最开始的问题，我有一个定义好的struct，需要去生成SQL命令。所以还是需要用到内置的AST解析器的。除此之外也就是一点点的区分类型型，做转换了。代码放在 &lt;a href=&#34;https://github.com/hzmangel/struct2schema&#34;&gt;https://github.com/hzmangel/struct2schema&lt;/a&gt; 这里，README还在编写中。目前代码支持将大部分Go内置的类型转换为SQL类型，不过可能还是有一些不支持的需要手动操作。在DB支持上，目前只看了sqlite3和MySQL。下一步要做的事情估计有这些：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;支持更多的DB类型，如PostgreSQL， MSSQL 等（Mongo这种无结构的就不需要了&amp;hellip;&amp;hellip;）&lt;/li&gt;
-&lt;li&gt;现在生成的SQL命令中，字段名和Go中的变量名一致，都是Camel String，拟在解析的时候将其变为下划线小写的方式来生成SQL命令（考虑从后面的json字段获取小写名）&lt;/li&gt;
-&lt;li&gt;支持更多的Go数据类型&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;目前生成出来的代码会直接打印到屏幕上，格式啥的，据说1.6上对模板会有一个更新， &lt;a href=&#34;https://github.com/golang/go/issues/9969&#34;&gt;讨论在此&lt;/a&gt; ，拭目以待。&lt;/p&gt;
-
-&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
-
-&lt;p&gt;在写这篇文章的时候，突然反应过来这个 &lt;code&gt;go generate&lt;/code&gt; 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。&lt;/p&gt;
-</description>
+&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -490,112 +98,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
       <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid>
-      <description>
-
-&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;
-
-&lt;p&gt;社交网络包含有用户和用户之间的联系。把用户看成顶点，把用户之间的联系看成边，就可以得到一个图 (&lt;em&gt;social graph&lt;/em&gt;)。像 Facebook 中的图就是无向图，而 Twitter/G+ 中的就是有向图。在 &lt;em&gt;Network&lt;/em&gt; 和 &lt;em&gt;Communities&lt;/em&gt; 这块，主要的任务有两类：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;给定一个模型，怎么去生成网络&lt;/li&gt;
-&lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;从模型生成网络&#34;&gt;从模型生成网络&lt;/h2&gt;
-
-&lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
-
-&lt;h3 id=&#34;agm-affiliation-graph-model&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
-
-&lt;h4 id=&#34;参数&#34;&gt;参数&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$C$&lt;/code&gt;: &lt;em&gt;Community&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$M$&lt;/code&gt;: 节点与 &lt;em&gt;Community&lt;/em&gt; 之间的关系&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;生成过程&#34;&gt;生成过程&lt;/h4&gt;
-
-&lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
-
-&lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \epsilon $&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;h4 id=&#34;适应性强&#34;&gt;适应性强&lt;/h4&gt;
-
-&lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;无交集 (Non-overlapping)&lt;/li&gt;
-&lt;li&gt;有交集 (Overlapping)&lt;/li&gt;
-&lt;li&gt;内嵌 (Nested)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;从网络生成模型&#34;&gt;从网络生成模型&lt;/h2&gt;
-
-&lt;h3 id=&#34;agm-affiliation-graph-model-1&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
-
-&lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
-
-&lt;h3 id=&#34;bigclam&#34;&gt;BigCLAM&lt;/h3&gt;
-
-&lt;h4 id=&#34;membership-strength&#34;&gt;Membership Strength&lt;/h4&gt;
-
-&lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;此处不是很明白为什么同 &lt;em&gt;Community&lt;/em&gt; 中节点的连通概率可以写成上面的方式，需要去书中相应章节找答案。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;上面介绍的是在同一个 &lt;em&gt;Community&lt;/em&gt; 中两个节点的联通概率，现在将要说的是在不同的 &lt;em&gt;Community&lt;/em&gt; 中如何确定联通概率。首先需要定义一个 &lt;em&gt;Community membership strength matrix&lt;/em&gt; ，它的列是 &lt;em&gt;Community&lt;/em&gt; ，行是节点。将矩阵记为 &lt;code&gt;$F$&lt;/code&gt;，某个位置 &lt;code&gt;$F_{vA}$&lt;/code&gt; 的值表示的是节点在这个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;strength&lt;/em&gt; ，所以任意一行 &lt;code&gt;$F_{u}$&lt;/code&gt; 则表示的是节点在多个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;membership strength&lt;/em&gt; 向量。&lt;/p&gt;
-
-&lt;p&gt;上面的公式计算的是两个节点在单 &lt;em&gt;Community&lt;/em&gt; 中的联通概率，两个节点之间存在至少相同的 &lt;em&gt;Community&lt;/em&gt; ，那么它们的联通概率即为 &lt;code&gt;$P(u,v)=1-\prod_{C}(1-P_{C}(u,v))$&lt;/code&gt; ，经过和上面的公式整合，简化，可以得到 &lt;code&gt;$P(u,v)=1-\exp (-F_{v} \cdot F_{v}^{T} )$&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;计算&#34;&gt;计算&lt;/h4&gt;
-
-&lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$$ \nabla l(F_{u})=\sum_{v \in \mathcal{N}(u)} F_{v} \frac{\exp (-F_{u}F_{v}^{T})}{1- \exp (-F_{u}F_{v}^{T})} - \sum_{v \notin \mathcal{N}(u)} F_{v} $$&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;其中，&lt;code&gt;$\mathcal{N}(u)$&lt;/code&gt;表示节点 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点。&lt;/p&gt;
-
-&lt;p&gt;这个公式的问题在于，后面的一个求和操作是线性时间的，而且是和所有节点数目相关，这样会拖慢运算速度。式子的后一项是计算所有不在节点 &lt;code&gt;$u$&lt;/code&gt; 邻接节点中的节点的&lt;code&gt;$F$&lt;/code&gt;值的和，它可以替换为 &lt;code&gt;$\sum_{v} F_{v} - F_{u} - \sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; ，而这个式子的第一项 &lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 是可以预先计算得到的，而 &lt;code&gt;$\sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; 虽然也是线性时间，但是只和 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点数目想关，这个数值在真实网络中远小于整个网络的节点数的。所以在速度上有很大的改进。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;有点不明白，&lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 在开始的时候是怎么可以事先计算的，要求的不就是某个 &lt;code&gt;$F$&lt;/code&gt; 吗。后期实现的时候再看如何处理吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;其它阅读-graph-and-social-network&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
-
-&lt;p&gt;一般认为，一个 &lt;em&gt;SN&lt;/em&gt; 可以看成一张图，但这并不是表示任意一个 &lt;em&gt;graph&lt;/em&gt; ，就能表示一个 &lt;em&gt;social network&lt;/em&gt; ，这个是由这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; 确定的。&lt;/p&gt;
-
-&lt;p&gt;检查一个 &lt;em&gt;graph&lt;/em&gt; 是不是 &lt;em&gt;SN&lt;/em&gt; ，则需要计算这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; （找不到这个词怎么翻译，先原样放这吧）。给定一个有 &lt;code&gt;$N$&lt;/code&gt; 节点， &lt;code&gt;$E$&lt;/code&gt; 条边的图，它的联通率是指，有三个点&lt;code&gt;$X$&lt;/code&gt;，&lt;code&gt;$Y$&lt;/code&gt;和&lt;code&gt;$Z$&lt;/code&gt;，在确定&lt;code&gt;$(X,Y)$&lt;/code&gt;和&lt;code&gt;$(X,Z)$&lt;/code&gt;联通的情况下，&lt;code&gt;$(Y,Z)$&lt;/code&gt;联通的概率。&lt;/p&gt;
-
-&lt;p&gt;此概率的计算有以下几步：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;理论联通率&lt;/strong&gt;：完全图会有&lt;code&gt;K=$\binom{N}{2}$&lt;/code&gt;条边，所以理论联通率应为 &lt;code&gt;$E/K$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;单条边的联通率&lt;/strong&gt;：在大规模的图中，一般认为理论联通率就是图的联通率，但是在小规模的图中，这个数值偏差有些大，所以需要重新计算。考虑给定条件，在已经确定有两条边的情况下，计算第三条边出现的条件概率，即为&lt;code&gt;$(E-2)/(K-2)$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;实际联通率&lt;/strong&gt;：实际概率的计算需要遍历图中的每个节点，假设为&lt;code&gt;$X$&lt;/code&gt;，再找到邻接节点 &lt;code&gt;$Y$&lt;/code&gt; 和 &lt;code&gt;$Z$&lt;/code&gt; ，最后计算 &lt;code&gt;$(Y,Z)$&lt;/code&gt; 出现的概率。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;书中表示，最后算出来的实际概率大于单边理论概率，所以这张图可以看成是某 &lt;em&gt;SN&lt;/em&gt; 网络（可以表示 &lt;em&gt;SN&lt;/em&gt; 网络的 &lt;em&gt;locality&lt;/em&gt; ）。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;是不是说大规格图的联通率直接认为是理论联通率，所以就肯定可以表示 &lt;em&gt;SN&lt;/em&gt; 而不用再计算？&lt;/li&gt;
-&lt;li&gt;如果计算出来的联通率比单边联通率还要低，那是不是就说明这个图不能表示 &lt;em&gt;SN&lt;/em&gt; ？&lt;/li&gt;
-&lt;li&gt;是不是说实际联通率只要超过单边联通率就可以看成是 &lt;em&gt;SN&lt;/em&gt; ？还是说需要超过某个阈值才可以算？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-</description>
+      <description>&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -605,117 +108,7 @@ $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
       <pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid>
-      <description>
-
-&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;
-
-&lt;p&gt;前一篇中所说的两种计算数据对次数的办法，都是 &lt;em&gt;one-pass&lt;/em&gt; 的，程序在读入数据的同时，生成数据对，然后在数据对对应的计数上加1。这样数据读取完成后，直接查找计数的数即可得知结果。但是这个方法在在数据量过大时会超过主存的大小，从而在计算时引发换页，降低效率。而本篇要介绍的 &lt;em&gt;A-Priori&lt;/em&gt; 算法，通过减少需要计算的数据对个数，从而减少对内存的需求。&lt;/p&gt;
-
-&lt;p&gt;这个算法的核心思想是 &lt;em&gt;monotonicity&lt;/em&gt; ，即如果 &lt;code&gt;{I}&lt;/code&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的所有子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。反过来说，如果一个元素不是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么任何包含它的集合都不可能是。&lt;/p&gt;
-
-&lt;h2 id=&#34;基本算法&#34;&gt;基本算法&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;A-Priori&lt;/em&gt; 是一个 &lt;em&gt;two-pass&lt;/em&gt; 算法，&lt;/p&gt;
-
-&lt;h3 id=&#34;first-pass&#34;&gt;First Pass&lt;/h3&gt;
-
-&lt;p&gt;在读取的过程中创建两张Hash表，一张表是将所有 &lt;code&gt;item&lt;/code&gt; 映射为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;n&lt;/code&gt; 的索引，减少后面引用时占用的内存。第二张表是将 &lt;code&gt;item&lt;/code&gt; 的索引与 &lt;code&gt;item&lt;/code&gt; 出现的次数对应起来。&lt;/p&gt;
-
-&lt;h3 id=&#34;between-passes&#34;&gt;Between Passes&lt;/h3&gt;
-
-&lt;p&gt;检查索引和出现次数映射的表，找出其中所有的 &lt;em&gt;frequent itemset&lt;/em&gt; ，并将它们重新索引为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;m&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;second-pass&#34;&gt;Second Pass&lt;/h3&gt;
-
-&lt;p&gt;计算所有使用 &lt;em&gt;frequent itemset&lt;/em&gt; 表中元素组成的数据对的 &lt;em&gt;support&lt;/em&gt; 值。具体流程如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;对每一个 &lt;em&gt;basket&lt;/em&gt; ，找出其中属于 &lt;em&gt;frequent itemset&lt;/em&gt; 表中的元素。&lt;/li&gt;
-&lt;li&gt;为找到的元素构建数据对。&lt;/li&gt;
-&lt;li&gt;找到数据对对应的计数值，加上它出现的次数。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;最后，只需要检查第二次生成的数据就好。另外，如果需要求多于2个元素的 &lt;em&gt;itemset&lt;/em&gt; ，可以按上述办法将算法级联计算。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;基本算法介绍完成，下面就是改进了。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Mutation: it is the key to our evolution.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;pcy&#34;&gt;PCY&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 的时候，内存中有很多空闲的地方，所以在给 &lt;em&gt;item&lt;/em&gt; 计数的同时，生成出所有的 &lt;em&gt;pair&lt;/em&gt; ，取 Hash 后，给对应的 &lt;em&gt;bucket&lt;/em&gt; 加1 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，只处理如下的数据对：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;i&lt;/code&gt; 和 &lt;code&gt;j&lt;/code&gt; 都是 &lt;em&gt;frequent items&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;{i, j}&lt;/code&gt; 被 Hash 的 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;这样 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据又能少一些了。&lt;/p&gt;
-
-&lt;p&gt;这个算法的原理是，如果一个 &lt;em&gt;pair&lt;/em&gt; 是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它对应的 &lt;em&gt;bucket&lt;/em&gt; 一定超过 &lt;em&gt;support&lt;/em&gt; 的阈值。而如果一个 &lt;em&gt;bucket&lt;/em&gt; 没有超过阈值，那么里面的所有 &lt;em&gt;pair&lt;/em&gt; 一定不是 &lt;em&gt;frequent pair&lt;/em&gt; 。 注意：一个 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt; 并不能保证其中的 &lt;em&gt;pair&lt;/em&gt; 都是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;first-pass-1&#34;&gt;First Pass&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;for b in buckets
-  for item in b:
-    count[item]++
-  end
-
-  for pair in b:
-    bucket(hash(pair))++
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;between-passes-1&#34;&gt;Between Passes&lt;/h3&gt;
-
-&lt;p&gt;除了找出 &lt;em&gt;frequent item&lt;/em&gt; 外，还会把上一步中的 &lt;em&gt;hash bucket&lt;/em&gt; 替换为 &lt;em&gt;bitmap&lt;/em&gt; ，&lt;code&gt;1&lt;/code&gt; 表示 &lt;em&gt;frequent bucket&lt;/em&gt; ， &lt;code&gt;0&lt;/code&gt; 表示不是。这样可以进一步减少内存空间的占用（从 &lt;code&gt;32bit&lt;/code&gt; 降到 &lt;code&gt;1bit&lt;/code&gt;）。&lt;/p&gt;
-
-&lt;h3 id=&#34;second-pass-1&#34;&gt;Second Pass&lt;/h3&gt;
-
-&lt;p&gt;根据上面列出的条件，找到 &lt;em&gt;canidate pair&lt;/em&gt; ，计算。&lt;/p&gt;
-
-&lt;p&gt;PCY算法还有两个变种：&lt;/p&gt;
-
-&lt;h2 id=&#34;multistage&#34;&gt;Multistage&lt;/h2&gt;
-
-&lt;p&gt;这个算法的核心在于，在PCY算法的 &lt;em&gt;first pass&lt;/em&gt; 后，并不开始对 &lt;em&gt;bucket&lt;/em&gt; 做筛选，而是将其中属于 &lt;em&gt;frequent bucket&lt;/em&gt; 的 &lt;em&gt;pair&lt;/em&gt; 挑出来，再做一次 Hash ，从而进一步减少 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据量。从定义上来看，这个算法可能会有多个 &lt;em&gt;pass&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;multihash&#34;&gt;Multihash&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用多个独立的Hash函数来计算 &lt;em&gt;bucket&lt;/em&gt; 。相比物 Multistage ，它还是 &lt;em&gt;two pass&lt;/em&gt; 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 &lt;em&gt;frequent bucket&lt;/em&gt; 。如果它能保证 &lt;em&gt;frequent bucket&lt;/em&gt; 的数目足够小，那么我们就能在 &lt;em&gt;two pass&lt;/em&gt; 获得 Multistage 的优点。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;算法的另一个发展趋势是获取到大部分的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，使用降低精确性的办法来换取效率。&lt;/p&gt;
-
-&lt;h2 id=&#34;基本想法&#34;&gt;基本想法&lt;/h2&gt;
-
-&lt;p&gt;对样本 &lt;em&gt;basket&lt;/em&gt; 进行随机抽样，并在内存中对样本进行 &lt;em&gt;A-Priori&lt;/em&gt; 或其改进版本的计算，此处需要计算所有的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，而不仅仅是 &lt;em&gt;pair&lt;/em&gt; 。计算时使用的 &lt;em&gt;support threshold&lt;/em&gt; 需要根据样本容量处理，例如抽样率为 &lt;code&gt;1/100&lt;/code&gt; ，那么阈值也相应的变成 &lt;code&gt;s/100&lt;/code&gt; 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，可以使用整体数据来验证是否找到的真的是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;这个算法有个问题有些 &lt;em&gt;set&lt;/em&gt; 可能在样本中不是 &lt;em&gt;frequent&lt;/em&gt; 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 &lt;em&gt;support&lt;/em&gt; 阈值，例如从 &lt;code&gt;s/100&lt;/code&gt; 降为 &lt;code&gt;s/125&lt;/code&gt; ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&amp;hellip;&amp;hellip;）&lt;/p&gt;
-
-&lt;h2 id=&#34;son-算法&#34;&gt;SON 算法&lt;/h2&gt;
-
-&lt;p&gt;这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 &lt;em&gt;frequent pair&lt;/em&gt; 置于候选的位置。而在 &lt;em&gt;second pass&lt;/em&gt; ，计算这些候选 &lt;em&gt;pair&lt;/em&gt; 并得出最后结果。这个算法的核心是，任何一个 &lt;em&gt;pair&lt;/em&gt; 如果是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它一定会在某个子集中是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;这个算法可以让计算并行化，以提高处理效率。&lt;/p&gt;
-
-&lt;h2 id=&#34;toivonen-算法&#34;&gt;Toivonen 算法&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 &lt;code&gt;s/125&lt;/code&gt;，以尽可能的不要遗漏在全集中是 &lt;em&gt;frequent set&lt;/em&gt; 的数据。此后设置一个 &lt;em&gt;negative border&lt;/em&gt; 区间，以存放所有子集是 &lt;em&gt;frequent set&lt;/em&gt; 但是本身不是的集合。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，计算所有候选 &lt;em&gt;frequent itemsets&lt;/em&gt; 和 &lt;em&gt;negative border&lt;/em&gt; 中的数据。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果 &lt;em&gt;negative border&lt;/em&gt; 中没有数据是 &lt;em&gt;frequent itemsets&lt;/em&gt; ，那么所得就是所需的 &lt;em&gt;frequent itemsets&lt;/em&gt; .&lt;/li&gt;
-&lt;li&gt;如果在 &lt;em&gt;negative border&lt;/em&gt; 中找到了 &lt;em&gt;frequent itesmsets&lt;/em&gt; ，那么就需要重新取样进行计算，直到满足前一条的条件为止。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;证明：假设 &lt;code&gt;S&lt;/code&gt; 是一个在全集中的 &lt;em&gt;frequent itemset&lt;/em&gt; ，但是在抽样样本中，它既不属于 &lt;em&gt;frequent itemsets&lt;/em&gt; 也不是 &lt;em&gt;negative border&lt;/em&gt; 。那么可以找到一个 &lt;code&gt;T&lt;/code&gt; ，它是在样本中非 &lt;em&gt;frequent&lt;/em&gt; 的 &lt;code&gt;S&lt;/code&gt; 最小子集。即比 &lt;code&gt;T&lt;/code&gt; 小的子集在样本中都是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那根据 &lt;em&gt;negative border&lt;/em&gt; 的定义，&lt;code&gt;T&lt;/code&gt; 一定会在 &lt;em&gt;negative border&lt;/em&gt; 中，否则它就不是是最小子集。由于空集总是 &lt;em&gt;frequent itemset&lt;/em&gt; ，所以 &lt;code&gt;T&lt;/code&gt; 一定存在。这样就有一个 &lt;code&gt;T&lt;/code&gt; ，它在全集中是 &lt;em&gt;frequent itemset&lt;/em&gt; ，在样本中是 &lt;em&gt;negative border&lt;/em&gt; ，于是，重新抽样吧。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -725,115 +118,7 @@ end
       <pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid>
-      <description>
-
-&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;
-
-&lt;h2 id=&#34;market-basket-模型&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
-
-&lt;p&gt;这个模型一般用来描述两种数据之间的 &lt;em&gt;m2m&lt;/em&gt; 关系。其中的一个数据是 &lt;em&gt;item&lt;/em&gt; ，而另一个是 &lt;em&gt;baskets&lt;/em&gt; 。每一个 &lt;em&gt;basket&lt;/em&gt; 中包含有多个 &lt;em&gt;items&lt;/em&gt; ，即为 &lt;em&gt;itemset&lt;/em&gt; 。 通常认为：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 中的 &lt;em&gt;items&lt;/em&gt; 数量较少，远小于整体 &lt;em&gt;items&lt;/em&gt; 的数量。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 的数量较大，不能完全的放于内存中。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这是一个模型的例子：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Market&lt;/em&gt; ：一个超级市场。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Item&lt;/em&gt; ：市场中售卖的所有东西。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Basket&lt;/em&gt; ：用户的订单。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;frequent-itemsets&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt; 即指在 &lt;em&gt;baskets&lt;/em&gt; 中经常出现的 &lt;em&gt;itemset&lt;/em&gt; ，它的定义为：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;假设 &lt;em&gt;I&lt;/em&gt; 是一个 &lt;em&gt;itemset&lt;/em&gt; ，定义 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;support&lt;/em&gt; 为包含 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;basket&lt;/em&gt; 个数。定义数字 &lt;em&gt;s&lt;/em&gt; 为 &lt;em&gt;support threshold&lt;/em&gt; ，所有 &lt;em&gt;support&lt;/em&gt; 数超过 &lt;em&gt;s&lt;/em&gt; 的 &lt;em&gt;I&lt;/em&gt; 即为 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：一个 &lt;em&gt;basket&lt;/em&gt; 可能包含有多个 &lt;em&gt;itemset&lt;/em&gt; ，并不是说一个 &lt;em&gt;basket&lt;/em&gt; 中包含的就是一个 &lt;em&gt;itemset&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;一个 &lt;em&gt;itemset&lt;/em&gt; 可以包含有不定个元素。如果一个 &lt;em&gt;itemset&lt;/em&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的的任何子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h4 id=&#34;应用场景&#34;&gt;应用场景&lt;/h4&gt;
-
-&lt;h5 id=&#34;超市商品&#34;&gt;超市商品&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：超市商品。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：用户订单，上面包含有一个或多个商品。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;通过分析订单中的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，可以得出哪些商品会经常被同时购买。&lt;/p&gt;
-
-&lt;h5 id=&#34;相关内容查找&#34;&gt;相关内容查找&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：单词&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：文档，如网页，blog，tweets等。包含一系列的单词。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 中，肯定包含有一些 common word，除去这些词后，可以揭示出一些单词之间的关系。&lt;/p&gt;
-
-&lt;h5 id=&#34;剽窃检测&#34;&gt;剽窃检测&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;itme&lt;/em&gt; ：文档&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：句子。如果一个文档包含这个句子，那么它在这个 &lt;em&gt;basket&lt;/em&gt; 中。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 表示这些文档中有大量的句子相似，可以检测抄袭的方法。&lt;/p&gt;
-
-&lt;h5 id=&#34;生物标记&#34;&gt;生物标记&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：生物标记，如基因，血蛋白，疾病等。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：病人数据，如基因检测，生化指标等。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找到的包含疾病和生物标记的 &lt;em&gt;frequent itemset&lt;/em&gt; 可以用于疾病检测。&lt;/p&gt;
-
-&lt;h3 id=&#34;association-rule&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;定义 &lt;code&gt;$I \rightarrow j$&lt;/code&gt; ，表示如果一个 &lt;em&gt;basket&lt;/em&gt; 包含有 &lt;code&gt;{I}&lt;/code&gt; 中所有的元素，那么它就有可能包含 &lt;code&gt;j&lt;/code&gt; 。即 &lt;code&gt;{I}&lt;/code&gt; 是一组元素，而 &lt;code&gt;j&lt;/code&gt; 是一个元素。这个推断，就是一个 &lt;em&gt;association rule&lt;/em&gt; 。 &lt;em&gt;association rule&lt;/em&gt; 有一个属性为 &lt;em&gt;Confidence&lt;/em&gt; ，它表示给了 &lt;code&gt;{I}&lt;/code&gt; 后出现 &lt;code&gt;j&lt;/code&gt; 的概率，即在所有包含&lt;code&gt;{I}&lt;/code&gt;的 &lt;em&gt;basket&lt;/em&gt; 中同时包含&lt;code&gt;j&lt;/code&gt;的概率。&lt;/p&gt;
-
-&lt;p&gt;现在问题来了：找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 且 &lt;em&gt;confidence &amp;gt;= c&lt;/em&gt; 的 &lt;em&gt;association rule&lt;/em&gt; 。此处的 &lt;em&gt;support&lt;/em&gt; 是指 &lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support&lt;/em&gt; ，而不是 &lt;code&gt;{I, j}&lt;/code&gt; 的。&lt;/p&gt;
-
-&lt;p&gt;计算过程的描述如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= sc&lt;/em&gt; 的集合&lt;/li&gt;
-&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的集合&lt;/li&gt;
-&lt;li&gt;如果 &lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support &amp;gt;= cs&lt;/em&gt; ，那么找到它少一个元素，而且 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的子集。&lt;/li&gt;
-&lt;li&gt;当且仅当下面条件都满足时， &lt;code&gt;$I \rightarrow j$&lt;/code&gt; 才是一个被接受的 &lt;em&gt;rule&lt;/em&gt; 。
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support s1 &amp;gt;= s&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support s2 &amp;gt;= sc&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;s2/s1 &amp;gt;= c&lt;/em&gt; （此比值即为 &lt;em&gt;confidence&lt;/em&gt; 的定义）.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在实现上，数据通常是以普通文件方式存储于磁盘上的，存储的方式是按 &lt;em&gt;basket&lt;/em&gt; 排列。在读入数据时，即将数据切分成不同长度的集合。不难看出，磁盘IO是数据读取过程中主要的开销。在实践中，数据是多次读取的。所以在计算时，读取次数也是一个需要考虑的部分。&lt;/p&gt;
-
-&lt;p&gt;在计算过程中，由于设置的阈值比较高，所以通常能找到的就是 &lt;em&gt;frequent pair&lt;/em&gt; ，所以这也是需要面对的最大问题。&lt;/p&gt;
-
-&lt;h4 id=&#34;一般算法&#34;&gt;一般算法&lt;/h4&gt;
-
-&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
-
-&lt;p&gt;在计算上，有两种方式：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;计算所有数据对出现的次数，并存放于三角矩阵中。&lt;/li&gt;
-&lt;li&gt;使用类似稀疏矩阵的存储方法，使用坐标+次数的方式存储。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;第一种方式每个数据对需要 &lt;code&gt;4&lt;/code&gt; 个字节（假设一个整型数使用4个字节）。第二种方式每对需要12字节（坐标及计数），但是只有存在的数据对才会占用空间。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -843,40 +128,7 @@ end
       <pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid>
-      <description>
-
-&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;
-
-&lt;h2 id=&#34;supervised-learning&#34;&gt;Supervised Learning&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;Supervised learning&lt;/em&gt; 是机器学习中的一种方法（还有两种分别是 &lt;a href=&#34;https://en.wikipedia.org/wiki/Unsupervised_learning&#34;&gt;Unsupervised learning&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Reinforcement_learning&#34;&gt;Reinforcement learning&lt;/a&gt; , via &lt;a href=&#34;https://en.wikipedia.org/wiki/Machine_learning&#34;&gt;wikipedia&lt;/a&gt; 。这个如果将来看了相应的课再写。）,它通过训练数据集建立一种模式或叫函数，再通过此模式去匹配待查询数据集从而得出预测结果。&lt;/p&gt;
-
-&lt;h2 id=&#34;instance-based-learning&#34;&gt;Instance Based Learning&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;Instance Based Learning&lt;/em&gt; 是机器学习的一种方法，也叫 &lt;em&gt;Memory Based Learning&lt;/em&gt; 。它不生成完整的匹配模式，而是在从训练数据中找到和待查询数据相近的数据（这些数据通常存放于内存中），并输出结果。将要说到的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 即是其中的一种。此方法也分为 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 和 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 。进行计算需要了解如下4个元素：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如何衡量距离？&lt;/li&gt;
-&lt;li&gt;找几个 Neighbor ？&lt;/li&gt;
-&lt;li&gt;各点是否有不同的权重？&lt;/li&gt;
-&lt;li&gt;如何确定输出？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
-
-&lt;p&gt;在 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 的情况下，距离使用欧氏距离，寻找最近的&lt;code&gt;1&lt;/code&gt;个 &lt;em&gt;Neighbor&lt;/em&gt; ，各点权重相同，直接以最近 &lt;em&gt;Neighbor&lt;/em&gt; 的输出为查询数据的输出。而在 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 中，查找的节点变成了 &lt;em&gt;k&lt;/em&gt; 个，而输出出变成了 &lt;em&gt;k&lt;/em&gt; 个节点的平均值。&lt;/p&gt;
-
-&lt;h3 id=&#34;kernel-regression&#34;&gt;Kernel Regression&lt;/h3&gt;
-
-&lt;p&gt;核回归，统计中的一种方法，具体的算法及使用场景没看太明白，此处暂时仅为记录而用。对于这个算法，它所涉及到的4个参量是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;欧氏距离&lt;/li&gt;
-&lt;li&gt;查找所有训练集中的点&lt;/li&gt;
-&lt;li&gt;权重函数： &lt;code&gt;$w_{i} = exp(-\frac{d(x_{i}, q)^{2}}{K_{w}})$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;输出：&lt;code&gt;$\frac{\sum_{i}w_{i}y_{i}}{\sum_{i}w_{i}}$&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -886,149 +138,7 @@ end
       <pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid>
-      <description>
-
-&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;
-
-&lt;h2 id=&#34;相似数据集&#34;&gt;相似数据集&lt;/h2&gt;
-
-&lt;p&gt;许多数据挖掘的问题都能简化为查找相似数据集的问题，如：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;查找含有相似单词的页面，用以给页面分类，或者找出页面的镜像站，或者检查剽窃等。&lt;/li&gt;
-&lt;li&gt;NetFlix，理解成豆瓣就行，哪些用户有相似的爱好。&lt;/li&gt;
-&lt;li&gt;以及，哪些电影有相似的粉丝。&lt;/li&gt;
-&lt;li&gt;网上找到的个人信息，怎么才能确定哪些属于同一个人。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;先从相似文档找起，有三个关键技术：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Shingling：把文档，像页面啊，邮件啊，什么的，拆成sets。&lt;/li&gt;
-&lt;li&gt;Minhashing：在保留相似性的基础上，把大的集合转化成短的标记。&lt;/li&gt;
-&lt;li&gt;Locality-sensitive hashing：找出相似的对。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;文档相似性可以使用 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 来衡量。对于两个集合 &lt;code&gt;$S$&lt;/code&gt; 和 &lt;code&gt;$T$&lt;/code&gt; 来说，它们之间的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 为 &lt;code&gt;$|S \cap T| / |S \cup T|$&lt;/code&gt;，记为 &lt;em&gt;SIM(S,T)&lt;/em&gt; 或 &lt;em&gt;J(S,T)&lt;/em&gt; 。不难看出，当此值为&lt;code&gt;0&lt;/code&gt;时表示两个集合没有交集，而为&lt;code&gt;1&lt;/code&gt;时则表示两个集合相等。&lt;/p&gt;
-
-&lt;h3 id=&#34;k-shingling或叫k-gram&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;k-shingling&lt;/em&gt; 是指把文档按连续的 &lt;em&gt;k&lt;/em&gt; 个字母拆成子集的方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;例如，给定文档&lt;code&gt;$D$&lt;/code&gt;的内容为&lt;code&gt;abcdabd&lt;/code&gt;，在&lt;code&gt;$k=2$&lt;/code&gt;的情况下，获得的 &lt;em&gt;2-shingling&lt;/em&gt; 集合为 &lt;code&gt;{ab, bc, cd, da, bd}&lt;/code&gt;。shingling有一个变种是生成一个bag而非set，此时重复的元素不会被归并，而是按照其本来出现的次数出现在最后结果中，如本例中的&lt;code&gt;ab&lt;/code&gt;将会出现2次。&lt;/p&gt;
-
-&lt;p&gt;对于空格的处理有多种选项，较常见的是把所有空格类的东西都替换成一个空格，然后将其作为一个正常元素参与到shingling中去。即shingling后的元素可能会包含2个或多个单词。&lt;/p&gt;
-
-&lt;p&gt;为了避免虚假的相似度， &lt;code&gt;$k$&lt;/code&gt; 的取值需要足够大。一般而言，对于短的如电子邮件之类的文件，取&lt;code&gt;$k=5$&lt;/code&gt;，而对于长的文档，如研究报告这种，取&lt;code&gt;$k=9$&lt;/code&gt;会比较好。&lt;/p&gt;
-
-&lt;p&gt;对于shingling中的元素，可以直接使用字符串，但是更好的办法是把它通过hash变化映射到某个bucket中，而将这个bucket的编号作为shingling元素进行比较。这样可以在shingling元素空间不变的情况下，降低运行时占用的内存。而且在比较上，整数比字符串要更有优势。这一步叫做 &lt;strong&gt;Compressing Shinglings&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;minhashing&#34;&gt;Minhashing&lt;/h3&gt;
-
-&lt;p&gt;这一段是从 &lt;a href=&#34;https://en.wikipedia.org/wiki/MinHash&#34;&gt;wikipedia&lt;/a&gt; 上看到的定义：&lt;/p&gt;
-
-&lt;p&gt;设有一个hash函数&lt;code&gt;$h$&lt;/code&gt;，可以将集合中的元素映射为不重复的整数值。这样对于任何集合&lt;code&gt;$S$&lt;/code&gt;，都能找到一个元素&lt;code&gt;$x$&lt;/code&gt;让&lt;code&gt;$h(S)$&lt;/code&gt;取到最小值&lt;code&gt;$h_{min}(S)$&lt;/code&gt;。这样就把对字符串比较，存储转换成了对整数的计算和存储。由于&lt;code&gt;$h_{min}(S)$&lt;/code&gt;只能得到一个值，所以需要使用 &lt;em&gt;Hash Function Family&lt;/em&gt; 去处理集合，以得到一个最小值的向量。在向量长度足够的情况下，两个集合的相似度等于最小值相等的概率。计算向量有两种办法，一种是选取足够多的hash函数，另一种是对一个hash得出的值作多次变换。&lt;/p&gt;
-
-&lt;p&gt;在课程中，首先介绍了怎么抽取多个集合的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; ，这个矩阵的每一列都是一个需要计算相似度的集合，记为&lt;code&gt;$S_{1}$&lt;/code&gt;到&lt;code&gt;$S_{N}$&lt;/code&gt;，而行是所有元素的集合，记为&lt;code&gt;$e_{1}$&lt;/code&gt;到&lt;code&gt;$e_{M}$&lt;/code&gt;。如果某个元素&lt;code&gt;$e_{i}$&lt;/code&gt;包含于集合&lt;code&gt;$S_{j}$&lt;/code&gt;中，则在矩阵相应的位置&lt;code&gt;$(i,j)$&lt;/code&gt;标上&lt;code&gt;1&lt;/code&gt;，反之则为&lt;code&gt;0&lt;/code&gt;。典型情况下这个矩阵是稀疏的。&lt;/p&gt;
-
-&lt;p&gt;此后直接介绍了一个 &lt;em&gt;Minhashing&lt;/em&gt; 的函数簇。假设前述的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 的行排列是随机的，我们定义一个 &lt;em&gt;Minhashing&lt;/em&gt; 函数 &lt;code&gt;h(S)&lt;/code&gt; ，它的值是在特定排列下，列 &lt;code&gt;S&lt;/code&gt; 中第一次出现 &lt;code&gt;1&lt;/code&gt; 的行数。使用多个独立的哈希函数（如100个），即可为每一个集合创建一个 &lt;em&gt;signatures&lt;/em&gt; ，而多个集合的结果合并后可以生成一个新的矩阵， &lt;em&gt;signatures matrix&lt;/em&gt; 。这个矩阵的列是各个集合，而行是某一次计算 &lt;em&gt;Minhashing&lt;/em&gt; 时的结果。&lt;/p&gt;
-
-&lt;p&gt;下面来分析下 *Jaccard Similarity*。首先看 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;然后再来看 &lt;em&gt;signatures matrix&lt;/em&gt; 。在某个特定的排列下，如果两个集合的 &lt;em&gt;Minhashing&lt;/em&gt; 值相同，那第它们一定是 &lt;code&gt;(1,1)&lt;/code&gt; 形式的，而其它三种形式不会有此结果）注意，此处只能保证， &lt;em&gt;Minhashing&lt;/em&gt; 值相同时，能保证这一行是 &lt;code&gt;(1,1)&lt;/code&gt;，但是一行是&lt;code&gt;(1,1)&lt;/code&gt;并不能说明这一行是 &lt;em&gt;Minhashing&lt;/em&gt; 值）。所以可以得知，两个集合 &lt;em&gt;Minhashing&lt;/em&gt; 值相等的概率，也就是两个集合的 &lt;em&gt;Jaccard&lt;/em&gt; 相似度，都是 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;p&gt;在实际实现上，给大量的数据做随机排列是比较难以实现的，所以更加通用的办法就是如wiki上说的，挑选多个 hash 函数来处理，下面是一段伪代码，计算某集合的 &lt;em&gt;Minhashing&lt;/em&gt; 向量：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;FOREACH hash_func_family:
-  CALCULATE hi(r)
-
-FOREACH columes:
-  IF val(c) == 1:
-    # Init value for SIG(i, c) is inf
-    SIG(i, c) = min( SIG(i, c), hi(r) )
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;locality-sensitive-hash&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;By Me: 此处的概念还有些模糊，需要再啃啃。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;经过了前面的 &lt;em&gt;Shingling&lt;/em&gt; 和 &lt;em&gt;Minhashing&lt;/em&gt; ，需要处理的数据已经减少许多了，但是对于大文档集来说还不够。如果是需要找到任意两个集合之间的相似度，那么除了计算它们每两对之间的相似度以外没有其它任何办法。但是如果只是需要找到超过某个相似度阈值的集合对，则可以使用LSH，又叫 &lt;em&gt;Nearest Neighbor search&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;LSH的一般做法是对元素使用多次Hash，让相似的元素落入同一个bucket中（即Hash冲突），而不相似的不在。对于上面生成的 &lt;em&gt;signatures matrix&lt;/em&gt; ，一个有效的办法是把矩阵按&lt;code&gt;r&lt;/code&gt;行分成&lt;code&gt;b&lt;/code&gt;个brand，对每一个brand中的每一小块长度为&lt;code&gt;r&lt;/code&gt;的特征值做hash，下面是分析（这块还是有些地方没想清楚，先记录下来）：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;设矩阵分成了&lt;code&gt;b&lt;/code&gt;个 &lt;em&gt;brand&lt;/em&gt; ，每个 &lt;em&gt;brand&lt;/em&gt; 中有 &lt;code&gt;r&lt;/code&gt; 行。某特定两个文档的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 是 &lt;code&gt;s&lt;/code&gt; 。即在 matrix 中某个Minhashing字符串与其它有&lt;code&gt;s&lt;/code&gt;的概率相似。&lt;/li&gt;
-&lt;li&gt;某个brand中选定的特征列和其它所有列相似的概率是 &lt;code&gt;$s^{r}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;某个brand中选定的特征列和至少一个其它列不相似的概率是&lt;code&gt;$1-s^{r}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;一个特征列和每一个brand中都有至少一个不相似列的概率是&lt;code&gt;$(1-s^{r})^{b}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;一个特征列和至少一个brand中所有列都相似，从而成为 &lt;em&gt;candidate pair&lt;/em&gt; 的概率为 &lt;code&gt;$1-(1-s^{r})^{b}$&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这个曲线是一个S型的连续曲线，我们需要做的就是通过挑选&lt;code&gt;b&lt;/code&gt;和&lt;code&gt;r&lt;/code&gt;，让这条曲线在两端尽量的平缓，而在中间部分尽可能的陡峭。这样就不会有过多的 &lt;em&gt;False Positive&lt;/em&gt; 或者 &lt;em&gt;False Negative&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h2 id=&#34;具体使用流程&#34;&gt;具体使用流程&lt;/h2&gt;
-
-&lt;p&gt;综上所述，在实际应用中会有下面几步工作（文档比较）：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;选择整数 &lt;code&gt;$k$&lt;/code&gt; ，将输入文档转换为 &lt;em&gt;k-shingling&lt;/em&gt; 集合。此处可以通过Hash将 &lt;em&gt;k-shingles&lt;/em&gt; 转换为较短的 &lt;em&gt;bucket序号&lt;/em&gt; 。&lt;/li&gt;
-&lt;li&gt;以 &lt;em&gt;shingle&lt;/em&gt; 排序 &lt;code&gt;&amp;lt;document, shingle&amp;gt;&lt;/code&gt; 对。&lt;/li&gt;
-&lt;li&gt;选择长度 &lt;code&gt;$n$&lt;/code&gt; 用于 &lt;em&gt;Minhashing Signature&lt;/em&gt; ，并为所有文档计算特征值。&lt;/li&gt;
-&lt;li&gt;确定一个概率 &lt;code&gt;$t$&lt;/code&gt; 作为文档相似度的阈值，选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 并保证 &lt;code&gt;$br=n$&lt;/code&gt; ，而且阈值&lt;code&gt;$t$&lt;/code&gt;接近&lt;code&gt;$(1/b)^{1/r}$&lt;/code&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果需要最大程度的避免 &lt;em&gt;False Negative&lt;/em&gt; ，那么选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 时要注意计算出来的值要小于 &lt;code&gt;$t$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;如果需要保证速度而且避免 &lt;em&gt;False Positive&lt;/em&gt; ，那么选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 时注意计算出一个高的阈值。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;使用 &lt;em&gt;LSH&lt;/em&gt; 找到所有的 *candidate pairs*。&lt;/li&gt;
-&lt;li&gt;检查选择出来的特征对，确定它们的相似度都大于 &lt;code&gt;$t$&lt;/code&gt; 。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;实例&#34;&gt;实例&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;注：此处只是列出课程中出现的示例，后续会尝试使用程序完成，再补齐说明。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;entity-resolution&#34;&gt;Entity Resolution&lt;/h3&gt;
-
-&lt;h3 id=&#34;fingerprints&#34;&gt;Fingerprints&lt;/h3&gt;
-
-&lt;h3 id=&#34;similar-news-articles&#34;&gt;Similar News Articles&lt;/h3&gt;
-
-&lt;h2 id=&#34;距离计算&#34;&gt;距离计算&lt;/h2&gt;
-
-&lt;p&gt;此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 并不是距离，用&lt;code&gt;1&lt;/code&gt;减去它才是。一般说来，有两种类型的距离，它们是 &lt;em&gt;欧氏距离&lt;/em&gt; 和 &lt;em&gt;非欧距离&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;欧氏距离是指欧氏空间的距离，欧氏空间包含有实实在在维度，和密集的点。&lt;/li&gt;
-&lt;li&gt;欧空中，可以在两个点之间找到中点。&lt;/li&gt;
-&lt;li&gt;欧氏距离是基于欧空中点的位置来确定的&lt;/li&gt;
-&lt;li&gt;其它的空间即被称为非欧空间。在非欧空间中，距离的计算是通过点的其它一些特性来完成的，因为非欧空间并没有位置这个概念。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;假设 &lt;code&gt;$x$&lt;/code&gt; ， &lt;code&gt;$y$&lt;/code&gt; 和 &lt;code&gt;$z$&lt;/code&gt; 是某个空间中的点，而 &lt;code&gt;$d$&lt;/code&gt; 是计算距离的函数，那么它有如下特性：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$d(x,y) \geq 0$&lt;/code&gt; ：所有距离都是非负值。&lt;/li&gt;
-&lt;li&gt;仅在 &lt;code&gt;$x$&lt;/code&gt; ， &lt;code&gt;$y$&lt;/code&gt; 是同一点时，才有 &lt;code&gt;$d(x,y) = 0$&lt;/code&gt; 。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$d(x,y) = d(y,x)$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$d(x,z) \leq d(x,y) + d(y,z)$&lt;/code&gt; ：三角定理。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;欧氏距离&#34;&gt;欧氏距离&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$&lt;/code&gt; 。在&lt;code&gt;$r=2$&lt;/code&gt;时，即变成平方各开根号，即熟悉的距离计算。此外还有&lt;code&gt;$L_{1}-norm$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;非欧距离&#34;&gt;非欧距离&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Jaccard Distance&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;余弦距离&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Edit Distance&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Hamming Distance&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1038,18 +148,7 @@ FOREACH columes:
       <pubDate>Tue, 16 Jun 2015 23:40:10 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/timezone-in-python/</guid>
-      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import os
-import datetime
-
-print(datetime.datetime.now())
-os.environ[&#39;TZ&#39;] = &#39;Asia/Shanghai&#39;
-print(datetime.datetime.now())
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;TZ&lt;/code&gt;的环境变量让datetime输出了指定时区的时间。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1059,62 +158,7 @@ print(datetime.datetime.now())
       <pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid>
-      <description>
-
-&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;
-
-&lt;p&gt;互联网在某种意义上是一个有向图，每个页面是图上的节点，而页面间的链接就是图的边。在经历了早期的目录式页面分类后，web现在进入了以Search为主的的组织方式。下面问题来了：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;怎么确定找到的信息是可以信赖的（或者相对可以信赖的）。&lt;/li&gt;
-&lt;li&gt;当我们查找某个词时，哪个才是最好的结果。&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;搜索技术哪家强？&lt;/del&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;所以这里引入了给页面排序的做法，以确定页面的重要性。&lt;/p&gt;
-
-&lt;h2 id=&#34;pagerank&#34;&gt;PageRank&lt;/h2&gt;
-
-&lt;p&gt;PageRank，Google家的看家算法。核心思路是，如果一个页面是重要的，那么它指向的那个页面应该也是重要的。也就是用其它页面来证明这个页面的重要性。&lt;/p&gt;
-
-&lt;h3 id=&#34;flow-formulation&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
-
-&lt;p&gt;在一张图中，假设有节点&lt;code&gt;$i$&lt;/code&gt;，它的PR值是&lt;code&gt;$r_{i}$&lt;/code&gt;，它有&lt;code&gt;$d_{i}$&lt;/code&gt;条出链，其中一条指向节点&lt;code&gt;$j$&lt;/code&gt;。那么&lt;code&gt;$j$&lt;/code&gt;上由&lt;code&gt;$i$&lt;/code&gt;带来的PR值即为&lt;code&gt;$\frac{r_{i}}{d_{i}}$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;根据这个需求，可以列出来一个方程组。显然，图中有几个节点，这个方程组就会有几个方程，为了给这个方程求得一个固定解，我们会人为的加上一个条件 &lt;code&gt;$\sum{r_{i}} = 1$&lt;/code&gt;，这样就可以求解出每个节点的PR值了。&lt;/p&gt;
-
-&lt;p&gt;这个方法比较易于理解，但是对于大规模的页面集不适用，所以引入了&lt;em&gt;Matrix&lt;/em&gt; Formulation。&lt;/p&gt;
-
-&lt;h3 id=&#34;matrix-formulation&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
-
-&lt;p&gt;首先，把所有页面之间的跳转都用一个&lt;strong&gt;列随机矩阵(column stochastic matrix)&lt;/strong&gt;来表示，记为&lt;code&gt;$M$&lt;/code&gt;。对于每条链路&lt;code&gt;$i\rightarrow j$&lt;/code&gt;，都有相应的&lt;code&gt;$M_{ji} = 1/d_{i}$&lt;/code&gt;，其中&lt;code&gt;$d$&lt;/code&gt;是&lt;code&gt;$i$&lt;/code&gt;的出链路条数。下一步是&lt;strong&gt;Rank向量&lt;/strong&gt;，记为&lt;code&gt;$r$&lt;/code&gt;它是一个1维的列向量，每一个元素的值就是表示此节点的Rank值，记为&lt;code&gt;$r_{i}$&lt;/code&gt;，此向量满足&lt;code&gt;$\sum_{i}r_{i} = 1$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;有此定义后，上面介绍的*Flow*方程可以转换成这样： &lt;code&gt;$r = M \cdot r$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;由矩阵的定义，这个&lt;code&gt;$r$&lt;/code&gt;是矩阵&lt;code&gt;$M$&lt;/code&gt;的&lt;strong&gt;单位向量(eigenvector)&lt;/strong&gt;。即，页面的PageRank值，就是这些页面之间转移矩阵的单位向量，解出了这个向量，也就确定了这些页面的PageRank值。&lt;/p&gt;
-
-&lt;p&gt;求解特征向量使用的是被称为*Power Iteration*的方法：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;初始化： &lt;code&gt;$r^{(0)} = [1/N, \ldots , 1/N]^{T}$&lt;/code&gt; ，其中&lt;code&gt;$N$&lt;/code&gt;是图中的节点数，也即所有页面个数。&lt;/li&gt;
-&lt;li&gt;迭代： &lt;code&gt;$r^{(t+1)} = M \cdot r^{(t)}$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;停止条件： &lt;code&gt;$|r^{(t+1) = r^{(t)}}|_{1} &amp;lt; \epsilon$&lt;/code&gt;。其中&lt;code&gt;$|x_{i}|_{1} ＝ \sum_{i}|x_{i}|$&lt;/code&gt;是向量&lt;code&gt;$i$&lt;/code&gt;的 &lt;em&gt;L1范数&lt;/em&gt; （其实就是绝对值相加，范数的定义就是 &lt;code&gt;$|x_{i}|_{p} = (\sum_{i}|x_{i}|^{p})^{\frac{1}{p}}$&lt;/code&gt;）。此处可以使用其它的范数，如L2范数，即欧氏距离。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;teleports&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;如果图中有 &lt;em&gt;dead end&lt;/em&gt; 节点，即只有进链没有出链；或者是在多个节点之间存在环，那么上面的迭代就会收敛到一个错误的结果上。解决方案就是，对于每次跳转，有&lt;code&gt;$\beta$&lt;/code&gt;的概率跟随链路去跳，而有&lt;code&gt;$1-\beta$&lt;/code&gt;的概率是一次随机传送 (&lt;em&gt;Teleports&lt;/em&gt;)，这样就解决上面提到的两个问题了。在实际使用中，一般&lt;code&gt;$\beta$&lt;/code&gt;取值为&lt;code&gt;0.8&lt;/code&gt;或&lt;code&gt;0.9&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;在计算上，就是引入一个Teleports矩阵，其中的每个值都是&lt;code&gt;$1/N$&lt;/code&gt;，&lt;code&gt;$N$&lt;/code&gt;为节点数目。而之前的转移矩阵&lt;code&gt;$M$&lt;/code&gt;则变为&lt;code&gt;$\beta M + (1-\beta)\frac{1}{N}e \cdot e^{T}$&lt;/code&gt;，记为&lt;code&gt;$A$&lt;/code&gt;。同样，状态跳转的迭代公式也变为&lt;code&gt;$r = A \cdot r$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h3 id=&#34;实际使用的样子&#34;&gt;实际使用的样子&lt;/h3&gt;
-
-&lt;p&gt;以上说的都是理论，在那个神奇的世界里，计算机的内存都是无限大的，计算速度都是无限NB的，一句话，TA们都是超限界的。在回到了位于爬行界的真实世界后，还有其它需要考虑的东西。假设节点数目是 &lt;strong&gt;1 billion&lt;/strong&gt; ，那么计算前和后的向量各需要&lt;strong&gt;1 billion&lt;/strong&gt;，但是对于那个矩阵，它可是&lt;strong&gt;1 billion * 1 billion&lt;/strong&gt;，也就是&lt;strong&gt;10^18&lt;/strong&gt;。这个内存，有点贵哈～&lt;/p&gt;
-
-&lt;p&gt;一般来说，转移矩阵都是稀疏的，这样在存储的时候可以不用存多少东西，但是加了那个Teleports后，它变成每个位置都有值了，这内存使用就duang的一下上来了。还好经过计算，发现公式&lt;code&gt;$r = A \cdot r$&lt;/code&gt; 可以改写成：&lt;code&gt;$r = \beta M \cdot r + [ \frac{1-\beta}{N} ]_{N}$&lt;/code&gt;。这就是说，矩阵还是那个稀疏的矩阵，但是在每次算完后，需要在向量上加上Teleports的结果。这样一来，占用的内存又回去了吧。&lt;/p&gt;
-
-&lt;p&gt;基本上就是这样了~&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1124,75 +168,9 @@ print(datetime.datetime.now())
       <pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid>
-      <description>
+      <description>&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
 
-&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
-
-&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;
-
-&lt;h2 id=&#34;dfs&#34;&gt;DFS&lt;/h2&gt;
-
-&lt;p&gt;课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。&lt;/p&gt;
-
-&lt;p&gt;现在较为通用的分布式架构就是使用不那么NB的Linux机器组建Cluster，然后用不那么NB的网络把它们连接起来。而在分布式存储的情况下，把数据在不同节点之间复制是需要时间的，所以让程序去找数据就是一个比较正确的解决方案了。&lt;/p&gt;
-
-&lt;p&gt;DFS中的节点有两类，&lt;code&gt;Chunk Server&lt;/code&gt;用来存放数据，&lt;code&gt;Master Node&lt;/code&gt;用来存放文件和&lt;code&gt;Chunk Server&lt;/code&gt;的对应关系。一个文件会被分成多处连续的&lt;code&gt;chunks&lt;/code&gt;，典型的大小是16~64MB。每一个&lt;code&gt;chunk&lt;/code&gt;都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而&lt;code&gt;Master Node&lt;/code&gt;就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从&lt;code&gt;Master Node&lt;/code&gt;处取到&lt;code&gt;Chunk Server&lt;/code&gt;的信息，再从相应的server上获取文件内容。&lt;/p&gt;
-
-&lt;h2 id=&#34;map-reduce&#34;&gt;Map Reduce&lt;/h2&gt;
-
-&lt;p&gt;MR是一种编程模型，典型的应用场景就是 &lt;strong&gt;Word Cound&lt;/strong&gt; 。将MR应用到 WordCount 的先决条件为：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文件过大，不能完整的放到内存中去&lt;/li&gt;
-&lt;li&gt;但是所有的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对可以完全放到内存中&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;算法流程&#34;&gt;算法流程&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;将数据分块读入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; ：创建&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;数据对。在本例中，即创建出一系列的&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Group by Key&lt;/code&gt; ：对&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;进行排序。本例中即将同样key的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对放在一起。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; ：将同一个&lt;code&gt;key&lt;/code&gt;的&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;对合并到一起，并对&lt;code&gt;v&lt;/code&gt;做相应处理，在本例中，就是把所有的值相加。&lt;/li&gt;
-&lt;li&gt;输出结果&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在具体实现上，程序需要指定&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个方法，这两个方法的参数都是&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对。例如&lt;code&gt;Map&lt;/code&gt;函数的&lt;code&gt;key&lt;/code&gt;可以是文件名，&lt;code&gt;value&lt;/code&gt;是对应的某一行或者某一块文字。而在&lt;code&gt;Reduce&lt;/code&gt;函数中，输入的&lt;code&gt;key&lt;/code&gt;是某个单词，而&lt;code&gt;value&lt;/code&gt;是1。&lt;code&gt;Reduce&lt;/code&gt;负责归并结果，并输出。&lt;/p&gt;
-
-&lt;h3 id=&#34;map-reduce的环境&#34;&gt;Map Reduce的环境&lt;/h3&gt;
-
-&lt;p&gt;除了根据逻辑实现&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;把输入数据分块&lt;/li&gt;
-&lt;li&gt;在机器前调度程序运行&lt;/li&gt;
-&lt;li&gt;处理 &lt;strong&gt;Group by key&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;处理机器故障&lt;/li&gt;
-&lt;li&gt;管理机器间通信&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;出错处理&#34;&gt;出错处理&lt;/h3&gt;
-
-&lt;p&gt;MR出错分几种，处理方式也不同：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; Worker出错：MasterNode会将此块数据标为未完成，并等待下一轮调度&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; Worker出错：MasterNode会将正在运行中的任务置为无效，并等待下一轮调度&lt;/li&gt;
-&lt;li&gt;MasterNode：任务直接退出。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;map-和-reduce-的数目&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;Mapper&lt;/code&gt;的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Reduce&lt;/code&gt;的数目没有具体要求，但是一般会比&lt;code&gt;Mapper&lt;/code&gt;的数目要少。&lt;/p&gt;
-
-&lt;h3 id=&#34;改良&#34;&gt;改良&lt;/h3&gt;
-
-&lt;p&gt;还是拿WC作为例子。在&lt;code&gt;Reduce&lt;/code&gt;函数处，原始的办法需要传一堆&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给&lt;code&gt;Reduce&lt;/code&gt;之前先归并一下，相当于多级&lt;code&gt;Reduce&lt;/code&gt;，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。&lt;/p&gt;
-
-&lt;p&gt;注意，此种方式并不适用所有计算，例如对多个数取平均值就不可以使用。&lt;/p&gt;
-</description>
+&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1202,48 +180,871 @@ print(datetime.datetime.now())
       
       <guid>http://hzmangel.github.io/post/1239/</guid>
       <description>&lt;p&gt;最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
-，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。###  Bufferred Channel&lt;/p&gt;
+，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Golang and JSON API</title>
+      <link>http://hzmangel.github.io/post/1233/</link>
+      <pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1233/</guid>
+      <description>&lt;p&gt;最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>goroutines &#43; channel</title>
+      <link>http://hzmangel.github.io/post/1230/</link>
+      <pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1230/</guid>
+      <description>&lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
+      <link>http://hzmangel.github.io/post/1224/</link>
+      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1224/</guid>
+      <description>&lt;h3 id=&#34;tl-dr&#34;&gt;tl;dr&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;Bufferred channel&lt;/code&gt;和&lt;a href=&#34;http://www.hzmangel.info/blog/archives/1230&#34;&gt;前一篇文章&lt;/a&gt;中说的东西没
-有太大差别，只是那篇文章中说的channel是不带缓存的，也就是相当于Semaphore的用法，而加了缓存的就是管道。不多说了，直接上代码吧：&lt;/p&gt;
+&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+response size limitation of server. This article is talking about save image
+to file with carrierwave.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;package main
+&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
+repo&lt;/a&gt;&lt;/p&gt;
 
-import &amp;quot;fmt&amp;quot;
-import &amp;quot;time&amp;quot;
+&lt;p&gt;Next is the full version.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ajax loading multi series to jqPlot</title>
+      <link>http://hzmangel.github.io/post/1220/</link>
+      <pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1220/</guid>
+      <description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
+In the example, The function used to load ajax data is ajaxDataRenderer, which returns array of data. For multi series, just return more than one data array. Here is a sample data set:
+[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]  </description>
+    </item>
+    
+    <item>
+      <title>Some failed attempts on PNaCl</title>
+      <link>http://hzmangel.github.io/post/1214/</link>
+      <pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1214/</guid>
+      <description>&lt;p&gt;Google has released his &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl
+/building-and-testing-portable-native-client&#34;&gt;PNaCl&lt;/a&gt; project on Google I/O 2013,
+which can allow user to write portable native client application. The portable
+native client application can be translated to native client program and
+executed on supported architecture.&lt;/p&gt;
 
-func main() {
+&lt;p&gt;The official toolchain contains clang frontend, which can only be used to
+compile C/C++ code to PNaCl application. But the PNaCl application is a subset
+of LLVM so I have tried some other languages have LLVM frontend. I am still
+working on the solution, and this article is just recording some failed
+attempts.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title>
+      <link>http://hzmangel.github.io/post/1210/</link>
+      <pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1210/</guid>
+      <description>&lt;p&gt;Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose &lt;code&gt;carrierwave&lt;/code&gt; finally.
+Also, I selected &lt;code&gt;nested_form&lt;/code&gt; to manage uploading and deleting multiple
+attachments.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using Rails with Redis</title>
+      <link>http://hzmangel.github.io/post/1205/</link>
+      <pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1205/</guid>
+      <description>&lt;p&gt;I have met an issue recently that the Rails site always returns 502 error for
+some page. After some investigation, I have found that the problem is caused
+by a long time query of database, which exceeds the timeout value of unicorn
+configuration, then the unicorn worker process will be killed and the Nginx
+returns 502 to user.&lt;/p&gt;
 
-    channel_cnt := 10
-    concurrency_chan := make(chan bool, 2)
-    msg_chan := make(chan string)
+&lt;p&gt;So the solution for this kind prblem is to put the job into some background
+task, and use some other method to inform the frontend when job done. Finally
+I choose the Redis for this task.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iOS Code Snippets - UITableView</title>
+      <link>http://hzmangel.github.io/post/1201/</link>
+      <pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1201/</guid>
+      <description>&lt;p&gt;Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href=&#34;http://goo.gl/0ZrcA&#34;&gt;http://goo.gl/0ZrcA&lt;/a&gt;. The text above is the introduction text for that project, please reference the code for detailed information.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>@property and its attributes</title>
+      <link>http://hzmangel.github.io/post/1195/</link>
+      <pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1195/</guid>
+      <description>&lt;p&gt;Recently working on iOS project, and have met some problems while using the
+attributes of &lt;code&gt;@property&lt;/code&gt;. I have searched some documents and here is my idea
+about this.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Change font size of UITextView dynamically</title>
+      <link>http://hzmangel.github.io/post/1191/</link>
+      <pubDate>Tue, 29 Jan 2013 10:48:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1191/</guid>
+      <description>I am working on a UITextView related problem recently, the widget, which have a fixed size, but need to show all content passed in. The text passed in have different length, so the font size should be different. The code snippet below will change the font size dynamically based on the text.
+// Set the text before setting font size my_text_view.text = foo_text; // Set the default font name and size int pre_defined_font_size = 14; my_text_view.</description>
+    </item>
+    
+    <item>
+      <title>Show alert box in calendar operations of iOS6</title>
+      <link>http://hzmangel.github.io/post/1189/</link>
+      <pubDate>Thu, 24 Jan 2013 23:47:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1189/</guid>
+      <description>With the new permission schema in iOS6, app should acquire authentication before accessing calendar. So the code for calendar operation should be surrounded like this:
+EKEventStore *eventStore = [[EKEventStore alloc] init]; EKEvent *event = [EKEvent eventWithEventStore:eventStore]; [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) { if (granted) { // Calendar operation } }];  As you can see, the code for calendar operation is written in a block.
+After the operation completed, you may want to show customer an alert box to say the operation is done.</description>
+    </item>
+    
+    <item>
+      <title>Compile Object-C program in command line</title>
+      <link>http://hzmangel.github.io/post/1183/</link>
+      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1183/</guid>
+      <description>&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
+language itself. But it is inconvenient to start Xcode for each program,
+especially for program without UI elements in. So I want to set up a command
+line environment that can compile and execute ObjC program.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Invoke map app in iOS app</title>
+      <link>http://hzmangel.github.io/post/1176/</link>
+      <pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1176/</guid>
+      <description>&lt;p&gt;最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dismiss keyboard in UITextViewController</title>
+      <link>http://hzmangel.github.io/post/1166/</link>
+      <pubDate>Wed, 18 Jul 2012 14:43:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1166/</guid>
+      <description>&lt;p&gt;The method is collected from Internet and I just record it with my way.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Playing MongoDB with Rails</title>
+      <link>http://hzmangel.github.io/post/1159/</link>
+      <pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1159/</guid>
+      <description>&lt;p&gt;This post will try to implement a web app used for recording mobile phone of
+cheaters. This idea is came from cooler@linuxfb, and I have used this for a
+presentation about GAE on 2009, and here is the
+&lt;a href=&#34;http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477&#34;&gt;slide&lt;/a&gt;.&lt;/p&gt;
 
-    fmt.Println(&amp;quot;Start launching goroutines&amp;quot;)
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        go foo(i, concurrency_chan, msg_chan)
-    }
-    fmt.Println(&amp;quot;Finish launching goroutines&amp;quot;)
+&lt;p&gt;NOTE: Code still under developing, the Git repo is shown at the end of
+article.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tunning Rails with DTrace</title>
+      <link>http://hzmangel.github.io/post/1147/</link>
+      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1147/</guid>
+      <description>&lt;p&gt;This post will talk about how to do performance test of Rails program with
+DTrace tool. The testing will be separated into Ruby program part and database
+operations part. Please make sure all the tested program has provided probes
+to the DTrace.&lt;/p&gt;
 
-    for i := 0; i &amp;lt; channel_cnt; i++ {
-        fmt.Println(&amp;lt;-msg_chan)
-    }
+&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deploy RoR application with Nginx</title>
+      <link>http://hzmangel.github.io/post/1133/</link>
+      <pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1133/</guid>
+      <description>&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>RoR learning log (2)</title>
+      <link>http://hzmangel.github.io/post/1125/</link>
+      <pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1125/</guid>
+      <description>&lt;p&gt;This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.&lt;/p&gt;
 
-}
+&lt;p&gt;Here is &lt;a href=&#34;http://www.hzmangel.info/blog/archives/1113&#34;&gt;to RoR learning log (1)&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>RoR learning log (1)</title>
+      <link>http://hzmangel.github.io/post/1113/</link>
+      <pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1113/</guid>
+      <description>&lt;p&gt;Just back from vacation, so the study log for this week is simple.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ruby learning log</title>
+      <link>http://hzmangel.github.io/post/1101/</link>
+      <pubDate>Sat, 28 Apr 2012 11:34:51 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1101/</guid>
+      <description>&lt;p&gt;Just studied Ruby with the tutorial on website &lt;a href=&#34;http://rubylearning.com/&#34; target=&#34;_blank&#34;&gt;rubylearning.com&lt;/a&gt; in the past week, and here are some knowledge gained those days.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>List all CVS tags</title>
+      <link>http://hzmangel.github.io/post/1052/</link>
+      <pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1052/</guid>
+      <description>&lt;p&gt;最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;a href=&#34;http://docs.codehaus.org/display/ninja/List+CVS+Tags&#34; target=&#34;_blank&#34;&gt;Perl脚本&lt;/a&gt;，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Simple Life Game in HTML5</title>
+      <link>http://hzmangel.github.io/post/1049/</link>
+      <pubDate>Tue, 29 Nov 2011 02:13:59 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1049/</guid>
+      <description>&lt;p&gt;想着好久没写blog了，刚好在看&lt;a title=&#34;计算中的上帝-豆瓣&#34; href=&#34;http://book.douban.com/subject/1140726/&#34; target=&#34;_blank&#34;&gt;计算中的上帝&lt;/a&gt;时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blocking/Non-Blocking IO and SYN/ASYN IO</title>
+      <link>http://hzmangel.github.io/post/1035/</link>
+      <pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/1035/</guid>
+      <description>&lt;p&gt;这是我上个月&lt;a title=&#34;linuxfb&#34; href=&#34;http://linuxfb.net&#34; target=&#34;_blank&#34;&gt;linuxfb&lt;/a&gt;版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Get Return Value from popen System Call</title>
+      <link>http://hzmangel.github.io/post/984/</link>
+      <pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/984/</guid>
+      <description>popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
+int status = pclose(fp); if (status == -1) { printf(&amp;quot;Error reported by pclose()\n&amp;quot;); exit(1); } else { printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;); printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status)); }  其实是满早前问的一个问题，忘更新过来了。</description>
+    </item>
+    
+    <item>
+      <title>Use TaobaoAPI in SAE</title>
+      <link>http://hzmangel.github.io/post/879/</link>
+      <pubDate>Sun, 13 Mar 2011 16:07:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/879/</guid>
+      <description>&lt;p&gt;需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。&lt;/p&gt;
 
-func foo(i int, concurrency_chan chan bool, msg_chan chan string) {
-    concurrency_chan &amp;lt;- true
-    s := fmt.Sprintf(&amp;quot;%s: Call index %d&amp;quot;, time.Now(), i)
-    msg_chan &amp;lt;- s
-    time.Sleep(1 * time.Second)
-    &amp;lt;-concurrency_chan
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个&lt;a href=&#34;http://code.google.com/p/lotusphp/&#34; target=&#34;_blank&#34;&gt;lotusphp&lt;/a&gt;的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using Django in bluehost</title>
+      <link>http://hzmangel.github.io/post/781/</link>
+      <pubDate>Sun, 19 Dec 2010 00:59:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/781/</guid>
+      <description>最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
+1. Install Python environment
+bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。
+wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本
+2. Install Django in bluehost
+安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。
+3. Prepare the Django project
+安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。
+bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写）
+#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ[&#39;DJANGO_SETTINGS_MODULE&#39;] = &amp;quot;settings&amp;quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run()  编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
+4. Configure the Apache server
+折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：
+AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</description>
+    </item>
+    
+    <item>
+      <title>try-except-finally block in python 2.4</title>
+      <link>http://hzmangel.github.io/post/778/</link>
+      <pubDate>Thu, 09 Dec 2010 09:50:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/778/</guid>
+      <description>try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
+#/usr/bin/python2.6 try: print &#39;try&#39; except: print &#39;except&#39; finally: print &#39;finally&#39; #/usr/bin/python2.4 try: try: print &#39;try&#39; except: print &#39;except&#39; finally: print &#39;finally&#39;  从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>Translate errno to error string</title>
+      <link>http://hzmangel.github.io/post/593/</link>
+      <pubDate>Thu, 18 Mar 2010 12:56:43 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/593/</guid>
+      <description>没几行的程序，就是输出errno数字所表示的对应含义
+#include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&amp;quot;Please give a number, Thanks~~~\n&amp;quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &amp;quot;errno %3d&amp;quot;, errno); perror(tmp_str); }  </description>
+    </item>
+    
+    <item>
+      <title>在thickbox中关掉自己</title>
+      <link>http://hzmangel.github.io/post/495/</link>
+      <pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/495/</guid>
+      <description>嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
+parent.tb_remove()  于是就达成需求了……</description>
+    </item>
+    
+    <item>
+      <title>Android中使用自定义Adapter</title>
+      <link>http://hzmangel.github.io/post/461/</link>
+      <pubDate>Mon, 14 Sep 2009 22:59:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/461/</guid>
+      <description>&lt;p&gt;算是对这段折腾android的一次小结吧，呵呵。&lt;/p&gt;
 
-&lt;p&gt;这段程序创建了两个&lt;code&gt;channel&lt;/code&gt;，而&lt;code&gt;concurrency_chan&lt;/code&gt;就是一个用来控制goroutine数量的&lt;code&gt;channel&lt;/code&gt;。在每个&lt;code&gt;gorout
-ine&lt;/code&gt;开始的时候，会往这个&lt;code&gt;channel&lt;/code&gt;中写入一个值，而在函数结束的时候从&lt;code&gt;channel&lt;/code&gt;中把东西取出来。当&lt;code&gt;channel&lt;/code&gt;中的缓存被占满的时候，
-后续的写入请求就会被阻塞，从而达到限制&lt;code&gt;goroutine&lt;/code&gt;个数的目的。代码和输出结果可以看&lt;a href=&#34;http://play.golang.org/p/8-
-qUxtH0gp&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
-</description>
+&lt;p&gt;一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
+tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
+来了一个fooAdapter，顺便还有这篇文章。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>调整Flex默认Application的长宽</title>
+      <link>http://hzmangel.github.io/post/425/</link>
+      <pubDate>Fri, 12 Jun 2009 00:59:44 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/425/</guid>
+      <description>Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：
+mxmlc.exe foobar.mxml -default-size 800 600</description>
+    </item>
+    
+    <item>
+      <title>Ubiquity &#43; dict.cn 查字典</title>
+      <link>http://hzmangel.github.io/post/339/</link>
+      <pubDate>Tue, 02 Sep 2008 09:56:59 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/339/</guid>
+      <description>&lt;p&gt;关键字： ubiquity, dict.cn&lt;/p&gt;
+
+&lt;p&gt;前天装上了个&lt;a href=&#34;https://wiki.mozilla.org/Labs/Ubiquity&#34;&gt;ubiquity&lt;/a&gt;，觉得满好玩的，于是就想做一个查词的东西，因
+为它里面默认的东西用的是Gtrans，对于单个单词的释义感觉有时看着云里雾里的，于是就萌生了自己写一个命令的想法，然后就做了。&lt;/p&gt;
+
+&lt;p&gt;看了几分钟教程，就开始折腾了，先从一个HelloWorld开始，然后慢慢扩展。其实没啥难的，按着例子把想要的东西加上就是了。赞一下&lt;a href=&#34;htt
+p://dict.cn&#34;&gt;dict.cn&lt;/a&gt;，不止提供了地址栏直接查询，还加上了XML接口。一开始用的是普通的查询，结果页面返回的结果是GBK编码的，在&lt;a href=&#34;h
+ttps://wiki.mozilla.org/Labs/Ubiquity&#34;&gt;ubiquity&lt;/a&gt;里面直接乱码，当时把我郁闷的不行了。还给它的客服扔了封信，问能不能提供XML或者
+JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提供了。一开始我用的还是一个简单的查询页面，返回结果还是GBK的编码，当时被郁闷弄傻了，直接从论坛上
+找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。&lt;/p&gt;
+
+&lt;p&gt;代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
+1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Open File with Specified Encoding</title>
+      <link>http://hzmangel.github.io/post/304/</link>
+      <pubDate>Fri, 13 Jun 2008 00:00:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/304/</guid>
+      <description>其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。
+其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</description>
+    </item>
+    
+    <item>
+      <title>Google Developer Day 2008</title>
+      <link>http://hzmangel.github.io/post/301/</link>
+      <pubDate>Thu, 12 Jun 2008 22:10:36 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/301/</guid>
+      <description>报名了今年的GDD，于是就过去看看了。
+早上和平时上班一样的点起床，蹬车去玩亚运村那边。诶，由于某些原因，那边的路叫一个绕啊，还好绕着绕着就找到路进去，没发生看着会场就在对面还进不去的惨剧。
+进去后，签到，排的那个队居然系统出了问题，郁闷的不行了，到后来换了两个队才弄完，旁边 一工作人员让后面来的先去旁边拿点饮料边喝边等，后来中午听说有人没拿到餐 券，看来在那排队是正确的选择，虽然中午的饭也一般，8过那是后话了，呵呵。在排队的时候居然看到了apt，呵呵。
+开始照例是开复的讲话，和去年差不多，嗯。话说开复出来的时候，那叫一个掌声雷动啊，呵呵。所不同的就是去年的会场比这个要小。去年是在北京新世纪日航饭店，今年弄到 了国际会展中心。应该是第二次在会展中心参加G的活动了，上次是那个啥互联网论坛。场地是大了，效果也比上次差了不少，开复讲了几句，就把话语权给了号称G第一个女性 工程师，好像是产品经理啥的吧，记不清了，呵呵。然后伊就开始讲，主要是大概介绍一下产品，然后讲到一个就从下面拖一个专家上来讲，满不错的安排。总有三块投影幕布， 中间一个放的是演讲者的幻灯，一般是鸟语的，两边两块是中文的，NND也不知道是哪个脑残的人做的，用啥字体不好用宋体，细的和啥一样，在后面根本看不清，你好歹也用 个黑体啊；中间的投影字倒是能看清，但也不知道谁管的灯光，N盏灯照在演讲者那边，人倒是看清楚了，片子看的那叫一个费劲啊，诶。
+这个完了就是分会场，上次好像是分了两个分会场，这次分了四个，外加两个代码实验室。感觉这次几个分会场的一些演讲主题和分会场的主题不一致，像上午云计算移动平台的 两场，一个讲云计算的结构，一个讲的机器学习，和移动应用基本上扯不上边撒，诶。
+听的第一场是云计算的架构和基础软件，P大数学系毕业的一哥们讲的，主要是介绍了GFS+BigTable+MapReduce ，GFS就是G自己的分布式文件系统 ，在一开始做搜索的时候，针对搜索系统的东西对文件系统做了优化，主要考虑的是大文件的存储以及对文件的操作多为追加的情况。还说了说G的文件系统的结构，一个Mas ter负责维护GFS系统的运转，然后一堆 Data Server 用来存放数据，它是把数据分成大小相同的块，好像今天是这么说的，然后一份数据存三份用于备份。 数据只在Client机器和数据服务器间传输，Master不参与数据传输。然后就是 BigTable，一个三维的数据映射关系，用以替代关系数据库，三个键值忘了，呵呵。MapReduce 就是把一个操作分到N台机器上去做，然后再在另M台机器上 进行数据挖掘，最后发到一台机器显示，感觉就是一个数据挖掘的过程，有点像上次看的MPI里面的Reduce，呵呵，也不知道是谁借鉴谁的。顺便提一下，这场的人叫一 个多，反正我是在站在门口听的，满不错的，嗯。
+这一场没听完就撤了，去了别的会场，本来是想去听应用平台主题的，于是跑到那边，结果等上一个哥们讲完了，再仔细一看原来是讲GWT，于是赶快就撤了。转了一圈最后去 听了社区平台的东西，说的是把自己的网站加到OpenSocial的容器中去，讲的满搞笑的，Chris Schalk和沈翔。不过内容倒是没怎么听，因为都是偏概念 的东西，而且我个人对SNS倒真的没啥爱。所以听了一半直接闪人，也算是给那些站着的人空个位子出来，呵呵。然后去地理API那边转了转，人好少，不过也没细听就撤了 ，跑代码实验室转了转，结果发现讲的东西都用过了，继续闪，在移动平台那块门口转了转，讲机器学习，片子上大把的公式，把我雷到了，只有闪。闪出来没到吃饭的点，于是 在外面傻傻的坐着，想找个认识的人搭讪，可惜未果。
+好不容易等到吃饭点了，跟着大部队去吃饭（顺便说一下，一楼有个EMC展会，我们一票人就大摇大摆的从人家展会那穿过去了，还由于场地问题在那交通堵塞了N久，想想都 汗），饭嘛，盒饭，一盒饭加两个小馒头，菜里面一个炒素菜，一个鸡腿，一个大概是洋葱炒牛肉，把牛肉挑吃了，不吃洋葱，木办法，呵呵。中午吃饭的人那叫一个多啊，排了 三个队，拿到饭后还等了N久才有地方坐下吃。排我前面的是一个exoweb的mm，好像是来迟了木有餐券，于是就木有吃上，也不知道是怎么解决的。还有个不爽的就是大 概排到后来没有饮料了，只好给我们每人一瓶水，本来是有个小盒装的鲜橙多的，诶。在身后人虎视眈眈的目光下吃完饭，赶忙起身让位，呵呵。看看时间也不算太早了，直接就 去下午的会场了，听的是实现平台的东西。
+下午第一场是讲Google Gears，几个demo看下来，唯一的想法是很好很强大，呵呵。一个是桌面快捷方式，有点像Mozilla Lab的prism，不知道这两个有啥区别，反正我是都 没用过，有空试试；第二个demo是上传文件，一次传一堆，也满好玩的，不过好像在好看簿有看到过，应该用的 不是gears；第三个是脱离浏览器的Alert等东西，也满好用的；第四个是和WiFi的运营商啥的一起，定位后查找周边，就这玩意引了一堆人问，能操作这个东西还 是满不错的。反正给我的感觉不错，一开始还以为就是离线浏览的呢，没想到现在有这么多功能，嗯
+第二场讲的是GAE，可惜已经用过了，限制太多，不说啥了，不知道能不能在上面布置非阻塞的web fetch进程，要不然肯定过不了它的时间限制。会后和Tom聊的时候说到一次Data View出了500的错，可惜那会没细去想，没准还是个bug呢，呵呵。
+然后，和apt聊了聊，再然后，我有事就闪人了，嗯。
+总结结束，差不多就这样了吧。有几点感想：
+1、碰到老外，还是会结巴啊，要练口语了，诶
+2、最受不了那帮自我感觉良好，然后操着各种口音的英语说着国人和老外都听不懂的鸟语的人，估计主持人都想来一句，您还是说中文吧。
+PS：刚去瞅了一眼，上次申请的GAE还是三个App诶，不错不错，刚用掉一个还有俩，做点啥呢&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>MoinMoin on Windows with Apache</title>
+      <link>http://hzmangel.github.io/post/282/</link>
+      <pubDate>Sat, 03 May 2008 13:00:49 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/282/</guid>
+      <description>昨天想着要装一个wiki系统，于是想到了MoinMoin，上次装是在Linux下，这次手边暂时没有Linux的机器，只好用Windowz了。在这记录一下安装过程吧，反正是比较麻烦。 先是把那些个软件装上，啥Python, Apache啥的，再去下载MoinMoin，它是用easy intall做的，直接下载，然后运行setup.py install即可。然后开始配置mod_python，也是windowz下的exe文件，双击运行，自动安装。有点不同的是它在最后会询问Apache的安装位置，大概是要把那个.so文件拷过去吧。然后开始改Apache的http.cpnf文件（在Debian下装的时候，那些个mod是分开放的，有个目录专门放被加载的mod），加载mod，配置Directory，测试。 mod_python测试通过后，就是MoinMoin了，新建一个文件存放wiki的文件，从MoinMoin安装的地方把moin.cgi文件拷过来，再在http.conf中加上一个script alias，然后设置wikiconfig.py，首页名称啥的，还有一个静态文件的地址，应该是绝对路径。但是在这里设计不行，还需要在Apache的http.conf中加上对静态文件目录的访问权限。再然后，就差不多了，嗯。</description>
+    </item>
+    
+    <item>
+      <title>GAE上的blog</title>
+      <link>http://hzmangel.github.io/post/277/</link>
+      <pubDate>Sat, 12 Apr 2008 00:10:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/277/</guid>
+      <description>折腾了两天发现后来发现没有用的东西，还是比较郁闷的事情。不过还好，没有被打击，又开了个新的东西。有了前面的一个经验，还是满快的，嗯。 做了一个十分简单的blog系统，说说里面有用的东西吧，由于blog很简单，所以只用了两张表，一张放文章，一张放Tags。其实本来懒到只想用一张表的，但是想想只有文章，那和留言板也没什么区别了，所以，加了个tag。文章中的taglist是用ListProperty建的，list的类型本来想用db.Key，但是查询那段代码写着太麻烦了，所以最后用了简单的字符串，没办法，我比较懒，呵呵。 还用到的一个模块就是认证，也是很简单的，传到服务器上后直接用google帐户的认证，满不错的，也满方便的，于是我就直接用了。在get时判断是否登录，如果登录了就显示表单，否则给个要登录的链接。两个用的是一个页面，用到了模板中的判断{% if %}，也很方便。从表单取数据直接用self.request.get(&amp;lt;name&amp;gt;)就行了，没啥好说的。 还有个地方就是URL的正则匹配，在app.yaml中有，在webapp的main()函数中也有，我是在app.yaml中把所有的URL映射到了一个地址下，然后在webapp中细分。它的正则匹配就是在函数中按顺序匹配()中的内容，变量名随便起，然后可以直接在函数中用。 别的，没有啥了，嗯。</description>
+    </item>
+    
+    <item>
+      <title>被GAE打击......</title>
+      <link>http://hzmangel.github.io/post/275/</link>
+      <pubDate>Thu, 10 Apr 2008 18:37:39 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/275/</guid>
+      <description>本来测试已经没啥问题了，但是，居然，它的那个urlfetch居然功能不全，或者是说那几个提供feed的网站有点啥，不管怎么样，结果就是，我用它的urlfet ch.fetch()抓不到我想到的数据，真郁闷。话说，更郁闷的是昨天拿来试这个功能的那个地址可以，要是昨天那个就不行了，我就不做了撒，诶。看来又要想东西做了 ，还是看看它和G家自己的东西能不能很好的结合吧……
+希望这两天的时间没有白费……</description>
+    </item>
+    
+    <item>
+      <title>App Engine中后台任务的实现</title>
+      <link>http://hzmangel.github.io/post/274/</link>
+      <pubDate>Thu, 10 Apr 2008 03:21:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/274/</guid>
+      <description>灌水灌上瘾了，没办法，呵呵，就再来一篇吧。
+写的那个RSS聚合应用，想在后台运行一个单独的线程，用以从那些地址更新RSS信息，一开始很傻很天真的用thread来写，写了一半想起来了，去查查支持不支持。 去开发者论坛上一找background，还真有人在讨论。扫了一眼，就是现在还不支持，然后一帮人在Google Code的某个Issue上灌水，话说我也去加了一瓢，嘿嘿。
+目前不支持，但我还是要用啊，继续转，果然找到了个折衷的方法，其实也很简单，就是把那个本来要写成thread的类映射到某个URL上，然后过一段时间访问一下，这 个可以在别的任何机器上用计划任务实现。刚试了一下，效果不错，暂时先这么用着吧，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>在App Engine中访问外部网站</title>
+      <link>http://hzmangel.github.io/post/273/</link>
+      <pubDate>Thu, 10 Apr 2008 03:16:13 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/273/</guid>
+      <description>下午做RSS聚合网站时，需要从外部的地址抓feed，用的是feedparse的库。但是怎么弄都出错，所以很郁闷，想从RSS的字符串解析一次，看看有没有错。想 当然的使用了urllib，结果它也出错。由于有了昨天模板的经验，所以直接去找google的文档。果不其然，它不支持直接从外网获取内容，如果有此需求，则需要使 用它封装好的一个urlfetch库中的fecth方法。没办法啊，那就用吧，谁让人家的地盘人家做主呢。
+抓取内容，判定返回值是否为200，取结果，到这一切顺利，于是就开始用feedparse解析。解析也没问题，但是郁闷的是，这样解析出来的东西没有时间信息了，就 是它得不到这个RSS的最后更新时间，去urlfetch的文档里面转了一圈，也没见有相关的内容，只好自己另想办法了。最后的解决办法是在FeedInfo中加入了 一个字段用以存放最后更新的时间，然后拿feed中的每个文章的updated_parse时间与这个时间比较，如果文章的时间较新则插入库中，否则不处理。在写时候 漏掉一条语句，调了好长时间，真郁闷。
+PS：logging真的很好用，直接在服务器的终端窗口输出信息。其实我本来是想用printf的，结果伊居然不支持，FT。
+PS2：如果loggin的消息调成debug，则在开服务器的时候需要加上- d选项，否则DEBUG的信息不输出，我为这折腾了10分钟，那几条logging语句一会加上一会删除，心里还直嘀咕，难道又被我找到个BUG&amp;hellip;&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>在App Engine中使用数据库</title>
+      <link>http://hzmangel.github.io/post/272/</link>
+      <pubDate>Thu, 10 Apr 2008 03:04:57 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/272/</guid>
+      <description>下午想了好久，才想到做一个类似Planet的Blog聚合的东西，也算是给自己玩玩吧。看了一下文档，它不支持往主机中写文件，如果需要存放数据的话，需要使用它的 Datastore，其实就是后台给提供个数据库，这样也好，也算方便管理吧。
+动手写了写，大概需要两张表，一张表维护feed的信息，另一张表存放文章的信息，反正目前是这样的，以后有什么再加吧，呵呵。和Django中类似，直接用一个cl ass表示一张表，而且也是分多种字段值，无外乎就是那些啥个文本啊，数字啊，链接啥的，与Django不同的是它需要根据字段值的不同构建一个db下某个模块的实例 。还有一个reference字段类型用来表示关联表，它存放的另一张表中的某个字段值的key。大概是因为还算比较熟悉Django的数据库模块，所以没感觉到有啥 困难。有DB就需要有查询，App Engine的查询使用的是像Django中的模块，或者使用GQL语言，和SQL类似，不过它的文档中只有SELECT，而没有 其它的诸如INSERT，UPDATE啥，不过如果需要更改数据的值可以先查询，然后直接对结果进行赋值操作后调用put操作即可。用起来还是满简单的，呵呵，反正大 概能满足我的要求了。</description>
+    </item>
+    
+    <item>
+      <title>App Engine 的模板支持......</title>
+      <link>http://hzmangel.github.io/post/271/</link>
+      <pubDate>Wed, 09 Apr 2008 02:51:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/271/</guid>
+      <description>是支持模板了，但是居然只支持把模板放在工程的根目录，好像是权限的原因。郁闷啊，想好的目录结构就这样被破坏了，还好支持把css等静态文件扔在别的文件夹。明天折 腾折腾UI吧，困了，睡觉。</description>
+    </item>
+    
+    <item>
+      <title>在 App Engine 中使用模板和静态文件</title>
+      <link>http://hzmangel.github.io/post/270/</link>
+      <pubDate>Wed, 09 Apr 2008 02:21:49 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/270/</guid>
+      <description>看到App Engine支持模板，扫了一眼，和Django的就是一样的，它下面的链接也直接说了，用的就是Django的模板系统。看来这次又有便宜可占了，直接 上手，不错不错。
+和Django中一样，需要使用静态文件，但是在yaml文件中设置了static_dir再起服务器死活就是开不起来，直接去google.com找未果，然后想到 了它的开发group，果然碰到一群和我碰到同样问题的人。后来好像说原因是因为Windowz下用的是 \ 作为路径分隔符，在某个正则中变了转义，所以就那个啥了 。一种解决方法是在yaml文件中把所有的静态文件写进去，看着头就大；还好有人想到了用正则，于是就有了一种新的方法。
+- url: /stylesheets/(.*) static_files: stylesheets/\1 upload: stylesheets/(.*)  查了一下，upload参数的意思没看太明白，好像是说如果文件匹配此参数后面的正则，就被这个handler接管，主要用处是确定和url和static_file s后面正则匹配的路径对应于哪个文件。汗自己的英语理解力，反正先用上了，确定能用了。然后按教程中写的，直接渲染吧。
+居然发现了一个bug，呵呵，有意思。</description>
+    </item>
+    
+    <item>
+      <title>初用 Google App Engine</title>
+      <link>http://hzmangel.github.io/post/268/</link>
+      <pubDate>Wed, 09 Apr 2008 00:27:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/268/</guid>
+      <description>在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。
+下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：
+application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py  version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。
+然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。
+print &#39;Content-Type: text/plain&#39; print &#39;&#39; print &#39;Hello, world!&#39;  反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。
+import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers[&#39;Content-Type&#39;] = &#39;text/plain&#39; self.response.out.write(&#39;Hello, webapp World!&#39;) def main(): application = webapp.WSGIApplication([(&#39;/&#39;, MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &amp;quot;__main__&amp;quot;: main()  在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。
+最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.</description>
+    </item>
+    
+    <item>
+      <title>Python取当前循环次数</title>
+      <link>http://hzmangel.github.io/post/267/</link>
+      <pubDate>Sat, 05 Apr 2008 15:08:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/267/</guid>
+      <description>在groups上瞎逛，看到了这个，觉得满有用的，于是复制到这里一份。
+在循环中使用enumerate可以同时取得循环次数和循环变量的值，使用方法是这样的
+1 for i,v in enumerate([&#39;a&#39;,&#39;b&#39;]): 2 print i,v  内置的函数，从2.3版加上去的。在这记一笔……</description>
+    </item>
+    
+    <item>
+      <title>在ReST文档中使用pygments</title>
+      <link>http://hzmangel.github.io/post/260/</link>
+      <pubDate>Fri, 21 Mar 2008 20:53:47 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/260/</guid>
+      <description>最近在整理个东西，本来想用LaTeX做的，但是想想它的代码高亮实在麻烦，而且默认的情况下只有黑白的，真的很难看的；而且最终发布是PDF，有时也不是很方便，所 以考虑用网页的形式弄。不想为这玩意再架个服务器，想来想去，能用好的大概就是 reStructuredText 了。
+说是想到了reStructuredText，其实一开始是想自己写一个的，大概也不外乎是标记分析啥的，主要是想要 pygments 带的语法高亮，只是在网上找东西的时候，突然发现 pygments 已经支持了rst的编写，于是就打消了造轮子的想法。毕竟，现在能把文档整理出来是最重要的。但 是用的时候碰到了点问题，它是通过rst的directive支持扩展的。一开始是通过easy_install的包没有那个rst-directive.py的文件 ，使用hg弄下来的代码里面才有；弄下来后紧接着就是安装directive。折腾了半天，直到今天才找到一个网页上有大概的步骤，照做，然后一切搞定。
+首先需要把那个rst-directive.py文件拷到docutils/parsers/rst/directives/下，然后再在那个directives目 录下的init.py中加一行，&amp;rsquo;sourcecode&amp;rsquo;: (&amp;lsquo;rst-directive&amp;rsquo;, &amp;lsquo;pygments_directive&amp;rsquo;), 至于加哪，就在类似的地方加吧，里面有一堆directives的，这样就算注册了，然后在rst文档中，就可以使用.. sourcecode这个directive了，rst会自动调用rst-directive中的pygments_directive来处理。
+这样处理还不行，因为pygments默认只是把程序通过词法分析器拆开后，归到一个一个的class下，还需要CSS才能生成带颜色的东西。在网上找它的CSS文件 的时候，碰到了一个有用的命令：
+pygmentize -S default -f html  这样它会在 stdout 输出CSS，直接重定向到文件即可。在rst2html中使用时，可以通过&amp;ndash; stylesheet等参数设置使用的CSS，好像默认它会把这些CSS嵌入到网页中去，嗯。
+OK了，还是满不错的，代码好看多了，嗯 ^_^</description>
+    </item>
+    
+    <item>
+      <title>初尝Flex</title>
+      <link>http://hzmangel.github.io/post/246/</link>
+      <pubDate>Fri, 29 Feb 2008 02:20:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/246/</guid>
+      <description>终于还是没有忍住，开始弄Flex了，下载的Flex 3 SDK，刚花了一点时间编译了它的explorer例子，效果不错，满好玩的，嗯。</description>
+    </item>
+    
+    <item>
+      <title>python中的静态成员函数</title>
+      <link>http://hzmangel.github.io/post/230/</link>
+      <pubDate>Wed, 17 Oct 2007 22:01:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/230/</guid>
+      <description>&lt;p&gt;被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
+没有这么玩的啊，于是查自带的文档，居然被我找到了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用swig给C做单元测试</title>
+      <link>http://hzmangel.github.io/post/232/</link>
+      <pubDate>Wed, 03 Oct 2007 17:29:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/232/</guid>
+      <description>&lt;p&gt;最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;中静态成员函数的声明及定义</title>
+      <link>http://hzmangel.github.io/post/207/</link>
+      <pubDate>Tue, 28 Aug 2007 17:22:08 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/207/</guid>
+      <description>今天才知道，静态成员函数在声明的时候前面加上static，但是在定义的时候不需要加，否则编译时会报错。在这留一笔。</description>
+    </item>
+    
+    <item>
+      <title>List的Iterator</title>
+      <link>http://hzmangel.github.io/post/202/</link>
+      <pubDate>Wed, 15 Aug 2007 17:09:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/202/</guid>
+      <description>写个小程序，用到了List，而且要用到它的Iterator，由于以前有用vector的经验，想当然的在Iterator上做了一个+3的操作，结果报错。当时F T，然后开始写测试程序，顺便上网去转转，结果程序写到一半的时候，看到篇文章比较各种Iterator，然后明白了，List的Iterator是双向的，而vec tor的Iterator是random的，就有了对+n这一操作支持的不同，而从前没看过的我就稀里糊涂的FT了。写下来，防止以后再稀里糊涂，嗯。</description>
+    </item>
+    
+    <item>
+      <title>fcache总算能用了</title>
+      <link>http://hzmangel.github.io/post/200/</link>
+      <pubDate>Sun, 05 Aug 2007 11:59:15 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/200/</guid>
+      <description>其实是昨天的消息，只是没有时间发而已，在umountroot的那条命令中去掉了一个参数就可以了，要开始考虑怎么才能读取文件内容了，呵呵，有难度的东西啊。</description>
+    </item>
+    
+    <item>
+      <title>wxWidgets中的Timer</title>
+      <link>http://hzmangel.github.io/post/199/</link>
+      <pubDate>Thu, 21 Jun 2007 22:22:39 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/199/</guid>
+      <description>&lt;p&gt;像前面说的，做项目要用到wxWidgets，于是装上用之，现在需要用Timer了，继续折腾吧。其实选Timer的时候经过了几次折腾，第一次是想用boost写
+一个timer出来，但是没想好怎么执行一定时间后调用某函数或方法，于是作罢。在网上瞎转后回宿舍和人讨论，某牛告诉我说QT里面有Timer，于是突然想到wxw
+idgets的timer，做了几个小例子后苦于其要依托于某widget，今天又想试试boost的thread，试了一天后，觉得我是没可能作出来这东西的，于是
+再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重新开始wxWidgets</title>
+      <link>http://hzmangel.github.io/post/198/</link>
+      <pubDate>Thu, 14 Jun 2007 19:37:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/198/</guid>
+      <description>&lt;p&gt;因为项目原因，要找个跨平台的图形库，因为用过wxPython做过点东西，所以决定选择wxWidgets了。没有了wxPython的好环境，只好自己编译了，从
+官网上下到Windows下的安装包，然后安装。突然想到第一次装wxWidgets时的样子了，那会以为只要把那个安装包按win下程序的方法一路next下去就可
+以了，正因为这样想，所以连最后的那个安装说明都没看直接Finish了，然后找到安装包里面的sample，准备找个Hello
+World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会后，打开doc文件夹，才知道安装后还要编译，呵呵，那会，还什么都不知道呢 :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>说说回调</title>
+      <link>http://hzmangel.github.io/post/197/</link>
+      <pubDate>Thu, 14 Jun 2007 09:37:03 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/197/</guid>
+      <description>&lt;p&gt;最近做个项目，在设计的时候想到有可能要用到回调，对于这个东西已经弄不懂很久了，于是就上网找资料看，经过一个程序的磨炼后，差不多弄懂了，说说吧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>传说中的content_type</title>
+      <link>http://hzmangel.github.io/post/196/</link>
+      <pubDate>Sun, 10 Jun 2007 17:39:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/196/</guid>
+      <description>今天在调试mod_python的程序，按着网上找的某教程，调了N久还是让我下载py文件，mod_python根本不给我解析，于是郁闷的继续google中，突 然看到一条语句
+req.content_type=&amp;ldquo;text/plain&amp;rdquo;
+突然想到了一些事情，然后加上这一句，成功通过，输出Hello World。看来content_type还是满有用的一个东西啊，sigh一下。
+btw: 当前目录下建.htaccess是个不错的方法，嗯。</description>
+    </item>
+    
+    <item>
+      <title>初识 Google Map API</title>
+      <link>http://hzmangel.github.io/post/192/</link>
+      <pubDate>Fri, 01 Jun 2007 09:07:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/192/</guid>
+      <description>昨天去 google dev day 晃了一圈，分会场上主要听的是 Google 的新产品发布会，感觉那个 map api 有点意思，可以在上面做点东西玩玩，于是晚上回来小看了一下例子，做了一个玩玩，还是满简单的，代码如下。
+&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD XHTML 1.0 Strict//EN&amp;quot; &amp;quot;&amp;lt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&amp;gt;&amp;quot;&amp;gt; &amp;lt;html xmlns=&amp;quot;&amp;lt;http://www.w3.org/1999/xhtml&amp;gt;&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;content-type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quot;/&amp;gt; &amp;lt;title&amp;gt;Google Maps JavaScript API Example&amp;lt;/title&amp;gt; &amp;lt;script src=&amp;quot;&amp;lt;http://ditu.google.com/maps?file=api&amp;gt;&amp;amp;amp;v=2&amp;amp;amp;key=*****&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt; //&amp;lt;![CDATA[ function load() { if (GBrowserIsCompatible()) { var map = new GMap2(document.getElementById(&amp;quot;map&amp;quot;)); map.addControl(new GLargeMapControl()); map.addControl(new GScaleControl()); GEvent.addListener(map, &amp;quot;moveend&amp;quot;, function() { document.getElementById(&amp;quot;center&amp;quot;).innerHTML = map.getCenter(); }); map.setCenter(new GLatLng(39.96255, 116.358969), 17); } } //]]&amp;gt; &amp;lt;/script&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body onload=&amp;quot;load()&amp;quot; onunload=&amp;quot;GUnload()&amp;quot;&amp;gt; &amp;lt;div id=&amp;quot;map&amp;quot; style=&amp;quot;width: 960; height: 800px&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; 地图中心：&amp;lt;div id=&amp;quot;center&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  30行出头，简单吧，那个key=&amp;rdquo;***&amp;ldquo;那一块是要自己去申请对应你域名的key，我写上去也没用，还影响排版，就8写了，呵呵。这个东西存成.</description>
+    </item>
+    
+    <item>
+      <title>哀悼一下我的wordpress</title>
+      <link>http://hzmangel.github.io/post/191/</link>
+      <pubDate>Thu, 31 May 2007 18:44:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/191/</guid>
+      <description>历经连续两天晚上3点睡觉调出来的日历，被系统一次升级彻底打回原型，特此哀悼，看来有空要做一个 widget 了，把我的日历做成一个 widget 加到 sidebar 上去，看你丫还怎么给我打回原型，哼哼。</description>
+    </item>
+    
+    <item>
+      <title>Google Develop Day</title>
+      <link>http://hzmangel.github.io/post/190/</link>
+      <pubDate>Thu, 31 May 2007 18:31:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/190/</guid>
+      <description>Google开发者日，感觉还行，讲了些 Google 的玩具，有空想玩玩，以前咋没发现这些东西有那么好玩呢，呵呵。还有就是去听 python 它老爹说了说东西，新要做的 python3000 感觉有些好玩的东西，8过还是先把2.5装上吧，本来一直不装，今天突然想装了，于是，装吧 :)
+btw: live write beta2 好像不闪了&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>一个echobot，哈哈</title>
+      <link>http://hzmangel.github.io/post/186/</link>
+      <pubDate>Fri, 11 May 2007 14:10:28 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/186/</guid>
+      <description>&lt;p&gt;那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Wordpress应该算差不多了吧…</title>
+      <link>http://hzmangel.github.io/post/185/</link>
+      <pubDate>Sun, 06 May 2007 21:41:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/185/</guid>
+      <description>&lt;p&gt;折腾了好几天，应该算是弄差不多了，这一次不光是改了主题，插件，连源程序都改了，想想都寒啊 ^_^&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Django中的静态文件</title>
+      <link>http://hzmangel.github.io/post/170/</link>
+      <pubDate>Sun, 10 Sep 2006 01:14:39 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/170/</guid>
+      <description>不知道应不应该叫这个名字，反正给我的感觉就是它是静态的页面，纯的html语言，没有python在里面，在刚开始用django的时候，就想把主页做成一个静态的 东西，那时候用的是step by step中第一讲的方法，只是把那个写死在程序中的字符串换成了一个文件的内容，然后改那个文件就可以更改主页，但是发现用不了外 部链接的css，虽然可以把css内嵌到html文件中，但总觉得的些不爽。后来往后翻了翻step by step，看到最后一讲有说怎么在一个view中渲染一个简单的模板并输出，也就在是urls.py中加上下面这条语句：
+(r&amp;rsquo;^$&amp;lsquo;, &amp;lsquo;django.views.generic.simple.direct_to_template&amp;rsquo;,
+{&amp;lsquo;template&amp;rsquo;: &amp;lsquo;homepage/index.html&amp;rsquo;}),
+这时候才算找到了好一些的方法，在那个目录下面就可以按正常网页开发了，不过外部链接的文件都要使用基于templates的路径，也就是说那个index.html 要放在templatex/hompage目录下，如果下面要使用css文件，还不能使用相对于index.html的相对路径，有些郁闷，正在考虑是不是把所有的c ss文件什么的放到一个统一的目录下，目录结构大变动啊。呵呵，睡觉了，醒来再折腾吧:)</description>
+    </item>
+    
+    <item>
+      <title>创新的数据总算导完了</title>
+      <link>http://hzmangel.github.io/post/168/</link>
+      <pubDate>Sat, 09 Sep 2006 00:08:59 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/168/</guid>
+      <description>先是存成sql语句，然后回来才想起来，PHP用的是我自己建的表，而Django中要用它的表，两个结构不同，用不了sql语句，于是想到用导入csv文件的办法， 刚好setp by step有这个例子，而且Django中可以直接导入csv文件，不用我再去写那些分隔什么的了，还是满方便的，所以就想到了导入csv文件。
+想好了就要开工，那个例子以前做过，所以还有点印象。首先是写module，主要就是构建数据表的结构，想了好久，才觉得大概能够把表结构定下来了，不过还是相当于留 了两个备注字段，应该够用了吧，如果不够用需要倒数据的话那真要疯了。其实说疯也有些夸张，再写程序导吧，呵呵。
+一开始写的module中没有主键，主要是看它的文档中说它会自己加上一个自增的主键，所以没去理会，但是在导入的时候，有一个filter要选择一条记录，一开始不 知道，使用第一个字段，即申请人做关键字，结果前面写进去的记录当碰到后面相同申请人的记录时，全部被覆盖(我的那个csv文件后面有一个空行，在导入的时候读入最后 一行的时候会出错，下标越界，不过还好，前面的数据都导入了)。后来把csv文件分成了大概10条一个的小文件，再导入的时候才发现是这个问题，再看看它的文档说是如 果用户自己没有设置自境的主键的话，系统会给设一个，不过我试了，不能调用，于是自己设一个吧(又把表结构重弄了一遍，真的很FT，还好没什么数据)，后来问题就解决 了。在module.py中的str方法中可以设置在管理界面中每一条记录显示的内容，step by step中说还有一个repr，但是我用了后没反应，不知道为什么。最后还要加上一个class Admin: pass以开启管理功能。
+在使用导入csv功能的时候，那个urls的映射要弄好，要不然服务器会提示找不到匹配的模式，不予解析。一般是在根目录下的urls.py中设置如果要访问app， 则把app中的utls.py包含进来，然后再在urls.py中解析对应于app的地址映射。
+本来想用sqlite数据库，不过用了一段时间，感觉上还是有些不方便的地方，一是管理工具不是很方便，二是性能上处于劣势，最后考虑了一会，还是选用了mysql， 导入的时候明显速度快了很多，不过那段导入的代码还是很有用的，到时候如果再换表结构的话，就又要用到它了。
+数据方面总算折腾完了，现在要把原来的表的记录改动一下，让它适应新的表的结构，还有一些细节方面的问题，像文件上传，显示的图标什么的，慢慢做吧，不管怎么说，大头 数据导进来了，也没什么好怕的了。
+btw: django中不能直接接收2000-01-01格式的字符串作为datetime类的输入，还要把它拆开成&amp;rsquo;2000&amp;rsquo;, &amp;lsquo;01&amp;rsquo;, &amp;lsquo;01&amp;rsquo;三个字串，不知道后续版本会不会把这个功能加上，虽然不加也能用，只要用下标把子串取出来就可以了，但总感觉有些不爽。</description>
+    </item>
+    
+    <item>
+      <title>CSS中的ID和class</title>
+      <link>http://hzmangel.github.io/post/167/</link>
+      <pubDate>Thu, 07 Sep 2006 22:47:15 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/167/</guid>
+      <description>本来以为它们两个是没什么太大区别的，但是今天上网上一查，发现还是有些区别的。最主要的大概就是在CSS定义中，ID是以#开头的，而class是以.开头的。而且 在网页编程中，一个ID只能出现一次，就像某个东西的标识符一样，在一个页面中，只能有一个，而class是可以出现多次的。看了一篇文章说，id是先找到结构或内容 ，再套用样式，而class是先定义好样式，再应用到多个结构或内容上，呵呵，还真有点这么回事 :)</description>
+    </item>
+    
+    <item>
+      <title>django的资源文件</title>
+      <link>http://hzmangel.github.io/post/166/</link>
+      <pubDate>Wed, 06 Sep 2006 23:54:28 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/166/</guid>
+      <description>刚看了怎么在django的工程中加入资源文件夹，即放一些静态内容，像html页面，css文件什么的，其实放在外面也可以，但是总感觉有些怪，还好step by step讲到了这一课，其实也没什么难的，它给的例子是在urls.py中加了一行，以解析URL，然后在settings.py中加上了一个相当于常量定义的命令， 把一个目录定义成常量，然后在网站根目录下建立了这个目录，于是，就可以了。urls.py中更改的和以前有些不太相同，使用了django.views.stati c.serve，而此参数需要一个参数，文档根目录，所以需要在后面加上{&amp;lsquo;document_root&amp;rsquo;: settings.STATIC_PATH})，那个settings.需要在开头加上import django.conf import settings以导入 模块。其它在网页中就可以使用/site_media来访问./media目录了，那个site_media是在urls.py中定义的，那个patten也有些不同 ，后面加上了一些东西，r&amp;rsquo;^site_media/(?P&amp;lt;path&amp;gt;.*)$&amp;lsquo;，还没太弄懂，过过再说。</description>
+    </item>
+    
+    <item>
+      <title>FileField的相关内容</title>
+      <link>http://hzmangel.github.io/post/165/</link>
+      <pubDate>Wed, 06 Sep 2006 23:48:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/165/</guid>
+      <description>由于要存储文件，所以使用了FileField类型的变量，后来学会了查db_api手册，知道了它的方法，比如想设个超链接，可以调用get_FOO_url得到它 的路径，不过在这之前要设置好settings.py中MEDIA_URL的值，否则得不到正确的结果，在设置的时候，需要在MEDIA_URL最后的那个目录后加一 个／，否则好像地址不能很好的识别。别的还有一些方法，像文件名什么的，另外还有ImageField特有的一些方法还是满不错的。不过不知道为什么我现在不能上传文 件名中有中文的文件，不知道是它不支持还是我设置的问题，有空去网上找找，实在不行就只有再骚扰limodou了。 ;)
+btw: 如果那个FileField需要提供下载的话，需要在app或整个工程的urls.py中设置一下patten，要不然会出错，系统不认。</description>
+    </item>
+    
+    <item>
+      <title>Django中CharField的choices</title>
+      <link>http://hzmangel.github.io/post/164/</link>
+      <pubDate>Wed, 06 Sep 2006 22:15:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/164/</guid>
+      <description>本来以为是比较难的问题，试了一堆记忆中的属性什么的，就是不认，后来骚扰了一下limodou才了解到原来是个这么简单的方法，而且在db- api手册中也有说。诶，看东西看的不仔细，丢人了啊。说说正题吧，就用step by step的例子说吧，本来显示的是M或F，因为直接调用的是address. gender，但是如果调用addres.get_gender_display就可以显示为男或女。简单吧，我怎么就没看到呢？</description>
+    </item>
+    
+    <item>
+      <title>Django中的templates</title>
+      <link>http://hzmangel.github.io/post/162/</link>
+      <pubDate>Tue, 05 Sep 2006 22:47:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/162/</guid>
+      <description>昨天想改一下模板的路径，主要是想在每个app中建立一个templates的目录，然后系统直接去那个目录寻找相应app的view的模板，按网上的方法，在set tings.py的TEMPLATE_DIRS项中加上了app的templates目录，但是在浏览器中查看的时候，它告诉我找不到模板，后来用Filemon看了 一下，它在app目录下的templates中也是按着默认的路径查找的，也就是templates/APP_NAME/ MODE_NAME_list.html文件，于是就把templates改回来了。不清楚是它只能这么找还是我的配置有误。</description>
+    </item>
+    
+    <item>
+      <title>Django数据库中的FileField</title>
+      <link>http://hzmangel.github.io/post/161/</link>
+      <pubDate>Tue, 05 Sep 2006 00:32:43 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/161/</guid>
+      <description>本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。
+首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&amp;lsquo;file&amp;rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。
+暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</description>
+    </item>
+    
+    <item>
+      <title>Python中的字符编码</title>
+      <link>http://hzmangel.github.io/post/159/</link>
+      <pubDate>Sun, 03 Sep 2006 00:09:47 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/159/</guid>
+      <description>想用Django做些东西，大概算是一个用于管理的网站吧。当然是要做个主页，首先是想在工程目录下放一个index.htm的文件，但是好像django自带的那个 服务器不认这个东西，只好写个模块，并改urls.py，让它能访问，我不想把主页写死在模块里面，所以写到了一个网页文件中，index.htm，然后再用模块从文 件中读数据进来，结果出现了乱码，其实也就是浏览器默认用的是utf8的编码，但是我的文件用的是GB2312的编码，所以乱码就横空出世了。一开始以为是那个ind ex.htm文件的问题，于是把它的编码也切成utf8，但是再次显示的时候还是乱码。上网查了一下，好像是python自动判断系统的编码，然后进行转换。后来加上 了这几句话就好了。不过不清楚为什么要加上那句reload，不知道是不是怕程序执行过程中系统环境发生变化。 import sys reload(sys) sys.setdefaultencoding(&amp;lsquo;utf8&amp;rsquo;)</description>
+    </item>
+    
+    <item>
+      <title>Django出错</title>
+      <link>http://hzmangel.github.io/post/156/</link>
+      <pubDate>Sat, 02 Sep 2006 23:41:44 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/156/</guid>
+      <description>今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include(&amp;ldquo;)，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r&amp;rsquo;^$&amp;lsquo;, include(&amp;lsquo;ilab.homepage.index&amp;rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r&amp;rsquo;^$&amp;lsquo;, &amp;lsquo;ilab.homepage.index&amp;rsquo;), 原因嘛，嘿嘿，未知。</description>
+    </item>
+    
+    <item>
+      <title>也说django</title>
+      <link>http://hzmangel.github.io/post/148/</link>
+      <pubDate>Wed, 16 Aug 2006 16:31:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/148/</guid>
+      <description>昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。
+btw: Apache的虚拟主机好像有点好玩，有空看看。</description>
+    </item>
+    
+    <item>
+      <title>Django起来啦</title>
+      <link>http://hzmangel.github.io/post/145/</link>
+      <pubDate>Tue, 15 Aug 2006 12:04:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/145/</guid>
+      <description>呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了
+btw: 建立站点后，要到站点的目录下运行managy.py runserver</description>
+    </item>
+    
+    <item>
+      <title>IE和PNG</title>
+      <link>http://hzmangel.github.io/post/139/</link>
+      <pubDate>Sun, 02 Jul 2006 15:20:05 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/139/</guid>
+      <description>&lt;p&gt;也不知道盖茨大叔是怎么想的，IE6居然不支持PNG的透明背景，还好在网上找到了一个方法，用到了一个没见到过的滤镜，刚试了一下，效果还算不错，就把代码贴出来吧
+，方便以后查。主要起作用的是这个滤镜：&lt;/p&gt;
+
+&lt;p&gt;filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&amp;lsquo;aaa.png&amp;rsquo;,
+sizingMethod=&amp;lsquo;crop&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。&lt;br /&gt;
+首先是JavaScript的代码，用以生成HTML，以给图像加滤镜&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My first python script</title>
+      <link>http://hzmangel.github.io/post/112/</link>
+      <pubDate>Sun, 27 Nov 2005 21:25:43 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/112/</guid>
+      <description>Yesterday, I needed a shell script to do a demo of a program, and I thought about python, so my first script was released today. But I have to say, it is useless, because I haven&amp;rsquo;t reach my goal :( . The problem is not in the script but in the program, so the only thing I can do is to abort, although I do not want to say this word.</description>
+    </item>
+    
+    <item>
+      <title>glut&#43;MinGW&#43;Windowz</title>
+      <link>http://hzmangel.github.io/post/104/</link>
+      <pubDate>Sat, 29 Oct 2005 19:13:11 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/104/</guid>
+      <description>Those days I have had a lot of faint things, coding with OpenGL is one of them. I do not want to use VC++ 6 as my develop environment, so I choosen the MinGW, and the IDE I use is Dev-Cpp, which is a good IDE. But in most time, I just use the MinGW environment command line to compile and execute the code, because I like it ^_^ At the beginning, I copy the code from NeHe tutorial to my Dev-Cpp project, at first the project I used is normal win32 project, so I have got a lot of errors.</description>
+    </item>
+    
+    <item>
+      <title>也说3D编程</title>
+      <link>http://hzmangel.github.io/post/103/</link>
+      <pubDate>Fri, 28 Oct 2005 15:01:03 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/103/</guid>
+      <description>这几天在看OpenGL，突然想起初中时的一些事情了，那时候学BASIC，在屏幕上输出一维和二维的数组，那时候就在想，如果把里面的那个数组换成三维的，不就可以输出三维的东西了吗。后来和边上一哥们讨论了好半天，讨论的问题是在，如果那个数组是四维的话&amp;hellip;&amp;hellip;..(呵呵，最后好像也没写程序验证一下)</description>
+    </item>
+    
+    <item>
+      <title>OpenGL Tips</title>
+      <link>http://hzmangel.github.io/post/102/</link>
+      <pubDate>Wed, 26 Oct 2005 08:49:39 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/102/</guid>
+      <description>glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); should put in the main circle, so if we change the display, the previous buffer can clear completely and the new image will draw correctly.</description>
+    </item>
+    
+    <item>
+      <title>玩玩OpenGL</title>
+      <link>http://hzmangel.github.io/post/45/</link>
+      <pubDate>Wed, 12 Jan 2005 23:09:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/45/</guid>
+      <description>最后还是用了VC，因为大家都用的是这个，我用别的找不到人问。运行了几个例子，感觉还行。也就是考研看书看郁闷了，想玩玩别的东西吧^_^ 先写这么多，玩玩。等什么时候学到点东西再写吧，感觉现在BLOG里面堆了N多的东西，呵呵，不知道能不能学下来啊 :-)</description>
     </item>
     
   </channel>

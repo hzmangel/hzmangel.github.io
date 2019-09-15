@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,13 +71,14 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。上网上看了篇文章，比较了几个测试的框架，它推荐的是cxxtest，拖下来一看，不会用，于是放弃。转而走向boost.test，用会了，刚要写test cas
+        <div class="post-summary"><p>最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。</p>
+
+<p>上网上看了篇文章，比较了几个测试的框架，它推荐的是cxxtest，拖下来一看，不会用，于是放弃。转而走向boost.test，用会了，刚要写test cas
 e，突然想到一件事，写一次需要重新编译一下程序，我那台破机器编译一次还是满慢的，于是想再换种方法。想起python中有单元测试的类，一开始想到的是使用pop
 en啥的，但转念一想，不如就此机会学学swig吧。<br />
 开始嘛，没啥好说的，apt-get，然后再杀向它的老家找教程，写Ｃ，写接口，编译，链接，过了。啥也不说了，测试了也能做，不过是找到程序的错误了。注意在链接的
 时候，最后生成的.so库的名称就是接口里面那个module的名称，只是前面加了根下划线，不这样做的话，伊找不到。<br />
-就这些了吧，还是满好用的，嗯。</p>
-</div>
+就这些了吧，还是满好用的，嗯。</p></div>
     </section>
 
     <footer>
@@ -98,11 +99,11 @@ en啥的，但转念一想，不如就此机会学学swig吧。<br />
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/221/"> &lt; 昨天满累的，嗯 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/219/"> &lt; xelatex再现memory exhaust </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/219/"> xelatex再现memory exhaust &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/221/"> 昨天满累的，嗯 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -136,20 +137,15 @@ en啥的，但转念一想，不如就此机会学学swig吧。<br />
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -158,7 +154,7 @@ en啥的，但转念一想，不如就此机会学学swig吧。<br />
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -227,11 +223,11 @@ en啥的，但转念一想，不如就此机会学学swig吧。<br />
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

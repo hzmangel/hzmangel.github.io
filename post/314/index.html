@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,9 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>又到了讲故事的时间了，嗯。昨天我们讲到把stage文件和protage文件下载到本地，然后拷到目录树中去，其实这时一个gentoo的系统已经原型初现了。只是现在的系统用的是livec
+<p>又到了讲故事的时间了，嗯。</p>
+
+<p>昨天我们讲到把stage文件和protage文件下载到本地，然后拷到目录树中去，其实这时一个gentoo的系统已经原型初现了。只是现在的系统用的是livec
 d中的程序等啥玩意，所以现在我们要切到即将要装的系统中折腾。</p>
 
 <p>在chroot前，需要做几件事情，首先是用选择使用emerge安装时的镜像源。在livecd系统中有一个mirrorselect的程序是用来做这个的，在<a href="http://www.gentoo.org/doc/en/handbook/index.xml">G
@@ -117,8 +119,7 @@ source，在漫长的等待后，终于下完了，下一步就是make menuconfi
 <p>好了，准备重启了，在重启前一定要从chroot的环境中退出，然后把那些挂载的东西手动卸下（5555，又是一堆umount），然后再去reboot。这是试练，
 嗯，看你的配置有没有写错了。我很幸运，第一次就过了，嗯。</p>
 
-<p>夜深了，要睡了，明天说说在新的世界里面为所欲为，嗯。</p>
-</div>
+<p>夜深了，要睡了，明天说说在新的世界里面为所欲为，嗯。</p></div>
     </section>
 
     <footer>
@@ -139,11 +140,11 @@ source，在漫长的等待后，终于下完了，下一步就是make menuconfi
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/315/"> &lt; Gentoo Install Notes (4) </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/313/"> &lt; Gentoo Install Notes (2) </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/313/"> Gentoo Install Notes (2) &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/315/"> Gentoo Install Notes (4) &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -177,20 +178,15 @@ source，在漫长的等待后，终于下完了，下一步就是make menuconfi
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -199,7 +195,7 @@ source，在漫长的等待后，终于下完了，下一步就是make menuconfi
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -268,11 +264,11 @@ source，在漫长的等待后，终于下完了，下一步就是make menuconfi
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

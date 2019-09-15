@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -88,15 +88,15 @@ $(OUTS):%:%.c
     $(CC) $(CFLAGS) -o $@ $&lt;
 
 clean:
-    $(RM) $(OUTS)其实很简单，先是设置编译的命令与编译选项，还有删除命令，紧接着通过内置的两个函数把源文件名和二进制文件存到变量中去。然后就是编译目标，默认的all依赖于所有
+    $(RM) $(OUTS)
 </code></pre>
 
-<p>的二进制文件，而每个二进制文件都跳到第二个条件中，从%.c编译出来名为%的二进制文件，%是通配符，表示匹配在$(OUTS)的文件名，由于上面的设置，这里就是
+<p>其实很简单，先是设置编译的命令与编译选项，还有删除命令，紧接着通过内置的两个函数把源文件名和二进制文件存到变量中去。然后就是编译目标，默认的all依赖于所有
+的二进制文件，而每个二进制文件都跳到第二个条件中，从%.c编译出来名为%的二进制文件，%是通配符，表示匹配在$(OUTS)的文件名，由于上面的设置，这里就是
 不带后缀的二进制文件。最后一个用来清除已经编译出来的二进制文件。</p>
 
 <p>丢到某个目录下运行，它会去找所有的.c文件，编译出二进制文件，二进制文件的文件名就是.c文件去掉扩展名。还可以单独编译单个的二进制文件，就是在make后直接
-接二进制文件名。嗯，就这些了。</p>
-</div>
+接二进制文件名。嗯，就这些了。</p></div>
     </section>
 
     <footer>
@@ -117,11 +117,11 @@ clean:
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/364/"> &lt; 寒风中的惬意 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/362/"> &lt; 我们远去的家园 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/362/"> 我们远去的家园 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/364/"> 寒风中的惬意 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -155,20 +155,15 @@ clean:
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -177,7 +172,7 @@ clean:
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -246,11 +241,11 @@ clean:
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

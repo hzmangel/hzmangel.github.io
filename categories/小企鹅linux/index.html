@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" 小企鹅linux &middot;  湖间小筑" />
+        <meta property="og:title" content=" 小企鹅Linux &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | 小企鹅linux
+                | 小企鹅Linux
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,8 @@
     </header>
 
     <section>
-        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。 $ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
+        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
+$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f  没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
     </section>
 
     
@@ -87,7 +88,10 @@
     </header>
 
     <section>
-        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。 今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1 然后，就能用LOCAL了，然后就没有然后了…… PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
+        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。
+今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1
+然后，就能用LOCAL了，然后就没有然后了……
+PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
     </section>
 
     
@@ -103,8 +107,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p>
-</div>
+        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p></div>
     </section>
 
     
@@ -124,7 +127,11 @@
     </header>
 
     <section>
-        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西： net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存 sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。 话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
+        <div class="post-summary">最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
+解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西：
+net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1  其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
+sysctl -w net.ipv4.route.flush=1  差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
+话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</div>
     </section>
 
     
@@ -140,7 +147,9 @@
     </header>
 
     <section>
-        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~ 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。 最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
+        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
+首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。
+最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
     </section>
 
     
@@ -156,7 +165,8 @@
     </header>
 
     <section>
-        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉 Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</div>
+        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
+Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动改~</div>
     </section>
 
     
@@ -172,7 +182,15 @@
     </header>
 
     <section>
-        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法： 不显示 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头 屏蔽响应事件 虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令 xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo; 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。 就这两条命令，具体的没的细究，有空再看吧。</div>
+        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
+不显示
+一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头
+屏蔽响应事件
+虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。
+这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令
+xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo;
+把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。
+就这两条命令，具体的没的细究，有空再看吧。</div>
     </section>
 
     
@@ -188,7 +206,15 @@
     </header>
 
     <section>
-        <div class="post-summary">新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。 按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下： $ cat local.repo [local repo] name=Repository on lldev baseurl=file:///XXX/YYY/ZZZ enabled=1 gpgcheck=0 需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</div>
+        <div class="post-summary">新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。
+按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下：
+$ cat local.repo
+[local repo]
+name=Repository on lldev
+baseurl=file:///XXX/YYY/ZZZ
+enabled=1
+gpgcheck=0
+需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</div>
     </section>
 
     
@@ -204,7 +230,10 @@
     </header>
 
     <section>
-        <div class="post-summary">每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了… S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &gt;&gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴 这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~ Update at 2010-09-16: 可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &lt;pub key&gt; &lt;remote host&gt;，然后这个命令会做完上面的工作~</div>
+        <div class="post-summary">每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了…
+ S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &gt;&gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴  这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~
+Update at 2010-09-16:
+可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &lt;pub key&gt; &lt;remote host&gt;，然后这个命令会做完上面的工作~</div>
     </section>
 
     
@@ -220,7 +249,13 @@
     </header>
 
     <section>
-        <div class="post-summary">折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。 直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了： `# fuser -km /mnt/dir umount -f /mnt/dir` Updated at 2011-01-11 唔，在网上又找到了一个办法 umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore. 试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</div>
+        <div class="post-summary">折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
+直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：
+`# fuser -km /mnt/dir
+umount -f /mnt/dir` Updated at 2011-01-11
+唔，在网上又找到了一个办法
+umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore.
+试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</div>
     </section>
 
     
@@ -253,20 +288,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -275,7 +305,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -344,11 +374,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

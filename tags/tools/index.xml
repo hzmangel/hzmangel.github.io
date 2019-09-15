@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tools on 湖间小筑</title>
+    <title>tools on 湖间小筑</title>
     <link>http://hzmangel.github.io/tags/tools/</link>
-    <description>Recent content in Tools on 湖间小筑</description>
+    <description>Recent content in tools on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Fri, 11 May 2012 11:40:52 +0000</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Deploy RoR application with Nginx</title>
@@ -16,213 +18,7 @@
       <pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/1133/</guid>
-      <description>
-
-&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.### Deploy RoR on local machine&lt;/p&gt;
-
-&lt;p&gt;Like deploying other website, the static file is served via nginx, and the
-Ruby logic will be handled via some middle-wares, here is the list:&lt;/p&gt;
-
-&lt;h4 id=&#34;thin&#34;&gt;Thin&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Install the &lt;code&gt;thin&lt;/code&gt; via &lt;code&gt;homebrew&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; gem install thin
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Start the thin server. Since this is a testing deploy, I just execute thin in the project directory.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; thin start
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;After the command executed, you can find some information printed via &lt;code&gt;thin&lt;/code&gt;
-command. The default port of the server is &lt;em&gt;3000&lt;/em&gt;, which should be used to
-fill the nginx configuration file.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Update the configuration file for nginx. The &lt;code&gt;upstream&lt;/code&gt; section should be put in &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; upstream todo_app {
- server http://127.0.0.1:3000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The &lt;code&gt;location&lt;/code&gt; section should be put in &lt;code&gt;server&lt;/code&gt; block.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;     location / {
-     proxy_set_header  X-Real-IP  $remote_addr;
-     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-     proxy_set_header  Host $http_host;
-     proxy_redirect    off;
-
-     try_files $uri $uri/index.html $uri.html @ruby;     
- }
-
- location @ruby {
-     proxy_pass http://todo_app
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;proxy_pass&lt;/code&gt; will pass all ruby request to the upstream server. &lt;code&gt;Unix
-socket&lt;/code&gt; can also be used in the &lt;code&gt;upstream&lt;/code&gt; section.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Restart the nginx server, the RoR project can be shown in the web browser now.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;passenger&#34;&gt;Passenger&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Install passenger via gem&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; gem install passenger
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install passenger module for nginx&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; passenger-install-nginx-module
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Or you can install nginx and passenger module with brew like this&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;     brew install nginx --with-passenger
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If nginx still report the error that can not find the &lt;code&gt;PassengerLoggingAgent&lt;/code&gt;,
-try to use &lt;code&gt;passenger package-runtime&lt;/code&gt; and then get the agent from package
-&lt;code&gt;passenger-standalone/XXX/support.tar.gz&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;In the &lt;em&gt;http&lt;/em&gt; section, you should specify the value of &lt;code&gt;passenger_root&lt;/code&gt; and
-&lt;code&gt;passenger_ruby&lt;/code&gt;. Here is the configuration in my laptop:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
- passenger_ruby /usr/local/bin/ruby;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE:&lt;/strong&gt; Make sure to set &lt;code&gt;rails_env&lt;/code&gt; variable is set to the same stage with development, seems the default value is &lt;code&gt;production&lt;/code&gt;. Here is my configuration section in nginx:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
- passenger_ruby /usr/local/bin/ruby;
-
- server {
-     listen       8080;
-     server_name  localhost;
-     root /Users/ziming/tmp/learn_rb/rails/todo_app/public;
-     passenger_enabled on;
-     rails_env development;
- }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;unicorn&#34;&gt;Unicorn&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Install unicorn via gem&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; gem install unicorn
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Get the sample configuration file from unicorn website&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; curl -o config/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;And update the &lt;code&gt;working_directory&lt;/code&gt;, &lt;code&gt;pid&lt;/code&gt;, &lt;code&gt;stderr_path&lt;/code&gt; and &lt;code&gt;stdout_path&lt;/code&gt; in
-the sample configuration file. &lt;strong&gt;NOTICE&lt;/strong&gt;: Need absolute path here.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The left step is the same with Thin, a &lt;code&gt;upstream&lt;/code&gt; section should be added to nginx.conf, and redirection should be added to &lt;code&gt;location&lt;/code&gt; section.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;deploy-remotely-via-capistrano&#34;&gt;Deploy remotely via Capistrano&lt;/h3&gt;
-
-&lt;p&gt;Capistrano is a useful tool for deploying RoR application to remote server(s).
-The Capistrany package provides several tasks for simplfying the deploying
-jobs.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Prepare the RoR application&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Before deploying, we should prepare the application. Since this only show how
-to deploy, so we just use the generated project. I have create a repository on
-bitbucket, and the scm used for this application is mercurial.&lt;/p&gt;
-
-&lt;p&gt;First I create the repository DailyCheckIn on butbucket, then I clone the
-project to local directory &lt;code&gt;dailycheckin&lt;/code&gt;. The directory is an empty directory
-except some mercurial information. After directory ready, I create RoR
-application via &lt;code&gt;rails new&lt;/code&gt; command. Before doing the initialization commit, I
-should create a &lt;code&gt;.hgignore&lt;/code&gt; file based on the &lt;code&gt;.gitignore&lt;/code&gt; (Just add &lt;code&gt;syntax:
-glob&lt;/code&gt; at the first line, remove the leader slash in the path, and rename
-&lt;code&gt;.gitignore&lt;/code&gt; to &lt;code&gt;.hgignore&lt;/code&gt;). After all things done, commit the new added file
-and push to the server, then we have a RoR application.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Capify the RoR project&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The project should be &amp;lsquo;capified&amp;rsquo; before deplying via Captistrano, which can be
-done via command &lt;code&gt;capify .&lt;/code&gt; easily. This command will create &lt;code&gt;Capfile&lt;/code&gt; and
-&lt;code&gt;config/deploy.rb&lt;/code&gt; file in current directory. The &lt;code&gt;Capfile&lt;/code&gt; is the wrapper,
-and the tasks is written in file &lt;code&gt;deploy.rb&lt;/code&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Configure the Capistrano&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Here are the information should be checked before deploying:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;* Application name
-* Server information 
-  * Application layer
-  * Wer server
-  * Database
-* SCM information 
-  * Repository location
-  * SCM type
-* Directory the project should be deployed to
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here is a sample configuration file for the project&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    set :application, &amp;quot;DailyCheckIn&amp;quot;
-set :repository,  
-set :scm, :mercurial
-server , :web, :app, :db, :primary =&amp;gt; true
-set :deploy_to, 
-set :use_sudo, false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The detailed information of configuration can be found in &lt;a href=&#34;https://github.com/capistrano/capistrano/wiki/2.x-From-The-
-Beginning&#34;&gt;Capistrano
-document&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Deploy the application&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Next step is deploy the application. The first step is setting up the server,
-Capistrano provide task &lt;code&gt;cap deploy:setup&lt;/code&gt; to do this. This task will do a
-series of &lt;code&gt;mkdir&lt;/code&gt; calls. Make sure the permission of directory.&lt;/p&gt;
-
-&lt;p&gt;After setting up completed, it is recommended to check the dependencies via
-&lt;code&gt;cap deploy:check&lt;/code&gt; command. Re-run this command after any change to the
-environment to make sure all check passed.&lt;/p&gt;
-
-&lt;p&gt;The next step should be done manually, you should login to the server and make
-sure the database can meet the requirement configured in the
-&lt;code&gt;config/database.yml&lt;/code&gt; file.&lt;/p&gt;
-
-&lt;p&gt;After environment ready, task &lt;code&gt;deploy:update&lt;/code&gt; can be used to clone the code to
-server. The clone operation will create a new snapshot in the &lt;code&gt;releases&lt;/code&gt;
-directory, and link it with symbol link &lt;code&gt;current&lt;/code&gt; in top level of depoly
-directory. Then &lt;code&gt;cap deploy:start&lt;/code&gt; can be used to start the services.&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -231,18 +27,8 @@ directory. Then &lt;code&gt;cap deploy:start&lt;/code&gt; can be used to start t
       <pubDate>Fri, 09 Jul 2010 01:54:31 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/721/</guid>
-      <description>&lt;p&gt;最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库
-叫B，于是有：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;A: hg pull –f &amp;lt;repo B&amp;gt;
-A: hg merge
-A: hg ci
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关键的地方是在那个-
-f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(&lt;a href=&#34;http://stackoverflow.com/questions/12843
-/how-to-combine-two-projects-in-mercurial&#34;&gt;via&lt;/a&gt;)&lt;/p&gt;
-</description>
+      <description>最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有：
+A: hg pull –f &amp;lt;repo B&amp;gt; A: hg merge A: hg ci  关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</description>
     </item>
     
     <item>
@@ -251,57 +37,16 @@ f处，如果没有加这个参数会报两个版本库不同源而不让你这�
       <pubDate>Wed, 10 Mar 2010 21:54:02 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/584/</guid>
-      <description>&lt;p&gt;在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带
-的web服务器。首先在远端某个目录里面新建一个Hg版本库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg serve -p3456
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后在本地就可以找个目录直接把那边的东西拷过来了&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg clone &amp;lt;host&amp;gt; &amp;lt;local_dir&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[paths]
-default = &amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg ci &amp;lt;-m &amp;quot;log message&amp;quot;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使
-用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[web]
-push_ssl = false
-allow_push = *
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要
-指定url参数（嗯，适合我这种懒人）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg push &amp;lt;url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg pull &amp;lt;url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库
+hg init  然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口
+hg serve -p3456  然后在本地就可以找个目录直接把那边的东西拷过来了
+hg clone &amp;lt;host&amp;gt; &amp;lt;local_dir&amp;gt;  使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。
+[paths] default = &amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;  在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log
+hg ci &amp;lt;-m &amp;quot;log message&amp;quot;&amp;gt;  在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行
+[web] push_ssl = false allow_push = *  根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。
+hg push &amp;lt;url&amp;gt;  在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令
+hg up  然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。
+hg pull &amp;lt;url&amp;gt;  </description>
     </item>
     
     <item>
@@ -310,27 +55,15 @@ allow_push = *
       <pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/583/</guid>
-      <description>&lt;p&gt;最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;不显示&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的
-那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;屏蔽响应事件&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm
-ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。&lt;/p&gt;
-
-&lt;p&gt;这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo;
-可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令&lt;/p&gt;
-
-&lt;p&gt;xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。&lt;/p&gt;
-
-&lt;p&gt;就这两条命令，具体的没的细究，有空再看吧。&lt;/p&gt;
-</description>
+      <description>最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
+不显示
+一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头
+屏蔽响应事件
+虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。
+这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令
+xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;
+把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。
+就这两条命令，具体的没的细究，有空再看吧。</description>
     </item>
     
     <item>
@@ -339,15 +72,11 @@ ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了
       <pubDate>Fri, 04 Dec 2009 11:12:41 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/491/</guid>
-      <description>&lt;p&gt;曾经用Emacs的时候发现那个Ctrl-
-L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~&lt;/p&gt;
-
-&lt;p&gt;zz: 将当前行置于屏幕中间（不是转载…）&lt;br /&gt;
-zt: 将当前行置于屏幕顶端（不是猪头~）&lt;br /&gt;
-zb：底端啦~&lt;/p&gt;
-
-&lt;p&gt;还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~&lt;/p&gt;
-</description>
+      <description>曾经用Emacs的时候发现那个Ctrl- L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~
+zz: 将当前行置于屏幕中间（不是转载…）
+zt: 将当前行置于屏幕顶端（不是猪头~）
+zb：底端啦~
+还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~</description>
     </item>
     
     <item>
@@ -356,25 +85,13 @@ zb：底端啦~&lt;/p&gt;
       <pubDate>Fri, 04 Dec 2009 01:07:05 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/490/</guid>
-      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和&lt;br /&gt;
-L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)&lt;/p&gt;
-
-&lt;p&gt;例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;:%s/^\(\w\)\(.*\)/\u\1\L\2/g&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是
-EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午
-试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;:%s/&lt;em&gt;\([a-z]\)&lt;/em&gt;\(.*\)/&lt;em&gt;\U\1\l&lt;/em&gt;\2/g&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;\l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……&lt;/p&gt;
-</description>
+      <description>在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和
+L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)
+例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：
+ :%s/^\(\w\)\(.*\)/\u\1\L\2/g
+ 需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是 EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午 试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了：
+ :%s/\([a-z]\)\(.*\)/\U\1\l\2/g
+ \l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……</description>
     </item>
     
     <item>
@@ -383,14 +100,8 @@ EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如�
       <pubDate>Mon, 02 Nov 2009 17:35:40 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/487/</guid>
-      <description>&lt;p&gt;折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助
-的指引下折腾出来了。其实很简单，在&lt;code&gt;:h non-greedy&lt;/code&gt;一条中有说，使用&lt;code&gt;{-}&lt;/code&gt;来匹配，和&lt;code&gt;*&lt;/code&gt;的功能类似，于是乎就有：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt;&lt;/li&gt;
-&lt;li&gt;使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助 的指引下折腾出来了。其实很简单，在:h non-greedy一条中有说，使用{-}来匹配，和*的功能类似，于是乎就有：
+ 默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt; 使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;  </description>
     </item>
     
   </channel>

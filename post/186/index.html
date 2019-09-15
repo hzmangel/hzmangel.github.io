@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,9 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧这种小玩意，当然是用 python 做啦，又快又好玩，8过也从另一方面说明我很懒，哈哈。在网上找了一下，发现 python 关于 XMPP
+        <div class="post-summary"><p>那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧</p>
+
+<p>这种小玩意，当然是用 python 做啦，又快又好玩，8过也从另一方面说明我很懒，哈哈。在网上找了一下，发现 python 关于 XMPP
 协议的模块有两个，一个是 sf(<a href="http://xmpppy.sf.net">http://xmpppy.sf.net</a>)
 上的，另一个是某单独网站(<a href="http://pyxmpp.jajcus.net)上的，本来想用后面一个，但是用它的例子连接">http://pyxmpp.jajcus.net)上的，本来想用后面一个，但是用它的例子连接</a> gtalk 的时候，总告诉我说木有
 TLS 认证，总让我很FT，于是转向 sf 上的那个了。 先是看它自己带的例子，没有一点悬念的看不懂，继续 google
@@ -122,8 +124,7 @@ conn.send(xmpp.Message('$$$$$$$@gmail.com', 'Test'))
 GoOn(conn)
 </code></pre>
 
-<p>看看，是不是比我说的还要简单。正在考虑给伊加上些什么功能 ^_^</p>
-</div>
+<p>看看，是不是比我说的还要简单。正在考虑给伊加上些什么功能 ^_^</p></div>
     </section>
 
     <footer>
@@ -144,11 +145,11 @@ GoOn(conn)
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/187/"> &lt; Moinmoin的章节编号 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/185/"> &lt; Wordpress应该算差不多了吧… </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/185/"> Wordpress应该算差不多了吧… &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/187/"> Moinmoin的章节编号 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -182,20 +183,15 @@ GoOn(conn)
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -204,7 +200,7 @@ GoOn(conn)
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -273,11 +269,11 @@ GoOn(conn)
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head>
-	<meta name="generator" content="Hugo 0.16" />
+	<meta name="generator" content="Hugo 0.57.0" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -20,7 +20,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -72,8 +72,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>昨天被老大骂了，理由很简单，帮别人。</p>
-</div>
+        <div class="post-summary"><p>昨天被老大骂了，理由很简单，帮别人。</p></div>
     </section>
 
     
@@ -93,7 +92,9 @@
     </header>
 
     <section>
-        <div class="post-summary">把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。 是从tgbus下载的apache_1.3.37_mach-o_acorn压缩包，然后用FTP传到远端的一台Linux机器，然后从这用scp弄到iphone上 。在这里需要再赞一下iphone的SSH服务，上传真的很方便。拷完后，把几个文件给加上x属性就行了，就是扔到bin和sbin里面的几个文件，还有扔到libe xec里面的httpd，弄完后，apachectl -k start，就OK了。 下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&hellip;&hellip;</div>
+        <div class="post-summary">把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。
+是从tgbus下载的apache_1.3.37_mach-o_acorn压缩包，然后用FTP传到远端的一台Linux机器，然后从这用scp弄到iphone上 。在这里需要再赞一下iphone的SSH服务，上传真的很方便。拷完后，把几个文件给加上x属性就行了，就是扔到bin和sbin里面的几个文件，还有扔到libe xec里面的httpd，弄完后，apachectl -k start，就OK了。
+下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&hellip;&hellip;</div>
     </section>
 
     
@@ -109,7 +110,8 @@
     </header>
 
     <section>
-        <div class="post-summary">记忆中，已经有几年没看到沙尘了，不过今天早上又感受了一回。不过说是沙尘，和大一那年相比已经差很多了，只是淡黄色的天，在雾气中若隐若现，而且下午居然出太阳了。 不过晚上走在路上，还是可以感受到空气中那些细小的颗粒往嘴里面钻。 随意写点东西，不想细说什么，虽然很想知道为什么几年之后又会出现这种东西。呵呵，糊涂点过吧，希望明天是个好天，最好有大风，把沙尘啥的都给吹走。喜欢蓝天的感觉， 像一块没有瑕疵的玉，也像一匹平整的布，反正就是看上去很舒服的感觉，嗯。</div>
+        <div class="post-summary">记忆中，已经有几年没看到沙尘了，不过今天早上又感受了一回。不过说是沙尘，和大一那年相比已经差很多了，只是淡黄色的天，在雾气中若隐若现，而且下午居然出太阳了。 不过晚上走在路上，还是可以感受到空气中那些细小的颗粒往嘴里面钻。
+随意写点东西，不想细说什么，虽然很想知道为什么几年之后又会出现这种东西。呵呵，糊涂点过吧，希望明天是个好天，最好有大风，把沙尘啥的都给吹走。喜欢蓝天的感觉， 像一块没有瑕疵的玉，也像一匹平整的布，反正就是看上去很舒服的感觉，嗯。</div>
     </section>
 
     
@@ -141,7 +143,11 @@
     </header>
 
     <section>
-        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。 #!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
+        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
     </section>
 
     
@@ -157,7 +163,9 @@
     </header>
 
     <section>
-        <div class="post-summary">最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。 使用很简单，和iconv差不多，有一个-f标明源编码，一个-t标明目的编码，还有一些选项可以看帮助开。最主要的是要加上&ndash; notest标明就转换了，而不是仅仅测试显示，然后一条命令搞定，嗯。 convmv -f gb2312 -t utf8 --notest *</div>
+        <div class="post-summary">最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。
+使用很简单，和iconv差不多，有一个-f标明源编码，一个-t标明目的编码，还有一些选项可以看帮助开。最主要的是要加上&ndash; notest标明就转换了，而不是仅仅测试显示，然后一条命令搞定，嗯。
+ convmv -f gb2312 -t utf8 --notest *  </div>
     </section>
 
     
@@ -173,8 +181,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>前几天的一个晚上走在从实验室回寝室的路上，不经意间发现，图书馆旁边的花圃中，有几枝迎春花开的很灿烂，这才反应过来，春天来了。</p>
-</div>
+        <div class="post-summary"><p>前几天的一个晚上走在从实验室回寝室的路上，不经意间发现，图书馆旁边的花圃中，有几枝迎春花开的很灿烂，这才反应过来，春天来了。</p></div>
     </section>
 
     
@@ -226,7 +233,8 @@
     </header>
 
     <section>
-        <div class="post-summary">毕业论文中的参考文献用默认的间距看上去有点大，不知道别人看上去会不会不舒服，所以想调小点。最后使用了natbib宏包，用 \setlength{\bibsep}{1ex} 设置一下即可，后面括号中的值可以自己调。</div>
+        <div class="post-summary">毕业论文中的参考文献用默认的间距看上去有点大，不知道别人看上去会不会不舒服，所以想调小点。最后使用了natbib宏包，用
+\setlength{\bibsep}{1ex}  设置一下即可，后面括号中的值可以自己调。</div>
     </section>
 
     
@@ -261,20 +269,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -283,7 +286,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -352,11 +355,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

@@ -19,7 +19,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,8 @@
     </header>
 
     <section>
-        <div class="post-summary">popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。 int status = pclose(fp); if (status == -1) { printf(&quot;Error reported by pclose()\n&quot;); exit(1); } else { printf(&quot;Process exited? %s\n&quot;, WIFEXITED(status) ? &quot;yes&quot; : &quot;no&quot;); printf(&quot;Process status: %d\n&quot;, WEXITSTATUS(status)); } 其实是满早前问的一个问题，忘更新过来了。</div>
+        <div class="post-summary">popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
+int status = pclose(fp); if (status == -1) { printf(&quot;Error reported by pclose()\n&quot;); exit(1); } else { printf(&quot;Process exited? %s\n&quot;, WIFEXITED(status) ? &quot;yes&quot; : &quot;no&quot;); printf(&quot;Process status: %d\n&quot;, WEXITSTATUS(status)); }  其实是满早前问的一个问题，忘更新过来了。</div>
     </section>
 
     
@@ -87,7 +88,10 @@
     </header>
 
     <section>
-        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。 今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1 然后，就能用LOCAL了，然后就没有然后了…… PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
+        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。
+今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1
+然后，就能用LOCAL了，然后就没有然后了……
+PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
     </section>
 
     
@@ -105,8 +109,7 @@
     <section>
         <div class="post-summary"><p>需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。</p>
 
-<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。</p>
-</div>
+<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。</p></div>
     </section>
 
     
@@ -126,8 +129,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~</p>
-</div>
+        <div class="post-summary"><p>写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~</p></div>
     </section>
 
     
@@ -147,7 +149,19 @@
     </header>
 
     <section>
-        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。 1. Install Python environment bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。 wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本 2. Install Django in bluehost 安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。 3. Prepare the Django project 安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。 bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写） #! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run() 编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。 4. Configure the Apache server 折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的： AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !-f RewriteRule ^(.*)$ run.fcgi/$1 [QSA,L] 第一行设置fcgi的handler，然后后续的行都在设置rewrite模块。具体的我不太懂，于是略过。需要更改的地方可能就是static fie setting中那个目录，那个media是将admin的资源文件目录链接过来的地方（其实具体我也不太清楚rewrite模块是怎么做的，不过目前可以工作了）。 5.</div>
+        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
+1. Install Python environment
+bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。
+wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本
+2. Install Django in bluehost
+安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。
+3. Prepare the Django project
+安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。
+bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写）
+#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run()  编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
+4. Configure the Apache server
+折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：
+AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</div>
     </section>
 
     
@@ -167,7 +181,8 @@
     </header>
 
     <section>
-        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了： #/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally' 从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
+        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
+#/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally'  从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
     </section>
 
     
@@ -184,8 +199,7 @@
 
     <section>
         <div class="post-summary"><p>晚上去看了传说中的 Inception，先不涉及情节的小评论一下：情节中上（因为几年前就看过这类的小说），场面一般（不知道IMAX会不会好些），别的没啥了吧
-。然后，现在正式开始剧透，而且本文属于纯无聊加剧透的产物，所以无论看过还是没看过的都要慎入啊~</p>
-</div>
+。然后，现在正式开始剧透，而且本文属于纯无聊加剧透的产物，所以无论看过还是没看过的都要慎入啊~</p></div>
     </section>
 
     
@@ -205,7 +219,8 @@
     </header>
 
     <section>
-        <div class="post-summary">最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~ 问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。 改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件： diff -r 96b2b1cca7cd src/os_mswin.c --- a/src/os_mswin.c Mon Aug 23 12:55:47 2010 +0800 +++ b/src/os_mswin.c Mon Aug 23 13:05:17 2010 +0800 @@ -3288,8 +3288,11 @@ #ifndef FEAT_PROPORTIONAL_FONTS /* Ignore non-monospace fonts without further ado */ + /* + * hzmangel: I need non-monospace fonts! if ((ntm-&gt;tmPitchAndFamily &amp; 1) != 0) return 1; + */ #endif /* Remember this LOGFONT as a &quot;possible&quot; */ 然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ Update at 2010-09-18 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽 字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下 diff -r 6768ebd0bc04 -r 213b33df021a src/gui_w32.c --- a/src/gui_w32.c Sun Aug 08 16:38:42 2010 +0200 +++ b/src/gui_w32.c Sat Sep 18 10:37:41 2010 +0800 @@ -2298,7 +2298,11 @@ /* On NT, tell the font renderer not to &quot;help&quot; us with Hebrew and Arabic * text.</div>
+        <div class="post-summary">最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~ 问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。 改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件：
+diff -r 96b2b1cca7cd src/os_mswin.c --- a/src/os_mswin.c Mon Aug 23 12:55:47 2010 +0800 +++ b/src/os_mswin.c Mon Aug 23 13:05:17 2010 +0800 @@ -3288,8 +3288,11 @@ #ifndef FEAT_PROPORTIONAL_FONTS /* Ignore non-monospace fonts without further ado */ + /* + * hzmangel: I need non-monospace fonts! if ((ntm-&gt;tmPitchAndFamily &amp; 1) != 0) return 1; + */ #endif /* Remember this LOGFONT as a &quot;possible&quot; */  然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ Update at 2010-09-18 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽 字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下</div>
     </section>
 
     
@@ -225,7 +240,8 @@
     </header>
 
     <section>
-        <div class="post-summary">最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有： A: hg pull –f &lt;repo B&gt; A: hg merge A: hg ci 关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</div>
+        <div class="post-summary">最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有：
+A: hg pull –f &lt;repo B&gt; A: hg merge A: hg ci  关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</div>
     </section>
 
     
@@ -241,7 +257,9 @@
     </header>
 
     <section>
-        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~ 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。 最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
+        <div class="post-summary">昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
+首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。
+最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</div>
     </section>
 
     
@@ -276,20 +294,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -298,7 +311,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -367,11 +380,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

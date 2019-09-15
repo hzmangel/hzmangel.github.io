@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" Happy Coding &middot;  湖间小筑" />
+        <meta property="og:title" content=" Happy coding &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/categories/happy-coding/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | Happy Coding
+                | Happy coding
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,19 @@
     </header>
 
     <section>
-        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。 1. Install Python environment bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。 wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本 2. Install Django in bluehost 安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。 3. Prepare the Django project 安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。 bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写） #! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run() 编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。 4. Configure the Apache server 折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的： AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !-f RewriteRule ^(.*)$ run.fcgi/$1 [QSA,L] 第一行设置fcgi的handler，然后后续的行都在设置rewrite模块。具体的我不太懂，于是略过。需要更改的地方可能就是static fie setting中那个目录，那个media是将admin的资源文件目录链接过来的地方（其实具体我也不太清楚rewrite模块是怎么做的，不过目前可以工作了）。 5.</div>
+        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
+1. Install Python environment
+bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。
+wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本
+2. Install Django in bluehost
+安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。
+3. Prepare the Django project
+安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。
+bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写）
+#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run()  编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
+4. Configure the Apache server
+折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：
+AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</div>
     </section>
 
     
@@ -91,7 +103,8 @@
     </header>
 
     <section>
-        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了： #/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally' 从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
+        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
+#/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally'  从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
     </section>
 
     
@@ -107,7 +120,8 @@
     </header>
 
     <section>
-        <div class="post-summary">没几行的程序，就是输出errno数字所表示的对应含义 #include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&quot;Please give a number, Thanks~~~\n&quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &quot;errno %3d&quot;, errno); perror(tmp_str); }</div>
+        <div class="post-summary">没几行的程序，就是输出errno数字所表示的对应含义
+#include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&quot;Please give a number, Thanks~~~\n&quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &quot;errno %3d&quot;, errno); perror(tmp_str); }  </div>
     </section>
 
     
@@ -123,7 +137,9 @@
     </header>
 
     <section>
-        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~ 最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾： parent.tb_remove() 于是就达成需求了……</div>
+        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
+parent.tb_remove()  于是就达成需求了……</div>
     </section>
 
     
@@ -143,8 +159,7 @@
 
 <p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
 tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
-来了一个fooAdapter，顺便还有这篇文章。</p>
-</div>
+来了一个fooAdapter，顺便还有这篇文章。</p></div>
     </section>
 
     
@@ -164,7 +179,8 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
     </header>
 
     <section>
-        <div class="post-summary">Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样： mxmlc.exe foobar.mxml -default-size 800 600</div>
+        <div class="post-summary">Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：
+mxmlc.exe foobar.mxml -default-size 800 600</div>
     </section>
 
     
@@ -192,8 +208,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。</p>
 
 <p>代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
-1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。</p>
-</div>
+1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。</p></div>
     </section>
 
     
@@ -213,7 +228,8 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
     </header>
 
     <section>
-        <div class="post-summary">其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。 其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</div>
+        <div class="post-summary">其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。
+其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</div>
     </section>
 
     
@@ -229,7 +245,21 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
     </header>
 
     <section>
-        <div class="post-summary">报名了今年的GDD，于是就过去看看了。 早上和平时上班一样的点起床，蹬车去玩亚运村那边。诶，由于某些原因，那边的路叫一个绕啊，还好绕着绕着就找到路进去，没发生看着会场就在对面还进不去的惨剧。 进去后，签到，排的那个队居然系统出了问题，郁闷的不行了，到后来换了两个队才弄完，旁边 一工作人员让后面来的先去旁边拿点饮料边喝边等，后来中午听说有人没拿到餐 券，看来在那排队是正确的选择，虽然中午的饭也一般，8过那是后话了，呵呵。在排队的时候居然看到了apt，呵呵。 开始照例是开复的讲话，和去年差不多，嗯。话说开复出来的时候，那叫一个掌声雷动啊，呵呵。所不同的就是去年的会场比这个要小。去年是在北京新世纪日航饭店，今年弄到 了国际会展中心。应该是第二次在会展中心参加G的活动了，上次是那个啥互联网论坛。场地是大了，效果也比上次差了不少，开复讲了几句，就把话语权给了号称G第一个女性 工程师，好像是产品经理啥的吧，记不清了，呵呵。然后伊就开始讲，主要是大概介绍一下产品，然后讲到一个就从下面拖一个专家上来讲，满不错的安排。总有三块投影幕布， 中间一个放的是演讲者的幻灯，一般是鸟语的，两边两块是中文的，NND也不知道是哪个脑残的人做的，用啥字体不好用宋体，细的和啥一样，在后面根本看不清，你好歹也用 个黑体啊；中间的投影字倒是能看清，但也不知道谁管的灯光，N盏灯照在演讲者那边，人倒是看清楚了，片子看的那叫一个费劲啊，诶。 这个完了就是分会场，上次好像是分了两个分会场，这次分了四个，外加两个代码实验室。感觉这次几个分会场的一些演讲主题和分会场的主题不一致，像上午云计算移动平台的 两场，一个讲云计算的结构，一个讲的机器学习，和移动应用基本上扯不上边撒，诶。 听的第一场是云计算的架构和基础软件，P大数学系毕业的一哥们讲的，主要是介绍了GFS+BigTable+MapReduce ，GFS就是G自己的分布式文件系统 ，在一开始做搜索的时候，针对搜索系统的东西对文件系统做了优化，主要考虑的是大文件的存储以及对文件的操作多为追加的情况。还说了说G的文件系统的结构，一个Mas ter负责维护GFS系统的运转，然后一堆 Data Server 用来存放数据，它是把数据分成大小相同的块，好像今天是这么说的，然后一份数据存三份用于备份。 数据只在Client机器和数据服务器间传输，Master不参与数据传输。然后就是 BigTable，一个三维的数据映射关系，用以替代关系数据库，三个键值忘了，呵呵。MapReduce 就是把一个操作分到N台机器上去做，然后再在另M台机器上 进行数据挖掘，最后发到一台机器显示，感觉就是一个数据挖掘的过程，有点像上次看的MPI里面的Reduce，呵呵，也不知道是谁借鉴谁的。顺便提一下，这场的人叫一 个多，反正我是在站在门口听的，满不错的，嗯。 这一场没听完就撤了，去了别的会场，本来是想去听应用平台主题的，于是跑到那边，结果等上一个哥们讲完了，再仔细一看原来是讲GWT，于是赶快就撤了。转了一圈最后去 听了社区平台的东西，说的是把自己的网站加到OpenSocial的容器中去，讲的满搞笑的，Chris Schalk和沈翔。不过内容倒是没怎么听，因为都是偏概念 的东西，而且我个人对SNS倒真的没啥爱。所以听了一半直接闪人，也算是给那些站着的人空个位子出来，呵呵。然后去地理API那边转了转，人好少，不过也没细听就撤了 ，跑代码实验室转了转，结果发现讲的东西都用过了，继续闪，在移动平台那块门口转了转，讲机器学习，片子上大把的公式，把我雷到了，只有闪。闪出来没到吃饭的点，于是 在外面傻傻的坐着，想找个认识的人搭讪，可惜未果。 好不容易等到吃饭点了，跟着大部队去吃饭（顺便说一下，一楼有个EMC展会，我们一票人就大摇大摆的从人家展会那穿过去了，还由于场地问题在那交通堵塞了N久，想想都 汗），饭嘛，盒饭，一盒饭加两个小馒头，菜里面一个炒素菜，一个鸡腿，一个大概是洋葱炒牛肉，把牛肉挑吃了，不吃洋葱，木办法，呵呵。中午吃饭的人那叫一个多啊，排了 三个队，拿到饭后还等了N久才有地方坐下吃。排我前面的是一个exoweb的mm，好像是来迟了木有餐券，于是就木有吃上，也不知道是怎么解决的。还有个不爽的就是大 概排到后来没有饮料了，只好给我们每人一瓶水，本来是有个小盒装的鲜橙多的，诶。在身后人虎视眈眈的目光下吃完饭，赶忙起身让位，呵呵。看看时间也不算太早了，直接就 去下午的会场了，听的是实现平台的东西。 下午第一场是讲Google Gears，几个demo看下来，唯一的想法是很好很强大，呵呵。一个是桌面快捷方式，有点像Mozilla Lab的prism，不知道这两个有啥区别，反正我是都 没用过，有空试试；第二个demo是上传文件，一次传一堆，也满好玩的，不过好像在好看簿有看到过，应该用的 不是gears；第三个是脱离浏览器的Alert等东西，也满好用的；第四个是和WiFi的运营商啥的一起，定位后查找周边，就这玩意引了一堆人问，能操作这个东西还 是满不错的。反正给我的感觉不错，一开始还以为就是离线浏览的呢，没想到现在有这么多功能，嗯 第二场讲的是GAE，可惜已经用过了，限制太多，不说啥了，不知道能不能在上面布置非阻塞的web fetch进程，要不然肯定过不了它的时间限制。会后和Tom聊的时候说到一次Data View出了500的错，可惜那会没细去想，没准还是个bug呢，呵呵。 然后，和apt聊了聊，再然后，我有事就闪人了，嗯。 总结结束，差不多就这样了吧。有几点感想： 1、碰到老外，还是会结巴啊，要练口语了，诶 2、最受不了那帮自我感觉良好，然后操着各种口音的英语说着国人和老外都听不懂的鸟语的人，估计主持人都想来一句，您还是说中文吧。 PS：刚去瞅了一眼，上次申请的GAE还是三个App诶，不错不错，刚用掉一个还有俩，做点啥呢&hellip;&hellip;</div>
+        <div class="post-summary">报名了今年的GDD，于是就过去看看了。
+早上和平时上班一样的点起床，蹬车去玩亚运村那边。诶，由于某些原因，那边的路叫一个绕啊，还好绕着绕着就找到路进去，没发生看着会场就在对面还进不去的惨剧。
+进去后，签到，排的那个队居然系统出了问题，郁闷的不行了，到后来换了两个队才弄完，旁边 一工作人员让后面来的先去旁边拿点饮料边喝边等，后来中午听说有人没拿到餐 券，看来在那排队是正确的选择，虽然中午的饭也一般，8过那是后话了，呵呵。在排队的时候居然看到了apt，呵呵。
+开始照例是开复的讲话，和去年差不多，嗯。话说开复出来的时候，那叫一个掌声雷动啊，呵呵。所不同的就是去年的会场比这个要小。去年是在北京新世纪日航饭店，今年弄到 了国际会展中心。应该是第二次在会展中心参加G的活动了，上次是那个啥互联网论坛。场地是大了，效果也比上次差了不少，开复讲了几句，就把话语权给了号称G第一个女性 工程师，好像是产品经理啥的吧，记不清了，呵呵。然后伊就开始讲，主要是大概介绍一下产品，然后讲到一个就从下面拖一个专家上来讲，满不错的安排。总有三块投影幕布， 中间一个放的是演讲者的幻灯，一般是鸟语的，两边两块是中文的，NND也不知道是哪个脑残的人做的，用啥字体不好用宋体，细的和啥一样，在后面根本看不清，你好歹也用 个黑体啊；中间的投影字倒是能看清，但也不知道谁管的灯光，N盏灯照在演讲者那边，人倒是看清楚了，片子看的那叫一个费劲啊，诶。
+这个完了就是分会场，上次好像是分了两个分会场，这次分了四个，外加两个代码实验室。感觉这次几个分会场的一些演讲主题和分会场的主题不一致，像上午云计算移动平台的 两场，一个讲云计算的结构，一个讲的机器学习，和移动应用基本上扯不上边撒，诶。
+听的第一场是云计算的架构和基础软件，P大数学系毕业的一哥们讲的，主要是介绍了GFS+BigTable+MapReduce ，GFS就是G自己的分布式文件系统 ，在一开始做搜索的时候，针对搜索系统的东西对文件系统做了优化，主要考虑的是大文件的存储以及对文件的操作多为追加的情况。还说了说G的文件系统的结构，一个Mas ter负责维护GFS系统的运转，然后一堆 Data Server 用来存放数据，它是把数据分成大小相同的块，好像今天是这么说的，然后一份数据存三份用于备份。 数据只在Client机器和数据服务器间传输，Master不参与数据传输。然后就是 BigTable，一个三维的数据映射关系，用以替代关系数据库，三个键值忘了，呵呵。MapReduce 就是把一个操作分到N台机器上去做，然后再在另M台机器上 进行数据挖掘，最后发到一台机器显示，感觉就是一个数据挖掘的过程，有点像上次看的MPI里面的Reduce，呵呵，也不知道是谁借鉴谁的。顺便提一下，这场的人叫一 个多，反正我是在站在门口听的，满不错的，嗯。
+这一场没听完就撤了，去了别的会场，本来是想去听应用平台主题的，于是跑到那边，结果等上一个哥们讲完了，再仔细一看原来是讲GWT，于是赶快就撤了。转了一圈最后去 听了社区平台的东西，说的是把自己的网站加到OpenSocial的容器中去，讲的满搞笑的，Chris Schalk和沈翔。不过内容倒是没怎么听，因为都是偏概念 的东西，而且我个人对SNS倒真的没啥爱。所以听了一半直接闪人，也算是给那些站着的人空个位子出来，呵呵。然后去地理API那边转了转，人好少，不过也没细听就撤了 ，跑代码实验室转了转，结果发现讲的东西都用过了，继续闪，在移动平台那块门口转了转，讲机器学习，片子上大把的公式，把我雷到了，只有闪。闪出来没到吃饭的点，于是 在外面傻傻的坐着，想找个认识的人搭讪，可惜未果。
+好不容易等到吃饭点了，跟着大部队去吃饭（顺便说一下，一楼有个EMC展会，我们一票人就大摇大摆的从人家展会那穿过去了，还由于场地问题在那交通堵塞了N久，想想都 汗），饭嘛，盒饭，一盒饭加两个小馒头，菜里面一个炒素菜，一个鸡腿，一个大概是洋葱炒牛肉，把牛肉挑吃了，不吃洋葱，木办法，呵呵。中午吃饭的人那叫一个多啊，排了 三个队，拿到饭后还等了N久才有地方坐下吃。排我前面的是一个exoweb的mm，好像是来迟了木有餐券，于是就木有吃上，也不知道是怎么解决的。还有个不爽的就是大 概排到后来没有饮料了，只好给我们每人一瓶水，本来是有个小盒装的鲜橙多的，诶。在身后人虎视眈眈的目光下吃完饭，赶忙起身让位，呵呵。看看时间也不算太早了，直接就 去下午的会场了，听的是实现平台的东西。
+下午第一场是讲Google Gears，几个demo看下来，唯一的想法是很好很强大，呵呵。一个是桌面快捷方式，有点像Mozilla Lab的prism，不知道这两个有啥区别，反正我是都 没用过，有空试试；第二个demo是上传文件，一次传一堆，也满好玩的，不过好像在好看簿有看到过，应该用的 不是gears；第三个是脱离浏览器的Alert等东西，也满好用的；第四个是和WiFi的运营商啥的一起，定位后查找周边，就这玩意引了一堆人问，能操作这个东西还 是满不错的。反正给我的感觉不错，一开始还以为就是离线浏览的呢，没想到现在有这么多功能，嗯
+第二场讲的是GAE，可惜已经用过了，限制太多，不说啥了，不知道能不能在上面布置非阻塞的web fetch进程，要不然肯定过不了它的时间限制。会后和Tom聊的时候说到一次Data View出了500的错，可惜那会没细去想，没准还是个bug呢，呵呵。
+然后，和apt聊了聊，再然后，我有事就闪人了，嗯。
+总结结束，差不多就这样了吧。有几点感想：
+1、碰到老外，还是会结巴啊，要练口语了，诶
+2、最受不了那帮自我感觉良好，然后操着各种口音的英语说着国人和老外都听不懂的鸟语的人，估计主持人都想来一句，您还是说中文吧。
+PS：刚去瞅了一眼，上次申请的GAE还是三个App诶，不错不错，刚用掉一个还有俩，做点啥呢&hellip;&hellip;</div>
     </section>
 
     
@@ -280,20 +310,15 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -302,7 +327,7 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -371,11 +396,11 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

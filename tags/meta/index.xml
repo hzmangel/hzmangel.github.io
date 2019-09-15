@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meta on 湖间小筑</title>
+    <title>meta on 湖间小筑</title>
     <link>http://hzmangel.github.io/tags/meta/</link>
-    <description>Recent content in Meta on 湖间小筑</description>
+    <description>Recent content in meta on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Blog搬(zhe)家(teng)记</title>
@@ -16,9 +18,7 @@
       <pubDate>Sat, 13 Jun 2015 11:36:18 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/new-github-blog/</guid>
-      <description>
-
-&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
+      <description>&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
 
 &lt;p&gt;当初想把blog搬家的主要需求也就下面这些：&lt;/p&gt;
 
@@ -26,74 +26,7 @@
 &lt;li&gt;能用Markdown写。除了写着舒服外，这不是还能装13嘛～&lt;/li&gt;
 &lt;li&gt;之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。&lt;/li&gt;
 &lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;hugo&#34;&gt;Hugo&lt;/h2&gt;
-
-&lt;p&gt;最开始的时候也想着用 &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 或者 &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt; ，但是在转换的时候，发现有些&lt;code&gt;Latex&lt;/code&gt;的代码中的行末注释&lt;code&gt;{%&lt;/code&gt;会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&amp;hellip;&amp;hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。&lt;/p&gt;
-
-&lt;h2 id=&#34;wp2hugo&#34;&gt;wp2hugo&lt;/h2&gt;
-
-&lt;p&gt;敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， &lt;a href=&#34;https://github.com/jekyll/jekyll-import&#34;&gt;Jekyll Import&lt;/a&gt; ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&amp;hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： &lt;a href=&#34;https://github.com/hzmangel/wp2hugo&#34;&gt;wp2hugo&lt;/a&gt; 。这货主要干的事情是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;解析Wordpress导出的XML文件。&lt;/li&gt;
-&lt;li&gt;将站点信息存到&lt;code&gt;config.yaml&lt;/code&gt;中。&lt;/li&gt;
-&lt;li&gt;将文章存放到带有元信息的Markdown文件中（使用 &lt;a href=&#34;https://pypi.python.org/pypi/html2text&#34;&gt;html2text&lt;/a&gt; 将原来的HTML内容转成Markdown ），使用 &lt;strong&gt;post id&lt;/strong&gt; 作为文件名。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。&lt;/p&gt;
-
-&lt;h2 id=&#34;twenty-ten&#34;&gt;Twenty Ten&lt;/h2&gt;
-
-&lt;p&gt;原来的Blog用的模板是WP自带的 &lt;a href=&#34;https://wordpress.org/themes/twentyten/&#34;&gt;Twenty Ten&lt;/a&gt; ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten&#34;&gt;GitHub repo&lt;/a&gt; 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。&lt;/p&gt;
-
-&lt;h3 id=&#34;分页&#34;&gt;分页&lt;/h3&gt;
-
-&lt;p&gt;Hugo内置了分页，就是在页面中加入 &lt;code&gt;{{ template &amp;quot;_internal/pagination.html&amp;quot; . }}&lt;/code&gt; ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用&lt;code&gt;...&lt;/code&gt;代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。&lt;/p&gt;
-
-&lt;h3 id=&#34;标签云&#34;&gt;标签云&lt;/h3&gt;
-
-&lt;p&gt;Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html&#34;&gt;sidebar.html&lt;/a&gt;：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;sidebar-block&amp;quot;&amp;gt;
-  &amp;lt;h5&amp;gt;标签&amp;lt;/h5&amp;gt;
-  &amp;lt;div id=&amp;quot;tag_cloud&amp;quot; data-tags=&amp;quot;{{ range $key, $value := .Site.Taxonomies.tags }} [&#39;{{$key}}&#39;, {{len $value}}, &#39;/tags/{{ $key | urlize }}&#39;]; {{ end }}&amp;quot; /&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后生成标签云的js是这样的：&lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/static/js/index.js&#34;&gt;index.js&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$( document ).ready(function() {
-    var tag_list = eval($(&amp;quot;#tag_cloud&amp;quot;).data(&#39;tags&#39;).split(&#39;;&#39;));
-    tag_list.pop();
-
-    var tag_json = [];
-    var total_cnt = 0;
-    $.each(tag_list, function( idx, val ) {
-        foo = eval(val);
-        tag_json.push(foo);
-        total_cnt += foo[1];
-    })
-    generate_tag_cloud(tag_json, total_cnt);
-});
-
-var generate_tag_cloud = function(tag_json, total_cnt) {
-    tag_cloud_str = &amp;quot;&amp;lt;div id=&#39;tag_cloud_canvas&#39;&amp;gt;&amp;quot;;
-
-    $.each(tag_json, function(idx, val) {
-        font_size = 8 + Math.log(val[1])/Math.log(total_cnt) * 18;
-        tag_cloud_str += &amp;quot;&amp;lt;a style=\&amp;quot;font-size:&amp;quot; + font_size +&amp;quot;pt\&amp;quot; href=&amp;quot; + val[2] + &amp;quot;&amp;gt;&amp;quot; + val[0] + &amp;quot;&amp;lt;/a&amp;gt;&amp;amp;nbsp; &amp;quot;;
-    });
-
-    tag_cloud_str += &amp;quot;&amp;lt;/div&amp;gt;&amp;quot;;
-
-    $(&amp;quot;#tag_cloud&amp;quot;).append(tag_cloud_str);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;目前差不多就是这样了，偶尔想到啥新的东西再往上加吧，嘿嘿。&lt;/p&gt;
-</description>
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

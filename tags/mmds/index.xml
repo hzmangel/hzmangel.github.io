@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mmds on 湖间小筑</title>
+    <title>mmds on 湖间小筑</title>
     <link>http://hzmangel.github.io/tags/mmds/</link>
-    <description>Recent content in Mmds on 湖间小筑</description>
+    <description>Recent content in mmds on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Wed, 11 Nov 2015 23:53:33 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/mmds/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/mmds/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>MMDS Notes: W3 - Communities in Social Network (Basic)
@@ -17,112 +19,7 @@
       <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid>
-      <description>
-
-&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;
-
-&lt;p&gt;社交网络包含有用户和用户之间的联系。把用户看成顶点，把用户之间的联系看成边，就可以得到一个图 (&lt;em&gt;social graph&lt;/em&gt;)。像 Facebook 中的图就是无向图，而 Twitter/G+ 中的就是有向图。在 &lt;em&gt;Network&lt;/em&gt; 和 &lt;em&gt;Communities&lt;/em&gt; 这块，主要的任务有两类：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;给定一个模型，怎么去生成网络&lt;/li&gt;
-&lt;li&gt;给定一个网络，怎么找到最好的 &lt;em&gt;Communities&lt;/em&gt; 模型&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;从模型生成网络&#34;&gt;从模型生成网络&lt;/h2&gt;
-
-&lt;p&gt;从模型生成网络是指定义一个模型，它接受一系列的参数，并最终生成一张网络（主要是边的生成）。&lt;/p&gt;
-
-&lt;h3 id=&#34;agm-affiliation-graph-model&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
-
-&lt;h4 id=&#34;参数&#34;&gt;参数&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$V$&lt;/code&gt;: 节点&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$C$&lt;/code&gt;: &lt;em&gt;Community&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$M$&lt;/code&gt;: 节点与 &lt;em&gt;Community&lt;/em&gt; 之间的关系&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$P_{c}$&lt;/code&gt;: 某个 &lt;em&gt;Community&lt;/em&gt; 的联通率，即都属于某个 &lt;em&gt;Community&lt;/em&gt; 的节点之间联通的概率。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;生成过程&#34;&gt;生成过程&lt;/h4&gt;
-
-&lt;p&gt;遍历每个 &lt;em&gt;Community&lt;/em&gt; &lt;code&gt;$A$&lt;/code&gt; 中的节点对，以 &lt;code&gt;$P_{A}$&lt;/code&gt; 的概率连接它们（边的生成）。&lt;/p&gt;
-
-&lt;p&gt;任意两点间的连接概率为&lt;code&gt;$P(u,v)=1-\prod_{c \in M_{u} \bigcap M_{v}}(1-p_{c}) $&lt;/code&gt; 。其中，&lt;code&gt;$M_{u}$&lt;/code&gt; 表示包含有节点 &lt;code&gt;$u$&lt;/code&gt; 的 &lt;em&gt;Community&lt;/em&gt; 集合。如果 &lt;code&gt;$u$&lt;/code&gt; 和 &lt;code&gt;$v$&lt;/code&gt; 没有共用的 &lt;em&gt;Community&lt;/em&gt; ，则概率 &lt;code&gt;$P(u,v) = \epsilon $&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;h4 id=&#34;适应性强&#34;&gt;适应性强&lt;/h4&gt;
-
-&lt;p&gt;可以用于生成多种 &lt;em&gt;Community&lt;/em&gt; ：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;无交集 (Non-overlapping)&lt;/li&gt;
-&lt;li&gt;有交集 (Overlapping)&lt;/li&gt;
-&lt;li&gt;内嵌 (Nested)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;从网络生成模型&#34;&gt;从网络生成模型&lt;/h2&gt;
-
-&lt;h3 id=&#34;agm-affiliation-graph-model-1&#34;&gt;AGM: Affiliation Graph Model&lt;/h3&gt;
-
-&lt;p&gt;这个是mmds书本&lt;a href=&#34;http://www.mmds.org/mmds/v2.1/ch10-graphs2.pdf&#34;&gt;配套幻灯片&lt;/a&gt;上的内容，占坑。&lt;/p&gt;
-
-&lt;h3 id=&#34;bigclam&#34;&gt;BigCLAM&lt;/h3&gt;
-
-&lt;h4 id=&#34;membership-strength&#34;&gt;Membership Strength&lt;/h4&gt;
-
-&lt;p&gt;引入一个新概念，某个节点 &lt;code&gt;$u$&lt;/code&gt; 对某个 &lt;em&gt;Community&lt;/em&gt; 的 &lt;em&gt;membership strength&lt;/em&gt; ，记为 &lt;code&gt;$F_{u,A}$&lt;/code&gt;，同时定义如果此值为0，则表明节点不在 &lt;em&gt;Community&lt;/em&gt; 中。所以在某个 &lt;em&gt;Community&lt;/em&gt; 中，两个节点的联通概率为 &lt;code&gt;$P_{A}(u,v)=1-\exp (-F_{uA} \cdot F_{vA})$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;此处不是很明白为什么同 &lt;em&gt;Community&lt;/em&gt; 中节点的连通概率可以写成上面的方式，需要去书中相应章节找答案。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;上面介绍的是在同一个 &lt;em&gt;Community&lt;/em&gt; 中两个节点的联通概率，现在将要说的是在不同的 &lt;em&gt;Community&lt;/em&gt; 中如何确定联通概率。首先需要定义一个 &lt;em&gt;Community membership strength matrix&lt;/em&gt; ，它的列是 &lt;em&gt;Community&lt;/em&gt; ，行是节点。将矩阵记为 &lt;code&gt;$F$&lt;/code&gt;，某个位置 &lt;code&gt;$F_{vA}$&lt;/code&gt; 的值表示的是节点在这个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;strength&lt;/em&gt; ，所以任意一行 &lt;code&gt;$F_{u}$&lt;/code&gt; 则表示的是节点在多个 &lt;em&gt;Community&lt;/em&gt; 中的 &lt;em&gt;membership strength&lt;/em&gt; 向量。&lt;/p&gt;
-
-&lt;p&gt;上面的公式计算的是两个节点在单 &lt;em&gt;Community&lt;/em&gt; 中的联通概率，两个节点之间存在至少相同的 &lt;em&gt;Community&lt;/em&gt; ，那么它们的联通概率即为 &lt;code&gt;$P(u,v)=1-\prod_{C}(1-P_{C}(u,v))$&lt;/code&gt; ，经过和上面的公式整合，简化，可以得到 &lt;code&gt;$P(u,v)=1-\exp (-F_{v} \cdot F_{v}^{T} )$&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;所以问题就从如何从一个网络生成 &lt;em&gt;Community&lt;/em&gt; 变成了如何从给定的网络中找到可以最大化 &lt;em&gt;likelihood&lt;/em&gt; 的矩阵 &lt;code&gt;$F$&lt;/code&gt; ，即 &lt;code&gt;$argmax_{F} \prod_{u,v \in E} p(u,v) \prod_{(u,v \notin E)}(1-p(u,v))$&lt;/code&gt; 。通常这个 &lt;em&gt;likelihood&lt;/em&gt; 会使用对数表示，记为 &lt;code&gt;$l(F)=\log P(G|F)$&lt;/code&gt; 。最后问题就演变为找到可以使 &lt;code&gt;$l(F)$&lt;/code&gt; 最大化的 &lt;code&gt;$F$&lt;/code&gt;。而 &lt;code&gt;$$l(F) = \sum_{(u,v) \in E} \log (1-\exp (-F_{u}F_{v}^{T})) - \sum_{(u,v) \notin E}(F_{u}F_{v}^{T})$$&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;计算&#34;&gt;计算&lt;/h4&gt;
-
-&lt;p&gt;考虑到需要求 &lt;em&gt;likelihood&lt;/em&gt; 的极大值，所以考虑使用导数（ &lt;em&gt;gradient&lt;/em&gt; ）来计算。将上式中的&lt;code&gt;$F_{u}$&lt;/code&gt;看作变量，即某节点 &lt;code&gt;$u$&lt;/code&gt; 的最大 &lt;em&gt;likelihood&lt;/em&gt; 值，则对上面公式的求导后可变为&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$$ \nabla l(F_{u})=\sum_{v \in \mathcal{N}(u)} F_{v} \frac{\exp (-F_{u}F_{v}^{T})}{1- \exp (-F_{u}F_{v}^{T})} - \sum_{v \notin \mathcal{N}(u)} F_{v} $$&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;其中，&lt;code&gt;$\mathcal{N}(u)$&lt;/code&gt;表示节点 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点。&lt;/p&gt;
-
-&lt;p&gt;这个公式的问题在于，后面的一个求和操作是线性时间的，而且是和所有节点数目相关，这样会拖慢运算速度。式子的后一项是计算所有不在节点 &lt;code&gt;$u$&lt;/code&gt; 邻接节点中的节点的&lt;code&gt;$F$&lt;/code&gt;值的和，它可以替换为 &lt;code&gt;$\sum_{v} F_{v} - F_{u} - \sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; ，而这个式子的第一项 &lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 是可以预先计算得到的，而 &lt;code&gt;$\sum_{v \in \mathcal{N}(u) F_{v}}$&lt;/code&gt; 虽然也是线性时间，但是只和 &lt;code&gt;$u$&lt;/code&gt; 的邻接节点数目想关，这个数值在真实网络中远小于整个网络的节点数的。所以在速度上有很大的改进。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;有点不明白，&lt;code&gt;$\sum_{v} F_{v}$&lt;/code&gt; 在开始的时候是怎么可以事先计算的，要求的不就是某个 &lt;code&gt;$F$&lt;/code&gt; 吗。后期实现的时候再看如何处理吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;其它阅读-graph-and-social-network&#34;&gt;其它阅读: Graph and Social Network&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：此处的内容并没有在课程讲义中，而对应书本的 &lt;em&gt;10.1.2 Social Networks as Graphs&lt;/em&gt; 节。主要是觉得在课程上说的有些东西不是很清楚来龙去脉，所以去书本上找一找，就看到了这个东西。目前还有一些问题不是很明了，也一起列在最后。&lt;/p&gt;
-
-&lt;p&gt;一般认为，一个 &lt;em&gt;SN&lt;/em&gt; 可以看成一张图，但这并不是表示任意一个 &lt;em&gt;graph&lt;/em&gt; ，就能表示一个 &lt;em&gt;social network&lt;/em&gt; ，这个是由这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; 确定的。&lt;/p&gt;
-
-&lt;p&gt;检查一个 &lt;em&gt;graph&lt;/em&gt; 是不是 &lt;em&gt;SN&lt;/em&gt; ，则需要计算这张图的 &lt;em&gt;locality of relationships&lt;/em&gt; （找不到这个词怎么翻译，先原样放这吧）。给定一个有 &lt;code&gt;$N$&lt;/code&gt; 节点， &lt;code&gt;$E$&lt;/code&gt; 条边的图，它的联通率是指，有三个点&lt;code&gt;$X$&lt;/code&gt;，&lt;code&gt;$Y$&lt;/code&gt;和&lt;code&gt;$Z$&lt;/code&gt;，在确定&lt;code&gt;$(X,Y)$&lt;/code&gt;和&lt;code&gt;$(X,Z)$&lt;/code&gt;联通的情况下，&lt;code&gt;$(Y,Z)$&lt;/code&gt;联通的概率。&lt;/p&gt;
-
-&lt;p&gt;此概率的计算有以下几步：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;理论联通率&lt;/strong&gt;：完全图会有&lt;code&gt;K=$\binom{N}{2}$&lt;/code&gt;条边，所以理论联通率应为 &lt;code&gt;$E/K$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;单条边的联通率&lt;/strong&gt;：在大规模的图中，一般认为理论联通率就是图的联通率，但是在小规模的图中，这个数值偏差有些大，所以需要重新计算。考虑给定条件，在已经确定有两条边的情况下，计算第三条边出现的条件概率，即为&lt;code&gt;$(E-2)/(K-2)$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;实际联通率&lt;/strong&gt;：实际概率的计算需要遍历图中的每个节点，假设为&lt;code&gt;$X$&lt;/code&gt;，再找到邻接节点 &lt;code&gt;$Y$&lt;/code&gt; 和 &lt;code&gt;$Z$&lt;/code&gt; ，最后计算 &lt;code&gt;$(Y,Z)$&lt;/code&gt; 出现的概率。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;书中表示，最后算出来的实际概率大于单边理论概率，所以这张图可以看成是某 &lt;em&gt;SN&lt;/em&gt; 网络（可以表示 &lt;em&gt;SN&lt;/em&gt; 网络的 &lt;em&gt;locality&lt;/em&gt; ）。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;是不是说大规格图的联通率直接认为是理论联通率，所以就肯定可以表示 &lt;em&gt;SN&lt;/em&gt; 而不用再计算？&lt;/li&gt;
-&lt;li&gt;如果计算出来的联通率比单边联通率还要低，那是不是就说明这个图不能表示 &lt;em&gt;SN&lt;/em&gt; ？&lt;/li&gt;
-&lt;li&gt;是不是说实际联通率只要超过单边联通率就可以看成是 &lt;em&gt;SN&lt;/em&gt; ？还是说需要超过某个阈值才可以算？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-</description>
+      <description>&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -132,117 +29,7 @@
       <pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid>
-      <description>
-
-&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;
-
-&lt;p&gt;前一篇中所说的两种计算数据对次数的办法，都是 &lt;em&gt;one-pass&lt;/em&gt; 的，程序在读入数据的同时，生成数据对，然后在数据对对应的计数上加1。这样数据读取完成后，直接查找计数的数即可得知结果。但是这个方法在在数据量过大时会超过主存的大小，从而在计算时引发换页，降低效率。而本篇要介绍的 &lt;em&gt;A-Priori&lt;/em&gt; 算法，通过减少需要计算的数据对个数，从而减少对内存的需求。&lt;/p&gt;
-
-&lt;p&gt;这个算法的核心思想是 &lt;em&gt;monotonicity&lt;/em&gt; ，即如果 &lt;code&gt;{I}&lt;/code&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的所有子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。反过来说，如果一个元素不是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么任何包含它的集合都不可能是。&lt;/p&gt;
-
-&lt;h2 id=&#34;基本算法&#34;&gt;基本算法&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;A-Priori&lt;/em&gt; 是一个 &lt;em&gt;two-pass&lt;/em&gt; 算法，&lt;/p&gt;
-
-&lt;h3 id=&#34;first-pass&#34;&gt;First Pass&lt;/h3&gt;
-
-&lt;p&gt;在读取的过程中创建两张Hash表，一张表是将所有 &lt;code&gt;item&lt;/code&gt; 映射为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;n&lt;/code&gt; 的索引，减少后面引用时占用的内存。第二张表是将 &lt;code&gt;item&lt;/code&gt; 的索引与 &lt;code&gt;item&lt;/code&gt; 出现的次数对应起来。&lt;/p&gt;
-
-&lt;h3 id=&#34;between-passes&#34;&gt;Between Passes&lt;/h3&gt;
-
-&lt;p&gt;检查索引和出现次数映射的表，找出其中所有的 &lt;em&gt;frequent itemset&lt;/em&gt; ，并将它们重新索引为 &lt;code&gt;1&lt;/code&gt; 到 &lt;code&gt;m&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;second-pass&#34;&gt;Second Pass&lt;/h3&gt;
-
-&lt;p&gt;计算所有使用 &lt;em&gt;frequent itemset&lt;/em&gt; 表中元素组成的数据对的 &lt;em&gt;support&lt;/em&gt; 值。具体流程如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;对每一个 &lt;em&gt;basket&lt;/em&gt; ，找出其中属于 &lt;em&gt;frequent itemset&lt;/em&gt; 表中的元素。&lt;/li&gt;
-&lt;li&gt;为找到的元素构建数据对。&lt;/li&gt;
-&lt;li&gt;找到数据对对应的计数值，加上它出现的次数。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;最后，只需要检查第二次生成的数据就好。另外，如果需要求多于2个元素的 &lt;em&gt;itemset&lt;/em&gt; ，可以按上述办法将算法级联计算。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;基本算法介绍完成，下面就是改进了。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Mutation: it is the key to our evolution.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;pcy&#34;&gt;PCY&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 的时候，内存中有很多空闲的地方，所以在给 &lt;em&gt;item&lt;/em&gt; 计数的同时，生成出所有的 &lt;em&gt;pair&lt;/em&gt; ，取 Hash 后，给对应的 &lt;em&gt;bucket&lt;/em&gt; 加1 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，只处理如下的数据对：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;i&lt;/code&gt; 和 &lt;code&gt;j&lt;/code&gt; 都是 &lt;em&gt;frequent items&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;{i, j}&lt;/code&gt; 被 Hash 的 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;这样 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据又能少一些了。&lt;/p&gt;
-
-&lt;p&gt;这个算法的原理是，如果一个 &lt;em&gt;pair&lt;/em&gt; 是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它对应的 &lt;em&gt;bucket&lt;/em&gt; 一定超过 &lt;em&gt;support&lt;/em&gt; 的阈值。而如果一个 &lt;em&gt;bucket&lt;/em&gt; 没有超过阈值，那么里面的所有 &lt;em&gt;pair&lt;/em&gt; 一定不是 &lt;em&gt;frequent pair&lt;/em&gt; 。 注意：一个 &lt;em&gt;bucket&lt;/em&gt; 是 &lt;em&gt;frequent bucket&lt;/em&gt; 并不能保证其中的 &lt;em&gt;pair&lt;/em&gt; 都是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;first-pass-1&#34;&gt;First Pass&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;for b in buckets
-  for item in b:
-    count[item]++
-  end
-
-  for pair in b:
-    bucket(hash(pair))++
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;between-passes-1&#34;&gt;Between Passes&lt;/h3&gt;
-
-&lt;p&gt;除了找出 &lt;em&gt;frequent item&lt;/em&gt; 外，还会把上一步中的 &lt;em&gt;hash bucket&lt;/em&gt; 替换为 &lt;em&gt;bitmap&lt;/em&gt; ，&lt;code&gt;1&lt;/code&gt; 表示 &lt;em&gt;frequent bucket&lt;/em&gt; ， &lt;code&gt;0&lt;/code&gt; 表示不是。这样可以进一步减少内存空间的占用（从 &lt;code&gt;32bit&lt;/code&gt; 降到 &lt;code&gt;1bit&lt;/code&gt;）。&lt;/p&gt;
-
-&lt;h3 id=&#34;second-pass-1&#34;&gt;Second Pass&lt;/h3&gt;
-
-&lt;p&gt;根据上面列出的条件，找到 &lt;em&gt;canidate pair&lt;/em&gt; ，计算。&lt;/p&gt;
-
-&lt;p&gt;PCY算法还有两个变种：&lt;/p&gt;
-
-&lt;h2 id=&#34;multistage&#34;&gt;Multistage&lt;/h2&gt;
-
-&lt;p&gt;这个算法的核心在于，在PCY算法的 &lt;em&gt;first pass&lt;/em&gt; 后，并不开始对 &lt;em&gt;bucket&lt;/em&gt; 做筛选，而是将其中属于 &lt;em&gt;frequent bucket&lt;/em&gt; 的 &lt;em&gt;pair&lt;/em&gt; 挑出来，再做一次 Hash ，从而进一步减少 &lt;em&gt;second pass&lt;/em&gt; 中需要处理的数据量。从定义上来看，这个算法可能会有多个 &lt;em&gt;pass&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;multihash&#34;&gt;Multihash&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用多个独立的Hash函数来计算 &lt;em&gt;bucket&lt;/em&gt; 。相比物 Multistage ，它还是 &lt;em&gt;two pass&lt;/em&gt; 的算法，但是它的风险在于在多个 Hash 的作用下，可能会有更多的 &lt;em&gt;frequent bucket&lt;/em&gt; 。如果它能保证 &lt;em&gt;frequent bucket&lt;/em&gt; 的数目足够小，那么我们就能在 &lt;em&gt;two pass&lt;/em&gt; 获得 Multistage 的优点。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;算法的另一个发展趋势是获取到大部分的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，使用降低精确性的办法来换取效率。&lt;/p&gt;
-
-&lt;h2 id=&#34;基本想法&#34;&gt;基本想法&lt;/h2&gt;
-
-&lt;p&gt;对样本 &lt;em&gt;basket&lt;/em&gt; 进行随机抽样，并在内存中对样本进行 &lt;em&gt;A-Priori&lt;/em&gt; 或其改进版本的计算，此处需要计算所有的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，而不仅仅是 &lt;em&gt;pair&lt;/em&gt; 。计算时使用的 &lt;em&gt;support threshold&lt;/em&gt; 需要根据样本容量处理，例如抽样率为 &lt;code&gt;1/100&lt;/code&gt; ，那么阈值也相应的变成 &lt;code&gt;s/100&lt;/code&gt; 。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，可以使用整体数据来验证是否找到的真的是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;这个算法有个问题有些 &lt;em&gt;set&lt;/em&gt; 可能在样本中不是 &lt;em&gt;frequent&lt;/em&gt; 但在全局中是，这里有一个稍微改进的办法是适当降低样本计算中的 &lt;em&gt;support&lt;/em&gt; 阈值，例如从 &lt;code&gt;s/100&lt;/code&gt; 降为 &lt;code&gt;s/125&lt;/code&gt; ，不过这会需要更大的内存空间。（而且还是有可能会漏掉的吧&amp;hellip;&amp;hellip;）&lt;/p&gt;
-
-&lt;h2 id=&#34;son-算法&#34;&gt;SON 算法&lt;/h2&gt;
-
-&lt;p&gt;这个算法是将大的数据分成小集合分别读入内存进行计算，并将在任意一次计算中得到的 &lt;em&gt;frequent pair&lt;/em&gt; 置于候选的位置。而在 &lt;em&gt;second pass&lt;/em&gt; ，计算这些候选 &lt;em&gt;pair&lt;/em&gt; 并得出最后结果。这个算法的核心是，任何一个 &lt;em&gt;pair&lt;/em&gt; 如果是 &lt;em&gt;frequent pair&lt;/em&gt; ，那么它一定会在某个子集中是 &lt;em&gt;frequent pair&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;这个算法可以让计算并行化，以提高处理效率。&lt;/p&gt;
-
-&lt;h2 id=&#34;toivonen-算法&#34;&gt;Toivonen 算法&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;em&gt;first pass&lt;/em&gt; 中，使用子集基本算法一样的方法，抽样并计算，但是在取阈值的时候设置的稍低，例如 &lt;code&gt;s/125&lt;/code&gt;，以尽可能的不要遗漏在全集中是 &lt;em&gt;frequent set&lt;/em&gt; 的数据。此后设置一个 &lt;em&gt;negative border&lt;/em&gt; 区间，以存放所有子集是 &lt;em&gt;frequent set&lt;/em&gt; 但是本身不是的集合。在 &lt;em&gt;second pass&lt;/em&gt; 的时候，计算所有候选 &lt;em&gt;frequent itemsets&lt;/em&gt; 和 &lt;em&gt;negative border&lt;/em&gt; 中的数据。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果 &lt;em&gt;negative border&lt;/em&gt; 中没有数据是 &lt;em&gt;frequent itemsets&lt;/em&gt; ，那么所得就是所需的 &lt;em&gt;frequent itemsets&lt;/em&gt; .&lt;/li&gt;
-&lt;li&gt;如果在 &lt;em&gt;negative border&lt;/em&gt; 中找到了 &lt;em&gt;frequent itesmsets&lt;/em&gt; ，那么就需要重新取样进行计算，直到满足前一条的条件为止。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;证明：假设 &lt;code&gt;S&lt;/code&gt; 是一个在全集中的 &lt;em&gt;frequent itemset&lt;/em&gt; ，但是在抽样样本中，它既不属于 &lt;em&gt;frequent itemsets&lt;/em&gt; 也不是 &lt;em&gt;negative border&lt;/em&gt; 。那么可以找到一个 &lt;code&gt;T&lt;/code&gt; ，它是在样本中非 &lt;em&gt;frequent&lt;/em&gt; 的 &lt;code&gt;S&lt;/code&gt; 最小子集。即比 &lt;code&gt;T&lt;/code&gt; 小的子集在样本中都是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那根据 &lt;em&gt;negative border&lt;/em&gt; 的定义，&lt;code&gt;T&lt;/code&gt; 一定会在 &lt;em&gt;negative border&lt;/em&gt; 中，否则它就不是是最小子集。由于空集总是 &lt;em&gt;frequent itemset&lt;/em&gt; ，所以 &lt;code&gt;T&lt;/code&gt; 一定存在。这样就有一个 &lt;code&gt;T&lt;/code&gt; ，它在全集中是 &lt;em&gt;frequent itemset&lt;/em&gt; ，在样本中是 &lt;em&gt;negative border&lt;/em&gt; ，于是，重新抽样吧。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -252,115 +39,7 @@ end
       <pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid>
-      <description>
-
-&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;
-
-&lt;h2 id=&#34;market-basket-模型&#34;&gt;&lt;em&gt;Market-Basket&lt;/em&gt; 模型&lt;/h2&gt;
-
-&lt;p&gt;这个模型一般用来描述两种数据之间的 &lt;em&gt;m2m&lt;/em&gt; 关系。其中的一个数据是 &lt;em&gt;item&lt;/em&gt; ，而另一个是 &lt;em&gt;baskets&lt;/em&gt; 。每一个 &lt;em&gt;basket&lt;/em&gt; 中包含有多个 &lt;em&gt;items&lt;/em&gt; ，即为 &lt;em&gt;itemset&lt;/em&gt; 。 通常认为：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 中的 &lt;em&gt;items&lt;/em&gt; 数量较少，远小于整体 &lt;em&gt;items&lt;/em&gt; 的数量。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; 的数量较大，不能完全的放于内存中。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这是一个模型的例子：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Market&lt;/em&gt; ：一个超级市场。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Item&lt;/em&gt; ：市场中售卖的所有东西。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Basket&lt;/em&gt; ：用户的订单。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;frequent-itemsets&#34;&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Frequent Itemsets&lt;/em&gt; 即指在 &lt;em&gt;baskets&lt;/em&gt; 中经常出现的 &lt;em&gt;itemset&lt;/em&gt; ，它的定义为：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;假设 &lt;em&gt;I&lt;/em&gt; 是一个 &lt;em&gt;itemset&lt;/em&gt; ，定义 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;support&lt;/em&gt; 为包含 &lt;em&gt;I&lt;/em&gt; 的 &lt;em&gt;basket&lt;/em&gt; 个数。定义数字 &lt;em&gt;s&lt;/em&gt; 为 &lt;em&gt;support threshold&lt;/em&gt; ，所有 &lt;em&gt;support&lt;/em&gt; 数超过 &lt;em&gt;s&lt;/em&gt; 的 &lt;em&gt;I&lt;/em&gt; 即为 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：一个 &lt;em&gt;basket&lt;/em&gt; 可能包含有多个 &lt;em&gt;itemset&lt;/em&gt; ，并不是说一个 &lt;em&gt;basket&lt;/em&gt; 中包含的就是一个 &lt;em&gt;itemset&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;一个 &lt;em&gt;itemset&lt;/em&gt; 可以包含有不定个元素。如果一个 &lt;em&gt;itemset&lt;/em&gt; 是 &lt;em&gt;frequent itemset&lt;/em&gt; ，那么它的的任何子集都是 &lt;em&gt;frequent itemset&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h4 id=&#34;应用场景&#34;&gt;应用场景&lt;/h4&gt;
-
-&lt;h5 id=&#34;超市商品&#34;&gt;超市商品&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：超市商品。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：用户订单，上面包含有一个或多个商品。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;通过分析订单中的 &lt;em&gt;frequent itemsets&lt;/em&gt; ，可以得出哪些商品会经常被同时购买。&lt;/p&gt;
-
-&lt;h5 id=&#34;相关内容查找&#34;&gt;相关内容查找&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：单词&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：文档，如网页，blog，tweets等。包含一系列的单词。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 中，肯定包含有一些 common word，除去这些词后，可以揭示出一些单词之间的关系。&lt;/p&gt;
-
-&lt;h5 id=&#34;剽窃检测&#34;&gt;剽窃检测&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;itme&lt;/em&gt; ：文档&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：句子。如果一个文档包含这个句子，那么它在这个 &lt;em&gt;basket&lt;/em&gt; 中。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找出的 &lt;em&gt;frequent itemset&lt;/em&gt; 表示这些文档中有大量的句子相似，可以检测抄袭的方法。&lt;/p&gt;
-
-&lt;h5 id=&#34;生物标记&#34;&gt;生物标记&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;item&lt;/em&gt; ：生物标记，如基因，血蛋白，疾病等。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;basket&lt;/em&gt; ：病人数据，如基因检测，生化指标等。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找到的包含疾病和生物标记的 &lt;em&gt;frequent itemset&lt;/em&gt; 可以用于疾病检测。&lt;/p&gt;
-
-&lt;h3 id=&#34;association-rule&#34;&gt;&lt;em&gt;Association Rule&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;定义 &lt;code&gt;$I \rightarrow j$&lt;/code&gt; ，表示如果一个 &lt;em&gt;basket&lt;/em&gt; 包含有 &lt;code&gt;{I}&lt;/code&gt; 中所有的元素，那么它就有可能包含 &lt;code&gt;j&lt;/code&gt; 。即 &lt;code&gt;{I}&lt;/code&gt; 是一组元素，而 &lt;code&gt;j&lt;/code&gt; 是一个元素。这个推断，就是一个 &lt;em&gt;association rule&lt;/em&gt; 。 &lt;em&gt;association rule&lt;/em&gt; 有一个属性为 &lt;em&gt;Confidence&lt;/em&gt; ，它表示给了 &lt;code&gt;{I}&lt;/code&gt; 后出现 &lt;code&gt;j&lt;/code&gt; 的概率，即在所有包含&lt;code&gt;{I}&lt;/code&gt;的 &lt;em&gt;basket&lt;/em&gt; 中同时包含&lt;code&gt;j&lt;/code&gt;的概率。&lt;/p&gt;
-
-&lt;p&gt;现在问题来了：找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 且 &lt;em&gt;confidence &amp;gt;= c&lt;/em&gt; 的 &lt;em&gt;association rule&lt;/em&gt; 。此处的 &lt;em&gt;support&lt;/em&gt; 是指 &lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support&lt;/em&gt; ，而不是 &lt;code&gt;{I, j}&lt;/code&gt; 的。&lt;/p&gt;
-
-&lt;p&gt;计算过程的描述如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= sc&lt;/em&gt; 的集合&lt;/li&gt;
-&lt;li&gt;找到所有 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的集合&lt;/li&gt;
-&lt;li&gt;如果 &lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support &amp;gt;= cs&lt;/em&gt; ，那么找到它少一个元素，而且 &lt;em&gt;support &amp;gt;= s&lt;/em&gt; 的子集。&lt;/li&gt;
-&lt;li&gt;当且仅当下面条件都满足时， &lt;code&gt;$I \rightarrow j$&lt;/code&gt; 才是一个被接受的 &lt;em&gt;rule&lt;/em&gt; 。
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;{I}&lt;/code&gt; 的 &lt;em&gt;support s1 &amp;gt;= s&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;{I, j}&lt;/code&gt; 的 &lt;em&gt;support s2 &amp;gt;= sc&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;s2/s1 &amp;gt;= c&lt;/em&gt; （此比值即为 &lt;em&gt;confidence&lt;/em&gt; 的定义）.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在实现上，数据通常是以普通文件方式存储于磁盘上的，存储的方式是按 &lt;em&gt;basket&lt;/em&gt; 排列。在读入数据时，即将数据切分成不同长度的集合。不难看出，磁盘IO是数据读取过程中主要的开销。在实践中，数据是多次读取的。所以在计算时，读取次数也是一个需要考虑的部分。&lt;/p&gt;
-
-&lt;p&gt;在计算过程中，由于设置的阈值比较高，所以通常能找到的就是 &lt;em&gt;frequent pair&lt;/em&gt; ，所以这也是需要面对的最大问题。&lt;/p&gt;
-
-&lt;h4 id=&#34;一般算法&#34;&gt;一般算法&lt;/h4&gt;
-
-&lt;p&gt;一般的算法就是读一次文件，在内存中计算出所有 &lt;em&gt;pair&lt;/em&gt; 出现的次数。对于一个有 &lt;em&gt;n&lt;/em&gt; 个元素的 &lt;em&gt;basket&lt;/em&gt; ，最后会生成 &lt;em&gt;n(n-1)/2&lt;/em&gt; 个 &lt;em&gt;pair&lt;/em&gt; 。所以如果 *n*&lt;em&gt;2&lt;/em&gt; 的大小超过内存，这个算法就会失败。&lt;/p&gt;
-
-&lt;p&gt;在计算上，有两种方式：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;计算所有数据对出现的次数，并存放于三角矩阵中。&lt;/li&gt;
-&lt;li&gt;使用类似稀疏矩阵的存储方法，使用坐标+次数的方式存储。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;第一种方式每个数据对需要 &lt;code&gt;4&lt;/code&gt; 个字节（假设一个整型数使用4个字节）。第二种方式每对需要12字节（坐标及计数），但是只有存在的数据对才会占用空间。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -370,40 +49,7 @@ end
       <pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid>
-      <description>
-
-&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;
-
-&lt;h2 id=&#34;supervised-learning&#34;&gt;Supervised Learning&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;Supervised learning&lt;/em&gt; 是机器学习中的一种方法（还有两种分别是 &lt;a href=&#34;https://en.wikipedia.org/wiki/Unsupervised_learning&#34;&gt;Unsupervised learning&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Reinforcement_learning&#34;&gt;Reinforcement learning&lt;/a&gt; , via &lt;a href=&#34;https://en.wikipedia.org/wiki/Machine_learning&#34;&gt;wikipedia&lt;/a&gt; 。这个如果将来看了相应的课再写。）,它通过训练数据集建立一种模式或叫函数，再通过此模式去匹配待查询数据集从而得出预测结果。&lt;/p&gt;
-
-&lt;h2 id=&#34;instance-based-learning&#34;&gt;Instance Based Learning&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;Instance Based Learning&lt;/em&gt; 是机器学习的一种方法，也叫 &lt;em&gt;Memory Based Learning&lt;/em&gt; 。它不生成完整的匹配模式，而是在从训练数据中找到和待查询数据相近的数据（这些数据通常存放于内存中），并输出结果。将要说到的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 即是其中的一种。此方法也分为 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 和 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 。进行计算需要了解如下4个元素：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如何衡量距离？&lt;/li&gt;
-&lt;li&gt;找几个 Neighbor ？&lt;/li&gt;
-&lt;li&gt;各点是否有不同的权重？&lt;/li&gt;
-&lt;li&gt;如何确定输出？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;1-nearest-neighbor-和-k-nearest-neighbor&#34;&gt;1-Nearest Neighbor 和 k-Nearest Neighbor&lt;/h3&gt;
-
-&lt;p&gt;在 &lt;em&gt;1-Nearest Neighbor&lt;/em&gt; 的情况下，距离使用欧氏距离，寻找最近的&lt;code&gt;1&lt;/code&gt;个 &lt;em&gt;Neighbor&lt;/em&gt; ，各点权重相同，直接以最近 &lt;em&gt;Neighbor&lt;/em&gt; 的输出为查询数据的输出。而在 &lt;em&gt;k-Nearest Neighbor&lt;/em&gt; 中，查找的节点变成了 &lt;em&gt;k&lt;/em&gt; 个，而输出出变成了 &lt;em&gt;k&lt;/em&gt; 个节点的平均值。&lt;/p&gt;
-
-&lt;h3 id=&#34;kernel-regression&#34;&gt;Kernel Regression&lt;/h3&gt;
-
-&lt;p&gt;核回归，统计中的一种方法，具体的算法及使用场景没看太明白，此处暂时仅为记录而用。对于这个算法，它所涉及到的4个参量是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;欧氏距离&lt;/li&gt;
-&lt;li&gt;查找所有训练集中的点&lt;/li&gt;
-&lt;li&gt;权重函数： &lt;code&gt;$w_{i} = exp(-\frac{d(x_{i}, q)^{2}}{K_{w}})$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;输出：&lt;code&gt;$\frac{\sum_{i}w_{i}y_{i}}{\sum_{i}w_{i}}$&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -413,149 +59,7 @@ end
       <pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid>
-      <description>
-
-&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;
-
-&lt;h2 id=&#34;相似数据集&#34;&gt;相似数据集&lt;/h2&gt;
-
-&lt;p&gt;许多数据挖掘的问题都能简化为查找相似数据集的问题，如：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;查找含有相似单词的页面，用以给页面分类，或者找出页面的镜像站，或者检查剽窃等。&lt;/li&gt;
-&lt;li&gt;NetFlix，理解成豆瓣就行，哪些用户有相似的爱好。&lt;/li&gt;
-&lt;li&gt;以及，哪些电影有相似的粉丝。&lt;/li&gt;
-&lt;li&gt;网上找到的个人信息，怎么才能确定哪些属于同一个人。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;先从相似文档找起，有三个关键技术：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Shingling：把文档，像页面啊，邮件啊，什么的，拆成sets。&lt;/li&gt;
-&lt;li&gt;Minhashing：在保留相似性的基础上，把大的集合转化成短的标记。&lt;/li&gt;
-&lt;li&gt;Locality-sensitive hashing：找出相似的对。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;文档相似性可以使用 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 来衡量。对于两个集合 &lt;code&gt;$S$&lt;/code&gt; 和 &lt;code&gt;$T$&lt;/code&gt; 来说，它们之间的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 为 &lt;code&gt;$|S \cap T| / |S \cup T|$&lt;/code&gt;，记为 &lt;em&gt;SIM(S,T)&lt;/em&gt; 或 &lt;em&gt;J(S,T)&lt;/em&gt; 。不难看出，当此值为&lt;code&gt;0&lt;/code&gt;时表示两个集合没有交集，而为&lt;code&gt;1&lt;/code&gt;时则表示两个集合相等。&lt;/p&gt;
-
-&lt;h3 id=&#34;k-shingling或叫k-gram&#34;&gt;k-shingling或叫k-gram&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;k-shingling&lt;/em&gt; 是指把文档按连续的 &lt;em&gt;k&lt;/em&gt; 个字母拆成子集的方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;例如，给定文档&lt;code&gt;$D$&lt;/code&gt;的内容为&lt;code&gt;abcdabd&lt;/code&gt;，在&lt;code&gt;$k=2$&lt;/code&gt;的情况下，获得的 &lt;em&gt;2-shingling&lt;/em&gt; 集合为 &lt;code&gt;{ab, bc, cd, da, bd}&lt;/code&gt;。shingling有一个变种是生成一个bag而非set，此时重复的元素不会被归并，而是按照其本来出现的次数出现在最后结果中，如本例中的&lt;code&gt;ab&lt;/code&gt;将会出现2次。&lt;/p&gt;
-
-&lt;p&gt;对于空格的处理有多种选项，较常见的是把所有空格类的东西都替换成一个空格，然后将其作为一个正常元素参与到shingling中去。即shingling后的元素可能会包含2个或多个单词。&lt;/p&gt;
-
-&lt;p&gt;为了避免虚假的相似度， &lt;code&gt;$k$&lt;/code&gt; 的取值需要足够大。一般而言，对于短的如电子邮件之类的文件，取&lt;code&gt;$k=5$&lt;/code&gt;，而对于长的文档，如研究报告这种，取&lt;code&gt;$k=9$&lt;/code&gt;会比较好。&lt;/p&gt;
-
-&lt;p&gt;对于shingling中的元素，可以直接使用字符串，但是更好的办法是把它通过hash变化映射到某个bucket中，而将这个bucket的编号作为shingling元素进行比较。这样可以在shingling元素空间不变的情况下，降低运行时占用的内存。而且在比较上，整数比字符串要更有优势。这一步叫做 &lt;strong&gt;Compressing Shinglings&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;minhashing&#34;&gt;Minhashing&lt;/h3&gt;
-
-&lt;p&gt;这一段是从 &lt;a href=&#34;https://en.wikipedia.org/wiki/MinHash&#34;&gt;wikipedia&lt;/a&gt; 上看到的定义：&lt;/p&gt;
-
-&lt;p&gt;设有一个hash函数&lt;code&gt;$h$&lt;/code&gt;，可以将集合中的元素映射为不重复的整数值。这样对于任何集合&lt;code&gt;$S$&lt;/code&gt;，都能找到一个元素&lt;code&gt;$x$&lt;/code&gt;让&lt;code&gt;$h(S)$&lt;/code&gt;取到最小值&lt;code&gt;$h_{min}(S)$&lt;/code&gt;。这样就把对字符串比较，存储转换成了对整数的计算和存储。由于&lt;code&gt;$h_{min}(S)$&lt;/code&gt;只能得到一个值，所以需要使用 &lt;em&gt;Hash Function Family&lt;/em&gt; 去处理集合，以得到一个最小值的向量。在向量长度足够的情况下，两个集合的相似度等于最小值相等的概率。计算向量有两种办法，一种是选取足够多的hash函数，另一种是对一个hash得出的值作多次变换。&lt;/p&gt;
-
-&lt;p&gt;在课程中，首先介绍了怎么抽取多个集合的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; ，这个矩阵的每一列都是一个需要计算相似度的集合，记为&lt;code&gt;$S_{1}$&lt;/code&gt;到&lt;code&gt;$S_{N}$&lt;/code&gt;，而行是所有元素的集合，记为&lt;code&gt;$e_{1}$&lt;/code&gt;到&lt;code&gt;$e_{M}$&lt;/code&gt;。如果某个元素&lt;code&gt;$e_{i}$&lt;/code&gt;包含于集合&lt;code&gt;$S_{j}$&lt;/code&gt;中，则在矩阵相应的位置&lt;code&gt;$(i,j)$&lt;/code&gt;标上&lt;code&gt;1&lt;/code&gt;，反之则为&lt;code&gt;0&lt;/code&gt;。典型情况下这个矩阵是稀疏的。&lt;/p&gt;
-
-&lt;p&gt;此后直接介绍了一个 &lt;em&gt;Minhashing&lt;/em&gt; 的函数簇。假设前述的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 的行排列是随机的，我们定义一个 &lt;em&gt;Minhashing&lt;/em&gt; 函数 &lt;code&gt;h(S)&lt;/code&gt; ，它的值是在特定排列下，列 &lt;code&gt;S&lt;/code&gt; 中第一次出现 &lt;code&gt;1&lt;/code&gt; 的行数。使用多个独立的哈希函数（如100个），即可为每一个集合创建一个 &lt;em&gt;signatures&lt;/em&gt; ，而多个集合的结果合并后可以生成一个新的矩阵， &lt;em&gt;signatures matrix&lt;/em&gt; 。这个矩阵的列是各个集合，而行是某一次计算 &lt;em&gt;Minhashing&lt;/em&gt; 时的结果。&lt;/p&gt;
-
-&lt;p&gt;下面来分析下 *Jaccard Similarity*。首先看 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 。设有两个需要比较的集合 &lt;code&gt;$S_{1}$&lt;/code&gt; 和 &lt;code&gt;$S_{2}$&lt;/code&gt; ，假设它们的 &lt;em&gt;Characteristic Matrix&lt;/em&gt; 为 &lt;code&gt;$M$&lt;/code&gt;，那么在矩阵 &lt;code&gt;$M$&lt;/code&gt; 中，每一行的元素只有4种组合： &lt;code&gt;(0,0)&lt;/code&gt; ，&lt;code&gt;(0,1)&lt;/code&gt; ， &lt;code&gt;(1,0)&lt;/code&gt; 和 &lt;code&gt;(1,1)&lt;/code&gt;。我们把这4种关系在M中的数量分别记为ABCD，不难看出，两个集合的相似度可以表示为 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;然后再来看 &lt;em&gt;signatures matrix&lt;/em&gt; 。在某个特定的排列下，如果两个集合的 &lt;em&gt;Minhashing&lt;/em&gt; 值相同，那第它们一定是 &lt;code&gt;(1,1)&lt;/code&gt; 形式的，而其它三种形式不会有此结果）注意，此处只能保证， &lt;em&gt;Minhashing&lt;/em&gt; 值相同时，能保证这一行是 &lt;code&gt;(1,1)&lt;/code&gt;，但是一行是&lt;code&gt;(1,1)&lt;/code&gt;并不能说明这一行是 &lt;em&gt;Minhashing&lt;/em&gt; 值）。所以可以得知，两个集合 &lt;em&gt;Minhashing&lt;/em&gt; 值相等的概率，也就是两个集合的 &lt;em&gt;Jaccard&lt;/em&gt; 相似度，都是 &lt;code&gt;$J(S_{1}, S_{2}) = D/(A+B+C)$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;p&gt;在实际实现上，给大量的数据做随机排列是比较难以实现的，所以更加通用的办法就是如wiki上说的，挑选多个 hash 函数来处理，下面是一段伪代码，计算某集合的 &lt;em&gt;Minhashing&lt;/em&gt; 向量：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;FOREACH hash_func_family:
-  CALCULATE hi(r)
-
-FOREACH columes:
-  IF val(c) == 1:
-    # Init value for SIG(i, c) is inf
-    SIG(i, c) = min( SIG(i, c), hi(r) )
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;locality-sensitive-hash&#34;&gt;Locality-Sensitive Hash&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;By Me: 此处的概念还有些模糊，需要再啃啃。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;经过了前面的 &lt;em&gt;Shingling&lt;/em&gt; 和 &lt;em&gt;Minhashing&lt;/em&gt; ，需要处理的数据已经减少许多了，但是对于大文档集来说还不够。如果是需要找到任意两个集合之间的相似度，那么除了计算它们每两对之间的相似度以外没有其它任何办法。但是如果只是需要找到超过某个相似度阈值的集合对，则可以使用LSH，又叫 &lt;em&gt;Nearest Neighbor search&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;p&gt;LSH的一般做法是对元素使用多次Hash，让相似的元素落入同一个bucket中（即Hash冲突），而不相似的不在。对于上面生成的 &lt;em&gt;signatures matrix&lt;/em&gt; ，一个有效的办法是把矩阵按&lt;code&gt;r&lt;/code&gt;行分成&lt;code&gt;b&lt;/code&gt;个brand，对每一个brand中的每一小块长度为&lt;code&gt;r&lt;/code&gt;的特征值做hash，下面是分析（这块还是有些地方没想清楚，先记录下来）：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;设矩阵分成了&lt;code&gt;b&lt;/code&gt;个 &lt;em&gt;brand&lt;/em&gt; ，每个 &lt;em&gt;brand&lt;/em&gt; 中有 &lt;code&gt;r&lt;/code&gt; 行。某特定两个文档的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 是 &lt;code&gt;s&lt;/code&gt; 。即在 matrix 中某个Minhashing字符串与其它有&lt;code&gt;s&lt;/code&gt;的概率相似。&lt;/li&gt;
-&lt;li&gt;某个brand中选定的特征列和其它所有列相似的概率是 &lt;code&gt;$s^{r}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;某个brand中选定的特征列和至少一个其它列不相似的概率是&lt;code&gt;$1-s^{r}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;一个特征列和每一个brand中都有至少一个不相似列的概率是&lt;code&gt;$(1-s^{r})^{b}$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;一个特征列和至少一个brand中所有列都相似，从而成为 &lt;em&gt;candidate pair&lt;/em&gt; 的概率为 &lt;code&gt;$1-(1-s^{r})^{b}$&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这个曲线是一个S型的连续曲线，我们需要做的就是通过挑选&lt;code&gt;b&lt;/code&gt;和&lt;code&gt;r&lt;/code&gt;，让这条曲线在两端尽量的平缓，而在中间部分尽可能的陡峭。这样就不会有过多的 &lt;em&gt;False Positive&lt;/em&gt; 或者 &lt;em&gt;False Negative&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;h2 id=&#34;具体使用流程&#34;&gt;具体使用流程&lt;/h2&gt;
-
-&lt;p&gt;综上所述，在实际应用中会有下面几步工作（文档比较）：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;选择整数 &lt;code&gt;$k$&lt;/code&gt; ，将输入文档转换为 &lt;em&gt;k-shingling&lt;/em&gt; 集合。此处可以通过Hash将 &lt;em&gt;k-shingles&lt;/em&gt; 转换为较短的 &lt;em&gt;bucket序号&lt;/em&gt; 。&lt;/li&gt;
-&lt;li&gt;以 &lt;em&gt;shingle&lt;/em&gt; 排序 &lt;code&gt;&amp;lt;document, shingle&amp;gt;&lt;/code&gt; 对。&lt;/li&gt;
-&lt;li&gt;选择长度 &lt;code&gt;$n$&lt;/code&gt; 用于 &lt;em&gt;Minhashing Signature&lt;/em&gt; ，并为所有文档计算特征值。&lt;/li&gt;
-&lt;li&gt;确定一个概率 &lt;code&gt;$t$&lt;/code&gt; 作为文档相似度的阈值，选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 并保证 &lt;code&gt;$br=n$&lt;/code&gt; ，而且阈值&lt;code&gt;$t$&lt;/code&gt;接近&lt;code&gt;$(1/b)^{1/r}$&lt;/code&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果需要最大程度的避免 &lt;em&gt;False Negative&lt;/em&gt; ，那么选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 时要注意计算出来的值要小于 &lt;code&gt;$t$&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;如果需要保证速度而且避免 &lt;em&gt;False Positive&lt;/em&gt; ，那么选择 &lt;code&gt;$b$&lt;/code&gt; 和 &lt;code&gt;$r$&lt;/code&gt; 时注意计算出一个高的阈值。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;使用 &lt;em&gt;LSH&lt;/em&gt; 找到所有的 *candidate pairs*。&lt;/li&gt;
-&lt;li&gt;检查选择出来的特征对，确定它们的相似度都大于 &lt;code&gt;$t$&lt;/code&gt; 。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;实例&#34;&gt;实例&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;注：此处只是列出课程中出现的示例，后续会尝试使用程序完成，再补齐说明。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;entity-resolution&#34;&gt;Entity Resolution&lt;/h3&gt;
-
-&lt;h3 id=&#34;fingerprints&#34;&gt;Fingerprints&lt;/h3&gt;
-
-&lt;h3 id=&#34;similar-news-articles&#34;&gt;Similar News Articles&lt;/h3&gt;
-
-&lt;h2 id=&#34;距离计算&#34;&gt;距离计算&lt;/h2&gt;
-
-&lt;p&gt;此块知识的最后提到了距离的计算。从某种意义上说，计算LSH即是计算某两个点之间的距离，越相似的点距离越近。上面提到的 &lt;em&gt;Jaccard Similarity&lt;/em&gt; 并不是距离，用&lt;code&gt;1&lt;/code&gt;减去它才是。一般说来，有两种类型的距离，它们是 &lt;em&gt;欧氏距离&lt;/em&gt; 和 &lt;em&gt;非欧距离&lt;/em&gt; 。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;欧氏距离是指欧氏空间的距离，欧氏空间包含有实实在在维度，和密集的点。&lt;/li&gt;
-&lt;li&gt;欧空中，可以在两个点之间找到中点。&lt;/li&gt;
-&lt;li&gt;欧氏距离是基于欧空中点的位置来确定的&lt;/li&gt;
-&lt;li&gt;其它的空间即被称为非欧空间。在非欧空间中，距离的计算是通过点的其它一些特性来完成的，因为非欧空间并没有位置这个概念。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;假设 &lt;code&gt;$x$&lt;/code&gt; ， &lt;code&gt;$y$&lt;/code&gt; 和 &lt;code&gt;$z$&lt;/code&gt; 是某个空间中的点，而 &lt;code&gt;$d$&lt;/code&gt; 是计算距离的函数，那么它有如下特性：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$d(x,y) \geq 0$&lt;/code&gt; ：所有距离都是非负值。&lt;/li&gt;
-&lt;li&gt;仅在 &lt;code&gt;$x$&lt;/code&gt; ， &lt;code&gt;$y$&lt;/code&gt; 是同一点时，才有 &lt;code&gt;$d(x,y) = 0$&lt;/code&gt; 。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$d(x,y) = d(y,x)$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$d(x,z) \leq d(x,y) + d(y,z)$&lt;/code&gt; ：三角定理。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;欧氏距离&#34;&gt;欧氏距离&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;$L_{r}-norm = (\sum_{i=1}^{n} |x_{i} - y_{i}|^{r})^{1/r}$&lt;/code&gt; 。在&lt;code&gt;$r=2$&lt;/code&gt;时，即变成平方各开根号，即熟悉的距离计算。此外还有&lt;code&gt;$L_{1}-norm$&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;h3 id=&#34;非欧距离&#34;&gt;非欧距离&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Jaccard Distance&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;余弦距离&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Edit Distance&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Hamming Distance&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -565,62 +69,7 @@ FOREACH columes:
       <pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid>
-      <description>
-
-&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;
-
-&lt;p&gt;互联网在某种意义上是一个有向图，每个页面是图上的节点，而页面间的链接就是图的边。在经历了早期的目录式页面分类后，web现在进入了以Search为主的的组织方式。下面问题来了：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;怎么确定找到的信息是可以信赖的（或者相对可以信赖的）。&lt;/li&gt;
-&lt;li&gt;当我们查找某个词时，哪个才是最好的结果。&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;搜索技术哪家强？&lt;/del&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;所以这里引入了给页面排序的做法，以确定页面的重要性。&lt;/p&gt;
-
-&lt;h2 id=&#34;pagerank&#34;&gt;PageRank&lt;/h2&gt;
-
-&lt;p&gt;PageRank，Google家的看家算法。核心思路是，如果一个页面是重要的，那么它指向的那个页面应该也是重要的。也就是用其它页面来证明这个页面的重要性。&lt;/p&gt;
-
-&lt;h3 id=&#34;flow-formulation&#34;&gt;&lt;em&gt;Flow&lt;/em&gt; Formulation&lt;/h3&gt;
-
-&lt;p&gt;在一张图中，假设有节点&lt;code&gt;$i$&lt;/code&gt;，它的PR值是&lt;code&gt;$r_{i}$&lt;/code&gt;，它有&lt;code&gt;$d_{i}$&lt;/code&gt;条出链，其中一条指向节点&lt;code&gt;$j$&lt;/code&gt;。那么&lt;code&gt;$j$&lt;/code&gt;上由&lt;code&gt;$i$&lt;/code&gt;带来的PR值即为&lt;code&gt;$\frac{r_{i}}{d_{i}}$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;根据这个需求，可以列出来一个方程组。显然，图中有几个节点，这个方程组就会有几个方程，为了给这个方程求得一个固定解，我们会人为的加上一个条件 &lt;code&gt;$\sum{r_{i}} = 1$&lt;/code&gt;，这样就可以求解出每个节点的PR值了。&lt;/p&gt;
-
-&lt;p&gt;这个方法比较易于理解，但是对于大规模的页面集不适用，所以引入了&lt;em&gt;Matrix&lt;/em&gt; Formulation。&lt;/p&gt;
-
-&lt;h3 id=&#34;matrix-formulation&#34;&gt;&lt;em&gt;Matrix&lt;/em&gt; Formulation&lt;/h3&gt;
-
-&lt;p&gt;首先，把所有页面之间的跳转都用一个&lt;strong&gt;列随机矩阵(column stochastic matrix)&lt;/strong&gt;来表示，记为&lt;code&gt;$M$&lt;/code&gt;。对于每条链路&lt;code&gt;$i\rightarrow j$&lt;/code&gt;，都有相应的&lt;code&gt;$M_{ji} = 1/d_{i}$&lt;/code&gt;，其中&lt;code&gt;$d$&lt;/code&gt;是&lt;code&gt;$i$&lt;/code&gt;的出链路条数。下一步是&lt;strong&gt;Rank向量&lt;/strong&gt;，记为&lt;code&gt;$r$&lt;/code&gt;它是一个1维的列向量，每一个元素的值就是表示此节点的Rank值，记为&lt;code&gt;$r_{i}$&lt;/code&gt;，此向量满足&lt;code&gt;$\sum_{i}r_{i} = 1$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;有此定义后，上面介绍的*Flow*方程可以转换成这样： &lt;code&gt;$r = M \cdot r$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;由矩阵的定义，这个&lt;code&gt;$r$&lt;/code&gt;是矩阵&lt;code&gt;$M$&lt;/code&gt;的&lt;strong&gt;单位向量(eigenvector)&lt;/strong&gt;。即，页面的PageRank值，就是这些页面之间转移矩阵的单位向量，解出了这个向量，也就确定了这些页面的PageRank值。&lt;/p&gt;
-
-&lt;p&gt;求解特征向量使用的是被称为*Power Iteration*的方法：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;初始化： &lt;code&gt;$r^{(0)} = [1/N, \ldots , 1/N]^{T}$&lt;/code&gt; ，其中&lt;code&gt;$N$&lt;/code&gt;是图中的节点数，也即所有页面个数。&lt;/li&gt;
-&lt;li&gt;迭代： &lt;code&gt;$r^{(t+1)} = M \cdot r^{(t)}$&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;停止条件： &lt;code&gt;$|r^{(t+1) = r^{(t)}}|_{1} &amp;lt; \epsilon$&lt;/code&gt;。其中&lt;code&gt;$|x_{i}|_{1} ＝ \sum_{i}|x_{i}|$&lt;/code&gt;是向量&lt;code&gt;$i$&lt;/code&gt;的 &lt;em&gt;L1范数&lt;/em&gt; （其实就是绝对值相加，范数的定义就是 &lt;code&gt;$|x_{i}|_{p} = (\sum_{i}|x_{i}|^{p})^{\frac{1}{p}}$&lt;/code&gt;）。此处可以使用其它的范数，如L2范数，即欧氏距离。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;teleports&#34;&gt;&lt;em&gt;Teleports&lt;/em&gt;&lt;/h3&gt;
-
-&lt;p&gt;如果图中有 &lt;em&gt;dead end&lt;/em&gt; 节点，即只有进链没有出链；或者是在多个节点之间存在环，那么上面的迭代就会收敛到一个错误的结果上。解决方案就是，对于每次跳转，有&lt;code&gt;$\beta$&lt;/code&gt;的概率跟随链路去跳，而有&lt;code&gt;$1-\beta$&lt;/code&gt;的概率是一次随机传送 (&lt;em&gt;Teleports&lt;/em&gt;)，这样就解决上面提到的两个问题了。在实际使用中，一般&lt;code&gt;$\beta$&lt;/code&gt;取值为&lt;code&gt;0.8&lt;/code&gt;或&lt;code&gt;0.9&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;在计算上，就是引入一个Teleports矩阵，其中的每个值都是&lt;code&gt;$1/N$&lt;/code&gt;，&lt;code&gt;$N$&lt;/code&gt;为节点数目。而之前的转移矩阵&lt;code&gt;$M$&lt;/code&gt;则变为&lt;code&gt;$\beta M + (1-\beta)\frac{1}{N}e \cdot e^{T}$&lt;/code&gt;，记为&lt;code&gt;$A$&lt;/code&gt;。同样，状态跳转的迭代公式也变为&lt;code&gt;$r = A \cdot r$&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h3 id=&#34;实际使用的样子&#34;&gt;实际使用的样子&lt;/h3&gt;
-
-&lt;p&gt;以上说的都是理论，在那个神奇的世界里，计算机的内存都是无限大的，计算速度都是无限NB的，一句话，TA们都是超限界的。在回到了位于爬行界的真实世界后，还有其它需要考虑的东西。假设节点数目是 &lt;strong&gt;1 billion&lt;/strong&gt; ，那么计算前和后的向量各需要&lt;strong&gt;1 billion&lt;/strong&gt;，但是对于那个矩阵，它可是&lt;strong&gt;1 billion * 1 billion&lt;/strong&gt;，也就是&lt;strong&gt;10^18&lt;/strong&gt;。这个内存，有点贵哈～&lt;/p&gt;
-
-&lt;p&gt;一般来说，转移矩阵都是稀疏的，这样在存储的时候可以不用存多少东西，但是加了那个Teleports后，它变成每个位置都有值了，这内存使用就duang的一下上来了。还好经过计算，发现公式&lt;code&gt;$r = A \cdot r$&lt;/code&gt; 可以改写成：&lt;code&gt;$r = \beta M \cdot r + [ \frac{1-\beta}{N} ]_{N}$&lt;/code&gt;。这就是说，矩阵还是那个稀疏的矩阵，但是在每次算完后，需要在向量上加上Teleports的结果。这样一来，占用的内存又回去了吧。&lt;/p&gt;
-
-&lt;p&gt;基本上就是这样了~&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -630,75 +79,9 @@ FOREACH columes:
       <pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid>
-      <description>
+      <description>&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
 
-&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
-
-&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;
-
-&lt;h2 id=&#34;dfs&#34;&gt;DFS&lt;/h2&gt;
-
-&lt;p&gt;课程开始是从分布式存储DFS讲起，介绍性的东西居多。在大规模的集群中，硬件故障是个很容易发生的问题。解决方案要么就是堆大把的钱上NB的机器，要么就是多做备份。这里的DFS就是后一种解决方案。&lt;/p&gt;
-
-&lt;p&gt;现在较为通用的分布式架构就是使用不那么NB的Linux机器组建Cluster，然后用不那么NB的网络把它们连接起来。而在分布式存储的情况下，把数据在不同节点之间复制是需要时间的，所以让程序去找数据就是一个比较正确的解决方案了。&lt;/p&gt;
-
-&lt;p&gt;DFS中的节点有两类，&lt;code&gt;Chunk Server&lt;/code&gt;用来存放数据，&lt;code&gt;Master Node&lt;/code&gt;用来存放文件和&lt;code&gt;Chunk Server&lt;/code&gt;的对应关系。一个文件会被分成多处连续的&lt;code&gt;chunks&lt;/code&gt;，典型的大小是16~64MB。每一个&lt;code&gt;chunk&lt;/code&gt;都会复制2到3份，分别存储在不同的机器上（最好是在不同rack上）。而&lt;code&gt;Master Node&lt;/code&gt;就会存储这些机器和文件的映射关系。当需要查找这个文件时，先从&lt;code&gt;Master Node&lt;/code&gt;处取到&lt;code&gt;Chunk Server&lt;/code&gt;的信息，再从相应的server上获取文件内容。&lt;/p&gt;
-
-&lt;h2 id=&#34;map-reduce&#34;&gt;Map Reduce&lt;/h2&gt;
-
-&lt;p&gt;MR是一种编程模型，典型的应用场景就是 &lt;strong&gt;Word Cound&lt;/strong&gt; 。将MR应用到 WordCount 的先决条件为：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文件过大，不能完整的放到内存中去&lt;/li&gt;
-&lt;li&gt;但是所有的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对可以完全放到内存中&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;算法流程&#34;&gt;算法流程&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;将数据分块读入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; ：创建&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;数据对。在本例中，即创建出一系列的&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Group by Key&lt;/code&gt; ：对&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;进行排序。本例中即将同样key的&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对放在一起。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; ：将同一个&lt;code&gt;key&lt;/code&gt;的&lt;code&gt;&amp;lt;k, v&amp;gt;&lt;/code&gt;对合并到一起，并对&lt;code&gt;v&lt;/code&gt;做相应处理，在本例中，就是把所有的值相加。&lt;/li&gt;
-&lt;li&gt;输出结果&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在具体实现上，程序需要指定&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个方法，这两个方法的参数都是&lt;code&gt;&amp;lt;key, value&amp;gt;&lt;/code&gt;对。例如&lt;code&gt;Map&lt;/code&gt;函数的&lt;code&gt;key&lt;/code&gt;可以是文件名，&lt;code&gt;value&lt;/code&gt;是对应的某一行或者某一块文字。而在&lt;code&gt;Reduce&lt;/code&gt;函数中，输入的&lt;code&gt;key&lt;/code&gt;是某个单词，而&lt;code&gt;value&lt;/code&gt;是1。&lt;code&gt;Reduce&lt;/code&gt;负责归并结果，并输出。&lt;/p&gt;
-
-&lt;h3 id=&#34;map-reduce的环境&#34;&gt;Map Reduce的环境&lt;/h3&gt;
-
-&lt;p&gt;除了根据逻辑实现&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;两个函数外，还需要一个运行Map Reduce的环境，它需要提供下面几项功能：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;把输入数据分块&lt;/li&gt;
-&lt;li&gt;在机器前调度程序运行&lt;/li&gt;
-&lt;li&gt;处理 &lt;strong&gt;Group by key&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;处理机器故障&lt;/li&gt;
-&lt;li&gt;管理机器间通信&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;出错处理&#34;&gt;出错处理&lt;/h3&gt;
-
-&lt;p&gt;MR出错分几种，处理方式也不同：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Map&lt;/code&gt; Worker出错：MasterNode会将此块数据标为未完成，并等待下一轮调度&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Reduce&lt;/code&gt; Worker出错：MasterNode会将正在运行中的任务置为无效，并等待下一轮调度&lt;/li&gt;
-&lt;li&gt;MasterNode：任务直接退出。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;map-和-reduce-的数目&#34;&gt;&lt;code&gt;Map&lt;/code&gt;和&lt;code&gt;Reduce&lt;/code&gt;的数目&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;Mapper&lt;/code&gt;的数目会比节点数目多许多，这样就能保证一台节点上会被会到多个任务，即使节点出错，也只会影响到正在运行中的小块任务，对于其它被分配到此节点但是还没有运行的任务来说，可以很方便的调度到其它节点上。如果任务很大，而又有一个节点在任务运行时故障的话，就需要回滚较多的部分。而且大任务也不方便充分利用空闲的机器资源。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Reduce&lt;/code&gt;的数目没有具体要求，但是一般会比&lt;code&gt;Mapper&lt;/code&gt;的数目要少。&lt;/p&gt;
-
-&lt;h3 id=&#34;改良&#34;&gt;改良&lt;/h3&gt;
-
-&lt;p&gt;还是拿WC作为例子。在&lt;code&gt;Reduce&lt;/code&gt;函数处，原始的办法需要传一堆&lt;code&gt;&amp;lt;word, 1&amp;gt;&lt;/code&gt;对到处理端，这会占用较多的带宽和传输时间，所以一个改良就是在传给&lt;code&gt;Reduce&lt;/code&gt;之前先归并一下，相当于多级&lt;code&gt;Reduce&lt;/code&gt;，而这一中间处理是在本地完成的，这样就可以减少对网络带宽的占用，以及乱序Mapper结果时的计算量。&lt;/p&gt;
-
-&lt;p&gt;注意，此种方式并不适用所有计算，例如对多个数取平均值就不可以使用。&lt;/p&gt;
-</description>
+&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;</description>
     </item>
     
   </channel>

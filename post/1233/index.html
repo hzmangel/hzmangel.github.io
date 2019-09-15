@@ -26,7 +26,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -75,9 +75,9 @@
     </header>
 
     <section>
-        <div class="post-summary">
+        <div class="post-summary"><p>最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。</p>
 
-<p>最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。### 生成URL</p>
+<h3 id="生成url">生成URL</h3>
 
 <p>嗯，反正我的blog已经被墙了，所以这次就用不存在的网站来作为示例吧。这个网站的名字叫Facebook（其实是不想为国内的账号上传身份证，所以只有用国外的A
 PI了）。找了一圈，决定拿这个不存在的网站的CEO来测试。</p>
@@ -245,8 +245,7 @@ g.org/ref/spec#Type_assertions"><em>type assertions</em></a>，它的意思是�
 })</code>。文档中给出的更加精确的说法是<code>x.(T)</code>表示<code>x</code>的动态类型和<code>T</code>一致，<code>T</code>必需实现<code>x</code>的所有接口。更加具体的代码请参考文档</p>
 
 <p>到这，差不多就完成了，POST请求的事情还没用到，等用到后发现有什么需要写的再写吧。另外需要注意的一点是，<a href="http://play.golang.org/">http://play.golang.org/</a>
-网站上是不允许使用<code>net/http</code>库的，所以我后面的程序才没有给出代码链接，有兴趣的可以在自己机器上试验，记得要科学上网哦，要不然就会返回奇怪的结果了～</p>
-</div>
+网站上是不允许使用<code>net/http</code>库的，所以我后面的程序才没有给出代码链接，有兴趣的可以在自己机器上试验，记得要科学上网哦，要不然就会返回奇怪的结果了～</p></div>
     </section>
 
     <footer>
@@ -267,11 +266,11 @@ g.org/ref/spec#Type_assertions"><em>type assertions</em></a>，它的意思是�
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1239/"> &lt; Control Goroutines amount via bufferred channel </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1230/"> &lt; goroutines &#43; channel </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1230/"> goroutines &#43; channel &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1239/"> Control Goroutines amount via bufferred channel &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -305,20 +304,15 @@ g.org/ref/spec#Type_assertions"><em>type assertions</em></a>，它的意思是�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -327,7 +321,7 @@ g.org/ref/spec#Type_assertions"><em>type assertions</em></a>，它的意思是�
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -396,11 +390,11 @@ g.org/ref/spec#Type_assertions"><em>type assertions</em></a>，它的意思是�
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

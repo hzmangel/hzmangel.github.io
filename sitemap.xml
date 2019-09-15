@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://hzmangel.github.io/</loc>
+    <loc>http://hzmangel.github.io/categories/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/happy-coding/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/post/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/programming/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/rails/</loc>
     <lastmod>2016-08-10T00:07:40+08:00</lastmod>
   </url>
   
@@ -12,8 +33,33 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/rubyonrails/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/til/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/</loc>
+    <lastmod>2016-08-10T00:07:40+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</loc>
     <lastmod>2016-04-17T12:59:42+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/elasticsearch/</loc>
+    <lastmod>2016-02-23T00:52:42+08:00</lastmod>
   </url>
   
   <url>
@@ -22,8 +68,18 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/studylog/</loc>
+    <lastmod>2016-02-23T00:52:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</loc>
     <lastmod>2016-01-27T23:21:42+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/hadoop/</loc>
+    <lastmod>2016-01-17T07:22:32+08:00</lastmod>
   </url>
   
   <url>
@@ -34,6 +90,16 @@
   <url>
     <loc>http://hzmangel.github.io/post/go-generate-struct-to-schema/</loc>
     <lastmod>2015-12-07T21:15:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/golang/</loc>
+    <lastmod>2015-12-07T21:15:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/mmds/</loc>
+    <lastmod>2015-11-11T23:53:33+08:00</lastmod>
   </url>
   
   <url>
@@ -62,6 +128,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/python/</loc>
+    <lastmod>2015-06-16T23:40:10+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/timezone-in-python/</loc>
     <lastmod>2015-06-16T23:40:10+08:00</lastmod>
   </url>
@@ -77,7 +148,22 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/blog/</loc>
+    <lastmod>2015-06-13T11:36:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/new-github-blog/</loc>
+    <lastmod>2015-06-13T11:36:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/meta/</loc>
+    <lastmod>2015-06-13T11:36:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_/</loc>
     <lastmod>2015-06-13T11:36:18+08:00</lastmod>
   </url>
   
@@ -97,12 +183,32 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/base64/</loc>
+    <lastmod>2013-12-01T15:03:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/carrierwave/</loc>
+    <lastmod>2013-12-01T15:03:37+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/1224/</loc>
     <lastmod>2013-12-01T15:03:37+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://hzmangel.github.io/post/1220/</loc>
+    <lastmod>2013-07-14T11:21:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/jqplot/</loc>
+    <lastmod>2013-07-14T11:21:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/jquery/</loc>
     <lastmod>2013-07-14T11:21:07+00:00</lastmod>
   </url>
   
@@ -119,6 +225,11 @@
   <url>
     <loc>http://hzmangel.github.io/post/1205/</loc>
     <lastmod>2013-04-25T16:56:17+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/ios/</loc>
+    <lastmod>2013-03-12T00:06:08+00:00</lastmod>
   </url>
   
   <url>
@@ -147,6 +258,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/objc/</loc>
+    <lastmod>2013-01-24T09:41:13+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/1176/</loc>
     <lastmod>2012-12-26T11:28:34+00:00</lastmod>
   </url>
@@ -162,12 +278,32 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/dtrace/</loc>
+    <lastmod>2012-05-24T09:25:42+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/performance/</loc>
+    <lastmod>2012-05-24T09:25:42+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/ruby/</loc>
+    <lastmod>2012-05-24T09:25:42+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/1147/</loc>
     <lastmod>2012-05-24T09:25:42+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://hzmangel.github.io/post/1133/</loc>
+    <lastmod>2012-05-11T11:40:52+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/tools/</loc>
     <lastmod>2012-05-11T11:40:52+00:00</lastmod>
   </url>
   
@@ -192,8 +328,28 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E6%97%85%E8%A1%8C/</loc>
+    <lastmod>2012-01-11T22:28:20+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E9%82%A3%E5%B1%B1%E9%82%A3%E6%B0%B4/</loc>
+    <lastmod>2012-01-11T22:28:20+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/linux/</loc>
+    <lastmod>2011-12-19T10:41:55+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/1052/</loc>
     <lastmod>2011-12-19T10:41:55+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/javascript/</loc>
+    <lastmod>2011-11-29T02:13:59+00:00</lastmod>
   </url>
   
   <url>
@@ -207,6 +363,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E6%91%84%E5%BD%B1/</loc>
+    <lastmod>2011-07-18T23:48:20+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/1031/</loc>
     <lastmod>2011-07-18T23:48:20+00:00</lastmod>
   </url>
@@ -214,6 +375,16 @@
   <url>
     <loc>http://hzmangel.github.io/post/999/</loc>
     <lastmod>2011-07-03T01:27:23+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/</loc>
+    <lastmod>2011-07-03T01:27:23+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/%E5%BE%92%E6%AD%A5/</loc>
+    <lastmod>2011-06-27T01:02:48+00:00</lastmod>
   </url>
   
   <url>
@@ -232,6 +403,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E9%AA%91%E8%A1%8C/</loc>
+    <lastmod>2011-05-02T10:53:44+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/954/</loc>
     <lastmod>2011-04-29T01:22:04+00:00</lastmod>
   </url>
@@ -242,8 +418,18 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E6%84%9F%E6%83%B3/</loc>
+    <lastmod>2011-03-13T23:07:01+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/882/</loc>
     <lastmod>2011-03-13T23:07:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/php/</loc>
+    <lastmod>2011-03-13T16:07:18+00:00</lastmod>
   </url>
   
   <url>
@@ -263,6 +449,16 @@
   
   <url>
     <loc>http://hzmangel.github.io/post/786/</loc>
+    <lastmod>2010-12-31T12:59:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2010-12-31T12:59:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2010-12-31T12:59:10+00:00</lastmod>
   </url>
   
@@ -299,6 +495,16 @@
   <url>
     <loc>http://hzmangel.github.io/post/729/</loc>
     <lastmod>2010-09-01T00:42:51+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/vim/</loc>
+    <lastmod>2010-08-23T13:08:03+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/</loc>
+    <lastmod>2010-08-23T13:08:03+00:00</lastmod>
   </url>
   
   <url>
@@ -339,6 +545,11 @@
   <url>
     <loc>http://hzmangel.github.io/post/627/</loc>
     <lastmod>2010-05-30T01:20:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/admin/</loc>
+    <lastmod>2010-05-05T15:08:38+00:00</lastmod>
   </url>
   
   <url>
@@ -437,6 +648,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/regexp/</loc>
+    <lastmod>2009-11-02T17:35:40+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/487/</loc>
     <lastmod>2009-11-02T17:35:40+00:00</lastmod>
   </url>
@@ -452,7 +668,17 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/android/</loc>
+    <lastmod>2009-09-14T22:59:50+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/461/</loc>
+    <lastmod>2009-09-14T22:59:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/java/</loc>
     <lastmod>2009-09-14T22:59:50+00:00</lastmod>
   </url>
   
@@ -472,8 +698,28 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E4%BB%99%E5%89%91/</loc>
+    <lastmod>2009-08-10T01:02:50+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/445/</loc>
     <lastmod>2009-08-10T01:02:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/%E6%B8%B8%E6%88%8F/</loc>
+    <lastmod>2009-08-10T01:02:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F/</loc>
+    <lastmod>2009-08-10T01:02:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/%E7%94%B5%E5%BD%B1/</loc>
+    <lastmod>2009-08-04T23:39:43+00:00</lastmod>
   </url>
   
   <url>
@@ -482,8 +728,18 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/gfw/</loc>
+    <lastmod>2009-08-04T01:07:49+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/427/</loc>
     <lastmod>2009-08-04T01:07:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/tags/flex/</loc>
+    <lastmod>2009-06-12T00:59:44+00:00</lastmod>
   </url>
   
   <url>
@@ -597,6 +853,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB/</loc>
+    <lastmod>2008-11-23T20:00:38+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/367/</loc>
     <lastmod>2008-11-23T20:00:38+00:00</lastmod>
   </url>
@@ -663,6 +924,11 @@
   
   <url>
     <loc>http://hzmangel.github.io/post/354/</loc>
+    <lastmod>2008-10-13T22:45:51+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex/</loc>
     <lastmod>2008-10-13T22:45:51+00:00</lastmod>
   </url>
   
@@ -877,6 +1143,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/tags/%E5%8D%81%E6%B8%A1/</loc>
+    <lastmod>2008-06-23T21:46:03+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/310/</loc>
     <lastmod>2008-06-23T21:46:03+00:00</lastmod>
   </url>
@@ -1014,6 +1285,11 @@
   <url>
     <loc>http://hzmangel.github.io/post/280/</loc>
     <lastmod>2008-04-25T15:48:56+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/bt~~up/</loc>
+    <lastmod>2008-04-17T02:32:15+00:00</lastmod>
   </url>
   
   <url>
@@ -1398,6 +1674,11 @@
   
   <url>
     <loc>http://hzmangel.github.io/post/188/</loc>
+    <lastmod>2007-05-29T11:34:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF/</loc>
     <lastmod>2007-05-29T11:34:53+00:00</lastmod>
   </url>
   
@@ -1987,6 +2268,11 @@
   </url>
   
   <url>
+    <loc>http://hzmangel.github.io/categories/%E9%A3%8E%E9%9B%A8%E8%80%83%E7%A0%94%E8%B7%AF/</loc>
+    <lastmod>2005-04-17T10:05:44+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://hzmangel.github.io/post/69/</loc>
     <lastmod>2005-04-15T10:34:38+00:00</lastmod>
   </url>
@@ -2318,6 +2604,10 @@
   
   <url>
     <loc>http://hzmangel.github.io/page/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hzmangel.github.io/page/</loc>
   </url>
   
 </urlset>

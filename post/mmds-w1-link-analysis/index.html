@@ -30,7 +30,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -80,9 +80,7 @@
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>第一周的后半部分讲的是Link Analysis，主要讲的是<strong>PageRank</strong>的计算。</p>
+        <div class="post-summary"><p>第一周的后半部分讲的是Link Analysis，主要讲的是<strong>PageRank</strong>的计算。</p>
 
 <p>互联网在某种意义上是一个有向图，每个页面是图上的节点，而页面间的链接就是图的边。在经历了早期的目录式页面分类后，web现在进入了以Search为主的的组织方式。下面问题来了：</p>
 
@@ -134,8 +132,7 @@
 
 <p>一般来说，转移矩阵都是稀疏的，这样在存储的时候可以不用存多少东西，但是加了那个Teleports后，它变成每个位置都有值了，这内存使用就duang的一下上来了。还好经过计算，发现公式<code>$r = A \cdot r$</code> 可以改写成：<code>$r = \beta M \cdot r + [ \frac{1-\beta}{N} ]_{N}$</code>。这就是说，矩阵还是那个稀疏的矩阵，但是在每次算完后，需要在向量上加上Teleports的结果。这样一来，占用的内存又回去了吧。</p>
 
-<p>基本上就是这样了~</p>
-</div>
+<p>基本上就是这样了~</p></div>
     </section>
 
     <footer>
@@ -156,12 +153,12 @@
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/timezone-in-python/"> &lt; Set timezone in Python
+                 <a class="previous" href="http://hzmangel.github.io/post/mmds-w1-hdfs-mr/"> &lt; MMDS Notes: W1 - HDFS &amp; MR
  </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/mmds-w1-hdfs-mr/"> MMDS Notes: W1 - HDFS &amp; MR
+                 <a class="next" href="http://hzmangel.github.io/post/timezone-in-python/"> Set timezone in Python
  &gt;</a> 
             </p>
         </nav>
@@ -196,20 +193,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -218,7 +210,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -287,11 +279,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

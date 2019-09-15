@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -78,7 +78,9 @@
 sizingMethod=&lsquo;crop&rsquo;);</p>
 
 <p>由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。<br />
-首先是JavaScript的代码，用以生成HTML，以给图像加滤镜function fix_png(f_obj)<br />
+首先是JavaScript的代码，用以生成HTML，以给图像加滤镜</p>
+
+<p>function fix_png(f_obj)<br />
 {<br />
     if (window.navigator.appName == &ldquo;Microsoft Internet Explorer&rdquo;)<br />
     {<br />
@@ -99,8 +101,7 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
 <p>然后在网页文件中，只要这样调用就可以了：</p>
 
 <pre><code>&lt;img src=&quot;xyz.png&quot; alt=&quot;foo&quot; width=&quot;10&quot; height=&quot;20&quot; onload=&quot;fixPNG(this)&quot;&gt;
-</code></pre>
-</div>
+</code></pre></div>
     </section>
 
     <footer>
@@ -121,11 +122,11 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/140/"> &lt; 21,22 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/137/"> &lt; 什么是命运？ </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/137/"> 什么是命运？ &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/140/"> 21,22 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -159,20 +160,15 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -181,7 +177,7 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -250,11 +246,11 @@ sizingMethod=&lsquo;crop&rsquo;);</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

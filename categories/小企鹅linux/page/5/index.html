@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" 小企鹅linux &middot;  湖间小筑" />
+        <meta property="og:title" content=" 小企鹅Linux &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | 小企鹅linux
+                | 小企鹅Linux
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -103,7 +103,9 @@
     </header>
 
     <section>
-        <div class="post-summary">把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。 是从tgbus下载的apache_1.3.37_mach-o_acorn压缩包，然后用FTP传到远端的一台Linux机器，然后从这用scp弄到iphone上 。在这里需要再赞一下iphone的SSH服务，上传真的很方便。拷完后，把几个文件给加上x属性就行了，就是扔到bin和sbin里面的几个文件，还有扔到libe xec里面的httpd，弄完后，apachectl -k start，就OK了。 下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&hellip;&hellip;</div>
+        <div class="post-summary">把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。
+是从tgbus下载的apache_1.3.37_mach-o_acorn压缩包，然后用FTP传到远端的一台Linux机器，然后从这用scp弄到iphone上 。在这里需要再赞一下iphone的SSH服务，上传真的很方便。拷完后，把几个文件给加上x属性就行了，就是扔到bin和sbin里面的几个文件，还有扔到libe xec里面的httpd，弄完后，apachectl -k start，就OK了。
+下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&hellip;&hellip;</div>
     </section>
 
     
@@ -119,7 +121,11 @@
     </header>
 
     <section>
-        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。 #!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
+        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
     </section>
 
     
@@ -135,7 +141,9 @@
     </header>
 
     <section>
-        <div class="post-summary">最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。 使用很简单，和iconv差不多，有一个-f标明源编码，一个-t标明目的编码，还有一些选项可以看帮助开。最主要的是要加上&ndash; notest标明就转换了，而不是仅仅测试显示，然后一条命令搞定，嗯。 convmv -f gb2312 -t utf8 --notest *</div>
+        <div class="post-summary">最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。
+使用很简单，和iconv差不多，有一个-f标明源编码，一个-t标明目的编码，还有一些选项可以看帮助开。最主要的是要加上&ndash; notest标明就转换了，而不是仅仅测试显示，然后一条命令搞定，嗯。
+ convmv -f gb2312 -t utf8 --notest *  </div>
     </section>
 
     
@@ -151,7 +159,9 @@
     </header>
 
     <section>
-        <div class="post-summary">昨天给对面屋一哥们开了个用户，可是他说进不去一个目录，今天看了看权限，估计是设置的时候没弄懂目录的权限，就上网找找，把结果放在这吧，方便以后查。 对于文件的那几个权限就不说了，rwx 还是满简单的，但是对于目录来说，r 表示可以读包含在目录中文件的名称，w 表示可以写信息到目录中去（如增加和删除索引节点），而 x 表示可以查找目录，即就是可以用目录名作为路径名去访问它包含的文件或子目录。那个哥们我一开始只给了他一个对目录的只读权限，所以进不去了，还需要加上一个 x 权限。 还有一些具体的东西：对一个目录有只读权限的，只能列出目录下的文件名，但不能得到其它信息，也不能写入文件，也不能更改目录中已有的文件。如果去掉了写权限，则 ls 的时候也会被告知权限不够，cat 也不行，写入那是更不行了。如果有 x 权限，则不能 ls，但是能够使用 cat 得到文件，写入不能。差不多就些了吧，其它一些高级的设置，下次有空再看吧。上面那几个都在机器上测试过，希望还没有脑子糊涂到测试错&hellip;&hellip;</div>
+        <div class="post-summary">昨天给对面屋一哥们开了个用户，可是他说进不去一个目录，今天看了看权限，估计是设置的时候没弄懂目录的权限，就上网找找，把结果放在这吧，方便以后查。
+对于文件的那几个权限就不说了，rwx 还是满简单的，但是对于目录来说，r 表示可以读包含在目录中文件的名称，w 表示可以写信息到目录中去（如增加和删除索引节点），而 x 表示可以查找目录，即就是可以用目录名作为路径名去访问它包含的文件或子目录。那个哥们我一开始只给了他一个对目录的只读权限，所以进不去了，还需要加上一个 x 权限。
+还有一些具体的东西：对一个目录有只读权限的，只能列出目录下的文件名，但不能得到其它信息，也不能写入文件，也不能更改目录中已有的文件。如果去掉了写权限，则 ls 的时候也会被告知权限不够，cat 也不行，写入那是更不行了。如果有 x 权限，则不能 ls，但是能够使用 cat 得到文件，写入不能。差不多就些了吧，其它一些高级的设置，下次有空再看吧。上面那几个都在机器上测试过，希望还没有脑子糊涂到测试错&hellip;&hellip;</div>
     </section>
 
     
@@ -183,8 +193,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>向老板申请了台服务器，说是服务器，也就是一台老的破机器，不过能完全给我自己瞎折腾，装个linux玩玩什么的，还是满好的。用了一段时间pietty，感觉没有X，有时候还是有些事情不好做的，所以昨天开始去折腾Win下的X模拟器。</p>
-</div>
+        <div class="post-summary"><p>向老板申请了台服务器，说是服务器，也就是一台老的破机器，不过能完全给我自己瞎折腾，装个linux玩玩什么的，还是满好的。用了一段时间pietty，感觉没有X，有时候还是有些事情不好做的，所以昨天开始去折腾Win下的X模拟器。</p></div>
     </section>
 
     
@@ -204,7 +213,9 @@
     </header>
 
     <section>
-        <div class="post-summary">接了个项目，是要做内核相关的东西，现有的东西是在内核上打 patch，于是就去弄个个内核的源代码，打了个 patch 后，对着 README 开始配置，make config 那种事情我第一次做过后就再也不干了，其实应该只算是做过了半遍，因为回答问题到差不多一半的时候我就直接 C-C 了。putty 上木有 X ，也只剩 make menuconfig 了，调入命令，回车，等。 可惜木有等到那个蓝屏，出现的是个 error，伊告诉我找不到 curses.h ，一般这种事情，直接 dpkg -S，可惜这次不行了，找到的几个东西都是 python 相关的东西，无奈之下只好 google。 既然求助了 google 基本就木有找不到答案的情况发生了，少 ncurses-dev 库，apt-get 装上后，成功打开那个蓝屏。所以说啊， dpkg -S 有时还是木有 google 有用啊 :)</div>
+        <div class="post-summary">接了个项目，是要做内核相关的东西，现有的东西是在内核上打 patch，于是就去弄个个内核的源代码，打了个 patch 后，对着 README 开始配置，make config 那种事情我第一次做过后就再也不干了，其实应该只算是做过了半遍，因为回答问题到差不多一半的时候我就直接 C-C 了。putty 上木有 X ，也只剩 make menuconfig 了，调入命令，回车，等。
+可惜木有等到那个蓝屏，出现的是个 error，伊告诉我找不到 curses.h ，一般这种事情，直接 dpkg -S，可惜这次不行了，找到的几个东西都是 python 相关的东西，无奈之下只好 google。
+既然求助了 google 基本就木有找不到答案的情况发生了，少 ncurses-dev 库，apt-get 装上后，成功打开那个蓝屏。所以说啊， dpkg -S 有时还是木有 google 有用啊 :)</div>
     </section>
 
     
@@ -221,8 +232,7 @@
 
     <section>
         <div class="post-summary"><p>折腾了一晚上，总算把原来架在自己机器上的WordPress弄到了Debian的那台机器上，说说折腾的过程吧
-　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。</p>
-</div>
+　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。</p></div>
     </section>
 
     
@@ -261,20 +271,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -283,7 +288,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -352,11 +357,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

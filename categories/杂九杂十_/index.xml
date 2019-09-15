@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>杂九杂十_ on 湖间小筑</title>
+    <title>杂九杂十^_^ on 湖间小筑</title>
     <link>http://hzmangel.github.io/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_/</link>
-    <description>Recent content in 杂九杂十_ on 湖间小筑</description>
+    <description>Recent content in 杂九杂十^_^ on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Blog搬(zhe)家(teng)记</title>
@@ -16,9 +18,7 @@
       <pubDate>Sat, 13 Jun 2015 11:36:18 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/new-github-blog/</guid>
-      <description>
-
-&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
+      <description>&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
 
 &lt;p&gt;当初想把blog搬家的主要需求也就下面这些：&lt;/p&gt;
 
@@ -26,74 +26,7 @@
 &lt;li&gt;能用Markdown写。除了写着舒服外，这不是还能装13嘛～&lt;/li&gt;
 &lt;li&gt;之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。&lt;/li&gt;
 &lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;hugo&#34;&gt;Hugo&lt;/h2&gt;
-
-&lt;p&gt;最开始的时候也想着用 &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 或者 &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt; ，但是在转换的时候，发现有些&lt;code&gt;Latex&lt;/code&gt;的代码中的行末注释&lt;code&gt;{%&lt;/code&gt;会被认成模板字符串的开始字符，然后就悲剧的说我找不到另一半了啊啊啊我要去死啊啊啊，然后就没有然后了&amp;hellip;&amp;hellip; 想着如果自己写一个的话那又不知道要拖到什么时候了，所以在网上找到了 &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;。所以，其实我选择它的原因也就是它能把我原来所有的东西都显示出来不出错（格式什么的再说哈）。&lt;/p&gt;
-
-&lt;h2 id=&#34;wp2hugo&#34;&gt;wp2hugo&lt;/h2&gt;
-
-&lt;p&gt;敲定了用的框架，下一步就是挪东西了。Jekyll提供了一个挪东西的Gem， &lt;a href=&#34;https://github.com/jekyll/jekyll-import&#34;&gt;Jekyll Import&lt;/a&gt; ，在WP上也有导出的插件，但是拿到的导出文件多少有些问题，有的是没有时间，有的是没有转成Markdown，当然有一个最不能忍的就是导出文件的文件名（我的blog里面的标题是中文，所以也就明白是咋回事了吧&amp;hellip;）。本来想去看那些代码自己弄，再一想算了，自己写吧，这种小工具应该不会引发拖延症的。所以就有了这么个玩意： &lt;a href=&#34;https://github.com/hzmangel/wp2hugo&#34;&gt;wp2hugo&lt;/a&gt; 。这货主要干的事情是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;解析Wordpress导出的XML文件。&lt;/li&gt;
-&lt;li&gt;将站点信息存到&lt;code&gt;config.yaml&lt;/code&gt;中。&lt;/li&gt;
-&lt;li&gt;将文章存放到带有元信息的Markdown文件中（使用 &lt;a href=&#34;https://pypi.python.org/pypi/html2text&#34;&gt;html2text&lt;/a&gt; 将原来的HTML内容转成Markdown ），使用 &lt;strong&gt;post id&lt;/strong&gt; 作为文件名。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;基本上我目前的需求是可以被满足了，不过有一个问题是现在页面中引用的图像文件还是放在老站上的，考虑是不是在脚本中加一个选项把它给放到某个assets目录中去。&lt;/p&gt;
-
-&lt;h2 id=&#34;twenty-ten&#34;&gt;Twenty Ten&lt;/h2&gt;
-
-&lt;p&gt;原来的Blog用的模板是WP自带的 &lt;a href=&#34;https://wordpress.org/themes/twentyten/&#34;&gt;Twenty Ten&lt;/a&gt; ，试了几个Hugo的模板后不喜欢，于是着手把这货给弄过来。由于有一些Hugo的变量，还有就是在port到后面有点烦了所以直接把bootstrap弄进来了，所以也新开了一个 &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten&#34;&gt;GitHub repo&lt;/a&gt; 放这东西。不过有两个东西想吐槽，一是分页，二是标签云。&lt;/p&gt;
-
-&lt;h3 id=&#34;分页&#34;&gt;分页&lt;/h3&gt;
-
-&lt;p&gt;Hugo内置了分页，就是在页面中加入 &lt;code&gt;{{ template &amp;quot;_internal/pagination.html&amp;quot; . }}&lt;/code&gt; ，但是它是把所有页面都列出来的啊，然后我就发现我的页面下面放了2行页码。虽然说增加每页的文章数可以解决这个问题，但这也不是啥解决办法啊。提供的少的可怜的计算功能还有犯晕的模板语法也没法很快弄出来那种显示第一页最后一页的链接，高亮当前页并显示当前页前后各X页，其它页用&lt;code&gt;...&lt;/code&gt;代替的效果，所以最后就直接用上一页下一页了，回头有空的话考虑用那种页面底部加上loading按钮的做法吧。&lt;/p&gt;
-
-&lt;h3 id=&#34;标签云&#34;&gt;标签云&lt;/h3&gt;
-
-&lt;p&gt;Hugo中提供获取所有标签和标签下对应文章数的函数，但是对于生成字体大小不同的标签云来说，它没有提供对应的数学函数。最后选择的做法就是用Hugo把标签名称，数目，以及链接地址生成到某个div的data属性中，然后再用javascript取到其中信息，计算，并生成标签云的代码。Hugo输出的模板是这样的： &lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/layouts/partials/sidebar.html&#34;&gt;sidebar.html&lt;/a&gt;：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;sidebar-block&amp;quot;&amp;gt;
-  &amp;lt;h5&amp;gt;标签&amp;lt;/h5&amp;gt;
-  &amp;lt;div id=&amp;quot;tag_cloud&amp;quot; data-tags=&amp;quot;{{ range $key, $value := .Site.Taxonomies.tags }} [&#39;{{$key}}&#39;, {{len $value}}, &#39;/tags/{{ $key | urlize }}&#39;]; {{ end }}&amp;quot; /&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后生成标签云的js是这样的：&lt;a href=&#34;https://github.com/hzmangel/hugo-twenty-ten/blob/master/static/js/index.js&#34;&gt;index.js&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$( document ).ready(function() {
-    var tag_list = eval($(&amp;quot;#tag_cloud&amp;quot;).data(&#39;tags&#39;).split(&#39;;&#39;));
-    tag_list.pop();
-
-    var tag_json = [];
-    var total_cnt = 0;
-    $.each(tag_list, function( idx, val ) {
-        foo = eval(val);
-        tag_json.push(foo);
-        total_cnt += foo[1];
-    })
-    generate_tag_cloud(tag_json, total_cnt);
-});
-
-var generate_tag_cloud = function(tag_json, total_cnt) {
-    tag_cloud_str = &amp;quot;&amp;lt;div id=&#39;tag_cloud_canvas&#39;&amp;gt;&amp;quot;;
-
-    $.each(tag_json, function(idx, val) {
-        font_size = 8 + Math.log(val[1])/Math.log(total_cnt) * 18;
-        tag_cloud_str += &amp;quot;&amp;lt;a style=\&amp;quot;font-size:&amp;quot; + font_size +&amp;quot;pt\&amp;quot; href=&amp;quot; + val[2] + &amp;quot;&amp;gt;&amp;quot; + val[0] + &amp;quot;&amp;lt;/a&amp;gt;&amp;amp;nbsp; &amp;quot;;
-    });
-
-    tag_cloud_str += &amp;quot;&amp;lt;/div&amp;gt;&amp;quot;;
-
-    $(&amp;quot;#tag_cloud&amp;quot;).append(tag_cloud_str);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;目前差不多就是这样了，偶尔想到啥新的东西再往上加吧，嘿嘿。&lt;/p&gt;
-</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -104,23 +37,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       <guid>http://hzmangel.github.io/post/882/</guid>
       <description>&lt;p&gt;不知不觉工作已经有了三年，只是在昨天去吃车版联合BG时才蓦然发现，又一轮的毕业季，来了。&lt;/p&gt;
 
-&lt;p&gt;记忆中属于自己的散伙饭，一直只有本科毕业那一次，同样是在福口居，同样是那两张桌子。已经记不清当时吃了什么，只记得那天把所有人都喝了一遍，虽然在一起四年了，但是还是有很多话想和他们说，真的好想一直就那么拿着酒杯，一直喝下去，一直说下去……&lt;div id=&#34;scid:8747F07C-CDE8-481f-B0DF-C6CFD074BF67:33bf2f4e-397b-433e-bcdf-e25917046bd4&#34; class=&#34;wlWriterEditableSmartContent&#34; style=&#34;margin: 0px; display: inline; float: none; padding: 0px;&#34;&gt;&lt;a rel=&#34;thumbnail&#34; href=&#34;http://www.hzmangel.info/blog/wp-content/uploads/2011/03/DSC_3812-8x6.jpg&#34;&gt;&lt;img src=&#34;http://www.hzmangel.info/blog/wp-content/uploads/2011/03/DSC_3812.png&#34; border=&#34;0&#34; alt=&#34;&#34; width=&#34;455&#34; height=&#34;580&#34; /&gt;&lt;/a&gt;&lt;/div&gt;
-在学校吃过散伙饭的都知道，那份感情，那种感觉，只会存在于那种特殊的场合，而在其它的任何时间，任何地点都是不会出现的。虽然在那以后，也有过几次聚会，但是直到自己最后毕业离校，都没再吃过真正意义上的散伙饭，至少那些在我看来，那些就是普通的聚会。&lt;/p&gt;
-
-&lt;p&gt;本以为只能在回忆中去找寻这份真挚，但是没想到还能有机会去感受这份感情。&lt;/p&gt;
-
-&lt;p&gt;第一次蹭散伙饭是08年，本来只是一次普通的大食堂BG（记得那天刚好是毕业生的歌会，一大群人在操场上开卡拉OK），后来zpzhao说他们班刚好那天散伙饭，问了问发现还是有几个认识的人，就想去随便扯扯。结果到了那边一坐下就走不掉了，慢慢的也就溶入那个氛围中去了，拿着酒杯看着他们说，看着他们笑，跟着他们唱，仿佛又找到了几年前的那种感觉~&lt;/p&gt;
-
-&lt;p&gt;第二次，也就是昨天，车版联合BG，再次从车版的那帮子靠谱兄弟姐妹们那找到了那份喝着酒谈着心的感觉。同样的地点不同的人，恍然间仿佛又回到了几年前，和一帮子四年中天天见面的家伙们拿着酒杯，谈着人生，说着理想…… 昨天的事情，我会永远记得的。&lt;/p&gt;
-
-&lt;p&gt;感谢zpzhao和ztalent，让我再一次围观到了那份感情。祝你在糜烂的道路上越走越远，然后顺便求带，嗯。&lt;/p&gt;
-
-&lt;p&gt;感谢车版的一票兄弟姐妹们，让我再一次沉浸在那份真挚中，那种感觉，真好~&lt;/p&gt;
-
-&lt;p&gt;最后，bless圈圈回家能顺利的定下工作的事，记得你要带着好消息回来，记得还要一起去天津吃海鲜。a za a za fighting~~&lt;/p&gt;
-
-&lt;p&gt;后记：周六喝的酒，周日晕了一天，尽管如此，还是很high。只是突然想到不知道下次还有没有机会再这么着喝了，于是今天一天心中都有淡淡的忧伤，也许，这种机会，可遇，而不可求吧。所以，不敢奢望还能碰到这样的机会，只能在心中永远记住这样的时刻~~&lt;/p&gt;
-</description>
+&lt;p&gt;记忆中属于自己的散伙饭，一直只有本科毕业那一次，同样是在福口居，同样是那两张桌子。已经记不清当时吃了什么，只记得那天把所有人都喝了一遍，虽然在一起四年了，但是还是有很多话想和他们说，真的好想一直就那么拿着酒杯，一直喝下去，一直说下去……&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,47 +46,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       <pubDate>Fri, 31 Dec 2010 12:59:10 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/786/</guid>
-      <description>&lt;p&gt;写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~&amp;gt; &lt;strong&gt;读书计划&lt;/strong&gt;&lt;br /&gt;
-1. SICP，边学习这本书边用haskell去折腾之&lt;br /&gt;
-2. 具体数学，高爷爷的书，当冷馒头啃都不行了，要当石头啃，试试吧。&lt;/p&gt;
-
-&lt;p&gt;SICP和具体数学各看了个开头，然后就由于某些原因各自丢一边了。年底的时候觉得这样不行，于是开始啃算法和机器学习，目前各看了一两章吧，继续努力中。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;码农基本功&lt;/strong&gt;&lt;br /&gt;
-1. 记账软件，大概是BS结构，大概会折腾Flex/Android。嗯，宏愿，做多少看食言的程度 –_-!!!&lt;br /&gt;
-2. 找个用的人多的开源项目去掺和。类似的愿望在去年也有，只是最后只折腾了一些小patch，残念哇，期望的项目是 Python/CLI
-相关的，不想做界面，太累~&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;这个&amp;hellip;.. 记账软件是没戏了，在TeamBuilding的时候曾经想过折腾个Flex的小网站，但是在发现Flex对于大段文字的支持不是很好后最终放弃。至
-于Android，除了把机器里面的SDK各种升级外就再也没沾过。开源项目&amp;hellip;.. 今年连patch都没有了，诶。&lt;/p&gt;
-
-&lt;p&gt;放开这俩伤心事，今年还是做了一些东西的：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;完成了LL的两个Item。第一个做的很窝火，紧赶慢赶做了出来，结果因为别的原因被delay到后年发布。第二个做的满舒服，然后还把Python给硬塞进了LL中，嘿嘿&lt;/li&gt;
-&lt;li&gt;学习了OpenCL，然后还去linuxfb上扯了一把，骗到了个好玩具。不过好像还欠一个OpenCL+OpenGL的demo&amp;hellip;.. 我掩面&amp;hellip;..&lt;/li&gt;
-&lt;li&gt;瞄了一眼hadoop，然后在Team里面小扯了一扯，感觉不喜欢，于是就丢一边了。&lt;/li&gt;
-&lt;li&gt;完成了ProjectEuler的level 1，虽然有些问题完成的很tricky。后面的问题暂时还没开始看。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;好像就这些了吧，看来看去怎么都是琐事。明年要好好想想怎么提升技能了。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;游山玩水&lt;/strong&gt;&lt;br /&gt;
-1. 小五台金莲花&lt;br /&gt;
-2. 8月份去青海湖看油菜花&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;唔，从前面一篇中不难看出，这俩愿望都gg鸟。小五时间没赶上，也就不从装备上找理由了。青海湖已经开始折腾车票了，结果被那次TeamBuilding冲了，更郁闷
-的是TeamBuilding最后还改时间了，只能羡慕嫉妒完他们的照片后自己找个没人的墙角蹲着哭了。不过端午那次去的锡盟还是很爽的，hoho~~&lt;/p&gt;
-
-&lt;p&gt;整体看一眼，和2009一样，依然在没有进度没有系统的学习新东西，依然会开开心心无忧无虑的在户外乱窜，一样的不淡定，一样的爱得瑟，一样的晚睡，一样会在关键时刻
-不给力。要说变化，可能除了多了点得瑟的经历外就再也没啥了~~&lt;/p&gt;
-
-&lt;p&gt;话说，家里面不给力的网速让本应该是2010年的最后一篇变成了2011年的第一篇，只好送上迟到的新年祝福，祝大家新年快乐 ^_^&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -179,154 +56,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       
       <guid>http://hzmangel.github.io/post/730/</guid>
       <description>&lt;p&gt;晚上去看了传说中的 Inception，先不涉及情节的小评论一下：情节中上（因为几年前就看过这类的小说），场面一般（不知道IMAX会不会好些），别的没啥了吧
-。然后，现在正式开始剧透，而且本文属于纯无聊加剧透的产物，所以无论看过还是没看过的都要慎入啊~其实真的是无聊了，等程序的过程中写了这个玩意，嗯，所以就表再说我无聊鸟，哈哈~&lt;/p&gt;
-
-&lt;p&gt;首先是主线~&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;def main():
-  # 下面开始主循环~
-  while True:
-    # 首先要去偷那个日本老板的梦
-    try:
-      extract(objective = &#39;Saito&#39;)
-    except missionFailException:
-      # 结果被识破
-      if not accept_offer(offer_from = &#39;Saito&#39;):
-        # 任务失败了就只有挂了嘛
-        game_over(objective = &#39;Cobb&#39;)
-      else:
-        # 不过那个老板能量很大
-        try:
-          inception(objective = &#39;Robert Fischer&#39;)
-        except missionFailException:
-          game_over(objective = &#39;Cobb&#39;)
-
-        # 任务完成了，木有犯罪记录了，可以回家了
-        clean_criminal_rcds(owner = &#39;Cobb&#39;)
-        back_home(objective = &#39;Cobb&#39;)
-
-    # 最后那个扣子留的啊......
-    to_be_continued(&#39;dreaming or not dreaming, that is the question&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后是inception的过程&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;def inception(person):
-  # 找forger，为了在梦里变形，找到Eames
-  # 找architect，构建梦境，找到Ariadne
-  # 找chemist，配镇静剂，找到Yusuf
-  (forger, architect, chemist) = find_teammember()
-
-  # 开始查资料
-  #  Robert Fischer: 被inception的目标，被改造成败家子
-  #  Maurice Fischer: 败家子（筹）他爹，挂ing
-  #  Peter Browning: 败家子（筹）的教父，被forger假份后用来策反败家子
-  background_info = collect_info([&#39;Robert Fischer&#39;, &#39;Maurice Fischer&#39;, &#39;Peter Browning&#39;])
-
-  init_members = {
-        &#39;Cobb&#39;: &#39;health&#39;,
-        &#39;Arthur&#39;: &#39;health&#39;,
-        &#39;Eames&#39;: &#39;health&#39;,
-        &#39;Yusuf&#39;: &#39;health&#39;,
-        &#39;Saito&#39;: &#39;health&#39;,
-        &#39;Ariadne&#39;: &#39;health&#39;,
-        &#39;Robert Fischer&#39;: &#39;health&#39;,
-      }
-
-  # 一些前期工作，如要收买空姐地勤结果把航空公司收买了之类
-  pre_inception()
-
-  try:
-    while True:
-      # 在飞机上开始折腾，第一层梦（如果不算最外面一层的话）
-      anaesthetize(&#39;Robert Fischer&#39;)
-      dream_scene = DreamSence(scene = &#39;flight from Sydeny to Los Angel&#39;,
-          team = init_members, depth = 1, owner = &#39;Yusuf&#39;)
-      dream_scene.dream_in_flight()
-  except AnMaNiBaMiHong:
-    # 男猪脚都跳出来了，自然就结束了啦~
-    return 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后是那个做梦的类，有些地方用程序不好表示啊，凑合看吧，嘿嘿。男猪脚最后退出的方式很牛，可惜Python中木有goto，只好用exception代替了~&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class DreamSence:
-  def __init__(self, scene, team, depth, owner):
-    self.scene = scene # 场景
-    self.team = team  # 梦中人
-    self.depth = depth # 深度
-    self.owner = owner # 梦境的所有人
-
-  def dream_in_flight(self):
-    # 唔，一堆defender，还都是武装过的
-    self.fight_with_defenders(owner = &#39;Robert Fischer&#39;, level = &#39;armed&#39;)
-    # 于是日本老板中弹了，但还不能让他死
-    self.team[&#39;Saito&#39;] = &#39;dying&#39;
-    # 开始夺命狂奔
-    self.start_running()
-    # 第二层梦
-    # Yusuf留在外面开车
-    self.team.pop(&#39;Yusuf&#39;)
-    dream_scene = DreamSence(scene = &#39;Running Car&#39;, team = self.team,
-        depth = 2, owner = &#39;Arthur&#39;)
-    dream_scene.dream_in_car()
-
-  def dream_in_car(self):
-    # 告诉Fischer丫在梦里
-    invokeMrSecure(objective = &#39;Robert Fischer&#39;)
-    # 第三层梦
-    # Arthur留外面叫他们起床
-    self.team.pop(&#39;Arthur&#39;)
-    dream_scene = DreamSence(scene = &#39;Hotel&#39;, team = self.team, depth = 3,
-        owner = &#39;Eames&#39;)
-    dream_scene.dream_in_hotel()
-    # 被叫醒~
-    self.be_kicked()
-
-  def dream_in_hotel(self):
-    # 还是要和那帮defender打啊，而且武器更精良了
-    self.fight_with_defenders(owner = &#39;Robert Fischer&#39;, level = &#39;army&#39;)
-    # Fischer挂了，被Cobb老婆Mal杀的
-    self.kill_person(killer = &#39;Mal&#39;, objective = &#39;Robert Fischer&#39;)
-    self.team[&#39;Robert Fischer&#39;] = &#39;dead&#39;
-    # Saito也挂了，也算在Mal头上吧
-    self.kill_person(killer = &#39;Mal&#39;, objective = &#39;Saito&#39;)
-    self.team[&#39;Saito&#39;] = &#39;dead&#39;
-    # 第四层梦
-    # Eames留上面电Fischer玩
-    self.team.pop(&#39;Eames&#39;)
-    dream_scene = DreamSence(scene = &#39;SnowMountain&#39;, team = self.team,
-        depth = 4, owner = &#39;Cobb&#39;)
-    dream_scene.dream_in_mountain()
-    # 被叫醒
-    self.be_kicked()
-
-  def dream_in_mountain(self):
-    # 先找老婆
-    find_person(objective = &#39;Mal&#39;)
-    # 认清身处梦中
-    clearify_state(objective = &#39;Cobb&#39;)
-    # 救Fischer
-    self.be_kicked(&#39;Robert Fischer&#39;)
-    # Ariadne自己出去了
-    self.be_kicked(&#39;Ariadne&#39;)
-    # 救Saito
-    self.be_kicked(&#39;Saito&#39;)
-    # 唔，男猪脚终于牛了一把，直接跳出这一堆梦中
-    if self.owner == &#39;Cobb&#39;:
-      raise AnMaNiBaMiHong
-
-  def be_kicked(objective = None):
-    # 被踢醒之前还是需要恢复健康滴~
-    if objective == None:
-        for i in self.team:
-            self.team[i] = &#39;health&#39;
-    else:
-        self.team[objective] = &#39;health&#39;
-
-    wake_up()
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+。然后，现在正式开始剧透，而且本文属于纯无聊加剧透的产物，所以无论看过还是没看过的都要慎入啊~&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -336,22 +66,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       
       <guid>http://hzmangel.github.io/post/729/</guid>
       <description>&lt;p&gt;晚上被别人惦记起，惦记的理由是曾经说过的一句话，喜欢一个人刷街，无论有没有别人去。其实说来惭愧，最近一两个月已经很久没有去到那个熟悉的A点了，而且也就是最近
-几天才又恢复到骑车上下班的状态。不过看完了那个贴子，想了想，确实很多时候做事喜欢一个人：一个人去走路，一个人去爬山，一个人骑车。不知道因为什么，但是确实很享受那种孤独的感觉，无视身边的陌生
-人，率性的去走自己看到的想走的任何一条路，不需要考虑同伴的挂念，也不需要去向同伴解释为什么，只需要去跟随自己的心灵，随性的走下去~&lt;/p&gt;
-
-&lt;p&gt;有人说，只有在孤独的情况下才能真正的认识自我；也有人说，只有在孤独的环境中才能更好的成长；还有人说，只有孤独气氛才能造就成功的人生。不知道我是不是受到了这些
-说辞的影响，不过估计我也从来不会把个人的习惯上升到这样一种高度，其实我所要的，就是一个可以自由思考自在做事的空间，可惜上学的时候学校不曾给我，上班了以后公司
-也不曾给我，在家的时候父母倒是给了不少，但是已经是从前的一份记忆了，于是我爱上了深夜。&lt;/p&gt;
-
-&lt;p&gt;夜里，喧嚣的都市已经走进了梦乡，街上不再有蠕动的车流，路上不再有涌动的人潮，空气中不再有刺耳的噪声，同时不再的还有白天的那份浮躁。一个人静静的对着屏幕上跃动
-的字符，手指在键盘上欢快的敲击，虽然偶有困意来袭，却总是只能在两次眨眼之间留下一丝逐渐散开的涟漪，很快便再也找寻不到了踪迹。从漆黑的窗外感觉不到外界的存在，
-仿佛眼前所拥有的键盘鼠标小屋屏幕就是所有的世界，一个人的世界，&lt;/p&gt;
-
-&lt;p&gt;为什么习惯于一个人的世界，我问过我很多次，但是每次总是得不到答案，或者说每次的答案都不同，不过想了想，为什么需要给每样事情都找一个为什么呢，喜欢它，这个理由
-应该就足够了吧，就算非要找到喜欢的理由，又有什么用呢，喜欢依然会喜欢，不喜欢还是不喜欢~&lt;/p&gt;
-
-&lt;p&gt;于是，我释然了。&lt;/p&gt;
-</description>
+几天才又恢复到骑车上下班的状态。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -360,34 +75,21 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       <pubDate>Wed, 13 Jan 2010 23:29:39 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/582/</guid>
-      <description>&lt;p&gt;年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去
-实现~&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;读书计划&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;去年列下了5本非技术书的想法，虽然达成了，但是总感觉有些不务正业，于是乎今年列些技术的。其实不多，就两本&lt;br /&gt;
-1. SICP，边学习这本书边用haskell去折腾之&lt;br /&gt;
-2. 具体数学，高爷爷的书，当冷馒头啃都不行了，要当石头啃，试试吧。&lt;/p&gt;
-
-&lt;p&gt;以我的智商而言，估计这两本书都有难度，能看多少是多少吧，争取看完，然后再去复习复习算法导论。呵呵，看着这计划，自己都怕哇。至于非技术书嘛，找到就看吧，当休闲
-用。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;码农基本功&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;虽然单位的代码是C++的，但是说真的，实在不想折腾那玩意，太杀脑细胞了，所以今年的计划继续无视之，工作中学习吧（其实是偷懒的借口），嘿嘿。今年的计划也是差不
-多两个吧&lt;br /&gt;
-1. 记账软件，大概是BS结构，大概会折腾Flex/Android。嗯，宏愿，做多少看食言的程度 –_-!!!&lt;br /&gt;
-2. 找个用的人多的开源项目去掺和。类似的愿望在去年也有，只是最后只折腾了一些小patch，残念哇，期望的项目是 Python/CLI
-相关的，不想做界面，太累~&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;游山玩水&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;这个，不确定性太多了哇，先列上两个吧，可实现度，呵呵，不知道了哇&lt;br /&gt;
-1. 小五台金莲花&lt;br /&gt;
-2. 8月份去青海湖看油菜花&lt;/p&gt;
-
-&lt;p&gt;差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~&lt;/p&gt;
-</description>
+      <description>年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去 实现~
+读书计划
+去年列下了5本非技术书的想法，虽然达成了，但是总感觉有些不务正业，于是乎今年列些技术的。其实不多，就两本
+1. SICP，边学习这本书边用haskell去折腾之
+2. 具体数学，高爷爷的书，当冷馒头啃都不行了，要当石头啃，试试吧。
+以我的智商而言，估计这两本书都有难度，能看多少是多少吧，争取看完，然后再去复习复习算法导论。呵呵，看着这计划，自己都怕哇。至于非技术书嘛，找到就看吧，当休闲 用。
+码农基本功
+虽然单位的代码是C++的，但是说真的，实在不想折腾那玩意，太杀脑细胞了，所以今年的计划继续无视之，工作中学习吧（其实是偷懒的借口），嘿嘿。今年的计划也是差不 多两个吧
+1. 记账软件，大概是BS结构，大概会折腾Flex/Android。嗯，宏愿，做多少看食言的程度 –_-!!!
+2. 找个用的人多的开源项目去掺和。类似的愿望在去年也有，只是最后只折腾了一些小patch，残念哇，期望的项目是 Python/CLI 相关的，不想做界面，太累~
+游山玩水
+这个，不确定性太多了哇，先列上两个吧，可实现度，呵呵，不知道了哇
+1. 小五台金莲花
+2. 8月份去青海湖看油菜花
+差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~</description>
     </item>
     
     <item>
@@ -396,35 +98,7 @@ var generate_tag_cloud = function(tag_json, total_cnt) {
       <pubDate>Thu, 31 Dec 2009 22:28:06 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/540/</guid>
-      <description>&lt;p&gt;2010年的大门已然在慢慢的打开，身后渐行渐远的是2009年的欢声笑语及愁眉苦脸。进门前，回头看看吧，要不然就见不着了~找回了&lt;a href=&#34;http://www.hzmangel.info/blog/2008/12/31/%e6%88%91%e7%9a%8408%e4%
-b8%8e09/&#34;&gt;一年前写的东西&lt;/a&gt;，对着看了一下，发现工作上的那些soft skill虽然有了进步，但是依然还要改进，无论是交流的意愿还是交流的频度抑或交流的方法上，都有太
-多要学的东西。最近看了点笑来老师的&lt;a href=&#34;http://www.douban.com/subject/3609132/&#34;&gt;把时间当作朋友&lt;/a&gt;和斯科特·派克的&lt;a href=&#34;http://www.douban.com/subject/1775691/&#34;&gt;少有人
-走的路&lt;/a&gt;，觉得自己还是下意识的去逃避那些难办的问题，怎么说呢，责任感不够强吧
-，明年继续和自己掐~&lt;/p&gt;
-
-&lt;p&gt;户外嘛，继续了啦，前面一篇已经说了，既然已经开始了，我就不指望我能停下来了。认识了一些新朋友，不过依然有些不能融入的感觉，所以也是一个需要加强的方面啦。&lt;/p&gt;
-
-&lt;p&gt;技术上，惭愧一下，没有太多的长进，再次产生了一个做了开头又停下来的django网站，再就是学了一些haskell，再就没有什么了。明年，主攻两个方向吧，Fl
-ex和Haskell，再看看一些理论方面的书籍。先列两本：具体数学和SICP(Haskell)&lt;/p&gt;
-
-&lt;p&gt;看看年初的展望：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;别的，还有对自己的一些小小的期望：静下心来读非计算机类的五本书；养成一个月总结回顾一次的习惯；认真的玩两个游戏；用口琴学会五首曲子；学习一门FP语言并重
-新学习一遍6.001；至少弄懂LL的3个component并写下文档；买一台DSLR；出去旅游一次；再骑车上一次香山；参与一个开源项目；在11点前睡觉；加强
-对自己情绪的控制力。呵呵，回头看看，好像都是奢望啊，不管了，先列在这，慢慢去做吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;结果嘛：五本书应该是有了，只是通读的不多，明年要好好看看数学是什么；一个月回顾一次早就丢掉了，所以依然经常对着电脑不知道干点啥；游戏倒是达到数字了，只是还有
-需要温习的；Haskell学了皮毛，6.001依然没影，明年一定要拿下；LL的component，2个半吧(SDO, Transaction, Shm)，不
-过懂的不是很深，继续努力。DSLR弄到了手，但旅游依然因为太多的杂事没有成行，拿户外代替吧；香山，呵呵，散步去过几次，骑车倒是再也没去过了，这个，以后好像短
-期内也没打算哈，放着吧；开源的项目，这个真的没有，一是有些懒，二是怕水平不够，不知道折腾啥，明年看情况再定吧；11点前睡觉，咳咳，这个，我们直接略过了哈，嘿
-嘿；情绪的控制力，也许好些了吧，平时看的一些书还是满有作用的。&lt;/p&gt;
-
-&lt;p&gt;明年的宏愿明年再发吧，因为明天要出去玩，嘿嘿&lt;/p&gt;
-
-&lt;p&gt;又只剩最后一句了，俺也免不了俗，祝所有的朋友们新年快乐吧，不过，在事业的高速公路上急速前奔的同时，也偶尔驻足一下吧，因为，路边的景色也是满好滴 ^_^&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;2010年的大门已然在慢慢的打开，身后渐行渐远的是2009年的欢声笑语及愁眉苦脸。进门前，回头看看吧，要不然就见不着了~&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -433,30 +107,8 @@ ex和Haskell，再看看一些理论方面的书籍。先列两本：具体数�
       <pubDate>Tue, 04 Aug 2009 23:39:43 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/434/</guid>
-      <description>&lt;p&gt;上周六估摸着变形金刚2再不去看可能就看不到了，所以不辞劳苦的跑去了龙德广场。过了热门期看电影就是爽啊，坐第四排，前三排没人，第四排就我一个，视野里不见有别的人，嗯，我直接当是为我放我的专场了，哇哈哈。&lt;/p&gt;
-
-&lt;p&gt;开说吧，按条来：
-&lt;ul&gt;
-    &lt;li&gt;擎天柱原来是Hook船长，用的是双钩。那钩子真神奇，不止能当钩子使把个人分两瓣，还能当刀使把人给劈了，当然了，晚上应该也能当灯使。&lt;/li&gt;
-    &lt;li&gt;不知道擎天柱那大箱子是丢了还是被导演拿回家装东西了，整个片子里面就只见到个车头，完全没有了气势啊~&lt;/li&gt;
-    &lt;li&gt;看到后来才知道，原来擎天柱比威震天高一级啊，可以直接和威震天的老大PK的，不知道为啥在动画片里总是被打&amp;hellip;&amp;hellip;&lt;/li&gt;
-    &lt;li&gt;原来天火爷爷是SR-71黑鸟，好像比动画片里面的少了尾翼，而且从白的变成了黑的了&lt;/li&gt;
-    &lt;li&gt;居然给天火还弄了个拐杖，太看不起他了吧，在动画片里面还是某些行动的主力队伍啊。&lt;/li&gt;
-    &lt;li&gt;还有，天火的拐杖下面居然是轮子，嘿嘿，如果老爷爷的零件老化，轮子一不小心滑了咋办 :)&lt;/li&gt;
-    &lt;li&gt;某爱国者用GPS给轨道炮指示坐标时用的是Garmin的GPS，嗯，天线和我手上的这个一样~&lt;/li&gt;
-    &lt;li&gt;Cisco应该给了不少广告费，视频用的是Cisco的系统，而且美国军方的那个电话好像也是，和我桌上的那个长的差不多 -_-!!!&lt;/li&gt;
-    &lt;li&gt;估计LG也给了不少钱，至少两次手机的特写&lt;/li&gt;
-    &lt;li&gt;机器狗和谁学不好学异形，没事干在肚子里养那么多虫做甚&amp;hellip;&amp;hellip;&lt;/li&gt;
-    &lt;li&gt;最后决战中有重复的爆炸场面，不像是好莱坞商业片的所为啊~~&lt;/li&gt;
-    &lt;li&gt;美帝那架无人侦查机起飞的时候用的是像气垫船那样的后螺旋桨，等伊再次出现的时候就成喷射推进的了，难道伊每飞一次都要炸掉一个桨？&lt;/li&gt;
-    &lt;li&gt;最后那场仗哪来那么多霸天虎打，总感觉像打不完一样，FT&lt;/li&gt;
-    &lt;li&gt;天火自残救擎天柱这情节太狗血了吧，人正好好在博物馆里安度晚年呢，把人给揪出来自杀。&lt;/li&gt;
-    &lt;li&gt;接上，同样狗血的还有擎天柱和死天火合体后的情节。&lt;/li&gt;
-    &lt;li&gt;大力神也太丑了点吧，别的本事没学会，倒是只学会了像蓝鲸一样吃饭，结果牙口还不行，sigh~&lt;/li&gt;
-    &lt;li&gt;片子中感觉有不少类似Matrix的镜头。&lt;/li&gt;
-&lt;/ul&gt;
-差不多说完了，总体感觉没有，本来就是去看场面的，嗯。下一部，大概是UP吧~&lt;/p&gt;
-</description>
+      <description>上周六估摸着变形金刚2再不去看可能就看不到了，所以不辞劳苦的跑去了龙德广场。过了热门期看电影就是爽啊，坐第四排，前三排没人，第四排就我一个，视野里不见有别的人，嗯，我直接当是为我放我的专场了，哇哈哈。
+开说吧，按条来：  擎天柱原来是Hook船长，用的是双钩。那钩子真神奇，不止能当钩子使把个人分两瓣，还能当刀使把人给劈了，当然了，晚上应该也能当灯使。 不知道擎天柱那大箱子是丢了还是被导演拿回家装东西了，整个片子里面就只见到个车头，完全没有了气势啊~ 看到后来才知道，原来擎天柱比威震天高一级啊，可以直接和威震天的老大PK的，不知道为啥在动画片里总是被打&amp;hellip;&amp;hellip; 原来天火爷爷是SR-71黑鸟，好像比动画片里面的少了尾翼，而且从白的变成了黑的了 居然给天火还弄了个拐杖，太看不起他了吧，在动画片里面还是某些行动的主力队伍啊。 还有，天火的拐杖下面居然是轮子，嘿嘿，如果老爷爷的零件老化，轮子一不小心滑了咋办 :) 某爱国者用GPS给轨道炮指示坐标时用的是Garmin的GPS，嗯，天线和我手上的这个一样~ Cisco应该给了不少广告费，视频用的是Cisco的系统，而且美国军方的那个电话好像也是，和我桌上的那个长的差不多 -_-!!! 估计LG也给了不少钱，至少两次手机的特写 机器狗和谁学不好学异形，没事干在肚子里养那么多虫做甚&amp;hellip;&amp;hellip; 最后决战中有重复的爆炸场面，不像是好莱坞商业片的所为啊~~ 美帝那架无人侦查机起飞的时候用的是像气垫船那样的后螺旋桨，等伊再次出现的时候就成喷射推进的了，难道伊每飞一次都要炸掉一个桨？ 最后那场仗哪来那么多霸天虎打，总感觉像打不完一样，FT 天火自残救擎天柱这情节太狗血了吧，人正好好在博物馆里安度晚年呢，把人给揪出来自杀。 接上，同样狗血的还有擎天柱和死天火合体后的情节。 大力神也太丑了点吧，别的本事没学会，倒是只学会了像蓝鲸一样吃饭，结果牙口还不行，sigh~ 片子中感觉有不少类似Matrix的镜头。  差不多说完了，总体感觉没有，本来就是去看场面的，嗯。下一部，大概是UP吧~</description>
     </item>
     
     <item>
@@ -465,12 +117,9 @@ ex和Haskell，再看看一些理论方面的书籍。先列两本：具体数�
       <pubDate>Tue, 04 Aug 2009 01:07:49 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/427/</guid>
-      <description>&lt;p&gt;嗯，因为不能享受我天朝为屁民提供的全民ICP福利，所以只好背井离乡翻出长城来到塞外，至于是回来还是回去，谁知道，谁关心~~~&lt;/p&gt;
-
-&lt;p&gt;今天看到tweet上有人在推天朝第一封电子邮件，我在这也推一下吧：Across the Great Wall we can reach every corner in the world.&lt;/p&gt;
-
-&lt;p&gt;最后还要感谢 @colyli 童鞋提供的主机，嗯嗯~&lt;/p&gt;
-</description>
+      <description>嗯，因为不能享受我天朝为屁民提供的全民ICP福利，所以只好背井离乡翻出长城来到塞外，至于是回来还是回去，谁知道，谁关心~~~
+今天看到tweet上有人在推天朝第一封电子邮件，我在这也推一下吧：Across the Great Wall we can reach every corner in the world.
+最后还要感谢 @colyli 童鞋提供的主机，嗯嗯~</description>
     </item>
     
     <item>
@@ -479,24 +128,15 @@ ex和Haskell，再看看一些理论方面的书籍。先列两本：具体数�
       <pubDate>Wed, 29 Apr 2009 00:35:14 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/407/</guid>
-      <description>&lt;p&gt;在不经意间翻了翻日历，猛然发现毕业一周年的日子已然过去，所以只好在这工作一周年的日子里，随便写点啥了。&lt;/p&gt;
-
-&lt;p&gt;2008年的4月15号，被学校用两张纸扫地出门，于是乎，正式被从学生队列中除名鸟。在家闲了两周后，终于开始了走上了一个打工仔的不归路。&lt;/p&gt;
-
-&lt;p&gt;这一转眼，地球就打了300多个滚，于是乎，就到了工作一周年的纪念日，有得，亦有失；有成就，也有磨炼；有欢声笑语，当然还有闷闷不乐。这一切的东西，最后汇聚到一起，就是我这一年的工作历程。&lt;/p&gt;
-
-&lt;p&gt;技术上，明白的最主要的一件事情就是，以前在学校学的东西，到了工作中，需要改变的地方有太多太多。会一门技术不难，但是怎么把它熟练的应用到工作中就是另一码事了。在工程的世界中，需要考虑的许多代码之外的东西，像兼容性，容错性等，在一份已经有年头的产品中，这些相比于代码是更需要去仔细复查的部分。还有就是新技术并不一定就是好的。诚然，新的东西能带来许多新的体验，简化许多过程，但是相对于一套产品而言，还是需要把稳定性放在首要位置的。&lt;/p&gt;
-
-&lt;p&gt;个人方面，也许最大的感想就是不会的东西太多了，以前随便掠一眼觉得没啥看头的东西，深挖下去会发现里面别有一番洞天。感慨一下，想做技术，还是需要耐下性子来，一步一个脚印的去走啊，否则没准哪一天你之前所不屑去看的东西，就会演化为一道不可逾越的鸿沟，而此时再返工的代价，呵呵，会让你悔不该当初啊~~~&lt;/p&gt;
-
-&lt;p&gt;然后就是态度上的事情，工作之初，可能是还没从实验室的氛围中转换过来，抑或是平时在学校就没有太多的责任心，反正没少被老板批，原因也很简单，就是做事情没有责任感，需要别人在后面催着。反正就是记得那次被老板拖到个小会议室里面，谈了大概有20分钟吧，反正就是说，已然有不止一个人反映在工作上有这样的问题，说在培训的时候觉得还是满不错的啊，咋工作后就这样了呢，还有就是会影响年终评定云云。不过说真的，那次以后我好像还是没有怎么改变，不知道是哪一次被啥东西给触动了，从那之后开始正式反思自己的一些作为，然后在工作上也有了反映。最后终于在年终的时候没有太差，呵呵。不过还是需要改进啊，现在做事有时还是轻重缓急不分，需要好好去磨炼一下意志力和执行力。&lt;/p&gt;
-
-&lt;p&gt;还有很重要的一点就是交流。也许程序员在大多数人的眼里就是那些个和电脑交流比和人交流要多也要利索的人，但其实交流对于程序员来说还是很重要的一项技能，通过交流你才能让别人知道你想做什么，或者从别人那得到有用的信息。就像上次开会的时候老板所说的那样，一般而言，某项技术一定能在公司里面找到会的那个人，你所要做的就是找到那个人，并把技术从他的脑子里面挖出来（目前这个被找的人大多数情况下是俺们的leader，嘿嘿）。反观自己，在某些情况下还是没有很好的表达自己的意思，可能是不愿开口，或者是顾虑太多，反正经常的情况就是明明有些东西想说想问，但是眼睁睁的看着机会溜走。另外就是对于身边的事情热情比较的低，其实这样不利于展示自己的能力和工作量。需要加强，嗯。&lt;/p&gt;
-
-&lt;p&gt;最后还有一点，对公司内部的培训资料啥的利用简直趋于0。平时闲时比较倾向于去做技术方面的学习，而放弃了使用内部的培训资料提升软实力的机会。这个，真有一种捡芝麻丢西瓜的味道在里面，呵呵，一定要改掉哇。&lt;/p&gt;
-
-&lt;p&gt;别的，没啥了，技术岗，倒没太多那种所谓的职场规则。大家的年龄都不算大，一起玩起来还是很舒服的一件事情。能够有现在这份工作，我很知足，剩下的就是靠自己去打拼了，嗯，希望能有个光明的未来~~~~&lt;/p&gt;
-</description>
+      <description>在不经意间翻了翻日历，猛然发现毕业一周年的日子已然过去，所以只好在这工作一周年的日子里，随便写点啥了。
+2008年的4月15号，被学校用两张纸扫地出门，于是乎，正式被从学生队列中除名鸟。在家闲了两周后，终于开始了走上了一个打工仔的不归路。
+这一转眼，地球就打了300多个滚，于是乎，就到了工作一周年的纪念日，有得，亦有失；有成就，也有磨炼；有欢声笑语，当然还有闷闷不乐。这一切的东西，最后汇聚到一起，就是我这一年的工作历程。
+技术上，明白的最主要的一件事情就是，以前在学校学的东西，到了工作中，需要改变的地方有太多太多。会一门技术不难，但是怎么把它熟练的应用到工作中就是另一码事了。在工程的世界中，需要考虑的许多代码之外的东西，像兼容性，容错性等，在一份已经有年头的产品中，这些相比于代码是更需要去仔细复查的部分。还有就是新技术并不一定就是好的。诚然，新的东西能带来许多新的体验，简化许多过程，但是相对于一套产品而言，还是需要把稳定性放在首要位置的。
+个人方面，也许最大的感想就是不会的东西太多了，以前随便掠一眼觉得没啥看头的东西，深挖下去会发现里面别有一番洞天。感慨一下，想做技术，还是需要耐下性子来，一步一个脚印的去走啊，否则没准哪一天你之前所不屑去看的东西，就会演化为一道不可逾越的鸿沟，而此时再返工的代价，呵呵，会让你悔不该当初啊~~~
+然后就是态度上的事情，工作之初，可能是还没从实验室的氛围中转换过来，抑或是平时在学校就没有太多的责任心，反正没少被老板批，原因也很简单，就是做事情没有责任感，需要别人在后面催着。反正就是记得那次被老板拖到个小会议室里面，谈了大概有20分钟吧，反正就是说，已然有不止一个人反映在工作上有这样的问题，说在培训的时候觉得还是满不错的啊，咋工作后就这样了呢，还有就是会影响年终评定云云。不过说真的，那次以后我好像还是没有怎么改变，不知道是哪一次被啥东西给触动了，从那之后开始正式反思自己的一些作为，然后在工作上也有了反映。最后终于在年终的时候没有太差，呵呵。不过还是需要改进啊，现在做事有时还是轻重缓急不分，需要好好去磨炼一下意志力和执行力。
+还有很重要的一点就是交流。也许程序员在大多数人的眼里就是那些个和电脑交流比和人交流要多也要利索的人，但其实交流对于程序员来说还是很重要的一项技能，通过交流你才能让别人知道你想做什么，或者从别人那得到有用的信息。就像上次开会的时候老板所说的那样，一般而言，某项技术一定能在公司里面找到会的那个人，你所要做的就是找到那个人，并把技术从他的脑子里面挖出来（目前这个被找的人大多数情况下是俺们的leader，嘿嘿）。反观自己，在某些情况下还是没有很好的表达自己的意思，可能是不愿开口，或者是顾虑太多，反正经常的情况就是明明有些东西想说想问，但是眼睁睁的看着机会溜走。另外就是对于身边的事情热情比较的低，其实这样不利于展示自己的能力和工作量。需要加强，嗯。
+最后还有一点，对公司内部的培训资料啥的利用简直趋于0。平时闲时比较倾向于去做技术方面的学习，而放弃了使用内部的培训资料提升软实力的机会。这个，真有一种捡芝麻丢西瓜的味道在里面，呵呵，一定要改掉哇。
+别的，没啥了，技术岗，倒没太多那种所谓的职场规则。大家的年龄都不算大，一起玩起来还是很舒服的一件事情。能够有现在这份工作，我很知足，剩下的就是靠自己去打拼了，嗯，希望能有个光明的未来~~~~</description>
     </item>
     
     <item>
@@ -505,14 +145,10 @@ ex和Haskell，再看看一些理论方面的书籍。先列两本：具体数�
       <pubDate>Thu, 16 Apr 2009 22:56:48 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/400/</guid>
-      <description>&lt;p&gt;72松的服务器大概是好不了了，自己掏钱吧，买了个空间，浪点的，不算很贵，嗯，先用着啦~~~&lt;/p&gt;
-
-&lt;p&gt;由于是自己搭的系统，所以需要用空闲的时间多折腾折腾，暂时，先这样吧，呵呵，谁让手边比较忙呢。订阅的地址倒是没有变，目前有两个（列在文末，本站的系统还没把fe
-ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿嘿），有兴趣的童鞋可以尝试着订阅一下，当然，后果自负，嘿嘿~~~&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://feed.feedsky.com/hzmangel&#34;&gt;http://feed.feedsky.com/hzmangel&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://feeds2.feedburner.com/hzmangel&#34;&gt;http://feeds2.feedburner.com/hzmangel&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>72松的服务器大概是好不了了，自己掏钱吧，买了个空间，浪点的，不算很贵，嗯，先用着啦~~~
+由于是自己搭的系统，所以需要用空闲的时间多折腾折腾，暂时，先这样吧，呵呵，谁让手边比较忙呢。订阅的地址倒是没有变，目前有两个（列在文末，本站的系统还没把fe ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿嘿），有兴趣的童鞋可以尝试着订阅一下，当然，后果自负，嘿嘿~~~
+http://feed.feedsky.com/hzmangel
+http://feeds2.feedburner.com/hzmangel</description>
     </item>
     
     <item>
@@ -521,10 +157,8 @@ ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿
       <pubDate>Fri, 06 Feb 2009 22:07:35 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/392/</guid>
-      <description>&lt;p&gt;推荐一下，好电影一部，情节比较平淡，不过经常会在不经意间有触动心弦的东西；强力推荐的是里面的音乐，纯纯的童声，优美的旋律，享受啊~~~~&lt;/p&gt;
-
-&lt;p&gt;别的，没啥了，感慨一下，小孩难养啊，主要是教育的问题， 简单的以暴制暴不行，一味的鼓励纵容也不行，照搬别人的方法同样不行，呵呵，等到时候再烦吧 ^_^&lt;/p&gt;
-</description>
+      <description>推荐一下，好电影一部，情节比较平淡，不过经常会在不经意间有触动心弦的东西；强力推荐的是里面的音乐，纯纯的童声，优美的旋律，享受啊~~~~
+别的，没啥了，感慨一下，小孩难养啊，主要是教育的问题， 简单的以暴制暴不行，一味的鼓励纵容也不行，照搬别人的方法同样不行，呵呵，等到时候再烦吧 ^_^</description>
     </item>
     
     <item>
@@ -533,17 +167,9 @@ ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿
       <pubDate>Fri, 06 Feb 2009 00:24:54 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/389/</guid>
-      <description>&lt;p&gt;听上去名字很科幻，其实是一部很老的黑白片了。故事很简单，一架灰碟灰过来，想带给人类和平，然后人不信他，最后把人家给气走了。片子本身倒没啥出彩的地方，但是在看
-的时候一直在想一件事情：和平真的只有强制才能推行吗？&lt;/p&gt;
-
-&lt;p&gt;有时想想也是哈，在现在这种尔虞我诈的社会环境中，骗人比家常便饭还要平凡，虽然可以举出种种的理由为自己辩护，但是总感觉是活在面具后面一样。于是在此基础之上，任
-何人的任何举动，都会被往坏的方面考虑，就会像电影中一样。既然没可能建立信任的关系，那就只好开打了，反正死人是不会让自己觉得不安全的。大刘在黑暗森林中提到的猜
-疑链很有意思，不过，我的感觉是就算是在同一个物种中，也会由于猜疑链的情况让双方互相都不信任对方，最后PK了事。片子里面那架灰碟扮演的是警察的角色，成天无聊的
-在转，看到哪不爽了就灭了丫的，其实，说起来这也许是最快速的和平实现的方式吧，但是由谁来扮演这个条子是件大难事，从外面揪个人过来确实是个不错的想法。想到了那篇
-经典的童年的终结了，有空再去回味回味。&lt;/p&gt;
-
-&lt;p&gt;最后，回到电影，结尾太仓促，正等着看呢，结果出来了THE END，呵呵，那时候的电影就开始留扣子了啊~~~~&lt;/p&gt;
-</description>
+      <description>听上去名字很科幻，其实是一部很老的黑白片了。故事很简单，一架灰碟灰过来，想带给人类和平，然后人不信他，最后把人家给气走了。片子本身倒没啥出彩的地方，但是在看 的时候一直在想一件事情：和平真的只有强制才能推行吗？
+有时想想也是哈，在现在这种尔虞我诈的社会环境中，骗人比家常便饭还要平凡，虽然可以举出种种的理由为自己辩护，但是总感觉是活在面具后面一样。于是在此基础之上，任 何人的任何举动，都会被往坏的方面考虑，就会像电影中一样。既然没可能建立信任的关系，那就只好开打了，反正死人是不会让自己觉得不安全的。大刘在黑暗森林中提到的猜 疑链很有意思，不过，我的感觉是就算是在同一个物种中，也会由于猜疑链的情况让双方互相都不信任对方，最后PK了事。片子里面那架灰碟扮演的是警察的角色，成天无聊的 在转，看到哪不爽了就灭了丫的，其实，说起来这也许是最快速的和平实现的方式吧，但是由谁来扮演这个条子是件大难事，从外面揪个人过来确实是个不错的想法。想到了那篇 经典的童年的终结了，有空再去回味回味。
+最后，回到电影，结尾太仓促，正等着看呢，结果出来了THE END，呵呵，那时候的电影就开始留扣子了啊~~~~</description>
     </item>
     
     <item>
@@ -552,8 +178,7 @@ ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿
       <pubDate>Tue, 03 Feb 2009 10:58:43 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/387/</guid>
-      <description>&lt;p&gt;大过年的，本来想上来说点啥的，结果72松被神勇的功夫网给墙了，也不知道是谁弄出来的事情，诶，郁闷。&lt;/p&gt;
-</description>
+      <description>大过年的，本来想上来说点啥的，结果72松被神勇的功夫网给墙了，也不知道是谁弄出来的事情，诶，郁闷。</description>
     </item>
     
     <item>
@@ -562,10 +187,1358 @@ ed地址给转向其中任何一个，理由嘛，很简单啦，不会用，嘿
       <pubDate>Tue, 13 Jan 2009 19:45:31 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/385/</guid>
-      <description>&lt;p&gt;晚上下班，出公司门就感觉风声不对，果然一出门就被好好的吹了一回。刚骑上的车的时候还好，不过转了一个弯立马来了一阵大风，人还没啥感觉呢，眼泪就下来了，这次是真
-真正正泪奔了一回，呵呵。&lt;br /&gt;
-PS：还好回去的路上多是顺风，不过在荷清路上那一段的风还是那么的诡异，诶。&lt;/p&gt;
-</description>
+      <description>晚上下班，出公司门就感觉风声不对，果然一出门就被好好的吹了一回。刚骑上的车的时候还好，不过转了一个弯立马来了一阵大风，人还没啥感觉呢，眼泪就下来了，这次是真 真正正泪奔了一回，呵呵。
+PS：还好回去的路上多是顺风，不过在荷清路上那一段的风还是那么的诡异，诶。</description>
+    </item>
+    
+    <item>
+      <title>鸡兔同笼另解</title>
+      <link>http://hzmangel.github.io/post/381/</link>
+      <pubDate>Sun, 04 Jan 2009 18:10:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/381/</guid>
+      <description>&lt;p&gt;关键字： 数学&lt;/p&gt;
+
+&lt;p&gt;在等编译结果的时候逛&lt;a href=&#34;http://songshuhui.net/&#34;&gt;科学松鼠会&lt;/a&gt;，看到&lt;a href=&#34;http://songshuhui.net/arc
+hives/5989.html&#34;&gt;这样一篇文章&lt;/a&gt;，很有才啊，于是，转撒。当然，版权嘛，人家是CC的，俺可是加上原始链接了哈 ^_^&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的08与09</title>
+      <link>http://hzmangel.github.io/post/377/</link>
+      <pubDate>Wed, 31 Dec 2008 22:20:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/377/</guid>
+      <description>关键字： 总结, 回忆, 展望
+不经意间，一转眼就到了年尾，而且是尾巴梢上最后一根毛，看着一帮网站这个弄总结，那个弄回忆，决定咱也跟风一把。
+08年，对我而言，最大的事情大概就是身份的转变吧，从一个学生转变成了一名光荣的挨踢码农。虽然现在的象牙塔已经不再是以前的那座了，但是塔内外的差距还是没缩太小 。反正大半年来，还是经常被老板K的主，主要被K的方面就是那些所谓的soft skill，以前积累下来的恶习太多啊，加油改吧。
+再有就是逐渐的和外面的接触多了起来，一是经常骑着车出去遛遛，也籍此认识了不少朋友，算是个不错的开端吧；还有就是和一些做open source的人也有了不少的接触，真的能学很多东西，明年继续，嗯。
+也没啥好回忆了，想想09吧。最主要的事情当然就是去继续做好工作上的事情，要学的东西有很多，要改的东西也有很多，都是需要花时间花精力的。当然还有一件很重要的事 情就是给自己大概定一个方向，工作还是去找学校上学，需要好好的比较两者的机会成本。
+这段时间看了一些GTD的东西，感觉确实让自己的事情有了那么一些条理，所以还是希望在新一年中能够将GTD更多的应用到自己的工作中，让它发挥应有的作用，帮助我更 有条理一些。当然为了让GTD能够更好的发挥作用，需要让自己有更强的自制力。
+别的，还有对自己的一些小小的期望：静下心来读非计算机类的五本书；养成一个月总结回顾一次的习惯；认真的玩两个游戏；用口琴学会五首曲子；学习一门FP语言并重新学 习一遍6.001；至少弄懂LL的3个component并写下文档；买一台DSLR；出去旅游一次；再骑车上一次香山；参与一个开源项目；在11点前睡觉；加强对自 己情绪的控制力。呵呵，回头看看，好像都是奢望啊，不管了，先列在这，慢慢去做吧。
+时间是有限的，想法是无限的，尽我最大的可能做好想做的事情吧，想起来某次和一老黑聊天最后说的一句话：Enjoy Life，呵呵，能做自己想做的事情，应该就是最大的Enjoy吧 ^_^
+就剩一句了，新年新气象，希望我们都能走上更宽广的道路。</description>
+    </item>
+    
+    <item>
+      <title>夜色下的西六环</title>
+      <link>http://hzmangel.github.io/post/375/</link>
+      <pubDate>Mon, 29 Dec 2008 23:13:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/375/</guid>
+      <description>&lt;p&gt;关键字：夜行, 滑雪, 西六环&lt;/p&gt;
+
+&lt;p&gt;周五晚被拖去滑雪，本来以为是可以在那边住的，结果发现木有住的地方，滑雪场11点关门，于是乎，找路回来吧。&lt;/p&gt;
+
+&lt;p&gt;考虑到某果粒太晚回宿舍不方便，于是我们仨就决定走到一个能呆着的地方然后呆到天亮。于是乎，夜行在11点半的时候，算是正式开始了吧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>秒速5厘米</title>
+      <link>http://hzmangel.github.io/post/374/</link>
+      <pubDate>Sun, 21 Dec 2008 21:27:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/374/</guid>
+      <description>终于看完了这部在我机器里面扔了好久的片子，静静的看完，有一份感动，也有一份无奈。也许，生活就是由这种种的错过所组成的吧，也正因为有了这些错过，才会让得到的东 西看上去那么美好吧。虽然，生活中有许多的不尽人意，还是想贴一句从丫头的blog上看到的话：能牵手的时候，请别只是肩并肩，能拥抱的时候，请别只是手牵手，如果能 在一起的时候， 就请不要轻易分开。</description>
+    </item>
+    
+    <item>
+      <title>蓝色之路</title>
+      <link>http://hzmangel.github.io/post/371/</link>
+      <pubDate>Sun, 14 Dec 2008 00:52:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/371/</guid>
+      <description>关键字： 联欢会, 话剧
+公司开元旦联欢会，每个组都要出节目，于是乎，我等新人就被拉着去做各种活。不光要写剧本，还要找素材，更FZ的是居然还要上去演。诶，说啥也没用，最后还是硬着头皮 上了。
+不过，效果还是不错，至少比我们想的要好，至少在想要搞笑的部分，下面的人基本都笑了，也没有出现太多的冷场，知足了，嗯。唯一一点不足的就是，声音没弄好，呵呵，原 本设想的音效都没有很好的表现出来。不过，还是那句话，知足了。大家付出的辛苦劳动，没有白费，嗯。
+这周在上面花了不少时间，周末，呵呵，加班了啦~~~~
+最后想说的是，NND，12号就弄双蛋联欢会，是不是太早了点啊 -_-!!!</description>
+    </item>
+    
+    <item>
+      <title>hohner 580</title>
+      <link>http://hzmangel.github.io/post/370/</link>
+      <pubDate>Tue, 02 Dec 2008 21:41:33 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/370/</guid>
+      <description>关键字： 580, 十孔, hohner
+最后还是没忍住，让coly从香港给带了把580，呵呵，希望能学到些东西啊。感慨一下，琴至少不存在音准的问题，呵呵，国产琴啊，你啥时候能做好呢&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>我们远去的家园</title>
+      <link>http://hzmangel.github.io/post/362/</link>
+      <pubDate>Tue, 11 Nov 2008 11:43:36 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/362/</guid>
+      <description>关键字： 音乐
+两盘专辑，音乐都很有特色，应该是中国的古典乐器加上了一些处理，配乐很赞。个人推荐溪行桃花源，轻扬的琵琶和低沉的萧（不知道退化的耳朵有没有听错，诶）配合，音乐 中间歇出现的潺潺流水声，还是很有意境的。很喜欢在安静的时候一个人闭上眼去感受那份平静~~~
+当然，专辑里面的其它曲子也很赞的，只是，需要分别用不同的心境去感受，wish u enjoy it~~~</description>
+    </item>
+    
+    <item>
+      <title>心灵之歌</title>
+      <link>http://hzmangel.github.io/post/359/</link>
+      <pubDate>Sun, 09 Nov 2008 00:43:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/359/</guid>
+      <description>关键字： 电影, 后记
+场景是桐哲被单位来的同事从山里面揪回单位前去找全牧师告别。
+－那你要找的声音找到了吗？
+－找是找到了，只可惜没有机会录下来。
+……
+－其实，很多人一生都在寻找，至少，你找到了
+呵呵，想想也是啊，在忙忙碌碌之中，不都是在寻找那些存在于心中的东西吗。找到本已不易，更不易的是要去收获，不让那份心灵中的感动在不经意间从指缝中溜走。也许，得 之我幸失之我命的生活方式会让一切简单许多，但是，这样也会错过那份寻觅中的快乐呢。
+PS：突然觉得做录音师，漫山遍野的去收音也满有意思的，用自己的心灵去感受那些自然的旋律，也许就会在不经意间给自己带去一份感动。
+话说我好像也和某人一样，开始贴电影对白了，汗自己~~~~</description>
+    </item>
+    
+    <item>
+      <title>Farewell The EARTH</title>
+      <link>http://hzmangel.github.io/post/356/</link>
+      <pubDate>Mon, 03 Nov 2008 15:51:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/356/</guid>
+      <description>关键字： 歌曲, 心情
+一首曲子，来自Lost Emipre Saga。很好听，但是，也许我现在的心情不适合听，所以听完后会有一丝淡淡的失落。
+原因嘛，已经不清楚了，只是知道已经有很久没再有这种感觉了，突然发现，已经有好久没有找个地方找段时间好好想一些事情了，自己不光被ThinkPad惯坏了，更是被 电脑和网络惯坏了，也许，找个时间，一个人出去静静是个不错的选择，希望自己不要食言……
+在写之前想了许多许多，但是真到要写的时候却不知道从什么地方开始，呵呵，被惯坏的人啊。最后推荐一下这首曲子，很好听，适合一个人慢慢的去欣赏，嗯。</description>
+    </item>
+    
+    <item>
+      <title>最后一个666</title>
+      <link>http://hzmangel.github.io/post/352/</link>
+      <pubDate>Sun, 12 Oct 2008 23:38:47 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/352/</guid>
+      <description>关键字： BBS, ID, 666
+不知道KBS刚开始的时候为什么会选择这个数字做为5年ID的生命值，我只知道我的最后一个ID也达到了这个数字。基本应该算是和论坛同岁了吧。只是突然发现，当最后 一个ID变成666的时候，找不到地方灌水了，也许是没有了那种心情，但更主要的是没有了那些一起灌水的人，没有了一个舒服的灌水的环境。大概也就剩下在这自娱自乐一 下了吧，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>feed地址更改</title>
+      <link>http://hzmangel.github.io/post/348/</link>
+      <pubDate>Tue, 23 Sep 2008 11:09:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/348/</guid>
+      <description>由于9月30号后绑米好像要收钱了，所以暂时地址会转回http://sonic.72pines.com，如果有feed订阅的，可以使用feedsky的地址 ：http://feed.feedsky.com/hzmangel，感谢大家的关注。</description>
+    </item>
+    
+    <item>
+      <title>被ThinkPad惯坏了</title>
+      <link>http://hzmangel.github.io/post/346/</link>
+      <pubDate>Mon, 22 Sep 2008 11:33:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/346/</guid>
+      <description>关键字：鼠标, 小红点
+周六去村里试买硬盘，要试的时候拿到了台大概是HP的机器，上来先去找小红点，没找到，第二反应去旁边找鼠标，也没找到，然后问卖东西的：机器没鼠标，不会用。然后别 人过来告诉我，机器下面那个板可以用。诶，当时那叫一个郁闷啊&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>奥运，结束了</title>
+      <link>http://hzmangel.github.io/post/343/</link>
+      <pubDate>Wed, 17 Sep 2008 21:20:35 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/343/</guid>
+      <description>嗯，有些失落，有些感伤，有些兴奋，所以我也不知道是啥心情了。记一笔，然后继续干活，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>0901，记忆中开学的日子</title>
+      <link>http://hzmangel.github.io/post/340/</link>
+      <pubDate>Tue, 02 Sep 2008 19:52:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/340/</guid>
+      <description>关键字： 记忆, 9月1日
+本来应该昨天写的文章，只是昨天在折腾那个Ubiquity，所以拖到今天写 了。
+昨天在看日历的时候才突然想到，又到9月1号了。已经有六七年对这个日期没有什么感触了，不知道为啥在上班后又突然蹦出来了。记得在家那会，尤其是在小学的时候，这个 日期可就是一个怎么看怎么怕的日子，又要上学了，要交作业了，假期没有了，呵呵，反正就是一堆不爽的东西。不过小时候，真要到那会也在家呆烦了，因为从小闲下来的时候 就没怎么和外面的人玩过，基本是一个人在家看书，只是书不多，所以一本书看了N遍，呵呵。终于熬到开学了，至少能见到那帮子熟悉的人了。
+后来逐渐长大了，上了中学后，假期也越放越少了，很少再会有整两个月的假期了，不过8月31号和9月1号上课的感觉就是不同，心理作用吧，呵呵。再到后来，上了大学， 也就没啥假期的概念了，天天是假期，也就没有假了，嗯。
+无聊，写一笔，哈哈。</description>
+    </item>
+    
+    <item>
+      <title>Starship Troopers 2</title>
+      <link>http://hzmangel.github.io/post/338/</link>
+      <pubDate>Fri, 29 Aug 2008 21:48:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/338/</guid>
+      <description>关键字： 电影, 感动
+星船伞兵2，我承认不是什么好片子，但是一直为其中的两段感动着，所以又下来看。一段是Sahara上尉去把Dax从禁闭室里面放出来后，自杀那一段，另一段就是最后 ，Dax对着救生船说的那句: Murderers don&amp;rsquo;t go home.
+不知道因为什么感动，只是知道，为了那两段几秒的视频，我又把整个片子看了一遍，还不包括下载的时间，呵呵。也许，我的感动阈值比较低吧。
+无聊，记上一笔，嗯。</description>
+    </item>
+    
+    <item>
+      <title>QQ4Linux</title>
+      <link>http://hzmangel.github.io/post/330/</link>
+      <pubDate>Thu, 31 Jul 2008 13:17:59 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/330/</guid>
+      <description>关键字： QQ, Linux
+终于发布了，嗯，8过还没用，有空试试，嘿嘿，这可是官方的版本啊。话说 blog 好久都没更新了，罪过啊&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>又老了一岁，嗯</title>
+      <link>http://hzmangel.github.io/post/329/</link>
+      <pubDate>Mon, 21 Jul 2008 23:55:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/329/</guid>
+      <description>关键字：生日
+呵呵，没啥说的吧，又老了一岁，只是突然发现身边居然有这么多人一起过，满开心的，嗯。其实，不要期望什么，一切顺其自然，还会收到意想不到的惊喜，多舒服。为什么要 给自己的心灵加上一把锁呢，还弄的自己不痛快。
+本命年的生日。都说本命年是转运的一年，希望我转的方向是好的，嗯。祝大家快乐，我也快乐，不止今天，而是每天，嗯。</description>
+    </item>
+    
+    <item>
+      <title>呵呵，什么是真相</title>
+      <link>http://hzmangel.github.io/post/327/</link>
+      <pubDate>Thu, 10 Jul 2008 13:45:46 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/327/</guid>
+      <description>关键字： 真情, 变动
+这几天看着一帮人在吵吵，突然感觉有些好玩，每个人都是把事实中最有利于自己的方面取出来，然后添点油，加点醋，烹饪一番后拿给大家。于是乎，两边的人拿出来的菜单几 乎是完全不同的两份，就当故事看吧，也满有意思的，至于真相，呵呵，都过去多久了，谁又能说清楚那时的是是非非，就算能说清楚，谁又能证明自己说的就是对的呢。
+事实应该是，每个人都从原材料堆中拿出了自己需要的部分，但还是有一部分是自己准备的佐料了撒。菜做好了，但是要从那做好的色香味俱全的美味菜肴中找到相对而言惨不忍 睹的原材料，还是十分有难度的，嗯。所以嘛，真相是什么不重要，边吃菜边听故事就行了。至于听过后嘛，对于天上的浮云还需要有什么在意的吗？有故事听，有闲人去灌水， 多惬意的生活~~~
+PS：对于某人的印象继续走低，理由很简单，做错事不承认，嗯。</description>
+    </item>
+    
+    <item>
+      <title>真情，还在吗？</title>
+      <link>http://hzmangel.github.io/post/326/</link>
+      <pubDate>Tue, 08 Jul 2008 23:54:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/326/</guid>
+      <description>关键字： 真情, 变动
+本来是平平淡淡的一天，本来是和和气气的一群人，但是非要把某些事情牵扯进来。本来是开开心心去听BG的，结果弄的自己十分的不爽，诶。
+真情，已经不再是原先的那个地方了，经过七年时间积累下来的感觉，虽然不是那么说破坏就能破坏掉的，但是还是因为某些事情，加上了一丝裂纹，一片乌云。为什么要把事情 弄的这么复杂，大家开开心心的灌灌水不是很舒服的一件事情吗，为什么~~~~~
+不想失去一个灌水的地方，所以应该还会常回去看看，只是不知道曾经的那种温馨的感觉，什么时候还能再回来。还有就是，不被人信任的感觉，真的很不爽，嗯。
+bless真情，能早日回到我熟悉的那个味道中去。</description>
+    </item>
+    
+    <item>
+      <title>配电脑了，嗯</title>
+      <link>http://hzmangel.github.io/post/306/</link>
+      <pubDate>Sun, 15 Jun 2008 20:53:53 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/306/</guid>
+      <description>到现在第一次去村子里面给自己配了台新机器，呵呵，所以在这里写上一笔。5K还是很大一笔米的，诶，又要省吃俭用等发工资了，不过已经都差不多了，以后的东西再慢慢来 吧，呵呵。要开始学习新东西了，在公司的这台 Windowz 下已经浪费了太多的时间，诶。</description>
+    </item>
+    
+    <item>
+      <title>工作一个月</title>
+      <link>http://hzmangel.github.io/post/299/</link>
+      <pubDate>Fri, 30 May 2008 13:51:31 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/299/</guid>
+      <description>上个月29号入职，到今天，应该算是一个月了吧，上班一个月，还是有点感触的，最大的感触就是，现在已经没有别人再会为你的行为买单了，责任重了，不像在学校了，呵呵 。交流的能力也很重要，嗯。</description>
+    </item>
+    
+    <item>
+      <title>Break at other file in GDB</title>
+      <link>http://hzmangel.github.io/post/298/</link>
+      <pubDate>Wed, 28 May 2008 16:11:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/298/</guid>
+      <description>这几天在调程序，感觉跳到一个文件中再去给它下断下麻烦了，于是想着怎么在开始的时候把文件的断点给下了。看了看help，果然有这种方法，其实说起来也很简单，就是 在下断的时候，前面加上文件名，如b[foo.c]bar，后面可以用函数名，也可以用行号，很简单，但是很方便。</description>
+    </item>
+    
+    <item>
+      <title>Using muse in WinEmacs</title>
+      <link>http://hzmangel.github.io/post/296/</link>
+      <pubDate>Mon, 26 May 2008 22:54:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/296/</guid>
+      <description>网上找了一堆东西，都说要make啥的，实在不想再去整个cygwin/MinGW啥的了，于是继续转，转了一大圈，感觉还是自己去看目录啥的有用。在里面转了转，发 现它的el文件只在list文件夹下，于是直接把lisp那个目录拷到.emacs.d目录下，然后开始改.emacs文件。
+按着网上的，在配置文件里面加了几行：
+ (add-to-list &#39;load-path &amp;quot;[path to Muse]&amp;quot;) (require &#39;muse-mode) ; load authoring mode (require &#39;muse-html) ; load publishing styles I use (require &#39;muse-latex) (require &#39;muse-texinfo) (require &#39;muse-docbook)  第一行是说需要把muse读进来，第二行是一个muse-mode，然后下面几行就是需要用到的输出格式，具体的，我还没去折腾，再说，再说。</description>
+    </item>
+    
+    <item>
+      <title>国旗，为汶川而降</title>
+      <link>http://hzmangel.github.io/post/290/</link>
+      <pubDate>Mon, 19 May 2008 16:45:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/290/</guid>
+      <description>看到降半旗的天安门广场，心中夹杂着说不清的感觉。也许有为平民而降的国旗所带来的一丝感动，但是占据内心更大部分的，还是那份悼念，看着网上的图片与文字，不经意间 发现眼中已经啜满泪水。不想多说什么，只有祈祷，希望那些还活着的人们，能够坚强的活出新的未来；也希望那些已经去了另一个世界的人们，能够不再会有痛苦。bless ~~~~</description>
+    </item>
+    
+    <item>
+      <title>bless地震中的人们</title>
+      <link>http://hzmangel.github.io/post/289/</link>
+      <pubDate>Wed, 14 May 2008 11:10:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/289/</guid>
+      <description>前天，正在单位迷迷糊糊的调代码，突然听到有人说地震了，于是乎开始上网找消息，紧接着就看到了汶川的消息，7.8级的浅源地震，不由让人又联想起唐山那时的情况。7 .8，看到了网上的新闻才知道是多么恐怖的一件事情。回头想想中国最近事情真的很多，转一段网上看到的：2月肆虐的雪灾，冻裂了中国大地；3月的西藏，烧伤了美丽的圣 地；4月的奥运火炬全球传递受阻，刺伤了中国人向世界张开的双臂；善变的5月，胶济铁路火车相撞，撞碎了多少旅人的梦；突然传遍全国的儿童手足口病，令全国父母心头纠 结；震动传及东南亚的四川大地震，撼及整个中国的灵魂……
+不想说什么了，只有祈祷，祈祷在地震中受灾的人们可以尽快脱险，祈祷伤亡人数可以尽可能的少，祈祷不再会有更多的灾害……
+bless~~~~~</description>
+    </item>
+    
+    <item>
+      <title>上来看看</title>
+      <link>http://hzmangel.github.io/post/280/</link>
+      <pubDate>Fri, 25 Apr 2008 15:48:56 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/280/</guid>
+      <description>租的房子开了宽带还没给装，郁闷了。今天为了回入职的邮件，只有到网吧来上网了。顺便发篇吧，嗯。动手做饭的感觉满好玩的，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>离别，在如雪的杨絮中</title>
+      <link>http://hzmangel.github.io/post/278/</link>
+      <pubDate>Tue, 15 Apr 2008 01:49:02 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/278/</guid>
+      <description>天气一如既往的热了起来，于是杨絮也一如即往的飘了起来。一样的挺拔的杨树，一样如雪的杨絮，一样忙碌的校园，所不同的只是我们，因为，在这一刻，我们选择了离开。
+不知是否还能记起大一刚来时的青葱，也不知现在的我们，是否已经有了那份可以走入社会的成熟，唯一知道的，就是已经到了说再见的时候，和朝夕相处的伙伴说再见，和宁静慵懒的校园说再见，和无忧无虑的学生生涯说再见。
+没有了本科毕业时的依依不舍，所以也就没有了太多的伤别离。在本科毕业时，虽然时常安慰自己，大家都在北京，想聚还是能聚的，但是这几年来，真正聚在一起的时间，真的很少很少，有些人虽然也在北京，但是在毕业以后，一次见面的机会都没有。这次研究生的毕业，虽然也试着用同样美丽的谎言来欺骗自己，但是在自己的心中，有个声音在偷偷的说，以后，呵呵，随缘吧。
+不知道想写些啥，也不知道能写些啥，随便飘吧。细数几年来走过的路，越过的坎，大大小小的，也该有不少了吧。但是，成熟了吗？我不知道。有时在想，成熟真的是件好事吗？至少在我的眼中，成熟在某种意义上代表着麻木，麻木的对待着本该千变万化的世界，只生活在自己的小圈子中，有时候觉得这是一种可怕的事情，十分的可怕；但是，谁知道几年后是什么样子呢，残酷的现实总会把自己所谓美好的设想击的粉碎，然后撒向太空，变成绚丽的星空，然后告诉你，看，你的未来多美好…………也许几年后的自己，就会适应这样的日子，麻木的面对身边的人，身边的事，甚至是自己。时常会羡慕那些玩的很高兴的儿童们，羡慕他们那像白纸一样没有任何污点的童心。童心未泯难，一世童心更难，不知道，我有没有可能达到那份境界。
+来点老套的吧，感谢朋友。说实话，我的朋友不多，虽然可以一起灌水的人有不少，但是真正愿意听我诉苦的没几个，呵呵，也许是我不想说吧，有些事情，自己一个人郁闷就行了，没必要把这种情绪传染给大家吧。不过还是要感谢大家，感谢身边的每一个人，谢谢你们给我带来的欢笑，最主要的是要谢谢你们能够忍受我经常性的无礼取闹，谢谢你们不计较我说话时刻薄的语气，还要感谢你们在我困难时伸出的援助之手。相遇是种缘，而相识相知更是几世的修为，不知道是我前几世的修行感动了上天，还是你们前几世的作为惹怒了某老大，反正结果就是我们在这一世成为了朋友。因为有了你们，我的学生生涯才变的这么多姿多彩。这些话，也许在别人看来是套话，但是在我这，是我发自内心的谢意。
+聚散终有时，相聚是种缘，谁又能说分开不是呢。茫茫尘世中，有一刻的相聚，便是一刻的欢喜，至于以后，至少会相互记住，或者那已足够。
+行走在校园中，看着漫天的飞絮，心中不知道是啥滋味。本来每年都对它很反感，但是今年，在反感之中，掺和了一些别的味道。不知道明年的时候，会不会对它有些怀念呢，怀念空中那像雪花一样的飘着的絮，那满眼的棉花团，棉花球，棉花垫子，棉花糖…………
+又到一年飘絮时，但是在这个飘絮的季节，我们选择了离开。希望我们大家，都会有一个灿烂的未来。</description>
+    </item>
+    
+    <item>
+      <title>火炬·某独·某投</title>
+      <link>http://hzmangel.github.io/post/276/</link>
+      <pubDate>Thu, 10 Apr 2008 23:43:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/276/</guid>
+      <description>首先，我承认，把火炬和那两放一起实在太抬高那俩玩意了，真的。
+这几天，看了不少这方面的报导，感动于金晶保护火炬的那个瞬间，同时也感动于留学生们的团结。至于那些无良的新闻媒体，不管你们是不是在某首脑的授意下这么做的，能把 事情扭曲成这样，真的很不容易啊。看看那些照片，某独的一个中国人没有，都是一帮闲着无聊的老外在那找抽，顺便赚点外快，对着一帮中国人的解释不听，不过也难怪，留学 生有解释没钱，某独的SB们没有解释但是有钱，所以嘛。今天看到那个free Japan的笑话笑的不行了，虽然基本上清楚他们是什么玩意，但是真的没想到还能玩出这 么有创意的节目。哥们台词没记住好歹也弄个提词的在旁边撒，啥都不懂就表在那装撒，诶。
+别的，没啥想说的了，惊异于天朝这次媒体报道的迅速，消息开放了，也和像CNN那种东西对着干起来了，感觉这次天朝的态度比较强硬啊，很好很强大。其实这件事情，也许 是塞翁失马呢，感觉国人开始拧成一起和那帮SB干上了，呵呵。
+有段话大家都引，那我也引吧，毛爷爷说过的：&amp;rdquo;如若敌人起劲地反对我们，把我们说得一塌糊涂，一无是处，那就更好了，那就证明我们不但同敌人划清了界线，而且证明我们 的工作是很有成绩的了。&amp;rdquo;其实觉得更应该说的一句话是这样的：&amp;rdquo;明犯强汉者，虽远必诛！&amp;rdquo;是甘延寿、陈汤在西汉末年给汉元帝的奏折中的，同时给上去的还郅支单于的人头 。呵呵，有点愤青了，打住打住。
+最后，bless火炬，bless中国，更重要的，是bless我们大家能团结。</description>
+    </item>
+    
+    <item>
+      <title>没有雨的清明</title>
+      <link>http://hzmangel.github.io/post/266/</link>
+      <pubDate>Sat, 05 Apr 2008 01:02:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/266/</guid>
+      <description>应该是在北京过的第七个清明吧，只知道这是第一个有假放的清明，于是乎，北京的大街小巷上又充斥着一堆一堆又一堆的人，各种口音，各种肤色，把本就已经熙熙攘攘的街道 ，商场，景点等能放的下人的地方，变的更加拥挤。
+在来北京之前，一直固执的认为，清明就应该是在如丝的细雨中度过的，静静的小雨，把天地间的一切东西都蒙在一层淡淡的雾中。行走在雨中，能感觉到轻抚在身上的雨丝，很 舒服。在脑海中还会浮现出这样一个场景：一个牧童，骑在青牛上，吹着用青竹削制的牧笛（指不指杏花村，无所谓了啦）。这一切就是是一幅活动的水墨画卷。丝丝的小雨在我 们那倒是比较常见，刚好清明前后那几天总会有几天大概是样的天气，所以也就一直没有更改自己的想法。但是等到了这边，才知道，清明并不是非要雨纷纷的，太阳公公在这段 时间也是可以露脸的，虽然感觉有些不舒服。其实感觉到更不舒服的就是太阳公公好勤劳啊，一年365天基本上天天上班。
+已经忘记了江南水乡的春天，7年的日子，改变了我很多，虽然没有真正喜欢上这个地方，但是还是慢慢的在被迫熟悉于它的一切。就要走到人生的第一个转折点了，希望我能走 好，不知道几年后，我会不会对这个地方产生感情，同样也不知道几年后，我是否会换一个地方继续漂着，还有不知道几年后，我会走哪一条路，做什么样的工作。太多的不确定 因素，使我已经不敢对我的未来做出期望，最多也就是可以在脑海中憧憬一下某些场景，然后继续回到残酷的现实中，是不是只有等自己过上了清明节，才能说的上是不会变了呢 ，因为大家都说盖棺定论嘛……
+也已经有7年没有在清明的时候，给家里面那些搬到另一个世界的老人们烧纸了，虽然知道这也许只是一种给活人的寄托，但是，又没有理由让它消失，那就放那放着吧。怀念爷 爷他们，不知道在那边过的好不好（老人家好像没托梦，应该还行吧，呵呵），晚辈在此给您几位请安了。
+PS1：发现自己总是忘不了家乡的春雨，都快成月经贴了……
+PS2：同样固执的认为，清明就是在4月5号，但是今天从老妈的电话中得知，今年的清明是今天……
+PS3：阳光明媚的清明，总是找不到某些感觉，加上现在的假期，估计以后就更难找了。话说，哪怕给个阴天也好啊……</description>
+    </item>
+    
+    <item>
+      <title>香山 -&gt; 六郎庄，穿越？</title>
+      <link>http://hzmangel.github.io/post/265/</link>
+      <pubDate>Sat, 05 Apr 2008 00:13:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/265/</guid>
+      <description>下午闲着无聊，看着天气不错，有人提议去香山，于是就去了。
+先是331，上了车，觉得挤，过了几站才发现，后面还等着一堆人呢。快到香泉环岛的时候，那叫一个堵啊，人又多，忍不了了，下车散步过去的（最郁闷的是我们下车了，那 331开的贼溜……）。两站路走起来倒是很快，买票，进门，在正面转了转，爬吧。爬山倒是没啥好说的，反正只是出来放风，所以没有上到顶，大概爬了点，就开始下山了。
+出了东门，在买卖街转了转，想着找辆331回去吧。正以为旅途就此结束，没想到好戏刚开始……
+走出买卖街，先看到的就是几辆公交和一堆私车堵在路上，一动不动，延伸到远方。我们想着，走走看吧，看到车站那边怎么样。然后到了车站，还没找到331的车，就看到等 车的地方那叫一个人山人海啊。几个人一合计，往前走走吧。刚好有点饿了，去路边一家小店吃了份炒饭，于是开始了我们真正的旅程。
+刚开始，想着往前走几站，找个别的车子坐坐后倒车，可是越往前走越知道不妙，从香山开出来的车子就没有一个能开的动的，而且上面都是像罐头一样挤满了人，就算想上也上 不去了。没办法，只好继续走。找到个路口，想着就往四环去吧。从香山南路转到闵庄路，然后是北坞村路，最后在六郎庄路上的车。运通113，转498，回学校。
+反正这次走路算是走爽了，一路过来，看到的都是大包小包从香山上下来的人，而且就我们这一路，闵庄路快走到头了，才看到第一辆从香山出来的公交车。路上每一个公交车站 那都等着一堆人准备上车，呵呵。
+没啥别的想说，就是记录一下这次的行程，可惜没有GPS，不能记录行迹，看着地图又有点犯晕，也就只能记个大概吧。路上风景倒没什么，不过真想骑车再走一次，有几条路 又宽又没车，骑起车来一定会很舒服的，嗯。
+感慨一下，人真多啊……
+BTW：香山的郁金香还没开，倒是植物园的牡丹说是开了，而且花期就这几天，在考虑是不是再去自虐一把。不知道玉渊潭的樱花能不能等到这个清明过了以后吧，实在不想再 去踩人或者被踩了……</description>
+    </item>
+    
+    <item>
+      <title>被骂了:(</title>
+      <link>http://hzmangel.github.io/post/259/</link>
+      <pubDate>Wed, 19 Mar 2008 15:39:59 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/259/</guid>
+      <description>&lt;p&gt;昨天被老大骂了，理由很简单，帮别人。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>又见沙尘</title>
+      <link>http://hzmangel.github.io/post/257/</link>
+      <pubDate>Wed, 19 Mar 2008 01:10:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/257/</guid>
+      <description>记忆中，已经有几年没看到沙尘了，不过今天早上又感受了一回。不过说是沙尘，和大一那年相比已经差很多了，只是淡黄色的天，在雾气中若隐若现，而且下午居然出太阳了。 不过晚上走在路上，还是可以感受到空气中那些细小的颗粒往嘴里面钻。
+随意写点东西，不想细说什么，虽然很想知道为什么几年之后又会出现这种东西。呵呵，糊涂点过吧，希望明天是个好天，最好有大风，把沙尘啥的都给吹走。喜欢蓝天的感觉， 像一块没有瑕疵的玉，也像一匹平整的布，反正就是看上去很舒服的感觉，嗯。</description>
+    </item>
+    
+    <item>
+      <title>用iphone发个贴子</title>
+      <link>http://hzmangel.github.io/post/256/</link>
+      <pubDate>Mon, 17 Mar 2008 21:50:45 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/256/</guid>
+      <description>抢来的东西要好好玩才能对得起原主人嘛,满多好玩的东西的,觉得比较牛的是那个SSH服务器和apache服务器,虽然是unix的系统,总觉得这俩东西和手机关系不大,呵呵.不过有了SSH我这边才能顺利的拷电子书:)别的也没啥说的了, 打字太累了, 呵呵. 昨天看到有人说可以用蓝牙键盘, 8过目前还木有这玩意, 呵呵.</description>
+    </item>
+    
+    <item>
+      <title>迎春花开</title>
+      <link>http://hzmangel.github.io/post/253/</link>
+      <pubDate>Fri, 14 Mar 2008 16:32:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/253/</guid>
+      <description>&lt;p&gt;前几天的一个晚上走在从实验室回寝室的路上，不经意间发现，图书馆旁边的花圃中，有几枝迎春花开的很灿烂，这才反应过来，春天来了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>论文差不多算弄完了吧</title>
+      <link>http://hzmangel.github.io/post/252/</link>
+      <pubDate>Fri, 14 Mar 2008 15:20:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/252/</guid>
+      <description>早上打印送审了，应该算弄完了吧，眼看着学生生涯就要结束，实验室也逐渐被下两届的师弟师妹们占据了，不知道以后还有没有机会回到学校，呵呵。写点东西吧，不为什么， 只为了记录一下。回首的东西，等以后再写吧。</description>
+    </item>
+    
+    <item>
+      <title>其实，快乐很简单</title>
+      <link>http://hzmangel.github.io/post/244/</link>
+      <pubDate>Sun, 27 Jan 2008 10:08:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/244/</guid>
+      <description>&lt;p&gt;这几天拖着N多人陪我郁闷，宿舍的，哥们，BBS上的，现在自己感觉总算好了些，后天就要回家了，收拾心情去了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>最近又开始郁闷了，嗯</title>
+      <link>http://hzmangel.github.io/post/241/</link>
+      <pubDate>Wed, 23 Jan 2008 09:26:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/241/</guid>
+      <description>&lt;p&gt;真的不清楚为啥郁闷，在找到工作后，突然开始考虑以后的路了，而且考虑了很多很多。不止在想职业规划，还在想将来的日子怎么过。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>长大前我们是否还会唱起心愿……</title>
+      <link>http://hzmangel.github.io/post/237/</link>
+      <pubDate>Wed, 26 Dec 2007 23:37:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/237/</guid>
+      <description>&lt;p&gt;最近有些郁闷，也不清楚是因为什么原因，工作？毕业？还是什么一些别的东西，反正郁闷就是啦。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一次笔试，继续被B4，嗯</title>
+      <link>http://hzmangel.github.io/post/233/</link>
+      <pubDate>Thu, 18 Oct 2007 09:29:51 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/233/</guid>
+      <description>也没怎么准备，所以被B4了，题目难就不说了，更郁闷的是题目木看懂。诶，郁闷啊。</description>
+    </item>
+    
+    <item>
+      <title>顺便给俺的ID过个生日吧</title>
+      <link>http://hzmangel.github.io/post/227/</link>
+      <pubDate>Tue, 16 Oct 2007 14:31:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/227/</guid>
+      <description>不想再说什么真情和北邮人的事情，只是想纪念一下我在两个站的ID，一个四年，一个六年，这应该是我的大学生活中最不可或缺的一部分，感谢北邮，感谢真情，感谢北邮人 ，因为两个站都有给过我帮助的人。怀念以前两个站一起灌水的情景，同样也怀念以前那帮一起灌水的老鬼，嗯。</description>
+    </item>
+    
+    <item>
+      <title>第一封拒信，终于来了。</title>
+      <link>http://hzmangel.github.io/post/226/</link>
+      <pubDate>Tue, 16 Oct 2007 14:25:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/226/</guid>
+      <description>没有太多的惊异，有的只是那些许的不舍。从网上的介绍，他们自己的blog和面试时在公司的感觉都告诉我一件事情，这家公司不错，可惜机会没有落到我的头上。呵呵，不 说啥了，谨以此文纪念我研究生找工作期间的第一封拒信。大家加油，嗯。</description>
+    </item>
+    
+    <item>
+      <title>居然会紧张</title>
+      <link>http://hzmangel.github.io/post/224/</link>
+      <pubDate>Fri, 12 Oct 2007 10:08:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/224/</guid>
+      <description>呵呵，这种感觉好久木有出现了。还以为自己啥都不怕，能做到宠辱不惊。看来，历练还是少了啊。不说啥了，希望下午能发挥出自己的水平，至于会是offer还是拒信都无 所谓了，至少我努力过了。不过说真的，这些话大概也就是安慰自己一下吧，呵呵。
+PS： 期待周日与coly的见面，希望能突破那块，有点进展也好在简历上写啊。
+PS2：已然被M$ B4了，当然还有别的公司，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>Vim显示Tab</title>
+      <link>http://hzmangel.github.io/post/223/</link>
+      <pubDate>Thu, 11 Oct 2007 20:15:00 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/223/</guid>
+      <description>刚学了一招，在Vim里面显示tab，默认的是使用 :set list ，显示出来的Tab是^I，但是如果设置一下listchar就会好多了，所以在.vimrc中又加入了两句：
+set list
+set listchars=tab:&amp;gt;-,trail:-</description>
+    </item>
+    
+    <item>
+      <title>沐猴而冠，哈哈</title>
+      <link>http://hzmangel.github.io/post/222/</link>
+      <pubDate>Thu, 11 Oct 2007 18:56:22 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/222/</guid>
+      <description>昨天嘛，这个词给我大概正好，穿的像模像样的去面试，呵呵。那身衣服穿着真不舒服，可惜没别的什么衣服穿了，只好用那个了。反正就是走到哪都觉得不自在，不知道算不算自卑，嗯。 说点正事，exoweb的环境真的很爽，看着很有感觉啊，不知道能不能去那。诶，明天就要去第二面了，希望能有些好结果。 PS： 谨以此文纪念研究生阶段第一次面试 PS2：那写字楼还真难找 PS3：真不想再穿那件衣服了&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>昨天满累的，嗯</title>
+      <link>http://hzmangel.github.io/post/221/</link>
+      <pubDate>Sat, 06 Oct 2007 10:56:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/221/</guid>
+      <description>本来想昨天写的，结果拖到了今天。昨天闲着无聊散步去了天安门，人还是满多的，警察叔叔也满多的，尤其是从府右街出来的时候，路边走几步就有几个警察在那闲聊。想找找人群中的便衣，可惜眼力不行。听说昨天由于下雨，广场上人少了很多，不过就算这样，晚上价值价值坐车走的时候，路边那等着看降旗的人也是一堆一堆的，那会离降旗还有半个小时呢&amp;hellip;&amp;hellip; 刚在Google Earth上描了描，居然走了有13+km，难怪那么累呢&amp;hellip;&amp;hellip; PS1: 再次迷失在后海那绕的厉害的路上，刚看了一下居然走了一大截回头路&amp;hellip;&amp;hellip; PS2: 变形金刚，也就那样嘛，也许是我没看懂，我还是去欣赏动画片吧。</description>
+    </item>
+    
+    <item>
+      <title>xelatex再现memory exhaust</title>
+      <link>http://hzmangel.github.io/post/219/</link>
+      <pubDate>Sun, 30 Sep 2007 19:26:11 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/219/</guid>
+      <description>今天编译文档，又给我出现了这个问题，上次这个问题出现我直接给它reboot了，这次w一看，还有一哥们登在上面，那想想办法吧。先cat了一下/proc/meminfo，可用的内存那叫一个可怜啊。想了想，先切到root，清共享内存，这一步完了也没再去看meminfo，接着用ps aux看了一下现有的进程，拿mem占用高的开刀，把apache和mysql给重启了一下，然后再次编译，成了，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>终于用上了Boost.test</title>
+      <link>http://hzmangel.github.io/post/218/</link>
+      <pubDate>Sun, 30 Sep 2007 15:59:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/218/</guid>
+      <description>终于用上了，虽然现在只是简单的做单元测试，但至少能用了，这够了。 首先apt-get install libboost-test，诶，不得不说一句，debian就是方便啊。然后写makefile，主要是我不想每次都写那么一大串的东西来编译。其实也没什么特殊的，记得链接一下test的库，具体的用dpkg -L查看吧。然后还需要加一个常量的定义，-DBOOST_TEST_DYN_LINK，否则丫会告诉你main没有定义，昨晚折腾了我一晚上，FT。</description>
+    </item>
+    
+    <item>
+      <title>这个假期，有灾……</title>
+      <link>http://hzmangel.github.io/post/217/</link>
+      <pubDate>Sun, 30 Sep 2007 15:56:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/217/</guid>
+      <description>昨天手被风扇打破了，今天脚又差点起泡，不知道明天会是个啥事情，bless一下自己，嗯。</description>
+    </item>
+    
+    <item>
+      <title>三年了……</title>
+      <link>http://hzmangel.github.io/post/215/</link>
+      <pubDate>Fri, 07 Sep 2007 10:02:53 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/215/</guid>
+      <description>不经意间收到了招行给寄来的新卡，才意识到，自己拿到这张卡已经过去三年了。顺便来blog上看了一眼，这儿也折腾了三年了，中间换过BSP，也干过手动倒文章的事情 ，不过看看文章数还真是惭愧，呵呵。
+其实也不想说些啥，就是留个纪念吧。不知道三年前同一个宿舍的哥们，现在正在做什么呢&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>第一次去招聘会</title>
+      <link>http://hzmangel.github.io/post/209/</link>
+      <pubDate>Sat, 01 Sep 2007 17:59:45 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/209/</guid>
+      <description>终于在宿舍一帮人的忽悠下，去参加了平生第一次招聘会，感觉嘛，白白浪费了我的10块钱啊&amp;hellip;&amp;hellip;
+去的公司不是怎么满意，看来下次去之前要好好研究研究参展名录，这次只是随便扫了一眼，结果去了只扔出去了两份，sigh&amp;hellip;&amp;hellip; 别的嘛，也没啥了，主要是要多看看网上有木有免费的票，那就不要买票了，嗯。
+第一次招聘会，不爽，嗯。</description>
+    </item>
+    
+    <item>
+      <title>擦肩而过的月食</title>
+      <link>http://hzmangel.github.io/post/208/</link>
+      <pubDate>Wed, 29 Aug 2007 15:54:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/208/</guid>
+      <description>昨天看到消息说昨晚有月食，北京昨天白天的天气还算好，所以憧憬着晚上能看上一看，可惜到了晚上，主楼上方一大片云，当时就很郁闷，明明知道月亮就在那片云的后面，就 是看不到。唉，再次擦肩而过啊。</description>
+    </item>
+    
+    <item>
+      <title>Blog再次搬家</title>
+      <link>http://hzmangel.github.io/post/204/</link>
+      <pubDate>Fri, 24 Aug 2007 14:00:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/204/</guid>
+      <description>昨天在逛小众软件的时候，看到他说有个BSP用wordpress提供服务，于是就产生了给自己的blog找个新家的想法，曾经老的blog在博客中国，后来有段日子 那儿教育网访问不了，所以把文章什么的全弄下来后自己在实验室架了一个，偶有心得，就往上面扔，但是实验室的机器外网不能访问，有些时候还不是很方便，国内的几个大的 BSP都转过，没有找到官方支持软件发文的，所以心愿一直未了。昨天在72松上转了圈，速度还不错，所以初步选定它了，在此要谢谢小众软件给的松子 ;)
+不过还是有些失望，不支持自定义模板，而且我原来用vim生成的代码到上面后不支持style设置背景颜色，比较郁闷啊，呵呵。不过也许是我自己没有找到，有空再折腾 吧。
+blog里面有一个分类叫善用佳软，是Xbeta博客的名称，不过实在想不到什么其它的名字了，所以请Xbeta表怪我，如果Xbeta找上来了，那俺只有换名字了 ;)</description>
+    </item>
+    
+    <item>
+      <title>有真情的日子</title>
+      <link>http://hzmangel.github.io/post/195/</link>
+      <pubDate>Fri, 08 Jun 2007 14:06:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/195/</guid>
+      <description>&lt;p&gt;真情流露，一个BBS，但是对我来说不，它又不仅仅只是一个BBS。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>GWT还是满不错的，嗯</title>
+      <link>http://hzmangel.github.io/post/194/</link>
+      <pubDate>Mon, 04 Jun 2007 00:19:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/194/</guid>
+      <description>&lt;p&gt;还是缘起 Google Develop Day，看着那个 GWT 的演示，心中痒的厉害。昨天弄了一天的视频，今天晚上才有空看看这东西。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Primere和After effects</title>
+      <link>http://hzmangel.github.io/post/193/</link>
+      <pubDate>Sun, 03 Jun 2007 00:15:28 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/193/</guid>
+      <description>今天被逼着做视频，一开始想用会声会影，但是用了大概十分钟，发现它真的很难用，于是又把primere弄出来了，编辑，找素材，做了一段时间发现它也不是很难用，反 正比会声会影要好用多了。有空试试AE，感觉满好玩的，嗯。
+btw: write beta 2在自己的机器上还是有些闪，FT</description>
+    </item>
+    
+    <item>
+      <title>学会长大（续）</title>
+      <link>http://hzmangel.github.io/post/181/</link>
+      <pubDate>Tue, 17 Apr 2007 22:39:15 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/181/</guid>
+      <description>&lt;p&gt;写完了那篇郁闷的文字，发现自己还留着一篇预告，趁着心情郁闷无事能做，一起了吧。虽然事隔了那么久，但那天下午说过的一些事情还是在脑海中盘旋，也许是因为那天所说过的话和我脑子里面一直所想的都差不多，所以被吸收了吧。
+　　其实那天也没说什么，两个郁闷的人在一起，也就随便骂骂什么的，还有就是对身边一些人的所做所为不能理解。初中的班主任曾经说过（我居然还能记得&amp;hellip;..），不能理解的事情，不要急着去讽刺它们，试试换位思考，会有更多的发现。但是，有些人所做的事情总是让你有把他海扁一顿的冲动，这种人相信每个人身边都有，真的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>飘絮之日，离别之时</title>
+      <link>http://hzmangel.github.io/post/180/</link>
+      <pubDate>Tue, 17 Apr 2007 22:12:09 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/180/</guid>
+      <description>&lt;p&gt;Blog重开，很大一部分原因是这个原因，有些东西，总憋在心里，是会把人弄出病来的，也许写出来，会好一些&amp;hellip;&amp;hellip;..本来还想拿又到一年飘絮时做标题的，但是以前已经有过相同的题目了，换吧，于是就选了这么一个题目。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重新写些东西吧</title>
+      <link>http://hzmangel.github.io/post/179/</link>
+      <pubDate>Tue, 17 Apr 2007 21:31:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/179/</guid>
+      <description>有很长一段时间没写这东西了，日记这种东西应该不适合我，嗯。但是最近由于有些事情，所以打开尘封已久的这个页面，写些吧&amp;hellip;&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>学会长大</title>
+      <link>http://hzmangel.github.io/post/178/</link>
+      <pubDate>Mon, 20 Nov 2006 22:00:42 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/178/</guid>
+      <description>周六一个朋友过来，两个大男生在避风堂呆了一下午，发现虽然许久没见，两人之间还有那份默契，心里一边在赞叹的同时，也在想，大概也只有朋友才会这样吧。预告一下，过 过再写吧。</description>
+    </item>
+    
+    <item>
+      <title>人在江湖飘，哪能不挨刀</title>
+      <link>http://hzmangel.github.io/post/177/</link>
+      <pubDate>Mon, 20 Nov 2006 21:57:47 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/177/</guid>
+      <description>&lt;p&gt;这应该算是一句名言了吧，谁说的咱不知道，前两天刚听某mm说的，所以拿来用着先。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>毕设啊毕设</title>
+      <link>http://hzmangel.github.io/post/175/</link>
+      <pubDate>Wed, 08 Nov 2006 22:20:57 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/175/</guid>
+      <description>今天算是把毕设的事情定下来了，还行吧，老板给的方向还算是比较喜欢的。不过说真的，我还是比较期待那次重写，呵呵，就是不知道老板愿不愿意了，毕竟把前面的基础推掉 了不少。和我相比，实验室另一个就有些郁闷了，不是自己想做的东西，终归有些不爽，看看那家伙明天沟通的结果吧，呵呵，bless一下 ^_^
+btw: 看来Linux又只能成为业余爱好了，呵呵。</description>
+    </item>
+    
+    <item>
+      <title>试试Firefox &#43; Performancing</title>
+      <link>http://hzmangel.github.io/post/174/</link>
+      <pubDate>Tue, 07 Nov 2006 22:19:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/174/</guid>
+      <description>呵呵，好久没折腾blog了，今天升级firefox的时候看到网站上有个不错的add- on，就弄下来试试，就是这个写blog的东西了。界面方面嘛，基于Firefox的，看上去有可能会比前段时间的那个MS Live Writer要差一些吧，但是对于我这种没什么图片需求的人，够用了，呵呵。发一篇试试吧 :)</description>
+    </item>
+    
+    <item>
+      <title>中秋，好伦哥</title>
+      <link>http://hzmangel.github.io/post/173/</link>
+      <pubDate>Sat, 07 Oct 2006 00:26:43 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/173/</guid>
+      <description>几个人过的实在无聊，于是合计着出去吃一顿，想来想去没想好地方，也不知道是谁的提议，最后去了好伦哥。
+说实在的，个人对自助没什么兴趣，反正就是把东西死往肚子里面塞，塞到走不动路了才心有不甘的作罢。虽然量上没什么问题了，但是质的方面嘛&amp;hellip;&amp;hellip; 不知道是不是因为我去的都是那种便宜的地方。
+这次的好伦哥之行嘛，总体也和上面所说的差不多，东西比较的油，所以吃了一些就感觉到饱了，呵呵，这也算是一种经营策略吧，无限供给，但让你吃不多。至于味道嘛，呵呵 ，不发表评论吧，因为我嘴比较刁:) 不过这次在好伦哥感觉好伦哥让吃饭不再一种享受，看着一堆人一脸痛苦的往嘴里面放东西的时候，我也痛苦了。回来的路上居然下起 了雨，彻底FT了，还想回来看看天上那块大的月饼呢&amp;hellip;&amp;hellip;
+不知道为什么，现在最想念的就是那甜甜的桂花香，想找人带些过来，无奈找不到人，于是只好从那远久的记忆中，调出那快要退色的片段，找个无人的角落，静静享受那一份曾 经的幽香。
+中秋，月圆，祝福那一堆远在异乡的人们。
+美人迈兮音尘阙，隔千里兮共明月；
+临风叹兮将焉歇？川路长兮不可越。</description>
+    </item>
+    
+    <item>
+      <title>好久没写了</title>
+      <link>http://hzmangel.github.io/post/172/</link>
+      <pubDate>Fri, 06 Oct 2006 14:13:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/172/</guid>
+      <description>好久没在这边写东西了，前一段时间在玩wiki，最近又在玩岳飞传，赶上今天中秋，来小灌溉一下。不知道说啥好，就祝所有我认识的人节日快乐吧，另外记下一句诗：海上 升明月，照我还故乡。嘿嘿，谁写的谁知道是怎么回事 ^_^</description>
+    </item>
+    
+    <item>
+      <title>Django中的TIME_ZONE</title>
+      <link>http://hzmangel.github.io/post/163/</link>
+      <pubDate>Tue, 05 Sep 2006 23:06:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/163/</guid>
+      <description>今天在groups上看到有人在讨论这个问题，想想自己当时果然没有考虑到这个事情。在Django step by step中，写的是CCT，然后到django提供的网站上去查了一下，发现应该写成&amp;rsquo;Asia/Shanghai PRC&amp;rsquo;，但是好像还有一个选项是&amp;rsquo;Etc/GM T+8&amp;rsquo;，不知道这几个选项之间是什么关系。groups上有人说用CCT时会出现时间设置不对的问题，另外两个好像没有。我也没有试验，只是把这个东西写下来，算是 知道有这么个东西吧，呵呵 :)</description>
+    </item>
+    
+    <item>
+      <title>键盘上的Power键</title>
+      <link>http://hzmangel.github.io/post/157/</link>
+      <pubDate>Sat, 02 Sep 2006 23:52:06 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/157/</guid>
+      <description>以前一直被键盘上的那个按键郁闷着，一不小心碰一下就FT了，偏偏赶上那个键是在Break的位置，又容易被我按下去，真是郁闷，8过今天好像在论坛上看到一个方法， 控制面板-&amp;gt;电源管理-&amp;gt;高级选项 里面确实是有那个设置，设置了一下，8知道有没有用，偶现在用的键盘上可没这个键，也幸亏没这个键&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>测试coolcode</title>
+      <link>http://hzmangel.github.io/post/155/</link>
+      <pubDate>Wed, 30 Aug 2006 23:23:22 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/155/</guid>
+      <description>刚用它好像有问题，现在试试看倒底是不是有问题 Hello World
+Hello World Again
+ps: 刚看了一下，好像没什么问题，不知道为什么刚才用不了</description>
+    </item>
+    
+    <item>
+      <title>23</title>
+      <link>http://hzmangel.github.io/post/141/</link>
+      <pubDate>Sat, 22 Jul 2006 17:22:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/141/</guid>
+      <description>老太太的祭日，希望她老人家在天之灵能过的安好，不能给您烧纸钱，就在这怀念一下吧。</description>
+    </item>
+    
+    <item>
+      <title>21,22</title>
+      <link>http://hzmangel.github.io/post/140/</link>
+      <pubDate>Fri, 21 Jul 2006 14:36:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/140/</guid>
+      <description>21号21岁，22号22岁，一辈子大概也就这一次吧。又荒废了一年，呵呵。
+第二次在这边过的生日，也没什么特别的感觉，只是身边的人换了一些，人生嘛，聚聚散散了。也不是十分有话要说，只是觉得有必要在这个时间写点东西，所以就写了，谢谢所 有帮助过我的人吧，真的。
+发现现在很没有写blog的想法，等搬回去不知道会不会好一些 ^_^</description>
+    </item>
+    
+    <item>
+      <title>清明时节雨纷纷</title>
+      <link>http://hzmangel.github.io/post/136/</link>
+      <pubDate>Thu, 06 Apr 2006 12:53:02 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/136/</guid>
+      <description>不管北京的天气有多倔强，这次总算在清明小低了一下头，5号晚上回去的时候就有人说下雨了，今天早上起床的时候发现天气阴沉沉的，没想到坐到实验室一会就听到有人说， 外面下雨了。那段时间也没太往窗外看，但是中午下去吃饭的时候，发现地面上已经全湿了，而且有些地方积起了一个小水洼，很少见啊。北京的天气，总觉得让人不爽，也许是 因为我没有适应，大概是打心里面不想适应这边~~~~
+清明时节雨纷纷，路上行人欲断魂，借问酒家何处有，牧童遥指杏花村。小时候就会背这首古诗，但是在心里面还是没能体会出那个意境，在北京，已经有很久没感受到那种雨纷 纷的感觉了，有的只是N多天不下雨，或者就是一场豪雨，让你从里到外透潮。怀念在家的时候，那种在细雨中散步的感觉，一小片林子，牛毛一样的细雨洒在身上，林子的远处 朦朦胧胧，雨洒在身上也不会把身上弄湿，不过，在这个地方，这只能是一场憧憬。
+再说说路上的行人，至今还是不懂那个断魂的意思，不知道现在成天过着朝九晚五的日子的那些行色匆匆的人算不算断魂，也不知道现在的我成天三点一线的生活算不算断魂，唯 一记得的事情就是，有很久没有享受到读书的乐趣了，除了逼着自己看的书，就是被别人逼着看的书，自己想看的书一是弄不到，还有就是没有时间和心境。田园的生活，也许是 我的另一个憧憬。
+还有就是不清楚清明和酒家有什么关系，所以一直弄不懂最后两句。现在，从小在城市长大的我从来就没见过什么牧童，只是在动画片里面看到过那些骑在牛背上，手里吹着笛子 的小孩。至于那种门口顶着幌子的酒家，也只能在电视中见到一二了。
+突然想到了这些，居然还写了不少的东西，呵呵，也许是又想爷爷了，小时候教我认字，读诗，陪我做风筝，还有许多好玩的东西。那时候学的字大概现在还记得，诗什么的只记 得有个小本子，具体本子上的东西已经渐渐消失在记忆深处，只有某些时候才能记起些许，小时候没学会扎风筝，只记得那时候爷爷带我去省体育场放风筝，飞的还是满高的，还 有就是小时候在一起包粽子。不知道他老人家在那边过的如何 ^_^
+也想不出来什么可写的了，就写到这吧。
+窗外，还是那一片阴霾的天空…………</description>
+    </item>
+    
+    <item>
+      <title>郁闷ing~~~~~</title>
+      <link>http://hzmangel.github.io/post/135/</link>
+      <pubDate>Fri, 31 Mar 2006 10:46:12 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/135/</guid>
+      <description>今天刚想找找那盆草，没想到看到的竞是那样一个惨状，还好，那几棵草算是弄回来了，哪天再去找点土，再找个花盆吧。唉，可怜的草。</description>
+    </item>
+    
+    <item>
+      <title>夜色</title>
+      <link>http://hzmangel.github.io/post/134/</link>
+      <pubDate>Thu, 30 Mar 2006 13:20:12 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/134/</guid>
+      <description>昨天弄一块让人很郁闷的板子，弄到了12点多，于是乎，有幸看到了和10点钟回去时不一样的夜色。首先是出主楼，门已经关了，叫了一会管理员，没人理，所以就找了个窗 户翻了出去，呵呵，感觉真的不一样^^ (还有一个不一样的感觉就是从门走的话，一般不会磕到腿，而现在我的腿还有点痛呢，一块皮啊)
+再就是学校里面，宿舍已经锁门了，不算大的校园里面，很少能见到人，就算有也是个个行色匆匆，大概是在想怎么能弄开大门吧，当然还是有那么几双筷子，宿舍倒是差不多各 个灯火通明，据说现在好像是1点熄灯吧，主干道上，昏黄的路灯撒在冷冷清清的路上，不过我是看了没什么感觉:) 北门关的很小，不过自行车还是可以轻松出入的，北门外的那些小店已经关门了，也是很冷清的感觉，第一次见北门没有围着一堆一堆的人。
+再说说路上，车辆少了很多，一路骑回去就没怎么减过速，偶尔也会有一些小轿车在夜幕下飞驰而过。第一次没见那些公交车和出租车，呵呵，感觉还是满爽的。拐弯的时候，看 到了桥下摆开的卖串的摊子，还有一个人在那坐着等吃的，当时如果不是我一个人，应该也会去弄点吃的吧，不过昨天脑子里面只有回寝这一个念头了^^
+别的也没啥好写的了，唯一的感觉就是今天的头真晕，好想睡觉啊~~~~~</description>
+    </item>
+    
+    <item>
+      <title>5V vs 12V</title>
+      <link>http://hzmangel.github.io/post/132/</link>
+      <pubDate>Thu, 30 Mar 2006 12:54:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/132/</guid>
+      <description>昨天总算找到板子点不亮的毛病了，居然是电给错了，还好没烧掉什么东西，否则，呵呵，至少1K要出去了。看来下次弄之前确实要好好看看说明，虽然我记得我看过那个电源的说明，也记得那个东西是有两路输出，但是还是弄反了，还好，另一块板子可以上12V，没准它的标准电压就是12V，或者它的抗压能力太好了，或者什么别的事情，真的不敢想了，只能说我糊涂人的糊涂运气。不管了，好好做那块Xscale吧，还不知道从哪下手呢~~~~</description>
+    </item>
+    
+    <item>
+      <title>又到一年飘絮时</title>
+      <link>http://hzmangel.github.io/post/131/</link>
+      <pubDate>Sat, 25 Mar 2006 10:10:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/131/</guid>
+      <description>不知道为什么，突然想到了这个题目。来到北京上学已经有5年了，记忆中，北京的春天就是和大风和扬尘联系在一起的，虽然扬尘的情况没有前几年那么严重，但是风声依旧， 这半年住在大运村，对北京的风可是深有感触，好像不管什么方向，都没有顺风的时候。学校里，在春天还有一大景观，就是那漫天飘舞的杨絮，和下雪一样，天上，地上，身上 ，到处就是这个东西，经常会在哪个旮旯里看到堆成一堆的絮。学校去年也受不了了，做了件巨傻的事情，春夏之交的时候，把操场那边几颗树砍了，移了几颗银杏过来，好像是 没过多久就都成为校领导英明决策下的牺牲品了吧。
+一到这个时候，首先就会想起那年肆虐的非典，不过那段时间真的很爽啊，记得有很久没有那么开心的玩过了，完全没有学习的约束。还有一件就是去年的水木了，事情已经过去 了，也就不想再说什么了，只是想把那个的桌面再找回来。
+无聊之余，就写这么多吧，也有一段时间没这个地方了，没网的日子啊~~~~</description>
+    </item>
+    
+    <item>
+      <title>水木周年祭</title>
+      <link>http://hzmangel.github.io/post/130/</link>
+      <pubDate>Thu, 16 Mar 2006 14:53:06 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/130/</guid>
+      <description>没有文笔写出华丽的祭文，只是想写些东西。也不指望能有多少人能记得，但是我知道，多少年后，在我的记忆中，都会出现那一片在春天飘零的枯叶。前一段时间翻了翻那时候 写成的文章，还是有点感觉的，那段时间由于考研的事情，心情比较的差，再加上这件事情，呵呵，忘了那时候有没有在宿舍发飚了。不过事情还是往好的方向发展的，凤凰终归 是不死鸟，也终究会复活的，于是也就有了现在的新水。我的这个ID还是潜水居多，不过还是找人帮忙第三批激活了。看着新水的在线人数从3位数开始逐渐增加，心情也渐渐 的好了起来。从小部分人激活内测，到激活版主，再到核心成员，再就是逐渐开放激活，到最后的开放注册，这条路走的还是满不顺利的啊。不说什么了，灌水去了^_^
+btw: 伪水那几天疯狂的时候，看着真的好爽啊
+ps: bless newsmth~~~~</description>
+    </item>
+    
+    <item>
+      <title>又通宵了</title>
+      <link>http://hzmangel.github.io/post/128/</link>
+      <pubDate>Fri, 20 Jan 2006 23:08:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/128/</guid>
+      <description>最终还是选择了在实验室通宵，也不知道是为了什么，大概是怕回去后那份孤独吧。在考试前想的好好的事情，例如考后好好学习，好好玩玩游戏，在考试终结的那一刻起，都不 知道去哪了，什么也不想做，只是在那闲着。看着人一个一个走了，自己心里面也不知道为什么有点急，浮躁的心理让我现在什么事情都做不下去，只想着回家，但是回家后又能 做些什么呢？还是不知道。大概明天，实验室又要有人走了，有时候都不知道刻去哪，真的很不愿意一个人在实验室呆着，平时虽然说的话也不多，但是至少能够感觉到不冷清， 呵呵，看来下次寒假再也不留这么迟了，现在有些羡慕那些在公司干活的人了，至少他们还有事做，还有人陪他们做事，在公司做事的兄弟表砍偶啊 :)
+还好，也就两天了，要回家了，有的时候真的不想去宿舍呆着，一个人，什么事情都做不下去，也不知道是为什么。呵呵，不说了，干干活吧 :)</description>
+    </item>
+    
+    <item>
+      <title>诚信和考试有关吗？</title>
+      <link>http://hzmangel.github.io/post/127/</link>
+      <pubDate>Sun, 15 Jan 2006 21:51:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/127/</guid>
+      <description>刚在学校里面闲逛，突然看到了几条标语，也没什么特别的意思，就是说要诚信，不要作弊。一开始也没觉得有什么不对的地方，但是突然间，发现心里面泛起一个想法，这两者 之间有联系吗？
+我知道肯定有一大堆人告诉我，这两者之间的联系是紧密的，是不可分的，是&amp;hellip;.的，不过我的脑子想到现在还是转不过来，如果教育体制中，不是一考定终身的话，会有那 么多作弊的吗？本来考试就是没什么道理的事情，现在又纯粹变成了考记忆力，有意思吗？有意义吗？不说了，不想把时间放在评论这东西上面，不过欣慰的是，偶的考试，不多 了。</description>
+    </item>
+    
+    <item>
+      <title>2006 is coming</title>
+      <link>http://hzmangel.github.io/post/126/</link>
+      <pubDate>Sun, 01 Jan 2006 13:34:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/126/</guid>
+      <description>呵呵，和昨天的2005呼应一下，昨天发了不少短信，不知道一些关机的人收到没，一会再发一下吧^_^
+不单要元旦快乐，还要天天快乐哦</description>
+    </item>
+    
+    <item>
+      <title>Good Bye, 2005</title>
+      <link>http://hzmangel.github.io/post/125/</link>
+      <pubDate>Sat, 31 Dec 2005 19:36:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/125/</guid>
+      <description>昨天晚上躺在床上还是想好好写点东西的，但是一到了这个时候，也不知道写什么好了，胡乱写点什么吧，算是今年的最后一篇^^
+还算老师好，让我上了研，要不然就是已经工作半年了(那时候应该能找到工作的吧)，不过半年研究僧的生活下来，觉得和本科没什么不同嘛，就是上的课少多了，呵呵，近乎 疯狂的逃课，还要上一堆自己不喜欢的课，打住不说了吧，要不然又不知道要扯到什么地方了。
+别的方面也没什么好写的了，又把一年混过去了，也不知道明年会怎么样，唯一知道的就是过完元旦就要开始考试了，心里面还一点底都没有，呵呵，但愿能过吧，要求不高。
+明年大概就要正式进项目了，心里面还是没有底，越来越发现自己懂的少了，一戴东西不会玩，有时还是有点自卑的:)
+还有就是那么多的游戏，不知道什么时候有时间能玩玩啊，现在只敢玩玩那些RTS之类的情节不太连贯的游戏了，别的游戏都不敢玩，怕把好游戏玩糟蹋了 ^^
+别的也没什么要说的了，胡乱写了点，就是为了留下今年的最后一篇。
+btw:今天终于下雪了，不过一会就没了。北京这边真的不爽，连个雪都没有，又想起来那首也不知道叫什么东西的东西了：包河畔，小山旁，年年冬天下雪时。另外，又开始 玩Mud了，呵呵不知道这次能玩多久，8过要谢谢那些带我的人，嗯。
+最后祝朋友们新年快乐吧，我也就会说这些了 ^_^</description>
+    </item>
+    
+    <item>
+      <title>让FZ的word</title>
+      <link>http://hzmangel.github.io/post/124/</link>
+      <pubDate>Wed, 28 Dec 2005 10:19:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/124/</guid>
+      <description>本来毕设论文用LaTeX写，格式什么都不错，昨天Boss说要我把论文发给她，最好是Word的，于是昨晚回去的时候，顺便带好了干粮，准备做一下这个Projec t。
+由于本来论文是用软件转的，有点慢，所以这次用Acrobat把我的论文另存为Word格式后就开始了痛苦的过程。前几章由于主要是文字，所以还是比较好转，但是到了 后面，一到开始介绍原理后，噩梦就开始了。
+由于我的论文是偏理论的，所以公式有点小多(其实也不是怎么太多，100个左右吧)，还好的是我在LaTeX中把公式都单独用公式环境列出来了，所以那些编了号的公式 就直接截图了，那些在文字中的公式能偷懒就偷懒了吧，上下标，斜体什么的，看着差不多就可以了。
+用的是PDF另存为的，所以转成的格式较多，自己定义了一下格式，想转到新的一个文档中，也不知道是不是我不会用还是怎么回事，新文档中居然没有我定义的那些格式，真 郁闷，只能回到原文档中去改，纯体力活啊。
+改格式，删乱码，截图，调大小，位置，正当我以为快要完了的时候，机器崩了，没有任何征兆，突然的黑屏，把我郁闷的诶。接着就是重启，找到那份Word 文档，一看吓 我一跳，46M多，就算那么多图也不会有这么大吧，先打开看看再压缩吧，这时word显现出它FZ的地方了，告诉我说，文档出错了，打不开了，恢复的那份也出错了，也 打不开了，修复文件也不好用了，修复不出来东西了。MD让我对着那个46M的庞然大物干瞪眼，狂FT，当时的时间是3点。
+后来想想，算了，谁让人家是Word呢，我现在真的有些想不出在碰到LaTeX之间，我那些论文是怎么做的了，大概是因为公式不多的原因吧，8过word也有让我4k 字论文丢3k的光荣传统，还是保存过的，所以，是我的错，嗯，我不应该用word的&amp;hellip;&amp;hellip;
+让人FZ的word&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Mery Xmas</title>
+      <link>http://hzmangel.github.io/post/123/</link>
+      <pubDate>Sun, 25 Dec 2005 12:09:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/123/</guid>
+      <description>虽然是个洋节，但是这一天还是要过啊，顺便给这边浇浇水 ^_^
+btw:一个灰了吧叽的圣诞节:(</description>
+    </item>
+    
+    <item>
+      <title>Bless NingNing</title>
+      <link>http://hzmangel.github.io/post/122/</link>
+      <pubDate>Fri, 09 Dec 2005 12:06:06 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/122/</guid>
+      <description>又一个出去的，也不想在这说和这家伙的一些陈芝麻烂谷子的事了，也不知道现在这家伙飞到哪了。感觉那天打电话时一点感觉也没有，也不知道为什么 ^_^
+希望她在那边能过的好一点吧，我相信她应该没事的，8过还是要bless一下 :)</description>
+    </item>
+    
+    <item>
+      <title>搭好了吧</title>
+      <link>http://hzmangel.github.io/post/121/</link>
+      <pubDate>Sat, 03 Dec 2005 02:35:32 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/121/</guid>
+      <description>应该算是搭好了吧，折腾了不短的时间，不过还是满好玩的。^_^</description>
+    </item>
+    
+    <item>
+      <title>总算折腾完了</title>
+      <link>http://hzmangel.github.io/post/119/</link>
+      <pubDate>Wed, 30 Nov 2005 22:20:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/119/</guid>
+      <description>这次作业做的真是一个郁闷啊，结果很不满意，但是又能怎么样呢，现在整个人已经快到崩溃的边缘了，希望这两天能缓缓吧。居然碰上了listing和CJK不兼容的毛病 ，狂FT。但是为什么寝室的那台机器上没问题呢？想不通ing。不管了，当做完了吧，因为我懒了 ^_^
+btw: 第一次用metapost写东西，还是满好玩的，哪天有空再玩玩。还有就是哪天把寝室的那个CTeX升一下级。</description>
+    </item>
+    
+    <item>
+      <title>那份淡忘的亲情</title>
+      <link>http://hzmangel.github.io/post/118/</link>
+      <pubDate>Wed, 30 Nov 2005 22:13:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/118/</guid>
+      <description>刚在干活的时候，老爸打电话过来，说了几句，他大概也知道我在忙，就挂了。其实我就忙那一会，要不是有同学在边上，还是很想说说的，现在心里面一直有点过意不去。有时 想想，我们是不是把那份从小就在关怀我们的亲情忘了呢，到现在，长到这么大，经历了友谊，爱情，事业的得失，所以对这些东西看的比较的重，但是对于那一份亲情呢？
+放假回家的时候，总会告诉自己，不要和家里面吵架，但是总是有时忍不住，有时事后真的想狠狠抽自己一顿。
+我也不知道想说什么了</description>
+    </item>
+    
+    <item>
+      <title>让人郁闷的php.ini</title>
+      <link>http://hzmangel.github.io/post/115/</link>
+      <pubDate>Tue, 29 Nov 2005 09:16:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/115/</guid>
+      <description>想自己弄个blog，去网上下了Apache, PHP, MySQL，前天把PHP升了个级，后来用了php.ini- recommend，结果出问题了，phpinfo出不来了东西了，郁闷了近两天，才找到问题所在，就是那个php.ini文件的问题，换成php.ini- dist就可以了。
+btw: 用Filemon查看调用了哪个配置文件还是满方便的 ^_^</description>
+    </item>
+    
+    <item>
+      <title>创新笔试了</title>
+      <link>http://hzmangel.github.io/post/111/</link>
+      <pubDate>Sat, 26 Nov 2005 21:52:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/111/</guid>
+      <description>又是一界的新人，希望还能够有创新的老样子。虽然在里面呆的时间不长，但是发现自己对那很有感情，一方面大概是因为这是我努力争取得来的东西，另一方面应该就是里面的氛围吧。那天有个师妹问我一些关于创新的事情，当时也不知道怎么想的，就告诉她，创新就是一个游乐场。现在想想还真有点像，不知道是不是我没有参加过竞赛的原因，至少创新给我的感觉就是，在那，你想做什么，都会有人支持，很喜欢分组这种模式，虽然我还没怎么尝到分组的甜头就出来了，不过暑假那两个月，真的是让我一生难忘的。羡慕那些参加过竞赛的人，至少在我看来，他们在参赛的过程中懂得了Teamwork，有时候感觉自己和别人不知道为什么，就是合不来，就算是在一个Team里面，也不能和别人好好的合作。我也不知道是为什么:( 看着创新的那帮人，有时真的感觉和他们差了不少距离，虽然我也不知道具体的地方差在什么地方，sigh~~~
+不知道如果我下次再去创新的话，还能够认识多少人 ^_^</description>
+    </item>
+    
+    <item>
+      <title>Congratulation to Angel</title>
+      <link>http://hzmangel.github.io/post/110/</link>
+      <pubDate>Fri, 25 Nov 2005 18:32:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/110/</guid>
+      <description>Just graduaded from UBC, hope she will have a better tomorrow, I trust her. ^_^</description>
+    </item>
+    
+    <item>
+      <title>学会感恩</title>
+      <link>http://hzmangel.github.io/post/109/</link>
+      <pubDate>Wed, 23 Nov 2005 14:50:52 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/109/</guid>
+      <description>11月的最后一个周四，美国人的感恩节。为的是感谢上天赐与的好收成。
+　有时想想，对别人心存感激真的是一种很好的感觉。感谢父母，感谢他们把我们带到这个世界上，让我们感谢世界的美好；感谢老师，感谢他们传授给我们知识，让我们有能力去改变我们所在的世界；感谢朋友，感谢他们给予我们帮助，陪伴我们度过难关；我们甚至要感谢我们的对手，感谢他们给予我们前进的动力。 有时候觉得，现在我们已经把太多太多的事情，当作理所当然，心安理得的去享受那些本不属于我们的东西。当第一次索取成功的喜悦逐渐被淡忘，代之而来的是无尽的贪婪。有时，觉得我们真的应该学会多去感谢身边的每件事，感谢身边的一切，因为有了这些，我们的生活才能变的如此美好。 最后，在感恩节前一天，感谢所有出现在我的生命中，帮助过我的人，谢谢你们。</description>
+    </item>
+    
+    <item>
+      <title>微机实验pass啦</title>
+      <link>http://hzmangel.github.io/post/108/</link>
+      <pubDate>Mon, 07 Nov 2005 14:49:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/108/</guid>
+      <description>从别人那要了个程序，调了一下，自己再把线检查一遍就OK了。嘿嘿，不知道下次的ARM做什么，希望能做出来 ^_^</description>
+    </item>
+    
+    <item>
+      <title>童话、梦、现实</title>
+      <link>http://hzmangel.github.io/post/107/</link>
+      <pubDate>Mon, 07 Nov 2005 14:41:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/107/</guid>
+      <description>刚看完查理与巧克力工厂，突然想到了一些东西。
+　闲来无事，看看走过的那些路，曾经的童话和梦想都已经消失殆尽，有的只是那份死板，就像片中说的那样，头脑生锈，没有想像力。已经习惯了努力去符合规章制度。记得前几天看过一篇文章，中间就提到了类似的事情，文章里说，当拿到一个题目的时候，有很大一部分人想的是怎么去把这个东西做好，而没有想过为什么要这么做。也许在工作中，这种做法无可厚非，但是在别的情况下呢&amp;hellip;&amp;hellip; 影片展示了一个华丽的梦幻的童话世界，我想，能生活在里面一定是很幸福的。小时候看过不少童话，现在有时也想看看那些童话，但是更多的情况是发现自己真的没有什么心情去感受那一份世界，感觉要想再回到那个时候的心境可以说是一种奢望，真希望自己能再次变小，再次回到那些童话书中，去体验那纯真的，华丽的世界。 期待什么时候能再回到年少时的世界中去, I have a dream&amp;hellip;..</description>
+    </item>
+    
+    <item>
+      <title>微机实验，继续郁闷中…….</title>
+      <link>http://hzmangel.github.io/post/106/</link>
+      <pubDate>Sun, 06 Nov 2005 22:01:10 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/106/</guid>
+      <description>做的头大还是做不出来，看看机器前贴的Tips，还有一堆事情没做 :( 不过发现自己越来越不可救药了，现在这么忙，还想看看分形，还想自己弄个Blog和Wiki ^_^ 真的不知道我有时是怎么冒出那些稀奇古怪的想法的，sigh~~~~</description>
+    </item>
+    
+    <item>
+      <title>QccPack is available</title>
+      <link>http://hzmangel.github.io/post/105/</link>
+      <pubDate>Tue, 01 Nov 2005 12:21:12 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/105/</guid>
+      <description>Just download the QccPack from http://qccpack.sf.net, and apt-get the imake. Extrate, imake, make Makefiles, make, make install&amp;hellip;. after a long time, I install it successfully. But when I use some commands of this pack, I got an error, it tells me that &amp;ldquo;cannot open shared object file&amp;rdquo;, after google it, I know the reason, and I copy the .so and .a file to /lib, the problem is resolved.</description>
+    </item>
+    
+    <item>
+      <title>OPNET……</title>
+      <link>http://hzmangel.github.io/post/100/</link>
+      <pubDate>Wed, 26 Oct 2005 08:35:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/100/</guid>
+      <description>最近比较的郁闷，做OPNET做的快要不行了。找不到合适的人讨论，自己一个人就像无头苍蝇一样乱撞。在BBS上问的问题也没人回答，不知道是不是我问的问题太弱了，但是我真的就碰到这个问题，而且现在基本上就是卡在这了啊，FT的不行了。顺带着这几天的心情也不怎么好。 :( OPNETing&amp;hellip;&amp;hellip;&amp;hellip; &amp;amp;&amp;amp; FTing&amp;hellip;&amp;hellip;. 本来以为做硬件那时候就已经很郁闷了，没想到软件也会这样，我真的有那么笨吗？</description>
+    </item>
+    
+    <item>
+      <title>又回来了</title>
+      <link>http://hzmangel.github.io/post/92/</link>
+      <pubDate>Sat, 17 Sep 2005 12:45:20 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/92/</guid>
+      <description>又回学校了，住大运村，不爽，上网还不方便。再过过再把以前的东西补完吧。newsmth的bm被下了:(</description>
+    </item>
+    
+    <item>
+      <title>灌的好爽啊</title>
+      <link>http://hzmangel.github.io/post/86/</link>
+      <pubDate>Mon, 23 May 2005 23:53:22 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/86/</guid>
+      <description>好久没有这种感觉了，看着那些熟悉的ID在眼前，仿佛又回到了从前的美好时光，今晚灌的不错，虽然telnet寒碜了点，但灌的感觉不错。
+　灌水的感觉，真好 ^_^</description>
+    </item>
+    
+    <item>
+      <title>喝多了吗？</title>
+      <link>http://hzmangel.github.io/post/85/</link>
+      <pubDate>Thu, 19 May 2005 00:10:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/85/</guid>
+      <description>一顿饭，算上路上的时间，从6点吃到11点，呵呵，也算是大学4年里面头一次吧。也不知道是不是喝的有点多，就在这写点什么东西吧^^ 说到这顿饭，就不能不说说创新。其实说起来，我进创新真有那么一点死磨硬泡的味道在里面，本来想去参加全赛(现在想想，大概就是想到那个团队里面去感受一下团队合作的气氛，还有就是能实际参与到那几天几夜的奋斗中去)，但是没来的及，等我回到学校的时候，他们已经在准备参赛了，只好做罢。后来有点不想就这么放弃，所以还是找到老师，死缠着进到了实验室。记得那时候，老师对我说：“实验室这个周日培训，你也一起来听听吧。”我真的是不知道是怎么兴奋了^^ 那时候对比赛还不是十分了解，以为每年都有，进了实验室才知道是两年一次，中间那一年是北京的竞赛，一开始想，那样也行，能参加就参加吧，不过没想到那年的比赛是用计算机模拟的，顿觉无味，所以转到另一个项目了。 说来也是惭愧，那时候虽然进了实验室，但是由于课程比较的多，而且还要复习考研，所以没怎么在实验室呆，就是老师让我照着板子画个PCB图做了大概一个月也没结果。说真的，现在有点觉得可惜，那时候本可以在实验室学到更多东西的，其实说复习考研真的没怎么看，课程我也是觉得一般就可以了，应该在是上面浪费了不少时间，后悔啊。 暑假，本来是他们准备竞赛的时候，我由于没参加竞赛，改做了一段时间ARM，那段时间我是早上去实验室，下午去上自习准备考研，晚上再去实验室。那个暑假，虽然比较的累，但是过的比较的充实，总体来说感觉还是不错的。只是现在对我做ARM那比蜗牛或乌龟还慢的进度还一直耿耿于怀，那时候做到最后真的是有点要崩溃了，知道眼前有路，但是就是跨不过那道门槛。做硬件，真辛苦，如果是一个人慢慢摸索就更辛苦，真的。 后来，也就考研了，虽然考的不怎么样，但是老师还是要我了，这样，又能在这个学校再混两年半了，心里面真的是感觉十分幸运，复习的时候真的没怎么用功的。
+　感觉自己的能力真的是很一般，没有什么可以拿的出去的事情。看看身边，永远有比你牛的人存在，在BUPT这个卧虎藏龙的地方，什么时候都能感觉到来自各方面的压力。而那些大家公认的N人，总是能找到太多太多的东西让你学习，有时真的对自己的能力信心不足。不过不管怎么说，还是要谢谢郭老师，谢谢您给我提供的那些机会，谢谢您对我的器重，谢谢&amp;hellip;&amp;hellip;　要谢谢的事情有太多太多，我也不知道我能不能达到您预期的目标，努力吧。</description>
+    </item>
+    
+    <item>
+      <title>凤凰真的涅磐了</title>
+      <link>http://hzmangel.github.io/post/84/</link>
+      <pubDate>Thu, 12 May 2005 22:43:50 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/84/</guid>
+      <description>哈哈，重生了，是凤凰总会涅磐的:-)</description>
+    </item>
+    
+    <item>
+      <title>祝妈妈永远年轻</title>
+      <link>http://hzmangel.github.io/post/83/</link>
+      <pubDate>Sat, 07 May 2005 23:50:23 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/83/</guid>
+      <description>明天就是母亲节，希望妈妈 永远年轻。突然想写点东西，就想到这了。 记忆中，自己做的许多事情里面都有妈妈的影子，从上学到课外学习，基本都是妈妈带着做的。由于上学的时候年纪比较小，家里面不放心，妈妈就天天接送，后来一直到了初中。具体到什么时候忘了，反正时间不会太短。还有就是小时候学琴，妈妈都是和我一起听，一起学。 记忆中，妈妈没怎么生过我的气，但是只要一生气起来，那后果可是&amp;hellip;.的 ^_^ 现在脑子不太好用，一时也想不出来什么事情了，先写这些吧，哪天完完整整的写点什么东西，现在，在母亲节前夕，衷心祝愿妈妈永远 年轻。</description>
+    </item>
+    
+    <item>
+      <title>我的大学生活之初来北京</title>
+      <link>http://hzmangel.github.io/post/82/</link>
+      <pubDate>Fri, 06 May 2005 18:27:37 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/82/</guid>
+      <description>虽然题目用了之一，但是不知道自己能不能坚持写下去，加油吧:-)
+　记得高三的时候，对父母说，不来北京，那时在北京打工的父亲，过年回家后就没再来这边，但是报志愿的时候，也不清楚为什么就来到了这边(害的每次回家,老爸都还要说说当时不回来就好了^-^)。当时报北邮，是因为有个99的师兄在这边，和我一个高中的，曾经一起参加竞赛的，也就依稀记得一个名字，加之北邮那年扩招的又特别厉害，所以就过来了(记得当时来这边报到的时候，向师姐问了那个师兄住在哪，当时就去了，去了发现他在睡觉^_^)。
+　我不是在报到那天到这边的，我有个哥在北航，他开学的比我早，我和我妈就跟他一起过来了，住在北航的亲戚家里。趁着开学前几天，和老妈在北京城里面转了几个地方，由于93年来过这边，所以也没到什么景点去了。说实话，那时候我对这边的印象很差(虽然现在也差不多，但是比那时候要好一点)，亲戚家白天没人，我们也不好呆在那，外面也没什么地方去，还要在外面呆到大概傍晚&amp;hellip;..不说了已经过去的事情了。不过觉得爽的一次是这边的舅舅请我们去吃了顿烤鸭，北京烤鸭店(现在我还不知道在哪)，感觉味道不错的说^_^
+　在开学前，总要到北邮转转，记得最清楚的第一次过来，坐的是375，坐到政法下的，走了一大段路(刚到这边，感觉这边的一站比我们那边长多了)，但是还是见不到踪影心里面有点沉不住气了，于是走到京冶的那个门口，问那个警察:&amp;ldquo;北邮在哪&amp;rdquo;，我觉得我现在还能把他的那副表情学下来，真的太好玩了，一脸惊愕的看着我们，然后缓缓的说出，&amp;rdquo;就在对面啊&amp;rdquo;，现在想想还好笑。
+　报名的时候也记不清什么了，只是记得去邮局用存折转帐，打印出来的时候打歪了，后来还是手写上去的。基本在第一天我就办好了手续，后来在第二天懊悔不已，人少多了，早知道就不在第一天排那么长的队了。
+　后来就去了学3，感觉还不错吧，虽然楼是旧了一点，但是里面东西还是满新的，还有电视呢，当时可是想都没想过的。就是感觉要的银子多了一点，北航那边只要500+呢(后来学校不知道为什么改了，更惊奇的是还退了我们多交的钱^-^)。
+　随后也就开始了大学生活，暂时也没想到什么好写的，下次有东西的时候再灌吧，如果我想的起来的话^_^
+btw: 说到电话卡，我记得我买的第一张是20块的17950的卡，买的时候还特别强调要能带到外地打的，后来的201我忘了买的是多少的了，但肯定不是那100块的，我记得我买的最大面值的大概是50吧:)</description>
+    </item>
+    
+    <item>
+      <title>开始BM培训了</title>
+      <link>http://hzmangel.github.io/post/75/</link>
+      <pubDate>Fri, 29 Apr 2005 23:02:44 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/75/</guid>
+      <description>今天做了一下那些题目，感觉不是很难嘛，过过看能不能把考试过了吧，介样就是正式的BM了。 感觉newsmth越来越上正轨了，不知道ICP的事情怎么样了，不过现在老用户大概已经上来差不多了，不爽的就是在公网，教育网连特别的慢，用term按一次?还要等N大一会，没以前在教育网内的爽，不过忍了吧，能开已经不错了:)　希望它能越来越好，衷心的。</description>
+    </item>
+    
+    <item>
+      <title>哈哈，蛋蛋</title>
+      <link>http://hzmangel.github.io/post/74/</link>
+      <pubDate>Tue, 26 Apr 2005 10:13:53 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/74/</guid>
+      <description>没想到newsmth居然用这种方法，还是满好玩的，zixia今天SMTH版都成蛋盟了。好玩。看着新水木一点点壮大，感觉真不错。不过可惜的是只能送3个，偶又没mj，本校的朋友们只有再等了。</description>
+    </item>
+    
+    <item>
+      <title>斯人已去</title>
+      <link>http://hzmangel.github.io/post/72/</link>
+      <pubDate>Mon, 25 Apr 2005 09:40:55 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/72/</guid>
+      <description>今天刚在zixia上看到那则消息，一开始还没觉得什么(不知道是不是因为自己已经麻木)，但是后来看着网友的回贴，心情逐渐沉重起来，忍不住想写点什么。 生命永远是脆弱的，随时都有N多种方法可以夺去生命，但同时生命也是灿烂的，只有好好的活下去，才能够让自己的生命出现最绚丽的光芒。 不知道那张贴子是不是那个MM的，其实可以有很多理由可以让你活下去的，不过现在都迟了，斯人已去，一路走好吧。</description>
+    </item>
+    
+    <item>
+      <title>凤凰涅磐</title>
+      <link>http://hzmangel.github.io/post/71/</link>
+      <pubDate>Sun, 24 Apr 2005 13:46:29 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/71/</guid>
+      <description>?凰涅?(节选) 天方?古有神?名“菲尼克司”(Phoenix)， ?五百?後，集香木自焚， ??死灰中更生，?美?常，不再死。 按此?殆即中?所??凰；雄??，雌?凰。 《孔演?》??“?凰火精，生丹穴。” 《?雅》??“?凰……雄?曰即即，雌?曰足足。”
+?凰更生歌
+?? 听潮?了，听潮?了， 死了的光明更生了。
+春潮?了，春潮?了， 死了的宇宙更生了。
+生潮?了，生潮?了， 死了的?凰更生了。
+?凰和? 我?更生了，我?更生了。 一切的一，更生了。 一的一切，更生了。 我?便是他，他?便是我， 我中也有你，你中也有我。 我便是你，你便是我。 火便是凰。?便是火。 翱翔！翱翔！ ?唱！?唱！
+我?新?，我??朗， 我??美，我?芬芳， 一切的一，芬芳。 一的一切，芬芳。 芬芳便是你，芬芳便是我。 芬芳便是他，芬芳便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！
+我???，我???。 我???，我?和?。 一切的一，和?。 一的一切，和?。 和?便是你，和?便是我。 和?便是他，和?便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！
+我?生?，我?自由。 我?雄?，我?悠久。 一切的一，悠久。 一的一切，悠久。 悠久便是你，悠久便是我。 悠久便是他，悠久便是火。 火便是你。火便是我。 火便是他。火便是火。 翱翔！翱翔！ ?唱！?唱！
+我??唱，我?翱翔。 我?翱翔，我??唱。 一切的一，常在?唱。 一的一切，常在?唱。 是你在?唱？是我在?唱？ 是他在?唱？是火在?唱？ ?唱在?唱！ ?唱在?唱！ 只有?唱！ 只有?唱！ ?唱！ ?唱！ ?唱！
+　凤凰只有经过烈火的洗礼，才能够?磐，也只有经过烈火洗礼的才能够称为凤凰。对某事有感而发。</description>
+    </item>
+    
+    <item>
+      <title>走了，虽然还有些许留念</title>
+      <link>http://hzmangel.github.io/post/69/</link>
+      <pubDate>Fri, 15 Apr 2005 10:34:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/69/</guid>
+      <description>我轻轻的来，正如我轻轻的走 我挥一挥手，作别曾经的水木。
+ 看来信是没希望转了，今天下了决心，把注册了3年多的ID杀了，没有什么其它的感觉，SMTH都不在了，还要ID做什么呢。水木十年，我陪她走过了四年，虽然我的ID用的不多。 本来好像有很多话想说了，但是现在就是说不出来了，算了，让一切都随着SMTH的死亡消散吧。曾经看到一篇贴子，说SMTH多少年的时候，一家人都在上面做版主，不知道那样的日子能不能到来。一切随风吧，在这春光明媚的日子里，我们失去了SMTH。 十年累积方成果，一箭穿心两翼分 水木已死，有事烧纸  </description>
+    </item>
+    
+    <item>
+      <title>十年</title>
+      <link>http://hzmangel.github.io/post/68/</link>
+      <pubDate>Fri, 15 Apr 2005 00:52:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/68/</guid>
+      <description>贴这首歌的歌词，只是因为它叫十年
+如果那两个字没有颤抖
+我不会发现我难受
+怎么说出口也不过是分手
+如果对于明天没有要求
+牵牵手就像旅游
+成千上万个门口总有一个人要先走
+怀抱既然不能逗留
+何不在离开的时候
+一边享受一边泪流
+十年之前
+我不认识你你不属于我
+我们还是一样陪在一个陌生人左右
+走过渐渐熟悉的街头
+十年之后
+我们是朋友还可以问候
+只是那种温柔再也找不到拥抱的理由
+情人最后难免沦为朋友
+直到和你做了多年朋友
+才明白我的眼泪
+不是为你而流也为别人而流
+十载累积方得果，一箭穿心两翼分
+注册日期 : Thu Nov 8 14:07:43 2001
+最近光临日期 : Thu Apr 14 23:04:02 2005
+上站次数 : 623 次
+文章数目 : 398 篇
+上站总时数 : 110 小时 51 分钟
+私人信箱 : 43 封
+使用者权限 : bTCPR&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-
+生命力：[380] 身份: [用户]。
+大概这次就是真的了，也不想说什么了，因为说什么都没用了，现在能说的，也就是水木已死，有事烧纸了。看着THUExpress那些人的疯狂，觉得他们大致还是幸福的 ，至少有一个可以让他们发泄的地方，而我们这些从316事件后就被排斥的人来说，只有默默的看着这一切发生了。看着身边的BBS一个接一个的走向不归路，已经是无话可 说了。这篇文章里我也不想说什么关于这方面的事，只想找个时间，找个地点，回顾一下在SMTH上混的历史吧，也算是为SMTH出自己的一份力。
+今天查看了一下用户信息，惊异于自己的注册时间，才来学校两个月不到，就在SMTH上有了帐号，比我在学校的BBS上注册的时间晚不多少。不过开始泡SMTH大概是大 二后的事了。一开始是因为寝室没网，后来是机器对SMTH过敏(呵呵，至今还是，刚才差点重启，吓的我出了一身冷汗，文章都没保存啊。)
+刚写好的东西，没存，算了，能写多少是多少吧。
+SMTH给我的感觉，不仅仅是一个BBS，在那，我学会了很多东西。觉得很喜欢SMTH上氛围。不想说什么了，转点东西过来吧。
+ [公告]BBS水木清华站务委员会公告  鉴于现水木清华服务器已经不由我们掌握，我们不再能保证用户的一切数据、资料的</description>
+    </item>
+    
+    <item>
+      <title>想爷爷了</title>
+      <link>http://hzmangel.github.io/post/64/</link>
+      <pubDate>Mon, 04 Apr 2005 22:30:46 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/64/</guid>
+      <description>明天就是清明，想爷爷了&amp;hellip;&amp;hellip;
+ 在小时候，和爷爷一起住，爷爷经常带我出去玩，放风筝，逛公园；长大了后，有时觉得爷爷很固执，也发生过一些争执；再后来，我就搬家了，去爷爷家也少了。记得我考上大学那年，爷爷高兴了好久。后来爷爷得了老年痴呆症；在我军训那年的暑假，爷爷去了。 虽然后来去爷爷家少了许多，但是有时还是很想爷爷的，毕竟在一起过了那么久。爷爷是个很认真的人，记得他那时让我练字，每天都要我写，一天也不能停。爷爷也是个心灵手巧的人，在我的记忆中，他那双手能变出许多好玩的东西。记的最清楚的就是每年到大概这个时候，爷爷都要为我做一个风筝，方方的，竹签扎的，上面糊上白纸；再加上一个红纸的尖头，一个红纸的尾巴，还在白纸上贴一个红五星，后面拖两条长长的尾巴。在爷爷身体好的时候，经常带我去离家一站多路的体育场放风筝，一次比赛，我的风筝还得了第一名呢。 小时候，家边上的公园每到周日，都有一次花鸟市，爷爷都会带我去那逛逛。后来爷爷养了两只鸟，在他的嘴里面，那两鸟叫白燕(查了一下，好像就是金丝雀，记得那时候上写作班，用它写的作文还被老师表扬了呢^_^)，黄黄的，小小的，叫的声音很好听。那时候，爷爷大部分时间都花在养鸟上了，这也给他带来了许多欢乐，所以虽然奶奶一直反对他养，他还是硬把鸟儿留了下来。鸟儿后来又生了小鸟，鸟窝是爷爷用罐子的盖子垫上棉花做成的，那时候我和爷爷在家喜欢从鸟窝里面把长大了一点的小鸟拿出来，看它在地下走，有时也捧着它让它在家里面学飞。记得家里面最多的时候有过6只鸟，不过最后剩下来的好像只有两只了，其它的都在奶奶的&amp;quot;压力&amp;quot;下送人了。 后来也不知道怎么回事，爷爷变的越来越抑郁了，经常在家里面沉着脸，动不动就生气，也不知道是为什么。再后来我就搬走了，回去的时候也不多，所以就没什么好写的了。 明天就是清明了，不知道这算不算迷信，但是有时还是会想想爷爷，一个认真执着的老人。  </description>
+    </item>
+    
+    <item>
+      <title>转贴：物理大牛人的八卦</title>
+      <link>http://hzmangel.github.io/post/61/</link>
+      <pubDate>Sun, 03 Apr 2005 12:46:14 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/61/</guid>
+      <description>刚在ctex上看到的，有的N搞。^_^ 转过来，有可能过过就看不到了，那个版已经是要删除的了。
+1.本内容，纯属网络收集，道听途说，如有任何错误，本人概不负责
+2.feymann那扯淡的直觉 他有个最大的毛病，就是喜欢装牛b,明明自己也是费尽九牛二虎之力才作出来的 非得装着一晚上想出来的，用来打击别人 不过他也碰上过对手，有次碰上个速算的大牛，从此他知道在某些人面前不能吹牛b
+3.feymann这人表面上不在乎名声，实际上很虚荣 他有次跟个朋友参加聚会，他路上抱怨说自己为盛名所累，讨厌人围着，他朋友 安慰他说今天没有物理圈的，我不说，没人知道你得过nobel,于是他朋友很老实的 遵守诺言，可是宴会开到一半，几乎所有的人都知道feymann是nobel了 他朋友很郁闷，找了个人一问，原来是feymann自己到处说的 典型的甲方乙方徐帆表演的那个明星的现场版
+4.关键是feymann虽然的确不错，但是他自己吹再加上别人帮着吹，吹着吹着就真的 让人受不了了 比如那个所谓的拒领nobel奖 而且这个家伙明显的大嘴巴，作演讲不管对的错的一块儿来 他教学生算是nobel奖里面比较差得了(不知道算不算最差的)，大概学生中的牛人 我知道的就一个bjoken
+5.说一下schwinger 这个人是大大牛，属于早慧那种，据说他十五岁的时候混得不好，在纽约一个什么社区 大学混日子，但是有一天偶尔RABI和另一个牛牛在谈论一个量子电动力学的问题，这 时候schwinger插进来，&amp;rdquo;这个少年尖锐的发言结束了这场争论&amp;rdquo;，rabi爱才，特意托关系 把他招进的columbia,从此schwinger一帆风顺。。。。 schwinger大概对数学特别有偏好，做的文章很难看得懂，据说是在他做自己的第一次 场论报告的时候，除了bohr在那里点头同意，剩下的人根本不知道他在那里说什么， 但是既然波尔点了头，大家就认为对了，紧接着feymann上去，也讲场论，讲自己的那 套，这下更糟，连bohr在内，没一个听懂的，bohr据说说了一句特尖刻的话&amp;rdquo;你应该重 学量子力学&amp;rdquo;
+6.其实当时feymann得理论还是有人听懂了，一个是bethe,是他的同事，不断被他毒害 不懂也差不多了，另一个fermi,fermi以前从来没听过这个idea,但是fermi一下子就抓 住了本质 大牛啊 feymann最郁闷的事情莫过于，在物理上，比他聪明的同时代人有个schwinger,这位是 真的比他聪明，而且功力深厚，无论feymann怎么追，也追不上啊 引文 about schwinger, actually feynman envies him. feynman&amp;rsquo;s mum always compare they two to stipulate feynman and feynman finds it hard to defend himself, hehe.
+7.fermi真的是可以跟爱因斯坦,bohr比肩的大师，非但目光锐利，善于抓住主要问题 而且思维敏捷，实验理论都是第一流大牛，还会教学生，作为一个物理学家，简直是 完美 我认为是最好的物理学家之一 关于场论，刚开始大家特别糊涂，自己算出来的是什么东西都不知道，只知道算 然后feimi发了一片文章，结束了混乱。 另外说一句 杨振宁的博士导师不是fermi，他导师是TAYLOR,feimi的嫡传理论弟子是李政道
+8.杨振宁说的,现代数学的书可以分成两种，一种是看了一页看不下去的，另一种是看了一行看不下去的。 数学家想打人请便</description>
+    </item>
+    
+    <item>
+      <title>无题</title>
+      <link>http://hzmangel.github.io/post/59/</link>
+      <pubDate>Thu, 31 Mar 2005 10:45:38 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/59/</guid>
+      <description>无题就是无题
+　觉得教育部那帮子人办的事情越来越让人&amp;hellip;..了 先是关了ytht，再关了全国各大高校的BBS，昨天又出台什么规定允许大学生结婚。真***是吃饱了撑的吧。 首先说说BBS，我想各大学的BBS不是只有那帮无聊的人吧，不说别的，光说说SMTH那1到2W人在线，难道全是在征友、灌水吗？这把上BBS的人想的也too simple了点吧。关了yt，是因为上面太民主了，民主的有点过了，我也就忍了，反正我也没那根筋。但sm关了，真让人FT，外校的要去那找资料，已经离校的要去那寻回母校的消息。这也有错吗？昨天看了凤凰关于SMTH的节目，想想也是，什么是大学生，要像前一段时间那个什么z猪头说的，不能有电视、电话，再加上这段时间这个z猪头说的&amp;rdquo;BBS只能做什么校内交流平台&amp;rdquo;，还不知道再过过还会出现什么让人FT的决定，不过看看大概就一句话：&amp;rdquo;你们什么大学生啊，关心那么多事情干什么啊，乖乖的学学那些小学生，两耳不闻窗外事，一心只读‘圣贤书&amp;rsquo;去吧，什么信息交流，什么获取信息，书中自有黄金屋，书中自有&amp;hellip;..&amp;ldquo;，等到什么时候那帮zt再下一条规定，高校的图书馆再&amp;hellip;&amp;hellip;样，那时候我绝对不让我认识的人考大学，考上了又能怎么样啊，一整个奴化的人！ 再说说结婚，当然，有些人是想，但是想过没，没有经济基础的东西，能维持多久。教育部这帮&amp;rdquo;人&amp;rdquo;，除了会干一些表面上看，给学生很好环境的事情，剩下大概的就是对学生的疯狂压制！ 不过怎么说呢，也许这次事情就会促成一种新的技术的诞生，不知道p2pbbs什么时候能实用化，或什么时候能在高校间进行实验，这样我们也有个盼头啊。 不说了，FQ也当够了，虽然没有SM，研究也是要做的。</description>
+    </item>
+    
+    <item>
+      <title>好久没来写东西了:-)</title>
+      <link>http://hzmangel.github.io/post/58/</link>
+      <pubDate>Fri, 25 Mar 2005 17:01:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/58/</guid>
+      <description>做毕设，忙找工作，这几天看电脑看的头昏脑涨的，程序也写不下去，看小说看的不行了 :) 无聊啊^_^</description>
+    </item>
+    
+    <item>
+      <title>老爸生日快乐啊</title>
+      <link>http://hzmangel.github.io/post/56/</link>
+      <pubDate>Sat, 05 Mar 2005 00:02:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/56/</guid>
+      <description>今天是老爸的生日，希望他能快乐。
+为了这个家，操劳了大半辈子了，现在还在忙着，真的想说一声，老爸，辛苦了。 自己做的也不够，没能给您分担一些。我现在只能希望我能找个好工作吧。能给家里面多少分担一些。 不想写的太多，也写不出来什么东西。想说的只有一句：
+老爸，您幸苦了，生日快乐，天天快乐。</description>
+    </item>
+    
+    <item>
+      <title>演唱会归来</title>
+      <link>http://hzmangel.github.io/post/54/</link>
+      <pubDate>Thu, 03 Mar 2005 00:18:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/54/</guid>
+      <description>最近一直没写东西，因为没什么心思，有时想到点什么东西又写不了。趁着今天有了难得的晚上时间，写点什么吧。
+刚看完了零点的演唱会。说真的，第一次去看演唱会，说感觉也没什么，只是觉得他们都满幸福的，有着自己的追求，并可以为之奋斗。虽然中间有过不快乐，但是至少还有想要奋斗的动力和目标。想想也是，一个没目标的人生，真的不知道会成什么样，虽然自己现在也没什么目标:( 有时也在想，是不是要给自己定一个目标了，但是总没有坚持下去。不少人告诉我说，你很强。我真的不知道有多少是善意的谎言。现在才感觉到，认识自己是个多么难的步骤，能完全的认识自己，可以说在成功的路上已经走过了一大半了。别人对自己的看法，又有多少是实话呢。现在才觉得，只有从小孩的嘴里，才有可能听到没有被社会的虚伪所玷污的实话。而这种虚伪，不管你怎么痛恨它，它都会在这个世界上存活下去，而且会有个很好听的名字叫做人的学问。这也是没办法的事情，好听的话谁不想听呢？那个准备了100顶高帽的学生出去送人的笑话应该有不少人听过吧。 认识自己进而超越自己，才会取得最后的成功。可惜到现在，我还是对自己没什么了解:(
+失败啊。 ps:看来我真的是属于那种夜猫子型的^_^</description>
+    </item>
+    
+    <item>
+      <title>晚上回家啦</title>
+      <link>http://hzmangel.github.io/post/53/</link>
+      <pubDate>Wed, 26 Jan 2005 12:53:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/53/</guid>
+      <description>还在这边有一顿饭，晚上就要回家啦，回家后上网也不方便了 :( 回去做翻译，下学期好好学习。 真要学点东西了，要不然要是没考好找工作都不好找。 Good luck for me and Happy New Year for all of us
+btw: What is Spinach dong now? the mobile has shut down for two days</description>
+    </item>
+    
+    <item>
+      <title>Happy Birthday 2 Spinach</title>
+      <link>http://hzmangel.github.io/post/52/</link>
+      <pubDate>Mon, 24 Jan 2005 22:46:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/52/</guid>
+      <description>Today is her birthday, leave something here :-)</description>
+    </item>
+    
+    <item>
+      <title>Happy New Year in other language</title>
+      <link>http://hzmangel.github.io/post/42/</link>
+      <pubDate>Sat, 01 Jan 2005 22:45:39 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/42/</guid>
+      <description>德 :Frohliches Neues Jahr! 俄 :Поздравляю Вас с Новмы годом! 日: 明けまして おめでとうございます。 中 :祝你新年快乐! 英 :Happy new year to you! 法 :Bonne Année!
+hehe, just for fun, and wish all of us happy and good luck in new year.</description>
+    </item>
+    
+    <item>
+      <title>Happy New Year</title>
+      <link>http://hzmangel.github.io/post/41/</link>
+      <pubDate>Sat, 01 Jan 2005 00:06:02 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/41/</guid>
+      <description>now is year 2005 Wish all of us happy. to my friends.
+There is no strangers, the only thing left is friends haven&amp;rsquo;t met.
+Happy New Year</description>
+    </item>
+    
+    <item>
+      <title>a new year is nearby</title>
+      <link>http://hzmangel.github.io/post/40/</link>
+      <pubDate>Fri, 31 Dec 2004 23:11:36 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/40/</guid>
+      <description>A new year, 2005, is nearby. After less than 1 hour, 2005 is coming. I do not want to say something, I only want to mark this day on the blog, For nothing but memory. After 21 days, I have to get in the important exam, I do not know what the result now, a war for me. OK, say nothing, just bless me and all the person like me.</description>
+    </item>
+    
+    <item>
+      <title>要过年了</title>
+      <link>http://hzmangel.github.io/post/39/</link>
+      <pubDate>Wed, 29 Dec 2004 19:40:19 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/39/</guid>
+      <description>又有一段时间没来了，眼看着就要考研了，书还没看完，更要命的是看不下去了，狂FT 这几天想把Internet的论文做完，好一门心思的看书，晕啊
+一年又要过去了，回头看看，都不知道自己做了什么，无语啊 :(</description>
+    </item>
+    
+    <item>
+      <title>N久没来了</title>
+      <link>http://hzmangel.github.io/post/38/</link>
+      <pubDate>Sat, 11 Dec 2004 15:16:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/38/</guid>
+      <description>写点什么吧，要不然放着两个月前的文章，不好 ^_^ 最近也不知道在忙什么，考研的书也没好好看，游戏也没好好玩，网也没好好上，实验室更是不知道门朝哪开了，狂FT。瞎忙了这么长时间。看看日历，没几天了，40天左右吧，手头还有两篇论文，一个仿真，最后还有一次考试＋一次大考试，诶，难啊
+熬吧，出头就行了 :-)</description>
+    </item>
+    
+    <item>
+      <title>凌晨3点半</title>
+      <link>http://hzmangel.github.io/post/15/</link>
+      <pubDate>Thu, 30 Sep 2004 03:08:40 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/15/</guid>
+      <description>凌晨3点半，醒了。 对我来说，本来就是一件很不寻常的事情，我很少有一觉睡一半就醒了的记录，也不知道是什么原因。 醒了，再睡着就难了，刚好趁着这段时间，好好想想心事。 说是心事，其实也没什么，也就是P大点的事，平时白天没时间，也没环境想，刚好有个机会，好好想想也不错。 想了一段时间，觉得自己和大一的时候真的差了许多，没有了那时候的一种进取精神(其实那时候也不一定是进取，但是比现在应该是好多了)，现在对什么事情都提不起来兴趣，不想玩游戏，不想写程序，不想看书。有时候真的不清楚自己在干什么，在自习室坐了一晚上，或在机子前坐了一天，事后想想都不知道自己做了什么，经常会冒出来自己很失败的想法，这在大一的时候好像基本是MI的。说起来，想学编程，借了书也没怎么看；想复习考研，拿起来书就看不下去；想玩游戏，但是坐到机子前就是想不到玩什么；想看电影，到现在没一部片子看超过15分钟。有时都不知道自己想做什么。今天就开始放假了，本来的一些计划已经被打乱了，看来只有定新的了。主要时间用来复习吧，这样会好不少，说真的，一开始想考研，是因为家里面让考，还有一些别的原因，自己并不是十分愿意的；后来进了实验室，现在看来，我只有考上研，才能再做嵌入式的东西，才能再有时间去学编程(但愿能学下来)，也不是对那些东西有多大的兴趣，但是相比起别的一些东西，还是比较想学这些东西的。一开始没什么事，时间浪费在游戏上了，现在游戏玩厌了，又没时间学编程了，真FT。 那天看了一本书，上面说，不要老是说“如果”，而要多说“我应该”，多从“我应该怎么怎么样”这个角度考虑问题，想想真是，老说“如果”的人，老是强调外因；而说“我应该”的人，是从自身找原因的。两者之间有根本的不同。现在我也开始学着从自己身上找原因了，觉得以前对自己的认识真的很不够，眼光放不开，老是局限在身边的一群人，这样说有不好听一些，就相当于井底之蛙。自从接手了嵌入式的那些东西，BBS上多了，才知道自己是多么的无知。苏驷希也说过，“知识就是力量，但是无知者也无谓啊”，当时只是当成笑话一听了之，现在想想，觉得真的是这样。本来一直以为自己的电脑水平不错，但是上了BBS才知道，山外有山，人外有人这句话真的不假，而自己计算机的基础之薄弱也让我吃了一惊，数据结构和没学过一样，算法方面简直是白痴。就这水平还对别人说自己对编程比较的熟，看看自己写过的程序，首先是没有超过200行的，再就是基本上没自己写的东西，都是从一些现成的程序上东摘一句，西抄一段，真正自己写的东西很少，有时候自己想写点东西，就会觉得无从下手。我想嵌入式编程用C写不出来什么程序，也许和这有很大的关系。 还有就是不从基础开始做，这已经是很早就有的毛病了，只不过是一直没改掉，现在发现影响越来越大了。虽然学程序都是从例子开始的，但是这样的话就不会有系统的认识，没写过系统的C程序，也是编程提高不起来的原因。不知道现在开始读那本linux内核源代码迟不迟。 发现晚上真的是个好时间，这也是我喜欢在晚上干活的原因，对我来说，效率高一些，而且身边很静，不会有人吵。 先写这些吧，这几天经历了一些事，让心智又成熟了一些，也算是成长过程中必不可少的一课吧，衷心感谢那些帮我上这一课的人，如果能看到这些的话。 要过节了，想点高兴的事吧，嗯，就这样了先。 ^_^</description>
+    </item>
+    
+    <item>
+      <title>该来的</title>
+      <link>http://hzmangel.github.io/post/14/</link>
+      <pubDate>Wed, 29 Sep 2004 12:51:27 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/14/</guid>
+      <description>还是来了，就让它来吧，不让也不行。心里面少的那一块，就让时间来磨平吧。手里面的活还是不能停的，所以+U吧 :-)</description>
+    </item>
+    
+    <item>
+      <title>我看中国的教育制度</title>
+      <link>http://hzmangel.github.io/post/9/</link>
+      <pubDate>Tue, 21 Sep 2004 21:38:07 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/9/</guid>
+      <description>看书看的不爽了，回来当一回愤青^_^
+　一直想对这些东西说点什么，其实说了也没什么用，但是还是觉得有点不吐不快的滋味。 既然是从看英语开始不爽的，那就先从英语说起吧。从小学学到现在英语，自己感觉从来就没学到过什么真的东西，除了多了些所谓的单词量，还有一些老外都不管的语法，就没有过什么东西。其实觉得这些东西都没有什么用，有了语言环境，这些我觉得都是小case。也许有人会说，国内，哪来什么语言环境，那我再来说说我觉得学英语为的是什么。首先说这个语言环境的问题，可以说，只要出去了，不到一个月，交流基本上就没什么障碍了；在国内，当然没有什么语言环境，但是我要说的是，你在国内，学那么多干什么？和老外交流？我想也许到现在，还有不少人连和老外面对面的机会都没有吧，既然没有用，学了也是白学。学语言，应该都是听说读写这样下来的，但是国内的教法基本都是哑巴英语，教出来的只会选ABCD，不会说，我不由的想问，这有用吗？没有听说的读写，可以说是无根之石，呵呵，后果嘛&amp;hellip;.. 再来说说理工类的课吧，看看国内的教法，基本上都是纯理论的教学，实验的机会，基本上是想都不要想。这样教出来的学生，照理说理论知识应该比较不错吧，但是看看那些找工作的学生，有多少在工作一个月后还记得课里面的东西？就我自己的亲身经历来说吧，我学编程基本都是从例子入手，自己边看例子边改，这样学编程真的很快，我想不少人也有这样的经历吧，光看那些编程的理论，感觉什么都看不懂，但是加上例子后，很快就明了了，这也可以说是一个不错的例子吧。 再来说说前几天教育部副部长张XX说的一些话，就是说坚决反对奢华，不允许电视电话进学生宿舍(虽然有点跑题)的事。首先我想问的问题就是，现在的我是人还是两个只有23条DNA的东西。如果是后一点，那我想他说这话没错，当然要反对，一个电视加一个电话要多少钱啊，学生怎么用的起啊。但是不好意思，我现在是一个20岁的人，一个有血有肉的人，可以坐在电脑前打字的人，所以，看到这句话也只有喊toold的份了，比我看过最老的笑话还老，真的。TMD现在是信息时代，邓爷爷早就说过，计算机要从娃娃抓起，不知道这位副部长知不知道电脑可以同时当电视和电话使？首先我们要听邓爷爷的，所以，我们每个人都要从幼儿园开始玩电脑，但是要按这位副部长的话来说，我们在上了大学后，一概不可以用电脑，要等到4年后，开启我们那部灰落多厚的电脑。我想现在是个人都知道电脑过一到两个月后就已经落后了，想想4年。也许有人要说，他说的是电视和电话，那我再来说说电视和电话。电视这个问题嘛，老师告诉我们要关心国家大事，所以新闻联播嘛，等4年后看吧；就算不是看新闻，想想看4年与外界的接触只有可怜的一点点，那是与时俱进吗？再说说电话，你姓张的没父母啊，你丫一个人在外面，家里面不担心啊，真TMD不是人说的话! 算了，不说了，要写下一篇了，写写技术方面的东西吧，不要再当FQ了。当了也没用，还在中国，就要这样，真有本事，出去混混再回来，不受这种X气了。 :-)</description>
+    </item>
+    
+    <item>
+      <title>扩招啊!!!</title>
+      <link>http://hzmangel.github.io/post/7/</link>
+      <pubDate>Tue, 14 Sep 2004 22:40:15 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/7/</guid>
+      <description>今天彻底不行了，早上去上自习，找了一圈，找了N久才找一间教室。晚上去听一节研究生的课，居然是爆满，本来还以为我们这一界是扩招的最大受害者，没想到研究生比我们还惨。服了学校了，扩招也要有个限度吧，招成这样，又没相应的硬件设备，真不知道将来学校是什么样，教育产业化的后果啊。 本来学校教室就少，还要给语言的分专用教室，真弄不懂学校怎么想的，不错，我也知道学语言的要专用教室，但是完全没必要用这么多吧，就算人多也可以分时用嘛，弄的N多人现在都没地方上自习，天天在BBS上吵，狂晕。 浙大今年研究生比本科生招的多，不知道我们这届我们学校会不会这样，不过估计不太可能，能改的也就是学制，但愿能改成两年。
+也许今天自己像个fq，但是真的想说点什么，虽然知道没什么用，不用说放在这了，就是放在学校里面发也不会有什么用，有也是让自己被封。在这写点吧，留下点东西。</description>
+    </item>
+    
+    <item>
+      <title>要上课了</title>
+      <link>http://hzmangel.github.io/post/5/</link>
+      <pubDate>Mon, 13 Sep 2004 01:14:04 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/5/</guid>
+      <description>再过几个小时，就是真正意义上的上课了，虽然对于大四的我来说，主要任务是考研，已经没什么课可上了。 一个学期，主要的任务当然是考研，还没怎么看书呢，已经只有3个月了，还要除去实验室和一些别的事情，真的还不知道有多少时间复习。虽然一帮人告诉我说我没问题，但不知道有多少是真的了解我的人说的。
+喜欢晚上一个人，身边很静，可以想到白天想不到的事情，但愿开学后能有心情看书，有时也想像他们一样，放手，不考了，其实说真的，我也不是太想考研的，一是学费太贵，还有就是国内的研究生动手能力发挥的不够，还要考那该死的zz，背可是让我最头疼的事情啊，所以郁闷中:(
+嵌入式系统做的基本上可以说是一点进展都没有，有点让人郁闷，就像是那种找不到门的感觉，也不知道去听听研究生的课会不会有什么进展，老师还给报了一个班，有时想想真怕对不起她，虽然她嘴上说不急，但是我还是想做出来点东西，这样对自己也算是有个交待啊。现在最想的就是在片子上跑起来j2me，这样编程也有的下手一点。现在感觉自己已经找不到那种C编程的感觉了。其实有时想想，自己所谓的编程，哪一次不是把别人的一段程序抄过来再自己改，抄个几段拼在一起就成自己的东西了，所以可以说自己没写过程序，悲哀啊，一直自诩自己编程不错，其实呢，一个程序也没写过。现在知道了数据结构的重要性，只是以前学的时候为什么没觉得呢，还没感觉到离散的重要性，但愿觉得到的时候，不要太迟。
+以前在家里面没电脑，想找台机子写代码。现在有了，又找不到大一那时候的刻苦了，图书馆N久才去一次，借的书还不一定看。只在无聊的时候，才会想起来有过想编程的想法，但是没过一会就找不到了，人是会变的，真的。
+一开始是想在实验室做大概一个月，然后一门心思考研，但是老师给报的这个班可以说对我的想法有很大的影响，还不知道自己那时候会在干什么呢，学校教室这么紧张，还不知道能不能找到教室学习，唉，难啊
+不知不觉又写了一篇不知所云的东西，还申请技术版呢*^_^*。其实说真的，我都不知道我这边能写几篇真正技术含量高的东西，先这样吧 要睡觉了，祝大家和我自己早安。</description>
+    </item>
+    
+    <item>
+      <title>开篇词</title>
+      <link>http://hzmangel.github.io/post/4/</link>
+      <pubDate>Sun, 12 Sep 2004 15:38:34 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/4/</guid>
+      <description>经常听人说起博客，自己也想来试试。不过对自己的分量还是比较的清楚，从上高中期间，语文一路在及格线上挣扎的情况，就知道自己以后就不太会和文字之类的东西打太多的交道:-)　，不过最后还是申请一个下来吧，有时可以写点东西。
+自认为对电脑有点三脚猫的理解，看看自己以前学过的东西，基本上都是连皮毛都没有摸到过，而且也就那几种可怜的软件，屈指可数的语言，基本上没写过超过200行的程序。呵呵，有点不好意思，眼看着大学就要毕业了，想想能不能留下点什么吧。
+就到这吧，算开始了 :-)</description>
     </item>
     
   </channel>

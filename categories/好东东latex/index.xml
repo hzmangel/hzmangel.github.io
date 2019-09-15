@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>好东东latex on 湖间小筑</title>
+    <title>好东东LaTeX on 湖间小筑</title>
     <link>http://hzmangel.github.io/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex/</link>
-    <description>Recent content in 好东东latex on 湖间小筑</description>
+    <description>Recent content in 好东东LaTeX on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Mon, 13 Oct 2008 22:45:51 +0000</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>xetex设置字体</title>
@@ -16,10 +18,8 @@
       <pubDate>Mon, 13 Oct 2008 22:45:51 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/354/</guid>
-      <description>&lt;p&gt;关键字： xetex, 字体&lt;/p&gt;
-
-&lt;p&gt;xetex是好东西啊，直接支持TTF字体。赞完了，说正题。写片子，最后的一个Thanks需要用花体，google了几个关键字组合未果，只好去直接翻fontspec的文档了，结果发现真的很简单。\fontspec{FONTNAME} &amp;lt;text&amp;gt;，就行了，如果只想要这一点文字是这个字体，那么两边加个花括号，over.&lt;/p&gt;
-</description>
+      <description>关键字： xetex, 字体
+xetex是好东西啊，直接支持TTF字体。赞完了，说正题。写片子，最后的一个Thanks需要用花体，google了几个关键字组合未果，只好去直接翻fontspec的文档了，结果发现真的很简单。\fontspec{FONTNAME} &amp;lt;text&amp;gt;，就行了，如果只想要这一点文字是这个字体，那么两边加个花括号，over.</description>
     </item>
     
     <item>
@@ -28,17 +28,9 @@
       <pubDate>Sun, 12 Oct 2008 23:59:44 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/353/</guid>
-      <description>&lt;p&gt;关键字： beamer, latex, 背景&lt;/p&gt;
-
-&lt;p&gt;一直以为给beamer加背景是很难的事情，后来在网上翻了翻才知道原来是很简单的，只需要重新设置一下beamer的background变量就行了，代码很简单：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;\setbeamertemplate{background}%
-{\includegraphics[height=\paperheight]{pics/background_title.jpg}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;后面的includegraphics也可以换成别的包含图片的命令，像xelatex里面的\XeTeXpicfile什么的。话说后来发现，手册里面也有说这东西
-，所以有空还是要把手册给读读啊~~~&lt;/p&gt;
-</description>
+      <description>关键字： beamer, latex, 背景
+一直以为给beamer加背景是很难的事情，后来在网上翻了翻才知道原来是很简单的，只需要重新设置一下beamer的background变量就行了，代码很简单：
+\setbeamertemplate{background}% {\includegraphics[height=\paperheight]{pics/background_title.jpg}}  后面的includegraphics也可以换成别的包含图片的命令，像xelatex里面的\XeTeXpicfile什么的。话说后来发现，手册里面也有说这东西 ，所以有空还是要把手册给读读啊~~~</description>
     </item>
     
     <item>
@@ -47,13 +39,8 @@
       <pubDate>Sun, 09 Mar 2008 22:41:10 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/250/</guid>
-      <description>&lt;p&gt;毕业论文中的参考文献用默认的间距看上去有点大，不知道别人看上去会不会不舒服，所以想调小点。最后使用了natbib宏包，用&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;\setlength{\bibsep}{1ex}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;设置一下即可，后面括号中的值可以自己调。&lt;/p&gt;
-</description>
+      <description>毕业论文中的参考文献用默认的间距看上去有点大，不知道别人看上去会不会不舒服，所以想调小点。最后使用了natbib宏包，用
+\setlength{\bibsep}{1ex}  设置一下即可，后面括号中的值可以自己调。</description>
     </item>
     
     <item>
@@ -62,16 +49,7 @@
       <pubDate>Sun, 09 Mar 2008 22:38:49 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/249/</guid>
-      <description>&lt;p&gt;一段时间没用asymptote，居然不知道咋加中文了，在CTeX找到了解决方案，列上吧，怕我又忘了。其实很简单，只需要在asy文件的头部加上这三行&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  texpreamble(&amp;quot;\usepackage{CJKutf8}&amp;quot;);
-  texpreamble(&amp;quot;\AtBeginDocument{\begin{CJK}{UTF8}{song}}&amp;quot;);
-  texpreamble(&amp;quot;\AtEndDocument{\clearpage\end{CJK}}&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后用asy编译就行了，我的文件用的是utf-8编码，所以用的是CJKutf8包，如果是GBK编码则直接用CJK包就行了。系统中一定要有song啥的字体，目
-前还不清楚怎么像xetex一样直接可以用TTF字体。就这样了。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;一段时间没用asymptote，居然不知道咋加中文了，在CTeX找到了解决方案，列上吧，怕我又忘了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -80,9 +58,7 @@
       <pubDate>Mon, 03 Mar 2008 14:17:07 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/248/</guid>
-      <description>&lt;p&gt;用asymptote画的图，用includegraphics插入生成的eps到文件中，居然告诉我不认，上网找了找，发现需要在documentclass中加入
-dvipdfm的选项才行。基本功不行啊。&lt;/p&gt;
-</description>
+      <description>用asymptote画的图，用includegraphics插入生成的eps到文件中，居然告诉我不认，上网找了找，发现需要在documentclass中加入 dvipdfm的选项才行。基本功不行啊。</description>
     </item>
     
     <item>
@@ -91,8 +67,7 @@ dvipdfm的选项才行。基本功不行啊。&lt;/p&gt;
       <pubDate>Mon, 03 Mar 2008 14:15:00 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/247/</guid>
-      <description>&lt;p&gt;写论文，教务处要固定行距20磅，在LaTeX里面可以用linespread设置，但是它的参数表示的是倍数，所以算啊。用的是小四号字，大小大概是12pt，然后默认的行距是1.2倍，然后小算了一下，最后用的是\linespread{1.36}，1.36倍，大概行距是12*1.2*1.36＝19.584，凑合用吧，嗯。&lt;/p&gt;
-</description>
+      <description>写论文，教务处要固定行距20磅，在LaTeX里面可以用linespread设置，但是它的参数表示的是倍数，所以算啊。用的是小四号字，大小大概是12pt，然后默认的行距是1.2倍，然后小算了一下，最后用的是\linespread{1.36}，1.36倍，大概行距是12*1.2*1.36＝19.584，凑合用吧，嗯。</description>
     </item>
     
     <item>
@@ -101,8 +76,7 @@ dvipdfm的选项才行。基本功不行啊。&lt;/p&gt;
       <pubDate>Sun, 05 Aug 2007 12:01:40 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/201/</guid>
-      <description>&lt;p&gt;昨晚看了几个帖子，终于弄掉了，其实也简单，就是在hyperref宏包的参数中加上unicode选项就可以了，这个选项好像和CJKbook&amp;hellip;.什么的冲突还是和什么冲突，反正老的东西不能用了，自己又重新写了个选项列表，主要就是更改了一些颜色之类的东西，还有文档属性的一些东西。有些参数还是满好玩的，嗯。&lt;/p&gt;
-</description>
+      <description>昨晚看了几个帖子，终于弄掉了，其实也简单，就是在hyperref宏包的参数中加上unicode选项就可以了，这个选项好像和CJKbook&amp;hellip;.什么的冲突还是和什么冲突，反正老的东西不能用了，自己又重新写了个选项列表，主要就是更改了一些颜色之类的东西，还有文档属性的一些东西。有些参数还是满好玩的，嗯。</description>
     </item>
     
     <item>
@@ -111,24 +85,7 @@ dvipdfm的选项才行。基本功不行啊。&lt;/p&gt;
       <pubDate>Tue, 01 May 2007 23:50:11 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/183/</guid>
-      <description>&lt;p&gt;前段时间看到smth上有人说XeTeX直接支持TTF字体，心里一阵痒痒的，本来XeTeX是给Apple的人用的，现在咱终于有的用了，就带在TeXLive2007里面。昨天把TeXLive2007折腾完了，本来心里面想难道是直接用的是XeTeX引擎，后来用的时候才知道，直接用latex命令使用的还是fpTex，如果要用XeTeX的话，需要使用xetex和xelatex命令。昨天没空，全折腾字体去了，今天刚好有些时间空出来了，就换个东西折腾了 ^&lt;em&gt;^先在newsmth上找了个beamer的例子，于是开始编译。xelatex
-test.tex，结果它告诉我说找不到xelatex.fmt，而且最后的错误是mkdir error，老习惯，转向google，第一次找到的页面是XeTeX
-的FAQ，那上面很直接的告诉我说，介个文件是安装的时候生成的，要是没有就是出错了，你丫重装吧，在最后一句，提到了一个方法，改language.dat，当时我
-叫一个郁闷啊，如果XeTeX那玩意是我装的，我倒还真不怕了，但是我是从TeXLive里面直接拷出来的撒，不得已转向第二个方法，改文件，那会在等网页的时候，已
-经在Linux下把那个文件编译完成了，效果还行，想想Windowz下的一大把字体，总不能全上我上传吧，更坚定了我在Windowz下要把它折腾出来的决心。 想
-想Linux下能用了，比较下两个系统中的language.dat吧，一比，更FT了，两个文件的大小差了5倍，更加不敢折腾了。这时候又打开个页面，也是XeTe
-X官网中的某个，它里面有说用fmtutil生成fmt文件，一看有戏，照着做吧。看看它的步骤，发现前面的安装什么的应该都不用做了，于是直奔主题，生成fmt文件
-。它给的方法是fmtutil &amp;ndash;enablefmt
-xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，倒。比较了一下两个系统上的这个命令，参数还真的不一样，只好自己接着摸了。看看它的选项，有一个
-&amp;ndash;byfmt &amp;hellip;..，试试吧。输入后，一运行，一堆文字滚动过后，同样的错误，mkdir error。最后想了半天，祭出FileMon，最后终于被我找到
-原因了，在$HOME$下新建目录出错，当时我叫一个郁闷啊，还能犯这种错。于是按它要建的目录结构给他建好，运行fmtutil
-&amp;ndash;all，等结束后，再次运行xelatex test.tex，一切正常，总算成功了。试了几个字体，感觉还是满不错的，这几天看来又有的玩了 ^&lt;/em&gt;^&lt;/p&gt;
-
-&lt;p&gt;对了，xetex带了一个fc-list命令，可以看到系统中可用的字体，生成出来的东西是utf-
-8编码的，第一列就是可用的字体名称。还可以在fonts.conf文件中加&lt;/p&gt;
-
-&lt;p&gt;以增加目录。很不错的东西，嗯。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;前段时间看到smth上有人说XeTeX直接支持TTF字体，心里一阵痒痒的，本来XeTeX是给Apple的人用的，现在咱终于有的用了，就带在TeXLive2007里面。昨天把TeXLive2007折腾完了，本来心里面想难道是直接用的是XeTeX引擎，后来用的时候才知道，直接用latex命令使用的还是fpTex，如果要用XeTeX的话，需要使用xetex和xelatex命令。昨天没空，全折腾字体去了，今天刚好有些时间空出来了，就换个东西折腾了 ^_^&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -137,14 +94,8 @@ xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，
       <pubDate>Tue, 01 May 2007 23:31:58 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/182/</guid>
-      <description>&lt;p&gt;前段时间也不知道为什么把CTeX删了，最近要用，刚好一直以来想试试TeXLive，于是就拖下来了，newsmth上有人做的，可以Live，支持中文。&lt;br /&gt;
-不过东西弄下来后，感觉挂着iso玩有些不爽，如果想要升级宏包的话就不行了，于是动手开始拷东西。它的文档中是说把光盘里面的所有东西拷到某个目录下
-就可以了，但看着那么一大堆东西头大，于是决定拷有用的，自己慢慢找吧。最后的结果是把bin目录，texmf*目录，gs目录，perltl目录和
-WinEdt给拷过来了，把bin加进了系统目录，但是运行latex，出错，错误信息忘抄了，反正就是说啥啥文件找不到。后来仔细看了看它的安装说明，
-老老实实的设置了几个环境变量，TEXMFDIST, TEXMFLOCAL, TEXMFMAIN,
-TEXMFSYSVAR，再运行，可以了。和原来用的MikTex相比，没感觉到什么不同，嗯。8过TeXLive里面加了XeTeX，号称直接支持
-TTF字体，而且内部全使用Unicode编码，听上去很诱人，刚用个小文件试了试，有几个字体直接给我弄出来了，效果还行，过过再写吧 ^_^&lt;/p&gt;
-</description>
+      <description>前段时间也不知道为什么把CTeX删了，最近要用，刚好一直以来想试试TeXLive，于是就拖下来了，newsmth上有人做的，可以Live，支持中文。
+不过东西弄下来后，感觉挂着iso玩有些不爽，如果想要升级宏包的话就不行了，于是动手开始拷东西。它的文档中是说把光盘里面的所有东西拷到某个目录下 就可以了，但看着那么一大堆东西头大，于是决定拷有用的，自己慢慢找吧。最后的结果是把bin目录，texmf*目录，gs目录，perltl目录和 WinEdt给拷过来了，把bin加进了系统目录，但是运行latex，出错，错误信息忘抄了，反正就是说啥啥文件找不到。后来仔细看了看它的安装说明， 老老实实的设置了几个环境变量，TEXMFDIST, TEXMFLOCAL, TEXMFMAIN, TEXMFSYSVAR，再运行，可以了。和原来用的MikTex相比，没感觉到什么不同，嗯。8过TeXLive里面加了XeTeX，号称直接支持 TTF字体，而且内部全使用Unicode编码，听上去很诱人，刚用个小文件试了试，有几个字体直接给我弄出来了，效果还行，过过再写吧 ^_^</description>
     </item>
     
     <item>
@@ -153,11 +104,8 @@ TTF字体，而且内部全使用Unicode编码，听上去很诱人，刚用个�
       <pubDate>Wed, 30 Nov 2005 12:19:47 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/117/</guid>
-      <description>&lt;p&gt;昨天在寝室又被dvipdfmx郁闷了，本来以为升级一下dvipdfmx就可以OK了，图插进去了，但是字体又出问题了，也不知道是哪的问题，经常出现两个字叠在一
-起的情况。最后不得以，把那些图使用的Acrobat转成了eps，插了进去。现在又有问题了，继续FT&amp;hellip;&amp;hellip;.&lt;/p&gt;
-
-&lt;p&gt;btw: 不知道为啥CTeX版的mptopdf要在前面加上%&amp;amp;latex :(&lt;/p&gt;
-</description>
+      <description>昨天在寝室又被dvipdfmx郁闷了，本来以为升级一下dvipdfmx就可以OK了，图插进去了，但是字体又出问题了，也不知道是哪的问题，经常出现两个字叠在一 起的情况。最后不得以，把那些图使用的Acrobat转成了eps，插了进去。现在又有问题了，继续FT&amp;hellip;&amp;hellip;.
+btw: 不知道为啥CTeX版的mptopdf要在前面加上%&amp;amp;latex :(</description>
     </item>
     
     <item>
@@ -166,11 +114,8 @@ TTF字体，而且内部全使用Unicode编码，听上去很诱人，刚用个�
       <pubDate>Tue, 29 Nov 2005 21:48:34 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/116/</guid>
-      <description>&lt;p&gt;升级了dvipdfmx，总算把问题解决了，把dvipdfmx升级到了20050831版本，还有就是把mp文件中的两行input注释掉了(input mp-
-tool  &amp;amp;  input mp-spec)，否则使用dvipdfmx的时候，全出错，说找不到什么&amp;rdquo;def&amp;rdquo;，然后图像就包不进来。&lt;/p&gt;
-
-&lt;p&gt;现在郁闷的地方是学校的机器和寝室的机器编译的效果不一样，在这边编译有错，但是回去就没有了。错全是在lstlistings环境中，也不知道是为什么，FT中。&lt;/p&gt;
-</description>
+      <description>升级了dvipdfmx，总算把问题解决了，把dvipdfmx升级到了20050831版本，还有就是把mp文件中的两行input注释掉了(input mp- tool &amp;amp; input mp-spec)，否则使用dvipdfmx的时候，全出错，说找不到什么&amp;rdquo;def&amp;rdquo;，然后图像就包不进来。
+现在郁闷的地方是学校的机器和寝室的机器编译的效果不一样，在这边编译有错，但是回去就没有了。错全是在lstlistings环境中，也不知道是为什么，FT中。</description>
     </item>
     
     <item>
@@ -179,13 +124,10 @@ tool  &amp;amp;  input mp-spec)，否则使用dvipdfmx的时候，全出错，�
       <pubDate>Mon, 28 Nov 2005 21:39:09 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/114/</guid>
-      <description>&lt;p&gt;弄了几个小时，做的第一个Metapost源文件，图方便选了N-S流程图，不知道他们的图要怎么办，如果都转的话会疯掉的:(&lt;br /&gt;
-那个图就没什么说的了，纯体力活，不过现在还有的问题就是还不能嵌入到pdf文档中去，用dvipdfmx的时候会出错，难道真让我另做一个pdf文件，再用Acro
-bat弄到一起啊。&lt;br /&gt;
-为什么什么东西一碰到东亚语系就那么难弄呢？&lt;/p&gt;
-
-&lt;p&gt;btw:Freemind满好玩的，真的 ^_^&lt;/p&gt;
-</description>
+      <description>弄了几个小时，做的第一个Metapost源文件，图方便选了N-S流程图，不知道他们的图要怎么办，如果都转的话会疯掉的:(
+那个图就没什么说的了，纯体力活，不过现在还有的问题就是还不能嵌入到pdf文档中去，用dvipdfmx的时候会出错，难道真让我另做一个pdf文件，再用Acro bat弄到一起啊。
+为什么什么东西一碰到东亚语系就那么难弄呢？
+btw:Freemind满好玩的，真的 ^_^</description>
     </item>
     
     <item>
@@ -194,15 +136,9 @@ bat弄到一起啊。&lt;br /&gt;
       <pubDate>Mon, 28 Nov 2005 12:14:57 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/113/</guid>
-      <description>&lt;p&gt;昨晚折腾到4点半还是没搞定，今天早上过来在网上查了一下，就查到结果了，看来，还是不太习惯没有网络的日子啊，至少在做东西的时候，真的很需要。言归正传，说说过程
-吧 ^_^&lt;/p&gt;
-
-&lt;p&gt;故事的起因这介样的，在做数字音频信号处理的作业，想做个流程图，最后选定了用NS图表示，用Metapost做，外面的框子还算比较的好画，但是一开始加label
-死活加不上去，不认latex的命令，后来用英文做，但是空格在图中都是一条小短线，狂FT。早上来网上逛逛，发现自己的程序里面，把end;放在了结尾的\end{
-document}的前面，把这一条改过来后，又看到了一篇贴子，知道了要用mp -tex=latex %，于是，编译成功了 ^_^&lt;/p&gt;
-
-&lt;p&gt;ps: 好像还是后面一条命令的作用多一点 :)&lt;/p&gt;
-</description>
+      <description>昨晚折腾到4点半还是没搞定，今天早上过来在网上查了一下，就查到结果了，看来，还是不太习惯没有网络的日子啊，至少在做东西的时候，真的很需要。言归正传，说说过程 吧 ^_^
+故事的起因这介样的，在做数字音频信号处理的作业，想做个流程图，最后选定了用NS图表示，用Metapost做，外面的框子还算比较的好画，但是一开始加label 死活加不上去，不认latex的命令，后来用英文做，但是空格在图中都是一条小短线，狂FT。早上来网上逛逛，发现自己的程序里面，把end;放在了结尾的\end{ document}的前面，把这一条改过来后，又看到了一篇贴子，知道了要用mp -tex=latex %，于是，编译成功了 ^_^
+ps: 好像还是后面一条命令的作用多一点 :)</description>
     </item>
     
     <item>
@@ -211,8 +147,7 @@ document}的前面，把这一条改过来后，又看到了一篇贴子，知�
       <pubDate>Wed, 26 Oct 2005 08:46:29 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/101/</guid>
-      <description>&lt;p&gt;After I re-install the OS, I improve the register to the system, but all the things was available except the ghostscript, and this failure made me cannot insert any .eps pic in my document. Yesterday, I download  the gs852w32.exe from the sourceforge, after I installed this software, my LaTeX was available again ^_^&lt;/p&gt;
-</description>
+      <description>After I re-install the OS, I improve the register to the system, but all the things was available except the ghostscript, and this failure made me cannot insert any .eps pic in my document. Yesterday, I download the gs852w32.exe from the sourceforge, after I installed this software, my LaTeX was available again ^_^</description>
     </item>
     
     <item>
@@ -221,8 +156,65 @@ document}的前面，把这一条改过来后，又看到了一篇贴子，知�
       <pubDate>Mon, 13 Jun 2005 18:19:17 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/89/</guid>
-      <description>&lt;p&gt;虽然做的很辛苦，但是结果不错。过过再写点使用LaTeX的心得之类的东西吧。&lt;/p&gt;
-</description>
+      <description>虽然做的很辛苦，但是结果不错。过过再写点使用LaTeX的心得之类的东西吧。</description>
+    </item>
+    
+    <item>
+      <title>LaTeX统计字数</title>
+      <link>http://hzmangel.github.io/post/80/</link>
+      <pubDate>Wed, 04 May 2005 00:59:28 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/80/</guid>
+      <description>原来LaTeX也可以统计字数的啊，命令是charcnt filename.dvi，不过偶的cmd不知道为什么默认代码页是437-OEM-US了，虽然可以用chcp 936将其改成中文的，但是多了一条命令，不爽。再说吧^_^</description>
+    </item>
+    
+    <item>
+      <title>VIM LaTeX Suite</title>
+      <link>http://hzmangel.github.io/post/79/</link>
+      <pubDate>Tue, 03 May 2005 04:33:24 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/79/</guid>
+      <description>今天在xia又学到了一招，VIM Latex-Suite的使用，以及在其中加上正向、反向搜索的方法。刚用了一下，感觉不错^_^
+声明：==之间的内容摘自edyfox@xia.net所发表的贴子_**VIM LaTeX Suite
+中正向、反向搜索的配置&amp;gt;**_。本人只是使用时查到了，顺便转载一下，版 权归原作者所有。 首先去下载Latex-Suite，网址是http://vim-latex.sourceforge.net，下载压缩包，解压到~/vimfiles(Windowz)或~/.vim(*nix)文件夹，我使用的是Windoze下的Gvim ，在菜单里面就出现了Latex-Suite的菜单，是一些命令的快捷输入，有时还是满有用的^_^
+在xia上看到了正向、反向搜索，转贴一下下：
+首先，要让双向搜索正常运行，要将VIM运行在remote模式下，具体方式在两个系统下有不同，基本都是在VIM后加上参数--servername latex-suite &amp;ndash;remote-silent &amp;lt;文件名&amp;gt;，这样VIM在打开文件的时候就不会开一个.swp文件了，这样就可以打开多个副本。
+在nix下，修改.vimrc文件，使其支持xdvi，在调用latex的时候，加上-src- specials参数以生成带行号信息的dvi文件。在.vimrc文件中加上let g:Tex_CompileRule_dvi=&amp;ldquo;latex -src- specials -interaction=nonstopmode $&amp;ldquo; 。反向搜索为了让xdvi知道工作在remote模式下，要在.vimrc中加上let g:Tex_ViewRule_dvi=&amp;ldquo;xdvi -editor &amp;lsquo;gvim &amp;ndash;servername latex-suite &amp;ndash;remote-silent&amp;rsquo;&amp;ldquo;；如果是Windoz，则在_vimrc中加上let g:Tex_CompileRuledvi=&amp;ldquo;latex -src-pecials -interaction=nonstopmode $*&amp;rdquo; 即可。(其实我也不清楚加上那些是什么意思，只是从那篇文章里面直接Copy过来的^^)。
+在Windowz下还需要配置yap，具体方法是打开yap，在View-&amp;gt;Option选项中，找到Inverse
+Search页，在Command里输入gvim.exe &amp;ndash;servername latex-suite &amp;ndash;remote-silent +%l %f，这样就可以在yap中执行反向搜索了。
+用remote模式下的VIM打开一个.tex文件，在normal模式下键入\ll即可编译文件，\ls就可以调用一个dvi的窗口来查看，而且页面停留在输入\l s时，光标所指内容生成的内容上。在*nix下，在xdvi窗口中用Ctrl+左键可以调用VIM查看源码；在Windoz中，双击yap页面上相应的位置即可转到源 码中的位置。============================================================
+今天主要学了Latex- Suite的使用，现在有点感觉不爽的是在VIM中输入{}、()等符号时，后面会自动加上&amp;lt;++&amp;gt;，目前还不清楚在什么地方改，再说吧^_^</description>
+    </item>
+    
+    <item>
+      <title>论文页面搞定一半啦^_^</title>
+      <link>http://hzmangel.github.io/post/78/</link>
+      <pubDate>Tue, 03 May 2005 01:22:45 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/78/</guid>
+      <description>多亏CTeX的Neals，才能把这个页面设置好，要是光靠我自己不晕死才怪，贴一下代码吧，这样以后我也有的查，:-)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper,twoside]{article} \usepackage{CJK} \usepackage{fancyhdr} \usepackage[%paperwidth=18.4cm, paperheight= 26cm, twosideshift=0 pt, margin=2.5cm, lines = 38 %headheight=1.0true cm ]{geometry} \begin{CJK*}{GBK}{song} % 构建新的页面格式 \newsavebox{\pagebox} \begin{lrbox}{\pagebox} \begin{tabular}{|p{3.00cm}|p{4.70cm}|p{3.00cm}|p{4.70cm}|}\hline \multicolumn{4}{|p{15.4cm}|}{\rule{0in}{24.5cm}\ }\\ \hline \rule{0pt}{.25in} 第一格 &amp;amp; 第二格 &amp;amp; 第三格&amp;amp; 第四格\\ \hline \end{tabular} \end{lrbox} % 设置页面 \pagestyle{fancy}{% \fancyhead[C]{\setlength{\unitlength}{1cm} \begin{picture}(0,0) \put(-8.55,-13.35){\usebox{\pagebox}} \end{picture}}} \fancypagestyle{plain}{% \fancyhead[C]{\setlength{\unitlength}{1cm} \begin{picture}(0,0) \put(-8.55,-13.35){\usebox{\pagebox}} \end{picture}}} % 称除页眉的那条横线 \renewcommand{\headrulewidth}{0pt} \begin{document} \title{The title} \author{The author} \date{\today} \maketitle \newpage This is a test \newpage this is a test2 \newpage This is a test3 \clearpage \end{CJK*} \end{document}  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</description>
+    </item>
+    
+    <item>
+      <title>做完了一份幻灯片:)</title>
+      <link>http://hzmangel.github.io/post/62/</link>
+      <pubDate>Mon, 04 Apr 2005 11:31:41 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/62/</guid>
+      <description>昨天用beamer宏包做完了一份幻灯片，感觉不错。写点什么在这吧，有心得，也有问题 ^_^
+不错的一个宏包，做幻灯片很方便，而且模板也不错，简洁。 说说做的过程中碰到的一些问题吧： 1、在\documentclass[cjk,10pt]{beamer}处要加上cjk，否则编译中文会出错。后面的那个10pt是设置页面大小，默认好像是11pt的吧。 2、暂时还没弄清那个slidebar的设置在什么地方，大概是在程序中的\mode{&amp;hellip;.}处吧，还不清楚怎么设置中间的字体，字号什么的。 3、定义PDF属性这一块，不清楚为什么不能使用中文，用了ctex编译也不行。 4、\frame[allowframebreaks]中不知道为什么最多只能有两页，到第三页就会出错，不知道是不是因为使用中文的问题。 5、在幻灯片中，不能很好的断词，中英文混排的英文基本上不会断词。 6、幻灯片中的公式使用的字体好怪，还要在前面加上\mathnormal才行，所以最后把公式全去了。在公式中改变字体大小可以用\displaysize \scriptsize \scriptscriptsize等命令。 7、编译的时候用ctex -pdflatex来生成有中文目录的幻灯片，如果是文章的话，要使用ctex -dvipdfmx，昨天刚在ctex论坛上发现的，很好用^^ 8、不知道怎么在后面加上参考文献，只好自己敲了 :( 9、beamer居然不能直接使用eps的图片，只好转成pdf的，发现pdf的比eps的图还要小^^
+先写这些了吧，下次用的时候再写，下次就想用ConText了:)</description>
+    </item>
+    
+    <item>
+      <title>LaTeX的使用(1)</title>
+      <link>http://hzmangel.github.io/post/44/</link>
+      <pubDate>Mon, 10 Jan 2005 13:18:54 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/44/</guid>
+      <description>刚用LaTeX写完了一篇论文，想写点什么东西。 LaTeX真是个好软件，免费，而且功能强大，Word能做的，它都能做，而它能做的有时Word就是做不到。它比Word差的地方就是它的学习曲线比较的陡，而且在国内，真正用Z版软件的人是少之又少。说真的，如果我的word没有问题，我现在还会是在使用.doc的文档。 不过用了LaTeX以后，感觉学到了不少的东西，而且对文章的版式有了更好的理解，也就有了更好控制。LaTeX不是&amp;rdquo;所见即所得&amp;rdquo;(WYSIWYG: What You See Is What You Get)的工具，它倡导的是一种称为&amp;rdquo;所想即所得&amp;rdquo;的东西，这东西在有些情况下很有用，虽然刚开始时有些不熟悉，但是用多了就觉得很方便了。我能忍受这种东西大概和我自己学过HTML也有一点关系吧，都不是直接能看到的^^ 现在也没什么时间，就不写什么太多的东西了，我的论文用的是清华的一个模板，然后自己改了一些东西，感觉还是不错的，但是在subsection处还有解决好缩进的问题，毕竟国内和国外的排版还是有一些差距的，加上我自己的排版和别人也是有一些不同的，所以只好自己多琢磨琢磨了。看着自己的第一篇论文，感觉还行，没有太多的不如意的地方，不过有些不爽的就是有时老师要.doc的，这时我可以说是一点辙都没有，上次老师要Word文档，我只好自己把它贴成HTML给了他，下学期看看能不能找到转换的东西吧。 先写到这吧，算是一个开头。我会一直写下去的，毕竟这个软件真的很好玩^^</description>
     </item>
     
   </channel>

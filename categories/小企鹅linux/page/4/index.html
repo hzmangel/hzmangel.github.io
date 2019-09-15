@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" 小企鹅linux &middot;  湖间小筑" />
+        <meta property="og:title" content=" 小企鹅Linux &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | 小企鹅linux
+                | 小企鹅Linux
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,8 +73,7 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>A Whole New World</p>
-</div>
+<p>A Whole New World</p></div>
     </section>
 
     
@@ -96,8 +95,7 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>又到了讲故事的时间了，嗯。</p>
-</div>
+<p>又到了讲故事的时间了，嗯。</p></div>
     </section>
 
     
@@ -119,8 +117,7 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>让我们继续昨晚的故事。</p>
-</div>
+<p>让我们继续昨晚的故事。</p></div>
     </section>
 
     
@@ -142,8 +139,7 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。</p>
-</div>
+<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。</p></div>
     </section>
 
     
@@ -179,7 +175,10 @@
     </header>
 
     <section>
-        <div class="post-summary">今天在折腾程序，突然目录结构变了，所以想着把所有的编译生成的文件给删了，然后把源代码扔到另一个目录里面再去编译，一个一个手动删太累了，于是懒人我就想到了fi nd命令。 man了一下，找到了一个 -perm 选项，在后面可以像 chmod 一样指定421的权限位，于是乎就简单了，一条命令搞定： find . -perm /u+x -type f -exec -rm {} \; 千万记得在exec前要打印出来看看撒&hellip;&hellip;.</div>
+        <div class="post-summary">今天在折腾程序，突然目录结构变了，所以想着把所有的编译生成的文件给删了，然后把源代码扔到另一个目录里面再去编译，一个一个手动删太累了，于是懒人我就想到了fi nd命令。
+man了一下，找到了一个 -perm 选项，在后面可以像 chmod 一样指定421的权限位，于是乎就简单了，一条命令搞定：
+find . -perm /u+x -type f -exec -rm {} \;
+千万记得在exec前要打印出来看看撒&hellip;&hellip;.</div>
     </section>
 
     
@@ -195,7 +194,8 @@
     </header>
 
     <section>
-        <div class="post-summary">在单位调程序，加了 -g 的参数，但是要把可执行文件从别的机器拷过来，但又不想把整棵源文件树拷过来，只拷了个别要调的文件，于是出现了要在执行 gdb 前设置一堆 dir 的事情，每次都做做了一天，实在受不了了，于是上网找，还真给找到了脚本。 其实很简单，在当前目录下放个 .gdbinit 文件，则 gdb 在启动的时候会自动读入里面的内容，并且执行它，所以只要把 dir 命令放到里面就行了。还有一种方法是进 gdb 后用 source 命令来指定要执行的脚本文件。于是乎用 find . -type d 把目录输出，其实是想找条命令把输出用 : 接起来的，但那会没找到，于是用 vim 的全局替换了，反正能用就行。剩下的，就调程序吧，不知道 GDB 有没有啥命令可以把文件树整个给搬个家的，有空再找吧，呵呵。</div>
+        <div class="post-summary">在单位调程序，加了 -g 的参数，但是要把可执行文件从别的机器拷过来，但又不想把整棵源文件树拷过来，只拷了个别要调的文件，于是出现了要在执行 gdb 前设置一堆 dir 的事情，每次都做做了一天，实在受不了了，于是上网找，还真给找到了脚本。
+其实很简单，在当前目录下放个 .gdbinit 文件，则 gdb 在启动的时候会自动读入里面的内容，并且执行它，所以只要把 dir 命令放到里面就行了。还有一种方法是进 gdb 后用 source 命令来指定要执行的脚本文件。于是乎用 find . -type d 把目录输出，其实是想找条命令把输出用 : 接起来的，但那会没找到，于是用 vim 的全局替换了，反正能用就行。剩下的，就调程序吧，不知道 GDB 有没有啥命令可以把文件树整个给搬个家的，有空再找吧，呵呵。</div>
     </section>
 
     
@@ -211,7 +211,9 @@
     </header>
 
     <section>
-        <div class="post-summary">这段时间想折腾Linux，最终选择了gentoo，尝试一下这个传说的发行版。 由于手边没有光盘，也不想浪费光盘了，所以就用上了前段时间做好的可以GRUB启动的U盘。在gentoo的官方wiki上用的是syslinux，但是它的官方发布 包用的是GRUB，于是只好再去找，后来找到一篇别的文章，得知，原来很简单，只要把文件都拷过去，然后用GRUB启动，那个menu.lst还是没有找到，只好手动 输入那一大堆命令行参数，还要检查是否有错。不过弄完就可以进去系统了，不知道为啥机器不能用X，只好在命令行下把东西装完了。 装的过程其实很简单，按它的handbook做就行了，先分区，然后把文件系统挂载到/mnt/gentoo目录下，然后解压stage3（官方的handbook是 用wget下载的，我是先用thunder下载到机器上然后cp的，嗯），再是Portage，弄完后就可以用chroot到新系统上去了，然后下载linux- source，编译，链接，说一下，make -j 4还是很爽的，呵呵。然后就是配置fstab，再配置网络，具体的内容，在学习中，以后再说，呵呵。</div>
+        <div class="post-summary">这段时间想折腾Linux，最终选择了gentoo，尝试一下这个传说的发行版。
+由于手边没有光盘，也不想浪费光盘了，所以就用上了前段时间做好的可以GRUB启动的U盘。在gentoo的官方wiki上用的是syslinux，但是它的官方发布 包用的是GRUB，于是只好再去找，后来找到一篇别的文章，得知，原来很简单，只要把文件都拷过去，然后用GRUB启动，那个menu.lst还是没有找到，只好手动 输入那一大堆命令行参数，还要检查是否有错。不过弄完就可以进去系统了，不知道为啥机器不能用X，只好在命令行下把东西装完了。
+装的过程其实很简单，按它的handbook做就行了，先分区，然后把文件系统挂载到/mnt/gentoo目录下，然后解压stage3（官方的handbook是 用wget下载的，我是先用thunder下载到机器上然后cp的，嗯），再是Portage，弄完后就可以用chroot到新系统上去了，然后下载linux- source，编译，链接，说一下，make -j 4还是很爽的，呵呵。然后就是配置fstab，再配置网络，具体的内容，在学习中，以后再说，呵呵。</div>
     </section>
 
     
@@ -243,7 +245,12 @@
     </header>
 
     <section>
-        <div class="post-summary">想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。 没有别的机器看文档，只好按着依稀的记忆知道要分区，于是删除系统中其它几个Linux分区，在它问要不要写分区表的时候，犹豫了好一会，终于闭着眼睛打了yes，心 想听天由命吧。 不过和以前几次不同的是，这次刚想完，天就来找我了，想把win的盘mount上看看东西还在不在，然后不知道U盘上的那个系统就出啥毛病了，PATH里面就没有了/ bin啥的目录，当时就看到了很壮观的刷屏，系统告诉我说，sleep找不到。切到另一个终端，输入/bin，结果丫告诉我说木有这个目录，于是就慌了。试了几条命令 未果，于是只好重启，halt是肯定没有的了，只是在祭出三指大法的时候，伊也告诉我说/sbin/shutdown目录下东西不存在，只好很郁闷的去按开关了。 本来以为事情就这样了，但是重启的时候突然发现，GRUB进不去了，原来把盘给格了，想了想，U盘里面还有个GRUB，看看能不能用吧。重启，U盘启动，进GRUB命 令行，敲boot后，丫直接给我没反应，这时已经有点慌了；找出DSL的盘，输入dsl 2后，屏幕上打出来两只小企鹅，然后也没反应了，等了一会还是不行，于是更慌 了；抱着最后一点希望把某次展会拿来的CentOS扔进了光驱，回车启动，终于起来了，进了X干的第一件事情就是先把Win盘mount上，还好没啥事情，于是开始想 怎么解决grub的问题。 最简单的应该就是用XP盘启动，然后fixmbr，但是还是想把grub留着，一开始想在Windows下新建一个grub目录，结果伊弹出来个框子告诉我，此分区只 读，FT。突然意识到机器里面的那两个Linux盘可以用来放grub，于是问题解决，mkfs.ext3，然后mkdir，从U盘里面把东西拷过去，进grub，r oot-&gt;setup，再重启，终于能进命令行了，继续试chainloader +1，终于进来了。 总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</div>
+        <div class="post-summary">想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。
+没有别的机器看文档，只好按着依稀的记忆知道要分区，于是删除系统中其它几个Linux分区，在它问要不要写分区表的时候，犹豫了好一会，终于闭着眼睛打了yes，心 想听天由命吧。
+不过和以前几次不同的是，这次刚想完，天就来找我了，想把win的盘mount上看看东西还在不在，然后不知道U盘上的那个系统就出啥毛病了，PATH里面就没有了/ bin啥的目录，当时就看到了很壮观的刷屏，系统告诉我说，sleep找不到。切到另一个终端，输入/bin，结果丫告诉我说木有这个目录，于是就慌了。试了几条命令 未果，于是只好重启，halt是肯定没有的了，只是在祭出三指大法的时候，伊也告诉我说/sbin/shutdown目录下东西不存在，只好很郁闷的去按开关了。
+本来以为事情就这样了，但是重启的时候突然发现，GRUB进不去了，原来把盘给格了，想了想，U盘里面还有个GRUB，看看能不能用吧。重启，U盘启动，进GRUB命 令行，敲boot后，丫直接给我没反应，这时已经有点慌了；找出DSL的盘，输入dsl 2后，屏幕上打出来两只小企鹅，然后也没反应了，等了一会还是不行，于是更慌 了；抱着最后一点希望把某次展会拿来的CentOS扔进了光驱，回车启动，终于起来了，进了X干的第一件事情就是先把Win盘mount上，还好没啥事情，于是开始想 怎么解决grub的问题。
+最简单的应该就是用XP盘启动，然后fixmbr，但是还是想把grub留着，一开始想在Windows下新建一个grub目录，结果伊弹出来个框子告诉我，此分区只 读，FT。突然意识到机器里面的那两个Linux盘可以用来放grub，于是问题解决，mkfs.ext3，然后mkdir，从U盘里面把东西拷过去，进grub，r oot-&gt;setup，再重启，终于能进命令行了，继续试chainloader +1，终于进来了。
+总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</div>
     </section>
 
     
@@ -278,20 +285,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -300,7 +302,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -369,11 +371,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

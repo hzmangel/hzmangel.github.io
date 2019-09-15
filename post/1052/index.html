@@ -28,7 +28,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -77,7 +77,9 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。脚本的原理就是检查一个working
+        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。</p>
+
+<p>脚本的原理就是检查一个working
 directory中所有文件的status，然后把输出的内容去重。脚本运行需要设置好CVSROOT环境变量，而且需要提供一个CVS的工作目录作为参数。</p>
 
 <pre><code>#!/usr/bin/python
@@ -123,8 +125,7 @@ if __name__ == '__main__':
     print '\n'.join(sorted(get_all_tags(sys.argv[1])))
 </code></pre>
 
-<p>话说，有人能提供更好的办法吗？然后，有人可以告诉我，这个东西取出来的东西是全部的tag吗？没用过CVS&hellip;&hellip;</p>
-</div>
+<p>话说，有人能提供更好的办法吗？然后，有人可以告诉我，这个东西取出来的东西是全部的tag吗？没用过CVS&hellip;&hellip;</p></div>
     </section>
 
     <footer>
@@ -145,11 +146,11 @@ if __name__ == '__main__':
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1078/"> &lt; 2012，魔都开年 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1049/"> &lt; Simple Life Game in HTML5 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1049/"> Simple Life Game in HTML5 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1078/"> 2012，魔都开年 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -183,20 +184,15 @@ if __name__ == '__main__':
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -205,7 +201,7 @@ if __name__ == '__main__':
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -274,11 +270,11 @@ if __name__ == '__main__':
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

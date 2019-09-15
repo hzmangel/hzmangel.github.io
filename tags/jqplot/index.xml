@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jqplot on 湖间小筑</title>
+    <title>jqplot on 湖间小筑</title>
     <link>http://hzmangel.github.io/tags/jqplot/</link>
-    <description>Recent content in Jqplot on 湖间小筑</description>
+    <description>Recent content in jqplot on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Sun, 14 Jul 2013 11:21:07 +0000</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/jqplot/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/jqplot/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ajax loading multi series to jqPlot</title>
@@ -16,24 +18,9 @@
       <pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/1220/</guid>
-      <description>&lt;p&gt;The &lt;a href=&#34;http://www.jqplot.com/tests/data-renderers.php&#34;&gt;Ajax example of jqPlot&lt;/a&gt;
-only shows how to plot on series data, but the request I have met needs multi
-series. The solution is easy, just record here for later reference.&lt;/p&gt;
-
-&lt;p&gt;In the example, The function used to load ajax data is &lt;code&gt;ajaxDataRenderer&lt;/code&gt;,
-which returns array of data. For multi series, just return more than one data
-array. Here is a sample data set:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[
-  [
-    [1,1],[2,2],[3,3],[4,4],[5,5]
-  ],
-  [
-    [5,1],[4,2],[3,3],[2,4],[1,5]
-  ]
-]
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
+In the example, The function used to load ajax data is ajaxDataRenderer, which returns array of data. For multi series, just return more than one data array. Here is a sample data set:
+[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]  </description>
     </item>
     
   </channel>

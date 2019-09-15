@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Til on 湖间小筑</title>
+    <title>TIL on 湖间小筑</title>
     <link>http://hzmangel.github.io/tags/til/</link>
-    <description>Recent content in Til on 湖间小筑</description>
+    <description>Recent content in TIL on 湖间小筑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/til/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/til/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
@@ -17,10 +19,7 @@
       <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
-      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;
-
-&lt;p&gt;细看了眼原因，因为在Rails中，默认传递的params类型为 &lt;code&gt;ActionController::Parameters&lt;/code&gt; ，而在这个类下可以直接调用 &lt;code&gt;permit&lt;/code&gt; 或 &lt;code&gt;permit!&lt;/code&gt; 的方法来完成参数设置，同时会提供 &lt;code&gt;permitted?&lt;/code&gt; 函数来检查参数是否有效。而 grape 默认传入的参数类型是 &lt;code&gt;Hashie::Mash&lt;/code&gt; ，并没有提供 &lt;code&gt;permit&lt;/code&gt; 函数。好在 Ruby 支持 &lt;em&gt;Monkey Patch&lt;/em&gt; 所以新增的这个 gem 在 &lt;code&gt;Hashie::Mash&lt;/code&gt; 类中加上了对函数 &lt;code&gt;:permitted?&lt;/code&gt; 的响应，从而解决了这个问题。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,21 +29,7 @@
       <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
-      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooController &amp;lt; ApplicationController
-  def parent_reload
-    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.reload();&amp;lt;/script&amp;gt;&amp;quot;
-  end
-
-  def parent_redirect_to(url)
-    render text: &amp;quot;&amp;lt;script&amp;gt;window.parent.location.href=&#39;#{url}&#39;;&amp;lt;/script&amp;gt;&amp;quot;
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;就是直接把 Javascript 以 HTML 的形式返回给浏览器端，浏览器端在收到内容后自动执行其中的脚本。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,18 +39,7 @@ end
       <pubDate>Tue, 16 Jun 2015 23:40:10 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/timezone-in-python/</guid>
-      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import os
-import datetime
-
-print(datetime.datetime.now())
-os.environ[&#39;TZ&#39;] = &#39;Asia/Shanghai&#39;
-print(datetime.datetime.now())
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;TZ&lt;/code&gt;的环境变量让datetime输出了指定时区的时间。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;</description>
     </item>
     
   </channel>

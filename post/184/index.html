@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,9 @@
 
     <section>
         <div class="post-summary"><p>折腾了一晚上，总算把原来架在自己机器上的WordPress弄到了Debian的那台机器上，说说折腾的过程吧
-　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。WP是弄下来了，但是不会用了。本来压缩包那种方式就是把全部代码解压，访问就可以了，但是debian下用apt-
+　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。</p>
+
+<p>WP是弄下来了，但是不会用了。本来压缩包那种方式就是把全部代码解压，访问就可以了，但是debian下用apt-
 get来的东西它给放在/use/share里面了，总不能让我弄个符号链接指向那吧，那也太不安全了吧，也太不智能了，嗯。于是用dpkg -L看它到底给我弄下来
 了些啥。在滚动文字的最底下看到了一个/usr/share/doc/wordpress/README.Debian的文件，有戏。打开，果然看到了安装步骤
 ，它告诉我要用examples目录下的setup-mysql生成配置文件和数据库，然后再访问，真麻烦，不过也只好这样了。setup-mysql是一个脚本，需
@@ -141,8 +143,7 @@ SQL语句加了进去，就像这样，这是运行diff -u的结果。</p>
 are/wordpress，这样能做改动的只有root了，看来要是出去用虚拟主机，还是把WP上传到自己的家目录下吧。 btw2:新版的WP可以正确使用</p>
 
 <pre><code>标签了，不错不错 :-)
-</code></pre>
-</div>
+</code></pre></div>
     </section>
 
     <footer>
@@ -163,11 +164,11 @@ are/wordpress，这样能做改动的只有root了，看来要是出去用虚拟
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/185/"> &lt; Wordpress应该算差不多了吧… </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/183/"> &lt; TeXLive中的XeTeX </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/183/"> TeXLive中的XeTeX &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/185/"> Wordpress应该算差不多了吧… &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -201,20 +202,15 @@ are/wordpress，这样能做改动的只有root了，看来要是出去用虚拟
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -223,7 +219,7 @@ are/wordpress，这样能做改动的只有root了，看来要是出去用虚拟
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -292,11 +288,11 @@ are/wordpress，这样能做改动的只有root了，看来要是出去用虚拟
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

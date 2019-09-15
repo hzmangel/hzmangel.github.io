@@ -24,7 +24,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,9 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。chrome在有CSS的情况下默认使用的是CSS的设置，而google家的网页里赫然把arial写在CSS的第一位，然后呢，arial在linux下的效果那
+        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p>
+
+<p>chrome在有CSS的情况下默认使用的是CSS的设置，而google家的网页里赫然把arial写在CSS的第一位，然后呢，arial在linux下的效果那
 叫一个惨不忍睹啊（或者是我没配好），于是每次在linux下看gmail都是一种煎熬。</p>
 
 <p>在网上转了一圈，找到了<a href="http://wdicc.com/some-font-configuration-for-chrome/">这篇文章</a>，按着来了一下
@@ -88,8 +90,7 @@
 </code></pre>
 
 <p>其实很简单，匹配所有arial的family，然后把它换成sans-
-serif，不过这样估计系统的字体也被改掉了，反正arial在linux下看就没一个好看的，改掉就改掉吧，嘿嘿。</p>
-</div>
+serif，不过这样估计系统的字体也被改掉了，反正arial在linux下看就没一个好看的，改掉就改掉吧，嘿嘿。</p></div>
     </section>
 
     <footer>
@@ -110,11 +111,11 @@ serif，不过这样估计系统的字体也被改掉了，反正arial在linux�
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/879/"> &lt; Use TaobaoAPI in SAE </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/861/"> &lt; 2011，箭扣开年 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/861/"> 2011，箭扣开年 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/879/"> Use TaobaoAPI in SAE &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -148,20 +149,15 @@ serif，不过这样估计系统的字体也被改掉了，反正arial在linux�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -170,7 +166,7 @@ serif，不过这样估计系统的字体也被改掉了，反正arial在linux�
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -239,11 +235,11 @@ serif，不过这样估计系统的字体也被改掉了，反正arial在linux�
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

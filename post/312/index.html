@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,9 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。其实，在gentoo的官方网站上有一份详细的说明文档(<a href="http://www.gentoo.org/doc/en/hand
+<p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。</p>
+
+<p>其实，在gentoo的官方网站上有一份详细的说明文档(<a href="http://www.gentoo.org/doc/en/hand
 book/index.xml">Gentoo Handbook</a>)，说明安装的过程，而且有<a href="http://www.gentoo.org/doc/zh_cn/handbook/">中文版</a>的，
 所以我的步骤大部分是按着来的，写下弄的过程中碰到的问题吧。</p>
 
@@ -110,8 +112,7 @@ o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的
 | /tmp                   | 2G        | ext3                          |<br />
 |&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|</p>
 
-<p>然后敲了一大堆mount命令，把磁盘挂载好，嗯，就可以准备安装了。先写到这，后面的明天写 :)</p>
-</div>
+<p>然后敲了一大堆mount命令，把磁盘挂载好，嗯，就可以准备安装了。先写到这，后面的明天写 :)</p></div>
     </section>
 
     <footer>
@@ -132,11 +133,11 @@ o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/313/"> &lt; Gentoo Install Notes (2) </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/311/"> &lt; 0620-0622自虐日记 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/311/"> 0620-0622自虐日记 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/313/"> Gentoo Install Notes (2) &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -170,20 +171,15 @@ o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -192,7 +188,7 @@ o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -261,11 +257,11 @@ o.org/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">那篇文档</a>上描述的
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

@@ -28,7 +28,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +80,9 @@
         <div class="post-summary"><p>This article will finish the ToDo web application, and the prime area in this
 article is adding validator and updating templates.</p>
 
-<p>Here is <a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)</a>According to the requirements, the length of ToDo account should less than 100
+<p>Here is <a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)</a></p>
+
+<p>According to the requirements, the length of ToDo account should less than 100
 characters and the status of ToDo can only be chosen from 0 or 1, so some
 validator should be added to the model. With the validator, the model code
 should be looked like:</p>
@@ -128,8 +130,7 @@ form.</p>
 simple application, which do not contain the static files, user
 authentication, unit test and so on. In next step, I plan to re-write the
 <a href="http://www.linuxfb.org">linuxfb</a> website with more better structure, hope can
-touch more features in RoR.</p>
-</div>
+touch more features in RoR.</p></div>
     </section>
 
     <footer>
@@ -150,11 +151,11 @@ touch more features in RoR.</p>
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1133/"> &lt; Deploy RoR application with Nginx </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1113/"> &lt; RoR learning log (1) </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1113/"> RoR learning log (1) &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1133/"> Deploy RoR application with Nginx &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -188,20 +189,15 @@ touch more features in RoR.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -210,7 +206,7 @@ touch more features in RoR.</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -279,11 +275,11 @@ touch more features in RoR.</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

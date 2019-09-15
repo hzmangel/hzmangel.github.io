@@ -30,7 +30,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -80,9 +80,7 @@
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>最近在折腾用Golang弄DB，定义完了 <code>struct</code> 后发现好像没有 ORM 可以把这个 <code>struct</code> 给映射到某张表上，所以需要：</p>
+        <div class="post-summary"><p>最近在折腾用Golang弄DB，定义完了 <code>struct</code> 后发现好像没有 ORM 可以把这个 <code>struct</code> 给映射到某张表上，所以需要：</p>
 
 <ul>
 <li>手动创建表结构，包括折腾表名和数据结构</li>
@@ -123,8 +121,7 @@
 
 <h2 id="后记">后记</h2>
 
-<p>在写这篇文章的时候，突然反应过来这个 <code>go generate</code> 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。</p>
-</div>
+<p>在写这篇文章的时候，突然反应过来这个 <code>go generate</code> 就是会调用在注释中写的命令，根据给定的参数处理。所以理论上说可以给定任何文件，所以还是有不少可玩性的。</p></div>
     </section>
 
     <footer>
@@ -145,12 +142,12 @@
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/"> &lt; Hadoop Study Log 1: Env Setup
+                 <a class="previous" href="http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/"> &lt; MMDS Notes: W3 - Communities in Social Network (Basic)
  </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/"> MMDS Notes: W3 - Communities in Social Network (Basic)
+                 <a class="next" href="http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/"> Hadoop Study Log 1: Env Setup
  &gt;</a> 
             </p>
         </nav>
@@ -185,20 +182,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -207,7 +199,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -276,11 +268,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

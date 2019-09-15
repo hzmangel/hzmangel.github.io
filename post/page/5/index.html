@@ -19,7 +19,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,8 +71,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>嗯，公司组织的TeamBuilding，找了个所谓的旅行社跟着走的？不多说啥了，先放照片，最后吐槽。</p>
-</div>
+        <div class="post-summary"><p>嗯，公司组织的TeamBuilding，找了个所谓的旅行社跟着走的？不多说啥了，先放照片，最后吐槽。</p></div>
     </section>
 
     
@@ -92,7 +91,8 @@
     </header>
 
     <section>
-        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。 $ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
+        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
+$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f  没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
     </section>
 
     
@@ -108,8 +108,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>端午要回家，于是顺便从南京走了一趟。原本是想好好拍拍夜秦淮，可惜最后拍出来的照片基本没有满意的，不过还是想在这留下一笔，原因？不知道~~</p>
-</div>
+        <div class="post-summary"><p>端午要回家，于是顺便从南京走了一趟。原本是想好好拍拍夜秦淮，可惜最后拍出来的照片基本没有满意的，不过还是想在这留下一笔，原因？不知道~~</p></div>
     </section>
 
     
@@ -129,7 +128,8 @@
     </header>
 
     <section>
-        <div class="post-summary">popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。 int status = pclose(fp); if (status == -1) { printf(&quot;Error reported by pclose()\n&quot;); exit(1); } else { printf(&quot;Process exited? %s\n&quot;, WIFEXITED(status) ? &quot;yes&quot; : &quot;no&quot;); printf(&quot;Process status: %d\n&quot;, WEXITSTATUS(status)); } 其实是满早前问的一个问题，忘更新过来了。</div>
+        <div class="post-summary">popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
+int status = pclose(fp); if (status == -1) { printf(&quot;Error reported by pclose()\n&quot;); exit(1); } else { printf(&quot;Process exited? %s\n&quot;, WIFEXITED(status) ? &quot;yes&quot; : &quot;no&quot;); printf(&quot;Process status: %d\n&quot;, WEXITSTATUS(status)); }  其实是满早前问的一个问题，忘更新过来了。</div>
     </section>
 
     
@@ -145,8 +145,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>以前不知道听谁说起过白河，然后就莫名其妙的想去那边。可能固执的认为那是个漂亮的地方，于是在看了活动召集后就报了名，当然结局肯定是悲剧啦~</p>
-</div>
+        <div class="post-summary"><p>以前不知道听谁说起过白河，然后就莫名其妙的想去那边。可能固执的认为那是个漂亮的地方，于是在看了活动召集后就报了名，当然结局肯定是悲剧啦~</p></div>
     </section>
 
     
@@ -166,7 +165,10 @@
     </header>
 
     <section>
-        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。 今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1 然后，就能用LOCAL了，然后就没有然后了…… PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
+        <div class="post-summary">LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。
+今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &ndash;local-infile=1
+然后，就能用LOCAL了，然后就没有然后了……
+PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</div>
     </section>
 
     
@@ -182,8 +184,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>不知从何时起，莫名的对江南的水乡有了不同于其它地方的一份向往，向往那石桥碧水，青砖白瓦，向往那斜风细雨，翠竹细柳。这份向往，经常会在春暖花开时，从记忆的某个角落中蹦出来透透气，然后在我心里种下一把又一把的草……</p>
-</div>
+        <div class="post-summary"><p>不知从何时起，莫名的对江南的水乡有了不同于其它地方的一份向往，向往那石桥碧水，青砖白瓦，向往那斜风细雨，翠竹细柳。这份向往，经常会在春暖花开时，从记忆的某个角落中蹦出来透透气，然后在我心里种下一把又一把的草……</p></div>
     </section>
 
     
@@ -205,8 +206,7 @@
     <section>
         <div class="post-summary"><p>不知不觉工作已经有了三年，只是在昨天去吃车版联合BG时才蓦然发现，又一轮的毕业季，来了。</p>
 
-<p>记忆中属于自己的散伙饭，一直只有本科毕业那一次，同样是在福口居，同样是那两张桌子。已经记不清当时吃了什么，只记得那天把所有人都喝了一遍，虽然在一起四年了，但是还是有很多话想和他们说，真的好想一直就那么拿着酒杯，一直喝下去，一直说下去……</p>
-</div>
+<p>记忆中属于自己的散伙饭，一直只有本科毕业那一次，同样是在福口居，同样是那两张桌子。已经记不清当时吃了什么，只记得那天把所有人都喝了一遍，虽然在一起四年了，但是还是有很多话想和他们说，真的好想一直就那么拿着酒杯，一直喝下去，一直说下去……</p></div>
     </section>
 
     
@@ -228,8 +228,7 @@
     <section>
         <div class="post-summary"><p>需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。</p>
 
-<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。</p>
-</div>
+<p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个<a href="http://code.google.com/p/lotusphp/" target="_blank">lotusphp</a>的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。</p></div>
     </section>
 
     
@@ -249,8 +248,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p>
-</div>
+        <div class="post-summary"><p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。</p></div>
     </section>
 
     
@@ -289,20 +287,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -311,7 +304,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -380,11 +373,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

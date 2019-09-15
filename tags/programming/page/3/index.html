@@ -19,7 +19,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -81,8 +81,7 @@ executed on supported architecture.</p>
 compile C/C++ code to PNaCl application. But the PNaCl application is a subset
 of LLVM so I have tried some other languages have LLVM frontend. I am still
 working on the solution, and this article is just recording some failed
-attempts.</p>
-</div>
+attempts.</p></div>
     </section>
 
     
@@ -105,8 +104,7 @@ attempts.</p>
         <div class="post-summary"><p>Recently I have met a requirement that need to upload multiple attachments to
 a rails project. After some investigations, I choose <code>carrierwave</code> finally.
 Also, I selected <code>nested_form</code> to manage uploading and deleting multiple
-attachments.</p>
-</div>
+attachments.</p></div>
     </section>
 
     
@@ -134,8 +132,7 @@ returns 502 to user.</p>
 
 <p>So the solution for this kind prblem is to put the job into some background
 task, and use some other method to inform the frontend when job done. Finally
-I choose the Redis for this task.</p>
-</div>
+I choose the Redis for this task.</p></div>
     </section>
 
     
@@ -155,8 +152,7 @@ I choose the Redis for this task.</p>
     </header>
 
     <section>
-        <div class="post-summary"><p>Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at <a href="http://goo.gl/0ZrcA">http://goo.gl/0ZrcA</a>. The text above is the introduction text for that project, please reference the code for detailed information.</p>
-</div>
+        <div class="post-summary"><p>Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at <a href="http://goo.gl/0ZrcA">http://goo.gl/0ZrcA</a>. The text above is the introduction text for that project, please reference the code for detailed information.</p></div>
     </section>
 
     
@@ -178,8 +174,7 @@ I choose the Redis for this task.</p>
     <section>
         <div class="post-summary"><p>Recently working on iOS project, and have met some problems while using the
 attributes of <code>@property</code>. I have searched some documents and here is my idea
-about this.</p>
-</div>
+about this.</p></div>
     </section>
 
     
@@ -199,7 +194,8 @@ about this.</p>
     </header>
 
     <section>
-        <div class="post-summary">I am working on a UITextView related problem recently, the widget, which have a fixed size, but need to show all content passed in. The text passed in have different length, so the font size should be different. The code snippet below will change the font size dynamically based on the text. // Set the text before setting font size my_text_view.text = foo_text; // Set the default font name and size int pre_defined_font_size = 14; my_text_view.font = [UIFont fontWithName:@&quot;Helvetica&quot; size:pre_defined_font_size]; // Change the font size if needed if (my_text_view.contentSize.height &gt; my_text_view.frame.size.height) { int adjust_font_size = 1; while (my_text_view.contentSize.height &gt; my_text_view.frame.size.height) { my_text_view.font = [UIFont fontWithName:@&quot;Helvetica&quot; size:pre_defined_font_size-adjust_font_size]; adjust_font_size++; } } There is a comparison between content height and frame height.</div>
+        <div class="post-summary">I am working on a UITextView related problem recently, the widget, which have a fixed size, but need to show all content passed in. The text passed in have different length, so the font size should be different. The code snippet below will change the font size dynamically based on the text.
+// Set the text before setting font size my_text_view.text = foo_text; // Set the default font name and size int pre_defined_font_size = 14; my_text_view.</div>
     </section>
 
     
@@ -219,7 +215,9 @@ about this.</p>
     </header>
 
     <section>
-        <div class="post-summary">With the new permission schema in iOS6, app should acquire authentication before accessing calendar. So the code for calendar operation should be surrounded like this: EKEventStore *eventStore = [[EKEventStore alloc] init]; EKEvent *event = [EKEvent eventWithEventStore:eventStore]; [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) { if (granted) { // Calendar operation } }]; As you can see, the code for calendar operation is written in a block. After the operation completed, you may want to show customer an alert box to say the operation is done.</div>
+        <div class="post-summary">With the new permission schema in iOS6, app should acquire authentication before accessing calendar. So the code for calendar operation should be surrounded like this:
+EKEventStore *eventStore = [[EKEventStore alloc] init]; EKEvent *event = [EKEvent eventWithEventStore:eventStore]; [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) { if (granted) { // Calendar operation } }];  As you can see, the code for calendar operation is written in a block.
+After the operation completed, you may want to show customer an alert box to say the operation is done.</div>
     </section>
 
     
@@ -242,8 +240,7 @@ about this.</p>
         <div class="post-summary"><p>Recently I am working on an iOS project, and I am getting interested in the
 language itself. But it is inconvenient to start Xcode for each program,
 especially for program without UI elements in. So I want to set up a command
-line environment that can compile and execute ObjC program.</p>
-</div>
+line environment that can compile and execute ObjC program.</p></div>
     </section>
 
     
@@ -263,8 +260,7 @@ line environment that can compile and execute ObjC program.</p>
     </header>
 
     <section>
-        <div class="post-summary"><p>最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：</p>
-</div>
+        <div class="post-summary"><p>最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：</p></div>
     </section>
 
     
@@ -284,8 +280,7 @@ line environment that can compile and execute ObjC program.</p>
     </header>
 
     <section>
-        <div class="post-summary"><p>The method is collected from Internet and I just record it with my way.</p>
-</div>
+        <div class="post-summary"><p>The method is collected from Internet and I just record it with my way.</p></div>
     </section>
 
     
@@ -324,20 +319,15 @@ line environment that can compile and execute ObjC program.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -346,7 +336,7 @@ line environment that can compile and execute ObjC program.</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -415,11 +405,11 @@ line environment that can compile and execute ObjC program.</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

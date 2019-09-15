@@ -24,7 +24,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,9 +73,7 @@
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>Google has released his <a href="http://www.chromium.org/nativeclient/pnacl
+        <div class="post-summary"><p>Google has released his <a href="http://www.chromium.org/nativeclient/pnacl
 /building-and-testing-portable-native-client">PNaCl</a> project on Google I/O 2013,
 which can allow user to write portable native client application. The portable
 native client application can be translated to native client program and
@@ -85,7 +83,9 @@ executed on supported architecture.</p>
 compile C/C++ code to PNaCl application. But the PNaCl application is a subset
 of LLVM so I have tried some other languages have LLVM frontend. I am still
 working on the solution, and this article is just recording some failed
-attempts.### Install PNaCl toolchain</p>
+attempts.</p>
+
+<h3 id="install-pnacl-toolchain">Install PNaCl toolchain</h3>
 
 <p>PNaCl toolchain can be downloaded via <a href="https://developers.google.com/native-client/sdk/download">Native Client
 SDK</a>, please follow
@@ -163,8 +163,7 @@ PNaCl binary. I am still investigating on this.</p>
 
 <p>I am still trying to write portable native client code with other languages. I
 saw the author of <code>llgo</code> has made some changes and I will do the test. I will
-update my post when got progress.</p>
-</div>
+update my post when got progress.</p></div>
     </section>
 
     <footer>
@@ -185,11 +184,11 @@ update my post when got progress.</p>
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1220/"> &lt; Ajax loading multi series to jqPlot </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1210/"> &lt; Uploading multiple attachments with carrierwave/mongoid/nested_form </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1210/"> Uploading multiple attachments with carrierwave/mongoid/nested_form &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1220/"> Ajax loading multi series to jqPlot &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -223,20 +222,15 @@ update my post when got progress.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -245,7 +239,7 @@ update my post when got progress.</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -314,11 +308,11 @@ update my post when got progress.</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

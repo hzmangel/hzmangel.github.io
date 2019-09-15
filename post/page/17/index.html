@@ -19,7 +19,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -73,8 +73,7 @@
     <section>
         <div class="post-summary"><p>关键字： 骑行, 后海</p>
 
-<p>本来应该是周六写的东西，结果昨天有点懒，所以只好放在今天来写了。其实是下午骑行出去找荷花中的一段路，但是这一段路是最舒服的一段路，所以写写吧。</p>
-</div>
+<p>本来应该是周六写的东西，结果昨天有点懒，所以只好放在今天来写了。其实是下午骑行出去找荷花中的一段路，但是这一段路是最舒服的一段路，所以写写吧。</p></div>
     </section>
 
     
@@ -94,7 +93,11 @@
     </header>
 
     <section>
-        <div class="post-summary">关键字： Linux, 终端属性, 回显 一直想写段程序试试输入不回显的东西，但是一直被一些事情所羁绊（其实是自己懒，玩游戏去了），直到最近要在公司的代码上加东西。 于是乎，一轮 google 以后，终于找到了答案，其实是因为自己看APUE看的头晕了。代码很简单，先用 tcgetattr 取到现有的属性，然后在现有属性上设置 XXX.c_lflag &amp;= ~ECHO ，再用 tcsetattr 把新属性给设置上去，就行了，对于两个终端相关的函数，需要提供 fd ，对于 stdin 而言是 0 ，话说不知道为啥昨天直接写 stdin 不行，下面呢，木有了~~~~ PS：突然想到，代码贴上来是不是好一点？于是下面又有了： ** 1** **#include ****&lt;stdio.h&gt;** ** 2** **#include ****&lt;stdlib.h&gt;** ** 3** **#include ****&lt;termios.h&gt;** ** 4** **#include ****&lt;time.h&gt;** ** 5** ** 6** ** 7** **int** main (**int** argc, **char*** argv[]) ** 8** { ** 9** **struct** termios init_setting; **10** **struct** termios pend_setting; **11** **12** **if** (tcgetattr(**0**, &amp;init_setting)</div>
+        <div class="post-summary">关键字： Linux, 终端属性, 回显
+一直想写段程序试试输入不回显的东西，但是一直被一些事情所羁绊（其实是自己懒，玩游戏去了），直到最近要在公司的代码上加东西。
+于是乎，一轮 google 以后，终于找到了答案，其实是因为自己看APUE看的头晕了。代码很简单，先用 tcgetattr 取到现有的属性，然后在现有属性上设置 XXX.c_lflag &amp;= ~ECHO ，再用 tcsetattr 把新属性给设置上去，就行了，对于两个终端相关的函数，需要提供 fd ，对于 stdin 而言是 0 ，话说不知道为啥昨天直接写 stdin 不行，下面呢，木有了~~~~
+PS：突然想到，代码贴上来是不是好一点？于是下面又有了：
+** 1** **#include ****&lt;stdio.h&gt;** ** 2** **#include ****&lt;stdlib.h&gt;** ** 3** **#include ****&lt;termios.h&gt;** ** 4** **#include ****&lt;time.h&gt;** ** 5** ** 6** ** 7** **int** main (**int** argc, **char*** argv[]) ** 8** { ** 9** **struct** termios init_setting; **10** **struct** termios pend_setting; **11** **12** **if** (tcgetattr(**0**, &amp;init_setting) &lt; **0**) **13** { **14** fprintf (**stderr**, **&quot;Error~~~****\n****&quot;**); **15** exit (**1**); **16** } **17** pend_setting = init_setting; **18** **19** printf (**&quot;Pending for 5 secone!</div>
     </section>
 
     
@@ -114,7 +117,14 @@
     </header>
 
     <section>
-        <div class="post-summary">关键字：骑行, 迷路, 北京 昨晚家里面没人，继续出去骑车，于是继续迷路，汗自己一个。 本来是说，顺三环骑到国贸，然后转到长安街上回家。骑到亚运村的时候想了想，就走四环吧，在鸟巢和水立方前路过，话说水立方亮上灯看上去还不错，不过在侧面看的时候它 的房顶有一块不是平的，对于这个是不是质量问题一直耿耿于怀。天桥上的人依然很多，嗯。 顺四环走到望和桥转弯上三环，在路过芍药居城铁站的时候还在纳闷，这到底是哪，咋还有城铁。然后在太阳宫桥转上三环，顺着三环，走到了国贸，看到鸟财富中心，至此一切 顺利。只是在这碰到了一起车祸，一小孩骑车闯红灯，不看车，结果被某公交给kiss了，车上的面条洒了，还好人没事，车就不清楚了，应该是要修了，诶。 然后就晕头了，在国贸下的桥那不知道怎么绕的，没有向西走，继续向南，边走还边纳闷，这长安街咋这一段这么荒凉，汗一个。然后在猛然间，看到了地铁站，细看，双井，1 0号线，这时才反应过来，走错路了，于是在劲松桥转西，骑了好久才在一个公交车站看到了地图，上去仔细研究了一下，发现还有走回长安街的可能，于是继续。 顺路走到天坛，然后在那转北，走磁器口崇文门上东单，说一下哈，天坛大概晚上打灯了，看到几条光柱，没细看祈年殿所在，8过天坛那边的红桥珍珠市场那个楼很大，嗯，天 坛附近的路也很宽，嗯。 然后就上长安街了，一路骑行，灯火辉煌啊，只是忘了看那个大蛋壳的灯光了。然后到复兴门转北，回学校买瓶可乐补充糖分，然后回家。三小时，46公里，呵呵，不算快，但 是我已经累的不行了，今天腿的感觉都不对。还要继续锻炼啊。 想弄个GPS了，骑了太多的冤枉路，诶。</div>
+        <div class="post-summary">关键字：骑行, 迷路, 北京
+昨晚家里面没人，继续出去骑车，于是继续迷路，汗自己一个。
+本来是说，顺三环骑到国贸，然后转到长安街上回家。骑到亚运村的时候想了想，就走四环吧，在鸟巢和水立方前路过，话说水立方亮上灯看上去还不错，不过在侧面看的时候它 的房顶有一块不是平的，对于这个是不是质量问题一直耿耿于怀。天桥上的人依然很多，嗯。
+顺四环走到望和桥转弯上三环，在路过芍药居城铁站的时候还在纳闷，这到底是哪，咋还有城铁。然后在太阳宫桥转上三环，顺着三环，走到了国贸，看到鸟财富中心，至此一切 顺利。只是在这碰到了一起车祸，一小孩骑车闯红灯，不看车，结果被某公交给kiss了，车上的面条洒了，还好人没事，车就不清楚了，应该是要修了，诶。
+然后就晕头了，在国贸下的桥那不知道怎么绕的，没有向西走，继续向南，边走还边纳闷，这长安街咋这一段这么荒凉，汗一个。然后在猛然间，看到了地铁站，细看，双井，1 0号线，这时才反应过来，走错路了，于是在劲松桥转西，骑了好久才在一个公交车站看到了地图，上去仔细研究了一下，发现还有走回长安街的可能，于是继续。
+顺路走到天坛，然后在那转北，走磁器口崇文门上东单，说一下哈，天坛大概晚上打灯了，看到几条光柱，没细看祈年殿所在，8过天坛那边的红桥珍珠市场那个楼很大，嗯，天 坛附近的路也很宽，嗯。
+然后就上长安街了，一路骑行，灯火辉煌啊，只是忘了看那个大蛋壳的灯光了。然后到复兴门转北，回学校买瓶可乐补充糖分，然后回家。三小时，46公里，呵呵，不算快，但 是我已经累的不行了，今天腿的感觉都不对。还要继续锻炼啊。
+想弄个GPS了，骑了太多的冤枉路，诶。</div>
     </section>
 
     
@@ -132,8 +142,7 @@
     <section>
         <div class="post-summary"><p>关键字：老莫 莫斯科餐厅 西餐</p>
 
-<p>前天去吃老莫，1954年的老西餐厅，也算是北京的知名餐厅之一了吧。</p>
-</div>
+<p>前天去吃老莫，1954年的老西餐厅，也算是北京的知名餐厅之一了吧。</p></div>
     </section>
 
     
@@ -153,7 +162,8 @@
     </header>
 
     <section>
-        <div class="post-summary">keyword: gentoo, USE for package, mysql 在升级系统的时候要装mysql，于是emerge mysql，刷了一堆字后丫告诉我出错，看了看信息原来是BDB不再支持，然后也不知道怎么回事丫就出错。一开始 在make.conf中把berkdb关键字给去掉了，但是还是不行，emerge &ndash;info看了一下关键字还在，大概是哪个上层哪个配置文件中的事情，于是乎只 好再去找Handbook，在USE一节中找到了，其实就 是在/etc/portage/package.use中加上dev-db/mysql -berkdb就行了，告诉编译器对于mysql不要用berkdb编译选项 。手册里面还说package.use可能不是一个文件，而是目录，没细看说明了，碰到再说吧，嗯。就这样，单独为某个包设置USE标记。</div>
+        <div class="post-summary">keyword: gentoo, USE for package, mysql
+在升级系统的时候要装mysql，于是emerge mysql，刷了一堆字后丫告诉我出错，看了看信息原来是BDB不再支持，然后也不知道怎么回事丫就出错。一开始 在make.conf中把berkdb关键字给去掉了，但是还是不行，emerge &ndash;info看了一下关键字还在，大概是哪个上层哪个配置文件中的事情，于是乎只 好再去找Handbook，在USE一节中找到了，其实就 是在/etc/portage/package.use中加上dev-db/mysql -berkdb就行了，告诉编译器对于mysql不要用berkdb编译选项 。手册里面还说package.use可能不是一个文件，而是目录，没细看说明了，碰到再说吧，嗯。就这样，单独为某个包设置USE标记。</div>
     </section>
 
     
@@ -185,7 +195,8 @@
     </header>
 
     <section>
-        <div class="post-summary">关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge 今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</div>
+        <div class="post-summary">关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge
+今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</div>
     </section>
 
     
@@ -201,7 +212,9 @@
     </header>
 
     <section>
-        <div class="post-summary">关键字：Gentoo software emerge version 想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法： 先装gentoolkit，以找到equery这个工具，然后再equery list -p &lt;pkg name&gt;列出所有可用的版本，最后用emerge =&lt;pkg full name&gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</div>
+        <div class="post-summary">关键字：Gentoo software emerge version
+想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法：
+先装gentoolkit，以找到equery这个工具，然后再equery list -p &lt;pkg name&gt;列出所有可用的版本，最后用emerge =&lt;pkg full name&gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</div>
     </section>
 
     
@@ -217,7 +230,12 @@
     </header>
 
     <section>
-        <div class="post-summary">关键字：Gentoo ATI 配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。 首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。 然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&ndash;initial &ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。 再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。 话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</div>
+        <div class="post-summary">关键字：Gentoo ATI
+配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。
+首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。
+然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&ndash;initial &ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。
+再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。
+话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</div>
     </section>
 
     
@@ -235,8 +253,7 @@
     <section>
         <div class="post-summary"><p>关键字： gentoo lvm install</p>
 
-<p>A Whole New World</p>
-</div>
+<p>A Whole New World</p></div>
     </section>
 
     
@@ -275,20 +292,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -297,7 +309,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -366,11 +378,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

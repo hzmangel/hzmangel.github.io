@@ -8,7 +8,9 @@
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Mon, 23 Aug 2010 13:08:03 +0000</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>让win下的vim支持非等宽字体</title>
@@ -16,55 +18,8 @@
       <pubDate>Mon, 23 Aug 2010 13:08:03 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/724/</guid>
-      <description>&lt;p&gt;最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~
-问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei
-Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。
-改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;diff -r 96b2b1cca7cd src/os_mswin.c
---- a/src/os_mswin.c    Mon Aug 23 12:55:47 2010 +0800
-+++ b/src/os_mswin.c    Mon Aug 23 13:05:17 2010 +0800
-@@ -3288,8 +3288,11 @@
-
- #ifndef FEAT_PROPORTIONAL_FONTS
-     /* Ignore non-monospace fonts without further ado */
-+    /*
-+     * hzmangel: I need non-monospace fonts!
-     if ((ntm-&amp;gt;tmPitchAndFamily &amp;amp; 1) != 0)
-        return 1;
-+    */
- #endif
-
-     /* Remember this LOGFONT as a &amp;quot;possible&amp;quot; */
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ &lt;strong&gt;Update at
-2010-09-18&lt;/strong&gt; 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 &lt;http://xbeta.info/gvim-
-powerword-ciba.htm&gt; 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽
-字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;diff -r 6768ebd0bc04 -r 213b33df021a src/gui_w32.c
---- a/src/gui_w32.c     Sun Aug 08 16:38:42 2010 +0200
-+++ b/src/gui_w32.c     Sat Sep 18 10:37:41 2010 +0800
-@@ -2298,7 +2298,11 @@
-     /* On NT, tell the font renderer not to &amp;quot;help&amp;quot; us with Hebrew and Arabic
-      * text.  This doesn&#39;t work in 9x, so we have to deal with it manually on
-      * those systems. */
--    if (os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
-+    if (
-+#ifdef FEAT_RIGHTLEFT
-+            curwin-&amp;gt;w_p_rl &amp;amp;&amp;amp;
-+#endif
-+    os_version.dwPlatformId == VER_PLATFORM_WIN32_NT)
-        foptions |= ETO_IGNORELANGUAGE;
-
-     /*
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后是编译好的gvim，安装官方的包后直接丢到安装目录下替换原文件即可，Enjoy~~
-&lt;a href=&#34;http://www.hzmangel.info/blog/wp-
-content/uploads/2011/11/gvim20111115.zip&#34;&gt;gvim20111115&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>最近vim升级到了7.3，很喜欢它的相对行号功能(:h rnu)，于是就升级了，然后就毫无悬念的出问题了~ 问题的原因是之前用的vim72是个改版，加上了对非等宽字体的支持，于是在vim中可以将guifontwide设置为YaHei Consolas的混合字体，不过这次升级后没找到原作者的网站，只好自己动手了。 改动在os_mswin.c中，进去后直接找mono，会看到一处注释说忽略非等宽字体，把下面那行注释掉就好，这是diff文件：
+diff -r 96b2b1cca7cd src/os_mswin.c --- a/src/os_mswin.c Mon Aug 23 12:55:47 2010 +0800 +++ b/src/os_mswin.c Mon Aug 23 13:05:17 2010 +0800 @@ -3288,8 +3288,11 @@ #ifndef FEAT_PROPORTIONAL_FONTS /* Ignore non-monospace fonts without further ado */ + /* + * hzmangel: I need non-monospace fonts! if ((ntm-&amp;gt;tmPitchAndFamily &amp;amp; 1) != 0) return 1; + */ #endif /* Remember this LOGFONT as a &amp;quot;possible&amp;quot; */  然后直接在vs2010编译环境中用bigvim.bat来编译vim即可，如有需要可以对其中的参数进行修改。写完，收工~ Update at 2010-09-18 在xbeta的帮助下试着编译了一个可以支持取词的版本，用的是这篇文章的方法 感谢Dieken@newsmth，手边没有金山，用有道测试了一下支持取词。目前的版本相比于官方有如下改动：支持非等宽 字体，支持取词，但是去掉了Perl/Lua/Ruby/Tcl的支持（因为编译的机器上没装这些软件）。支持取词改动的diff文件如下</description>
     </item>
     
     <item>
@@ -73,18 +28,8 @@ content/uploads/2011/11/gvim20111115.zip&#34;&gt;gvim20111115&lt;/a&gt;&lt;/p&gt
       <pubDate>Fri, 09 Jul 2010 01:54:31 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/721/</guid>
-      <description>&lt;p&gt;最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库
-叫B，于是有：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;A: hg pull –f &amp;lt;repo B&amp;gt;
-A: hg merge
-A: hg ci
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关键的地方是在那个-
-f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(&lt;a href=&#34;http://stackoverflow.com/questions/12843
-/how-to-combine-two-projects-in-mercurial&#34;&gt;via&lt;/a&gt;)&lt;/p&gt;
-</description>
+      <description>最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有：
+A: hg pull –f &amp;lt;repo B&amp;gt; A: hg merge A: hg ci  关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</description>
     </item>
     
     <item>
@@ -93,57 +38,16 @@ f处，如果没有加这个参数会报两个版本库不同源而不让你这�
       <pubDate>Wed, 10 Mar 2010 21:54:02 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/584/</guid>
-      <description>&lt;p&gt;在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带
-的web服务器。首先在远端某个目录里面新建一个Hg版本库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg serve -p3456
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后在本地就可以找个目录直接把那边的东西拷过来了&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg clone &amp;lt;host&amp;gt; &amp;lt;local_dir&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[paths]
-default = &amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg ci &amp;lt;-m &amp;quot;log message&amp;quot;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使
-用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[web]
-push_ssl = false
-allow_push = *
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要
-指定url参数（嗯，适合我这种懒人）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg push &amp;lt;url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hg pull &amp;lt;url&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库
+hg init  然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口
+hg serve -p3456  然后在本地就可以找个目录直接把那边的东西拷过来了
+hg clone &amp;lt;host&amp;gt; &amp;lt;local_dir&amp;gt;  使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。
+[paths] default = &amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;  在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log
+hg ci &amp;lt;-m &amp;quot;log message&amp;quot;&amp;gt;  在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行
+[web] push_ssl = false allow_push = *  根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。
+hg push &amp;lt;url&amp;gt;  在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令
+hg up  然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。
+hg pull &amp;lt;url&amp;gt;  </description>
     </item>
     
     <item>
@@ -152,15 +56,11 @@ allow_push = *
       <pubDate>Fri, 04 Dec 2009 11:12:41 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/491/</guid>
-      <description>&lt;p&gt;曾经用Emacs的时候发现那个Ctrl-
-L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~&lt;/p&gt;
-
-&lt;p&gt;zz: 将当前行置于屏幕中间（不是转载…）&lt;br /&gt;
-zt: 将当前行置于屏幕顶端（不是猪头~）&lt;br /&gt;
-zb：底端啦~&lt;/p&gt;
-
-&lt;p&gt;还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~&lt;/p&gt;
-</description>
+      <description>曾经用Emacs的时候发现那个Ctrl- L特别好用，看到光标在下面了按一下就把那行提到屏幕中间来了，于是想在vim中找类似的功能，想想也该有嘛，所以就找到了，而且有三条~
+zz: 将当前行置于屏幕中间（不是转载…）
+zt: 将当前行置于屏幕顶端（不是猪头~）
+zb：底端啦~
+还有一条就是移动光标所在行的位置，就是说，比如我光标在第10行，我想光标不动，但是所在行向上移，ctrl-e啦，然后向下的话，ctrl-y~</description>
     </item>
     
     <item>
@@ -169,25 +69,13 @@ zb：底端啦~&lt;/p&gt;
       <pubDate>Fri, 04 Dec 2009 01:07:05 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/490/</guid>
-      <description>&lt;p&gt;在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和&lt;br /&gt;
-L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)&lt;/p&gt;
-
-&lt;p&gt;例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;:%s/^\(\w\)\(.*\)/\u\1\L\2/g&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是
-EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午
-试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;:%s/&lt;em&gt;\([a-z]\)&lt;/em&gt;\(.*\)/&lt;em&gt;\U\1\l&lt;/em&gt;\2/g&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;\l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……&lt;/p&gt;
-</description>
+      <description>在vim中，通过v选中的文字可以用u切换到小写，U切换到大写，~在大小写之间切换，但是如果需要对选定的词做大小写操作，就需要用到%s中的\u,\U,\l和
+L，\u是把后续的字符串第一个字符转成大写而\U是把后续的都转成大写(upper case)，\l和\L是转成小写(lower case)
+例如如果要把所有行首的单词首字母大写后面的所有字母都小写，可以这么折腾：
+ :%s/^\(\w\)\(.*\)/\u\1\L\2/g
+ 需要注意的一点是，如果\L和\U后面跟有别的字符串，也会被弄成大写，如对字符串abcdefg运行 %s/abcd/\Uefgh/g 的结果就是 EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如我\1取到的是一个单词，我需要把它们都大写化了，然后后面的\2也会被变成大写。刚好下午 试的是给变量改名字，在需要变大写的单词后面有一条下划线，于是就这么用了：
+ :%s/\([a-z]\)\(.*\)/\U\1\l\2/g
+ \l 对下划线没影响，刚好用来抵消 \U 的作用，满好，至于别的情况，暂时没想法……</description>
     </item>
     
     <item>
@@ -196,14 +84,8 @@ EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如�
       <pubDate>Mon, 02 Nov 2009 17:35:40 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/487/</guid>
-      <description>&lt;p&gt;折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助
-的指引下折腾出来了。其实很简单，在&lt;code&gt;:h non-greedy&lt;/code&gt;一条中有说，使用&lt;code&gt;{-}&lt;/code&gt;来匹配，和&lt;code&gt;*&lt;/code&gt;的功能类似，于是乎就有：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt;&lt;/li&gt;
-&lt;li&gt;使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>折腾了一个HTML文件，想把标签中一些不要的属性去掉，直接的话就直接匹配到行末了，想想vim这么高级的东西应该支持非贪婪匹配吧，于是在google和自带帮助 的指引下折腾出来了。其实很简单，在:h non-greedy一条中有说，使用{-}来匹配，和*的功能类似，于是乎就有：
+ 默认贪婪匹配到行末：/&amp;lt;a.*&amp;gt; 使用非贪婪匹配本标签：/&amp;lt;a.\{-}&amp;gt;  </description>
     </item>
     
     <item>
@@ -212,18 +94,9 @@ EFGHefg，这一点在使用反向引用\1, \2等的时候比较麻烦，例如�
       <pubDate>Thu, 12 Jun 2008 23:39:06 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/302/</guid>
-      <description>&lt;p&gt;最近想在自己机器上装个v6的协议栈做开发，但是单位装机的thinkpad上居然没有v6的协议栈，真郁闷，只好自己装，可惜在ipv6
-install的时候，给直接报了个错，Error
-0x800704b8，这回可是碰到问题了，一开始以为是机器权限的问题，可是问了旁边那哥们，他说他装上了，用的某条命令后，但是命令忘了，于是 google
-之。&lt;/p&gt;
-
-&lt;p&gt;其实，碰上这个问题的人很多，那条命令也很简单。问题是windows安全数据库出问题了，Windows安全数据库，在%WinDir%\Security\dat
-abase里，具体存放的内容，暂时没时间去找，呵呵。Windowz提供了一个 esentutl 的工具用以检查修复这玩意。具体用的到的命令是
-esentutl /p %windir%\security\Database\secedit.sdb
-，/p表示修复，后面是具体的数据库，然后再安装，于是就行了。&lt;/p&gt;
-
-&lt;p&gt;汗Windowz，好歹也说清楚点出错的地方啊&amp;hellip;&amp;hellip;&lt;/p&gt;
-</description>
+      <description>最近想在自己机器上装个v6的协议栈做开发，但是单位装机的thinkpad上居然没有v6的协议栈，真郁闷，只好自己装，可惜在ipv6 install的时候，给直接报了个错，Error 0x800704b8，这回可是碰到问题了，一开始以为是机器权限的问题，可是问了旁边那哥们，他说他装上了，用的某条命令后，但是命令忘了，于是 google 之。
+其实，碰上这个问题的人很多，那条命令也很简单。问题是windows安全数据库出问题了，Windows安全数据库，在%WinDir%\Security\dat abase里，具体存放的内容，暂时没时间去找，呵呵。Windowz提供了一个 esentutl 的工具用以检查修复这玩意。具体用的到的命令是 esentutl /p %windir%\security\Database\secedit.sdb ，/p表示修复，后面是具体的数据库，然后再安装，于是就行了。
+汗Windowz，好歹也说清楚点出错的地方啊&amp;hellip;&amp;hellip;</description>
     </item>
     
     <item>
@@ -232,18 +105,11 @@ esentutl /p %windir%\security\Database\secedit.sdb
       <pubDate>Tue, 27 May 2008 23:44:34 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/297/</guid>
-      <description>&lt;p&gt;虽然前几天&lt;a href=&#34;http://hzmangel.cn/2008/05/26/using-muse-in-emacs-under-
-windowz/&#34;&gt;折腾上了muse&lt;/a&gt;，但是又在网上看到了另一个org mode，而且以前也看别人提过一次，说它的表格功能很好用，所以心又痒了，于是乎，下载，安装。&lt;br /&gt;
-和muse一样，解压后，在配置文件中加上两行就行了，一行指定org的el文件存放的位置，另一行设定对于org后缀的文件，使用org-mode打开。&lt;br /&gt;
-新建一个foo.org的文件，然后开写，用的也是类似outline的模式，而且对每级都有不同的颜色，好看。比较方便的是光标放在哪个标题栏上按&amp;lt;TAB&amp;amp;
-gt;可以控制此级标题的显示与隐藏，很方便的一个功能。还有就是在它下面可以用-/+/*来显示无级列表，用1.来显示编号的列表，写完一个列表后按&amp;lt;M-C
-R&amp;gt;，它会在下面给添加一个同级的列表，如果是无序的则加一个标记，如果是有序的则数字加1，然后按&amp;lt;M-LEFT&amp;gt;和&amp;lt;M-RIGHT&amp;amp;g
-t;可以控制列表缩进的层次，说真的，比Word下那让人莫名其妙的列表层次要好多了。它还支持导出，&amp;lt;C-c&amp;gt;&amp;lt;C-e&amp;gt;后会有一个buf
-fer告诉你有啥命令可用，可以导出的格式还是满多的，不过目前我的需求，大概就是HTML了吧，还没弄明白能不能给代码加高亮，过过再折腾吧，最近先用它来记笔记。
-一会再看看用它来做一下TODO。&lt;br /&gt;
-再说说表格，由于目前还没怎么用到表格功能，所以只是从教程中感受到了它的方便与强大，而且还有计算功能，过段时间再折腾吧。&lt;br /&gt;
-发现自己已经开始逐渐喜欢上了这个邪恶的Emacs了，呵呵。&lt;/p&gt;
-</description>
+      <description>虽然前几天折腾上了muse，但是又在网上看到了另一个org mode，而且以前也看别人提过一次，说它的表格功能很好用，所以心又痒了，于是乎，下载，安装。
+和muse一样，解压后，在配置文件中加上两行就行了，一行指定org的el文件存放的位置，另一行设定对于org后缀的文件，使用org-mode打开。
+新建一个foo.org的文件，然后开写，用的也是类似outline的模式，而且对每级都有不同的颜色，好看。比较方便的是光标放在哪个标题栏上按&amp;lt;TAB&amp;amp; gt;可以控制此级标题的显示与隐藏，很方便的一个功能。还有就是在它下面可以用-/+/*来显示无级列表，用1.来显示编号的列表，写完一个列表后按&amp;lt;M-C R&amp;gt;，它会在下面给添加一个同级的列表，如果是无序的则加一个标记，如果是有序的则数字加1，然后按&amp;lt;M-LEFT&amp;gt;和&amp;lt;M-RIGHT&amp;amp;g t;可以控制列表缩进的层次，说真的，比Word下那让人莫名其妙的列表层次要好多了。它还支持导出，&amp;lt;C-c&amp;gt;&amp;lt;C-e&amp;gt;后会有一个buf fer告诉你有啥命令可用，可以导出的格式还是满多的，不过目前我的需求，大概就是HTML了吧，还没弄明白能不能给代码加高亮，过过再折腾吧，最近先用它来记笔记。 一会再看看用它来做一下TODO。
+再说说表格，由于目前还没怎么用到表格功能，所以只是从教程中感受到了它的方便与强大，而且还有计算功能，过段时间再折腾吧。
+发现自己已经开始逐渐喜欢上了这个邪恶的Emacs了，呵呵。</description>
     </item>
     
     <item>
@@ -252,8 +118,7 @@ fer告诉你有啥命令可用，可以导出的格式还是满多的，不过�
       <pubDate>Sun, 11 May 2008 19:57:30 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/287/</guid>
-      <description>&lt;p&gt;今天在BBS上逛，看到篇文章不错，但是我只要它中间某几行，先试的是g/XXX/p，但是觉得它输出的内容不好看，我也不知道怎么弄到别的缓冲区中去，于是想把不包括这个关键字的行给删了。想找一个类似grep -v的命令，查了一下，可以用g!/XXX/d，那个!表示不包含，最后的那个d表示删除，不错，嗯。&lt;/p&gt;
-</description>
+      <description>今天在BBS上逛，看到篇文章不错，但是我只要它中间某几行，先试的是g/XXX/p，但是觉得它输出的内容不好看，我也不知道怎么弄到别的缓冲区中去，于是想把不包括这个关键字的行给删了。想找一个类似grep -v的命令，查了一下，可以用g!/XXX/d，那个!表示不包含，最后的那个d表示删除，不错，嗯。</description>
     </item>
     
     <item>
@@ -262,20 +127,8 @@ fer告诉你有啥命令可用，可以导出的格式还是满多的，不过�
       <pubDate>Thu, 08 May 2008 23:06:11 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/286/</guid>
-      <description>&lt;p&gt;装了个&lt;a href=&#34;http://www.selenic.com/mercurial/wiki/index.cgi/TortoiseHg&#34;&gt;TortoiseHg&lt;/a&gt;用来控
-制本地的一些代码，自然需要配置一下diff的工具，它默认的visusal diff工具刚装上点了没啥反应，于是上网找。它的安装包中倒是带了一个kdiff3，
-但是用来比较两个文件比较不好用，主要是自己想用vim做diff，所以需要配置一下。去它的wiki转了一圈，知道是要配置TortoiseHg安装文件夹下的Me
-rcurial.ini文件。首先需要改[extensions]节的配置，把使用hgext.extdiff = !的感叹号去掉，表示启用这个扩展，然后在下面[
-extdiff]一节中，配置一下cmd.XXX，其中XXX是将来需要在上面设置的命令的别名，然后设置好cmd.XXX=&amp;lt;Command&amp;gt;，如果需
-要参数，则要加上opts.XXX=&amp;lt;args&amp;gt;。参数默认中有要比较两个文件名，所以不需要加上文件名。例如如果需要使用vim做比较，我是这么写的：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cmd.vimdiff = [path /]\gvim.exe
-opts.vimdiff = -d
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后可以在图形界面里面设置，也可以在配置文件中编写，里面会列出在cmd中写的命令，选择好后点visual
-diff就可以了。它会把当前工作版本和版本库中的版本做比较，目前还没有试怎么与特定版本做比较，用到再说，嗯。&lt;/p&gt;
-</description>
+      <description>装了个TortoiseHg用来控 制本地的一些代码，自然需要配置一下diff的工具，它默认的visusal diff工具刚装上点了没啥反应，于是上网找。它的安装包中倒是带了一个kdiff3， 但是用来比较两个文件比较不好用，主要是自己想用vim做diff，所以需要配置一下。去它的wiki转了一圈，知道是要配置TortoiseHg安装文件夹下的Me rcurial.ini文件。首先需要改[extensions]节的配置，把使用hgext.extdiff = !的感叹号去掉，表示启用这个扩展，然后在下面[ extdiff]一节中，配置一下cmd.XXX，其中XXX是将来需要在上面设置的命令的别名，然后设置好cmd.XXX=&amp;lt;Command&amp;gt;，如果需 要参数，则要加上opts.XXX=&amp;lt;args&amp;gt;。参数默认中有要比较两个文件名，所以不需要加上文件名。例如如果需要使用vim做比较，我是这么写的：
+cmd.vimdiff = [path /]\gvim.exe opts.vimdiff = -d  然后可以在图形界面里面设置，也可以在配置文件中编写，里面会列出在cmd中写的命令，选择好后点visual diff就可以了。它会把当前工作版本和版本库中的版本做比较，目前还没有试怎么与特定版本做比较，用到再说，嗯。</description>
     </item>
     
     <item>
@@ -284,15 +137,10 @@ diff就可以了。它会把当前工作版本和版本库中的版本做比较�
       <pubDate>Sat, 29 Mar 2008 01:38:38 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/261/</guid>
-      <description>&lt;p&gt;在水木上看到了，记下来，以后可能会用到，嗯。答案来自&lt;a href=&#34;mailto:vale@newsmth.org&#34;&gt;vale@newsmth.org&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  :g/^/+1m-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;g/^/：匹配所有行&lt;br /&gt;
-+1：定位到下一行&lt;br /&gt;
-m-1：移到上面去&lt;/p&gt;
-</description>
+      <description>在水木上看到了，记下来，以后可能会用到，嗯。答案来自vale@newsmth.org
+ :g/^/+1m-1  g/^/：匹配所有行
++1：定位到下一行
+m-1：移到上面去</description>
     </item>
     
     <item>
@@ -301,9 +149,7 @@ m-1：移到上面去&lt;/p&gt;
       <pubDate>Fri, 14 Mar 2008 00:46:40 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/251/</guid>
-      <description>&lt;p&gt;在水木瞎逛，看到有人在问这个，而且有解答，抄下来吧。其实就是在visual模式下，选中要查字数的片段后，按g +
-C-g，然后在下面就会显示有多少个字节，有多少个字啥的，可以随便用用吧，呵呵。&lt;/p&gt;
-</description>
+      <description>在水木瞎逛，看到有人在问这个，而且有解答，抄下来吧。其实就是在visual模式下，选中要查字数的片段后，按g + C-g，然后在下面就会显示有多少个字节，有多少个字啥的，可以随便用用吧，呵呵。</description>
     </item>
     
     <item>
@@ -312,15 +158,7 @@ C-g，然后在下面就会显示有多少个字节，有多少个字啥的，�
       <pubDate>Sun, 06 Jan 2008 21:05:04 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/238/</guid>
-      <description>&lt;p&gt;最近写论文，需要上下两个屏幕，一个是vim，一个是PDF。每次都要手动设置窗口位置和大小，很累的，于是就想偷懒了，嗯。想到了用AutoHotKey，找了找，居然不是在WinSet里面的，而是在WinMove下，呵呵，有点意思。代码其实很简单，就一行，嗯。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;; set the width and height of window
-#2::WinMove, A, , 0, 0, A_ScreenWidth, (A_ScreenHeight/2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;它的取窗口那个A，不是放在最后，而要放在前面，算是不一样的地方吧，然后空的那个位子是放WinText的，没细看。两个0表示移到左上角，然后两个参数表示，一个
-是和屏幕一样宽，另一个表示只有屏幕的一半高，over.&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近写论文，需要上下两个屏幕，一个是vim，一个是PDF。每次都要手动设置窗口位置和大小，很累的，于是就想偷懒了，嗯。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -329,22 +167,8 @@ C-g，然后在下面就会显示有多少个字节，有多少个字啥的，�
       <pubDate>Mon, 22 Oct 2007 15:31:17 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/235/</guid>
-      <description>&lt;p&gt;一直用的是foobar的早期版本，主要是对它默认的UI情有独钟，黑底上列上标题什么的，还可以调颜色，简单，也满对我的胃口，所以也就一直用它了。昨天在水木上看
-到它出新版本了，有人说换了默认的界面，满好看的，于是就想下下来试试，结果一试，发现它的播放列表不支持TitleFormating的命令，或者我没找到应该在哪
-弄，诶，那叫一个不爽啊。正在想换回老版本的时候，想到换Columns UI试试，下载，复制，重启。在设置里面鼓捣鼓捣，发现它支持命令啥的，乱配一通，差不多和
-我原来的一样了，嗯。顺手翻它的TitleFormating命令的时候，发现有个命令可以生成渐变字，就试着放在标题上了，满好玩的，嗯。命令很简单，但由于加上了
-随机的判断，所以看上去很不爽，呵呵。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$if(%isplaying%, $rgb(0,255,0)→, $rgb(0,128,0) )
-    $transition(%title%,
-                $rgb($div($rand(),16843009),
-                     $div($rand(),16843009),
-                     $div($rand(),16843009)),
-                $rgb($div($rand(),16843009),
-                     $div($rand(),16843009),
-                     $div($rand(),16843009)))
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>一直用的是foobar的早期版本，主要是对它默认的UI情有独钟，黑底上列上标题什么的，还可以调颜色，简单，也满对我的胃口，所以也就一直用它了。昨天在水木上看 到它出新版本了，有人说换了默认的界面，满好看的，于是就想下下来试试，结果一试，发现它的播放列表不支持TitleFormating的命令，或者我没找到应该在哪 弄，诶，那叫一个不爽啊。正在想换回老版本的时候，想到换Columns UI试试，下载，复制，重启。在设置里面鼓捣鼓捣，发现它支持命令啥的，乱配一通，差不多和 我原来的一样了，嗯。顺手翻它的TitleFormating命令的时候，发现有个命令可以生成渐变字，就试着放在标题上了，满好玩的，嗯。命令很简单，但由于加上了 随机的判断，所以看上去很不爽，呵呵。
+$if(%isplaying%, $rgb(0,255,0)→, $rgb(0,128,0) ) $transition(%title%, $rgb($div($rand(),16843009), $div($rand(),16843009), $div($rand(),16843009)), $rgb($div($rand(),16843009), $div($rand(),16843009), $div($rand(),16843009)))  </description>
     </item>
     
     <item>
@@ -353,10 +177,114 @@ C-g，然后在下面就会显示有多少个字节，有多少个字啥的，�
       <pubDate>Mon, 03 Sep 2007 21:51:57 +0000</pubDate>
       
       <guid>http://hzmangel.github.io/post/210/</guid>
-      <description>&lt;p&gt;虽然没用过CVS，但是还是见过从CVS中弄出来的程序，都有$id$之类的属性。某天在用SVN的时候，突然想起来这个玩意，于是上网找找有没有可以实现类似功能的，于是就找到了svn:keywords关键字。试了一下，还是满有用的，只是需要在版本库里面设一下还是有些不习惯的。
-弄完了它自然而然就想到用到我的TeX文档中，但是它的关键字是以$$来区分的，这在TeX里面有特殊的含义，于是再次google，发现一个解决方法是在$Rev$的前后再各加一个$，试了试，效果还不错，嗯。
-有点不爽的就是它的日期格式不能自己调，所以最后只好把它给从文档中去掉了。&lt;/p&gt;
-</description>
+      <description>虽然没用过CVS，但是还是见过从CVS中弄出来的程序，都有$id$之类的属性。某天在用SVN的时候，突然想起来这个玩意，于是上网找找有没有可以实现类似功能的，于是就找到了svn:keywords关键字。试了一下，还是满有用的，只是需要在版本库里面设一下还是有些不习惯的。 弄完了它自然而然就想到用到我的TeX文档中，但是它的关键字是以$$来区分的，这在TeX里面有特殊的含义，于是再次google，发现一个解决方法是在$Rev$的前后再各加一个$，试了试，效果还不错，嗯。 有点不爽的就是它的日期格式不能自己调，所以最后只好把它给从文档中去掉了。</description>
+    </item>
+    
+    <item>
+      <title>初尝VirtualBox</title>
+      <link>http://hzmangel.github.io/post/206/</link>
+      <pubDate>Sat, 25 Aug 2007 23:43:36 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/206/</guid>
+      <description>&lt;p&gt;今天找到了传说中的虚拟机VirtualBox，主要是机器跑VMware实在是慢的不能忍了，不清楚为什么，机器也不是很差，所以找来了个这号称和真实机器一样快的虚拟机。安装过程没什么，标准的Windowz傻瓜安装，如果不是要改路径，一路Next都没问题。装完了，运行起来，菜单选的是中文，不知道是字体的问题还是我系统设置的问题，那个菜单的字体看着就是不舒服，又小，还大小不一，不过还是能忍的。新建机器，设置内存、硬盘，光驱等一堆东西，弄完了启动，不知道是不是心理上的因素，感觉上是好像是比VMware快了一些，明天编译个内核试试吧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pietty的Fn快捷键</title>
+      <link>http://hzmangel.github.io/post/205/</link>
+      <pubDate>Sat, 25 Aug 2007 23:22:07 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/205/</guid>
+      <description>由于某些原因，一直在用pietty登录到远端的服务器上做事，写程序，写文档什么的。但是有点郁闷的是总是设不好终端类型，于是总造成要不是这个功能键不能用，就是那个不能用。一直以来也都忍了，因为我需要的功能键一般也就是Home，End之类，PgUp和PgDn用的都不多，更不要说Fn了。可以最近在用TeX写文档，latexsuite需要用F5来自动补全，虽然一直是自己在敲，但是今天 也不知道怎么了突然不想敲了，找了个SecureCRT试了试，它能用，但是用着还是有些不爽，就再找到pietty，看了一下，只要把终端类型设置成Xterm就可以使用Fn的快捷键了，写了点东西，果然比自己手敲爽多了。再试了试Home和End，果然在Bash下有一个不太好用了，不过在Vim里面正常了，也算是一个好处吧。然后在网上转了转，发现Bash中可以用C-a和C-e到命令的首和尾，看来又学到了一招，嗯。</description>
+    </item>
+    
+    <item>
+      <title>AutoHotKey 设置窗口在最前</title>
+      <link>http://hzmangel.github.io/post/203/</link>
+      <pubDate>Sun, 19 Aug 2007 20:17:18 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/203/</guid>
+      <description>一直想要这个东西，但是曾经找过，一段时间没找到后就放弃了这个想法。今天在用 MyBase 的时候突然想折腾了，于是乎再一次打开它的帮助文件，找到了 WinSet 命令，但是不起作用，于是静下心下好好看了看它的帮助，终于被我找到了，嗯。 `
+#1::WinSet, AlwaysOnTop, Toggle, A  ` 最后那个 A 表示当前的窗口，一直就是没找到这个参数，所以一直没起作用。其它的东西有空再折腾吧，嗯 ;)</description>
+    </item>
+    
+    <item>
+      <title>Moinmoin的章节编号</title>
+      <link>http://hzmangel.github.io/post/187/</link>
+      <pubDate>Mon, 28 May 2007 16:05:09 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/187/</guid>
+      <description>用 moinmoin 已经有一段时间了，但是一直认为它的章节编不了号，只能用 CSS 改它的样式用以区分，今天写页面的时候，想用到 #language 可是忘了怎么用的，于是上网找一下，居然被我找到了怎么给章节加行号，哈哈。其实方法很简单了啦，在页面开头的地方加上 ##pragma section-numbers on 就可以了，如果需要默认加上的话，就编辑配置文件，一般是在 moin 安装目录下的 wikiconfig.py 中改，在 class Config 下找个地方，加上 show_section_numbers = 1 就可以了，然后重启apache，所有页面章节现在都加上编号了。</description>
+    </item>
+    
+    <item>
+      <title>Look’n’stop</title>
+      <link>http://hzmangel.github.io/post/169/</link>
+      <pubDate>Sun, 10 Sep 2006 00:57:25 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/169/</guid>
+      <description>号称世界排名第一的防火墙，上次用它由于上不了教育网直通车，换成了Tiny，最近配Tiny的规则配的很郁闷，所以考虑了半天，又换了回来，8过感觉这次好用多了。
+看了一些文章，发现配置也没什么难的，和其它的防火墙感觉上应该差不多，也就是配端口，然后设规则，只不过它可以在规则中配置连接的源或目标端口和IP地址，而且可以 对各个程序分别配置，以前用过的防火墙不知道是没有这个东西还是我没找到。说真的，选择这个防火墙的时候，也考虑到了它的名气，但主要还是看上它的小巧，不像Tiny 那样起个管理界面就要死一会。不过它的设置确实比较的让人郁闷，首先在程序规则里面要设，然后还要再去开端口，而且规则添加进去的时候，默认是block的，我是被这 件事情郁闷了好几次。还有就是要对网络协议比较的了解，比如使用的端口，曾经开了个FTP服务器别人连不上，后来看了别人的规则里面才知道还要把数据口20打开(8过 我现在把20开了，还没看别人能不能连上)。
+刚在调django，也碰到件比较郁闷的事情，django自带的服务器开起来后会有一个Error: (10022, &amp;lsquo;Invalid argument&amp;rsquo;)，不清楚是怎么回事，睡一觉起来后再折腾吧。
+btw: 刚想起来，装完lns后BT的又装了一个防火墙，jetico，免费的，大家说不错，不过一会还是卸了吧，要不然那规则会郁闷死我，后天去实验室装吧，哈哈。</description>
+    </item>
+    
+    <item>
+      <title>Apache的虚拟主机</title>
+      <link>http://hzmangel.github.io/post/160/</link>
+      <pubDate>Sun, 03 Sep 2006 20:58:28 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/160/</guid>
+      <description>&lt;p&gt;用Django的过程中，突然想用Apache+mod_python来玩玩，看了几篇文章，都是需要配置虚拟主机，于是就玩玩吧。主要就是在http.conf中加
+上一段虚拟主机的配置：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PSPad</title>
+      <link>http://hzmangel.github.io/post/158/</link>
+      <pubDate>Sat, 02 Sep 2006 23:54:44 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/158/</guid>
+      <description>小试了一下这个软件，第一感觉还是满不错的，和UE和长的很像，功能也不少，不过可惜的是自从用过VIM后就对其它的编辑器不再有兴趣，所以也只好把它作为替换品 了。不过还是推荐用UE或EP的人用一下，免费的软件，很不错的。</description>
+    </item>
+    
+    <item>
+      <title>Apache&#43;MySQL还是满方便的嘛</title>
+      <link>http://hzmangel.github.io/post/153/</link>
+      <pubDate>Fri, 18 Aug 2006 22:25:05 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/153/</guid>
+      <description>前几天折腾机器，重装系统，从XP到2k3又到2k3 R2，现在感觉系统用起来爽多了，看来XP还是没有2k3合我的胃口啊。8过今天只是想说说LAMP里面的A和 M(不过我一直好像用的都是WAMP，呵呵)，重装系统后根本不要重装，只要在命令行重新运行一下命令就可以了，可以直接安装成系统报务，真的是很方便。多亏当时搭系 统的时候没有按网上那一堆文章说的，把dll什么的拷到C盘去，在这其中多亏了FileMon啊，不过估计把文件夹拷走还是有些困难的，因为我把网站的目录移到别的地 方去了，不过即使这样改的地方也算是很少，比重装一下也方便多啦 :)</description>
+    </item>
+    
+    <item>
+      <title>本地时间与UTC时间</title>
+      <link>http://hzmangel.github.io/post/150/</link>
+      <pubDate>Thu, 17 Aug 2006 00:45:58 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/150/</guid>
+      <description>刚真的晕了，用writer发布的文章时间显示完全不对，差8个小时，直接想到的就是时区的问题，一开始还以为是MS这个软件的问题，找了一圈设置的选项没找到，后来 又去WP的设置里面找，总算找到了，本网与服务器时间的差，本来还不知道是做什么的，这回算是知道了，调时差啊，害我把那些个文章又重发了一遍，FT
+btw: 这个软件好像发布的时候设置时间真的有问题，不试了，困了，睡觉&amp;hellip;&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>Windows Live Writer</title>
+      <link>http://hzmangel.github.io/post/146/</link>
+      <pubDate>Wed, 16 Aug 2006 16:29:47 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/146/</guid>
+      <description>[](http://localhost:2270/blog/?p=162) MS刚发布的写blog的东西，我也是刚用上，感觉还是满不错的，所见即所得的东西，不过在打字过程中屏幕有时会闪烁，不知道是什么原因，刚发现还可以自动换行，别的 功能还没去发掘，应该还算是不错吧。虽然有时对MS没什么好感，但是它的东西在上手度方面还是很不错的，这也是不得不承认的一点 :) 。不过不知道是不是因为beta版的原因，有时会和输入法不兼容，机器上没有微软拼音，测试不了，不过极点五笔确实是有几次切不出来了，只有把 writer关了重启。
+btw: 写的时候才想起来，一直想弄个软件方面的分类，就用它当做开篇的吧，不过说真的，我也不知道应该在这边写些啥，不知道和其它的分类会不会有冲突啊</description>
+    </item>
+    
+    <item>
+      <title>Apache&#43;MySQL&#43;PHP终于搞定了</title>
+      <link>http://hzmangel.github.io/post/120/</link>
+      <pubDate>Thu, 01 Dec 2005 12:30:21 +0000</pubDate>
+      
+      <guid>http://hzmangel.github.io/post/120/</guid>
+      <description>自己一个一个装的，弄了些配置的东西，郁闷了几天后，终于把环境搭起来了，其实也不难，只是中间少了几步。比较郁闷的就是那个1067错误，后来在网上找找，终于起来 了。
+btw: Filemon用来看配置文件放哪真的很不错，嘿嘿，可以往绿色软件那一步发展了 ^_^</description>
     </item>
     
   </channel>

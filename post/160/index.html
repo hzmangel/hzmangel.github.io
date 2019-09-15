@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,9 @@
 
     <section>
         <div class="post-summary"><p>用Django的过程中，突然想用Apache+mod_python来玩玩，看了几篇文章，都是需要配置虚拟主机，于是就玩玩吧。主要就是在http.conf中加
-上一段虚拟主机的配置：1 <virtualhost 127.0.0.1:4210>  2     <Location "/">  3         SetHandler python-program<br />
+上一段虚拟主机的配置：</p>
+
+<p>1 <virtualhost 127.0.0.1:4210>  2     <Location "/">  3         SetHandler python-program<br />
      4         PythonPath &ldquo;[&lsquo;F:/_websites/Django&rsquo;] + sys.path&rdquo;  5         PythonHandler django.core.handlers.modpython<br />
      6         SetEnv DJANGO_SETTINGS_MODULE ilab.settings_apache<br />
      7         PythonAutoReload Off  8         PythonDebug On  9     </Location> 10     Alias /site_media F:/_websites/Django/ilab/media<br />
@@ -81,8 +83,7 @@
 
 <p>只是不爽的是其中有一些东西要用绝对路径才可以，比如我曾经用读入index.htm文件来确定主页，本来只需使用./index.htm，但是在用了apache的
 方案后，就需要指定绝对路径，如果没有使用绝对路径，就会去Apache2的目录下找，这要是能找到还不见鬼了。这也难怪为什么limodou要单独写个配置文件。不
-只是这些，在配置文件中还需要把数据库地址什么的一些东西转成绝对路径(好像是对于sqlite数据库)。</p>
-</div>
+只是这些，在配置文件中还需要把数据库地址什么的一些东西转成绝对路径(好像是对于sqlite数据库)。</p></div>
     </section>
 
     <footer>
@@ -103,11 +104,11 @@
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/161/"> &lt; Django数据库中的FileField </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/159/"> &lt; Python中的字符编码 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/159/"> Python中的字符编码 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/161/"> Django数据库中的FileField &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -141,20 +142,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -163,7 +159,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -232,11 +228,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

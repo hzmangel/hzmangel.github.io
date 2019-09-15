@@ -28,7 +28,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -81,7 +81,9 @@
 
 <p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
 tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
-来了一个fooAdapter，顺便还有这篇文章。首先是最简单的框架，一个布局的xml文件，然后一个主程序，在其中实现一个继承于Activity的类，在类中的onCreate()方法中把布局给画出来。</p>
+来了一个fooAdapter，顺便还有这篇文章。</p>
+
+<p>首先是最简单的框架，一个布局的xml文件，然后一个主程序，在其中实现一个继承于Activity的类，在类中的onCreate()方法中把布局给画出来。</p>
 
 <pre><code>public class Cover extends Activity {
     /** Called when the activity is first created. */
@@ -187,8 +189,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 }
 </code></pre>
 
-<p>呵呵，差不多就这些了吧，加上了一个自定义的Adapter，可以按自己的意愿让伊显示，满好 :)</p>
-</div>
+<p>呵呵，差不多就这些了吧，加上了一个自定义的Adapter，可以按自己的意愿让伊显示，满好 :)</p></div>
     </section>
 
     <footer>
@@ -209,11 +210,11 @@ public View getView(int position, View convertView, ViewGroup parent) {
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/481/"> &lt; 梦回东灵 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/460/"> &lt; 自虐周末第三天 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/460/"> 自虐周末第三天 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/481/"> 梦回东灵 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -247,20 +248,15 @@ public View getView(int position, View convertView, ViewGroup parent) {
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -269,7 +265,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -338,11 +334,11 @@ public View getView(int position, View convertView, ViewGroup parent) {
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

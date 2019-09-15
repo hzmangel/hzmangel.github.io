@@ -26,7 +26,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -75,10 +75,10 @@
     </header>
 
     <section>
-        <div class="post-summary">
+        <div class="post-summary"><p><code>channel</code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。</p>
 
-<p><code>channel</code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
-近用到的一些东西归纳了一下，就算是给自己留份存档吧。<code>channel</code>是需要和<code>goroutines</code>一起使用的。</p>
+<p><code>channel</code>是需要和<code>goroutines</code>一起使用的。</p>
 
 <h3 id="goroutines">goroutines</h3>
 
@@ -207,8 +207,7 @@ ed的。这时的channel，可以用来做Semaphore。</p>
 
 <p>上面介绍的channel是没有缓存的，golang中还有一种channel是可以加上缓存的，<a href="htt
 p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是Erlang的mailboxes</a>，因为不懂Erlang，所以只好把话贴在这以后两手一摊。目前
-在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于<code>select</code>的文章，目前时间未定，因为还没用到～</p>
-</div>
+在项目中还没有用到带缓存的channel，暂时先不写了，估计在不远的将来还会有一篇关于<code>select</code>的文章，目前时间未定，因为还没用到～</p></div>
     </section>
 
     <footer>
@@ -229,11 +228,11 @@ p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是E
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1233/"> &lt; Golang and JSON API </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1224/"> &lt; Save base64 image with carrierwave and bootstrap-wysiwyg </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1224/"> Save base64 image with carrierwave and bootstrap-wysiwyg &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1233/"> Golang and JSON API &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -267,20 +266,15 @@ p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是E
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -289,7 +283,7 @@ p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是E
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -358,11 +352,11 @@ p://talks.golang.org/2012/concurrency.slide#22A">官方文档说这个就像是E
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

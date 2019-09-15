@@ -8,7 +8,9 @@
     <language>zh-cn</language>
     <copyright>Copyright - ©2015 - hzmangel</copyright>
     <lastBuildDate>Sun, 17 Jan 2016 07:22:32 +0800</lastBuildDate>
-    <atom:link href="http://hzmangel.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://hzmangel.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Hadoop Study Log 1: Env Setup
@@ -17,98 +19,7 @@
       <pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate>
       
       <guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid>
-      <description>
-
-&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;2016.01.22: 按照&lt;a href=&#34;http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html&#34;&gt;Hadoop官方wiki&lt;/a&gt;配置的环境在尝试运行程序时会报连不上Node的错误，不知道是哪里的问题。后来在&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-on-ubuntu-13-10&#34;&gt;DigitalOcean的文档&lt;/a&gt;中发现了需要改Namenode和Datanode的配置才可以。已经将文中的链接和所需修改的文件列表更新。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
-
-&lt;p&gt;这里只是一些我之前可能弄混淆的概念，其它的一些东西可能需要去hadoop官网看了。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Hadoop是一个编程框架或者叫库，主要用于下面类型程序的编写
-
-&lt;ul&gt;
-&lt;li&gt;大规模数据集&lt;/li&gt;
-&lt;li&gt;分布式&lt;/li&gt;
-&lt;li&gt;简单任务模型&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Hadoop的核心项目&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;包含下面几个&lt;/a&gt;：
-
-&lt;ul&gt;
-&lt;li&gt;Common: 一些通用组件，工具类&lt;/li&gt;
-&lt;li&gt;HDFS：分布式文件系统&lt;/li&gt;
-&lt;li&gt;YARN：任务调度及资源管理&lt;/li&gt;
-&lt;li&gt;MapReduce：并行编程模型&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;还有一些衍生项目，具体&lt;a href=&#34;https://hadoop.apache.org/&#34;&gt;参见网页&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;环境配置&#34;&gt;环境配置&lt;/h2&gt;
-
-&lt;p&gt;鉴于之前在osx上装东西碰上过坑，所以选择了virtualbox+ubuntu的方案。系统的版本是Ubuntu 15.05，Hadoop选择的是2.6.3（截止写文章的时候它的Release Date最新）。具体步骤如下：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;下载及安装&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Download package from Hadoop site
-$ wget http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz
-
-# Decompress it
-$ tar zxvf hadoop-2.6.3.tar.gz
-
-# Move the package files to system directory, and change owner
-$ sudo mv hadoop-2.6.3 /opt/hadoop
-$ sudo chown -R vagrant:vagrant /opt/hadoop
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;配置服务（Single Node）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Export JAVA_HOME env variable
-$ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;并根据&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-hadoop-on-ubuntu-13-10&#34;&gt;此页面&lt;/a&gt;中的内容，修改相应文件并配置SSH服务。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;etc/hadoop/core-site.xml&lt;/p&gt;
-
-&lt;p&gt;Hadoop启动时的设置，上面那个页面中给出的是 &lt;code&gt;fs.default.name&lt;/code&gt; ，不过在新的配置中，这个字段应该变成 &lt;code&gt;fs.defaultFS&lt;/code&gt; 。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/yarn-site.xml&lt;/p&gt;
-
-&lt;p&gt;一些MapReduce的设置选项。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/mapred-site.xml&lt;/p&gt;
-
-&lt;p&gt;配置使用Yarn作为ResManager&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;etc/hadoop/hdfs-site.xml&lt;/p&gt;
-
-&lt;p&gt;配置Namenode和Datanode的路径信息&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;格式化namenode&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ bin/hdfs namenode -format
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;设置&lt;code&gt;etc/hadoop/hadoop-env.sh&lt;/code&gt;中的&lt;code&gt;JAVA_HOME&lt;/code&gt;变量&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;开启dfs服务&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sbin/start-dfs.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;至此，一个运行在单节点环境的Hadoop环境就ok了。&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;</description>
     </item>
     
   </channel>

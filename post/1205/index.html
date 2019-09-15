@@ -26,7 +26,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -83,7 +83,9 @@ returns 502 to user.</p>
 
 <p>So the solution for this kind prblem is to put the job into some background
 task, and use some other method to inform the frontend when job done. Finally
-I choose the Redis for this task.First of all, the Redis server should be run on the server, I am using ubuntu
+I choose the Redis for this task.</p>
+
+<p>First of all, the Redis server should be run on the server, I am using ubuntu
 on the server so the command is:</p>
 
 <pre><code>sudo apt-get install redis-server
@@ -139,8 +141,7 @@ end
 <code>bin/resque work</code> will start a worker process, and the parameter <code>--queues=</code>
 or <code>--queue=</code> can be added to specify the working queue. I have copied some
 code from <a href="https://gist.github.com/J-Gull/1060167">this page</a> to make the rake
-can start/stop the workers.</p>
-</div>
+can start/stop the workers.</p></div>
     </section>
 
     <footer>
@@ -161,11 +162,11 @@ can start/stop the workers.</p>
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1210/"> &lt; Uploading multiple attachments with carrierwave/mongoid/nested_form </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1201/"> &lt; iOS Code Snippets - UITableView </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1201/"> iOS Code Snippets - UITableView &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1210/"> Uploading multiple attachments with carrierwave/mongoid/nested_form &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -199,20 +200,15 @@ can start/stop the workers.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -221,7 +217,7 @@ can start/stop the workers.</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -290,11 +286,11 @@ can start/stop the workers.</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

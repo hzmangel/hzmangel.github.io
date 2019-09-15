@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -74,7 +74,9 @@
         <div class="post-summary"><p>像前面说的，做项目要用到wxWidgets，于是装上用之，现在需要用Timer了，继续折腾吧。其实选Timer的时候经过了几次折腾，第一次是想用boost写
 一个timer出来，但是没想好怎么执行一定时间后调用某函数或方法，于是作罢。在网上瞎转后回宿舍和人讨论，某牛告诉我说QT里面有Timer，于是突然想到wxw
 idgets的timer，做了几个小例子后苦于其要依托于某widget，今天又想试试boost的thread，试了一天后，觉得我是没可能作出来这东西的，于是
-再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。开始正题，wxTimer，目前按我的理解来看，是一个计时器，可以在到时间后，调用某个方法，但是到现在为止，我看到的都是要把计时器的事件绑定在某个widget
+再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。</p>
+
+<p>开始正题，wxTimer，目前按我的理解来看，是一个计时器，可以在到时间后，调用某个方法，但是到现在为止，我看到的都是要把计时器的事件绑定在某个widget
 的事件列表之内，于是，只好虚构一个类，继承于某种widget，然后不让丫显示出来，我也只能想到这种方法了。程序在下面：</p>
 
 <p>头文件 timer.h</p>
@@ -148,8 +150,7 @@ idgets的timer，做了几个小例子后苦于其要依托于某widget，今天
 
 <p>Timer就是我虚构的一个类，虽然继承于wxFrame，但是在构造函数里面就没有生成那个窗口，只是设置了一下内置的计时器。但是需要注意的一点就是这个类是多重
 继承，它还要继承于一个timer，那个m_timer就是类中wxTimer变量的变量名。别的就没啥好说的了，在wxApp的OnInit函数中新建一个Time
-r类的实例就可以了，计时器就开始跑了，然后Hello What就出现在终端上了，嗯。</p>
-</div>
+r类的实例就可以了，计时器就开始跑了，然后Hello What就出现在终端上了，嗯。</p></div>
     </section>
 
     <footer>
@@ -170,11 +171,11 @@ r类的实例就可以了，计时器就开始跑了，然后Hello What就出现
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/200/"> &lt; fcache总算能用了 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/198/"> &lt; 重新开始wxWidgets </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/198/"> 重新开始wxWidgets &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/200/"> fcache总算能用了 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -208,20 +209,15 @@ r类的实例就可以了，计时器就开始跑了，然后Hello What就出现
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -230,7 +226,7 @@ r类的实例就可以了，计时器就开始跑了，然后Hello What就出现
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -299,11 +295,11 @@ r类的实例就可以了，计时器就开始跑了，然后Hello What就出现
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

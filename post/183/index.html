@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,9 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>前段时间看到smth上有人说XeTeX直接支持TTF字体，心里一阵痒痒的，本来XeTeX是给Apple的人用的，现在咱终于有的用了，就带在TeXLive2007里面。昨天把TeXLive2007折腾完了，本来心里面想难道是直接用的是XeTeX引擎，后来用的时候才知道，直接用latex命令使用的还是fpTex，如果要用XeTeX的话，需要使用xetex和xelatex命令。昨天没空，全折腾字体去了，今天刚好有些时间空出来了，就换个东西折腾了 ^<em>^先在newsmth上找了个beamer的例子，于是开始编译。xelatex
+        <div class="post-summary"><p>前段时间看到smth上有人说XeTeX直接支持TTF字体，心里一阵痒痒的，本来XeTeX是给Apple的人用的，现在咱终于有的用了，就带在TeXLive2007里面。昨天把TeXLive2007折腾完了，本来心里面想难道是直接用的是XeTeX引擎，后来用的时候才知道，直接用latex命令使用的还是fpTex，如果要用XeTeX的话，需要使用xetex和xelatex命令。昨天没空，全折腾字体去了，今天刚好有些时间空出来了，就换个东西折腾了 ^_^</p>
+
+<p>先在newsmth上找了个beamer的例子，于是开始编译。xelatex
 test.tex，结果它告诉我说找不到xelatex.fmt，而且最后的错误是mkdir error，老习惯，转向google，第一次找到的页面是XeTeX
 的FAQ，那上面很直接的告诉我说，介个文件是安装的时候生成的，要是没有就是出错了，你丫重装吧，在最后一句，提到了一个方法，改language.dat，当时我
 叫一个郁闷啊，如果XeTeX那玩意是我装的，我倒还真不怕了，但是我是从TeXLive里面直接拷出来的撒，不得已转向第二个方法，改文件，那会在等网页的时候，已
@@ -82,13 +84,12 @@ X官网中的某个，它里面有说用fmtutil生成fmt文件，一看有戏，
 xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，倒。比较了一下两个系统上的这个命令，参数还真的不一样，只好自己接着摸了。看看它的选项，有一个
 &ndash;byfmt &hellip;..，试试吧。输入后，一运行，一堆文字滚动过后，同样的错误，mkdir error。最后想了半天，祭出FileMon，最后终于被我找到
 原因了，在$HOME$下新建目录出错，当时我叫一个郁闷啊，还能犯这种错。于是按它要建的目录结构给他建好，运行fmtutil
-&ndash;all，等结束后，再次运行xelatex test.tex，一切正常，总算成功了。试了几个字体，感觉还是满不错的，这几天看来又有的玩了 ^</em>^</p>
+&ndash;all，等结束后，再次运行xelatex test.tex，一切正常，总算成功了。试了几个字体，感觉还是满不错的，这几天看来又有的玩了 ^_^</p>
 
 <p>对了，xetex带了一个fc-list命令，可以看到系统中可用的字体，生成出来的东西是utf-
 8编码的，第一列就是可用的字体名称。还可以在fonts.conf文件中加</p>
 
-<p>以增加目录。很不错的东西，嗯。</p>
-</div>
+<p>以增加目录。很不错的东西，嗯。</p></div>
     </section>
 
     <footer>
@@ -109,11 +110,11 @@ xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/184/"> &lt; Wordpress搬家完毕 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/182/"> &lt; 初用TeXLive2007 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/182/"> 初用TeXLive2007 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/184/"> Wordpress搬家完毕 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -147,20 +148,15 @@ xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -169,7 +165,7 @@ xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -238,11 +234,11 @@ xetex，我在cmd里面一运行，它直接告诉我说，木有这个选项，
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

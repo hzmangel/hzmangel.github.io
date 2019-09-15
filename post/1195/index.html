@@ -26,7 +26,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -75,11 +75,11 @@
     </header>
 
     <section>
-        <div class="post-summary">
-
-<p>Recently working on iOS project, and have met some problems while using the
+        <div class="post-summary"><p>Recently working on iOS project, and have met some problems while using the
 attributes of <code>@property</code>. I have searched some documents and here is my idea
-about this.### What is <code>@property</code></p>
+about this.</p>
+
+<h3 id="what-is-property">What is <code>@property</code></h3>
 
 <p>So, first thing is to talk about the <code>@property</code>. This will offer a way to
 encapsulate the class. With the @synthesize keyword, the compiler will
@@ -344,8 +344,7 @@ since the <code>@property</code> with <code>retain</code> will invoke <code>reta
 feature. The attribute <code>strong</code> is the same with <code>retain</code>. While the attribute
 <code>weak</code> is almost same with <code>assign</code>. The minor difference between <code>weak</code> and
 <code>assign</code> is that the <code>weak</code> will set object to nil after releasing, which is
-missed in <code>assign</code> attribute.</p>
-</div>
+missed in <code>assign</code> attribute.</p></div>
     </section>
 
     <footer>
@@ -366,11 +365,11 @@ missed in <code>assign</code> attribute.</p>
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1201/"> &lt; iOS Code Snippets - UITableView </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/1191/"> &lt; Change font size of UITextView dynamically </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1191/"> Change font size of UITextView dynamically &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/1201/"> iOS Code Snippets - UITableView &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -404,20 +403,15 @@ missed in <code>assign</code> attribute.</p>
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -426,7 +420,7 @@ missed in <code>assign</code> attribute.</p>
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -495,11 +489,11 @@ missed in <code>assign</code> attribute.</p>
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

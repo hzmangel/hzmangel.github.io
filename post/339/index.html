@@ -22,7 +22,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -83,7 +83,9 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。</p>
 
 <p>代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
-1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。1 CmdUtils.CreateCommand<br />
+1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。</p>
+
+<p>1 CmdUtils.CreateCommand<br />
 2 ({<br />
 3  name: &ldquo;dictcn&rdquo;,<br />
 4  author: { name: &ldquo;Hu Ziming&rdquo;, email: &ldquo;hzmangel@gmail.com&rdquo;},<br />
@@ -150,8 +152,7 @@ class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt
 55  Utils.openUrlInBrowser( url );<br />
 56  }<br />
 57<br />
-58 });</p>
-</div>
+58 });</p></div>
     </section>
 
     <footer>
@@ -172,11 +173,11 @@ class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/340/"> &lt; 0901，记忆中开学的日子 </a> 
+                 <a class="previous" href="http://hzmangel.github.io/post/338/"> &lt; Starship Troopers 2 </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/338/"> Starship Troopers 2 &gt;</a> 
+                 <a class="next" href="http://hzmangel.github.io/post/340/"> 0901，记忆中开学的日子 &gt;</a> 
             </p>
         </nav>
         <br/>
@@ -210,20 +211,15 @@ class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -232,7 +228,7 @@ class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -301,11 +297,11 @@ class=\&ldquo;trans\&rdquo;&gt;${foo.trans}&lt;/div&gt; &lt;/div&gt; &lt;/div&gt
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

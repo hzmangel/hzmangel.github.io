@@ -19,7 +19,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,8 @@
     </header>
 
     <section>
-        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉 Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</div>
+        <div class="post-summary">公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
+Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动改~</div>
     </section>
 
     
@@ -87,7 +88,8 @@
     </header>
 
     <section>
-        <div class="post-summary">没几行的程序，就是输出errno数字所表示的对应含义 #include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&quot;Please give a number, Thanks~~~\n&quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &quot;errno %3d&quot;, errno); perror(tmp_str); }</div>
+        <div class="post-summary">没几行的程序，就是输出errno数字所表示的对应含义
+#include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&quot;Please give a number, Thanks~~~\n&quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &quot;errno %3d&quot;, errno); perror(tmp_str); }  </div>
     </section>
 
     
@@ -103,7 +105,16 @@
     </header>
 
     <section>
-        <div class="post-summary">在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库 hg init 然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口 hg serve -p3456 然后在本地就可以找个目录直接把那边的东西拷过来了 hg clone &lt;host&gt; &lt;local_dir&gt; 使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。 [paths] default = &lt;host&gt;:&lt;port&gt; 在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log hg ci &lt;-m &quot;log message&quot;&gt; 在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行 [web] push_ssl = false allow_push = * 根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。 hg push &lt;url&gt; 在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令 hg up 然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。 hg pull &lt;url&gt;</div>
+        <div class="post-summary">在putty里面用vim用够了，于是在远端机上弄了个Hg的版本库，平时在本机做开发，然后写完直接push到远端编译。不想折腾太多的东西，所以就用的是Hg自带 的web服务器。首先在远端某个目录里面新建一个Hg版本库
+hg init  然后就可以在远端开服务了，为了少惹麻烦，用了个3456的端口
+hg serve -p3456  然后在本地就可以找个目录直接把那边的东西拷过来了
+hg clone &lt;host&gt; &lt;local_dir&gt;  使用hg clone的好处是在目录的.hg/hgrc文件中已经存放有默认提交/连接的地址，以后在使用hg pull或者hg push时不需要额外提供地址了。
+[paths] default = &lt;host&gt;:&lt;port&gt;  在本地做过修改后，需要check in到版本库中才能成功的被push到远端。如果不加-m参数则会弹出一个编辑器让你输入log
+hg ci &lt;-m &quot;log message&quot;&gt;  在push的时候需要注意一个问题。为了安全起见，在默认情况下，Hg对于push是有一些限制的，首先需要SSL，其次需要提交改动的用户有权限。不过由于是自己使 用嘛，所以可以在Hg的配置文件中把这两个限制取消，即在hgrc中加入以下几行
+[web] push_ssl = false allow_push = *  根据自己的需求确定这几行加的位置（全局的配置还是某项目相关的配置）。添加过后即可在本地push改动到远端了。如果那个url已经添加到hgrc文件中，则不需要 指定url参数（嗯，适合我这种懒人）。
+hg push &lt;url&gt;  在远端此时只是把改动更新到版本库中，并没有把改动真正放到代码中，所以还要在远端运行一下更新命令
+hg up  然后，就能编译了，于是一次简单的流程就完鸟。如果在远端有改动，在check in到版本库后，可以在本地使用pull命令把改动同步过来。
+hg pull &lt;url&gt;  </div>
     </section>
 
     
@@ -119,7 +130,15 @@
     </header>
 
     <section>
-        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法： 不显示 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头 屏蔽响应事件 虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令 xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo; 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。 就这两条命令，具体的没的细究，有空再看吧。</div>
+        <div class="post-summary">最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
+不显示
+一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头
+屏蔽响应事件
+虽然鼠标不显示了，但是点击事件还是没有屏蔽掉，就是说你去点鼠标，还会是和原来的情况一样。本来想找HAL去直接禁用这个设备，但是在乱逛的过程中找到了xmodm ap这个东西，然后也顺便看到了怎么用它去折腾鼠标，就用了。
+这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &ldquo;pointer = 3 2 1&rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令
+xmodmap -e &ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&rdquo;
+把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。
+就这两条命令，具体的没的细究，有空再看吧。</div>
     </section>
 
     
@@ -135,7 +154,9 @@
     </header>
 
     <section>
-        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~ 最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾： parent.tb_remove() 于是就达成需求了……</div>
+        <div class="post-summary">嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
+parent.tb_remove()  于是就达成需求了……</div>
     </section>
 
     
@@ -155,8 +176,7 @@
 
 <p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
 tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
-来了一个fooAdapter，顺便还有这篇文章。</p>
-</div>
+来了一个fooAdapter，顺便还有这篇文章。</p></div>
     </section>
 
     
@@ -176,7 +196,8 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
     </header>
 
     <section>
-        <div class="post-summary">Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样： mxmlc.exe foobar.mxml -default-size 800 600</div>
+        <div class="post-summary">Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：
+mxmlc.exe foobar.mxml -default-size 800 600</div>
     </section>
 
     
@@ -192,9 +213,19 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
     </header>
 
     <section>
-        <div class="post-summary">在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。 下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下： application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。 然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。 print 'Content-Type: text/plain' print '' print 'Hello, world!' 反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。 import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &quot;__main__&quot;: main() 在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。 最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.appspot.com/ 访问了。满好玩的，继续折腾。</div>
+        <div class="post-summary">在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。
+下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：
+application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py  version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。
+然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。
+print 'Content-Type: text/plain' print '' print 'Hello, world!'  反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。
+import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &quot;__main__&quot;: main()  在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。
+最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.</div>
     </section>
 
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/268/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
     
 
 </article>
@@ -208,7 +239,11 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
     </header>
 
     <section>
-        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。 #!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
+        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
     </section>
 
     
@@ -225,8 +260,7 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
 
     <section>
         <div class="post-summary"><p>被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
-没有这么玩的啊，于是查自带的文档，居然被我找到了。</p>
-</div>
+没有这么玩的啊，于是查自带的文档，居然被我找到了。</p></div>
     </section>
 
     
@@ -263,20 +297,15 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -285,7 +314,7 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -354,11 +383,11 @@ tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足�
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

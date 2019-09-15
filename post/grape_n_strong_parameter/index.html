@@ -32,7 +32,7 @@
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -84,8 +84,7 @@
     <section>
         <div class="post-summary"><p>最近尝试在 <em>Grape API</em> 中创建一个 <em>ActiveModel</em> ，但是在使用 <code>new</code> 创建的时候发现会报 <code>ActiveModel::ForbiddenAttributesError</code> 错误。想了想估计是碰上了 <em>stronng parameters</em> 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 <code>permit!</code> 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 <em>hashie-forbidden_attributes</em> gem。</p>
 
-<p>细看了眼原因，因为在Rails中，默认传递的params类型为 <code>ActionController::Parameters</code> ，而在这个类下可以直接调用 <code>permit</code> 或 <code>permit!</code> 的方法来完成参数设置，同时会提供 <code>permitted?</code> 函数来检查参数是否有效。而 grape 默认传入的参数类型是 <code>Hashie::Mash</code> ，并没有提供 <code>permit</code> 函数。好在 Ruby 支持 <em>Monkey Patch</em> 所以新增的这个 gem 在 <code>Hashie::Mash</code> 类中加上了对函数 <code>:permitted?</code> 的响应，从而解决了这个问题。</p>
-</div>
+<p>细看了眼原因，因为在Rails中，默认传递的params类型为 <code>ActionController::Parameters</code> ，而在这个类下可以直接调用 <code>permit</code> 或 <code>permit!</code> 的方法来完成参数设置，同时会提供 <code>permitted?</code> 函数来检查参数是否有效。而 grape 默认传入的参数类型是 <code>Hashie::Mash</code> ，并没有提供 <code>permit</code> 函数。好在 Ruby 支持 <em>Monkey Patch</em> 所以新增的这个 gem 在 <code>Hashie::Mash</code> 类中加上了对函数 <code>:permitted?</code> 的响应，从而解决了这个问题。</p></div>
     </section>
 
     <footer>
@@ -106,12 +105,12 @@
         <br/>
         <nav class="post-meta">
             <p class="col-md-6">
-                
+                 <a class="previous" href="http://hzmangel.github.io/post/rails_reload_parent_in_iframe/"> &lt; Rails - Reload Parent Page in iframe
+ </a> 
             </p>
 
             <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/rails_reload_parent_in_iframe/"> Rails - Reload Parent Page in iframe
- &gt;</a> 
+                
             </p>
         </nav>
         <br/>
@@ -145,20 +144,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -167,7 +161,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -236,11 +230,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });

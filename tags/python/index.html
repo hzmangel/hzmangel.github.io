@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <meta property="og:title" content=" Python &middot;  湖间小筑" />
+        <meta property="og:title" content=" python &middot;  湖间小筑" />
         <meta property="og:site_name" content="湖间小筑" />
         <meta property="og:url" content="http://hzmangel.github.io/tags/python/" />
 
@@ -15,11 +15,11 @@
         <title>
             湖间小筑
             
-                | Python
+                | python
             
         </title>
 
-        <meta name="description" content="" />
+        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -72,8 +72,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>今天在写一个脚本的时候，发现使用<code>datetime.datetime.now()</code>输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用<code>pytz</code>的解决方案：</p>
-</div>
+        <div class="post-summary"><p>今天在写一个脚本的时候，发现使用<code>datetime.datetime.now()</code>输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用<code>pytz</code>的解决方案：</p></div>
     </section>
 
     
@@ -93,8 +92,7 @@
     </header>
 
     <section>
-        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。</p>
-</div>
+        <div class="post-summary"><p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个<a href="http://docs.codehaus.org/display/ninja/List+CVS+Tags" target="_blank">Perl脚本</a>，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。</p></div>
     </section>
 
     
@@ -114,7 +112,8 @@
     </header>
 
     <section>
-        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。 $ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
+        <div class="post-summary">从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
+$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f  没找到怎么让它输出到stdout，只好用临时文件弄了。</div>
     </section>
 
     
@@ -130,7 +129,19 @@
     </header>
 
     <section>
-        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。 1. Install Python environment bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。 wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本 2. Install Django in bluehost 安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。 3. Prepare the Django project 安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。 bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写） #! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run() 编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。 4. Configure the Apache server 折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的： AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !-f RewriteRule ^(.*)$ run.fcgi/$1 [QSA,L] 第一行设置fcgi的handler，然后后续的行都在设置rewrite模块。具体的我不太懂，于是略过。需要更改的地方可能就是static fie setting中那个目录，那个media是将admin的资源文件目录链接过来的地方（其实具体我也不太清楚rewrite模块是怎么做的，不过目前可以工作了）。 5.</div>
+        <div class="post-summary">最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
+1. Install Python environment
+bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。
+wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本
+2. Install Django in bluehost
+安装Django，不想手动解压安装了，于是先安装了setuptools，接着用easy_install安装了Django。
+3. Prepare the Django project
+安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。
+bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写）
+#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &quot;settings&quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run()  编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
+4. Configure the Apache server
+折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：
+AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</div>
     </section>
 
     
@@ -150,7 +161,8 @@
     </header>
 
     <section>
-        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了： #/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally' 从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
+        <div class="post-summary">try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
+#/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally'  从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</div>
     </section>
 
     
@@ -166,9 +178,19 @@
     </header>
 
     <section>
-        <div class="post-summary">在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。 下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下： application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。 然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。 print 'Content-Type: text/plain' print '' print 'Hello, world!' 反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。 import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &quot;__main__&quot;: main() 在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。 最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.appspot.com/ 访问了。满好玩的，继续折腾。</div>
+        <div class="post-summary">在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。
+下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：
+application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py  version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。
+然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。
+print 'Content-Type: text/plain' print '' print 'Hello, world!'  反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。
+import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &quot;__main__&quot;: main()  在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。
+最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.</div>
     </section>
 
+    
+        <footer>
+            <p><a href='http://hzmangel.github.io/post/268/'><nobr>继续阅读 →</nobr></a></p>
+        </footer>
     
 
 </article>
@@ -182,7 +204,11 @@
     </header>
 
     <section>
-        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。 #!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
+        <div class="post-summary">没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
+用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
+下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &quot;%s&quot; -o &quot;%s&quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &quot;%s&quot;' % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</div>
     </section>
 
     
@@ -199,8 +225,7 @@
 
     <section>
         <div class="post-summary"><p>被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
-没有这么玩的啊，于是查自带的文档，居然被我找到了。</p>
-</div>
+没有这么玩的啊，于是查自带的文档，居然被我找到了。</p></div>
     </section>
 
     
@@ -235,20 +260,15 @@
         <h5>新鲜出炉</h5>
         <ul class="list-unstyled">
         
-            <li><a href='http://hzmangel.github.io/post/grape_n_strong_parameter/'> Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_reload_parent_in_iframe/'> Rails - Reload Parent Page in iframe
-</a></li>
+            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/rails_elasticsearch_indexing/'> Integrate Rails with Elasticsearch - Indexing
-</a></li>
+            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/different_auth_method_in_rails_api/'> Use Different Auth Method In Rails API Controller
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
         
-            <li><a href='http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/'> Hadoop Study Log 1: Env Setup
-</a></li>
+            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
         
         </ul>
     </div>
@@ -257,7 +277,7 @@
         <h5>分类</h5>
         <ul class="list-unstyled">
         
-            <li><a href="/categories/btup">btup</a> &nbsp;(23)</li>
+            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
         
             <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
         
@@ -326,11 +346,11 @@
 
         <script type="text/x-mathjax-config">
           MathJax.Hub.Queue(function() {
-            
-            
-            
+            // Fix <code> tags after MathJax finishes running. This is a
+            // hack to overcome a shortcoming of Markdown. Discussion at
+            // https://github.com/mojombo/jekyll/issues/199
             var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i < all.length; i += 1) {
+            for(i = 0; i &lt; all.length; i += 1) {
                 all[i].SourceElement().parentNode.className += ' has-jax';
             }
         });
