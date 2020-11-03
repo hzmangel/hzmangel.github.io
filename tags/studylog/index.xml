@@ -1,147 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>StudyLog on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/studylog/</link>
-    <description>Recent content in StudyLog on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Tue, 23 Feb 2016 00:52:42 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/studylog/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Integrate Rails with Elasticsearch - Indexing
-</title>
-      <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
-      <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
-      <description>&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
-
-&lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装 Elasticsearch&lt;/li&gt;
-&lt;li&gt;关联 Rails 与 Elasticsearch&lt;/li&gt;
-&lt;li&gt;配置索引内容&lt;/li&gt;
-&lt;li&gt;Custom Analyzer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Use Different Auth Method In Rails API Controller
-</title>
-      <link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link>
-      <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
-      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hadoop Study Log 1: Env Setup
-</title>
-      <link>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</link>
-      <pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid>
-      <description>&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go generate study
-</title>
-      <link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link>
-      <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
-      <description>&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
-&lt;li&gt;同步代码中的字段和表结构&lt;/li&gt;
-&lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W3 - Communities in Social Network (Basic)
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</link>
-      <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid>
-      <description>&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Frequent Itemsets - Part II
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</link>
-      <pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid>
-      <description>&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Frequent Itemsets - Part I
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</link>
-      <pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid>
-      <description>&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Nearest Neighbor Learning
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</link>
-      <pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid>
-      <description>&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Locality-Sensitive Hashing
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</link>
-      <pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid>
-      <description>&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W1 - Link Analysis
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w1-link-analysis/</link>
-      <pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid>
-      <description>&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W1 - HDFS &amp; MR
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</link>
-      <pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid>
-      <description>&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
-
-&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>StudyLog on 湖间小筑</title><link>http://hzmangel.github.io/tags/studylog/</link><description>Recent content in StudyLog on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Tue, 23 Feb 2016 00:52:42 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/studylog/index.xml" rel="self" type="application/rss+xml"/><item><title>Integrate Rails with Elasticsearch - Indexing</title><link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link><pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid><description>&lt;p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p>
+&lt;p>这篇东西会包含下面几项内容：&lt;/p>
+&lt;ul>
+&lt;li>安装 Elasticsearch&lt;/li>
+&lt;li>关联 Rails 与 Elasticsearch&lt;/li>
+&lt;li>配置索引内容&lt;/li>
+&lt;li>Custom Analyzer&lt;/li>
+&lt;/ul>
+&lt;p>本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见&lt;a href="">官方文档&lt;/a>。&lt;/p></description></item><item><title>Use Different Auth Method In Rails API Controller</title><link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link><pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate><guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid><description>&lt;p>开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p></description></item><item><title>Hadoop Study Log 1: Env Setup</title><link>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</link><pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate><guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid><description>&lt;p>最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p></description></item><item><title>Go generate study</title><link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link><pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate><guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid><description>&lt;p>最近在折腾用Golang弄DB，定义完了 &lt;code>struct&lt;/code> 后发现好像没有 ORM 可以把这个 &lt;code>struct&lt;/code> 给映射到某张表上，所以需要：&lt;/p>
+&lt;ul>
+&lt;li>手动创建表结构，包括折腾表名和数据结构&lt;/li>
+&lt;li>同步代码中的字段和表结构&lt;/li>
+&lt;li>如果要换DB还得再来一次&lt;/li>
+&lt;/ul>
+&lt;p>于是，开始找有没有像 Rails 中一样的生成器。&lt;/p></description></item><item><title>MMDS Notes: W3 - Communities in Social Network (Basic)</title><link>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</link><pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid><description>&lt;p>第三周分两部分，第一部分是 &lt;em>Communities in Social Network&lt;/em> 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p></description></item><item><title>MMDS Notes: W2 - Frequent Itemsets - Part II</title><link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</link><pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid><description>&lt;p>这一部分介绍 &lt;em>A-Priori&lt;/em> 算法。&lt;/p></description></item><item><title>MMDS Notes: W2 - Frequent Itemsets - Part I</title><link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</link><pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid><description>&lt;p>第二周的最后一块内容是 &lt;em>Frequent Itemsets&lt;/em> 。主要介绍了 &lt;em>Frequent Itemsets&lt;/em> ， &lt;em>Association Rule&lt;/em> 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p></description></item><item><title>MMDS Notes: W2 - Nearest Neighbor Learning</title><link>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</link><pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid><description>&lt;p>第二周的 &lt;em>Nearest Neighbor Learning&lt;/em> 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p></description></item><item><title>MMDS Notes: W2 - Locality-Sensitive Hashing</title><link>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</link><pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid><description>&lt;p>Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p></description></item><item><title>MMDS Notes: W1 - Link Analysis</title><link>http://hzmangel.github.io/post/mmds-w1-link-analysis/</link><pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid><description>&lt;p>第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong>PageRank&lt;/strong>的计算。&lt;/p></description></item><item><title>MMDS Notes: W1 - HDFS &amp; MR</title><link>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</link><pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid><description>&lt;p>前段时间在Cousera上各种挤时间跟完了一门 &lt;a href="https://class.coursera.org/mmds-002">MMDS&lt;/a> ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p>
+&lt;p>课程总共7周，这篇整理的第一周的 &lt;code>HDFS&lt;/code> 和 &lt;code>MR&lt;/code> 部分。&lt;/p></description></item></channel></rss>

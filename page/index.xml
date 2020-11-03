@@ -1,28 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Pages on 湖间小筑</title>
-    <link>http://hzmangel.github.io/page/</link>
-    <description>Recent content in Pages on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    
-	<atom:link href="http://hzmangel.github.io/page/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>About Me</title>
-      <link>http://hzmangel.github.io/page/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/page/about/</guid>
-      <description>好读书，不求甚解
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 湖间小筑</title><link>http://hzmangel.github.io/page/</link><description>Recent content in Pages on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><atom:link href="http://hzmangel.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>About Me</title><link>http://hzmangel.github.io/page/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hzmangel.github.io/page/about/</guid><description>好读书，不求甚解
 喜游戏，幸不沉溺
 迷惘中曾抬头找寻过那方小筑
 怅然后才发现也许只有心中才有那片碧水蓝天
-只是，即使失败，也依然在找寻中~~</description>
-    </item>
-    
-  </channel>
-</rss>
+只是，即使失败，也依然在找寻中~~</description></item></channel></rss>

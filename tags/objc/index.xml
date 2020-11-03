@@ -1,28 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>ObjC on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/objc/</link>
-    <description>Recent content in ObjC on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Thu, 24 Jan 2013 09:41:13 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/objc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Compile Object-C program in command line</title>
-      <link>http://hzmangel.github.io/post/1183/</link>
-      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1183/</guid>
-      <description>&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ObjC on 湖间小筑</title><link>http://hzmangel.github.io/tags/objc/</link><description>Recent content in ObjC on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Thu, 24 Jan 2013 09:41:13 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/objc/index.xml" rel="self" type="application/rss+xml"/><item><title>Compile Object-C program in command line</title><link>http://hzmangel.github.io/post/1183/</link><pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate><guid>http://hzmangel.github.io/post/1183/</guid><description>&lt;p>Recently I am working on an iOS project, and I am getting interested in the
 language itself. But it is inconvenient to start Xcode for each program,
 especially for program without UI elements in. So I want to set up a command
-line environment that can compile and execute ObjC program.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+line environment that can compile and execute ObjC program.&lt;/p></description></item></channel></rss>

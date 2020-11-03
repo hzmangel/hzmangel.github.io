@@ -1,60 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>ruby on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/ruby/</link>
-    <description>Recent content in ruby on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Thu, 24 May 2012 09:25:42 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Tunning Rails with DTrace</title>
-      <link>http://hzmangel.github.io/post/1147/</link>
-      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1147/</guid>
-      <description>&lt;p&gt;This post will talk about how to do performance test of Rails program with
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ruby on 湖间小筑</title><link>http://hzmangel.github.io/tags/ruby/</link><description>Recent content in ruby on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Thu, 24 May 2012 09:25:42 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Tunning Rails with DTrace</title><link>http://hzmangel.github.io/post/1147/</link><pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate><guid>http://hzmangel.github.io/post/1147/</guid><description>&lt;p>This post will talk about how to do performance test of Rails program with
 DTrace tool. The testing will be separated into Ruby program part and database
 operations part. Please make sure all the tested program has provided probes
-to the DTrace.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (2)</title>
-      <link>http://hzmangel.github.io/post/1125/</link>
-      <pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1125/</guid>
-      <description>&lt;p&gt;This article will finish the ToDo web application, and the prime area in this
-article is adding validator and updating templates.&lt;/p&gt;
-
-&lt;p&gt;Here is &lt;a href=&#34;http://www.hzmangel.info/blog/archives/1113&#34;&gt;to RoR learning log (1)&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (1)</title>
-      <link>http://hzmangel.github.io/post/1113/</link>
-      <pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1113/</guid>
-      <description>&lt;p&gt;Just back from vacation, so the study log for this week is simple.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Ruby learning log</title>
-      <link>http://hzmangel.github.io/post/1101/</link>
-      <pubDate>Sat, 28 Apr 2012 11:34:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1101/</guid>
-      <description>&lt;p&gt;Just studied Ruby with the tutorial on website &lt;a href=&#34;http://rubylearning.com/&#34; target=&#34;_blank&#34;&gt;rubylearning.com&lt;/a&gt; in the past week, and here are some knowledge gained those days.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+to the DTrace.&lt;/p>
+&lt;p>&lt;strong>NOTICE&lt;/strong>: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p></description></item><item><title>RoR learning log (2)</title><link>http://hzmangel.github.io/post/1125/</link><pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1125/</guid><description>&lt;p>This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.&lt;/p>
+&lt;p>Here is &lt;a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)&lt;/a>&lt;/p></description></item><item><title>RoR learning log (1)</title><link>http://hzmangel.github.io/post/1113/</link><pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate><guid>http://hzmangel.github.io/post/1113/</guid><description>&lt;p>Just back from vacation, so the study log for this week is simple.&lt;/p></description></item><item><title>Ruby learning log</title><link>http://hzmangel.github.io/post/1101/</link><pubDate>Sat, 28 Apr 2012 11:34:51 +0000</pubDate><guid>http://hzmangel.github.io/post/1101/</guid><description>&lt;p>Just studied Ruby with the tutorial on website &lt;!-- raw HTML omitted -->rubylearning.com&lt;!-- raw HTML omitted --> in the past week, and here are some knowledge gained those days.&lt;/p></description></item></channel></rss>

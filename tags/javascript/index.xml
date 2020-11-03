@@ -1,36 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>javascript on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/javascript/</link>
-    <description>Recent content in javascript on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Tue, 29 Nov 2011 02:13:59 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Simple Life Game in HTML5</title>
-      <link>http://hzmangel.github.io/post/1049/</link>
-      <pubDate>Tue, 29 Nov 2011 02:13:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1049/</guid>
-      <description>&lt;p&gt;想着好久没写blog了，刚好在看&lt;a title=&#34;计算中的上帝-豆瓣&#34; href=&#34;http://book.douban.com/subject/1140726/&#34; target=&#34;_blank&#34;&gt;计算中的上帝&lt;/a&gt;时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>在thickbox中关掉自己</title>
-      <link>http://hzmangel.github.io/post/495/</link>
-      <pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/495/</guid>
-      <description>嗯，很拗口的标题吧，我也这么觉得~
-最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
-parent.tb_remove()  于是就达成需求了……</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>javascript on 湖间小筑</title><link>http://hzmangel.github.io/tags/javascript/</link><description>Recent content in javascript on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Tue, 29 Nov 2011 02:13:59 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Life Game in HTML5</title><link>http://hzmangel.github.io/post/1049/</link><pubDate>Tue, 29 Nov 2011 02:13:59 +0000</pubDate><guid>http://hzmangel.github.io/post/1049/</guid><description>&lt;p>想着好久没写blog了，刚好在看&lt;!-- raw HTML omitted -->计算中的上帝&lt;!-- raw HTML omitted -->时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。&lt;/p></description></item><item><title>在thickbox中关掉自己</title><link>http://hzmangel.github.io/post/495/</link><pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate><guid>http://hzmangel.github.io/post/495/</guid><description>嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了[这个网页](http://stackoverflow.com/questions/1012451 /jquery-thickbox-close-lightbox-from-the-event-of-the-iframe-page- content)，它告诉我，要这么来折腾：
+parent.tb_remove() 于是就达成需求了……</description></item></channel></rss>

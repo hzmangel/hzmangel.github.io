@@ -1,63 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>golang on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/golang/</link>
-    <description>Recent content in golang on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Mon, 07 Dec 2015 21:15:45 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Go generate study
-</title>
-      <link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link>
-      <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
-      <description>&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
-&lt;li&gt;同步代码中的字段和表结构&lt;/li&gt;
-&lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Control Goroutines amount via bufferred channel</title>
-      <link>http://hzmangel.github.io/post/1239/</link>
-      <pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1239/</guid>
-      <description>&lt;p&gt;最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
-，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Golang and JSON API</title>
-      <link>http://hzmangel.github.io/post/1233/</link>
-      <pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1233/</guid>
-      <description>&lt;p&gt;最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>goroutines &#43; channel</title>
-      <link>http://hzmangel.github.io/post/1230/</link>
-      <pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1230/</guid>
-      <description>&lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
-近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>golang on 湖间小筑</title><link>http://hzmangel.github.io/tags/golang/</link><description>Recent content in golang on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Mon, 07 Dec 2015 21:15:45 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>Go generate study</title><link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link><pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate><guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid><description>&lt;p>最近在折腾用Golang弄DB，定义完了 &lt;code>struct&lt;/code> 后发现好像没有 ORM 可以把这个 &lt;code>struct&lt;/code> 给映射到某张表上，所以需要：&lt;/p>
+&lt;ul>
+&lt;li>手动创建表结构，包括折腾表名和数据结构&lt;/li>
+&lt;li>同步代码中的字段和表结构&lt;/li>
+&lt;li>如果要换DB还得再来一次&lt;/li>
+&lt;/ul>
+&lt;p>于是，开始找有没有像 Rails 中一样的生成器。&lt;/p></description></item><item><title>Control Goroutines amount via bufferred channel</title><link>http://hzmangel.github.io/post/1239/</link><pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate><guid>http://hzmangel.github.io/post/1239/</guid><description>&lt;p>最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
+，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code>bufferred channel&lt;/code>用在这不错。&lt;/p></description></item><item><title>Golang and JSON API</title><link>http://hzmangel.github.io/post/1233/</link><pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1233/</guid><description>&lt;p>最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。&lt;/p></description></item><item><title>goroutines + channel</title><link>http://hzmangel.github.io/post/1230/</link><pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1230/</guid><description>&lt;p>&lt;code>channel&lt;/code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;/p></description></item></channel></rss>

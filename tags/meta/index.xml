@@ -1,33 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>meta on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/meta/</link>
-    <description>Recent content in meta on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Blog搬(zhe)家(teng)记</title>
-      <link>http://hzmangel.github.io/post/new-github-blog/</link>
-      <pubDate>Sat, 13 Jun 2015 11:36:18 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/new-github-blog/</guid>
-      <description>&lt;p&gt;其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p&gt;
-
-&lt;p&gt;当初想把blog搬家的主要需求也就下面这些：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;能用Markdown写。除了写着舒服外，这不是还能装13嘛～&lt;/li&gt;
-&lt;li&gt;之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。&lt;/li&gt;
-&lt;li&gt;模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>meta on 湖间小筑</title><link>http://hzmangel.github.io/tags/meta/</link><description>Recent content in meta on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Sat, 13 Jun 2015 11:36:18 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog搬(zhe)家(teng)记</title><link>http://hzmangel.github.io/post/new-github-blog/</link><pubDate>Sat, 13 Jun 2015 11:36:18 +0800</pubDate><guid>http://hzmangel.github.io/post/new-github-blog/</guid><description>&lt;p>其实把blog从WP挪出来的想法很早前就有了，只是由于拖延症的原因一直没去弄。不过最近可能是处于病情的低谷期，所以就动手了。&lt;/p>
+&lt;p>当初想把blog搬家的主要需求也就下面这些：&lt;/p>
+&lt;ul>
+&lt;li>能用Markdown写。除了写着舒服外，这不是还能装13嘛～&lt;/li>
+&lt;li>之前那些内容能弄过来，折腾来折腾去弄了这么久，之前的东西还是想保留下的。&lt;/li>
+&lt;li>模板稍微好看点（不过这个最后证实了还是需要自己弄，诶）。&lt;/li>
+&lt;/ul></description></item></channel></rss>

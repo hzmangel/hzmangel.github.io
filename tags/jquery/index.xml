@@ -1,38 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>jquery on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/jquery/</link>
-    <description>Recent content in jquery on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 14 Jul 2013 11:21:07 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Ajax loading multi series to jqPlot</title>
-      <link>http://hzmangel.github.io/post/1220/</link>
-      <pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1220/</guid>
-      <description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jquery on 湖间小筑</title><link>http://hzmangel.github.io/tags/jquery/</link><description>Recent content in jquery on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Sun, 14 Jul 2013 11:21:07 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/jquery/index.xml" rel="self" type="application/rss+xml"/><item><title>Ajax loading multi series to jqPlot</title><link>http://hzmangel.github.io/post/1220/</link><pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate><guid>http://hzmangel.github.io/post/1220/</guid><description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
 In the example, The function used to load ajax data is ajaxDataRenderer, which returns array of data. For multi series, just return more than one data array. Here is a sample data set:
-[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]  </description>
-    </item>
-    
-    <item>
-      <title>在thickbox中关掉自己</title>
-      <link>http://hzmangel.github.io/post/495/</link>
-      <pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/495/</guid>
-      <description>嗯，很拗口的标题吧，我也这么觉得~
-最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
-parent.tb_remove()  于是就达成需求了……</description>
-    </item>
-    
-  </channel>
-</rss>
+[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]</description></item><item><title>在thickbox中关掉自己</title><link>http://hzmangel.github.io/post/495/</link><pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate><guid>http://hzmangel.github.io/post/495/</guid><description>嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了[这个网页](http://stackoverflow.com/questions/1012451 /jquery-thickbox-close-lightbox-from-the-event-of-the-iframe-page- content)，它告诉我，要这么来折腾：
+parent.tb_remove() 于是就达成需求了……</description></item></channel></rss>

@@ -1,478 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Happy coding on 湖间小筑</title>
-    <link>http://hzmangel.github.io/categories/happy-coding/</link>
-    <description>Recent content in Happy coding on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</title>
-      <link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link>
-      <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
-      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails - Reload Parent Page in iframe
-</title>
-      <link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link>
-      <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
-      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Integrate Rails with Elasticsearch - Indexing
-</title>
-      <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
-      <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
-      <description>&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
-
-&lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装 Elasticsearch&lt;/li&gt;
-&lt;li&gt;关联 Rails 与 Elasticsearch&lt;/li&gt;
-&lt;li&gt;配置索引内容&lt;/li&gt;
-&lt;li&gt;Custom Analyzer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Use Different Auth Method In Rails API Controller
-</title>
-      <link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link>
-      <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
-      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hadoop Study Log 1: Env Setup
-</title>
-      <link>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</link>
-      <pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid>
-      <description>&lt;p&gt;最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go generate study
-</title>
-      <link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link>
-      <pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid>
-      <description>&lt;p&gt;最近在折腾用Golang弄DB，定义完了 &lt;code&gt;struct&lt;/code&gt; 后发现好像没有 ORM 可以把这个 &lt;code&gt;struct&lt;/code&gt; 给映射到某张表上，所以需要：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;手动创建表结构，包括折腾表名和数据结构&lt;/li&gt;
-&lt;li&gt;同步代码中的字段和表结构&lt;/li&gt;
-&lt;li&gt;如果要换DB还得再来一次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;于是，开始找有没有像 Rails 中一样的生成器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W3 - Communities in Social Network (Basic)
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</link>
-      <pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid>
-      <description>&lt;p&gt;第三周分两部分，第一部分是 &lt;em&gt;Communities in Social Network&lt;/em&gt; 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Frequent Itemsets - Part II
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</link>
-      <pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid>
-      <description>&lt;p&gt;这一部分介绍 &lt;em&gt;A-Priori&lt;/em&gt; 算法。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Frequent Itemsets - Part I
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</link>
-      <pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid>
-      <description>&lt;p&gt;第二周的最后一块内容是 &lt;em&gt;Frequent Itemsets&lt;/em&gt; 。主要介绍了 &lt;em&gt;Frequent Itemsets&lt;/em&gt; ， &lt;em&gt;Association Rule&lt;/em&gt; 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Nearest Neighbor Learning
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</link>
-      <pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid>
-      <description>&lt;p&gt;第二周的 &lt;em&gt;Nearest Neighbor Learning&lt;/em&gt; 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W2 - Locality-Sensitive Hashing
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</link>
-      <pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid>
-      <description>&lt;p&gt;Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Set timezone in Python
-</title>
-      <link>http://hzmangel.github.io/post/timezone-in-python/</link>
-      <pubDate>Tue, 16 Jun 2015 23:40:10 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/timezone-in-python/</guid>
-      <description>&lt;p&gt;今天在写一个脚本的时候，发现使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code&gt;pytz&lt;/code&gt;的解决方案：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W1 - Link Analysis
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w1-link-analysis/</link>
-      <pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid>
-      <description>&lt;p&gt;第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong&gt;PageRank&lt;/strong&gt;的计算。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MMDS Notes: W1 - HDFS &amp; MR
-</title>
-      <link>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</link>
-      <pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid>
-      <description>&lt;p&gt;前段时间在Cousera上各种挤时间跟完了一门 &lt;a href=&#34;https://class.coursera.org/mmds-002&#34;&gt;MMDS&lt;/a&gt; ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p&gt;
-
-&lt;p&gt;课程总共7周，这篇整理的第一周的 &lt;code&gt;HDFS&lt;/code&gt; 和 &lt;code&gt;MR&lt;/code&gt; 部分。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Control Goroutines amount via bufferred channel</title>
-      <link>http://hzmangel.github.io/post/1239/</link>
-      <pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1239/</guid>
-      <description>&lt;p&gt;最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
-，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code&gt;bufferred channel&lt;/code&gt;用在这不错。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Golang and JSON API</title>
-      <link>http://hzmangel.github.io/post/1233/</link>
-      <pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1233/</guid>
-      <description>&lt;p&gt;最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>goroutines &#43; channel</title>
-      <link>http://hzmangel.github.io/post/1230/</link>
-      <pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1230/</guid>
-      <description>&lt;p&gt;&lt;code&gt;channel&lt;/code&gt;是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
-近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
-      <link>http://hzmangel.github.io/post/1224/</link>
-      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1224/</guid>
-      <description>&lt;h3 id=&#34;tl-dr&#34;&gt;tl;dr&lt;/h3&gt;
-
-&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Happy coding on 湖间小筑</title><link>http://hzmangel.github.io/categories/happy-coding/</link><description>Recent content in Happy coding on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/categories/happy-coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape</title><link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link><pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate><guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid><description>&lt;p>最近尝试在 &lt;em>Grape API&lt;/em> 中创建一个 &lt;em>ActiveModel&lt;/em> ，但是在使用 &lt;code>new&lt;/code> 创建的时候发现会报 &lt;code>ActiveModel::ForbiddenAttributesError&lt;/code> 错误。想了想估计是碰上了 &lt;em>stronng parameters&lt;/em> 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code>permit!&lt;/code> 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em>hashie-forbidden_attributes&lt;/em> gem。&lt;/p></description></item><item><title>Rails - Reload Parent Page in iframe</title><link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link><pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid><description>&lt;p>最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code>render&lt;/code> 或 &lt;code>redirect_to&lt;/code> 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p></description></item><item><title>Integrate Rails with Elasticsearch - Indexing</title><link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link><pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid><description>&lt;p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p>
+&lt;p>这篇东西会包含下面几项内容：&lt;/p>
+&lt;ul>
+&lt;li>安装 Elasticsearch&lt;/li>
+&lt;li>关联 Rails 与 Elasticsearch&lt;/li>
+&lt;li>配置索引内容&lt;/li>
+&lt;li>Custom Analyzer&lt;/li>
+&lt;/ul>
+&lt;p>本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见&lt;a href="">官方文档&lt;/a>。&lt;/p></description></item><item><title>Use Different Auth Method In Rails API Controller</title><link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link><pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate><guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid><description>&lt;p>开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p></description></item><item><title>Hadoop Study Log 1: Env Setup</title><link>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</link><pubDate>Sun, 17 Jan 2016 07:22:32 +0800</pubDate><guid>http://hzmangel.github.io/post/hadoop_study_log_1_env_setup/</guid><description>&lt;p>最近想折腾数据，于是决定从基础的Hadoop开始。&lt;/p></description></item><item><title>Go generate study</title><link>http://hzmangel.github.io/post/go-generate-struct-to-schema/</link><pubDate>Mon, 07 Dec 2015 21:15:45 +0800</pubDate><guid>http://hzmangel.github.io/post/go-generate-struct-to-schema/</guid><description>&lt;p>最近在折腾用Golang弄DB，定义完了 &lt;code>struct&lt;/code> 后发现好像没有 ORM 可以把这个 &lt;code>struct&lt;/code> 给映射到某张表上，所以需要：&lt;/p>
+&lt;ul>
+&lt;li>手动创建表结构，包括折腾表名和数据结构&lt;/li>
+&lt;li>同步代码中的字段和表结构&lt;/li>
+&lt;li>如果要换DB还得再来一次&lt;/li>
+&lt;/ul>
+&lt;p>于是，开始找有没有像 Rails 中一样的生成器。&lt;/p></description></item><item><title>MMDS Notes: W3 - Communities in Social Network (Basic)</title><link>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</link><pubDate>Wed, 11 Nov 2015 23:53:33 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w3-communities-in-social-networks-basic/</guid><description>&lt;p>第三周分两部分，第一部分是 &lt;em>Communities in Social Network&lt;/em> 。是介绍如何在社交网络中给用户分组的。这一部分的课也分为基础和高级，这一篇是基础， 高级的课程另开一篇吧（主要是基础中还有些东西没完全弄明白&amp;hellip;）。&lt;/p></description></item><item><title>MMDS Notes: W2 - Frequent Itemsets - Part II</title><link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</link><pubDate>Wed, 01 Jul 2015 18:20:21 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p2/</guid><description>&lt;p>这一部分介绍 &lt;em>A-Priori&lt;/em> 算法。&lt;/p></description></item><item><title>MMDS Notes: W2 - Frequent Itemsets - Part I</title><link>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</link><pubDate>Fri, 26 Jun 2015 19:35:21 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-frequent-itemsets-p1/</guid><description>&lt;p>第二周的最后一块内容是 &lt;em>Frequent Itemsets&lt;/em> 。主要介绍了 &lt;em>Frequent Itemsets&lt;/em> ， &lt;em>Association Rule&lt;/em> 以及算法。这一部分介绍前面的，后面一篇会介绍算法和优化。&lt;/p></description></item><item><title>MMDS Notes: W2 - Nearest Neighbor Learning</title><link>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</link><pubDate>Wed, 24 Jun 2015 02:20:33 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-nearest-neighbor-learning/</guid><description>&lt;p>第二周的 &lt;em>Nearest Neighbor Learning&lt;/em> 只是一个大概的介绍。这是一个通过在训练集中找到离待查询数据最近的点从而做出预测的方法。&lt;/p></description></item><item><title>MMDS Notes: W2 - Locality-Sensitive Hashing</title><link>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</link><pubDate>Wed, 17 Jun 2015 08:02:10 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w2-locality-sensitive-hashing/</guid><description>&lt;p>Locality-Sensitive Hashing，LSH，局部敏感hash或叫位置敏感hash。它的想法是在对原始数据空间的数据做Hash后，让位置相邻的数据有很大概率被放到同一个或者相近的bucket中，而不相邻的点放在一起的概率要很小。这样就会减少后期数据处理的数据集，从而简化后续的工作。&lt;/p></description></item><item><title>Set timezone in Python</title><link>http://hzmangel.github.io/post/timezone-in-python/</link><pubDate>Tue, 16 Jun 2015 23:40:10 +0800</pubDate><guid>http://hzmangel.github.io/post/timezone-in-python/</guid><description>&lt;p>今天在写一个脚本的时候，发现使用&lt;code>datetime.datetime.now()&lt;/code>输出的是UTC时间，而同样的命令在ipython中输入的就是本地的时间。找了好久才找到不用&lt;code>pytz&lt;/code>的解决方案：&lt;/p></description></item><item><title>MMDS Notes: W1 - Link Analysis</title><link>http://hzmangel.github.io/post/mmds-w1-link-analysis/</link><pubDate>Sun, 14 Jun 2015 17:10:58 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w1-link-analysis/</guid><description>&lt;p>第一周的后半部分讲的是Link Analysis，主要讲的是&lt;strong>PageRank&lt;/strong>的计算。&lt;/p></description></item><item><title>MMDS Notes: W1 - HDFS &amp; MR</title><link>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</link><pubDate>Sat, 13 Jun 2015 23:13:32 +0800</pubDate><guid>http://hzmangel.github.io/post/mmds-w1-hdfs-mr/</guid><description>&lt;p>前段时间在Cousera上各种挤时间跟完了一门 &lt;a href="https://class.coursera.org/mmds-002">MMDS&lt;/a> ，手上留下了一堆笔记，整理下，顺便给新blog开光吧。&lt;/p>
+&lt;p>课程总共7周，这篇整理的第一周的 &lt;code>HDFS&lt;/code> 和 &lt;code>MR&lt;/code> 部分。&lt;/p></description></item><item><title>Control Goroutines amount via bufferred channel</title><link>http://hzmangel.github.io/post/1239/</link><pubDate>Sat, 19 Apr 2014 23:23:51 +0000</pubDate><guid>http://hzmangel.github.io/post/1239/</guid><description>&lt;p>最近还是在写爬虫，然后发现用goroutine是很快，但是很容易就碰到并发数过多被服务器限制的问题。虽然说让goroutine在起来前睡一小会能解决一些问题
+，但是终归感觉这样的办法不靠谱。继续翻文档发现&lt;code>bufferred channel&lt;/code>用在这不错。&lt;/p></description></item><item><title>Golang and JSON API</title><link>http://hzmangel.github.io/post/1233/</link><pubDate>Thu, 20 Feb 2014 01:44:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1233/</guid><description>&lt;p>最近在尝试用golang做爬虫类的东西，避免不了需要处理JSON API。其间碰到了些问题，记在这里以便下次查阅。&lt;/p></description></item><item><title>goroutines + channel</title><link>http://hzmangel.github.io/post/1230/</link><pubDate>Mon, 17 Feb 2014 01:40:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1230/</guid><description>&lt;p>&lt;code>channel&lt;/code>是golang里面一个比较有意思的东西，可以把它看成是一个semaphone（无缓存版队列）或者FIFO（有缓存版队列）。这篇文章只是把最
+近用到的一些东西归纳了一下，就算是给自己留份存档吧。&lt;/p></description></item><item><title>Save base64 image with carrierwave and bootstrap-wysiwyg</title><link>http://hzmangel.github.io/post/1224/</link><pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate><guid>http://hzmangel.github.io/post/1224/</guid><description>&lt;h3 id="tldr">tl;dr&lt;/h3>
+&lt;p>The pasted image will be converted to base64 encoded format, which will hit
 response size limitation of server. This article is talking about save image
-to file with carrierwave.&lt;/p&gt;
-
-&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
-repo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Next is the full version.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Ajax loading multi series to jqPlot</title>
-      <link>http://hzmangel.github.io/post/1220/</link>
-      <pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1220/</guid>
-      <description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
+to file with carrierwave.&lt;/p>
+&lt;p>The source code is available at &lt;a href="https://github.com/hzmangel/base64_image_carrierwave">github
+repo&lt;/a>&lt;/p>
+&lt;p>Next is the full version.&lt;/p></description></item><item><title>Ajax loading multi series to jqPlot</title><link>http://hzmangel.github.io/post/1220/</link><pubDate>Sun, 14 Jul 2013 11:21:07 +0000</pubDate><guid>http://hzmangel.github.io/post/1220/</guid><description>The Ajax example of jqPlot only shows how to plot on series data, but the request I have met needs multi series. The solution is easy, just record here for later reference.
 In the example, The function used to load ajax data is ajaxDataRenderer, which returns array of data. For multi series, just return more than one data array. Here is a sample data set:
-[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]  </description>
-    </item>
-    
-    <item>
-      <title>Some failed attempts on PNaCl</title>
-      <link>http://hzmangel.github.io/post/1214/</link>
-      <pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1214/</guid>
-      <description>&lt;p&gt;Google has released his &lt;a href=&#34;http://www.chromium.org/nativeclient/pnacl
-/building-and-testing-portable-native-client&#34;&gt;PNaCl&lt;/a&gt; project on Google I/O 2013,
+[ [ [1,1],[2,2],[3,3],[4,4],[5,5] ], [ [5,1],[4,2],[3,3],[2,4],[1,5] ] ]</description></item><item><title>Some failed attempts on PNaCl</title><link>http://hzmangel.github.io/post/1214/</link><pubDate>Thu, 20 Jun 2013 20:03:56 +0000</pubDate><guid>http://hzmangel.github.io/post/1214/</guid><description>&lt;p>Google has released his [PNaCl](&lt;a href="http://www.chromium.org/nativeclient/pnacl">http://www.chromium.org/nativeclient/pnacl&lt;/a>
+/building-and-testing-portable-native-client) project on Google I/O 2013,
 which can allow user to write portable native client application. The portable
 native client application can be translated to native client program and
-executed on supported architecture.&lt;/p&gt;
-
-&lt;p&gt;The official toolchain contains clang frontend, which can only be used to
+executed on supported architecture.&lt;/p>
+&lt;p>The official toolchain contains clang frontend, which can only be used to
 compile C/C++ code to PNaCl application. But the PNaCl application is a subset
 of LLVM so I have tried some other languages have LLVM frontend. I am still
 working on the solution, and this article is just recording some failed
-attempts.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title>
-      <link>http://hzmangel.github.io/post/1210/</link>
-      <pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1210/</guid>
-      <description>&lt;p&gt;Recently I have met a requirement that need to upload multiple attachments to
-a rails project. After some investigations, I choose &lt;code&gt;carrierwave&lt;/code&gt; finally.
-Also, I selected &lt;code&gt;nested_form&lt;/code&gt; to manage uploading and deleting multiple
-attachments.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Using Rails with Redis</title>
-      <link>http://hzmangel.github.io/post/1205/</link>
-      <pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1205/</guid>
-      <description>&lt;p&gt;I have met an issue recently that the Rails site always returns 502 error for
+attempts.&lt;/p></description></item><item><title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title><link>http://hzmangel.github.io/post/1210/</link><pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate><guid>http://hzmangel.github.io/post/1210/</guid><description>&lt;p>Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose &lt;code>carrierwave&lt;/code> finally.
+Also, I selected &lt;code>nested_form&lt;/code> to manage uploading and deleting multiple
+attachments.&lt;/p></description></item><item><title>Using Rails with Redis</title><link>http://hzmangel.github.io/post/1205/</link><pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate><guid>http://hzmangel.github.io/post/1205/</guid><description>&lt;p>I have met an issue recently that the Rails site always returns 502 error for
 some page. After some investigation, I have found that the problem is caused
 by a long time query of database, which exceeds the timeout value of unicorn
 configuration, then the unicorn worker process will be killed and the Nginx
-returns 502 to user.&lt;/p&gt;
-
-&lt;p&gt;So the solution for this kind prblem is to put the job into some background
+returns 502 to user.&lt;/p>
+&lt;p>So the solution for this kind prblem is to put the job into some background
 task, and use some other method to inform the frontend when job done. Finally
-I choose the Redis for this task.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>iOS Code Snippets - UITableView</title>
-      <link>http://hzmangel.github.io/post/1201/</link>
-      <pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1201/</guid>
-      <description>&lt;p&gt;Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href=&#34;http://goo.gl/0ZrcA&#34;&gt;http://goo.gl/0ZrcA&lt;/a&gt;. The text above is the introduction text for that project, please reference the code for detailed information.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>@property and its attributes</title>
-      <link>http://hzmangel.github.io/post/1195/</link>
-      <pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1195/</guid>
-      <description>&lt;p&gt;Recently working on iOS project, and have met some problems while using the
-attributes of &lt;code&gt;@property&lt;/code&gt;. I have searched some documents and here is my idea
-about this.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Change font size of UITextView dynamically</title>
-      <link>http://hzmangel.github.io/post/1191/</link>
-      <pubDate>Tue, 29 Jan 2013 10:48:04 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1191/</guid>
-      <description>I am working on a UITextView related problem recently, the widget, which have a fixed size, but need to show all content passed in. The text passed in have different length, so the font size should be different. The code snippet below will change the font size dynamically based on the text.
-// Set the text before setting font size my_text_view.text = foo_text; // Set the default font name and size int pre_defined_font_size = 14; my_text_view.</description>
-    </item>
-    
-    <item>
-      <title>Show alert box in calendar operations of iOS6</title>
-      <link>http://hzmangel.github.io/post/1189/</link>
-      <pubDate>Thu, 24 Jan 2013 23:47:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1189/</guid>
-      <description>With the new permission schema in iOS6, app should acquire authentication before accessing calendar. So the code for calendar operation should be surrounded like this:
-EKEventStore *eventStore = [[EKEventStore alloc] init]; EKEvent *event = [EKEvent eventWithEventStore:eventStore]; [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) { if (granted) { // Calendar operation } }];  As you can see, the code for calendar operation is written in a block.
-After the operation completed, you may want to show customer an alert box to say the operation is done.</description>
-    </item>
-    
-    <item>
-      <title>Compile Object-C program in command line</title>
-      <link>http://hzmangel.github.io/post/1183/</link>
-      <pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1183/</guid>
-      <description>&lt;p&gt;Recently I am working on an iOS project, and I am getting interested in the
+I choose the Redis for this task.&lt;/p></description></item><item><title>iOS Code Snippets - UITableView</title><link>http://hzmangel.github.io/post/1201/</link><pubDate>Tue, 12 Mar 2013 00:06:08 +0000</pubDate><guid>http://hzmangel.github.io/post/1201/</guid><description>&lt;p>Just created a project on BitBucket to save some iOS code snippets, and the first project is a simple UITableViewController one. The code is placed at &lt;a href="http://goo.gl/0ZrcA">http://goo.gl/0ZrcA&lt;/a>. The text above is the introduction text for that project, please reference the code for detailed information.&lt;/p></description></item><item><title>@property and its attributes</title><link>http://hzmangel.github.io/post/1195/</link><pubDate>Sun, 10 Feb 2013 00:06:18 +0000</pubDate><guid>http://hzmangel.github.io/post/1195/</guid><description>&lt;p>Recently working on iOS project, and have met some problems while using the
+attributes of &lt;code>@property&lt;/code>. I have searched some documents and here is my idea
+about this.&lt;/p></description></item><item><title>Change font size of UITextView dynamically</title><link>http://hzmangel.github.io/post/1191/</link><pubDate>Tue, 29 Jan 2013 10:48:04 +0000</pubDate><guid>http://hzmangel.github.io/post/1191/</guid><description>I am working on a UITextView related problem recently, the widget, which have a fixed size, but need to show all content passed in. The text passed in have different length, so the font size should be different. The code snippet below will change the font size dynamically based on the text.
+// Set the text before setting font size my_text_view.text = foo_text; // Set the default font name and size int pre_defined_font_size = 14; my_text_view.</description></item><item><title>Show alert box in calendar operations of iOS6</title><link>http://hzmangel.github.io/post/1189/</link><pubDate>Thu, 24 Jan 2013 23:47:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1189/</guid><description>With the new permission schema in iOS6, app should acquire authentication before accessing calendar. So the code for calendar operation should be surrounded like this:
+EKEventStore *eventStore = [[EKEventStore alloc] init]; EKEvent *event = [EKEvent eventWithEventStore:eventStore]; [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) { if (granted) { // Calendar operation } }]; As you can see, the code for calendar operation is written in a block.
+After the operation completed, you may want to show customer an alert box to say the operation is done.</description></item><item><title>Compile Object-C program in command line</title><link>http://hzmangel.github.io/post/1183/</link><pubDate>Thu, 24 Jan 2013 09:41:13 +0000</pubDate><guid>http://hzmangel.github.io/post/1183/</guid><description>&lt;p>Recently I am working on an iOS project, and I am getting interested in the
 language itself. But it is inconvenient to start Xcode for each program,
 especially for program without UI elements in. So I want to set up a command
-line environment that can compile and execute ObjC program.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Invoke map app in iOS app</title>
-      <link>http://hzmangel.github.io/post/1176/</link>
-      <pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1176/</guid>
-      <description>&lt;p&gt;最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Dismiss keyboard in UITextViewController</title>
-      <link>http://hzmangel.github.io/post/1166/</link>
-      <pubDate>Wed, 18 Jul 2012 14:43:32 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1166/</guid>
-      <description>&lt;p&gt;The method is collected from Internet and I just record it with my way.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Playing MongoDB with Rails</title>
-      <link>http://hzmangel.github.io/post/1159/</link>
-      <pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1159/</guid>
-      <description>&lt;p&gt;This post will try to implement a web app used for recording mobile phone of
+line environment that can compile and execute ObjC program.&lt;/p></description></item><item><title>Invoke map app in iOS app</title><link>http://hzmangel.github.io/post/1176/</link><pubDate>Wed, 26 Dec 2012 11:28:34 +0000</pubDate><guid>http://hzmangel.github.io/post/1176/</guid><description>&lt;p>最近在写个app，要调地图来展示一个地点，于是就有了三种选择：ios5之前的, 装了gmap的ios6和没装gmap的，在网上转了转，拼出来下面一段代码：&lt;/p></description></item><item><title>Dismiss keyboard in UITextViewController</title><link>http://hzmangel.github.io/post/1166/</link><pubDate>Wed, 18 Jul 2012 14:43:32 +0000</pubDate><guid>http://hzmangel.github.io/post/1166/</guid><description>&lt;p>The method is collected from Internet and I just record it with my way.&lt;/p></description></item><item><title>Playing MongoDB with Rails</title><link>http://hzmangel.github.io/post/1159/</link><pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1159/</guid><description>&lt;p>This post will try to implement a web app used for recording mobile phone of
 cheaters. This idea is came from cooler@linuxfb, and I have used this for a
 presentation about GAE on 2009, and here is the
-&lt;a href=&#34;http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477&#34;&gt;slide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;NOTE: Code still under developing, the Git repo is shown at the end of
-article.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Tunning Rails with DTrace</title>
-      <link>http://hzmangel.github.io/post/1147/</link>
-      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1147/</guid>
-      <description>&lt;p&gt;This post will talk about how to do performance test of Rails program with
+&lt;a href="http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477">slide&lt;/a>.&lt;/p>
+&lt;p>NOTE: Code still under developing, the Git repo is shown at the end of
+article.&lt;/p></description></item><item><title>Tunning Rails with DTrace</title><link>http://hzmangel.github.io/post/1147/</link><pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate><guid>http://hzmangel.github.io/post/1147/</guid><description>&lt;p>This post will talk about how to do performance test of Rails program with
 DTrace tool. The testing will be separated into Ruby program part and database
 operations part. Please make sure all the tested program has provided probes
-to the DTrace.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Deploy RoR application with Nginx</title>
-      <link>http://hzmangel.github.io/post/1133/</link>
-      <pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1133/</guid>
-      <description>&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (2)</title>
-      <link>http://hzmangel.github.io/post/1125/</link>
-      <pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1125/</guid>
-      <description>&lt;p&gt;This article will finish the ToDo web application, and the prime area in this
-article is adding validator and updating templates.&lt;/p&gt;
-
-&lt;p&gt;Here is &lt;a href=&#34;http://www.hzmangel.info/blog/archives/1113&#34;&gt;to RoR learning log (1)&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (1)</title>
-      <link>http://hzmangel.github.io/post/1113/</link>
-      <pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1113/</guid>
-      <description>&lt;p&gt;Just back from vacation, so the study log for this week is simple.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Ruby learning log</title>
-      <link>http://hzmangel.github.io/post/1101/</link>
-      <pubDate>Sat, 28 Apr 2012 11:34:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1101/</guid>
-      <description>&lt;p&gt;Just studied Ruby with the tutorial on website &lt;a href=&#34;http://rubylearning.com/&#34; target=&#34;_blank&#34;&gt;rubylearning.com&lt;/a&gt; in the past week, and here are some knowledge gained those days.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>List all CVS tags</title>
-      <link>http://hzmangel.github.io/post/1052/</link>
-      <pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1052/</guid>
-      <description>&lt;p&gt;最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;a href=&#34;http://docs.codehaus.org/display/ninja/List+CVS+Tags&#34; target=&#34;_blank&#34;&gt;Perl脚本&lt;/a&gt;，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Simple Life Game in HTML5</title>
-      <link>http://hzmangel.github.io/post/1049/</link>
-      <pubDate>Tue, 29 Nov 2011 02:13:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1049/</guid>
-      <description>&lt;p&gt;想着好久没写blog了，刚好在看&lt;a title=&#34;计算中的上帝-豆瓣&#34; href=&#34;http://book.douban.com/subject/1140726/&#34; target=&#34;_blank&#34;&gt;计算中的上帝&lt;/a&gt;时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Blocking/Non-Blocking IO and SYN/ASYN IO</title>
-      <link>http://hzmangel.github.io/post/1035/</link>
-      <pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1035/</guid>
-      <description>&lt;p&gt;这是我上个月&lt;a title=&#34;linuxfb&#34; href=&#34;http://linuxfb.net&#34; target=&#34;_blank&#34;&gt;linuxfb&lt;/a&gt;版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Get Return Value from popen System Call</title>
-      <link>http://hzmangel.github.io/post/984/</link>
-      <pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/984/</guid>
-      <description>popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
-int status = pclose(fp); if (status == -1) { printf(&amp;quot;Error reported by pclose()\n&amp;quot;); exit(1); } else { printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;); printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status)); }  其实是满早前问的一个问题，忘更新过来了。</description>
-    </item>
-    
-    <item>
-      <title>Use TaobaoAPI in SAE</title>
-      <link>http://hzmangel.github.io/post/879/</link>
-      <pubDate>Sun, 13 Mar 2011 16:07:18 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/879/</guid>
-      <description>&lt;p&gt;需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。&lt;/p&gt;
-
-&lt;p&gt;本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个&lt;a href=&#34;http://code.google.com/p/lotusphp/&#34; target=&#34;_blank&#34;&gt;lotusphp&lt;/a&gt;的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Using Django in bluehost</title>
-      <link>http://hzmangel.github.io/post/781/</link>
-      <pubDate>Sun, 19 Dec 2010 00:59:24 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/781/</guid>
-      <description>最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
+to the DTrace.&lt;/p>
+&lt;p>&lt;strong>NOTICE&lt;/strong>: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p></description></item><item><title>Deploy RoR application with Nginx</title><link>http://hzmangel.github.io/post/1133/</link><pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate><guid>http://hzmangel.github.io/post/1133/</guid><description>&lt;p>This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p></description></item><item><title>RoR learning log (2)</title><link>http://hzmangel.github.io/post/1125/</link><pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1125/</guid><description>&lt;p>This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.&lt;/p>
+&lt;p>Here is &lt;a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)&lt;/a>&lt;/p></description></item><item><title>RoR learning log (1)</title><link>http://hzmangel.github.io/post/1113/</link><pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate><guid>http://hzmangel.github.io/post/1113/</guid><description>&lt;p>Just back from vacation, so the study log for this week is simple.&lt;/p></description></item><item><title>Ruby learning log</title><link>http://hzmangel.github.io/post/1101/</link><pubDate>Sat, 28 Apr 2012 11:34:51 +0000</pubDate><guid>http://hzmangel.github.io/post/1101/</guid><description>&lt;p>Just studied Ruby with the tutorial on website &lt;!-- raw HTML omitted -->rubylearning.com&lt;!-- raw HTML omitted --> in the past week, and here are some knowledge gained those days.&lt;/p></description></item><item><title>List all CVS tags</title><link>http://hzmangel.github.io/post/1052/</link><pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1052/</guid><description>&lt;p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;!-- raw HTML omitted -->Perl脚本&lt;!-- raw HTML omitted -->，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。&lt;/p></description></item><item><title>Simple Life Game in HTML5</title><link>http://hzmangel.github.io/post/1049/</link><pubDate>Tue, 29 Nov 2011 02:13:59 +0000</pubDate><guid>http://hzmangel.github.io/post/1049/</guid><description>&lt;p>想着好久没写blog了，刚好在看&lt;!-- raw HTML omitted -->计算中的上帝&lt;!-- raw HTML omitted -->时，里面有提到生命游戏，所以就顺手写了一个，顺便凑篇文章。&lt;/p></description></item><item><title>Blocking/Non-Blocking IO and SYN/ASYN IO</title><link>http://hzmangel.github.io/post/1035/</link><pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1035/</guid><description>&lt;p>这是我上个月&lt;!-- raw HTML omitted -->linuxfb&lt;!-- raw HTML omitted -->版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。&lt;/p></description></item><item><title>Get Return Value from popen System Call</title><link>http://hzmangel.github.io/post/984/</link><pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate><guid>http://hzmangel.github.io/post/984/</guid><description>popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
+int status = pclose(fp); if (status == -1) { printf(&amp;quot;Error reported by pclose()\n&amp;quot;); exit(1); } else { printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;); printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status)); } 其实是满早前问的一个问题，忘更新过来了。</description></item><item><title>Use TaobaoAPI in SAE</title><link>http://hzmangel.github.io/post/879/</link><pubDate>Sun, 13 Mar 2011 16:07:18 +0000</pubDate><guid>http://hzmangel.github.io/post/879/</guid><description>&lt;p>需求是这样的，有一批宝贝需要导入到淘宝的店铺中，但是淘宝助手支持导入CSV文件格式过于诡异，所以只好转向API。&lt;/p>
+&lt;p>本来就是一个拼POST参数发请求的事情，淘宝非弄出来一个&lt;!-- raw HTML omitted -->lotusphp&lt;!-- raw HTML omitted -->的框架，本机调试倒是满方便的，但是传到新浪的SAE上后，那满屏的warning看着那叫一个壮观啊。又不想再去学用别的第三方SDK了，于是开始打这个框架的主意。&lt;/p></description></item><item><title>Using Django in bluehost</title><link>http://hzmangel.github.io/post/781/</link><pubDate>Sun, 19 Dec 2010 00:59:24 +0000</pubDate><guid>http://hzmangel.github.io/post/781/</guid><description>最近由于某些操蛋的事情，linuxfb需要搬家，但是bluehost主机上不支持通过网页安装django，只好自己折腾了。
 1. Install Python environment
 bluehost上提供的python的版本是2.4.3（谨慎怀疑是RH5的系统），嫌老，所以要升级。首先，需要从bluehost处申请获得SSH权限，具体做 法去查网站帮助吧。
 wget从服务器上下载源码包，然后解压编译安装三部曲，只是注意在配置的时间需要将安装的prefix目录改成自己家目录下的，否则没权限。在安装完成后记得把新p ython所在的目录加到$PATH环境变量中，然后可以使用python -V查看版本
@@ -481,104 +72,28 @@ wget从服务器上下载源码包，然后解压编译安装三部曲，只是�
 3. Prepare the Django project
 安装完Django后，可以在某处新建一个目录，然后把现有工程的整个目录拷过来。网上的教程中有说需要把setting.py的权限设成600，这样只有自己可读。 如果工程中没有绝对路径，应该不需要对工程做任何更改。
 bluehost中通过Apache+fastcgi的方式来支持Django的应用，所以还需要在工程目录下准备一个fcgi的文件，程序很简单，而且ms是通用的 （具体的我没研究过，所以不知道怎么写）
-#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ[&#39;DJANGO_SETTINGS_MODULE&#39;] = &amp;quot;settings&amp;quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run()  编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
+#! #coding:utf-8 import sys, os from os.path import abspath,dirname import sys sys.path.append(dirname(dirname(abspath(__file__)))) os.environ['DJANGO_SETTINGS_MODULE'] = &amp;quot;settings&amp;quot; from django.core.handlers.wsgi import WSGIHandler from flup.server.fcgi import WSGIServer WSGIServer(WSGIHandler()).run() 编辑完成后，将这个fcgi文件的权限设置成可执行的(chmod 755)。
 4. Configure the Apache server
 折腾完工程文件后，就需要设置Apache了，使用.htaccess方式。以下是内容，也基本上都是从网上找来的：
-AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</description>
-    </item>
-    
-    <item>
-      <title>try-except-finally block in python 2.4</title>
-      <link>http://hzmangel.github.io/post/778/</link>
-      <pubDate>Thu, 09 Dec 2010 09:50:54 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/778/</guid>
-      <description>try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
-#/usr/bin/python2.6 try: print &#39;try&#39; except: print &#39;except&#39; finally: print &#39;finally&#39; #/usr/bin/python2.4 try: try: print &#39;try&#39; except: print &#39;except&#39; finally: print &#39;finally&#39;  从Chromium的代码库(Issue 140005)中找到的方法，呵呵。</description>
-    </item>
-    
-    <item>
-      <title>Translate errno to error string</title>
-      <link>http://hzmangel.github.io/post/593/</link>
-      <pubDate>Thu, 18 Mar 2010 12:56:43 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/593/</guid>
-      <description>没几行的程序，就是输出errno数字所表示的对应含义
-#include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&amp;quot;Please give a number, Thanks~~~\n&amp;quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &amp;quot;errno %3d&amp;quot;, errno); perror(tmp_str); }  </description>
-    </item>
-    
-    <item>
-      <title>在thickbox中关掉自己</title>
-      <link>http://hzmangel.github.io/post/495/</link>
-      <pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/495/</guid>
-      <description>嗯，很拗口的标题吧，我也这么觉得~
-最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了这个网页，它告诉我，要这么来折腾：
-parent.tb_remove()  于是就达成需求了……</description>
-    </item>
-    
-    <item>
-      <title>Android中使用自定义Adapter</title>
-      <link>http://hzmangel.github.io/post/461/</link>
-      <pubDate>Mon, 14 Sep 2009 22:59:50 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/461/</guid>
-      <description>&lt;p&gt;算是对这段折腾android的一次小结吧，呵呵。&lt;/p&gt;
-
-&lt;p&gt;一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
+AddHandler fcgid-script .fcgi RewriteEngine On RewriteBase / #static file setting RewriteRule ^(media/.*)$ - [L] RewriteCond %{REQUEST_FILENAME} !</description></item><item><title>try-except-finally block in python 2.4</title><link>http://hzmangel.github.io/post/778/</link><pubDate>Thu, 09 Dec 2010 09:50:54 +0000</pubDate><guid>http://hzmangel.github.io/post/778/</guid><description>try-except-finally这种语法是在py2.5中才支持的，而在py2.4中只能单独使用try-except或try- finally。为了让脚本有更好的兼容性，只好绕过去了：
+#/usr/bin/python2.6 try: print 'try' except: print 'except' finally: print 'finally' #/usr/bin/python2.4 try: try: print 'try' except: print 'except' finally: print 'finally' 从Chromium的代码库([Issue 140005](http://codereview.chromium.org/140005/diff/1/tool s/grit/grit/scons.py))中找到的方法，呵呵。</description></item><item><title>Translate errno to error string</title><link>http://hzmangel.github.io/post/593/</link><pubDate>Thu, 18 Mar 2010 12:56:43 +0000</pubDate><guid>http://hzmangel.github.io/post/593/</guid><description>没几行的程序，就是输出errno数字所表示的对应含义
+#include #include #include int main(int argc, char* argv[]) { if (argc == 1) { printf (&amp;quot;Please give a number, Thanks~~~\n&amp;quot;); exit(1); } char tmp_str[20]; errno = atoi(argv[1]); sprintf(tmp_str, &amp;quot;errno %3d&amp;quot;, errno); perror(tmp_str); }</description></item><item><title>在thickbox中关掉自己</title><link>http://hzmangel.github.io/post/495/</link><pubDate>Wed, 16 Dec 2009 00:24:14 +0000</pubDate><guid>http://hzmangel.github.io/post/495/</guid><description>嗯，很拗口的标题吧，我也这么觉得~
+最近写的东西用到了jquery，然后也就用到那个很好用的thickbox插件。不过有 一个需求是我在thickbox中用Ajax.post()方式提交表单后需要把这个thickbox窗口关掉。它的close按钮调用的是tb_remove()函 数，但是我在里面调怎么也不起作用，直到最后找到了[这个网页](http://stackoverflow.com/questions/1012451 /jquery-thickbox-close-lightbox-from-the-event-of-the-iframe-page- content)，它告诉我，要这么来折腾：
+parent.tb_remove() 于是就达成需求了……</description></item><item><title>Android中使用自定义Adapter</title><link>http://hzmangel.github.io/post/461/</link><pubDate>Mon, 14 Sep 2009 22:59:50 +0000</pubDate><guid>http://hzmangel.github.io/post/461/</guid><description>&lt;p>算是对这段折腾android的一次小结吧，呵呵。&lt;/p>
+&lt;p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
 tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
-来了一个fooAdapter，顺便还有这篇文章。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>调整Flex默认Application的长宽</title>
-      <link>http://hzmangel.github.io/post/425/</link>
-      <pubDate>Fri, 12 Jun 2009 00:59:44 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/425/</guid>
-      <description>Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在这找到一篇文章讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：
-mxmlc.exe foobar.mxml -default-size 800 600</description>
-    </item>
-    
-    <item>
-      <title>Ubiquity &#43; dict.cn 查字典</title>
-      <link>http://hzmangel.github.io/post/339/</link>
-      <pubDate>Tue, 02 Sep 2008 09:56:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/339/</guid>
-      <description>&lt;p&gt;关键字： ubiquity, dict.cn&lt;/p&gt;
-
-&lt;p&gt;前天装上了个&lt;a href=&#34;https://wiki.mozilla.org/Labs/Ubiquity&#34;&gt;ubiquity&lt;/a&gt;，觉得满好玩的，于是就想做一个查词的东西，因
-为它里面默认的东西用的是Gtrans，对于单个单词的释义感觉有时看着云里雾里的，于是就萌生了自己写一个命令的想法，然后就做了。&lt;/p&gt;
-
-&lt;p&gt;看了几分钟教程，就开始折腾了，先从一个HelloWorld开始，然后慢慢扩展。其实没啥难的，按着例子把想要的东西加上就是了。赞一下&lt;a href=&#34;htt
-p://dict.cn&#34;&gt;dict.cn&lt;/a&gt;，不止提供了地址栏直接查询，还加上了XML接口。一开始用的是普通的查询，结果页面返回的结果是GBK编码的，在&lt;a href=&#34;h
-ttps://wiki.mozilla.org/Labs/Ubiquity&#34;&gt;ubiquity&lt;/a&gt;里面直接乱码，当时把我郁闷的不行了。还给它的客服扔了封信，问能不能提供XML或者
+来了一个fooAdapter，顺便还有这篇文章。&lt;/p></description></item><item><title>调整Flex默认Application的长宽</title><link>http://hzmangel.github.io/post/425/</link><pubDate>Fri, 12 Jun 2009 00:59:44 +0000</pubDate><guid>http://hzmangel.github.io/post/425/</guid><description>Flex的ms:Application默认有一个大小，我新建的Panel要比这个大小要大，所以默认会出来滚动条，看着比较的不爽。但是如果在Applicati on中把大小通过Height/Width设死的话，在窗口放大或者丢浏览器里面看的时候又不会居中，比较的不爽。最后终于在[这找到一篇文章](http://ww w.finosstudio.com/?p=13&amp;amp;a=view&amp;amp;r=27)讲这个的，这个参数不是在mxml文件里面设定的，而是需要在编译的时候传入- default-size 800 600 参数。命令行编译的话，是需要把这个参数加在mxml文件后面的，即这样：
+mxmlc.exe foobar.mxml -default-size 800 600</description></item><item><title>Ubiquity + dict.cn 查字典</title><link>http://hzmangel.github.io/post/339/</link><pubDate>Tue, 02 Sep 2008 09:56:59 +0000</pubDate><guid>http://hzmangel.github.io/post/339/</guid><description>&lt;p>关键字： ubiquity, dict.cn&lt;/p>
+&lt;p>前天装上了个&lt;a href="https://wiki.mozilla.org/Labs/Ubiquity">ubiquity&lt;/a>，觉得满好玩的，于是就想做一个查词的东西，因
+为它里面默认的东西用的是Gtrans，对于单个单词的释义感觉有时看着云里雾里的，于是就萌生了自己写一个命令的想法，然后就做了。&lt;/p>
+&lt;p>看了几分钟教程，就开始折腾了，先从一个HelloWorld开始，然后慢慢扩展。其实没啥难的，按着例子把想要的东西加上就是了。赞一下[dict.cn](htt
+p://dict.cn)，不止提供了地址栏直接查询，还加上了XML接口。一开始用的是普通的查询，结果页面返回的结果是GBK编码的，在[ubiquity](h
+ttps://wiki.mozilla.org/Labs/Ubiquity)里面直接乱码，当时把我郁闷的不行了。还给它的客服扔了封信，问能不能提供XML或者
 JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提供了。一开始我用的还是一个简单的查询页面，返回结果还是GBK的编码，当时被郁闷弄傻了，直接从论坛上
-找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。&lt;/p&gt;
-
-&lt;p&gt;代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
-1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Open File with Specified Encoding</title>
-      <link>http://hzmangel.github.io/post/304/</link>
-      <pubDate>Fri, 13 Jun 2008 00:00:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/304/</guid>
-      <description>其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。
-其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</description>
-    </item>
-    
-    <item>
-      <title>Google Developer Day 2008</title>
-      <link>http://hzmangel.github.io/post/301/</link>
-      <pubDate>Thu, 12 Jun 2008 22:10:36 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/301/</guid>
-      <description>报名了今年的GDD，于是就过去看看了。
+找到了admin的邮箱，扔了封邮件过去，然后等发完邮件回来一试XML接口的，好了，于是只好汗自己了，呵呵。&lt;/p>
+&lt;p>代码没啥东西，只是自己在里面加了一个template，所以看上去很不清爽，由于现在的代码只能扔在sandbox里面，模板啥的也不能发布，所以将就着用吧，0.
+1.1版本嘛。最后赞一下，开发还是满简单的，这个东西用了一天左右的时间吧。只是调试起来很不爽，大概是我还没找到方法吧，呵呵。点开看代码，嗯。&lt;/p></description></item><item><title>Open File with Specified Encoding</title><link>http://hzmangel.github.io/post/304/</link><pubDate>Fri, 13 Jun 2008 00:00:21 +0000</pubDate><guid>http://hzmangel.github.io/post/304/</guid><description>其实很早以前就找到解决方案了，只是一直没记录下来，害的我前几天写程序的时候又找了一大圈，现在学乖了，写下来吧。用的是 Python 语言，嗯。
+其实很简单，直接用 open 打开的话，好像用的是系统的编码或者什么别的方法来确定编码的，但是如果是 utf8 的文件可能会出错，说可能是因为它有时候不出错，汗。这时用 codecs 库里面的 open 方法即可，它的第一个参数是文件名，第二个是打开模式，第三个参数是文件编码，文件打开后会以 utf8 的格式存入变量，然后就可以处理了，嗯。</description></item><item><title>Google Developer Day 2008</title><link>http://hzmangel.github.io/post/301/</link><pubDate>Thu, 12 Jun 2008 22:10:36 +0000</pubDate><guid>http://hzmangel.github.io/post/301/</guid><description>报名了今年的GDD，于是就过去看看了。
 早上和平时上班一样的点起床，蹬车去玩亚运村那边。诶，由于某些原因，那边的路叫一个绕啊，还好绕着绕着就找到路进去，没发生看着会场就在对面还进不去的惨剧。
 进去后，签到，排的那个队居然系统出了问题，郁闷的不行了，到后来换了两个队才弄完，旁边 一工作人员让后面来的先去旁边拿点饮料边喝边等，后来中午听说有人没拿到餐 券，看来在那排队是正确的选择，虽然中午的饭也一般，8过那是后话了，呵呵。在排队的时候居然看到了apt，呵呵。
 开始照例是开复的讲话，和去年差不多，嗯。话说开复出来的时候，那叫一个掌声雷动啊，呵呵。所不同的就是去年的会场比这个要小。去年是在北京新世纪日航饭店，今年弄到 了国际会展中心。应该是第二次在会展中心参加G的活动了，上次是那个啥互联网论坛。场地是大了，效果也比上次差了不少，开复讲了几句，就把话语权给了号称G第一个女性 工程师，好像是产品经理啥的吧，记不清了，呵呵。然后伊就开始讲，主要是大概介绍一下产品，然后讲到一个就从下面拖一个专家上来讲，满不错的安排。总有三块投影幕布， 中间一个放的是演讲者的幻灯，一般是鸟语的，两边两块是中文的，NND也不知道是哪个脑残的人做的，用啥字体不好用宋体，细的和啥一样，在后面根本看不清，你好歹也用 个黑体啊；中间的投影字倒是能看清，但也不知道谁管的灯光，N盏灯照在演讲者那边，人倒是看清楚了，片子看的那叫一个费劲啊，诶。
@@ -592,460 +107,59 @@ JSON的接口，结果后来去它的论坛里面逛了一圈，属于直接提�
 总结结束，差不多就这样了吧。有几点感想：
 1、碰到老外，还是会结巴啊，要练口语了，诶
 2、最受不了那帮自我感觉良好，然后操着各种口音的英语说着国人和老外都听不懂的鸟语的人，估计主持人都想来一句，您还是说中文吧。
-PS：刚去瞅了一眼，上次申请的GAE还是三个App诶，不错不错，刚用掉一个还有俩，做点啥呢&amp;hellip;&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>MoinMoin on Windows with Apache</title>
-      <link>http://hzmangel.github.io/post/282/</link>
-      <pubDate>Sat, 03 May 2008 13:00:49 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/282/</guid>
-      <description>昨天想着要装一个wiki系统，于是想到了MoinMoin，上次装是在Linux下，这次手边暂时没有Linux的机器，只好用Windowz了。在这记录一下安装过程吧，反正是比较麻烦。 先是把那些个软件装上，啥Python, Apache啥的，再去下载MoinMoin，它是用easy intall做的，直接下载，然后运行setup.py install即可。然后开始配置mod_python，也是windowz下的exe文件，双击运行，自动安装。有点不同的是它在最后会询问Apache的安装位置，大概是要把那个.so文件拷过去吧。然后开始改Apache的http.cpnf文件（在Debian下装的时候，那些个mod是分开放的，有个目录专门放被加载的mod），加载mod，配置Directory，测试。 mod_python测试通过后，就是MoinMoin了，新建一个文件存放wiki的文件，从MoinMoin安装的地方把moin.cgi文件拷过来，再在http.conf中加上一个script alias，然后设置wikiconfig.py，首页名称啥的，还有一个静态文件的地址，应该是绝对路径。但是在这里设计不行，还需要在Apache的http.conf中加上对静态文件目录的访问权限。再然后，就差不多了，嗯。</description>
-    </item>
-    
-    <item>
-      <title>GAE上的blog</title>
-      <link>http://hzmangel.github.io/post/277/</link>
-      <pubDate>Sat, 12 Apr 2008 00:10:29 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/277/</guid>
-      <description>折腾了两天发现后来发现没有用的东西，还是比较郁闷的事情。不过还好，没有被打击，又开了个新的东西。有了前面的一个经验，还是满快的，嗯。 做了一个十分简单的blog系统，说说里面有用的东西吧，由于blog很简单，所以只用了两张表，一张放文章，一张放Tags。其实本来懒到只想用一张表的，但是想想只有文章，那和留言板也没什么区别了，所以，加了个tag。文章中的taglist是用ListProperty建的，list的类型本来想用db.Key，但是查询那段代码写着太麻烦了，所以最后用了简单的字符串，没办法，我比较懒，呵呵。 还用到的一个模块就是认证，也是很简单的，传到服务器上后直接用google帐户的认证，满不错的，也满方便的，于是我就直接用了。在get时判断是否登录，如果登录了就显示表单，否则给个要登录的链接。两个用的是一个页面，用到了模板中的判断{% if %}，也很方便。从表单取数据直接用self.request.get(&amp;lt;name&amp;gt;)就行了，没啥好说的。 还有个地方就是URL的正则匹配，在app.yaml中有，在webapp的main()函数中也有，我是在app.yaml中把所有的URL映射到了一个地址下，然后在webapp中细分。它的正则匹配就是在函数中按顺序匹配()中的内容，变量名随便起，然后可以直接在函数中用。 别的，没有啥了，嗯。</description>
-    </item>
-    
-    <item>
-      <title>被GAE打击......</title>
-      <link>http://hzmangel.github.io/post/275/</link>
-      <pubDate>Thu, 10 Apr 2008 18:37:39 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/275/</guid>
-      <description>本来测试已经没啥问题了，但是，居然，它的那个urlfetch居然功能不全，或者是说那几个提供feed的网站有点啥，不管怎么样，结果就是，我用它的urlfet ch.fetch()抓不到我想到的数据，真郁闷。话说，更郁闷的是昨天拿来试这个功能的那个地址可以，要是昨天那个就不行了，我就不做了撒，诶。看来又要想东西做了 ，还是看看它和G家自己的东西能不能很好的结合吧……
-希望这两天的时间没有白费……</description>
-    </item>
-    
-    <item>
-      <title>App Engine中后台任务的实现</title>
-      <link>http://hzmangel.github.io/post/274/</link>
-      <pubDate>Thu, 10 Apr 2008 03:21:23 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/274/</guid>
-      <description>灌水灌上瘾了，没办法，呵呵，就再来一篇吧。
+PS：刚去瞅了一眼，上次申请的GAE还是三个App诶，不错不错，刚用掉一个还有俩，做点啥呢&amp;hellip;&amp;hellip;</description></item><item><title>MoinMoin on Windows with Apache</title><link>http://hzmangel.github.io/post/282/</link><pubDate>Sat, 03 May 2008 13:00:49 +0000</pubDate><guid>http://hzmangel.github.io/post/282/</guid><description>昨天想着要装一个wiki系统，于是想到了MoinMoin，上次装是在Linux下，这次手边暂时没有Linux的机器，只好用Windowz了。在这记录一下安装过程吧，反正是比较麻烦。 先是把那些个软件装上，啥Python, Apache啥的，再去下载MoinMoin，它是用easy intall做的，直接下载，然后运行setup.py install即可。然后开始配置mod_python，也是windowz下的exe文件，双击运行，自动安装。有点不同的是它在最后会询问Apache的安装位置，大概是要把那个.so文件拷过去吧。然后开始改Apache的http.cpnf文件（在Debian下装的时候，那些个mod是分开放的，有个目录专门放被加载的mod），加载mod，配置Directory，测试。 mod_python测试通过后，就是MoinMoin了，新建一个文件存放wiki的文件，从MoinMoin安装的地方把moin.cgi文件拷过来，再在http.conf中加上一个script alias，然后设置wikiconfig.py，首页名称啥的，还有一个静态文件的地址，应该是绝对路径。但是在这里设计不行，还需要在Apache的http.conf中加上对静态文件目录的访问权限。再然后，就差不多了，嗯。</description></item><item><title>GAE上的blog</title><link>http://hzmangel.github.io/post/277/</link><pubDate>Sat, 12 Apr 2008 00:10:29 +0000</pubDate><guid>http://hzmangel.github.io/post/277/</guid><description>折腾了两天发现后来发现没有用的东西，还是比较郁闷的事情。不过还好，没有被打击，又开了个新的东西。有了前面的一个经验，还是满快的，嗯。 做了一个十分简单的blog系统，说说里面有用的东西吧，由于blog很简单，所以只用了两张表，一张放文章，一张放Tags。其实本来懒到只想用一张表的，但是想想只有文章，那和留言板也没什么区别了，所以，加了个tag。文章中的taglist是用ListProperty建的，list的类型本来想用db.Key，但是查询那段代码写着太麻烦了，所以最后用了简单的字符串，没办法，我比较懒，呵呵。 还用到的一个模块就是认证，也是很简单的，传到服务器上后直接用google帐户的认证，满不错的，也满方便的，于是我就直接用了。在get时判断是否登录，如果登录了就显示表单，否则给个要登录的链接。两个用的是一个页面，用到了模板中的判断{% if %}，也很方便。从表单取数据直接用self.request.get(&amp;lt;name&amp;gt;)就行了，没啥好说的。 还有个地方就是URL的正则匹配，在app.yaml中有，在webapp的main()函数中也有，我是在app.yaml中把所有的URL映射到了一个地址下，然后在webapp中细分。它的正则匹配就是在函数中按顺序匹配()中的内容，变量名随便起，然后可以直接在函数中用。 别的，没有啥了，嗯。</description></item><item><title>被GAE打击......</title><link>http://hzmangel.github.io/post/275/</link><pubDate>Thu, 10 Apr 2008 18:37:39 +0000</pubDate><guid>http://hzmangel.github.io/post/275/</guid><description>本来测试已经没啥问题了，但是，居然，它的那个urlfetch居然功能不全，或者是说那几个提供feed的网站有点啥，不管怎么样，结果就是，我用它的urlfet ch.fetch()抓不到我想到的数据，真郁闷。话说，更郁闷的是昨天拿来试这个功能的那个地址可以，要是昨天那个就不行了，我就不做了撒，诶。看来又要想东西做了 ，还是看看它和G家自己的东西能不能很好的结合吧……
+希望这两天的时间没有白费……</description></item><item><title>App Engine中后台任务的实现</title><link>http://hzmangel.github.io/post/274/</link><pubDate>Thu, 10 Apr 2008 03:21:23 +0000</pubDate><guid>http://hzmangel.github.io/post/274/</guid><description>灌水灌上瘾了，没办法，呵呵，就再来一篇吧。
 写的那个RSS聚合应用，想在后台运行一个单独的线程，用以从那些地址更新RSS信息，一开始很傻很天真的用thread来写，写了一半想起来了，去查查支持不支持。 去开发者论坛上一找background，还真有人在讨论。扫了一眼，就是现在还不支持，然后一帮人在Google Code的某个Issue上灌水，话说我也去加了一瓢，嘿嘿。
-目前不支持，但我还是要用啊，继续转，果然找到了个折衷的方法，其实也很简单，就是把那个本来要写成thread的类映射到某个URL上，然后过一段时间访问一下，这 个可以在别的任何机器上用计划任务实现。刚试了一下，效果不错，暂时先这么用着吧，呵呵。</description>
-    </item>
-    
-    <item>
-      <title>在App Engine中访问外部网站</title>
-      <link>http://hzmangel.github.io/post/273/</link>
-      <pubDate>Thu, 10 Apr 2008 03:16:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/273/</guid>
-      <description>下午做RSS聚合网站时，需要从外部的地址抓feed，用的是feedparse的库。但是怎么弄都出错，所以很郁闷，想从RSS的字符串解析一次，看看有没有错。想 当然的使用了urllib，结果它也出错。由于有了昨天模板的经验，所以直接去找google的文档。果不其然，它不支持直接从外网获取内容，如果有此需求，则需要使 用它封装好的一个urlfetch库中的fecth方法。没办法啊，那就用吧，谁让人家的地盘人家做主呢。
+目前不支持，但我还是要用啊，继续转，果然找到了个折衷的方法，其实也很简单，就是把那个本来要写成thread的类映射到某个URL上，然后过一段时间访问一下，这 个可以在别的任何机器上用计划任务实现。刚试了一下，效果不错，暂时先这么用着吧，呵呵。</description></item><item><title>在App Engine中访问外部网站</title><link>http://hzmangel.github.io/post/273/</link><pubDate>Thu, 10 Apr 2008 03:16:13 +0000</pubDate><guid>http://hzmangel.github.io/post/273/</guid><description>下午做RSS聚合网站时，需要从外部的地址抓feed，用的是feedparse的库。但是怎么弄都出错，所以很郁闷，想从RSS的字符串解析一次，看看有没有错。想 当然的使用了urllib，结果它也出错。由于有了昨天模板的经验，所以直接去找google的文档。果不其然，它不支持直接从外网获取内容，如果有此需求，则需要使 用它封装好的一个urlfetch库中的fecth方法。没办法啊，那就用吧，谁让人家的地盘人家做主呢。
 抓取内容，判定返回值是否为200，取结果，到这一切顺利，于是就开始用feedparse解析。解析也没问题，但是郁闷的是，这样解析出来的东西没有时间信息了，就 是它得不到这个RSS的最后更新时间，去urlfetch的文档里面转了一圈，也没见有相关的内容，只好自己另想办法了。最后的解决办法是在FeedInfo中加入了 一个字段用以存放最后更新的时间，然后拿feed中的每个文章的updated_parse时间与这个时间比较，如果文章的时间较新则插入库中，否则不处理。在写时候 漏掉一条语句，调了好长时间，真郁闷。
 PS：logging真的很好用，直接在服务器的终端窗口输出信息。其实我本来是想用printf的，结果伊居然不支持，FT。
-PS2：如果loggin的消息调成debug，则在开服务器的时候需要加上- d选项，否则DEBUG的信息不输出，我为这折腾了10分钟，那几条logging语句一会加上一会删除，心里还直嘀咕，难道又被我找到个BUG&amp;hellip;&amp;hellip;.</description>
-    </item>
-    
-    <item>
-      <title>在App Engine中使用数据库</title>
-      <link>http://hzmangel.github.io/post/272/</link>
-      <pubDate>Thu, 10 Apr 2008 03:04:57 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/272/</guid>
-      <description>下午想了好久，才想到做一个类似Planet的Blog聚合的东西，也算是给自己玩玩吧。看了一下文档，它不支持往主机中写文件，如果需要存放数据的话，需要使用它的 Datastore，其实就是后台给提供个数据库，这样也好，也算方便管理吧。
-动手写了写，大概需要两张表，一张表维护feed的信息，另一张表存放文章的信息，反正目前是这样的，以后有什么再加吧，呵呵。和Django中类似，直接用一个cl ass表示一张表，而且也是分多种字段值，无外乎就是那些啥个文本啊，数字啊，链接啥的，与Django不同的是它需要根据字段值的不同构建一个db下某个模块的实例 。还有一个reference字段类型用来表示关联表，它存放的另一张表中的某个字段值的key。大概是因为还算比较熟悉Django的数据库模块，所以没感觉到有啥 困难。有DB就需要有查询，App Engine的查询使用的是像Django中的模块，或者使用GQL语言，和SQL类似，不过它的文档中只有SELECT，而没有 其它的诸如INSERT，UPDATE啥，不过如果需要更改数据的值可以先查询，然后直接对结果进行赋值操作后调用put操作即可。用起来还是满简单的，呵呵，反正大 概能满足我的要求了。</description>
-    </item>
-    
-    <item>
-      <title>App Engine 的模板支持......</title>
-      <link>http://hzmangel.github.io/post/271/</link>
-      <pubDate>Wed, 09 Apr 2008 02:51:20 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/271/</guid>
-      <description>是支持模板了，但是居然只支持把模板放在工程的根目录，好像是权限的原因。郁闷啊，想好的目录结构就这样被破坏了，还好支持把css等静态文件扔在别的文件夹。明天折 腾折腾UI吧，困了，睡觉。</description>
-    </item>
-    
-    <item>
-      <title>在 App Engine 中使用模板和静态文件</title>
-      <link>http://hzmangel.github.io/post/270/</link>
-      <pubDate>Wed, 09 Apr 2008 02:21:49 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/270/</guid>
-      <description>看到App Engine支持模板，扫了一眼，和Django的就是一样的，它下面的链接也直接说了，用的就是Django的模板系统。看来这次又有便宜可占了，直接 上手，不错不错。
+PS2：如果loggin的消息调成debug，则在开服务器的时候需要加上- d选项，否则DEBUG的信息不输出，我为这折腾了10分钟，那几条logging语句一会加上一会删除，心里还直嘀咕，难道又被我找到个BUG&amp;hellip;&amp;hellip;.</description></item><item><title>在App Engine中使用数据库</title><link>http://hzmangel.github.io/post/272/</link><pubDate>Thu, 10 Apr 2008 03:04:57 +0000</pubDate><guid>http://hzmangel.github.io/post/272/</guid><description>下午想了好久，才想到做一个类似Planet的Blog聚合的东西，也算是给自己玩玩吧。看了一下文档，它不支持往主机中写文件，如果需要存放数据的话，需要使用它的 Datastore，其实就是后台给提供个数据库，这样也好，也算方便管理吧。
+动手写了写，大概需要两张表，一张表维护feed的信息，另一张表存放文章的信息，反正目前是这样的，以后有什么再加吧，呵呵。和Django中类似，直接用一个cl ass表示一张表，而且也是分多种字段值，无外乎就是那些啥个文本啊，数字啊，链接啥的，与Django不同的是它需要根据字段值的不同构建一个db下某个模块的实例 。还有一个reference字段类型用来表示关联表，它存放的另一张表中的某个字段值的key。大概是因为还算比较熟悉Django的数据库模块，所以没感觉到有啥 困难。有DB就需要有查询，App Engine的查询使用的是像Django中的模块，或者使用GQL语言，和SQL类似，不过它的文档中只有SELECT，而没有 其它的诸如INSERT，UPDATE啥，不过如果需要更改数据的值可以先查询，然后直接对结果进行赋值操作后调用put操作即可。用起来还是满简单的，呵呵，反正大 概能满足我的要求了。</description></item><item><title>App Engine 的模板支持......</title><link>http://hzmangel.github.io/post/271/</link><pubDate>Wed, 09 Apr 2008 02:51:20 +0000</pubDate><guid>http://hzmangel.github.io/post/271/</guid><description>是支持模板了，但是居然只支持把模板放在工程的根目录，好像是权限的原因。郁闷啊，想好的目录结构就这样被破坏了，还好支持把css等静态文件扔在别的文件夹。明天折 腾折腾UI吧，困了，睡觉。</description></item><item><title>在 App Engine 中使用模板和静态文件</title><link>http://hzmangel.github.io/post/270/</link><pubDate>Wed, 09 Apr 2008 02:21:49 +0000</pubDate><guid>http://hzmangel.github.io/post/270/</guid><description>看到App Engine支持模板，扫了一眼，和Django的就是一样的，它下面的链接也直接说了，用的就是Django的模板系统。看来这次又有便宜可占了，直接 上手，不错不错。
 和Django中一样，需要使用静态文件，但是在yaml文件中设置了static_dir再起服务器死活就是开不起来，直接去google.com找未果，然后想到 了它的开发group，果然碰到一群和我碰到同样问题的人。后来好像说原因是因为Windowz下用的是 \ 作为路径分隔符，在某个正则中变了转义，所以就那个啥了 。一种解决方法是在yaml文件中把所有的静态文件写进去，看着头就大；还好有人想到了用正则，于是就有了一种新的方法。
-- url: /stylesheets/(.*) static_files: stylesheets/\1 upload: stylesheets/(.*)  查了一下，upload参数的意思没看太明白，好像是说如果文件匹配此参数后面的正则，就被这个handler接管，主要用处是确定和url和static_file s后面正则匹配的路径对应于哪个文件。汗自己的英语理解力，反正先用上了，确定能用了。然后按教程中写的，直接渲染吧。
-居然发现了一个bug，呵呵，有意思。</description>
-    </item>
-    
-    <item>
-      <title>初用 Google App Engine</title>
-      <link>http://hzmangel.github.io/post/268/</link>
-      <pubDate>Wed, 09 Apr 2008 00:27:00 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/268/</guid>
-      <description>在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。
+- url: /stylesheets/(.*) static_files: stylesheets/\1 upload: stylesheets/(.*) 查了一下，upload参数的意思没看太明白，好像是说如果文件匹配此参数后面的正则，就被这个handler接管，主要用处是确定和url和static_file s后面正则匹配的路径对应于哪个文件。汗自己的英语理解力，反正先用上了，确定能用了。然后按教程中写的，直接渲染吧。
+居然发现了一个bug，呵呵，有意思。</description></item><item><title>初用 Google App Engine</title><link>http://hzmangel.github.io/post/268/</link><pubDate>Wed, 09 Apr 2008 00:27:00 +0000</pubDate><guid>http://hzmangel.github.io/post/268/</guid><description>在邮件列表中看到了这个东西，感觉满好玩的，是用python的，也满合胃口的，申请了一下，然后过了一会拿到的许可。有人说是在后台有一个sleep 3000，呵呵，不知道是真的假的。反正我是有了，用着玩玩吧。
 下载了SDK，没细看里面的目录结构，只是知道里面有一个脚本可以当作开发时的服务器，还有一个脚本可以用以把文件上传。网站上有一个教程，老例子，上来先是一个he lloworld。它的工程中需要有一个app.yaml用以标识工程的ID，刚写的那个yaml文件如下：
-application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py  version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。
+application: sonic version: 1 runtime: python api_version: 1 handlers: - url: /.* script: helloworld.py version是工程的版本，runtime version和api_version这俩目前只有一种选择，不知道以后会不会更改。然后就是写主要的部分了，han dlers。首先是以减号开始，后跟url关键字，冒号后是正则的URL列表，下一行的script是标明处理这个URL的脚本，后面自己写的。如果在url字段中用 了正则表达式，则将请求传入脚本时会自动将匹配的字符串作为参数。后面的那些静态文件和登录啥的没细看，看到再写。
 然后就是里面的helloworld.py文件了，最简单的就是三个print，当时看到我直接喷了，真的。 简单的不能再简单的代码了。
-print &#39;Content-Type: text/plain&#39; print &#39;&#39; print &#39;Hello, world!&#39;  反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。
-import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers[&#39;Content-Type&#39;] = &#39;text/plain&#39; self.response.out.write(&#39;Hello, webapp World!&#39;) def main(): application = webapp.WSGIApplication([(&#39;/&#39;, MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &amp;quot;__main__&amp;quot;: main()  在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。
-最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.</description>
-    </item>
-    
-    <item>
-      <title>Python取当前循环次数</title>
-      <link>http://hzmangel.github.io/post/267/</link>
-      <pubDate>Sat, 05 Apr 2008 15:08:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/267/</guid>
-      <description>在groups上瞎逛，看到了这个，觉得满有用的，于是复制到这里一份。
+print 'Content-Type: text/plain' print '' print 'Hello, world!' 反正就是这么简单。然后运行它的那个简单的服务器，运行时需要指明工程的目录，即包含有app.yaml文件的目录。运行后就可以通过浏览访问8080端口来测试服务 了。还好第二个程序算是有点内容了，虽然也还是HelloWorld，但是它用了webapp的框架，代码量也有点多了。
+import wsgiref.handlers from google.appengine.ext import webapp class MainPage(webapp.RequestHandler): def get(self): self.response.headers['Content-Type'] = 'text/plain' self.response.out.write('Hello, webapp World!') def main(): application = webapp.WSGIApplication([('/', MainPage)], debug=True) wsgiref.handlers.CGIHandler().run(application) if __name__ == &amp;quot;__main__&amp;quot;: main() 在main函数中，应该是通过WSGIApplication确定了对于某些特定的请求，使用哪个类来处理，get()方法用于响应HTTP GET的请求，其它的函数还没细看。返回结果和上一个差不多，嗯。
+最后需要把程序部署到google的服务器上，使用它的appcfg.py上传，需要把app.yaml中的那个application改成申请下来的id，然后上传 ，输入邮箱，密码啥的。然后就可以通过 http://.</description></item><item><title>Python取当前循环次数</title><link>http://hzmangel.github.io/post/267/</link><pubDate>Sat, 05 Apr 2008 15:08:14 +0000</pubDate><guid>http://hzmangel.github.io/post/267/</guid><description>在groups上瞎逛，看到了这个，觉得满有用的，于是复制到这里一份。
 在循环中使用enumerate可以同时取得循环次数和循环变量的值，使用方法是这样的
-1 for i,v in enumerate([&#39;a&#39;,&#39;b&#39;]): 2 print i,v  内置的函数，从2.3版加上去的。在这记一笔……</description>
-    </item>
-    
-    <item>
-      <title>在ReST文档中使用pygments</title>
-      <link>http://hzmangel.github.io/post/260/</link>
-      <pubDate>Fri, 21 Mar 2008 20:53:47 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/260/</guid>
-      <description>最近在整理个东西，本来想用LaTeX做的，但是想想它的代码高亮实在麻烦，而且默认的情况下只有黑白的，真的很难看的；而且最终发布是PDF，有时也不是很方便，所 以考虑用网页的形式弄。不想为这玩意再架个服务器，想来想去，能用好的大概就是 reStructuredText 了。
+1 for i,v in enumerate(['a','b']): 2 print i,v 内置的函数，从2.3版加上去的。在这记一笔……</description></item><item><title>在ReST文档中使用pygments</title><link>http://hzmangel.github.io/post/260/</link><pubDate>Fri, 21 Mar 2008 20:53:47 +0000</pubDate><guid>http://hzmangel.github.io/post/260/</guid><description>最近在整理个东西，本来想用LaTeX做的，但是想想它的代码高亮实在麻烦，而且默认的情况下只有黑白的，真的很难看的；而且最终发布是PDF，有时也不是很方便，所 以考虑用网页的形式弄。不想为这玩意再架个服务器，想来想去，能用好的大概就是 reStructuredText 了。
 说是想到了reStructuredText，其实一开始是想自己写一个的，大概也不外乎是标记分析啥的，主要是想要 pygments 带的语法高亮，只是在网上找东西的时候，突然发现 pygments 已经支持了rst的编写，于是就打消了造轮子的想法。毕竟，现在能把文档整理出来是最重要的。但 是用的时候碰到了点问题，它是通过rst的directive支持扩展的。一开始是通过easy_install的包没有那个rst-directive.py的文件 ，使用hg弄下来的代码里面才有；弄下来后紧接着就是安装directive。折腾了半天，直到今天才找到一个网页上有大概的步骤，照做，然后一切搞定。
-首先需要把那个rst-directive.py文件拷到docutils/parsers/rst/directives/下，然后再在那个directives目 录下的init.py中加一行，&amp;rsquo;sourcecode&amp;rsquo;: (&amp;lsquo;rst-directive&amp;rsquo;, &amp;lsquo;pygments_directive&amp;rsquo;), 至于加哪，就在类似的地方加吧，里面有一堆directives的，这样就算注册了，然后在rst文档中，就可以使用.. sourcecode这个directive了，rst会自动调用rst-directive中的pygments_directive来处理。
+首先需要把那个rst-directive.py文件拷到docutils/parsers/rst/directives/下，然后再在那个directives目 录下的__init__.py中加一行，&amp;lsquo;sourcecode&amp;rsquo;: (&amp;lsquo;rst-directive&amp;rsquo;, &amp;lsquo;pygments_directive&amp;rsquo;), 至于加哪，就在类似的地方加吧，里面有一堆directives的，这样就算注册了，然后在rst文档中，就可以使用.. sourcecode这个directive了，rst会自动调用rst-directive中的pygments_directive来处理。
 这样处理还不行，因为pygments默认只是把程序通过词法分析器拆开后，归到一个一个的class下，还需要CSS才能生成带颜色的东西。在网上找它的CSS文件 的时候，碰到了一个有用的命令：
-pygmentize -S default -f html  这样它会在 stdout 输出CSS，直接重定向到文件即可。在rst2html中使用时，可以通过&amp;ndash; stylesheet等参数设置使用的CSS，好像默认它会把这些CSS嵌入到网页中去，嗯。
-OK了，还是满不错的，代码好看多了，嗯 ^_^</description>
-    </item>
-    
-    <item>
-      <title>初尝Flex</title>
-      <link>http://hzmangel.github.io/post/246/</link>
-      <pubDate>Fri, 29 Feb 2008 02:20:41 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/246/</guid>
-      <description>终于还是没有忍住，开始弄Flex了，下载的Flex 3 SDK，刚花了一点时间编译了它的explorer例子，效果不错，满好玩的，嗯。</description>
-    </item>
-    
-    <item>
-      <title>python中的静态成员函数</title>
-      <link>http://hzmangel.github.io/post/230/</link>
-      <pubDate>Wed, 17 Oct 2007 22:01:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/230/</guid>
-      <description>&lt;p&gt;被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
-没有这么玩的啊，于是查自带的文档，居然被我找到了。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>用swig给C做单元测试</title>
-      <link>http://hzmangel.github.io/post/232/</link>
-      <pubDate>Wed, 03 Oct 2007 17:29:54 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/232/</guid>
-      <description>&lt;p&gt;最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;中静态成员函数的声明及定义</title>
-      <link>http://hzmangel.github.io/post/207/</link>
-      <pubDate>Tue, 28 Aug 2007 17:22:08 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/207/</guid>
-      <description>今天才知道，静态成员函数在声明的时候前面加上static，但是在定义的时候不需要加，否则编译时会报错。在这留一笔。</description>
-    </item>
-    
-    <item>
-      <title>List的Iterator</title>
-      <link>http://hzmangel.github.io/post/202/</link>
-      <pubDate>Wed, 15 Aug 2007 17:09:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/202/</guid>
-      <description>写个小程序，用到了List，而且要用到它的Iterator，由于以前有用vector的经验，想当然的在Iterator上做了一个+3的操作，结果报错。当时F T，然后开始写测试程序，顺便上网去转转，结果程序写到一半的时候，看到篇文章比较各种Iterator，然后明白了，List的Iterator是双向的，而vec tor的Iterator是random的，就有了对+n这一操作支持的不同，而从前没看过的我就稀里糊涂的FT了。写下来，防止以后再稀里糊涂，嗯。</description>
-    </item>
-    
-    <item>
-      <title>fcache总算能用了</title>
-      <link>http://hzmangel.github.io/post/200/</link>
-      <pubDate>Sun, 05 Aug 2007 11:59:15 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/200/</guid>
-      <description>其实是昨天的消息，只是没有时间发而已，在umountroot的那条命令中去掉了一个参数就可以了，要开始考虑怎么才能读取文件内容了，呵呵，有难度的东西啊。</description>
-    </item>
-    
-    <item>
-      <title>wxWidgets中的Timer</title>
-      <link>http://hzmangel.github.io/post/199/</link>
-      <pubDate>Thu, 21 Jun 2007 22:22:39 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/199/</guid>
-      <description>&lt;p&gt;像前面说的，做项目要用到wxWidgets，于是装上用之，现在需要用Timer了，继续折腾吧。其实选Timer的时候经过了几次折腾，第一次是想用boost写
+pygmentize -S default -f html 这样它会在 stdout 输出CSS，直接重定向到文件即可。在rst2html中使用时，可以通过&amp;ndash; stylesheet等参数设置使用的CSS，好像默认它会把这些CSS嵌入到网页中去，嗯。
+OK了，还是满不错的，代码好看多了，嗯 ^_^</description></item><item><title>初尝Flex</title><link>http://hzmangel.github.io/post/246/</link><pubDate>Fri, 29 Feb 2008 02:20:41 +0000</pubDate><guid>http://hzmangel.github.io/post/246/</guid><description>终于还是没有忍住，开始弄Flex了，下载的Flex 3 SDK，刚花了一点时间编译了它的explorer例子，效果不错，满好玩的，嗯。</description></item><item><title>python中的静态成员函数</title><link>http://hzmangel.github.io/post/230/</link><pubDate>Wed, 17 Oct 2007 22:01:56 +0000</pubDate><guid>http://hzmangel.github.io/post/230/</guid><description>&lt;p>被C++郁闷了，编译一次老半天，于是又想到了Python。在试着把C++的东西转过来的时候，突然想要用到静态方法，正要在def前面加个static，突然想到
+没有这么玩的啊，于是查自带的文档，居然被我找到了。&lt;/p></description></item><item><title>用swig给C做单元测试</title><link>http://hzmangel.github.io/post/232/</link><pubDate>Wed, 03 Oct 2007 17:29:54 +0000</pubDate><guid>http://hzmangel.github.io/post/232/</guid><description>&lt;p>最近因为找工作的原因在看数据结构，当然需要写程序。但测试这一块一直没去试什么工具，昨天写了个程序，想想不用不行了，于是就开始去找。&lt;/p></description></item><item><title>C++中静态成员函数的声明及定义</title><link>http://hzmangel.github.io/post/207/</link><pubDate>Tue, 28 Aug 2007 17:22:08 +0000</pubDate><guid>http://hzmangel.github.io/post/207/</guid><description>今天才知道，静态成员函数在声明的时候前面加上static，但是在定义的时候不需要加，否则编译时会报错。在这留一笔。</description></item><item><title>List的Iterator</title><link>http://hzmangel.github.io/post/202/</link><pubDate>Wed, 15 Aug 2007 17:09:14 +0000</pubDate><guid>http://hzmangel.github.io/post/202/</guid><description>写个小程序，用到了List，而且要用到它的Iterator，由于以前有用vector的经验，想当然的在Iterator上做了一个+3的操作，结果报错。当时F T，然后开始写测试程序，顺便上网去转转，结果程序写到一半的时候，看到篇文章比较各种Iterator，然后明白了，List的Iterator是双向的，而vec tor的Iterator是random的，就有了对+n这一操作支持的不同，而从前没看过的我就稀里糊涂的FT了。写下来，防止以后再稀里糊涂，嗯。</description></item><item><title>fcache总算能用了</title><link>http://hzmangel.github.io/post/200/</link><pubDate>Sun, 05 Aug 2007 11:59:15 +0000</pubDate><guid>http://hzmangel.github.io/post/200/</guid><description>其实是昨天的消息，只是没有时间发而已，在umountroot的那条命令中去掉了一个参数就可以了，要开始考虑怎么才能读取文件内容了，呵呵，有难度的东西啊。</description></item><item><title>wxWidgets中的Timer</title><link>http://hzmangel.github.io/post/199/</link><pubDate>Thu, 21 Jun 2007 22:22:39 +0000</pubDate><guid>http://hzmangel.github.io/post/199/</guid><description>&lt;p>像前面说的，做项目要用到wxWidgets，于是装上用之，现在需要用Timer了，继续折腾吧。其实选Timer的时候经过了几次折腾，第一次是想用boost写
 一个timer出来，但是没想好怎么执行一定时间后调用某函数或方法，于是作罢。在网上瞎转后回宿舍和人讨论，某牛告诉我说QT里面有Timer，于是突然想到wxw
 idgets的timer，做了几个小例子后苦于其要依托于某widget，今天又想试试boost的thread，试了一天后，觉得我是没可能作出来这东西的，于是
-再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>重新开始wxWidgets</title>
-      <link>http://hzmangel.github.io/post/198/</link>
-      <pubDate>Thu, 14 Jun 2007 19:37:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/198/</guid>
-      <description>&lt;p&gt;因为项目原因，要找个跨平台的图形库，因为用过wxPython做过点东西，所以决定选择wxWidgets了。没有了wxPython的好环境，只好自己编译了，从
+再次转回wxTimer，怕以后再这样转来转去啥都不会了，于是在这块地方留个脚印，让我以后转回来的时候还能找到我自己，嗯。&lt;/p></description></item><item><title>重新开始wxWidgets</title><link>http://hzmangel.github.io/post/198/</link><pubDate>Thu, 14 Jun 2007 19:37:25 +0000</pubDate><guid>http://hzmangel.github.io/post/198/</guid><description>&lt;p>因为项目原因，要找个跨平台的图形库，因为用过wxPython做过点东西，所以决定选择wxWidgets了。没有了wxPython的好环境，只好自己编译了，从
 官网上下到Windows下的安装包，然后安装。突然想到第一次装wxWidgets时的样子了，那会以为只要把那个安装包按win下程序的方法一路next下去就可
 以了，正因为这样想，所以连最后的那个安装说明都没看直接Finish了，然后找到安装包里面的sample，准备找个Hello
-World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会后，打开doc文件夹，才知道安装后还要编译，呵呵，那会，还什么都不知道呢 :)&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>说说回调</title>
-      <link>http://hzmangel.github.io/post/197/</link>
-      <pubDate>Thu, 14 Jun 2007 09:37:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/197/</guid>
-      <description>&lt;p&gt;最近做个项目，在设计的时候想到有可能要用到回调，对于这个东西已经弄不懂很久了，于是就上网找资料看，经过一个程序的磨炼后，差不多弄懂了，说说吧。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>传说中的content_type</title>
-      <link>http://hzmangel.github.io/post/196/</link>
-      <pubDate>Sun, 10 Jun 2007 17:39:41 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/196/</guid>
-      <description>今天在调试mod_python的程序，按着网上找的某教程，调了N久还是让我下载py文件，mod_python根本不给我解析，于是郁闷的继续google中，突 然看到一条语句
+World来跑跑，结果发现，我居然找不到.exe文件，郁闷了一会后，打开doc文件夹，才知道安装后还要编译，呵呵，那会，还什么都不知道呢 :)&lt;/p></description></item><item><title>说说回调</title><link>http://hzmangel.github.io/post/197/</link><pubDate>Thu, 14 Jun 2007 09:37:03 +0000</pubDate><guid>http://hzmangel.github.io/post/197/</guid><description>&lt;p>最近做个项目，在设计的时候想到有可能要用到回调，对于这个东西已经弄不懂很久了，于是就上网找资料看，经过一个程序的磨炼后，差不多弄懂了，说说吧。&lt;/p></description></item><item><title>传说中的content_type</title><link>http://hzmangel.github.io/post/196/</link><pubDate>Sun, 10 Jun 2007 17:39:41 +0000</pubDate><guid>http://hzmangel.github.io/post/196/</guid><description>今天在调试mod_python的程序，按着网上找的某教程，调了N久还是让我下载py文件，mod_python根本不给我解析，于是郁闷的继续google中，突 然看到一条语句
 req.content_type=&amp;ldquo;text/plain&amp;rdquo;
 突然想到了一些事情，然后加上这一句，成功通过，输出Hello World。看来content_type还是满有用的一个东西啊，sigh一下。
-btw: 当前目录下建.htaccess是个不错的方法，嗯。</description>
-    </item>
-    
-    <item>
-      <title>初识 Google Map API</title>
-      <link>http://hzmangel.github.io/post/192/</link>
-      <pubDate>Fri, 01 Jun 2007 09:07:38 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/192/</guid>
-      <description>昨天去 google dev day 晃了一圈，分会场上主要听的是 Google 的新产品发布会，感觉那个 map api 有点意思，可以在上面做点东西玩玩，于是晚上回来小看了一下例子，做了一个玩玩，还是满简单的，代码如下。
-&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD XHTML 1.0 Strict//EN&amp;quot; &amp;quot;&amp;lt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&amp;gt;&amp;quot;&amp;gt; &amp;lt;html xmlns=&amp;quot;&amp;lt;http://www.w3.org/1999/xhtml&amp;gt;&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;content-type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quot;/&amp;gt; &amp;lt;title&amp;gt;Google Maps JavaScript API Example&amp;lt;/title&amp;gt; &amp;lt;script src=&amp;quot;&amp;lt;http://ditu.google.com/maps?file=api&amp;gt;&amp;amp;amp;v=2&amp;amp;amp;key=*****&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt; //&amp;lt;![CDATA[ function load() { if (GBrowserIsCompatible()) { var map = new GMap2(document.getElementById(&amp;quot;map&amp;quot;)); map.addControl(new GLargeMapControl()); map.addControl(new GScaleControl()); GEvent.addListener(map, &amp;quot;moveend&amp;quot;, function() { document.getElementById(&amp;quot;center&amp;quot;).innerHTML = map.getCenter(); }); map.setCenter(new GLatLng(39.96255, 116.358969), 17); } } //]]&amp;gt; &amp;lt;/script&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body onload=&amp;quot;load()&amp;quot; onunload=&amp;quot;GUnload()&amp;quot;&amp;gt; &amp;lt;div id=&amp;quot;map&amp;quot; style=&amp;quot;width: 960; height: 800px&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; 地图中心：&amp;lt;div id=&amp;quot;center&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  30行出头，简单吧，那个key=&amp;rdquo;***&amp;ldquo;那一块是要自己去申请对应你域名的key，我写上去也没用，还影响排版，就8写了，呵呵。这个东西存成.</description>
-    </item>
-    
-    <item>
-      <title>哀悼一下我的wordpress</title>
-      <link>http://hzmangel.github.io/post/191/</link>
-      <pubDate>Thu, 31 May 2007 18:44:00 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/191/</guid>
-      <description>历经连续两天晚上3点睡觉调出来的日历，被系统一次升级彻底打回原型，特此哀悼，看来有空要做一个 widget 了，把我的日历做成一个 widget 加到 sidebar 上去，看你丫还怎么给我打回原型，哼哼。</description>
-    </item>
-    
-    <item>
-      <title>Google Develop Day</title>
-      <link>http://hzmangel.github.io/post/190/</link>
-      <pubDate>Thu, 31 May 2007 18:31:50 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/190/</guid>
-      <description>Google开发者日，感觉还行，讲了些 Google 的玩具，有空想玩玩，以前咋没发现这些东西有那么好玩呢，呵呵。还有就是去听 python 它老爹说了说东西，新要做的 python3000 感觉有些好玩的东西，8过还是先把2.5装上吧，本来一直不装，今天突然想装了，于是，装吧 :)
-btw: live write beta2 好像不闪了&amp;hellip;.</description>
-    </item>
-    
-    <item>
-      <title>一个echobot，哈哈</title>
-      <link>http://hzmangel.github.io/post/186/</link>
-      <pubDate>Fri, 11 May 2007 14:10:28 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/186/</guid>
-      <description>&lt;p&gt;那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Wordpress应该算差不多了吧…</title>
-      <link>http://hzmangel.github.io/post/185/</link>
-      <pubDate>Sun, 06 May 2007 21:41:27 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/185/</guid>
-      <description>&lt;p&gt;折腾了好几天，应该算是弄差不多了，这一次不光是改了主题，插件，连源程序都改了，想想都寒啊 ^_^&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Django中的静态文件</title>
-      <link>http://hzmangel.github.io/post/170/</link>
-      <pubDate>Sun, 10 Sep 2006 01:14:39 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/170/</guid>
-      <description>不知道应不应该叫这个名字，反正给我的感觉就是它是静态的页面，纯的html语言，没有python在里面，在刚开始用django的时候，就想把主页做成一个静态的 东西，那时候用的是step by step中第一讲的方法，只是把那个写死在程序中的字符串换成了一个文件的内容，然后改那个文件就可以更改主页，但是发现用不了外 部链接的css，虽然可以把css内嵌到html文件中，但总觉得的些不爽。后来往后翻了翻step by step，看到最后一讲有说怎么在一个view中渲染一个简单的模板并输出，也就在是urls.py中加上下面这条语句：
-(r&amp;rsquo;^$&amp;lsquo;, &amp;lsquo;django.views.generic.simple.direct_to_template&amp;rsquo;,
+btw: 当前目录下建.htaccess是个不错的方法，嗯。</description></item><item><title>初识 Google Map API</title><link>http://hzmangel.github.io/post/192/</link><pubDate>Fri, 01 Jun 2007 09:07:38 +0000</pubDate><guid>http://hzmangel.github.io/post/192/</guid><description>昨天去 google dev day 晃了一圈，分会场上主要听的是 Google 的新产品发布会，感觉那个 map api 有点意思，可以在上面做点东西玩玩，于是晚上回来小看了一下例子，做了一个玩玩，还是满简单的，代码如下。
+&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD XHTML 1.0 Strict//EN&amp;quot; &amp;quot;&amp;lt;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&amp;gt;&amp;quot;&amp;gt; &amp;lt;html xmlns=&amp;quot;&amp;lt;http://www.w3.org/1999/xhtml&amp;gt;&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;content-type&amp;quot; content=&amp;quot;text/html; charset=utf-8&amp;quot;/&amp;gt; &amp;lt;title&amp;gt;Google Maps JavaScript API Example&amp;lt;/title&amp;gt; &amp;lt;script src=&amp;quot;&amp;lt;http://ditu.google.com/maps?file=api&amp;gt;&amp;amp;amp;v=2&amp;amp;amp;key=*****&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt; //&amp;lt;![CDATA[ function load() { if (GBrowserIsCompatible()) { var map = new GMap2(document.getElementById(&amp;quot;map&amp;quot;)); map.addControl(new GLargeMapControl()); map.addControl(new GScaleControl()); GEvent.addListener(map, &amp;quot;moveend&amp;quot;, function() { document.getElementById(&amp;quot;center&amp;quot;).innerHTML = map.getCenter(); }); map.setCenter(new GLatLng(39.96255, 116.358969), 17); } } //]]&amp;gt; &amp;lt;/script&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body onload=&amp;quot;load()&amp;quot; onunload=&amp;quot;GUnload()&amp;quot;&amp;gt; &amp;lt;div id=&amp;quot;map&amp;quot; style=&amp;quot;width: 960; height: 800px&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; 地图中心：&amp;lt;div id=&amp;quot;center&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 30行出头，简单吧，那个key=&amp;quot;***&amp;ldquo;那一块是要自己去申请对应你域名的key，我写上去也没用，还影响排版，就8写了，呵呵。这个东西存成.</description></item><item><title>哀悼一下我的wordpress</title><link>http://hzmangel.github.io/post/191/</link><pubDate>Thu, 31 May 2007 18:44:00 +0000</pubDate><guid>http://hzmangel.github.io/post/191/</guid><description>历经连续两天晚上3点睡觉调出来的日历，被系统一次升级彻底打回原型，特此哀悼，看来有空要做一个 widget 了，把我的日历做成一个 widget 加到 sidebar 上去，看你丫还怎么给我打回原型，哼哼。</description></item><item><title>Google Develop Day</title><link>http://hzmangel.github.io/post/190/</link><pubDate>Thu, 31 May 2007 18:31:50 +0000</pubDate><guid>http://hzmangel.github.io/post/190/</guid><description>Google开发者日，感觉还行，讲了些 Google 的玩具，有空想玩玩，以前咋没发现这些东西有那么好玩呢，呵呵。还有就是去听 python 它老爹说了说东西，新要做的 python3000 感觉有些好玩的东西，8过还是先把2.5装上吧，本来一直不装，今天突然想装了，于是，装吧 :)
+btw: live write beta2 好像不闪了&amp;hellip;.</description></item><item><title>一个echobot，哈哈</title><link>http://hzmangel.github.io/post/186/</link><pubDate>Fri, 11 May 2007 14:10:28 +0000</pubDate><guid>http://hzmangel.github.io/post/186/</guid><description>&lt;p>那天在网上看到有人放出一个 gtalk 的聊天机器人，可以用来查字典，感觉有些好玩，自己也想玩玩，于是，开始吧&lt;/p></description></item><item><title>Wordpress应该算差不多了吧…</title><link>http://hzmangel.github.io/post/185/</link><pubDate>Sun, 06 May 2007 21:41:27 +0000</pubDate><guid>http://hzmangel.github.io/post/185/</guid><description>&lt;p>折腾了好几天，应该算是弄差不多了，这一次不光是改了主题，插件，连源程序都改了，想想都寒啊 ^_^&lt;/p></description></item><item><title>Django中的静态文件</title><link>http://hzmangel.github.io/post/170/</link><pubDate>Sun, 10 Sep 2006 01:14:39 +0000</pubDate><guid>http://hzmangel.github.io/post/170/</guid><description>不知道应不应该叫这个名字，反正给我的感觉就是它是静态的页面，纯的html语言，没有python在里面，在刚开始用django的时候，就想把主页做成一个静态的 东西，那时候用的是step by step中第一讲的方法，只是把那个写死在程序中的字符串换成了一个文件的内容，然后改那个文件就可以更改主页，但是发现用不了外 部链接的css，虽然可以把css内嵌到html文件中，但总觉得的些不爽。后来往后翻了翻step by step，看到最后一讲有说怎么在一个view中渲染一个简单的模板并输出，也就在是urls.py中加上下面这条语句：
+(r'^$', &amp;lsquo;django.views.generic.simple.direct_to_template&amp;rsquo;,
 {&amp;lsquo;template&amp;rsquo;: &amp;lsquo;homepage/index.html&amp;rsquo;}),
-这时候才算找到了好一些的方法，在那个目录下面就可以按正常网页开发了，不过外部链接的文件都要使用基于templates的路径，也就是说那个index.html 要放在templatex/hompage目录下，如果下面要使用css文件，还不能使用相对于index.html的相对路径，有些郁闷，正在考虑是不是把所有的c ss文件什么的放到一个统一的目录下，目录结构大变动啊。呵呵，睡觉了，醒来再折腾吧:)</description>
-    </item>
-    
-    <item>
-      <title>创新的数据总算导完了</title>
-      <link>http://hzmangel.github.io/post/168/</link>
-      <pubDate>Sat, 09 Sep 2006 00:08:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/168/</guid>
-      <description>先是存成sql语句，然后回来才想起来，PHP用的是我自己建的表，而Django中要用它的表，两个结构不同，用不了sql语句，于是想到用导入csv文件的办法， 刚好setp by step有这个例子，而且Django中可以直接导入csv文件，不用我再去写那些分隔什么的了，还是满方便的，所以就想到了导入csv文件。
+这时候才算找到了好一些的方法，在那个目录下面就可以按正常网页开发了，不过外部链接的文件都要使用基于templates的路径，也就是说那个index.html 要放在templatex/hompage目录下，如果下面要使用css文件，还不能使用相对于index.html的相对路径，有些郁闷，正在考虑是不是把所有的c ss文件什么的放到一个统一的目录下，目录结构大变动啊。呵呵，睡觉了，醒来再折腾吧:)</description></item><item><title>创新的数据总算导完了</title><link>http://hzmangel.github.io/post/168/</link><pubDate>Sat, 09 Sep 2006 00:08:59 +0000</pubDate><guid>http://hzmangel.github.io/post/168/</guid><description>先是存成sql语句，然后回来才想起来，PHP用的是我自己建的表，而Django中要用它的表，两个结构不同，用不了sql语句，于是想到用导入csv文件的办法， 刚好setp by step有这个例子，而且Django中可以直接导入csv文件，不用我再去写那些分隔什么的了，还是满方便的，所以就想到了导入csv文件。
 想好了就要开工，那个例子以前做过，所以还有点印象。首先是写module，主要就是构建数据表的结构，想了好久，才觉得大概能够把表结构定下来了，不过还是相当于留 了两个备注字段，应该够用了吧，如果不够用需要倒数据的话那真要疯了。其实说疯也有些夸张，再写程序导吧，呵呵。
-一开始写的module中没有主键，主要是看它的文档中说它会自己加上一个自增的主键，所以没去理会，但是在导入的时候，有一个filter要选择一条记录，一开始不 知道，使用第一个字段，即申请人做关键字，结果前面写进去的记录当碰到后面相同申请人的记录时，全部被覆盖(我的那个csv文件后面有一个空行，在导入的时候读入最后 一行的时候会出错，下标越界，不过还好，前面的数据都导入了)。后来把csv文件分成了大概10条一个的小文件，再导入的时候才发现是这个问题，再看看它的文档说是如 果用户自己没有设置自境的主键的话，系统会给设一个，不过我试了，不能调用，于是自己设一个吧(又把表结构重弄了一遍，真的很FT，还好没什么数据)，后来问题就解决 了。在module.py中的str方法中可以设置在管理界面中每一条记录显示的内容，step by step中说还有一个repr，但是我用了后没反应，不知道为什么。最后还要加上一个class Admin: pass以开启管理功能。
+一开始写的module中没有主键，主要是看它的文档中说它会自己加上一个自增的主键，所以没去理会，但是在导入的时候，有一个filter要选择一条记录，一开始不 知道，使用第一个字段，即申请人做关键字，结果前面写进去的记录当碰到后面相同申请人的记录时，全部被覆盖(我的那个csv文件后面有一个空行，在导入的时候读入最后 一行的时候会出错，下标越界，不过还好，前面的数据都导入了)。后来把csv文件分成了大概10条一个的小文件，再导入的时候才发现是这个问题，再看看它的文档说是如 果用户自己没有设置自境的主键的话，系统会给设一个，不过我试了，不能调用，于是自己设一个吧(又把表结构重弄了一遍，真的很FT，还好没什么数据)，后来问题就解决 了。在module.py中的__str__方法中可以设置在管理界面中每一条记录显示的内容，step by step中说还有一个__repr__，但是我用了后没反应，不知道为什么。最后还要加上一个class Admin: pass以开启管理功能。
 在使用导入csv功能的时候，那个urls的映射要弄好，要不然服务器会提示找不到匹配的模式，不予解析。一般是在根目录下的urls.py中设置如果要访问app， 则把app中的utls.py包含进来，然后再在urls.py中解析对应于app的地址映射。
 本来想用sqlite数据库，不过用了一段时间，感觉上还是有些不方便的地方，一是管理工具不是很方便，二是性能上处于劣势，最后考虑了一会，还是选用了mysql， 导入的时候明显速度快了很多，不过那段导入的代码还是很有用的，到时候如果再换表结构的话，就又要用到它了。
 数据方面总算折腾完了，现在要把原来的表的记录改动一下，让它适应新的表的结构，还有一些细节方面的问题，像文件上传，显示的图标什么的，慢慢做吧，不管怎么说，大头 数据导进来了，也没什么好怕的了。
-btw: django中不能直接接收2000-01-01格式的字符串作为datetime类的输入，还要把它拆开成&amp;rsquo;2000&amp;rsquo;, &amp;lsquo;01&amp;rsquo;, &amp;lsquo;01&amp;rsquo;三个字串，不知道后续版本会不会把这个功能加上，虽然不加也能用，只要用下标把子串取出来就可以了，但总感觉有些不爽。</description>
-    </item>
-    
-    <item>
-      <title>CSS中的ID和class</title>
-      <link>http://hzmangel.github.io/post/167/</link>
-      <pubDate>Thu, 07 Sep 2006 22:47:15 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/167/</guid>
-      <description>本来以为它们两个是没什么太大区别的，但是今天上网上一查，发现还是有些区别的。最主要的大概就是在CSS定义中，ID是以#开头的，而class是以.开头的。而且 在网页编程中，一个ID只能出现一次，就像某个东西的标识符一样，在一个页面中，只能有一个，而class是可以出现多次的。看了一篇文章说，id是先找到结构或内容 ，再套用样式，而class是先定义好样式，再应用到多个结构或内容上，呵呵，还真有点这么回事 :)</description>
-    </item>
-    
-    <item>
-      <title>django的资源文件</title>
-      <link>http://hzmangel.github.io/post/166/</link>
-      <pubDate>Wed, 06 Sep 2006 23:54:28 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/166/</guid>
-      <description>刚看了怎么在django的工程中加入资源文件夹，即放一些静态内容，像html页面，css文件什么的，其实放在外面也可以，但是总感觉有些怪，还好step by step讲到了这一课，其实也没什么难的，它给的例子是在urls.py中加了一行，以解析URL，然后在settings.py中加上了一个相当于常量定义的命令， 把一个目录定义成常量，然后在网站根目录下建立了这个目录，于是，就可以了。urls.py中更改的和以前有些不太相同，使用了django.views.stati c.serve，而此参数需要一个参数，文档根目录，所以需要在后面加上{&amp;lsquo;document_root&amp;rsquo;: settings.STATIC_PATH})，那个settings.需要在开头加上import django.conf import settings以导入 模块。其它在网页中就可以使用/site_media来访问./media目录了，那个site_media是在urls.py中定义的，那个patten也有些不同 ，后面加上了一些东西，r&amp;rsquo;^site_media/(?P&amp;lt;path&amp;gt;.*)$&amp;lsquo;，还没太弄懂，过过再说。</description>
-    </item>
-    
-    <item>
-      <title>FileField的相关内容</title>
-      <link>http://hzmangel.github.io/post/165/</link>
-      <pubDate>Wed, 06 Sep 2006 23:48:10 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/165/</guid>
-      <description>由于要存储文件，所以使用了FileField类型的变量，后来学会了查db_api手册，知道了它的方法，比如想设个超链接，可以调用get_FOO_url得到它 的路径，不过在这之前要设置好settings.py中MEDIA_URL的值，否则得不到正确的结果，在设置的时候，需要在MEDIA_URL最后的那个目录后加一 个／，否则好像地址不能很好的识别。别的还有一些方法，像文件名什么的，另外还有ImageField特有的一些方法还是满不错的。不过不知道为什么我现在不能上传文 件名中有中文的文件，不知道是它不支持还是我设置的问题，有空去网上找找，实在不行就只有再骚扰limodou了。 ;)
-btw: 如果那个FileField需要提供下载的话，需要在app或整个工程的urls.py中设置一下patten，要不然会出错，系统不认。</description>
-    </item>
-    
-    <item>
-      <title>Django中CharField的choices</title>
-      <link>http://hzmangel.github.io/post/164/</link>
-      <pubDate>Wed, 06 Sep 2006 22:15:04 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/164/</guid>
-      <description>本来以为是比较难的问题，试了一堆记忆中的属性什么的，就是不认，后来骚扰了一下limodou才了解到原来是个这么简单的方法，而且在db- api手册中也有说。诶，看东西看的不仔细，丢人了啊。说说正题吧，就用step by step的例子说吧，本来显示的是M或F，因为直接调用的是address. gender，但是如果调用addres.get_gender_display就可以显示为男或女。简单吧，我怎么就没看到呢？</description>
-    </item>
-    
-    <item>
-      <title>Django中的templates</title>
-      <link>http://hzmangel.github.io/post/162/</link>
-      <pubDate>Tue, 05 Sep 2006 22:47:52 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/162/</guid>
-      <description>昨天想改一下模板的路径，主要是想在每个app中建立一个templates的目录，然后系统直接去那个目录寻找相应app的view的模板，按网上的方法，在set tings.py的TEMPLATE_DIRS项中加上了app的templates目录，但是在浏览器中查看的时候，它告诉我找不到模板，后来用Filemon看了 一下，它在app目录下的templates中也是按着默认的路径查找的，也就是templates/APP_NAME/ MODE_NAME_list.html文件，于是就把templates改回来了。不清楚是它只能这么找还是我的配置有误。</description>
-    </item>
-    
-    <item>
-      <title>Django数据库中的FileField</title>
-      <link>http://hzmangel.github.io/post/161/</link>
-      <pubDate>Tue, 05 Sep 2006 00:32:43 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/161/</guid>
-      <description>本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。
+btw: django中不能直接接收2000-01-01格式的字符串作为datetime类的输入，还要把它拆开成'2000', &amp;lsquo;01&amp;rsquo;, &amp;lsquo;01&amp;rsquo;三个字串，不知道后续版本会不会把这个功能加上，虽然不加也能用，只要用下标把子串取出来就可以了，但总感觉有些不爽。</description></item><item><title>CSS中的ID和class</title><link>http://hzmangel.github.io/post/167/</link><pubDate>Thu, 07 Sep 2006 22:47:15 +0000</pubDate><guid>http://hzmangel.github.io/post/167/</guid><description>本来以为它们两个是没什么太大区别的，但是今天上网上一查，发现还是有些区别的。最主要的大概就是在CSS定义中，ID是以#开头的，而class是以.开头的。而且 在网页编程中，一个ID只能出现一次，就像某个东西的标识符一样，在一个页面中，只能有一个，而class是可以出现多次的。看了一篇文章说，id是先找到结构或内容 ，再套用样式，而class是先定义好样式，再应用到多个结构或内容上，呵呵，还真有点这么回事 :)</description></item><item><title>django的资源文件</title><link>http://hzmangel.github.io/post/166/</link><pubDate>Wed, 06 Sep 2006 23:54:28 +0000</pubDate><guid>http://hzmangel.github.io/post/166/</guid><description>刚看了怎么在django的工程中加入资源文件夹，即放一些静态内容，像html页面，css文件什么的，其实放在外面也可以，但是总感觉有些怪，还好step by step讲到了这一课，其实也没什么难的，它给的例子是在urls.py中加了一行，以解析URL，然后在settings.py中加上了一个相当于常量定义的命令， 把一个目录定义成常量，然后在网站根目录下建立了这个目录，于是，就可以了。urls.py中更改的和以前有些不太相同，使用了django.views.stati c.serve，而此参数需要一个参数，文档根目录，所以需要在后面加上{&amp;lsquo;document_root&amp;rsquo;: settings.STATIC_PATH})，那个settings.需要在开头加上import django.conf import settings以导入 模块。其它在网页中就可以使用/site_media来访问./media目录了，那个site_media是在urls.py中定义的，那个patten也有些不同 ，后面加上了一些东西，r'^site_media/(?P&amp;lt;path&amp;gt;.*)$'，还没太弄懂，过过再说。</description></item><item><title>FileField的相关内容</title><link>http://hzmangel.github.io/post/165/</link><pubDate>Wed, 06 Sep 2006 23:48:10 +0000</pubDate><guid>http://hzmangel.github.io/post/165/</guid><description>由于要存储文件，所以使用了FileField类型的变量，后来学会了查db_api手册，知道了它的方法，比如想设个超链接，可以调用get_FOO_url得到它 的路径，不过在这之前要设置好settings.py中MEDIA_URL的值，否则得不到正确的结果，在设置的时候，需要在MEDIA_URL最后的那个目录后加一 个／，否则好像地址不能很好的识别。别的还有一些方法，像文件名什么的，另外还有ImageField特有的一些方法还是满不错的。不过不知道为什么我现在不能上传文 件名中有中文的文件，不知道是它不支持还是我设置的问题，有空去网上找找，实在不行就只有再骚扰limodou了。 ;)
+btw: 如果那个FileField需要提供下载的话，需要在app或整个工程的urls.py中设置一下patten，要不然会出错，系统不认。</description></item><item><title>Django中CharField的choices</title><link>http://hzmangel.github.io/post/164/</link><pubDate>Wed, 06 Sep 2006 22:15:04 +0000</pubDate><guid>http://hzmangel.github.io/post/164/</guid><description>本来以为是比较难的问题，试了一堆记忆中的属性什么的，就是不认，后来骚扰了一下limodou才了解到原来是个这么简单的方法，而且在db- api手册中也有说。诶，看东西看的不仔细，丢人了啊。说说正题吧，就用step by step的例子说吧，本来显示的是M或F，因为直接调用的是address. gender，但是如果调用addres.get_gender_display就可以显示为男或女。简单吧，我怎么就没看到呢？</description></item><item><title>Django中的templates</title><link>http://hzmangel.github.io/post/162/</link><pubDate>Tue, 05 Sep 2006 22:47:52 +0000</pubDate><guid>http://hzmangel.github.io/post/162/</guid><description>昨天想改一下模板的路径，主要是想在每个app中建立一个templates的目录，然后系统直接去那个目录寻找相应app的view的模板，按网上的方法，在set tings.py的TEMPLATE_DIRS项中加上了app的templates目录，但是在浏览器中查看的时候，它告诉我找不到模板，后来用Filemon看了 一下，它在app目录下的templates中也是按着默认的路径查找的，也就是templates/APP_NAME/ MODE_NAME_list.html文件，于是就把templates改回来了。不清楚是它只能这么找还是我的配置有误。</description></item><item><title>Django数据库中的FileField</title><link>http://hzmangel.github.io/post/161/</link><pubDate>Tue, 05 Sep 2006 00:32:43 +0000</pubDate><guid>http://hzmangel.github.io/post/161/</guid><description>本来是想把料单直接存在数据库中，不过后来发现这些有可能要自己实现，考虑到我自己的功力，只好做罢，不过那天看django数据库的API时，发现有FileF ield一栏，当时就想能不能用，后来组织数据库的时候真用了上，不过后来在运行manage.py syncdb的时候，它提示说FileField需要uplod a_to参数，但当时真没看明白，今天碰到错了，就去python的groups上查了一下，总算找到了设置的方法。
 首先是要设置setting.py中MEDIA_ROOT的值，是一个路径，而且是在机器上的绝对路径。说真的，对绝对路径真的很不感冒，对移植上很不好办，不过有些 东西还真得要这种绝对路径，大概是对某些服务器来说，配置定下来后就不会再更改了吧，好像django的建议上也是说用django这个服务器不是长久之计，最好还是 移植到Apache上，而移植过去就需要设置绝对路径。呵呵，有些跑题了，不过最后还是要考虑移植到Apache的虚拟主机上。后来在upload_to中可以写上u pload_to=&amp;lsquo;file&amp;rsquo;，但是在admin的管理界面时，这是一个上传文件的表单，不清楚那个file是什么意思，不过最后文件是上传到那个MEDIA_RO OT标示的目录下了。但是碰到的一个问题是，在删除一条记录后，那个上传上去的文件不会被删除，这应该是件比较郁闷的事情。也许是我看错了，不过我试验的那一条是没有 删除。
-暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</description>
-    </item>
-    
-    <item>
-      <title>Python中的字符编码</title>
-      <link>http://hzmangel.github.io/post/159/</link>
-      <pubDate>Sun, 03 Sep 2006 00:09:47 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/159/</guid>
-      <description>想用Django做些东西，大概算是一个用于管理的网站吧。当然是要做个主页，首先是想在工程目录下放一个index.htm的文件，但是好像django自带的那个 服务器不认这个东西，只好写个模块，并改urls.py，让它能访问，我不想把主页写死在模块里面，所以写到了一个网页文件中，index.htm，然后再用模块从文 件中读数据进来，结果出现了乱码，其实也就是浏览器默认用的是utf8的编码，但是我的文件用的是GB2312的编码，所以乱码就横空出世了。一开始以为是那个ind ex.htm文件的问题，于是把它的编码也切成utf8，但是再次显示的时候还是乱码。上网查了一下，好像是python自动判断系统的编码，然后进行转换。后来加上 了这几句话就好了。不过不清楚为什么要加上那句reload，不知道是不是怕程序执行过程中系统环境发生变化。 import sys reload(sys) sys.setdefaultencoding(&amp;lsquo;utf8&amp;rsquo;)</description>
-    </item>
-    
-    <item>
-      <title>Django出错</title>
-      <link>http://hzmangel.github.io/post/156/</link>
-      <pubDate>Sat, 02 Sep 2006 23:41:44 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/156/</guid>
-      <description>今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include(&amp;ldquo;)，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r&amp;rsquo;^$&amp;lsquo;, include(&amp;lsquo;ilab.homepage.index&amp;rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r&amp;rsquo;^$&amp;lsquo;, &amp;lsquo;ilab.homepage.index&amp;rsquo;), 原因嘛，嘿嘿，未知。</description>
-    </item>
-    
-    <item>
-      <title>也说django</title>
-      <link>http://hzmangel.github.io/post/148/</link>
-      <pubDate>Wed, 16 Aug 2006 16:31:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/148/</guid>
-      <description>昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。
-btw: Apache的虚拟主机好像有点好玩，有空看看。</description>
-    </item>
-    
-    <item>
-      <title>Django起来啦</title>
-      <link>http://hzmangel.github.io/post/145/</link>
-      <pubDate>Tue, 15 Aug 2006 12:04:19 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/145/</guid>
-      <description>呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了
-btw: 建立站点后，要到站点的目录下运行managy.py runserver</description>
-    </item>
-    
-    <item>
-      <title>IE和PNG</title>
-      <link>http://hzmangel.github.io/post/139/</link>
-      <pubDate>Sun, 02 Jul 2006 15:20:05 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/139/</guid>
-      <description>&lt;p&gt;也不知道盖茨大叔是怎么想的，IE6居然不支持PNG的透明背景，还好在网上找到了一个方法，用到了一个没见到过的滤镜，刚试了一下，效果还算不错，就把代码贴出来吧
-，方便以后查。主要起作用的是这个滤镜：&lt;/p&gt;
-
-&lt;p&gt;filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&amp;lsquo;aaa.png&amp;rsquo;,
-sizingMethod=&amp;lsquo;crop&amp;rsquo;);&lt;/p&gt;
-
-&lt;p&gt;由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。&lt;br /&gt;
-首先是JavaScript的代码，用以生成HTML，以给图像加滤镜&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>My first python script</title>
-      <link>http://hzmangel.github.io/post/112/</link>
-      <pubDate>Sun, 27 Nov 2005 21:25:43 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/112/</guid>
-      <description>Yesterday, I needed a shell script to do a demo of a program, and I thought about python, so my first script was released today. But I have to say, it is useless, because I haven&amp;rsquo;t reach my goal :( . The problem is not in the script but in the program, so the only thing I can do is to abort, although I do not want to say this word.</description>
-    </item>
-    
-    <item>
-      <title>glut&#43;MinGW&#43;Windowz</title>
-      <link>http://hzmangel.github.io/post/104/</link>
-      <pubDate>Sat, 29 Oct 2005 19:13:11 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/104/</guid>
-      <description>Those days I have had a lot of faint things, coding with OpenGL is one of them. I do not want to use VC++ 6 as my develop environment, so I choosen the MinGW, and the IDE I use is Dev-Cpp, which is a good IDE. But in most time, I just use the MinGW environment command line to compile and execute the code, because I like it ^_^ At the beginning, I copy the code from NeHe tutorial to my Dev-Cpp project, at first the project I used is normal win32 project, so I have got a lot of errors.</description>
-    </item>
-    
-    <item>
-      <title>也说3D编程</title>
-      <link>http://hzmangel.github.io/post/103/</link>
-      <pubDate>Fri, 28 Oct 2005 15:01:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/103/</guid>
-      <description>这几天在看OpenGL，突然想起初中时的一些事情了，那时候学BASIC，在屏幕上输出一维和二维的数组，那时候就在想，如果把里面的那个数组换成三维的，不就可以输出三维的东西了吗。后来和边上一哥们讨论了好半天，讨论的问题是在，如果那个数组是四维的话&amp;hellip;&amp;hellip;..(呵呵，最后好像也没写程序验证一下)</description>
-    </item>
-    
-    <item>
-      <title>OpenGL Tips</title>
-      <link>http://hzmangel.github.io/post/102/</link>
-      <pubDate>Wed, 26 Oct 2005 08:49:39 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/102/</guid>
-      <description>glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); should put in the main circle, so if we change the display, the previous buffer can clear completely and the new image will draw correctly.</description>
-    </item>
-    
-    <item>
-      <title>玩玩OpenGL</title>
-      <link>http://hzmangel.github.io/post/45/</link>
-      <pubDate>Wed, 12 Jan 2005 23:09:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/45/</guid>
-      <description>最后还是用了VC，因为大家都用的是这个，我用别的找不到人问。运行了几个例子，感觉还行。也就是考研看书看郁闷了，想玩玩别的东西吧^_^ 先写这么多，玩玩。等什么时候学到点东西再写吧，感觉现在BLOG里面堆了N多的东西，呵呵，不知道能不能学下来啊 :-)</description>
-    </item>
-    
-  </channel>
-</rss>
+暂时就想到这么多吧，不过算是把那个数据显示的东西搞定了，也在模板中正确的显示出来了，明天再看看怎么把导进去，接着做吧，感觉django还是满好玩的一个东西。</description></item><item><title>Python中的字符编码</title><link>http://hzmangel.github.io/post/159/</link><pubDate>Sun, 03 Sep 2006 00:09:47 +0000</pubDate><guid>http://hzmangel.github.io/post/159/</guid><description>想用Django做些东西，大概算是一个用于管理的网站吧。当然是要做个主页，首先是想在工程目录下放一个index.htm的文件，但是好像django自带的那个 服务器不认这个东西，只好写个模块，并改urls.py，让它能访问，我不想把主页写死在模块里面，所以写到了一个网页文件中，index.htm，然后再用模块从文 件中读数据进来，结果出现了乱码，其实也就是浏览器默认用的是utf8的编码，但是我的文件用的是GB2312的编码，所以乱码就横空出世了。一开始以为是那个ind ex.htm文件的问题，于是把它的编码也切成utf8，但是再次显示的时候还是乱码。上网查了一下，好像是python自动判断系统的编码，然后进行转换。后来加上 了这几句话就好了。不过不清楚为什么要加上那句reload，不知道是不是怕程序执行过程中系统环境发生变化。 import sys reload(sys) sys.setdefaultencoding(&amp;lsquo;utf8&amp;rsquo;)</description></item><item><title>Django出错</title><link>http://hzmangel.github.io/post/156/</link><pubDate>Sat, 02 Sep 2006 23:41:44 +0000</pubDate><guid>http://hzmangel.github.io/post/156/</guid><description>今天想用django做些东西，8过没想到居然出错，说是importError，想想也不应该啊，基本是按着Django step by step做的，后来就差用diff一点一点看了，终于找到了出错的地方，默认的那个urls.py里面有个include('')，但是django step by step里面的没有这个语句，后来把那条语句改了就对了，就像这样：默认的是 (r'^$', include(&amp;lsquo;ilab.homepage.index&amp;rsquo;)), 结果出错，改成下面的这样就不会出错了。 (r'^$', &amp;lsquo;ilab.homepage.index&amp;rsquo;), 原因嘛，嘿嘿，未知。</description></item><item><title>也说django</title><link>http://hzmangel.github.io/post/148/</link><pubDate>Wed, 16 Aug 2006 16:31:56 +0000</pubDate><guid>http://hzmangel.github.io/post/148/</guid><description>昨天看了一些django的东西，也按着django step by step上面的东西做了一些尝试，感觉我在开始的时候错误的理解了django 。因为在接触 django前，接触过一点xoops的东西，所以下意识里面觉得django和它应该有些类似，提供一个架构，然后有一堆模块，我把模块组织组织就是一个基于内容的 网站。可是昨天发现，我错了，而且错的比较的远，django提供了一个框架，方便开发的框架，但是并不是像我觉得的那个用几个模块就可以搭个有点样子的服务器出来， 呵呵，看来要学的东西还是有很多啊。应该会看下去吧，毕竟对Python还算有些熟悉，至少比PHP要好，而且不少人告诉开发python的应用要比PHP要好，呵呵 ，看看吧，反正一方面blog什么的架着，那些东西又不是我弄的，会用就满足了，另一方面看看这个吧，好像满好玩的，呵呵。
+btw: Apache的虚拟主机好像有点好玩，有空看看。</description></item><item><title>Django起来啦</title><link>http://hzmangel.github.io/post/145/</link><pubDate>Tue, 15 Aug 2006 12:04:19 +0000</pubDate><guid>http://hzmangel.github.io/post/145/</guid><description>呵呵，总算是起来了，折腾了几天，倒不是因为配置上有什么难的地方，主要是这几天有时候玩玩游戏，时间就过去了，等到要玩Django的时候，又会发现有什么包没有， 所以就作罢了，不过现在总算是起来了 ![](/blog/wp-content/plugins/editormonkey/fckeditor/editor/i mages/smiley/msn/wink_smile.gif)
+其实也没什么难的地方，一是要下载django的软件包，解压到任何文件夹，在当然目录运行setup.py install，当然我是这在Windows下配置的，要是在*nix下，应该是python setup.py install，这时官方的文档中写的是需要联网下 载setuptool，后来看到安装的时候，说只要把那个工具放在当前目录下就可以了，所以那时候才知道能这样装了，然后也没什么了，一堆字符过后，装完了。再后来就 是按着教程什么的一步一步来吧，现在我看的是limodou的Django: Step by Step，刚把服务器起起来，可以看到那个Congratulations画面了
+btw: 建立站点后，要到站点的目录下运行managy.py runserver</description></item><item><title>IE和PNG</title><link>http://hzmangel.github.io/post/139/</link><pubDate>Sun, 02 Jul 2006 15:20:05 +0000</pubDate><guid>http://hzmangel.github.io/post/139/</guid><description>&lt;p>也不知道盖茨大叔是怎么想的，IE6居然不支持PNG的透明背景，还好在网上找到了一个方法，用到了一个没见到过的滤镜，刚试了一下，效果还算不错，就把代码贴出来吧
+，方便以后查。主要起作用的是这个滤镜：&lt;/p>
+&lt;p>filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&amp;lsquo;aaa.png&amp;rsquo;,
+sizingMethod=&amp;lsquo;crop&amp;rsquo;);&lt;/p>
+&lt;p>由于滤镜中间有源文件名，不方便调用，所以有哥们写了个javascript的脚本，方便了我等懒人啊。&lt;br>
+首先是JavaScript的代码，用以生成HTML，以给图像加滤镜&lt;/p></description></item><item><title>My first python script</title><link>http://hzmangel.github.io/post/112/</link><pubDate>Sun, 27 Nov 2005 21:25:43 +0000</pubDate><guid>http://hzmangel.github.io/post/112/</guid><description>Yesterday, I needed a shell script to do a demo of a program, and I thought about python, so my first script was released today. But I have to say, it is useless, because I haven&amp;rsquo;t reach my goal :( . The problem is not in the script but in the program, so the only thing I can do is to abort, although I do not want to say this word.</description></item><item><title>glut+MinGW+Windowz</title><link>http://hzmangel.github.io/post/104/</link><pubDate>Sat, 29 Oct 2005 19:13:11 +0000</pubDate><guid>http://hzmangel.github.io/post/104/</guid><description>Those days I have had a lot of faint things, coding with OpenGL is one of them. I do not want to use VC++ 6 as my develop environment, so I choosen the MinGW, and the IDE I use is Dev-Cpp, which is a good IDE. But in most time, I just use the MinGW environment command line to compile and execute the code, because I like it ^_^ At the beginning, I copy the code from NeHe tutorial to my Dev-Cpp project, at first the project I used is normal win32 project, so I have got a lot of errors.</description></item><item><title>也说3D编程</title><link>http://hzmangel.github.io/post/103/</link><pubDate>Fri, 28 Oct 2005 15:01:03 +0000</pubDate><guid>http://hzmangel.github.io/post/103/</guid><description>这几天在看OpenGL，突然想起初中时的一些事情了，那时候学BASIC，在屏幕上输出一维和二维的数组，那时候就在想，如果把里面的那个数组换成三维的，不就可以输出三维的东西了吗。后来和边上一哥们讨论了好半天，讨论的问题是在，如果那个数组是四维的话&amp;hellip;&amp;hellip;..(呵呵，最后好像也没写程序验证一下)</description></item><item><title>OpenGL Tips</title><link>http://hzmangel.github.io/post/102/</link><pubDate>Wed, 26 Oct 2005 08:49:39 +0000</pubDate><guid>http://hzmangel.github.io/post/102/</guid><description>glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); should put in the main circle, so if we change the display, the previous buffer can clear completely and the new image will draw correctly.</description></item><item><title>玩玩OpenGL</title><link>http://hzmangel.github.io/post/45/</link><pubDate>Wed, 12 Jan 2005 23:09:42 +0000</pubDate><guid>http://hzmangel.github.io/post/45/</guid><description>最后还是用了VC，因为大家都用的是这个，我用别的找不到人问。运行了几个例子，感觉还行。也就是考研看书看郁闷了，想玩玩别的东西吧^_^ 先写这么多，玩玩。等什么时候学到点东西再写吧，感觉现在BLOG里面堆了N多的东西，呵呵，不知道能不能学下来啊 :-)</description></item></channel></rss>

@@ -1,89 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>小企鹅Linux on 湖间小筑</title>
-    <link>http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/</link>
-    <description>Recent content in 小企鹅Linux on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 03 Jul 2011 01:27:23 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Remove packages installed by setup.py install</title>
-      <link>http://hzmangel.github.io/post/999/</link>
-      <pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/999/</guid>
-      <description>从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
-$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f  没找到怎么让它输出到stdout，只好用临时文件弄了。</description>
-    </item>
-    
-    <item>
-      <title>Using LOCAL in the LOAD DATA SQL command</title>
-      <link>http://hzmangel.github.io/post/954/</link>
-      <pubDate>Fri, 29 Apr 2011 01:22:04 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/954/</guid>
-      <description>LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小企鹅Linux on 湖间小筑</title><link>http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/</link><description>Recent content in 小企鹅Linux on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Sun, 03 Jul 2011 01:27:23 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Remove packages installed by setup.py install</title><link>http://hzmangel.github.io/post/999/</link><pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate><guid>http://hzmangel.github.io/post/999/</guid><description>从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了[折衷的办法](http://stackoverflow.com/questions/1550226/python- setup-py-uninstall)：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
+$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</description></item><item><title>Using LOCAL in the LOAD DATA SQL command</title><link>http://hzmangel.github.io/post/954/</link><pubDate>Fri, 29 Apr 2011 01:22:04 +0000</pubDate><guid>http://hzmangel.github.io/post/954/</guid><description>LOAD DATA是MySQL中导入数据的命令。对于客户端和服务器不在同一台机器上的情况，如果命令是LOAD DATA INFILE XXXX，那么表示从服务器端的某个路径把文件LOAD进来，而如果用LOAD DATA LOCAL INFILE XXXX，那么就表示是把本地的一个文件上传到服务器端再导入。
 今天碰到的问题是SLES的MySQL客户端默认没有把local_infile编译到程序中，于是在LOAD DATA中使用LOCAL命令报错，说不可以在这个版本下使用LOCAL。最后骚扰过group后发现的解决方案是在运行mysql的命令行时加上参数 &amp;ndash;local-infile=1
 然后，就能用LOCAL了，然后就没有然后了……
-PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</description>
-    </item>
-    
-    <item>
-      <title>Disable Arial in Chrome</title>
-      <link>http://hzmangel.github.io/post/876/</link>
-      <pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/876/</guid>
-      <description>&lt;p&gt;最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Reuse the TIME_WAIT Port</title>
-      <link>http://hzmangel.github.io/post/618/</link>
-      <pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/618/</guid>
-      <description>最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
+PS：感谢 @lidongyang , @oatgnep 还有 #linuxfb</description></item><item><title>Disable Arial in Chrome</title><link>http://hzmangel.github.io/post/876/</link><pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate><guid>http://hzmangel.github.io/post/876/</guid><description>&lt;p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。&lt;/p></description></item><item><title>Reuse the TIME_WAIT Port</title><link>http://hzmangel.github.io/post/618/</link><pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate><guid>http://hzmangel.github.io/post/618/</guid><description>最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西：
-net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1  其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
-sysctl -w net.ipv4.route.flush=1  差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
-话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</description>
-    </item>
-    
-    <item>
-      <title>The Capital S in Linux Permission Bitmap</title>
-      <link>http://hzmangel.github.io/post/614/</link>
-      <pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/614/</guid>
-      <description>昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
+net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
+sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
+话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</description></item><item><title>The Capital S in Linux Permission Bitmap</title><link>http://hzmangel.github.io/post/614/</link><pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate><guid>http://hzmangel.github.io/post/614/</guid><description>昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。
-最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</description>
-    </item>
-    
-    <item>
-      <title>Using sudo in rsh&#39;s command</title>
-      <link>http://hzmangel.github.io/post/610/</link>
-      <pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/610/</guid>
-      <description>公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
-Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动改~</description>
-    </item>
-    
-    <item>
-      <title>Mask Mouse on Linux</title>
-      <link>http://hzmangel.github.io/post/583/</link>
-      <pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/583/</guid>
-      <description>最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
+最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</description></item><item><title>Using sudo in rsh's command</title><link>http://hzmangel.github.io/post/610/</link><pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate><guid>http://hzmangel.github.io/post/610/</guid><description>公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
+Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</description></item><item><title>Mask Mouse on Linux</title><link>http://hzmangel.github.io/post/583/</link><pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate><guid>http://hzmangel.github.io/post/583/</guid><description>最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
 不显示
 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头
 屏蔽响应事件
@@ -91,16 +17,7 @@ Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动�
 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令
 xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;
 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。
-就这两条命令，具体的没的细究，有空再看吧。</description>
-    </item>
-    
-    <item>
-      <title>Set local dir as yum repo</title>
-      <link>http://hzmangel.github.io/post/581/</link>
-      <pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/581/</guid>
-      <description>新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。
+就这两条命令，具体的没的细究，有空再看吧。</description></item><item><title>Set local dir as yum repo</title><link>http://hzmangel.github.io/post/581/</link><pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate><guid>http://hzmangel.github.io/post/581/</guid><description>新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。
 按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下：
 $ cat local.repo
 [local repo]
@@ -108,735 +25,138 @@ name=Repository on lldev
 baseurl=file:///XXX/YYY/ZZZ
 enabled=1
 gpgcheck=0
-需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</description>
-    </item>
-    
-    <item>
-      <title>Auth ssh with keys</title>
-      <link>http://hzmangel.github.io/post/580/</link>
-      <pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/580/</guid>
-      <description>每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了…
- S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴  这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~
+需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</description></item><item><title>Auth ssh with keys</title><link>http://hzmangel.github.io/post/580/</link><pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate><guid>http://hzmangel.github.io/post/580/</guid><description>每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了…
+S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴 这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~
 Update at 2010-09-16:
-可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote host&amp;gt;，然后这个命令会做完上面的工作~</description>
-    </item>
-    
-    <item>
-      <title>强制umount无响应NFS分区</title>
-      <link>http://hzmangel.github.io/post/482/</link>
-      <pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/482/</guid>
-      <description>折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
+可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote host&amp;gt;，然后这个命令会做完上面的工作~</description></item><item><title>强制umount无响应NFS分区</title><link>http://hzmangel.github.io/post/482/</link><pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate><guid>http://hzmangel.github.io/post/482/</guid><description>折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
 直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：
 `# fuser -km /mnt/dir
 umount -f /mnt/dir` Updated at 2011-01-11
 唔，在网上又找到了一个办法
 umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore.
-试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</description>
-    </item>
-    
-    <item>
-      <title>Linux下的十六进制编辑器</title>
-      <link>http://hzmangel.github.io/post/379/</link>
-      <pubDate>Sat, 03 Jan 2009 20:45:48 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/379/</guid>
-      <description>关键字： Linux, hex editor, cli
-折腾东西，需要找一个命令行下的十六进制编辑器，最后在这篇文章中找到了办法。其实就是在用xxd看了，编辑完后，用xxd -r命令把它给恢复回去，然后再写回文件就行了，嗯。
-vim file :%!xxd ... edit ... :%!xxd -r  </description>
-    </item>
-    
-    <item>
-      <title>在Moin中使用pygments</title>
-      <link>http://hzmangel.github.io/post/372/</link>
-      <pubDate>Thu, 18 Dec 2008 19:22:29 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/372/</guid>
-      <description>关键字： MoinMoin, pygments
+试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</description></item><item><title>Linux下的十六进制编辑器</title><link>http://hzmangel.github.io/post/379/</link><pubDate>Sat, 03 Jan 2009 20:45:48 +0000</pubDate><guid>http://hzmangel.github.io/post/379/</guid><description>关键字： Linux, hex editor, cli
+折腾东西，需要找一个命令行下的十六进制编辑器，最后在[这篇文章](http://ox0spy.blogspot.com/2008/02/linux_27.h tml)中找到了办法。其实就是在用xxd看了，编辑完后，用xxd -r命令把它给恢复回去，然后再写回文件就行了，嗯。
+vim file :%!xxd ... edit ... :%!xxd -r</description></item><item><title>在Moin中使用pygments</title><link>http://hzmangel.github.io/post/372/</link><pubDate>Thu, 18 Dec 2008 19:22:29 +0000</pubDate><guid>http://hzmangel.github.io/post/372/</guid><description>关键字： MoinMoin, pygments
 想给自己的东西分个类，于是又一次架起了MoinMoin，不满足于里面自带的parser，想起来了pygments好像有对MoinMoin的支持，于是乎就去找 了。
 找到了结果，其实很简单，把pygments的external文件夹下的一个文件拷到自己wiki的data/plugin/parser下，然后改成你想要的名字 （如code.py）就可以了，然后写代码就包在{{{}}}块中，然后加上#!code &amp;lt;foobar&amp;gt;，以告诉它用那个东西处理，处理的语言是foobar，然后记得把css加到想要的地方就行了，嗯。
-很简单，但是比原来的好看多了，不过还是要把它CSS中pre的默认字体改一下，嗯。</description>
-    </item>
-    
-    <item>
-      <title>BLUG - Coding4fun</title>
-      <link>http://hzmangel.github.io/post/368/</link>
-      <pubDate>Sat, 29 Nov 2008 22:24:12 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/368/</guid>
-      <description>&lt;p&gt;关键字： coding, fun, exoweb, BLUG&lt;/p&gt;
-
-&lt;p&gt;对BLUG的这项活动，早就有所耳闻，也一直很想去体验一下，于是今天就去了。&lt;/p&gt;
-
-&lt;p&gt;活动是11点开始，早上9点多出门的，本来以为可以轻松在规定时间内赶到，结果郁闷的事情再次发生了，我又迷路了。在问了N多人后终于找到了正确的方向，期间走过的冤
+很简单，但是比原来的好看多了，不过还是要把它CSS中pre的默认字体改一下，嗯。</description></item><item><title>BLUG - Coding4fun</title><link>http://hzmangel.github.io/post/368/</link><pubDate>Sat, 29 Nov 2008 22:24:12 +0000</pubDate><guid>http://hzmangel.github.io/post/368/</guid><description>&lt;p>关键字： coding, fun, exoweb, BLUG&lt;/p>
+&lt;p>对BLUG的这项活动，早就有所耳闻，也一直很想去体验一下，于是今天就去了。&lt;/p>
+&lt;p>活动是11点开始，早上9点多出门的，本来以为可以轻松在规定时间内赶到，结果郁闷的事情再次发生了，我又迷路了。在问了N多人后终于找到了正确的方向，期间走过的冤
 枉路就不说了，因为太多了，后来为了赶时间，尽管气喘吁吁了还是在一路狂蹬，居然在某处飚到了44kmh的速度。本来是去Coding4Fun的，结果先来了段Cra
-sy4Finding。其实更郁闷的是，当我赶上楼的时候，居然只来了三个人，而且大门还没开，FT啊FT。注，本文纯流水，嗯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>在Django的模板中使用m2m</title>
-      <link>http://hzmangel.github.io/post/366/</link>
-      <pubDate>Sat, 22 Nov 2008 02:57:40 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/366/</guid>
-      <description>关键字： django, many-to-many, template, m2m
-最近在写自己的blog系统，自然就想到加上了tags。在我的数据库中，把tag扔在一个单独的表Tags中，然后在Articles表中有一个字段以m2m的关系 连到Tags表中。已经把post, list等页面写完了，但是在写detail的时候，发现如果直接用article.tags引用，模板系统会报m2m的对象不 能遍历的错，放狗找了一圈才知道需要使用article.tags.all作为for遍历的变量集，剩下的没啥说的了。</description>
-    </item>
-    
-    <item>
-      <title>root可写NFS目录</title>
-      <link>http://hzmangel.github.io/post/365/</link>
-      <pubDate>Wed, 19 Nov 2008 11:13:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/365/</guid>
-      <description>关键字： root, NFS, 权限
-最近在挂NFS，root默认在里面没权限。因为默认会加上root_squash选项，这个选项的含义就是把客户机上的root映射为服务器端的nobody用户， 所以自然就没有权限了，解决方案也很简单，加上no_root_squash即可，这个选项表示不把root映射为nobody，自然在那边就还是root了，ove r。</description>
-    </item>
-    
-    <item>
-      <title>偷懒用的Makefile</title>
-      <link>http://hzmangel.github.io/post/363/</link>
-      <pubDate>Wed, 12 Nov 2008 13:22:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/363/</guid>
-      <description>&lt;p&gt;关键字： 偷懒, makefile&lt;/p&gt;
-
-&lt;p&gt;经常写些测试的小程序，有时一个目录下N多C程序要手动编译，想着头都大，于是乎就想偷懒了，花了半小时攒了个Makefile:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;CC=gcc
+sy4Finding。其实更郁闷的是，当我赶上楼的时候，居然只来了三个人，而且大门还没开，FT啊FT。注，本文纯流水，嗯。&lt;/p></description></item><item><title>在Django的模板中使用m2m</title><link>http://hzmangel.github.io/post/366/</link><pubDate>Sat, 22 Nov 2008 02:57:40 +0000</pubDate><guid>http://hzmangel.github.io/post/366/</guid><description>关键字： django, many-to-many, template, m2m
+最近在写自己的blog系统，自然就想到加上了tags。在我的数据库中，把tag扔在一个单独的表Tags中，然后在Articles表中有一个字段以m2m的关系 连到Tags表中。已经把post, list等页面写完了，但是在写detail的时候，发现如果直接用article.tags引用，模板系统会报m2m的对象不 能遍历的错，放狗找了一圈才知道需要使用article.tags.all作为for遍历的变量集，剩下的没啥说的了。</description></item><item><title>root可写NFS目录</title><link>http://hzmangel.github.io/post/365/</link><pubDate>Wed, 19 Nov 2008 11:13:42 +0000</pubDate><guid>http://hzmangel.github.io/post/365/</guid><description>关键字： root, NFS, 权限
+最近在挂NFS，root默认在里面没权限。因为默认会加上root_squash选项，这个选项的含义就是把客户机上的root映射为服务器端的nobody用户， 所以自然就没有权限了，解决方案也很简单，加上no_root_squash即可，这个选项表示不把root映射为nobody，自然在那边就还是root了，ove r。</description></item><item><title>偷懒用的Makefile</title><link>http://hzmangel.github.io/post/363/</link><pubDate>Wed, 12 Nov 2008 13:22:59 +0000</pubDate><guid>http://hzmangel.github.io/post/363/</guid><description>&lt;p>关键字： 偷懒, makefile&lt;/p>
+&lt;p>经常写些测试的小程序，有时一个目录下N多C程序要手动编译，想着头都大，于是乎就想偷懒了，花了半小时攒了个Makefile:&lt;/p>
+&lt;pre>&lt;code>CC=gcc
 CFLAGS=-g
 RM=rm -f
-
 SRCS=$(wildcard *.c)
 OUTS=$(patsubst %.c,%,$(SRCS))
-
 all:$(OUTS)
-
 $(OUTS):%:%.c
-    $(CC) $(CFLAGS) -o $@ $&amp;lt;
-
+$(CC) $(CFLAGS) -o $@ $&amp;lt;
 clean:
-    $(RM) $(OUTS)
-&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    
-    <item>
-      <title>sed打印替换后的内容</title>
-      <link>http://hzmangel.github.io/post/361/</link>
-      <pubDate>Mon, 10 Nov 2008 14:38:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/361/</guid>
-      <description>关键字： sed, text process
+$(RM) $(OUTS)
+&lt;/code>&lt;/pre></description></item><item><title>sed打印替换后的内容</title><link>http://hzmangel.github.io/post/361/</link><pubDate>Mon, 10 Nov 2008 14:38:25 +0000</pubDate><guid>http://hzmangel.github.io/post/361/</guid><description>关键字： sed, text process
 一个文件，首先需要将某一特定行中的一些字符给删除，然后再将删除后的这一行内容打印出来，也不知道自己发什么神经不想用管道，反正在放狗N分钟后得到如下结果：
-sed -n &#39;s/^hostname:[ \t]*\(.*\)/\1/p&#39; conf.ini  首先让sed进入安静模式，然后正则查找，把找到的那个东西\1打印出来，本来老想着先查找，再p，再替换，所以总是走不通。没想到s//后面还能跟p，真像那个ma n手册里面说的一样，sed的瑞士军刀啊。</description>
-    </item>
-    
-    <item>
-      <title>配置crontab</title>
-      <link>http://hzmangel.github.io/post/351/</link>
-      <pubDate>Fri, 10 Oct 2008 10:16:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/351/</guid>
-      <description>关键字： crontab
+sed -n 's/^hostname:[ \t]*\(.*\)/\1/p' conf.ini 首先让sed进入安静模式，然后正则查找，把找到的那个东西\1打印出来，本来老想着先查找，再p，再替换，所以总是走不通。没想到s//后面还能跟p，真像那个ma n手册里面说的一样，sed的瑞士军刀啊。</description></item><item><title>配置crontab</title><link>http://hzmangel.github.io/post/351/</link><pubDate>Fri, 10 Oct 2008 10:16:14 +0000</pubDate><guid>http://hzmangel.github.io/post/351/</guid><description>关键字： crontab
 crontab -e编辑当前用户的crontab，这个应该没啥说的了，设置环境变量EDITOR可以更改编辑crontab的编辑器。
-文件里面就是一行算是一个任务，前面5列是执行的时间，分别是 分 时 日 月 星期，在man 5 crontab里面能看到允许的值。如果是 * 则表示是所有值。然后就是这样了，如果我有一个任务需要每天的10点运行，则就写成 0 10 * * * XXX ，如果要每2小时跑一次，可以写成 0 */2 * * * XXX 。
-还要说一下最后运行的那个命令，它会新开一个进程跑，那个进程只有USER, HOME, SHELL这三个环境变量，所以写命令的时候需要考虑到这一点。
-下面，没有了&amp;hellip;&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>主机名解析顺序</title>
-      <link>http://hzmangel.github.io/post/350/</link>
-      <pubDate>Sat, 27 Sep 2008 13:50:36 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/350/</guid>
-      <description>关键字： 主机名解析
-折腾机器，明明已经在/etc/hosts里面把一个东西给更新了，但是ping主机名还是ping不通，解析出来的IP地址还是原来的一个地址。后来上网转了一圈， 知道解析的顺序是通过配置文件确定的，于是就简单了，在Linux上是/etc/nsswitch.conf，在AIX上是/etc/netsvc.conf，在Li nux的配置文件里面写hosts: files dns，AIX的写hosts = local, bind就可以保证先由/etc/hosts解析了，嗯。</description>
-    </item>
-    
-    <item>
-      <title>在iptables中配置nat包转发</title>
-      <link>http://hzmangel.github.io/post/347/</link>
-      <pubDate>Tue, 23 Sep 2008 11:08:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/347/</guid>
-      <description>关键字：iptables, nat, 包转发
+文件里面就是一行算是一个任务，前面5列是执行的时间，分别是 分 时 日 月 星期，在man 5 crontab里面能看到允许的值。如果是 * 则表示是所有值。然后就是这样了，如果我有一个任务需要每天的10点运行，则就写成 0 10 * * * XXX ，如果要每2小时跑一次，可以写成 0 */2
+XXX 。 还要说一下最后运行的那个命令，它会新开一个进程跑，那个进程只有USER, HOME, SHELL这三个环境变量，所以写命令的时候需要考虑到这一点。
+下面，没有了&amp;hellip;&amp;hellip;</description></item><item><title>主机名解析顺序</title><link>http://hzmangel.github.io/post/350/</link><pubDate>Sat, 27 Sep 2008 13:50:36 +0000</pubDate><guid>http://hzmangel.github.io/post/350/</guid><description>关键字： 主机名解析
+折腾机器，明明已经在/etc/hosts里面把一个东西给更新了，但是ping主机名还是ping不通，解析出来的IP地址还是原来的一个地址。后来上网转了一圈， 知道解析的顺序是通过配置文件确定的，于是就简单了，在Linux上是/etc/nsswitch.conf，在AIX上是/etc/netsvc.conf，在Li nux的配置文件里面写hosts: files dns，AIX的写hosts = local, bind就可以保证先由/etc/hosts解析了，嗯。</description></item><item><title>在iptables中配置nat包转发</title><link>http://hzmangel.github.io/post/347/</link><pubDate>Tue, 23 Sep 2008 11:08:16 +0000</pubDate><guid>http://hzmangel.github.io/post/347/</guid><description>关键字：iptables, nat, 包转发
 两台机器，一台有多块网卡，能连外网，算是A吧，另一台连在A上，就叫B吧。现在的情况就是，有一台机器C，机器A能连上，机器B连不上，于是就要在A上做一个转发， 把B发来的到C的包都转出去。
 于是就有了一句iptables:
-iptables -t nat -A POSTROUTING \ -s [ip of addr B] -d \ [ip addr if C] -j SNAT \ --to-source [outer ip addr of A]  下面逐段解释一下，第一个选项-t表示要把东西加到nat表中，iptables默认使用的是filter表；选项A表示是要把这条规则加到POSTROUTING链 中的，系统在决定了数据包的路由后执行该链中的规则；-s选项表示源目的地址，在这个配置中就是内网机器B的地址；-d选项指定目的地址，即C的地址；SNAT操作表 示改变包的源地址；最后&amp;ndash;to-source写的是机器A的地址，然后就配完了，嗯。</description>
-    </item>
-    
-    <item>
-      <title>使用NFS在AIX上挂载Linux分区</title>
-      <link>http://hzmangel.github.io/post/344/</link>
-      <pubDate>Thu, 18 Sep 2008 13:30:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/344/</guid>
-      <description>关键字： AIX, NFS, Not owner
+iptables -t nat -A POSTROUTING \ -s [ip of addr B] -d \ [ip addr if C] -j SNAT \ --to-source [outer ip addr of A] 下面逐段解释一下，第一个选项-t表示要把东西加到nat表中，iptables默认使用的是filter表；选项A表示是要把这条规则加到POSTROUTING链 中的，系统在决定了数据包的路由后执行该链中的规则；-s选项表示源目的地址，在这个配置中就是内网机器B的地址；-d选项指定目的地址，即C的地址；SNAT操作表 示改变包的源地址；最后&amp;ndash;to-source写的是机器A的地址，然后就配完了，嗯。</description></item><item><title>使用NFS在AIX上挂载Linux分区</title><link>http://hzmangel.github.io/post/344/</link><pubDate>Thu, 18 Sep 2008 13:30:03 +0000</pubDate><guid>http://hzmangel.github.io/post/344/</guid><description>关键字： AIX, NFS, Not owner
 起因很简单，因为在折腾机器，在AIX上解压怎么也不对，只好想到了NFS的方式。首先保证两台机器能互相通信（也就是能ping通啦），然后编辑NFS服务器即Li nux机器上的/etc/exports的文件，在其中加上一行：&amp;lt;path&amp;gt; &amp;lt;hostname/ip&amp;gt;(&amp;lt;option&amp;gt; )，第一个是在Linux服务器上的路径，第二个是需要挂载此文件夹主机的主机名或者IP地址，最后括号中是选项，一般是rw, async。改完后重启NFS的服务器，此时在服务器上用exportfs命令应该能看到刚加到配置文件中的一行。此时服务器端应该算是设置完成了。
 在客户端的AIX机器上，首先需要确定portmap和nfs后台进程的存在，命令嘛就是startsrc -s portmap和startsrc -g nfs，然后就是用mount命令了，不用加-t nfs，直接就是mount &amp;lt;ip&amp;gt;:&amp;lt;path&amp;gt; &amp;lt;mount_point&amp;gt;。
-简单吧，不过需要说说vmount: Not owner这个问题（以下解答转自zhaolin日志）出现这个问题的原因是linux操作系统在响应AIX操作系统的mount请求时，需要用到此nfs保留端口，该端 口在默认情况下是不会开放的。所以需要在AIX客户端设置一下：
-# nfso -o nfs_use_reserved_ports=1 Setting nfs_use_reserved_ports to 1  然后再重新mount就没问题了。还有就是可能需要在AIX的/etc/hosts下添加服务器地址和IP映射，否则有可能会找不到，嗯。
-目前只是挂载上，能读，至于能不能写再说吧，嘿嘿。</description>
-    </item>
-    
-    <item>
-      <title>patch的-p参数</title>
-      <link>http://hzmangel.github.io/post/341/</link>
-      <pubDate>Fri, 05 Sep 2008 14:02:24 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/341/</guid>
-      <description>关键字： patch, 用法
+简单吧，不过需要说说vmount: Not owner这个问题（以下解答转自[zhaolin日志](http://www.aixchina.net/?uid-3256-action- viewspace-itemid-11798)）出现这个问题的原因是linux操作系统在响应AIX操作系统的mount请求时，需要用到此nfs保留端口，该端 口在默认情况下是不会开放的。所以需要在AIX客户端设置一下：
+# nfso -o nfs_use_reserved_ports=1 Setting nfs_use_reserved_ports to 1 然后再重新mount就没问题了。还有就是可能需要在AIX的/etc/hosts下添加服务器地址和IP映射，否则有可能会找不到，嗯。
+目前只是挂载上，能读，至于能不能写再说吧，嘿嘿。</description></item><item><title>patch的-p参数</title><link>http://hzmangel.github.io/post/341/</link><pubDate>Fri, 05 Sep 2008 14:02:24 +0000</pubDate><guid>http://hzmangel.github.io/post/341/</guid><description>关键字： patch, 用法
 先用diff比较两个目录，在patch的时候，如果要打补丁的目录和diff时的目录放的地方不一样，它会报找不到文件的错，此时需要用到-p的参数，-p后面跟一 个数字作为参数，表示忽略diff文件中第几个/前的东西。如-p5表示忽略第5个/前的东西。比如在diff的时候，比较的是a/foo和b/foo两个文件夹，那 么输出的diff文件中，文件名是a/foo/XXXX，此时如果要给c/foo下的一个东西打补丁，那么直接打就不行了。此时应该到c目录中，然后用patch -p1命令来打，嗯。
 外一则，如果被打补丁的目录中有些文件不存在了，patch会停下来问你咋办，如果在命令行中加上- t的参数，那么它就不会停而是直接跳过，开始打下一个文件的补丁了。
-记一笔，嗯。</description>
-    </item>
-    
-    <item>
-      <title>无密码scp(ssh)</title>
-      <link>http://hzmangel.github.io/post/332/</link>
-      <pubDate>Wed, 13 Aug 2008 14:49:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/332/</guid>
-      <description>关键字： linux, scp, 无密码
+记一笔，嗯。</description></item><item><title>无密码scp(ssh)</title><link>http://hzmangel.github.io/post/332/</link><pubDate>Wed, 13 Aug 2008 14:49:56 +0000</pubDate><guid>http://hzmangel.github.io/post/332/</guid><description>关键字： linux, scp, 无密码
 其实很早就想把怎么配无密码 scp 给记下来，可是一直忘，所以今天趁热打铁一下吧。其实很简单，首先，生成一对密钥对，然后把私钥扔到本机 ~/.ssh/ 目录下，好像还要把属性设成 600 ，最后把公钥加到要连接服务器的 ~/.ssh/authorized_keys 文件中，如果是 SSH2 则应该是 authorized_keys2 ，然后就行了，嗯。如果要从那台机器连回来，还要依样再来一遍。
-当前，前提是那台服务器的 SSH 可以用公钥密钥对进行认证。</description>
-    </item>
-    
-    <item>
-      <title>无密码rsh</title>
-      <link>http://hzmangel.github.io/post/328/</link>
-      <pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/328/</guid>
-      <description>最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：/etc/hosts.equiv和家目录下的.rhosts文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~</description>
-    </item>
-    
-    <item>
-      <title>Linux终端不回显</title>
-      <link>http://hzmangel.github.io/post/323/</link>
-      <pubDate>Fri, 04 Jul 2008 09:29:36 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/323/</guid>
-      <description>关键字： Linux, 终端属性, 回显
+当前，前提是那台服务器的 SSH 可以用公钥密钥对进行认证。</description></item><item><title>无密码rsh</title><link>http://hzmangel.github.io/post/328/</link><pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate><guid>http://hzmangel.github.io/post/328/</guid><description>最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：/etc/hosts.equiv和家目录下的.rhosts文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~</description></item><item><title>Linux终端不回显</title><link>http://hzmangel.github.io/post/323/</link><pubDate>Fri, 04 Jul 2008 09:29:36 +0000</pubDate><guid>http://hzmangel.github.io/post/323/</guid><description>关键字： Linux, 终端属性, 回显
 一直想写段程序试试输入不回显的东西，但是一直被一些事情所羁绊（其实是自己懒，玩游戏去了），直到最近要在公司的代码上加东西。
 于是乎，一轮 google 以后，终于找到了答案，其实是因为自己看APUE看的头晕了。代码很简单，先用 tcgetattr 取到现有的属性，然后在现有属性上设置 XXX.c_lflag &amp;amp;= ~ECHO ，再用 tcsetattr 把新属性给设置上去，就行了，对于两个终端相关的函数，需要提供 fd ，对于 stdin 而言是 0 ，话说不知道为啥昨天直接写 stdin 不行，下面呢，木有了~~~~
 PS：突然想到，代码贴上来是不是好一点？于是下面又有了：
-** 1** **#include ****&amp;lt;stdio.h&amp;gt;** ** 2** **#include ****&amp;lt;stdlib.h&amp;gt;** ** 3** **#include ****&amp;lt;termios.h&amp;gt;** ** 4** **#include ****&amp;lt;time.h&amp;gt;** ** 5** ** 6** ** 7** **int** main (**int** argc, **char*** argv[]) ** 8** { ** 9** **struct** termios init_setting; **10** **struct** termios pend_setting; **11** **12** **if** (tcgetattr(**0**, &amp;amp;init_setting) &amp;lt; **0**) **13** { **14** fprintf (**stderr**, **&amp;quot;Error~~~****\n****&amp;quot;**); **15** exit (**1**); **16** } **17** pend_setting = init_setting; **18** **19** printf (**&amp;quot;Pending for 5 secone!</description>
-    </item>
-    
-    <item>
-      <title>USE flag for individual package</title>
-      <link>http://hzmangel.github.io/post/320/</link>
-      <pubDate>Sun, 29 Jun 2008 23:37:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/320/</guid>
-      <description>keyword: gentoo, USE for package, mysql
-在升级系统的时候要装mysql，于是emerge mysql，刷了一堆字后丫告诉我出错，看了看信息原来是BDB不再支持，然后也不知道怎么回事丫就出错。一开始 在make.conf中把berkdb关键字给去掉了，但是还是不行，emerge &amp;ndash;info看了一下关键字还在，大概是哪个上层哪个配置文件中的事情，于是乎只 好再去找Handbook，在USE一节中找到了，其实就 是在/etc/portage/package.use中加上dev-db/mysql -berkdb就行了，告诉编译器对于mysql不要用berkdb编译选项 。手册里面还说package.use可能不是一个文件，而是目录，没细看说明了，碰到再说吧，嗯。就这样，单独为某个包设置USE标记。</description>
-    </item>
-    
-    <item>
-      <title>放弃Compiz，嗯</title>
-      <link>http://hzmangel.github.io/post/319/</link>
-      <pubDate>Sun, 29 Jun 2008 01:48:00 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/319/</guid>
-      <description>折腾了好久，发现折腾X没啥意思，够用就行了，以后还是开始折腾程序吧，这才是有用的，嗯。ATI的驱动装上了，能跑glxgears，我已经很欣慰了，过段时间再说 别的吧，先把欠在版上的东西完成了。快餐店准备开张了~~~~</description>
-    </item>
-    
-    <item>
-      <title>ACCEPT_KEYWORDS in gentoo</title>
-      <link>http://hzmangel.github.io/post/318/</link>
-      <pubDate>Sat, 28 Jun 2008 01:15:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/318/</guid>
-      <description>关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge
-今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</description>
-    </item>
-    
-    <item>
-      <title>Emerge specific version of software</title>
-      <link>http://hzmangel.github.io/post/317/</link>
-      <pubDate>Sat, 28 Jun 2008 01:11:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/317/</guid>
-      <description>关键字：Gentoo software emerge version
+** 1** **#include ****&amp;lt;stdio.h&amp;gt;** ** 2** **#include ****&amp;lt;stdlib.h&amp;gt;** ** 3** **#include ****&amp;lt;termios.h&amp;gt;** ** 4** **#include ****&amp;lt;time.h&amp;gt;** ** 5** ** 6** ** 7** **int** main (**int** argc, **char*** argv[]) ** 8** { ** 9** **struct** termios init_setting; **10** **struct** termios pend_setting; **11** **12** **if** (tcgetattr(**0**, &amp;amp;init_setting) &amp;lt; **0**) **13** { **14** fprintf (**stderr**, **&amp;quot;Error~~~****\n****&amp;quot;**); **15** exit (**1**); **16** } **17** pend_setting = init_setting; **18** **19** printf (**&amp;quot;Pending for 5 secone!</description></item><item><title>USE flag for individual package</title><link>http://hzmangel.github.io/post/320/</link><pubDate>Sun, 29 Jun 2008 23:37:55 +0000</pubDate><guid>http://hzmangel.github.io/post/320/</guid><description>keyword: gentoo, USE for package, mysql
+在升级系统的时候要装mysql，于是emerge mysql，刷了一堆字后丫告诉我出错，看了看信息原来是BDB不再支持，然后也不知道怎么回事丫就出错。一开始 在make.conf中把berkdb关键字给去掉了，但是还是不行，emerge &amp;ndash;info看了一下关键字还在，大概是哪个上层哪个配置文件中的事情，于是乎只 好再去找Handbook，在USE一节中找到了，其实就 是在/etc/portage/package.use中加上dev-db/mysql -berkdb就行了，告诉编译器对于mysql不要用berkdb编译选项 。手册里面还说package.use可能不是一个文件，而是目录，没细看说明了，碰到再说吧，嗯。就这样，单独为某个包设置USE标记。</description></item><item><title>放弃Compiz，嗯</title><link>http://hzmangel.github.io/post/319/</link><pubDate>Sun, 29 Jun 2008 01:48:00 +0000</pubDate><guid>http://hzmangel.github.io/post/319/</guid><description>折腾了好久，发现折腾X没啥意思，够用就行了，以后还是开始折腾程序吧，这才是有用的，嗯。ATI的驱动装上了，能跑glxgears，我已经很欣慰了，过段时间再说 别的吧，先把欠在版上的东西完成了。快餐店准备开张了~~~~</description></item><item><title>ACCEPT_KEYWORDS in gentoo</title><link>http://hzmangel.github.io/post/318/</link><pubDate>Sat, 28 Jun 2008 01:15:55 +0000</pubDate><guid>http://hzmangel.github.io/post/318/</guid><description>关键字：ACCEPT_KEYWORDS gentoo ~x86 emerge
+今天想装个zhcon来上BBS，结果emerge告诉我说，这个玩意是在~x86中的，你现在是x86，不让你装，于是FT。在网上逛了逛，可以通过ACCEPT_ KEYWORDS来设置，这个关键字可以在/etc/make.conf中设上，这样就行了。好像还可以对每个包做分别的mask，没细看了，呵呵。</description></item><item><title>Emerge specific version of software</title><link>http://hzmangel.github.io/post/317/</link><pubDate>Sat, 28 Jun 2008 01:11:03 +0000</pubDate><guid>http://hzmangel.github.io/post/317/</guid><description>关键字：Gentoo software emerge version
 想在Gentoo上装py-2.5，可惜丫默认用emerge python装的是2.4，去它的wiki转了转，找到了方法：
-先装gentoolkit，以找到equery这个工具，然后再equery list -p &amp;lt;pkg name&amp;gt;列出所有可用的版本，最后用emerge =&amp;lt;pkg full name&amp;gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</description>
-    </item>
-    
-    <item>
-      <title>ATI on Gentoo</title>
-      <link>http://hzmangel.github.io/post/316/</link>
-      <pubDate>Fri, 27 Jun 2008 22:03:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/316/</guid>
-      <description>关键字：Gentoo ATI
+先装gentoolkit，以找到equery这个工具，然后再equery list -p &amp;lt;pkg name&amp;gt;列出所有可用的版本，最后用emerge =&amp;lt;pkg full name&amp;gt;安装，full name是指带上版本号的全名，一定要加那个=号，嗯。这样就行了。</description></item><item><title>ATI on Gentoo</title><link>http://hzmangel.github.io/post/316/</link><pubDate>Fri, 27 Jun 2008 22:03:03 +0000</pubDate><guid>http://hzmangel.github.io/post/316/</guid><description>关键字：Gentoo ATI
 配机器的时候被老板说的选了A卡，HD3850，现在装系统的时候才知道有多么痛苦，呵呵。不过最后还是把X启起来了，在这留下一笔吧。
 首先用的是从官网下的驱动，其实emerge也能找到ati-drivers，但是怕它不支持俺的卡，所以去官网下最新的了，它上面说可以用在HD3xxx上，嗯。驱 动安装很简单，一个可执行的sh文件，加上x标记后直接运行就行了，由于没有预编译的一些东西，所以需要现场编译，可能会有些慢，装到最后它给弹出来个错，不过网上说 东西已经装好了，可以无视那个对话框了，反正现在用着还没啥问题。
 然后就是写xorg.conf了，ati提供了一个工具，aticonfig，加上参数&amp;ndash;initial &amp;ndash;input=/etc/xorg.conf，它会读入 配置文件，然后改成可以被ATI用的，可能需要把screen那一节改一下，反正在我这它是给了几个色深，一个mode都没给，在startx的时候直接报错，NND 。
 再然后，startx吧，gentoo默认的是twm，自己在家目录下写一个.xinitrc，然后改成你喜欢的吧，我是startkde。现在已经起来了，但是不支 持3D，glx模块没有，一会再看看是怎么回事，嗯。
-话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</description>
-    </item>
-    
-    <item>
-      <title>Gentoo Install Notes (4)</title>
-      <link>http://hzmangel.github.io/post/315/</link>
-      <pubDate>Fri, 27 Jun 2008 21:52:59 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/315/</guid>
-      <description>&lt;p&gt;关键字： gentoo lvm install&lt;/p&gt;
-
-&lt;p&gt;A Whole New World&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gentoo Install Notes (3)</title>
-      <link>http://hzmangel.github.io/post/314/</link>
-      <pubDate>Thu, 26 Jun 2008 23:52:51 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/314/</guid>
-      <description>&lt;p&gt;关键字： gentoo lvm install&lt;/p&gt;
-
-&lt;p&gt;又到了讲故事的时间了，嗯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gentoo Install Notes (2)</title>
-      <link>http://hzmangel.github.io/post/313/</link>
-      <pubDate>Thu, 26 Jun 2008 00:07:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/313/</guid>
-      <description>&lt;p&gt;关键字： gentoo lvm install&lt;/p&gt;
-
-&lt;p&gt;让我们继续昨晚的故事。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gentoo Install Notes (1)</title>
-      <link>http://hzmangel.github.io/post/312/</link>
-      <pubDate>Tue, 24 Jun 2008 23:58:43 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/312/</guid>
-      <description>&lt;p&gt;关键字： gentoo lvm install&lt;/p&gt;
-
-&lt;p&gt;一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>查看某文件属于的软件包</title>
-      <link>http://hzmangel.github.io/post/308/</link>
-      <pubDate>Thu, 19 Jun 2008 17:28:17 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/308/</guid>
-      <description>在做共享内存的东西，想找ipcs的源代码看看，结果直接ipcs.c出来的是FreeBSD下的，不知道和Linux下的有啥区别，所以只好去找命令，以前只知道a pt可以用 -S 参数，手上的SuSE是RPM系的，去网上转了转，发现可以用rpm -qf 来作，不过后面跟的参数要是文件的绝对路径，嗯。over.</description>
-    </item>
-    
-    <item>
-      <title>Search executable file with find command</title>
-      <link>http://hzmangel.github.io/post/307/</link>
-      <pubDate>Mon, 16 Jun 2008 16:24:15 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/307/</guid>
-      <description>今天在折腾程序，突然目录结构变了，所以想着把所有的编译生成的文件给删了，然后把源代码扔到另一个目录里面再去编译，一个一个手动删太累了，于是懒人我就想到了fi nd命令。
+话说在换用普通用启X的时候，说没有权限，网上找了一大圈，最后找到是用户家目录的权限设置不对，FT。</description></item><item><title>Gentoo Install Notes (4)</title><link>http://hzmangel.github.io/post/315/</link><pubDate>Fri, 27 Jun 2008 21:52:59 +0000</pubDate><guid>http://hzmangel.github.io/post/315/</guid><description>&lt;p>关键字： gentoo lvm install&lt;/p>
+&lt;p>A Whole New World&lt;/p></description></item><item><title>Gentoo Install Notes (3)</title><link>http://hzmangel.github.io/post/314/</link><pubDate>Thu, 26 Jun 2008 23:52:51 +0000</pubDate><guid>http://hzmangel.github.io/post/314/</guid><description>&lt;p>关键字： gentoo lvm install&lt;/p>
+&lt;p>又到了讲故事的时间了，嗯。&lt;/p></description></item><item><title>Gentoo Install Notes (2)</title><link>http://hzmangel.github.io/post/313/</link><pubDate>Thu, 26 Jun 2008 00:07:14 +0000</pubDate><guid>http://hzmangel.github.io/post/313/</guid><description>&lt;p>关键字： gentoo lvm install&lt;/p>
+&lt;p>让我们继续昨晚的故事。&lt;/p></description></item><item><title>Gentoo Install Notes (1)</title><link>http://hzmangel.github.io/post/312/</link><pubDate>Tue, 24 Jun 2008 23:58:43 +0000</pubDate><guid>http://hzmangel.github.io/post/312/</guid><description>&lt;p>关键字： gentoo lvm install&lt;/p>
+&lt;p>一直想弄gentoo，在新机器买来后，终于开始了gentoo之路。&lt;/p></description></item><item><title>查看某文件属于的软件包</title><link>http://hzmangel.github.io/post/308/</link><pubDate>Thu, 19 Jun 2008 17:28:17 +0000</pubDate><guid>http://hzmangel.github.io/post/308/</guid><description>在做共享内存的东西，想找ipcs的源代码看看，结果直接ipcs.c出来的是FreeBSD下的，不知道和Linux下的有啥区别，所以只好去找命令，以前只知道a pt可以用 -S 参数，手上的SuSE是RPM系的，去网上转了转，发现可以用rpm -qf 来作，不过后面跟的参数要是文件的绝对路径，嗯。over.</description></item><item><title>Search executable file with find command</title><link>http://hzmangel.github.io/post/307/</link><pubDate>Mon, 16 Jun 2008 16:24:15 +0000</pubDate><guid>http://hzmangel.github.io/post/307/</guid><description>今天在折腾程序，突然目录结构变了，所以想着把所有的编译生成的文件给删了，然后把源代码扔到另一个目录里面再去编译，一个一个手动删太累了，于是懒人我就想到了fi nd命令。
 man了一下，找到了一个 -perm 选项，在后面可以像 chmod 一样指定421的权限位，于是乎就简单了，一条命令搞定：
-find . -perm /u+x -type f -exec -rm {} \;
-千万记得在exec前要打印出来看看撒&amp;hellip;&amp;hellip;.</description>
-    </item>
-    
-    <item>
-      <title>Init Script for GDB</title>
-      <link>http://hzmangel.github.io/post/303/</link>
-      <pubDate>Thu, 12 Jun 2008 23:47:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/303/</guid>
-      <description>在单位调程序，加了 -g 的参数，但是要把可执行文件从别的机器拷过来，但又不想把整棵源文件树拷过来，只拷了个别要调的文件，于是出现了要在执行 gdb 前设置一堆 dir 的事情，每次都做做了一天，实在受不了了，于是上网找，还真给找到了脚本。
-其实很简单，在当前目录下放个 .gdbinit 文件，则 gdb 在启动的时候会自动读入里面的内容，并且执行它，所以只要把 dir 命令放到里面就行了。还有一种方法是进 gdb 后用 source 命令来指定要执行的脚本文件。于是乎用 find . -type d 把目录输出，其实是想找条命令把输出用 : 接起来的，但那会没找到，于是用 vim 的全局替换了，反正能用就行。剩下的，就调程序吧，不知道 GDB 有没有啥命令可以把文件树整个给搬个家的，有空再找吧，呵呵。</description>
-    </item>
-    
-    <item>
-      <title>Install gentoo with flash disk</title>
-      <link>http://hzmangel.github.io/post/295/</link>
-      <pubDate>Sun, 25 May 2008 19:02:10 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/295/</guid>
-      <description>这段时间想折腾Linux，最终选择了gentoo，尝试一下这个传说的发行版。
+find . -perm /u+x -type f -exec -rm {} ;
+千万记得在exec前要打印出来看看撒&amp;hellip;&amp;hellip;.</description></item><item><title>Init Script for GDB</title><link>http://hzmangel.github.io/post/303/</link><pubDate>Thu, 12 Jun 2008 23:47:55 +0000</pubDate><guid>http://hzmangel.github.io/post/303/</guid><description>在单位调程序，加了 -g 的参数，但是要把可执行文件从别的机器拷过来，但又不想把整棵源文件树拷过来，只拷了个别要调的文件，于是出现了要在执行 gdb 前设置一堆 dir 的事情，每次都做做了一天，实在受不了了，于是上网找，还真给找到了脚本。
+其实很简单，在当前目录下放个 .gdbinit 文件，则 gdb 在启动的时候会自动读入里面的内容，并且执行它，所以只要把 dir 命令放到里面就行了。还有一种方法是进 gdb 后用 source 命令来指定要执行的脚本文件。于是乎用 find . -type d 把目录输出，其实是想找条命令把输出用 : 接起来的，但那会没找到，于是用 vim 的全局替换了，反正能用就行。剩下的，就调程序吧，不知道 GDB 有没有啥命令可以把文件树整个给搬个家的，有空再找吧，呵呵。</description></item><item><title>Install gentoo with flash disk</title><link>http://hzmangel.github.io/post/295/</link><pubDate>Sun, 25 May 2008 19:02:10 +0000</pubDate><guid>http://hzmangel.github.io/post/295/</guid><description>这段时间想折腾Linux，最终选择了gentoo，尝试一下这个传说的发行版。
 由于手边没有光盘，也不想浪费光盘了，所以就用上了前段时间做好的可以GRUB启动的U盘。在gentoo的官方wiki上用的是syslinux，但是它的官方发布 包用的是GRUB，于是只好再去找，后来找到一篇别的文章，得知，原来很简单，只要把文件都拷过去，然后用GRUB启动，那个menu.lst还是没有找到，只好手动 输入那一大堆命令行参数，还要检查是否有错。不过弄完就可以进去系统了，不知道为啥机器不能用X，只好在命令行下把东西装完了。
-装的过程其实很简单，按它的handbook做就行了，先分区，然后把文件系统挂载到/mnt/gentoo目录下，然后解压stage3（官方的handbook是 用wget下载的，我是先用thunder下载到机器上然后cp的，嗯），再是Portage，弄完后就可以用chroot到新系统上去了，然后下载linux- source，编译，链接，说一下，make -j 4还是很爽的，呵呵。然后就是配置fstab，再配置网络，具体的内容，在学习中，以后再说，呵呵。</description>
-    </item>
-    
-    <item>
-      <title>Grub on usb disk</title>
-      <link>http://hzmangel.github.io/post/293/</link>
-      <pubDate>Fri, 23 May 2008 00:14:17 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/293/</guid>
-      <description>折腾了几天，终于差不多把U盘上的GRUB弄好了。其实，没网上说的那么麻烦。主要步骤就是先把U盘格式化，一开始我用的是FAT32，后来大概是操作有误，发现弄不 了，然后在Linux下用mkdosfs把它弄成FAT16了，反正后来能用了，也不知道一开始是FAT32不行还是操作不对。然后把Linux下的那些个文件，主要 是/boot/grub/下的那几个文件拷过去，然后找个grub环境，进去，root一下U盘，然后setup一下U盘，就行了，嗯。过几天试试用FAT32行不行 ，应该不会有问题的，我感觉。</description>
-    </item>
-    
-    <item>
-      <title>今天被吓个半死，嗯</title>
-      <link>http://hzmangel.github.io/post/292/</link>
-      <pubDate>Fri, 23 May 2008 00:03:11 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/292/</guid>
-      <description>想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。
+装的过程其实很简单，按它的handbook做就行了，先分区，然后把文件系统挂载到/mnt/gentoo目录下，然后解压stage3（官方的handbook是 用wget下载的，我是先用thunder下载到机器上然后cp的，嗯），再是Portage，弄完后就可以用chroot到新系统上去了，然后下载linux- source，编译，链接，说一下，make -j 4还是很爽的，呵呵。然后就是配置fstab，再配置网络，具体的内容，在学习中，以后再说，呵呵。</description></item><item><title>Grub on usb disk</title><link>http://hzmangel.github.io/post/293/</link><pubDate>Fri, 23 May 2008 00:14:17 +0000</pubDate><guid>http://hzmangel.github.io/post/293/</guid><description>折腾了几天，终于差不多把U盘上的GRUB弄好了。其实，没网上说的那么麻烦。主要步骤就是先把U盘格式化，一开始我用的是FAT32，后来大概是操作有误，发现弄不 了，然后在Linux下用mkdosfs把它弄成FAT16了，反正后来能用了，也不知道一开始是FAT32不行还是操作不对。然后把Linux下的那些个文件，主要 是/boot/grub/下的那几个文件拷过去，然后找个grub环境，进去，root一下U盘，然后setup一下U盘，就行了，嗯。过几天试试用FAT32行不行 ，应该不会有问题的，我感觉。</description></item><item><title>今天被吓个半死，嗯</title><link>http://hzmangel.github.io/post/292/</link><pubDate>Fri, 23 May 2008 00:03:11 +0000</pubDate><guid>http://hzmangel.github.io/post/292/</guid><description>想装个gentoo玩玩，于是就开始折腾。好不容易在U盘上弄上了一个grub（虽然不支持menu.lst，过几天继续折腾它），也把gentoo的install er盘拷进去了，可是系统丫就是不支持图形界面，所以只好郁闷的在文字下操作。
 没有别的机器看文档，只好按着依稀的记忆知道要分区，于是删除系统中其它几个Linux分区，在它问要不要写分区表的时候，犹豫了好一会，终于闭着眼睛打了yes，心 想听天由命吧。
 不过和以前几次不同的是，这次刚想完，天就来找我了，想把win的盘mount上看看东西还在不在，然后不知道U盘上的那个系统就出啥毛病了，PATH里面就没有了/ bin啥的目录，当时就看到了很壮观的刷屏，系统告诉我说，sleep找不到。切到另一个终端，输入/bin，结果丫告诉我说木有这个目录，于是就慌了。试了几条命令 未果，于是只好重启，halt是肯定没有的了，只是在祭出三指大法的时候，伊也告诉我说/sbin/shutdown目录下东西不存在，只好很郁闷的去按开关了。
 本来以为事情就这样了，但是重启的时候突然发现，GRUB进不去了，原来把盘给格了，想了想，U盘里面还有个GRUB，看看能不能用吧。重启，U盘启动，进GRUB命 令行，敲boot后，丫直接给我没反应，这时已经有点慌了；找出DSL的盘，输入dsl 2后，屏幕上打出来两只小企鹅，然后也没反应了，等了一会还是不行，于是更慌 了；抱着最后一点希望把某次展会拿来的CentOS扔进了光驱，回车启动，终于起来了，进了X干的第一件事情就是先把Win盘mount上，还好没啥事情，于是开始想 怎么解决grub的问题。
 最简单的应该就是用XP盘启动，然后fixmbr，但是还是想把grub留着，一开始想在Windows下新建一个grub目录，结果伊弹出来个框子告诉我，此分区只 读，FT。突然意识到机器里面的那两个Linux盘可以用来放grub，于是问题解决，mkfs.ext3，然后mkdir，从U盘里面把东西拷过去，进grub，r oot-&amp;gt;setup，再重启，终于能进命令行了，继续试chainloader +1，终于进来了。
-总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</description>
-    </item>
-    
-    <item>
-      <title>重定向strace的输出</title>
-      <link>http://hzmangel.github.io/post/291/</link>
-      <pubDate>Mon, 19 May 2008 16:50:30 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/291/</guid>
-      <description>今天折腾点东西，想看看strace的输出，结果用了&amp;gt;和tee都不管用，于是man之，发现strace的那些个输出是扔到stderr上的，如果需要重定向 ，则或者使用2&amp;gt;[filename]，或者使用-o参数，记下来，嗯。</description>
-    </item>
-    
-    <item>
-      <title>获得Linux上所有的用户名</title>
-      <link>http://hzmangel.github.io/post/283/</link>
-      <pubDate>Sun, 04 May 2008 17:42:33 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/283/</guid>
-      <description>以前一直以为查看机器上所有的用户只要用cat /etc/passwd命令即可，不过今天在单位碰到台机器，用这个命令死活查不出当前的用户。于是乎，Google之，被某网页点了一下，大概知道了，机器上的那个用户不是本机的用户，而是用像ldap, sambda等方法登录进去的，所以查看本地的文件自然是没有了(samba不清楚是不是远程的用户名需要和本地的对应，ldap应该没有这么一说)，紧接着就找到了一条命令，getent passwd，然后，那个用户就找到了。 看了一下帮助，getent是从系统的管理数据库中获取一个条目，后面的参数是passwd, group, hosts, services, protocols 或 networks 中的一个。再具体一点的内容就没怎么找到了，除了知道它可以用来看samba或者AD的用户是否配置成功，其它的就啥都不知道了，汗自己一个。在这留一笔，嗯。</description>
-    </item>
-    
-    <item>
-      <title>在iphone上装apache</title>
-      <link>http://hzmangel.github.io/post/258/</link>
-      <pubDate>Wed, 19 Mar 2008 15:14:15 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/258/</guid>
-      <description>把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。
+总结：今天被吓死了，机器里面一堆东西，一定要注意备份啊。</description></item><item><title>重定向strace的输出</title><link>http://hzmangel.github.io/post/291/</link><pubDate>Mon, 19 May 2008 16:50:30 +0000</pubDate><guid>http://hzmangel.github.io/post/291/</guid><description>今天折腾点东西，想看看strace的输出，结果用了&amp;gt;和tee都不管用，于是man之，发现strace的那些个输出是扔到stderr上的，如果需要重定向 ，则或者使用2&amp;gt;[filename]，或者使用-o参数，记下来，嗯。</description></item><item><title>获得Linux上所有的用户名</title><link>http://hzmangel.github.io/post/283/</link><pubDate>Sun, 04 May 2008 17:42:33 +0000</pubDate><guid>http://hzmangel.github.io/post/283/</guid><description>以前一直以为查看机器上所有的用户只要用cat /etc/passwd命令即可，不过今天在单位碰到台机器，用这个命令死活查不出当前的用户。于是乎，Google之，被某网页点了一下，大概知道了，机器上的那个用户不是本机的用户，而是用像ldap, sambda等方法登录进去的，所以查看本地的文件自然是没有了(samba不清楚是不是远程的用户名需要和本地的对应，ldap应该没有这么一说)，紧接着就找到了一条命令，getent passwd，然后，那个用户就找到了。 看了一下帮助，getent是从系统的管理数据库中获取一个条目，后面的参数是passwd, group, hosts, services, protocols 或 networks 中的一个。再具体一点的内容就没怎么找到了，除了知道它可以用来看samba或者AD的用户是否配置成功，其它的就啥都不知道了，汗自己一个。在这留一笔，嗯。</description></item><item><title>在iphone上装apache</title><link>http://hzmangel.github.io/post/258/</link><pubDate>Wed, 19 Mar 2008 15:14:15 +0000</pubDate><guid>http://hzmangel.github.io/post/258/</guid><description>把这篇扔在Linux分类中了，毕竟iphone上跑的Mac也算是*nix一族吧。其实，如果有installer的话，安装应该是很容易，但是我的Install er不知道为啥出错了，只好去找那种上传的方法了。
 是从tgbus下载的apache_1.3.37_mach-o_acorn压缩包，然后用FTP传到远端的一台Linux机器，然后从这用scp弄到iphone上 。在这里需要再赞一下iphone的SSH服务，上传真的很方便。拷完后，把几个文件给加上x属性就行了，就是扔到bin和sbin里面的几个文件，还有扔到libe xec里面的httpd，弄完后，apachectl -k start，就OK了。
-下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&amp;hellip;&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>给iphone传电子书</title>
-      <link>http://hzmangel.github.io/post/255/</link>
-      <pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/255/</guid>
-      <description>没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+下一步是用这玩意开服务器，然后直接拷电影上去看，嗯。iTunes那些东西用着实在是太麻烦了&amp;hellip;&amp;hellip;</description></item><item><title>给iphone传电子书</title><link>http://hzmangel.github.io/post/255/</link><pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate><guid>http://hzmangel.github.io/post/255/</guid><description>没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章[转换文件名格式](http://hzmangel.cn/2008/03/16/%e8%bd %ac%e6%8d%a2%e6%96%87%e4%bb%b6%e5%90%8d%e6%a0%bc%e5%bc%8f/)说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
-#!/usr/bin/python2.5 import glob import os filenames = glob.glob(&#39;*.txt&#39;) for foo in filenames: tmp_name = foo.replace(&#39;Download\\&#39;, &#39;&#39;) cmd_str = &#39;iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;&#39; % (foo, tmp_name) os.system(cmd_str) os.system(&#39;rm &amp;quot;%s&amp;quot;&#39; % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</description>
-    </item>
-    
-    <item>
-      <title>转换文件名格式</title>
-      <link>http://hzmangel.github.io/post/254/</link>
-      <pubDate>Sun, 16 Mar 2008 20:57:20 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/254/</guid>
-      <description>最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &amp;quot;%s&amp;quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</description></item><item><title>转换文件名格式</title><link>http://hzmangel.github.io/post/254/</link><pubDate>Sun, 16 Mar 2008 20:57:20 +0000</pubDate><guid>http://hzmangel.github.io/post/254/</guid><description>最近从别人那抢来个iphone，想下点电子书看，于是从水木上拖了一堆电子书，由于是在Windowz下下载的，所以文件名编码和文件内容编码都是gb2312，于 是在iphone里面就是一堆乱码。上网找了一下，好像是说iphone支持utf8的文件名，所以去找个东西转一下吧，Windowz下是肯定不会有类似的工具了， 转向Linux，还真找到了 convmv。
 使用很简单，和iconv差不多，有一个-f标明源编码，一个-t标明目的编码，还有一些选项可以看帮助开。最主要的是要加上&amp;ndash; notest标明就转换了，而不是仅仅测试显示，然后一条命令搞定，嗯。
- convmv -f gb2312 -t utf8 --notest *  </description>
-    </item>
-    
-    <item>
-      <title>Linux中的权限</title>
-      <link>http://hzmangel.github.io/post/234/</link>
-      <pubDate>Thu, 18 Oct 2007 19:05:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/234/</guid>
-      <description>昨天给对面屋一哥们开了个用户，可是他说进不去一个目录，今天看了看权限，估计是设置的时候没弄懂目录的权限，就上网找找，把结果放在这吧，方便以后查。
+convmv -f gb2312 -t utf8 --notest *</description></item><item><title>Linux中的权限</title><link>http://hzmangel.github.io/post/234/</link><pubDate>Thu, 18 Oct 2007 19:05:03 +0000</pubDate><guid>http://hzmangel.github.io/post/234/</guid><description>昨天给对面屋一哥们开了个用户，可是他说进不去一个目录，今天看了看权限，估计是设置的时候没弄懂目录的权限，就上网找找，把结果放在这吧，方便以后查。
 对于文件的那几个权限就不说了，rwx 还是满简单的，但是对于目录来说，r 表示可以读包含在目录中文件的名称，w 表示可以写信息到目录中去（如增加和删除索引节点），而 x 表示可以查找目录，即就是可以用目录名作为路径名去访问它包含的文件或子目录。那个哥们我一开始只给了他一个对目录的只读权限，所以进不去了，还需要加上一个 x 权限。
-还有一些具体的东西：对一个目录有只读权限的，只能列出目录下的文件名，但不能得到其它信息，也不能写入文件，也不能更改目录中已有的文件。如果去掉了写权限，则 ls 的时候也会被告知权限不够，cat 也不行，写入那是更不行了。如果有 x 权限，则不能 ls，但是能够使用 cat 得到文件，写入不能。差不多就些了吧，其它一些高级的设置，下次有空再看吧。上面那几个都在机器上测试过，希望还没有脑子糊涂到测试错&amp;hellip;&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>find的文件名匹配</title>
-      <link>http://hzmangel.github.io/post/225/</link>
-      <pubDate>Mon, 15 Oct 2007 15:42:01 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/225/</guid>
-      <description>今天在折腾makefile的时候，想把关联文件给写完了，但是用find的时候，丫就给我找到一个文件，于是上网一查，才知道，用文件名匹配的时候，需要把匹配的p attern用引号括起来，诶，下次手再也不能懒了。</description>
-    </item>
-    
-    <item>
-      <title>Pietty &#43; Xming，在Win下用X</title>
-      <link>http://hzmangel.github.io/post/212/</link>
-      <pubDate>Tue, 11 Sep 2007 15:51:19 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/212/</guid>
-      <description>&lt;p&gt;向老板申请了台服务器，说是服务器，也就是一台老的破机器，不过能完全给我自己瞎折腾，装个linux玩玩什么的，还是满好的。用了一段时间pietty，感觉没有X，有时候还是有些事情不好做的，所以昨天开始去折腾Win下的X模拟器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>curses.h</title>
-      <link>http://hzmangel.github.io/post/189/</link>
-      <pubDate>Wed, 30 May 2007 23:14:35 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/189/</guid>
-      <description>接了个项目，是要做内核相关的东西，现有的东西是在内核上打 patch，于是就去弄个个内核的源代码，打了个 patch 后，对着 README 开始配置，make config 那种事情我第一次做过后就再也不干了，其实应该只算是做过了半遍，因为回答问题到差不多一半的时候我就直接 C-C 了。putty 上木有 X ，也只剩 make menuconfig 了，调入命令，回车，等。
+还有一些具体的东西：对一个目录有只读权限的，只能列出目录下的文件名，但不能得到其它信息，也不能写入文件，也不能更改目录中已有的文件。如果去掉了写权限，则 ls 的时候也会被告知权限不够，cat 也不行，写入那是更不行了。如果有 x 权限，则不能 ls，但是能够使用 cat 得到文件，写入不能。差不多就些了吧，其它一些高级的设置，下次有空再看吧。上面那几个都在机器上测试过，希望还没有脑子糊涂到测试错&amp;hellip;&amp;hellip;</description></item><item><title>find的文件名匹配</title><link>http://hzmangel.github.io/post/225/</link><pubDate>Mon, 15 Oct 2007 15:42:01 +0000</pubDate><guid>http://hzmangel.github.io/post/225/</guid><description>今天在折腾makefile的时候，想把关联文件给写完了，但是用find的时候，丫就给我找到一个文件，于是上网一查，才知道，用文件名匹配的时候，需要把匹配的p attern用引号括起来，诶，下次手再也不能懒了。</description></item><item><title>Pietty + Xming，在Win下用X</title><link>http://hzmangel.github.io/post/212/</link><pubDate>Tue, 11 Sep 2007 15:51:19 +0000</pubDate><guid>http://hzmangel.github.io/post/212/</guid><description>&lt;p>向老板申请了台服务器，说是服务器，也就是一台老的破机器，不过能完全给我自己瞎折腾，装个linux玩玩什么的，还是满好的。用了一段时间pietty，感觉没有X，有时候还是有些事情不好做的，所以昨天开始去折腾Win下的X模拟器。&lt;/p></description></item><item><title>curses.h</title><link>http://hzmangel.github.io/post/189/</link><pubDate>Wed, 30 May 2007 23:14:35 +0000</pubDate><guid>http://hzmangel.github.io/post/189/</guid><description>接了个项目，是要做内核相关的东西，现有的东西是在内核上打 patch，于是就去弄个个内核的源代码，打了个 patch 后，对着 README 开始配置，make config 那种事情我第一次做过后就再也不干了，其实应该只算是做过了半遍，因为回答问题到差不多一半的时候我就直接 C-C 了。putty 上木有 X ，也只剩 make menuconfig 了，调入命令，回车，等。
 可惜木有等到那个蓝屏，出现的是个 error，伊告诉我找不到 curses.h ，一般这种事情，直接 dpkg -S，可惜这次不行了，找到的几个东西都是 python 相关的东西，无奈之下只好 google。
-既然求助了 google 基本就木有找不到答案的情况发生了，少 ncurses-dev 库，apt-get 装上后，成功打开那个蓝屏。所以说啊， dpkg -S 有时还是木有 google 有用啊 :)</description>
-    </item>
-    
-    <item>
-      <title>Wordpress搬家完毕</title>
-      <link>http://hzmangel.github.io/post/184/</link>
-      <pubDate>Wed, 02 May 2007 23:35:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/184/</guid>
-      <description>&lt;p&gt;折腾了一晚上，总算把原来架在自己机器上的WordPress弄到了Debian的那台机器上，说说折腾的过程吧
-　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>桌面的吸引力</title>
-      <link>http://hzmangel.github.io/post/171/</link>
-      <pubDate>Mon, 11 Sep 2006 00:23:05 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/171/</guid>
-      <description>在不少人眼中，Linux就是那一条一条的命令行，我们对面屋一哥们就一直是这么认为的，8过在我给他看过SuSE的桌面后，这一切都成了历史。
-找来了张SLED10的盘，其实也是我想玩玩那个XGL，昨天折腾了一会，在别人的一个本子上终于试成功了，用了一会，还是满炫的。先是e17，再加上XGL，不知道 吸引了多少的目光，也许其中就有那么些人开始玩Linux了，所以桌面的吸引力还是满大的啊。不知道能不能在e17上配置上xgl，我是指那些桌面立方体什么的，再打 开e17的那些模块，那才叫一个炫啊 :)</description>
-    </item>
-    
-    <item>
-      <title>diff/patch</title>
-      <link>http://hzmangel.github.io/post/154/</link>
-      <pubDate>Wed, 30 Aug 2006 21:56:26 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/154/</guid>
-      <description>&lt;p&gt;今天配置xoops的时候，发现几个模块之间好像有相同的配置文件，它们有相同的文件名，只是在不同的地方加上了一些代码，所以自然而然的就想到了用diff/pat
+既然求助了 google 基本就木有找不到答案的情况发生了，少 ncurses-dev 库，apt-get 装上后，成功打开那个蓝屏。所以说啊， dpkg -S 有时还是木有 google 有用啊 :)</description></item><item><title>Wordpress搬家完毕</title><link>http://hzmangel.github.io/post/184/</link><pubDate>Wed, 02 May 2007 23:35:13 +0000</pubDate><guid>http://hzmangel.github.io/post/184/</guid><description>&lt;p>折腾了一晚上，总算把原来架在自己机器上的WordPress弄到了Debian的那台机器上，说说折腾的过程吧
+　　首先，机器上要有WP，其实一个简单的方法就是从WP的官网上下载压缩包，解压到服务器上某个可以通过Web访问到的目录下，然后远程访问就可以了，但是既然是debian，而且它的源里面也有WP，所以嘛，当然就是直接apt-get了。&lt;/p></description></item><item><title>桌面的吸引力</title><link>http://hzmangel.github.io/post/171/</link><pubDate>Mon, 11 Sep 2006 00:23:05 +0000</pubDate><guid>http://hzmangel.github.io/post/171/</guid><description>在不少人眼中，Linux就是那一条一条的命令行，我们对面屋一哥们就一直是这么认为的，8过在我给他看过SuSE的桌面后，这一切都成了历史。
+找来了张SLED10的盘，其实也是我想玩玩那个XGL，昨天折腾了一会，在别人的一个本子上终于试成功了，用了一会，还是满炫的。先是e17，再加上XGL，不知道 吸引了多少的目光，也许其中就有那么些人开始玩Linux了，所以桌面的吸引力还是满大的啊。不知道能不能在e17上配置上xgl，我是指那些桌面立方体什么的，再打 开e17的那些模块，那才叫一个炫啊 :)</description></item><item><title>diff/patch</title><link>http://hzmangel.github.io/post/154/</link><pubDate>Wed, 30 Aug 2006 21:56:26 +0000</pubDate><guid>http://hzmangel.github.io/post/154/</guid><description>&lt;p>今天配置xoops的时候，发现几个模块之间好像有相同的配置文件，它们有相同的文件名，只是在不同的地方加上了一些代码，所以自然而然的就想到了用diff/pat
 ch。上网查了一上，还是满简单的，主要就是patch接受的diff文件有特定的格式，在用diff生成的时候要加上-
-u选项才可以被patch接受。例如目录下有1和2两个文件，下面是一些操作记录：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>root敢死队</title>
-      <link>http://hzmangel.github.io/post/152/</link>
-      <pubDate>Thu, 17 Aug 2006 23:57:43 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/152/</guid>
-      <description>一直来，用Linux都是非root不用，所以一直也就被人称为root敢死队，今天想好好珍惜一下生命，于是开始配用户。配用户这事情我以前也做过，不过一直弄不清 那些个组的关系，最后的结果就是用了大概一天的su，在第二天后就把那个普通用户遗忘的一干二净。今天在配用户之前在网上转了转，找了点东西，把那个普通用户加到了一 堆组中去，像什么audio, video什么的，总算是能大概用一下了，8过后来碰到使用aptitude什么的命令还是被告知权限不够，又把sudo装上了，直接 配置成可以执行大部分的可执行程序，而且不用密码，也就是在配置文件中加进去了一行：
+u选项才可以被patch接受。例如目录下有1和2两个文件，下面是一些操作记录：&lt;/p></description></item><item><title>root敢死队</title><link>http://hzmangel.github.io/post/152/</link><pubDate>Thu, 17 Aug 2006 23:57:43 +0000</pubDate><guid>http://hzmangel.github.io/post/152/</guid><description>一直来，用Linux都是非root不用，所以一直也就被人称为root敢死队，今天想好好珍惜一下生命，于是开始配用户。配用户这事情我以前也做过，不过一直弄不清 那些个组的关系，最后的结果就是用了大概一天的su，在第二天后就把那个普通用户遗忘的一干二净。今天在配用户之前在网上转了转，找了点东西，把那个普通用户加到了一 堆组中去，像什么audio, video什么的，总算是能大概用一下了，8过后来碰到使用aptitude什么的命令还是被告知权限不够，又把sudo装上了，直接 配置成可以执行大部分的可执行程序，而且不用密码，也就是在配置文件中加进去了一行：
 &amp;lt;username&amp;gt; ALL=NOPASSWD:/bin/,NOPASSWD:/sbin/,NOPASSWD:/usr/bin*
 呵呵，感觉和root差不多了，还是没有很把用户当作一回事啊，这个习惯看到要过很久一段时间才能改了 :)
-btw: 本来还想配置一下iptable来限制访问，结果直接把自己给ban了(我用的是ssh)，后来把自己的这条规则加上后，发现apt- get又不能用了，一怒之下又把iptable恢复到以前的状态了，呵呵，什么都不管。安全这个问题啊，还真是麻烦啊。</description>
-    </item>
-    
-    <item>
-      <title>搭NFS服务器</title>
-      <link>http://hzmangel.github.io/post/151/</link>
-      <pubDate>Thu, 17 Aug 2006 23:47:20 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/151/</guid>
-      <description>今天终于算是把NFS服务器搭建的流程走了一遍，其实并没有什么难的，下个软件，改个配置文件，就可以了，主要是那个配置文件。过程什么的在这就不详细讲了，网上一抓 一大堆，主要是配置方面的一些问题吧。今天郁闷的一点就是配置文件中不能加空格，今天就是因为加了空格了，所以郁闷了老半天。已经被这习惯郁闷过不少次了，看来下次出 现问题首先要看看这方面的事情。
-流程走了一遍，但是没有客户端来连，Windowz的NFS不会用，折腾了半天，最终都败在用户管理这一块了，它支持和UNIX主机共享用户信息，但是好像要求UNI X主机打开NIS服务，在配置的过程中，被那些个什么domain郁闷了N久，最后还是废弃了，最终的解决方案还是老老实实的用FTP，呵呵，又白忙了N久。</description>
-    </item>
-    
-    <item>
-      <title>当开源成为一种习惯……</title>
-      <link>http://hzmangel.github.io/post/149/</link>
-      <pubDate>Wed, 16 Aug 2006 16:33:04 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/149/</guid>
-      <description>昨天去LinuxWorld2006转了一圈，想写些东西，也不知道为什么，突然想到了这个名字，就用上了，呵呵。
+btw: 本来还想配置一下iptable来限制访问，结果直接把自己给ban了(我用的是ssh)，后来把自己的这条规则加上后，发现apt- get又不能用了，一怒之下又把iptable恢复到以前的状态了，呵呵，什么都不管。安全这个问题啊，还真是麻烦啊。</description></item><item><title>搭NFS服务器</title><link>http://hzmangel.github.io/post/151/</link><pubDate>Thu, 17 Aug 2006 23:47:20 +0000</pubDate><guid>http://hzmangel.github.io/post/151/</guid><description>今天终于算是把NFS服务器搭建的流程走了一遍，其实并没有什么难的，下个软件，改个配置文件，就可以了，主要是那个配置文件。过程什么的在这就不详细讲了，网上一抓 一大堆，主要是配置方面的一些问题吧。今天郁闷的一点就是配置文件中不能加空格，今天就是因为加了空格了，所以郁闷了老半天。已经被这习惯郁闷过不少次了，看来下次出 现问题首先要看看这方面的事情。
+流程走了一遍，但是没有客户端来连，Windowz的NFS不会用，折腾了半天，最终都败在用户管理这一块了，它支持和UNIX主机共享用户信息，但是好像要求UNI X主机打开NIS服务，在配置的过程中，被那些个什么domain郁闷了N久，最后还是废弃了，最终的解决方案还是老老实实的用FTP，呵呵，又白忙了N久。</description></item><item><title>当开源成为一种习惯……</title><link>http://hzmangel.github.io/post/149/</link><pubDate>Wed, 16 Aug 2006 16:33:04 +0000</pubDate><guid>http://hzmangel.github.io/post/149/</guid><description>昨天去LinuxWorld2006转了一圈，想写些东西，也不知道为什么，突然想到了这个名字，就用上了，呵呵。
 从昨天的一些演讲中可以看到，不少商业公司的策略有一些转变。第一次接触到这种事情还是去年的那个Sun开发者大会，从那才知道，Open Solaris其实和Sun卖的那个Solaris是同源的，任何人都可以把Open Solaris的源代码下载下来，然后自己编译，发布(具体是不是这样我也不太 清楚，因为那个时候听的不是很认真)。当时没觉得什么，后来才有一些感觉，像昨天的SuSE发布会，才知道其实SuSE也有一个Open SuSE的版本，可以从网站上直接下载，也可以直接更新，和SuSE Enterprise Edition不同，它不提供技术支持，但是更新会很快，而企业版的更新需要去买，不过相应的也有更好的技术支持。
 我用的最多的类似的东西应该算是Eclipse了吧，IBM直接把4kw的源代码，真的是很有魄力的一件事情，不过现在的事实也证明，这一决定的正确性，Eclips e开放的框架结构让它可以被灵活的配置在多种应用场合，而不是仅仅简单的开发Java程序。插件也很好的扩展了Eclipse的功能，像用cdt来开发C/C++程序 ，Together插件来做UML方面的开发，还有开发J2EE的插件，风河的新版workbench也使用的是Eclipse，还有Altera的NiosII开发 平台。个人感觉Eclipse的缺点就是战用资源较多，虽然在内存越来越便宜的今天不是什么大问题，但是还是存在像偶这种用着几年前的机器的人啊&amp;hellip;..
 今天仔细看了看昨天拿到的IBM的宣传材料，发现有了WebSphere和DB2的Express版的下载，不知道这个概念是不是从MS那弄来的，只知道MS提供VC 2005的下载，免费的，当然，功能不会全，但估计对我这种人是决对够用了，更重要的是，这是正版的软件，这在一些公司里面还是很看重的。
 写到这才觉得有些文不对题，只是曾经一度需要花费N多的软件推出了免费版本，和开源的关系不大，呵呵，不改了吧，谁让我懒呢。开源，给开发人员来的方便不是这几字节的 文字能表述完成的，只是想想每做一辆车都要去重新发明一次轮子的轮子的事情就让人郁闷的慌。不过从另一方面讲，开源也让开发人员的收入大大减少，如果没有稳定的收入来 源，开源大概只是一个梦想吧。
-呵呵，胡言乱语的说了一些东西，本来我说的话就是胡说嘛，爱看的看吧，纯属自娱，如有不同意见，可以拍砖，8过嘛，嘿嘿，偶的地盘，偶做主，哈哈。</description>
-    </item>
-    
-    <item>
-      <title>Linux is OK</title>
-      <link>http://hzmangel.github.io/post/147/</link>
-      <pubDate>Wed, 16 Aug 2006 16:31:24 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/147/</guid>
-      <description>折腾了两天，总算是把Linux折腾到了那台机器上，其实想想，也没什么难度，主要是自己懒，没有刻盘，用手头上现有的盘折腾的，所以比较的郁闷，呵呵。
-本来说是只想弄个能跑交叉编译环境的Linux，所以首先想到的是knopix，但是不知道怎么回事，这次装的knoppix用着很不爽，apt安装告诉我包依赖性没 有解决，但是看了它的安装软件列表，它需要的包就在那个列表里面，直接FT了。于是又想用回debian了，那台机器只有128的内存，我是没有信心在那上面跑个XP 再加个虚拟机，我知道我是不能忍那个速度的，于是想到了硬盘安装，一开始机器里面有Grub，看网上的说明直接改参数就可以启动安装进程。其实就是把那个vmlinu x和initrd文件放到Grub能找到的地方，然后加上参数root=/dev/ramdisk ramdisk_size=XXX什么的启动参数，大概就可以了，我看到的那个文章在这后面还加有个参数，不清楚是什么意思。再就是写上initrd /path/t o/initrd/file，然后就可以boot了，它会自动寻找debiannetinstall的image文件，网上说是把那个东西放到根目录下，不过我是放 在和内核文件一个目录下的，也可以找到嘛 ^^ ，再后来就是安装了，装过多少遍的东西，不说了，等，然后重启，设置apt源，update，再就是install软件了。
-btw: 这次考虑使用非root用户作为常用用户了，呵呵，咱也要学着professional一些嘛 :)</description>
-    </item>
-    
-    <item>
-      <title>Debian again(2)</title>
-      <link>http://hzmangel.github.io/post/67/</link>
-      <pubDate>Thu, 14 Apr 2005 23:18:13 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/67/</guid>
-      <description> 把X起起来了，配的比较幸苦:)
+呵呵，胡言乱语的说了一些东西，本来我说的话就是胡说嘛，爱看的看吧，纯属自娱，如有不同意见，可以拍砖，8过嘛，嘿嘿，偶的地盘，偶做主，哈哈。</description></item><item><title>Linux is OK</title><link>http://hzmangel.github.io/post/147/</link><pubDate>Wed, 16 Aug 2006 16:31:24 +0000</pubDate><guid>http://hzmangel.github.io/post/147/</guid><description>折腾了两天，总算是把Linux折腾到了那台机器上，其实想想，也没什么难度，主要是自己懒，没有刻盘，用手头上现有的盘折腾的，所以比较的郁闷，呵呵。
+本来说是只想弄个能跑交叉编译环境的Linux，所以首先想到的是knopix，但是不知道怎么回事，这次装的knoppix用着很不爽，apt安装告诉我包依赖性没 有解决，但是看了它的安装软件列表，它需要的包就在那个列表里面，直接FT了。于是又想用回debian了，那台机器只有128的内存，我是没有信心在那上面跑个XP 再加个虚拟机，我知道我是不能忍那个速度的，于是想到了硬盘安装，一开始机器里面有Grub，看网上的说明直接改参数就可以启动安装进程。其实就是把那个vmlinu x和initrd文件放到Grub能找到的地方，然后加上参数root=/dev/ramdisk ramdisk_size=XXX什么的启动参数，大概就可以了，我看到的那个文章在这后面还加有个参数，不清楚是什么意思。再就是写上initrd /path/t o/initrd/file，然后就可以boot了，它会自动寻找debian_netinstall的image文件，网上说是把那个东西放到根目录下，不过我是放 在和内核文件一个目录下的，也可以找到嘛 ^_^ ，再后来就是安装了，装过多少遍的东西，不说了，等，然后重启，设置apt源，update，再就是install软件了。
+btw: 这次考虑使用非root用户作为常用用户了，呵呵，咱也要学着professional一些嘛 :)</description></item><item><title>Debian again(2)</title><link>http://hzmangel.github.io/post/67/</link><pubDate>Thu, 14 Apr 2005 23:18:13 +0000</pubDate><guid>http://hzmangel.github.io/post/67/</guid><description>把X起起来了，配的比较幸苦:)
 最后还是把X起起来了，看看设置其实也没什么，只是有一个命令dpkg-reconfigure xserver-xfree86，这样会配置显卡，鼠标等显示方面的内容，然后把内容写入/etc/X11/XFree86-config-4(好像是这地方，手边没Linux，明天再说吧)。可以直接用文本编辑器编辑此文件内容。在起X的时候，把一些选项(Section Moduels中的)要注释掉，要不然系统会起不来，至少我在删东西前是没把X搞定。后来鼠标还出了点问题，后来是把Section Input Devices改成下面的格式
-(明天再贴)  还有一点就是在装的时候，要把一定要把驱动装全，如果在用光盘装的时候没有装完，可以使用modconf命令来重新装没装的驱动。 暂时就这么多了吧，现在的问题是中文显示不正常，本来宋体字间距太大了，写了一下fonts.dir和fonts.scals后，汉字都变成方块了，FT。过过再说吧。 ^_^  </description>
-    </item>
-    
-    <item>
-      <title>Debian again(1)</title>
-      <link>http://hzmangel.github.io/post/66/</link>
-      <pubDate>Thu, 14 Apr 2005 13:49:24 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/66/</guid>
-      <description> 又有实验室了，又能玩装系统了 :)
- 昨天花了半天，装Debian，现在说说昨天碰到的一些事情。 昨天首先用的是knoppix装，用了knx-hdinstall后，等了大概半个小时多，knoppix就全拷到硬盘上去了，这样装很方便，不过不好的就是加了不少不要的东西，感觉不爽，所以重装:) 昨天在网上看到一个装debian的好方法，用VM把debian的基系统装到硬盘中去，再进debian网络安装，这样就不用刻盘了。不过有一点不好的就是VM的硬件是很通用的，有可能在装驱动的时候后遇到一些问题，比如说我昨天就是，装了驱动，在VM下能上网，但是到了真的debian下后，就上不上了。害我弄了N久，从网上下驱动又没用。最后还是用knoppix的盘启动，用lsmod命令查到了驱动的名称，再把相应的.o文件从debian的driver.gz中拷过去。反正第一次启动后，用了insmod filename.o后，载入了驱动用dhclient就能分配到地址了，不知道是驱动的问题还是没有dhclient，再看看吧。 还有一个莫名其妙的事就是我的机子，在启动的时候不认硬盘，还是加了个什么扩展什么玩意，我也不清楚，我只知道在不用VM的情况下，我的硬盘是/dev/hdg*，昨天就为这事，看了N多次kernel panic，FT的不行了。最后还是从启动信息中找到了错在哪。昨天还学了一招，就是用knoppix 2启动到文本方式后，使用  mount /dev/hd?? /mnt/&amp;hellip;
+(明天再贴) 还有一点就是在装的时候，要把一定要把驱动装全，如果在用光盘装的时候没有装完，可以使用modconf命令来重新装没装的驱动。 暂时就这么多了吧，现在的问题是中文显示不正常，本来宋体字间距太大了，写了一下fonts.dir和fonts.scals后，汉字都变成方块了，FT。过过再说吧。 ^_^</description></item><item><title>Debian again(1)</title><link>http://hzmangel.github.io/post/66/</link><pubDate>Thu, 14 Apr 2005 13:49:24 +0000</pubDate><guid>http://hzmangel.github.io/post/66/</guid><description>又有实验室了，又能玩装系统了 :)
+昨天花了半天，装Debian，现在说说昨天碰到的一些事情。 昨天首先用的是knoppix装，用了knx-hdinstall后，等了大概半个小时多，knoppix就全拷到硬盘上去了，这样装很方便，不过不好的就是加了不少不要的东西，感觉不爽，所以重装:) 昨天在网上看到一个装debian的好方法，用VM把debian的基系统装到硬盘中去，再进debian网络安装，这样就不用刻盘了。不过有一点不好的就是VM的硬件是很通用的，有可能在装驱动的时候后遇到一些问题，比如说我昨天就是，装了驱动，在VM下能上网，但是到了真的debian下后，就上不上了。害我弄了N久，从网上下驱动又没用。最后还是用knoppix的盘启动，用lsmod命令查到了驱动的名称，再把相应的.o文件从debian的driver.gz中拷过去。反正第一次启动后，用了insmod filename.o后，载入了驱动用dhclient就能分配到地址了，不知道是驱动的问题还是没有dhclient，再看看吧。 还有一个莫名其妙的事就是我的机子，在启动的时候不认硬盘，还是加了个什么扩展什么玩意，我也不清楚，我只知道在不用VM的情况下，我的硬盘是/dev/hdg*，昨天就为这事，看了N多次kernel panic，FT的不行了。最后还是从启动信息中找到了错在哪。昨天还学了一招，就是用knoppix 2启动到文本方式后，使用 mount /dev/hd?? /mnt/&amp;hellip;
 chroot /mnt/&amp;hellip; /bin/bash
-mount -t proc proc /proc  好像就可以近似成直接操作系统中的文件，只是好像啊，我也不太清楚的说:) 先写这么多吧，现在我的Linux起不起来X，一会看看帖子，再调调吧。^_^ 总算又能玩debian了，我寝室的机子好像也可以这么玩，哪天试试  </description>
-    </item>
-    
-    <item>
-      <title>Install ns successfully at last</title>
-      <link>http://hzmangel.github.io/post/36/</link>
-      <pubDate>Fri, 12 Nov 2004 09:19:41 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/36/</guid>
-      <description>after switch my Linux from MDK to Slackware, i can use it at last. Thanks Godness. now i think i have no time to write smth about my Slackware, wait for days the most important thing after install is to set enviroment variable, and the ns directory should place at a stable place, i think that is all, ns_allinone is easy for newbie.
-btw:add enviroment variable:export PATH=ur path:$PATH, and if this command be added to ~/.</description>
-    </item>
-    
-    <item>
-      <title>My debian</title>
-      <link>http://hzmangel.github.io/post/35/</link>
-      <pubDate>Thu, 11 Nov 2004 10:42:28 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/35/</guid>
-      <description>My debian hasn&amp;rsquo;t installed successfully, because it can&amp;rsquo;t recognize my NIC, and i check the message, the IRQ of my cards is 0, so while i using ifconfig or ifdown ifup, it tells me that the resource is temporarily unavailable. and i can&amp;rsquo;t find the key now, wait for the next term.</description>
-    </item>
-    
-    <item>
-      <title>Install GRUB</title>
-      <link>http://hzmangel.github.io/post/34/</link>
-      <pubDate>Thu, 11 Nov 2004 10:24:49 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/34/</guid>
-      <description>p&amp;gt;the acquiescent bootloader of Slackware is lilo, but i want to use GRUB, so i have to install it.
+mount -t proc proc /proc 好像就可以近似成直接操作系统中的文件，只是好像啊，我也不太清楚的说:) 先写这么多吧，现在我的Linux起不起来X，一会看看帖子，再调调吧。^_^ 总算又能玩debian了，我寝室的机子好像也可以这么玩，哪天试试</description></item><item><title>Install ns successfully at last</title><link>http://hzmangel.github.io/post/36/</link><pubDate>Fri, 12 Nov 2004 09:19:41 +0000</pubDate><guid>http://hzmangel.github.io/post/36/</guid><description>after switch my Linux from MDK to Slackware, i can use it at last. Thanks Godness. now i think i have no time to write smth about my Slackware, wait for days the most important thing after install is to set enviroment variable, and the ns directory should place at a stable place, i think that is all, ns_allinone is easy for newbie.
+btw:add enviroment variable:export PATH=ur path:$PATH, and if this command be added to ~/.</description></item><item><title>My debian</title><link>http://hzmangel.github.io/post/35/</link><pubDate>Thu, 11 Nov 2004 10:42:28 +0000</pubDate><guid>http://hzmangel.github.io/post/35/</guid><description>My debian hasn&amp;rsquo;t installed successfully, because it can&amp;rsquo;t recognize my NIC, and i check the message, the IRQ of my cards is 0, so while i using ifconfig or ifdown ifup, it tells me that the resource is temporarily unavailable. and i can&amp;rsquo;t find the key now, wait for the next term.</description></item><item><title>Install GRUB</title><link>http://hzmangel.github.io/post/34/</link><pubDate>Thu, 11 Nov 2004 10:24:49 +0000</pubDate><guid>http://hzmangel.github.io/post/34/</guid><description>p&amp;gt;the acquiescent bootloader of Slackware is lilo, but i want to use GRUB, so i have to install it.
 i download the grub sourcr file to my disk, unzip, then install.
 use ./configure first, then make, make install. after that, i should use grub- check to check my disk and install the stage1 and stage2 file to my /boot/grub directory, and then use command under grub&amp;gt;, the command is:
-grub&amp;gt;root(hd0,4)</description>
-    </item>
-    
-    <item>
-      <title>Using Slackware now</title>
-      <link>http://hzmangel.github.io/post/33/</link>
-      <pubDate>Thu, 11 Nov 2004 10:06:57 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/33/</guid>
-      <description>because of the ns, and i cannot set the IRQ of NIC in debian, so switch to Slackware
+grub&amp;gt;root(hd0,4)</description></item><item><title>Using Slackware now</title><link>http://hzmangel.github.io/post/33/</link><pubDate>Thu, 11 Nov 2004 10:06:57 +0000</pubDate><guid>http://hzmangel.github.io/post/33/</guid><description>because of the ns, and i cannot set the IRQ of NIC in debian, so switch to Slackware
 a little Linux, only 2CDs, and costs about 2.5G on my computer. after copy the font in windows, i can use simsun in slackware, although not so beautiful. and the most important thing is that i can install ns on the system, thanks godness.
-but i can&amp;rsquo;t use middle button to copy, and sth else, i will find them later.</description>
-    </item>
-    
-    <item>
-      <title>be FTed again</title>
-      <link>http://hzmangel.github.io/post/32/</link>
-      <pubDate>Fri, 05 Nov 2004 23:17:50 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/32/</guid>
-      <description>i suppose that i have resolve the problem, and i can use ns2 tonight, but i am wrong, i don&amp;rsquo;t know how to resolve it now. this afternoon, i can pass the mistake after edit the source, but i think i should install a newer gcc, so i download it. after run install in allinone, i have been bloked at the tclcl again, and this time the mistake made me very faint, the only description is</description>
-    </item>
-    
-    <item>
-      <title>now using xfce4</title>
-      <link>http://hzmangel.github.io/post/31/</link>
-      <pubDate>Tue, 02 Nov 2004 22:27:03 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/31/</guid>
-      <description>a good wm, quicker than kde while launching, and the font in this wm feels good. although the simsun in xfce4 seems &amp;hellip;&amp;hellip;. but i can&amp;rsquo;t deal the wheel, so i can only use the scroll bar, a little un-convenience. OK, i have to check the devel package of linux, perhaps it is the reason that i can&amp;rsquo;t install ns.
-btw:I like the little mouse of xfce4 ^_^</description>
-    </item>
-    
-    <item>
-      <title>I can play rmvb files ^-^</title>
-      <link>http://hzmangel.github.io/post/30/</link>
-      <pubDate>Mon, 01 Nov 2004 22:40:47 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/30/</guid>
-      <description>Just found a method: get a codec package named all-20040916.tar.bz2, and then use command:
+but i can&amp;rsquo;t use middle button to copy, and sth else, i will find them later.</description></item><item><title>be FTed again</title><link>http://hzmangel.github.io/post/32/</link><pubDate>Fri, 05 Nov 2004 23:17:50 +0000</pubDate><guid>http://hzmangel.github.io/post/32/</guid><description>i suppose that i have resolve the problem, and i can use ns2 tonight, but i am wrong, i don&amp;rsquo;t know how to resolve it now. this afternoon, i can pass the mistake after edit the source, but i think i should install a newer gcc, so i download it. after run install in allinone, i have been bloked at the tclcl again, and this time the mistake made me very faint, the only description is</description></item><item><title>now using xfce4</title><link>http://hzmangel.github.io/post/31/</link><pubDate>Tue, 02 Nov 2004 22:27:03 +0000</pubDate><guid>http://hzmangel.github.io/post/31/</guid><description>a good wm, quicker than kde while launching, and the font in this wm feels good. although the simsun in xfce4 seems &amp;hellip;&amp;hellip;. but i can&amp;rsquo;t deal the wheel, so i can only use the scroll bar, a little un-convenience. OK, i have to check the devel package of linux, perhaps it is the reason that i can&amp;rsquo;t install ns.
+btw:I like the little mouse of xfce4 ^_^</description></item><item><title>I can play rmvb files ^-^</title><link>http://hzmangel.github.io/post/30/</link><pubDate>Mon, 01 Nov 2004 22:40:47 +0000</pubDate><guid>http://hzmangel.github.io/post/30/</guid><description>Just found a method: get a codec package named all-20040916.tar.bz2, and then use command:
 tar -jxvf all-20040916.tar.bz2
 then copy all the file in the package to /usr/lib/win32, creat the folder if it is not exist, then config the xine, locate the codec folder, it is said that all type of the movie can be played ^_^
 and now, i am watching conan :-)
-although the ns has no reply :(</description>
-    </item>
-    
-    <item>
-      <title>Just send a mail to the ns mailist</title>
-      <link>http://hzmangel.github.io/post/29/</link>
-      <pubDate>Sun, 31 Oct 2004 10:27:40 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/29/</guid>
-      <description>Just send a mail to the mailist, the first use mailist. The only thing i can do now is to wait the reply, i can&amp;rsquo;t find the reason, why this can be installed successfully on othes&amp;rsquo; computer?
-Windows has blue-screen again, i do not know why, too. Perhaps because of the drivers. but i haven&amp;rsquo;t met those problems before, reinstall perhaps will take no effect, because i have checked the drivers, but i can&amp;rsquo;t find the different drivers, faint a lot.</description>
-    </item>
-    
-    <item>
-      <title>MDK10 user manual (4)</title>
-      <link>http://hzmangel.github.io/post/28/</link>
-      <pubDate>Sat, 30 Oct 2004 19:22:15 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/28/</guid>
-      <description>the input method can use now, and now i can change the fonts to simsun, but the font is still small, and i do not know how to change it :( .
-i still can&amp;rsquo;t use ns, because i can&amp;rsquo;t install it. i install tcl and tk, but the otcl still tell me that i have no tcl installed :( , i think i will spend all my night here.</description>
-    </item>
-    
-    <item>
-      <title>re-install Successfuly</title>
-      <link>http://hzmangel.github.io/post/27/</link>
-      <pubDate>Sat, 30 Oct 2004 16:11:11 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/27/</guid>
-      <description>i have re-install the MDK just now, from the HDD. While i use the old menu of the GRUB for install, the system.told me that there are &amp;ldquo;kernel panic&amp;rdquo;, and after i check the command and compare the command of lilo, i add a command initrd (hd0,4)/isolinux/alt0/all.rdz and the problem has been resolved. but i can&amp;rsquo;t input chinese now :(
-btw: i have found a error of my previous article, about the command of install from HDD ^_^</description>
-    </item>
-    
-    <item>
-      <title>Linux again</title>
-      <link>http://hzmangel.github.io/post/26/</link>
-      <pubDate>Fri, 29 Oct 2004 21:19:24 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/26/</guid>
-      <description>Haven&amp;rsquo;t here for a long time, because of the exam, although i hate them very much :( and haven&amp;rsquo;t under Linux for a long time, too, Because for the grub.
+although the ns has no reply :(</description></item><item><title>Just send a mail to the ns mailist</title><link>http://hzmangel.github.io/post/29/</link><pubDate>Sun, 31 Oct 2004 10:27:40 +0000</pubDate><guid>http://hzmangel.github.io/post/29/</guid><description>Just send a mail to the mailist, the first use mailist. The only thing i can do now is to wait the reply, i can&amp;rsquo;t find the reason, why this can be installed successfully on othes' computer?
+Windows has blue-screen again, i do not know why, too. Perhaps because of the drivers. but i haven&amp;rsquo;t met those problems before, reinstall perhaps will take no effect, because i have checked the drivers, but i can&amp;rsquo;t find the different drivers, faint a lot.</description></item><item><title>MDK10 user manual (4)</title><link>http://hzmangel.github.io/post/28/</link><pubDate>Sat, 30 Oct 2004 19:22:15 +0000</pubDate><guid>http://hzmangel.github.io/post/28/</guid><description>the input method can use now, and now i can change the fonts to simsun, but the font is still small, and i do not know how to change it :( .
+i still can&amp;rsquo;t use ns, because i can&amp;rsquo;t install it. i install tcl and tk, but the otcl still tell me that i have no tcl installed :( , i think i will spend all my night here.</description></item><item><title>re-install Successfuly</title><link>http://hzmangel.github.io/post/27/</link><pubDate>Sat, 30 Oct 2004 16:11:11 +0000</pubDate><guid>http://hzmangel.github.io/post/27/</guid><description>i have re-install the MDK just now, from the HDD. While i use the old menu of the GRUB for install, the system.told me that there are &amp;ldquo;kernel panic&amp;rdquo;, and after i check the command and compare the command of lilo, i add a command initrd (hd0,4)/isolinux/alt0/all.rdz and the problem has been resolved. but i can&amp;rsquo;t input chinese now :(
+btw: i have found a error of my previous article, about the command of install from HDD ^_^</description></item><item><title>Linux again</title><link>http://hzmangel.github.io/post/26/</link><pubDate>Fri, 29 Oct 2004 21:19:24 +0000</pubDate><guid>http://hzmangel.github.io/post/26/</guid><description>Haven&amp;rsquo;t here for a long time, because of the exam, although i hate them very much :( and haven&amp;rsquo;t under Linux for a long time, too, Because for the grub.
 Today, i repair the GRUB, I do it successfully, the first time, so i want to write sth here ^_^
-1st, i think i should find a bootable disk, a CD, because i have no floopy, and my motherboard do not support boot from USB port :( 2nd, i find grub_for_dos, it is a useful tool, which is a grub prog with a DOS shell.</description>
-    </item>
-    
-    <item>
-      <title>My Windows is down :(</title>
-      <link>http://hzmangel.github.io/post/18/</link>
-      <pubDate>Sun, 10 Oct 2004 03:14:08 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/18/</guid>
-      <description>What a pity, and I am under Linux now, but i can&amp;rsquo;t find the input method of Chinese. I was just install a MacX theme, and after reboot, I just see a changed pic, and the system reboot. I think i have to repaire the system :( and i have to find the disk first.</description>
-    </item>
-    
-    <item>
-      <title>MDK10使用手记(3)</title>
-      <link>http://hzmangel.github.io/post/12/</link>
-      <pubDate>Fri, 24 Sep 2004 16:45:47 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/12/</guid>
-      <description>汉化篇(续)：
- 其实也没做什么，只是找到了那个i18n-zh_CN.GB2312的包，把系统变成简体中文的了，那个包在光盘的KDE3.3的文件夹里面，害我好找。不过现在的问题就是输入法怎么都不出来了，就算图标出来了，也切不出来输入法。没时间玩这个了，先用着吧，反正主要是编程，用到中文的也就是注释，先用英文写着吧。真是要考研了。:(  </description>
-    </item>
-    
-    <item>
-      <title>MDK10使用手记(2)</title>
-      <link>http://hzmangel.github.io/post/11/</link>
-      <pubDate>Wed, 22 Sep 2004 15:01:58 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/11/</guid>
-      <description>下面来写写美化的一些方面的事情吧，其实说实在的，我也是大菜鸟一只，以前做过一些东西都是从网上找的一些汉化包，美化包的一些东西，直接安装的，说真的，自己从来就没有去看过那些包倒底是怎么工作的，这次装了MDK10,不想上网找包了，也不是自己想动手了，实在是那些东西一个不好找，再说也不是怎么太好用，我以前配好过的系统，我都不知道是怎么回事，反正重启一下后，就行了，我也不知道是哪一句语句起了作用，让我的系统好看起来了，其实这次也是这样，不过自己再怎么说也敲了几条命令，所以想写一下，免的下次装的时候又不知道是怎么回事了。 一开始，装完了MDK10后，还是像往常一样，去网上找美化包，8过这次没那么顺利，居然没有找到，那只有自己去BBS上找东西，自己做了。主力站点是www.linuxsir.org，也就是那一个站点吧，别的也没怎么去找。 首先，看到坛子上有人说，可以有汉化包下，但给出的几个地址都连不上，郁闷了一大把，算了，自己干。 在坛子上找了几篇文章，照着做了一下，也就是从Windows里面找几个字体出来，然后拷到一个目录里面去，用MDK自带的那个Font Installer装了一下，于是在字体设置里面就可以选SimSun了，不过选上那个后，发现有些字看不见，也不知道是怎么回事，不过大部分还是可以的，所以我也就没去管了，不过这时KDE有事了，首先就是菜单变成英文的了，真不爽，再者就是系统监视器看不到了，也不知道为什么，反正也是不爽。不管了，先用着吧。 后来发现KDE自带的浏览器Kon&amp;hellip;的，用起来不爽，装了一个firefox，用着还行，但是菜单的字体诶，不是一般的小，用了一会，不干了，上去找找，果然找到几条命令，有人说用gnome-font-property，但是我在我的机子里面就是没找到这个命令，后来做了几件事，也不知道哪一个是最后起作用的，都写下来吧：
+1st, i think i should find a bootable disk, a CD, because i have no floopy, and my motherboard do not support boot from USB port :( 2nd, i find grub_for_dos, it is a useful tool, which is a grub prog with a DOS shell.</description></item><item><title>My Windows is down :(</title><link>http://hzmangel.github.io/post/18/</link><pubDate>Sun, 10 Oct 2004 03:14:08 +0000</pubDate><guid>http://hzmangel.github.io/post/18/</guid><description>What a pity, and I am under Linux now, but i can&amp;rsquo;t find the input method of Chinese. I was just install a MacX theme, and after reboot, I just see a changed pic, and the system reboot. I think i have to repaire the system :( and i have to find the disk first.</description></item><item><title>MDK10使用手记(3)</title><link>http://hzmangel.github.io/post/12/</link><pubDate>Fri, 24 Sep 2004 16:45:47 +0000</pubDate><guid>http://hzmangel.github.io/post/12/</guid><description>汉化篇(续)：
+其实也没做什么，只是找到了那个i18n-zh_CN.GB2312的包，把系统变成简体中文的了，那个包在光盘的KDE3.3的文件夹里面，害我好找。不过现在的问题就是输入法怎么都不出来了，就算图标出来了，也切不出来输入法。没时间玩这个了，先用着吧，反正主要是编程，用到中文的也就是注释，先用英文写着吧。真是要考研了。:(</description></item><item><title>MDK10使用手记(2)</title><link>http://hzmangel.github.io/post/11/</link><pubDate>Wed, 22 Sep 2004 15:01:58 +0000</pubDate><guid>http://hzmangel.github.io/post/11/</guid><description>下面来写写美化的一些方面的事情吧，其实说实在的，我也是大菜鸟一只，以前做过一些东西都是从网上找的一些汉化包，美化包的一些东西，直接安装的，说真的，自己从来就没有去看过那些包倒底是怎么工作的，这次装了MDK10,不想上网找包了，也不是自己想动手了，实在是那些东西一个不好找，再说也不是怎么太好用，我以前配好过的系统，我都不知道是怎么回事，反正重启一下后，就行了，我也不知道是哪一句语句起了作用，让我的系统好看起来了，其实这次也是这样，不过自己再怎么说也敲了几条命令，所以想写一下，免的下次装的时候又不知道是怎么回事了。 一开始，装完了MDK10后，还是像往常一样，去网上找美化包，8过这次没那么顺利，居然没有找到，那只有自己去BBS上找东西，自己做了。主力站点是www.linuxsir.org，也就是那一个站点吧，别的也没怎么去找。 首先，看到坛子上有人说，可以有汉化包下，但给出的几个地址都连不上，郁闷了一大把，算了，自己干。 在坛子上找了几篇文章，照着做了一下，也就是从Windows里面找几个字体出来，然后拷到一个目录里面去，用MDK自带的那个Font Installer装了一下，于是在字体设置里面就可以选SimSun了，不过选上那个后，发现有些字看不见，也不知道是怎么回事，不过大部分还是可以的，所以我也就没去管了，不过这时KDE有事了，首先就是菜单变成英文的了，真不爽，再者就是系统监视器看不到了，也不知道为什么，反正也是不爽。不管了，先用着吧。 后来发现KDE自带的浏览器Kon&amp;hellip;的，用起来不爽，装了一个firefox，用着还行，但是菜单的字体诶，不是一般的小，用了一会，不干了，上去找找，果然找到几条命令，有人说用gnome-font-property，但是我在我的机子里面就是没找到这个命令，后来做了几件事，也不知道哪一个是最后起作用的，都写下来吧：
 $ echo gtk-font-name=&amp;ldquo;Bitstream Vera Sans 10&amp;rdquo; &amp;gt;&amp;gt; ~/.gtkrc-2.0 弄进去的第一条命令，后面还有,看了一下，我的那个目录下面没有那个文件，是新建的一个，也不知道是不是它起的作用。 echo &amp;ldquo;Xft.dpi:96&amp;rdquo;&amp;gt;~/.Xresources 介个是偶弄进去的第二条命令，应该是把屏幕字体的dpi设成96吧，后面还有一个是关于dpi的。 1)改/etc/X11/xresources文件的ixft.dpi改成ixft.dpi=96 2)在gnome中把字体分辨率条成96 3)改/etc/X11/xdm/xserver 把:0 local /usr/X11R6/bin/X -deferglyphs 16改成 :0 local /usr/X11R6/bin/X -dpi 96 重启。 介个应该是偶做的最后的一个修改了。
-重启后发现程序的字体果然变大了，但是有点太大了，还不清楚在什么改呢。 后来就想用Enlightment了，听人说漂亮，本来自己装过一次，但是没找到双字节的补丁，这次想找，没想到换个主题后，自动支持双字节了，用着还是比较不错的，但是还有一点不太清楚，再说吧，准备用这个了。实验室的机子用的是Wmaker，也是个不错的东西。KDE是漂亮，但是也吃内存啊，所以我想我就用这个吧，就是有一点，操作习惯不同，不太舒服，至于英文菜单嘛，忍了 ^_^  </description>
-    </item>
-    
-    <item>
-      <title>MDK10使用手记(1)</title>
-      <link>http://hzmangel.github.io/post/10/</link>
-      <pubDate>Tue, 21 Sep 2004 22:14:52 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/10/</guid>
-      <description>想学Linux下的编程，装个Linux装了三天，狂郁闷。
+重启后发现程序的字体果然变大了，但是有点太大了，还不清楚在什么改呢。 后来就想用Enlightment了，听人说漂亮，本来自己装过一次，但是没找到双字节的补丁，这次想找，没想到换个主题后，自动支持双字节了，用着还是比较不错的，但是还有一点不太清楚，再说吧，准备用这个了。实验室的机子用的是Wmaker，也是个不错的东西。KDE是漂亮，但是也吃内存啊，所以我想我就用这个吧，就是有一点，操作习惯不同，不太舒服，至于英文菜单嘛，忍了 ^_^</description></item><item><title>MDK10使用手记(1)</title><link>http://hzmangel.github.io/post/10/</link><pubDate>Tue, 21 Sep 2004 22:14:52 +0000</pubDate><guid>http://hzmangel.github.io/post/10/</guid><description>想学Linux下的编程，装个Linux装了三天，狂郁闷。
 以前也有一次装系统装到抓狂的，那一次，两天装了九遍系统，其中1遍RH8，4遍RH9，还有4遍就是WindowsXP，那个时候是大菜鸟一只，不会改GRUB，所 以只有重装了*^_^*。装的我真要发狂了。
 现在两种经历都有了，高密度的和低密度的:-)
 一开始是用RH8上手的，后来用过RH9。那天在实验室装上了debian，觉得比较的好用。然后在寝室死活也配不上dhcp，郁闷之下就只有换了个发行版。换成了M andrake 10.1c，今天刚用上，只是稍微美化了一下，装了几个软件，感觉还不错，写点东西吧。 ^_^
@@ -854,8 +174,4 @@ title Mandeaklinux 10 install
 kernel (hd0,0)/isolinux/alt0/vmlinuz ramdisk_size=128000 root=/dev/ram3 automatic=method:disk acpi=ht vga=788
 initrd (hd0,0)/isolinux/alt0/all.rdz
 然后在装的时候，选硬盘安装，键入路径(tips:下下来的iso文件，改一下名字，会方便许多)，只要第一张盘的路径就可以了，后来就可以自动换盘了。后面就可以选 软件包，正常安装了。
-安装就写到这吧，下一篇是我用的美化方法。</description>
-    </item>
-    
-  </channel>
-</rss>
+安装就写到这吧，下一篇是我用的美化方法。</description></item></channel></rss>

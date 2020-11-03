@@ -1,27 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>GFW on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/gfw/</link>
-    <description>Recent content in GFW on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Tue, 04 Aug 2009 01:07:49 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/gfw/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>算是回来了吧</title>
-      <link>http://hzmangel.github.io/post/427/</link>
-      <pubDate>Tue, 04 Aug 2009 01:07:49 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/427/</guid>
-      <description>嗯，因为不能享受我天朝为屁民提供的全民ICP福利，所以只好背井离乡翻出长城来到塞外，至于是回来还是回去，谁知道，谁关心~~~
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GFW on 湖间小筑</title><link>http://hzmangel.github.io/tags/gfw/</link><description>Recent content in GFW on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Tue, 04 Aug 2009 01:07:49 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/gfw/index.xml" rel="self" type="application/rss+xml"/><item><title>算是回来了吧</title><link>http://hzmangel.github.io/post/427/</link><pubDate>Tue, 04 Aug 2009 01:07:49 +0000</pubDate><guid>http://hzmangel.github.io/post/427/</guid><description>嗯，因为不能享受我天朝为屁民提供的全民ICP福利，所以只好背井离乡翻出长城来到塞外，至于是回来还是回去，谁知道，谁关心~~~
 今天看到tweet上有人在推天朝第一封电子邮件，我在这也推一下吧：Across the Great Wall we can reach every corner in the world.
-最后还要感谢 @colyli 童鞋提供的主机，嗯嗯~</description>
-    </item>
-    
-  </channel>
-</rss>
+最后还要感谢 @colyli 童鞋提供的主机，嗯嗯~</description></item></channel></rss>

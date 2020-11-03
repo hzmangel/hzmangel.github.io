@@ -1,34 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>carrierwave on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/carrierwave/</link>
-    <description>Recent content in carrierwave on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 01 Dec 2013 15:03:37 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/carrierwave/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
-      <link>http://hzmangel.github.io/post/1224/</link>
-      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1224/</guid>
-      <description>&lt;h3 id=&#34;tl-dr&#34;&gt;tl;dr&lt;/h3&gt;
-
-&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>carrierwave on 湖间小筑</title><link>http://hzmangel.github.io/tags/carrierwave/</link><description>Recent content in carrierwave on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Sun, 01 Dec 2013 15:03:37 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/carrierwave/index.xml" rel="self" type="application/rss+xml"/><item><title>Save base64 image with carrierwave and bootstrap-wysiwyg</title><link>http://hzmangel.github.io/post/1224/</link><pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate><guid>http://hzmangel.github.io/post/1224/</guid><description>&lt;h3 id="tldr">tl;dr&lt;/h3>
+&lt;p>The pasted image will be converted to base64 encoded format, which will hit
 response size limitation of server. This article is talking about save image
-to file with carrierwave.&lt;/p&gt;
-
-&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
-repo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Next is the full version.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+to file with carrierwave.&lt;/p>
+&lt;p>The source code is available at &lt;a href="https://github.com/hzmangel/base64_image_carrierwave">github
+repo&lt;/a>&lt;/p>
+&lt;p>Next is the full version.&lt;/p></description></item></channel></rss>

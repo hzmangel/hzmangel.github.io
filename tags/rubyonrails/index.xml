@@ -1,67 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>RubyOnRails on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/rubyonrails/</link>
-    <description>Recent content in RubyOnRails on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/rubyonrails/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</title>
-      <link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link>
-      <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
-      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails - Reload Parent Page in iframe
-</title>
-      <link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link>
-      <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
-      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Integrate Rails with Elasticsearch - Indexing
-</title>
-      <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
-      <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
-      <description>&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
-
-&lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装 Elasticsearch&lt;/li&gt;
-&lt;li&gt;关联 Rails 与 Elasticsearch&lt;/li&gt;
-&lt;li&gt;配置索引内容&lt;/li&gt;
-&lt;li&gt;Custom Analyzer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Use Different Auth Method In Rails API Controller
-</title>
-      <link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link>
-      <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
-      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RubyOnRails on 湖间小筑</title><link>http://hzmangel.github.io/tags/rubyonrails/</link><description>Recent content in RubyOnRails on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/rubyonrails/index.xml" rel="self" type="application/rss+xml"/><item><title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape</title><link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link><pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate><guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid><description>&lt;p>最近尝试在 &lt;em>Grape API&lt;/em> 中创建一个 &lt;em>ActiveModel&lt;/em> ，但是在使用 &lt;code>new&lt;/code> 创建的时候发现会报 &lt;code>ActiveModel::ForbiddenAttributesError&lt;/code> 错误。想了想估计是碰上了 &lt;em>stronng parameters&lt;/em> 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code>permit!&lt;/code> 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em>hashie-forbidden_attributes&lt;/em> gem。&lt;/p></description></item><item><title>Rails - Reload Parent Page in iframe</title><link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link><pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid><description>&lt;p>最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code>render&lt;/code> 或 &lt;code>redirect_to&lt;/code> 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p></description></item><item><title>Integrate Rails with Elasticsearch - Indexing</title><link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link><pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid><description>&lt;p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p>
+&lt;p>这篇东西会包含下面几项内容：&lt;/p>
+&lt;ul>
+&lt;li>安装 Elasticsearch&lt;/li>
+&lt;li>关联 Rails 与 Elasticsearch&lt;/li>
+&lt;li>配置索引内容&lt;/li>
+&lt;li>Custom Analyzer&lt;/li>
+&lt;/ul>
+&lt;p>本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见&lt;a href="">官方文档&lt;/a>。&lt;/p></description></item><item><title>Use Different Auth Method In Rails API Controller</title><link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link><pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate><guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid><description>&lt;p>开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p></description></item></channel></rss>

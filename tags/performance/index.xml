@@ -1,30 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>performance on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/performance/</link>
-    <description>Recent content in performance on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Thu, 24 May 2012 09:25:42 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Tunning Rails with DTrace</title>
-      <link>http://hzmangel.github.io/post/1147/</link>
-      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1147/</guid>
-      <description>&lt;p&gt;This post will talk about how to do performance test of Rails program with
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>performance on 湖间小筑</title><link>http://hzmangel.github.io/tags/performance/</link><description>Recent content in performance on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Thu, 24 May 2012 09:25:42 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Tunning Rails with DTrace</title><link>http://hzmangel.github.io/post/1147/</link><pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate><guid>http://hzmangel.github.io/post/1147/</guid><description>&lt;p>This post will talk about how to do performance test of Rails program with
 DTrace tool. The testing will be separated into Ruby program part and database
 operations part. Please make sure all the tested program has provided probes
-to the DTrace.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+to the DTrace.&lt;/p>
+&lt;p>&lt;strong>NOTICE&lt;/strong>: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p></description></item></channel></rss>

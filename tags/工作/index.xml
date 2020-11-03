@@ -1,33 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>工作 on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/%E5%B7%A5%E4%BD%9C/</link>
-    <description>Recent content in 工作 on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Fri, 31 Dec 2010 12:59:10 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>2010：不给力的我</title>
-      <link>http://hzmangel.github.io/post/786/</link>
-      <pubDate>Fri, 31 Dec 2010 12:59:10 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/786/</guid>
-      <description>&lt;p&gt;写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2010计划</title>
-      <link>http://hzmangel.github.io/post/582/</link>
-      <pubDate>Wed, 13 Jan 2010 23:29:39 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/582/</guid>
-      <description>年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去 实现~
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工作 on 湖间小筑</title><link>http://hzmangel.github.io/tags/%E5%B7%A5%E4%BD%9C/</link><description>Recent content in 工作 on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Fri, 31 Dec 2010 12:59:10 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>2010：不给力的我</title><link>http://hzmangel.github.io/post/786/</link><pubDate>Fri, 31 Dec 2010 12:59:10 +0000</pubDate><guid>http://hzmangel.github.io/post/786/</guid><description>&lt;p>写完了一篇给力的山山水水，再想写时发现只剩下不给力的自己了。没办法啊，写吧，谁让咱这一年懒呢~&lt;/p></description></item><item><title>2010计划</title><link>http://hzmangel.github.io/post/582/</link><pubDate>Wed, 13 Jan 2010 23:29:39 +0000</pubDate><guid>http://hzmangel.github.io/post/582/</guid><description>年头的时候先是被雪堵的没脾气了，再就是疯狂的赶工设计文档，所以这事就耽搁下来了。不过计划还是要列的，趁着今天有空，写点吧，算是对自己做出一份承诺，然后争取去 实现~
 读书计划
 去年列下了5本非技术书的想法，虽然达成了，但是总感觉有些不务正业，于是乎今年列些技术的。其实不多，就两本
 1. SICP，边学习这本书边用haskell去折腾之
@@ -41,16 +12,7 @@
 这个，不确定性太多了哇，先列上两个吧，可实现度，呵呵，不知道了哇
 1. 小五台金莲花
 2. 8月份去青海湖看油菜花
-差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~</description>
-    </item>
-    
-    <item>
-      <title>小记工作一周年</title>
-      <link>http://hzmangel.github.io/post/407/</link>
-      <pubDate>Wed, 29 Apr 2009 00:35:14 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/407/</guid>
-      <description>在不经意间翻了翻日历，猛然发现毕业一周年的日子已然过去，所以只好在这工作一周年的日子里，随便写点啥了。
+差不多了吧，反正这些都够我喝几壶的。平时的工作习惯有太多需要改进的地方，如果改好了，上面的目标还有希望，如果不改或者没改好，呵呵，那就又要长胖了~</description></item><item><title>小记工作一周年</title><link>http://hzmangel.github.io/post/407/</link><pubDate>Wed, 29 Apr 2009 00:35:14 +0000</pubDate><guid>http://hzmangel.github.io/post/407/</guid><description>在不经意间翻了翻日历，猛然发现毕业一周年的日子已然过去，所以只好在这工作一周年的日子里，随便写点啥了。
 2008年的4月15号，被学校用两张纸扫地出门，于是乎，正式被从学生队列中除名鸟。在家闲了两周后，终于开始了走上了一个打工仔的不归路。
 这一转眼，地球就打了300多个滚，于是乎，就到了工作一周年的纪念日，有得，亦有失；有成就，也有磨炼；有欢声笑语，当然还有闷闷不乐。这一切的东西，最后汇聚到一起，就是我这一年的工作历程。
 技术上，明白的最主要的一件事情就是，以前在学校学的东西，到了工作中，需要改变的地方有太多太多。会一门技术不难，但是怎么把它熟练的应用到工作中就是另一码事了。在工程的世界中，需要考虑的许多代码之外的东西，像兼容性，容错性等，在一份已经有年头的产品中，这些相比于代码是更需要去仔细复查的部分。还有就是新技术并不一定就是好的。诚然，新的东西能带来许多新的体验，简化许多过程，但是相对于一套产品而言，还是需要把稳定性放在首要位置的。
@@ -58,8 +20,4 @@
 然后就是态度上的事情，工作之初，可能是还没从实验室的氛围中转换过来，抑或是平时在学校就没有太多的责任心，反正没少被老板批，原因也很简单，就是做事情没有责任感，需要别人在后面催着。反正就是记得那次被老板拖到个小会议室里面，谈了大概有20分钟吧，反正就是说，已然有不止一个人反映在工作上有这样的问题，说在培训的时候觉得还是满不错的啊，咋工作后就这样了呢，还有就是会影响年终评定云云。不过说真的，那次以后我好像还是没有怎么改变，不知道是哪一次被啥东西给触动了，从那之后开始正式反思自己的一些作为，然后在工作上也有了反映。最后终于在年终的时候没有太差，呵呵。不过还是需要改进啊，现在做事有时还是轻重缓急不分，需要好好去磨炼一下意志力和执行力。
 还有很重要的一点就是交流。也许程序员在大多数人的眼里就是那些个和电脑交流比和人交流要多也要利索的人，但其实交流对于程序员来说还是很重要的一项技能，通过交流你才能让别人知道你想做什么，或者从别人那得到有用的信息。就像上次开会的时候老板所说的那样，一般而言，某项技术一定能在公司里面找到会的那个人，你所要做的就是找到那个人，并把技术从他的脑子里面挖出来（目前这个被找的人大多数情况下是俺们的leader，嘿嘿）。反观自己，在某些情况下还是没有很好的表达自己的意思，可能是不愿开口，或者是顾虑太多，反正经常的情况就是明明有些东西想说想问，但是眼睁睁的看着机会溜走。另外就是对于身边的事情热情比较的低，其实这样不利于展示自己的能力和工作量。需要加强，嗯。
 最后还有一点，对公司内部的培训资料啥的利用简直趋于0。平时闲时比较倾向于去做技术方面的学习，而放弃了使用内部的培训资料提升软实力的机会。这个，真有一种捡芝麻丢西瓜的味道在里面，呵呵，一定要改掉哇。
-别的，没啥了，技术岗，倒没太多那种所谓的职场规则。大家的年龄都不算大，一起玩起来还是很舒服的一件事情。能够有现在这份工作，我很知足，剩下的就是靠自己去打拼了，嗯，希望能有个光明的未来~~~~</description>
-    </item>
-    
-  </channel>
-</rss>
+别的，没啥了，技术岗，倒没太多那种所谓的职场规则。大家的年龄都不算大，一起玩起来还是很舒服的一件事情。能够有现在这份工作，我很知足，剩下的就是靠自己去打拼了，嗯，希望能有个光明的未来~~~~</description></item></channel></rss>

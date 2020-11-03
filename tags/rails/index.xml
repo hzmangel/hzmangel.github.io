@@ -1,173 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>rails on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/rails/</link>
-    <description>Recent content in rails on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/rails/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape
-</title>
-      <link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link>
-      <pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid>
-      <description>&lt;p&gt;最近尝试在 &lt;em&gt;Grape API&lt;/em&gt; 中创建一个 &lt;em&gt;ActiveModel&lt;/em&gt; ，但是在使用 &lt;code&gt;new&lt;/code&gt; 创建的时候发现会报 &lt;code&gt;ActiveModel::ForbiddenAttributesError&lt;/code&gt; 错误。想了想估计是碰上了 &lt;em&gt;stronng parameters&lt;/em&gt; 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code&gt;permit!&lt;/code&gt; 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em&gt;hashie-forbidden_attributes&lt;/em&gt; gem。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails - Reload Parent Page in iframe
-</title>
-      <link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link>
-      <pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid>
-      <description>&lt;p&gt;最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code&gt;render&lt;/code&gt; 或 &lt;code&gt;redirect_to&lt;/code&gt; 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Integrate Rails with Elasticsearch - Indexing
-</title>
-      <link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link>
-      <pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid>
-      <description>&lt;p&gt;之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p&gt;
-
-&lt;p&gt;这篇东西会包含下面几项内容：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装 Elasticsearch&lt;/li&gt;
-&lt;li&gt;关联 Rails 与 Elasticsearch&lt;/li&gt;
-&lt;li&gt;配置索引内容&lt;/li&gt;
-&lt;li&gt;Custom Analyzer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见[官方文档]()。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Use Different Auth Method In Rails API Controller
-</title>
-      <link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link>
-      <pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid>
-      <description>&lt;p&gt;开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Save base64 image with carrierwave and bootstrap-wysiwyg</title>
-      <link>http://hzmangel.github.io/post/1224/</link>
-      <pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1224/</guid>
-      <description>&lt;h3 id=&#34;tl-dr&#34;&gt;tl;dr&lt;/h3&gt;
-
-&lt;p&gt;The pasted image will be converted to base64 encoded format, which will hit
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>rails on 湖间小筑</title><link>http://hzmangel.github.io/tags/rails/</link><description>Recent content in rails on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Wed, 10 Aug 2016 00:07:40 +0800</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/rails/index.xml" rel="self" type="application/rss+xml"/><item><title>Rails - Fix ActiveModel::ForbiddenAttributesError in grape</title><link>http://hzmangel.github.io/post/grape_n_strong_parameter/</link><pubDate>Wed, 10 Aug 2016 00:07:40 +0800</pubDate><guid>http://hzmangel.github.io/post/grape_n_strong_parameter/</guid><description>&lt;p>最近尝试在 &lt;em>Grape API&lt;/em> 中创建一个 &lt;em>ActiveModel&lt;/em> ，但是在使用 &lt;code>new&lt;/code> 创建的时候发现会报 &lt;code>ActiveModel::ForbiddenAttributesError&lt;/code> 错误。想了想估计是碰上了 &lt;em>stronng parameters&lt;/em> 的问题。按照之前的经验，那就是给参数加上一个permit，但是发现在调用 &lt;code>permit!&lt;/code> 之后，grape的params变成了空字典，从而造成后续的创建出错。在网上找了一圈，结果发现 grape 自己的Github页面上就有说明，如果需要和 Rails 4 一起使用，需要加上 &lt;em>hashie-forbidden_attributes&lt;/em> gem。&lt;/p></description></item><item><title>Rails - Reload Parent Page in iframe</title><link>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</link><pubDate>Sun, 17 Apr 2016 12:59:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_reload_parent_in_iframe/</guid><description>&lt;p>最近碰到的一个问题，弹出的 iframe 窗口在做完操作并把结果返回给 controller 后，调用 &lt;code>render&lt;/code> 或 &lt;code>redirect_to&lt;/code> 时都只会刷新 iframe 中的内容，而不会将整个页面都刷新。尝试在 iframe 中提交表单时关闭 iframe 窗口，但是依然无效。最后发现还是需要借助于 Javascript ，最后的解决方案如下：&lt;/p></description></item><item><title>Integrate Rails with Elasticsearch - Indexing</title><link>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</link><pubDate>Tue, 23 Feb 2016 00:52:42 +0800</pubDate><guid>http://hzmangel.github.io/post/rails_elasticsearch_indexing/</guid><description>&lt;p>之前写Rails在查找这块一般都是用DB内置的查询，不过上次试了下用 Elasticsearch ，比之前想像的要简单，记点东西在这吧。&lt;/p>
+&lt;p>这篇东西会包含下面几项内容：&lt;/p>
+&lt;ul>
+&lt;li>安装 Elasticsearch&lt;/li>
+&lt;li>关联 Rails 与 Elasticsearch&lt;/li>
+&lt;li>配置索引内容&lt;/li>
+&lt;li>Custom Analyzer&lt;/li>
+&lt;/ul>
+&lt;p>本文没有完整系统的介绍，更多的只是一些使用技巧。详细说明请参见&lt;a href="">官方文档&lt;/a>。&lt;/p></description></item><item><title>Use Different Auth Method In Rails API Controller</title><link>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</link><pubDate>Wed, 27 Jan 2016 23:21:42 +0800</pubDate><guid>http://hzmangel.github.io/post/different_auth_method_in_rails_api/</guid><description>&lt;p>开发的时候碰到一个问题，Rails的controller是用devise来提供认证的，如果用户在访问时没有有效的cookie就会被转到登录界面。但是在API的时候不能用cookie，所以需要分开做验证。&lt;/p></description></item><item><title>Save base64 image with carrierwave and bootstrap-wysiwyg</title><link>http://hzmangel.github.io/post/1224/</link><pubDate>Sun, 01 Dec 2013 15:03:37 +0000</pubDate><guid>http://hzmangel.github.io/post/1224/</guid><description>&lt;h3 id="tldr">tl;dr&lt;/h3>
+&lt;p>The pasted image will be converted to base64 encoded format, which will hit
 response size limitation of server. This article is talking about save image
-to file with carrierwave.&lt;/p&gt;
-
-&lt;p&gt;The source code is available at &lt;a href=&#34;https://github.com/hzmangel/base64_image_carrierwave&#34;&gt;github
-repo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Next is the full version.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title>
-      <link>http://hzmangel.github.io/post/1210/</link>
-      <pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1210/</guid>
-      <description>&lt;p&gt;Recently I have met a requirement that need to upload multiple attachments to
-a rails project. After some investigations, I choose &lt;code&gt;carrierwave&lt;/code&gt; finally.
-Also, I selected &lt;code&gt;nested_form&lt;/code&gt; to manage uploading and deleting multiple
-attachments.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Using Rails with Redis</title>
-      <link>http://hzmangel.github.io/post/1205/</link>
-      <pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1205/</guid>
-      <description>&lt;p&gt;I have met an issue recently that the Rails site always returns 502 error for
+to file with carrierwave.&lt;/p>
+&lt;p>The source code is available at &lt;a href="https://github.com/hzmangel/base64_image_carrierwave">github
+repo&lt;/a>&lt;/p>
+&lt;p>Next is the full version.&lt;/p></description></item><item><title>Uploading multiple attachments with carrierwave/mongoid/nested_form</title><link>http://hzmangel.github.io/post/1210/</link><pubDate>Tue, 07 May 2013 23:30:25 +0000</pubDate><guid>http://hzmangel.github.io/post/1210/</guid><description>&lt;p>Recently I have met a requirement that need to upload multiple attachments to
+a rails project. After some investigations, I choose &lt;code>carrierwave&lt;/code> finally.
+Also, I selected &lt;code>nested_form&lt;/code> to manage uploading and deleting multiple
+attachments.&lt;/p></description></item><item><title>Using Rails with Redis</title><link>http://hzmangel.github.io/post/1205/</link><pubDate>Thu, 25 Apr 2013 16:56:17 +0000</pubDate><guid>http://hzmangel.github.io/post/1205/</guid><description>&lt;p>I have met an issue recently that the Rails site always returns 502 error for
 some page. After some investigation, I have found that the problem is caused
 by a long time query of database, which exceeds the timeout value of unicorn
 configuration, then the unicorn worker process will be killed and the Nginx
-returns 502 to user.&lt;/p&gt;
-
-&lt;p&gt;So the solution for this kind prblem is to put the job into some background
+returns 502 to user.&lt;/p>
+&lt;p>So the solution for this kind prblem is to put the job into some background
 task, and use some other method to inform the frontend when job done. Finally
-I choose the Redis for this task.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Playing MongoDB with Rails</title>
-      <link>http://hzmangel.github.io/post/1159/</link>
-      <pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1159/</guid>
-      <description>&lt;p&gt;This post will try to implement a web app used for recording mobile phone of
+I choose the Redis for this task.&lt;/p></description></item><item><title>Playing MongoDB with Rails</title><link>http://hzmangel.github.io/post/1159/</link><pubDate>Tue, 19 Jun 2012 16:07:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1159/</guid><description>&lt;p>This post will try to implement a web app used for recording mobile phone of
 cheaters. This idea is came from cooler@linuxfb, and I have used this for a
 presentation about GAE on 2009, and here is the
-&lt;a href=&#34;http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477&#34;&gt;slide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;NOTE: Code still under developing, the Git repo is shown at the end of
-article.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Tunning Rails with DTrace</title>
-      <link>http://hzmangel.github.io/post/1147/</link>
-      <pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1147/</guid>
-      <description>&lt;p&gt;This post will talk about how to do performance test of Rails program with
+&lt;a href="http://www.slideshare.net/linuxfb/20090222-gae-demo-7083477">slide&lt;/a>.&lt;/p>
+&lt;p>NOTE: Code still under developing, the Git repo is shown at the end of
+article.&lt;/p></description></item><item><title>Tunning Rails with DTrace</title><link>http://hzmangel.github.io/post/1147/</link><pubDate>Thu, 24 May 2012 09:25:42 +0000</pubDate><guid>http://hzmangel.github.io/post/1147/</guid><description>&lt;p>This post will talk about how to do performance test of Rails program with
 DTrace tool. The testing will be separated into Ruby program part and database
 operations part. Please make sure all the tested program has provided probes
-to the DTrace.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTICE&lt;/strong&gt;: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Deploy RoR application with Nginx</title>
-      <link>http://hzmangel.github.io/post/1133/</link>
-      <pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1133/</guid>
-      <description>&lt;p&gt;This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (2)</title>
-      <link>http://hzmangel.github.io/post/1125/</link>
-      <pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1125/</guid>
-      <description>&lt;p&gt;This article will finish the ToDo web application, and the prime area in this
-article is adding validator and updating templates.&lt;/p&gt;
-
-&lt;p&gt;Here is &lt;a href=&#34;http://www.hzmangel.info/blog/archives/1113&#34;&gt;to RoR learning log (1)&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RoR learning log (1)</title>
-      <link>http://hzmangel.github.io/post/1113/</link>
-      <pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1113/</guid>
-      <description>&lt;p&gt;Just back from vacation, so the study log for this week is simple.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+to the DTrace.&lt;/p>
+&lt;p>&lt;strong>NOTICE&lt;/strong>: The testing data is still under collection, this post has only DTrace script now, I will update this post after gathering enough testing data.&lt;/p></description></item><item><title>Deploy RoR application with Nginx</title><link>http://hzmangel.github.io/post/1133/</link><pubDate>Fri, 11 May 2012 11:40:52 +0000</pubDate><guid>http://hzmangel.github.io/post/1133/</guid><description>&lt;p>This article will talk something about deploying RoR application to local and remote nginx server.&lt;/p></description></item><item><title>RoR learning log (2)</title><link>http://hzmangel.github.io/post/1125/</link><pubDate>Mon, 07 May 2012 23:57:16 +0000</pubDate><guid>http://hzmangel.github.io/post/1125/</guid><description>&lt;p>This article will finish the ToDo web application, and the prime area in this
+article is adding validator and updating templates.&lt;/p>
+&lt;p>Here is &lt;a href="http://www.hzmangel.info/blog/archives/1113">to RoR learning log (1)&lt;/a>&lt;/p></description></item><item><title>RoR learning log (1)</title><link>http://hzmangel.github.io/post/1113/</link><pubDate>Mon, 07 May 2012 00:51:32 +0000</pubDate><guid>http://hzmangel.github.io/post/1113/</guid><description>&lt;p>Just back from vacation, so the study log for this week is simple.&lt;/p></description></item></channel></rss>

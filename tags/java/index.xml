@@ -1,29 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>java on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/java/</link>
-    <description>Recent content in java on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Mon, 14 Sep 2009 22:59:50 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Android中使用自定义Adapter</title>
-      <link>http://hzmangel.github.io/post/461/</link>
-      <pubDate>Mon, 14 Sep 2009 22:59:50 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/461/</guid>
-      <description>&lt;p&gt;算是对这段折腾android的一次小结吧，呵呵。&lt;/p&gt;
-
-&lt;p&gt;一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on 湖间小筑</title><link>http://hzmangel.github.io/tags/java/</link><description>Recent content in java on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Mon, 14 Sep 2009 22:59:50 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Android中使用自定义Adapter</title><link>http://hzmangel.github.io/post/461/</link><pubDate>Mon, 14 Sep 2009 22:59:50 +0000</pubDate><guid>http://hzmangel.github.io/post/461/</guid><description>&lt;p>算是对这段折腾android的一次小结吧，呵呵。&lt;/p>
+&lt;p>一个很简单的界面，上面留块地方放logo或者banner，然后下面放个东西来显示数据。试验中上面使用的是TextView，下面是ListView。对于Lis
 tView，当然需要使用Adapter来显示数据啦，但默认的Adapter满足不了需要，因为我的那个一条需要显示的东西不是那么标准，所以折腾了几天，自己弄出
-来了一个fooAdapter，顺便还有这篇文章。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+来了一个fooAdapter，顺便还有这篇文章。&lt;/p></description></item></channel></rss>

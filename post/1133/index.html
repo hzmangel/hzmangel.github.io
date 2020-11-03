@@ -1,120 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-        <meta property="og:title" content=" Deploy RoR application with Nginx &middot;  湖间小筑" />
-        <meta property="og:site_name" content="湖间小筑" />
-        <meta property="og:url" content="http://hzmangel.github.io/post/1133/" />
-
-        
-            <meta property="og:type" content="article" />
-            <meta property="og:article:published_time" content="2012-05-11T11:40:52Z" />
-
-            
-                <meta property="og:article:tag" content="Programming" />
-            
-                <meta property="og:article:tag" content="rails" />
-            
-                <meta property="og:article:tag" content="tools" />
-            
-        
-
-        <title>
-            湖间小筑
-            
-                | Deploy RoR application with Nginx
-            
-        </title>
-
-        <meta name="description" content="蓝天，小湖，湖水中一方小筑" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/atelier-dune.dark.min.css">
-
-        <link rel="stylesheet" type="text/css" href="http://hzmangel.github.io/css/screen.css" />
-
-        
-
-        <link rel="canonical" href="http://hzmangel.github.io/post/1133/" />
-    </head>
-
-    <body>
-        <div class="container" id="site-wrapper">
-            <header>
-    <div class="row">
-        <div class="col-md-6" id="site-title">
-            <a href="http://hzmangel.github.io/" title="湖间小筑" rel="home"><h2>湖间小筑</h2></a>
-        </div>
-
-        <div class="col-md-6" id="site-description">
-            <i class="text-right muted"><div id="site-description">蓝天，小湖，湖水中一方小筑</div></i>
-        </div>
-    </div>
-
-    <img src="/img/banner.jpg" class="img-responsive">
-</header>
-
-            <nav role="navigation">
-
-</nav>
-
-
-
-
-
-<div class="row">
-    <div class="col-md-9">
-        <section>
-            <article class="post">
-
-    <header>
-        <h2 class="post-title"><a href='http://hzmangel.github.io/post/1133/'> Deploy RoR application with Nginx</a> </h2>
-        <div class="post-meta">发表于2012-05-11 11:40:52 </div>
-    </header>
-
-    <section>
-        <div class="post-summary"><p>This article will talk something about deploying RoR application to local and remote nginx server.</p>
-
-<h3 id="deploy-ror-on-local-machine">Deploy RoR on local machine</h3>
-
-<p>Like deploying other website, the static file is served via nginx, and the
-Ruby logic will be handled via some middle-wares, here is the list:</p>
-
-<h4 id="thin">Thin</h4>
-
-<ol>
-<li><p>Install the <code>thin</code> via <code>homebrew</code></p>
-
-<pre><code> gem install thin
-</code></pre></li>
-
-<li><p>Start the thin server. Since this is a testing deploy, I just execute thin in the project directory.</p>
-
-<pre><code> thin start
-</code></pre></li>
-</ol>
-
-<p>After the command executed, you can find some information printed via <code>thin</code>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="og:title" content="Deploy RoR application with Nginx &#183;  湖间小筑"><meta property="og:site_name" content="湖间小筑"><meta property="og:url" content="http://hzmangel.github.io/post/1133/"><meta property="og:type" content="article"><meta property="og:article:published_time" content="2012-05-11T11:40:52Z"><meta property="og:article:tag" content="Programming"><meta property="og:article:tag" content="rails"><meta property="og:article:tag" content="tools"><title>湖间小筑
+| Deploy RoR application with Nginx</title><meta name=description content="蓝天，小湖，湖水中一方小筑"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css integrity=sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk crossorigin=anonymous><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css><link rel=stylesheet type=text/css href=http://hzmangel.github.io/css/screen.css><link rel=canonical href=http://hzmangel.github.io/post/1133/></head><body><div class=container-md id=site-wrapper><header><div class=row><div class=col-md-6 id=site-title><a href=http://hzmangel.github.io/ title=湖间小筑 rel=home><h2>湖间小筑</h2></a></div><div class=col-md-6 id=site-description><i class="text-right muted"><div id=site-description>蓝天，小湖，湖水中一方小筑</div></i></div></div><img src=/img/banner.jpg class=img-responsive></header><nav role=navigation></nav><div class=row><div class=col-md-9><section><article class=post><header><h2 class=post-title><a href=http://hzmangel.github.io/post/1133/>Deploy RoR application with Nginx</a></h2><div class=post-meta>发表于2012-05-11 11:40:52</div></header><section><div class=post-summary><p>This article will talk something about deploying RoR application to local and remote nginx server.</p><h3 id=deploy-ror-on-local-machine>Deploy RoR on local machine</h3><p>Like deploying other website, the static file is served via nginx, and the
+Ruby logic will be handled via some middle-wares, here is the list:</p><h4 id=thin>Thin</h4><ol><li><p>Install the <code>thin</code> via <code>homebrew</code></p><pre><code>gem install thin
+</code></pre></li><li><p>Start the thin server. Since this is a testing deploy, I just execute thin in the project directory.</p><pre><code>thin start
+</code></pre></li></ol><p>After the command executed, you can find some information printed via <code>thin</code>
 command. The default port of the server is <em>3000</em>, which should be used to
-fill the nginx configuration file.</p>
-
-<ol>
-<li><p>Update the configuration file for nginx. The <code>upstream</code> section should be put in <code>http</code> block.</p>
-
-<pre><code> upstream todo_app {
- server http://127.0.0.1:3000
-</code></pre>
-
-<p>}</p></li>
-</ol>
-
-<p>The <code>location</code> section should be put in <code>server</code> block.</p>
-
-<pre><code>     location / {
+fill the nginx configuration file.</p><ol start=3><li><p>Update the configuration file for nginx. The <code>upstream</code> section should be put in <code>http</code> block.</p><pre><code>upstream todo_app {
+server http://127.0.0.1:3000
+</code></pre><p>}</p></li></ol><p>The <code>location</code> section should be put in <code>server</code> block.</p><pre><code>     location / {
      proxy_set_header  X-Real-IP  $remote_addr;
      proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
      proxy_set_header  Host $http_host;
@@ -126,48 +18,15 @@ fill the nginx configuration file.</p>
  location @ruby {
      proxy_pass http://todo_app
  }
-</code></pre>
-
-<p>The <code>proxy_pass</code> will pass all ruby request to the upstream server. <code>Unix
-socket</code> can also be used in the <code>upstream</code> section.</p>
-
-<ol>
-<li>Restart the nginx server, the RoR project can be shown in the web browser now.</li>
-</ol>
-
-<h4 id="passenger">Passenger</h4>
-
-<ol>
-<li><p>Install passenger via gem</p>
-
-<pre><code> gem install passenger
-</code></pre></li>
-
-<li><p>Install passenger module for nginx</p>
-
-<pre><code> passenger-install-nginx-module
-</code></pre></li>
-</ol>
-
-<p>Or you can install nginx and passenger module with brew like this</p>
-
-<pre><code>     brew install nginx --with-passenger
-</code></pre>
-
-<p>If nginx still report the error that can not find the <code>PassengerLoggingAgent</code>,
+</code></pre><p>The <code>proxy_pass</code> will pass all ruby request to the upstream server. <code>Unix socket</code> can also be used in the <code>upstream</code> section.</p><ol start=4><li>Restart the nginx server, the RoR project can be shown in the web browser now.</li></ol><h4 id=passenger>Passenger</h4><ol><li><p>Install passenger via gem</p><pre><code>gem install passenger
+</code></pre></li><li><p>Install passenger module for nginx</p><pre><code>passenger-install-nginx-module
+</code></pre></li></ol><p>Or you can install nginx and passenger module with brew like this</p><pre><code>     brew install nginx --with-passenger
+</code></pre><p>If nginx still report the error that can not find the <code>PassengerLoggingAgent</code>,
 try to use <code>passenger package-runtime</code> and then get the agent from package
-<code>passenger-standalone/XXX/support.tar.gz</code></p>
-
-<p>In the <em>http</em> section, you should specify the value of <code>passenger_root</code> and
-<code>passenger_ruby</code>. Here is the configuration in my laptop:</p>
-
-<pre><code>     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+<code>passenger-standalone/XXX/support.tar.gz</code></p><p>In the <em>http</em> section, you should specify the value of <code>passenger_root</code> and
+<code>passenger_ruby</code>. Here is the configuration in my laptop:</p><pre><code>     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
  passenger_ruby /usr/local/bin/ruby;
-</code></pre>
-
-<p><strong>NOTICE:</strong> Make sure to set <code>rails_env</code> variable is set to the same stage with development, seems the default value is <code>production</code>. Here is my configuration section in nginx:</p>
-
-<pre><code>     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+</code></pre><p><strong>NOTICE:</strong> Make sure to set <code>rails_env</code> variable is set to the same stage with development, seems the default value is <code>production</code>. Here is my configuration section in nginx:</p><pre><code>     passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
  passenger_ruby /usr/local/bin/ruby;
 
  server {
@@ -177,68 +36,23 @@ try to use <code>passenger package-runtime</code> and then get the agent from pa
      passenger_enabled on;
      rails_env development;
  }
-</code></pre>
-
-<h4 id="unicorn">Unicorn</h4>
-
-<ol>
-<li><p>Install unicorn via gem</p>
-
-<pre><code> gem install unicorn
-</code></pre></li>
-
-<li><p>Get the sample configuration file from unicorn website</p>
-
-<pre><code> curl -o config/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
-</code></pre></li>
-</ol>
-
-<p>And update the <code>working_directory</code>, <code>pid</code>, <code>stderr_path</code> and <code>stdout_path</code> in
-the sample configuration file. <strong>NOTICE</strong>: Need absolute path here.</p>
-
-<ol>
-<li>The left step is the same with Thin, a <code>upstream</code> section should be added to nginx.conf, and redirection should be added to <code>location</code> section.</li>
-</ol>
-
-<h3 id="deploy-remotely-via-capistrano">Deploy remotely via Capistrano</h3>
-
-<p>Capistrano is a useful tool for deploying RoR application to remote server(s).
+</code></pre><h4 id=unicorn>Unicorn</h4><ol><li><p>Install unicorn via gem</p><pre><code>gem install unicorn
+</code></pre></li><li><p>Get the sample configuration file from unicorn website</p><pre><code>curl -o config/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
+</code></pre></li></ol><p>And update the <code>working_directory</code>, <code>pid</code>, <code>stderr_path</code> and <code>stdout_path</code> in
+the sample configuration file. <strong>NOTICE</strong>: Need absolute path here.</p><ol start=3><li>The left step is the same with Thin, a <code>upstream</code> section should be added to nginx.conf, and redirection should be added to <code>location</code> section.</li></ol><h3 id=deploy-remotely-via-capistrano>Deploy remotely via Capistrano</h3><p>Capistrano is a useful tool for deploying RoR application to remote server(s).
 The Capistrany package provides several tasks for simplfying the deploying
-jobs.</p>
-
-<ol>
-<li>Prepare the RoR application</li>
-</ol>
-
-<p>Before deploying, we should prepare the application. Since this only show how
+jobs.</p><ol><li>Prepare the RoR application</li></ol><p>Before deploying, we should prepare the application. Since this only show how
 to deploy, so we just use the generated project. I have create a repository on
-bitbucket, and the scm used for this application is mercurial.</p>
-
-<p>First I create the repository DailyCheckIn on butbucket, then I clone the
+bitbucket, and the scm used for this application is mercurial.</p><p>First I create the repository DailyCheckIn on butbucket, then I clone the
 project to local directory <code>dailycheckin</code>. The directory is an empty directory
 except some mercurial information. After directory ready, I create RoR
 application via <code>rails new</code> command. Before doing the initialization commit, I
-should create a <code>.hgignore</code> file based on the <code>.gitignore</code> (Just add <code>syntax:
-glob</code> at the first line, remove the leader slash in the path, and rename
+should create a <code>.hgignore</code> file based on the <code>.gitignore</code> (Just add <code>syntax: glob</code> at the first line, remove the leader slash in the path, and rename
 <code>.gitignore</code> to <code>.hgignore</code>). After all things done, commit the new added file
-and push to the server, then we have a RoR application.</p>
-
-<ol>
-<li>Capify the RoR project</li>
-</ol>
-
-<p>The project should be &lsquo;capified&rsquo; before deplying via Captistrano, which can be
+and push to the server, then we have a RoR application.</p><ol start=2><li>Capify the RoR project</li></ol><p>The project should be &lsquo;capified&rsquo; before deplying via Captistrano, which can be
 done via command <code>capify .</code> easily. This command will create <code>Capfile</code> and
 <code>config/deploy.rb</code> file in current directory. The <code>Capfile</code> is the wrapper,
-and the tasks is written in file <code>deploy.rb</code></p>
-
-<ol>
-<li>Configure the Capistrano</li>
-</ol>
-
-<p>Here are the information should be checked before deploying:</p>
-
-<pre><code>* Application name
+and the tasks is written in file <code>deploy.rb</code></p><ol start=3><li>Configure the Capistrano</li></ol><p>Here are the information should be checked before deploying:</p><pre><code>* Application name
 * Server information 
   * Application layer
   * Wer server
@@ -247,211 +61,22 @@ and the tasks is written in file <code>deploy.rb</code></p>
   * Repository location
   * SCM type
 * Directory the project should be deployed to
-</code></pre>
-
-<p>Here is a sample configuration file for the project</p>
-
-<pre><code>    set :application, &quot;DailyCheckIn&quot;
+</code></pre><p>Here is a sample configuration file for the project</p><pre><code>    set :application, &quot;DailyCheckIn&quot;
 set :repository,  
 set :scm, :mercurial
 server , :web, :app, :db, :primary =&gt; true
 set :deploy_to, 
 set :use_sudo, false
-</code></pre>
-
-<p>The detailed information of configuration can be found in <a href="https://github.com/capistrano/capistrano/wiki/2.x-From-The-
-Beginning">Capistrano
-document</a>.</p>
-
-<ol>
-<li>Deploy the application</li>
-</ol>
-
-<p>Next step is deploy the application. The first step is setting up the server,
+</code></pre><p>The detailed information of configuration can be found in [Capistrano
+document](<a href=https://github.com/capistrano/capistrano/wiki/2.x-From-The->https://github.com/capistrano/capistrano/wiki/2.x-From-The-</a>
+Beginning).</p><ol start=4><li>Deploy the application</li></ol><p>Next step is deploy the application. The first step is setting up the server,
 Capistrano provide task <code>cap deploy:setup</code> to do this. This task will do a
-series of <code>mkdir</code> calls. Make sure the permission of directory.</p>
-
-<p>After setting up completed, it is recommended to check the dependencies via
+series of <code>mkdir</code> calls. Make sure the permission of directory.</p><p>After setting up completed, it is recommended to check the dependencies via
 <code>cap deploy:check</code> command. Re-run this command after any change to the
-environment to make sure all check passed.</p>
-
-<p>The next step should be done manually, you should login to the server and make
+environment to make sure all check passed.</p><p>The next step should be done manually, you should login to the server and make
 sure the database can meet the requirement configured in the
-<code>config/database.yml</code> file.</p>
-
-<p>After environment ready, task <code>deploy:update</code> can be used to clone the code to
+<code>config/database.yml</code> file.</p><p>After environment ready, task <code>deploy:update</code> can be used to clone the code to
 server. The clone operation will create a new snapshot in the <code>releases</code>
 directory, and link it with symbol link <code>current</code> in top level of depoly
-directory. Then <code>cap deploy:start</code> can be used to start the services.</p></div>
-    </section>
-
-    <footer>
-        <div class="post-meta">
-            分类：
-            <ul class="list-inline">
-                 <li><a href="/categories/happy-coding">Happy coding</a></li> 
-            </ul>
-        </div>
-
-        <div class="post-meta">
-            标签：
-            <ul class="list-inline">
-                 <li><a href="/tags/programming"><span class="label label-default">Programming</span></a></li>  <li><a href="/tags/rails"><span class="label label-default">rails</span></a></li>  <li><a href="/tags/tools"><span class="label label-default">tools</span></a></li> 
-            </ul>
-        </div>
-
-        <br/>
-        <nav class="post-meta">
-            <p class="col-md-6">
-                 <a class="previous" href="http://hzmangel.github.io/post/1125/"> &lt; RoR learning log (2) </a> 
-            </p>
-
-            <p class="col-md-6">
-                 <a class="next" href="http://hzmangel.github.io/post/1147/"> Tunning Rails with DTrace &gt;</a> 
-            </p>
-        </nav>
-        <br/>
-
-    </footer>
-
-</article>
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-     
-    var disqus_shortname = "hzmangel";
-
-     
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-
-        </section>
-    </div>
-
-    <div class="col-md-3">
-        <aside id="sidebar">
-
-    <div class="sidebar-block">
-        <h5>新鲜出炉</h5>
-        <ul class="list-unstyled">
-        
-            <li><a href='http://hzmangel.github.io/categories/'> Categories</a></li>
-        
-            <li><a href='http://hzmangel.github.io/categories/happy-coding/'> Happy coding</a></li>
-        
-            <li><a href='http://hzmangel.github.io/post/'> Posts</a></li>
-        
-            <li><a href='http://hzmangel.github.io/tags/programming/'> Programming</a></li>
-        
-            <li><a href='http://hzmangel.github.io/tags/rails/'> rails</a></li>
-        
-        </ul>
-    </div>
-
-    <div class="sidebar-block">
-        <h5>分类</h5>
-        <ul class="list-unstyled">
-        
-            <li><a href="/categories/bt~~up">bt~~up</a> &nbsp;(23)</li>
-        
-            <li><a href="/categories/happy-coding">happy-coding</a> &nbsp;(93)</li>
-        
-            <li><a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF">善用佳软</a> &nbsp;(26)</li>
-        
-            <li><a href="/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex">好东东latex</a> &nbsp;(20)</li>
-        
-            <li><a href="/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux">小企鹅linux</a> &nbsp;(73)</li>
-        
-            <li><a href="/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF">搭啊搭搭电路</a> &nbsp;(7)</li>
-        
-            <li><a href="/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_">杂九杂十_</a> &nbsp;(140)</li>
-        
-            <li><a href="/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F">游戏人生</a> &nbsp;(13)</li>
-        
-            <li><a href="/categories/%E9%82%A3%E5%B1%B1%E9%82%A3%E6%B0%B4">那山那水</a> &nbsp;(52)</li>
-        
-            <li><a href="/categories/%E9%A3%8E%E9%9B%A8%E8%80%83%E7%A0%94%E8%B7%AF">风雨考研路</a> &nbsp;(11)</li>
-        
-            <li><a href="/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB">饕餮之享</a> &nbsp;(4)</li>
-        
-        </ul>
-    </div>
-
-    <div class="sidebar-block">
-        <h5>标签</h5>
-        <div id="tag_cloud" data-tags=" ['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C']; " />
-    </div>
-
-</aside>
-
-
-
-    </div>
-</div>
-
-        <footer class="site-footer clearfix">
-            <div id="colophon">
-                <section class="col-md-7">Copyright - ©2015 - hzmangel</section>
-                
-                    <i class="text-right"><section class="col-md-5">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/hzmangel/hugo-twenty-ten">ported Twenty Ten</a> theme</section></i>
-                
-            </div>
-        </footer>
-
-        <script src="http://code.jquery.com/jquery-git2.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          tex2jax: {
-            inlineMath: [['$','$'], ['\\(','\\)']],
-            displayMath: [['$$','$$'], ['\[','\]']],
-            processEscapes: true,
-            processEnvironments: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            TeX: { equationNumbers: { autoNumber: "AMS" },
-                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-          }
-        });
-        </script>
-
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Queue(function() {
-            // Fix <code> tags after MathJax finishes running. This is a
-            // hack to overcome a shortcoming of Markdown. Discussion at
-            // https://github.com/mojombo/jekyll/issues/199
-            var all = MathJax.Hub.getAllJax(), i;
-            for(i = 0; i &lt; all.length; i += 1) {
-                all[i].SourceElement().parentNode.className += ' has-jax';
-            }
-        });
-        </script>
-
-        <script type="text/javascript" src="http://hzmangel.github.io/js/index.js"></script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-1847567-5', 'auto');
-            ga('send', 'pageview');
-        </script>
-
-    </div> 
-
-</body>
-</html>
-
-
-
+directory. Then <code>cap deploy:start</code> can be used to start the services.</p></div></section><footer><div class=post-meta>分类：<ul class=list-inline><li class=list-inline-item><a href=/categories/happy-coding>Happy coding</a></li></ul></div><div class=post-meta>标签：<ul class=list-inline><li class=list-inline-item><a href=/tags/programming><span class="label label-default">Programming</span></a></li><li class=list-inline-item><a href=/tags/rails><span class="label label-default">rails</span></a></li><li class=list-inline-item><a href=/tags/tools><span class="label label-default">tools</span></a></li></ul></div><br><nav class=post-meta><a class=previous href=http://hzmangel.github.io/post/1125/>&lt; RoR learning log (2)</a>
+<a class=next href=http://hzmangel.github.io/post/1147/>Tunning Rails with DTrace ></a></nav><br></footer></article><div id=disqus_thread></div><script type=text/javascript>var disqus_shortname="hzmangel";(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript rel=nofollow>comments powered by Disqus.</a></noscript></section></div><div class=col-md-3><aside id=sidebar><div class=sidebar-block><h5>新鲜出炉</h5><ul class=list-unstyled><li><a href=http://hzmangel.github.io/categories/>Categories</a></li><li><a href=http://hzmangel.github.io/categories/happy-coding/>Happy coding</a></li><li><a href=http://hzmangel.github.io/post/>Posts</a></li><li><a href=http://hzmangel.github.io/tags/programming/>Programming</a></li><li><a href=http://hzmangel.github.io/tags/rails/>rails</a></li></ul></div><div class=sidebar-block><h5>分类</h5><ul class=list-unstyled><li><a href=/categories/bt~~up>bt~~up</a> &nbsp;(23)</li><li><a href=/categories/happy-coding>happy-coding</a> &nbsp;(93)</li><li><a href=/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF>善用佳软</a> &nbsp;(26)</li><li><a href=/categories/%E5%A5%BD%E4%B8%9C%E4%B8%9Clatex>好东东latex</a> &nbsp;(20)</li><li><a href=/categories/%E5%B0%8F%E4%BC%81%E9%B9%85linux>小企鹅linux</a> &nbsp;(73)</li><li><a href=/categories/%E6%90%AD%E5%95%8A%E6%90%AD%E6%90%AD%E7%94%B5%E8%B7%AF>搭啊搭搭电路</a> &nbsp;(7)</li><li><a href=/categories/%E6%9D%82%E4%B9%9D%E6%9D%82%E5%8D%81_>杂九杂十_</a> &nbsp;(140)</li><li><a href=/categories/%E6%B8%B8%E6%88%8F%E4%BA%BA%E7%94%9F>游戏人生</a> &nbsp;(13)</li><li><a href=/categories/%E9%82%A3%E5%B1%B1%E9%82%A3%E6%B0%B4>那山那水</a> &nbsp;(52)</li><li><a href=/categories/%E9%A3%8E%E9%9B%A8%E8%80%83%E7%A0%94%E8%B7%AF>风雨考研路</a> &nbsp;(11)</li><li><a href=/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB>饕餮之享</a> &nbsp;(4)</li></ul></div><div class=sidebar-block><h5>标签</h5><div id=tag_cloud data-tags="['admin', 4, '/tags/admin'];  ['android', 1, '/tags/android'];  ['base64', 1, '/tags/base64'];  ['blog', 1, '/tags/blog'];  ['carrierwave', 1, '/tags/carrierwave'];  ['dtrace', 1, '/tags/dtrace'];  ['elasticsearch', 1, '/tags/elasticsearch'];  ['flex', 1, '/tags/flex'];  ['gfw', 1, '/tags/gfw'];  ['golang', 4, '/tags/golang'];  ['hadoop', 1, '/tags/hadoop'];  ['ios', 6, '/tags/ios'];  ['java', 1, '/tags/java'];  ['javascript', 2, '/tags/javascript'];  ['jqplot', 1, '/tags/jqplot'];  ['jquery', 2, '/tags/jquery'];  ['linux', 15, '/tags/linux'];  ['meta', 1, '/tags/meta'];  ['mmds', 7, '/tags/mmds'];  ['objc', 1, '/tags/objc'];  ['performance', 1, '/tags/performance'];  ['php', 1, '/tags/php'];  ['programming', 60, '/tags/programming'];  ['python', 8, '/tags/python'];  ['rails', 12, '/tags/rails'];  ['regexp', 1, '/tags/regexp'];  ['ruby', 4, '/tags/ruby'];  ['rubyonrails', 4, '/tags/rubyonrails'];  ['studylog', 11, '/tags/studylog'];  ['til', 3, '/tags/til'];  ['tools', 7, '/tags/tools'];  ['vim', 4, '/tags/vim'];  ['仙剑', 1, '/tags/%E4%BB%99%E5%89%91'];  ['十渡', 1, '/tags/%E5%8D%81%E6%B8%A1'];  ['工作', 3, '/tags/%E5%B7%A5%E4%BD%9C'];  ['徒步', 16, '/tags/%E5%BE%92%E6%AD%A5'];  ['总结', 4, '/tags/%E6%80%BB%E7%BB%93'];  ['感想', 7, '/tags/%E6%84%9F%E6%83%B3'];  ['摄影', 14, '/tags/%E6%91%84%E5%BD%B1'];  ['旅行', 27, '/tags/%E6%97%85%E8%A1%8C'];  ['游戏', 1, '/tags/%E6%B8%B8%E6%88%8F'];  ['电影', 1, '/tags/%E7%94%B5%E5%BD%B1'];  ['骑行', 8, '/tags/%E9%AA%91%E8%A1%8C'];"></div></aside></div></div><footer class="site-footer clearfix"><div id=colophon><section class=col-md-7>Copyright - ©2015 - hzmangel</section><i class=text-right><section class=col-md-5>Proudly generated by <a class=icon-hugo href=http://gohugo.io>HUGO</a>, with <a class=icon-theme href=https://github.com/hzmangel/hugo-twenty-ten>ported Twenty Ten</a> theme</section></i></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js integrity=sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo crossorigin=anonymous></script><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js integrity=sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI crossorigin=anonymous></script><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js></script><script>hljs.initHighlightingOnLoad();</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><script type=text/javascript src=http://hzmangel.github.io/js/index.js></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-1847567-5','auto');ga('send','pageview');</script></div></body></html>

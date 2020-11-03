@@ -1,115 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>linux on 湖间小筑</title>
-    <link>http://hzmangel.github.io/tags/linux/</link>
-    <description>Recent content in linux on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Mon, 19 Dec 2011 10:41:55 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>List all CVS tags</title>
-      <link>http://hzmangel.github.io/post/1052/</link>
-      <pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1052/</guid>
-      <description>&lt;p&gt;最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;a href=&#34;http://docs.codehaus.org/display/ninja/List+CVS+Tags&#34; target=&#34;_blank&#34;&gt;Perl脚本&lt;/a&gt;，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Blocking/Non-Blocking IO and SYN/ASYN IO</title>
-      <link>http://hzmangel.github.io/post/1035/</link>
-      <pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/1035/</guid>
-      <description>&lt;p&gt;这是我上个月&lt;a title=&#34;linuxfb&#34; href=&#34;http://linuxfb.net&#34; target=&#34;_blank&#34;&gt;linuxfb&lt;/a&gt;版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Remove packages installed by setup.py install</title>
-      <link>http://hzmangel.github.io/post/999/</link>
-      <pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/999/</guid>
-      <description>从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了折衷的办法：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
-$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f  没找到怎么让它输出到stdout，只好用临时文件弄了。</description>
-    </item>
-    
-    <item>
-      <title>Get Return Value from popen System Call</title>
-      <link>http://hzmangel.github.io/post/984/</link>
-      <pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/984/</guid>
-      <description>popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
-int status = pclose(fp); if (status == -1) { printf(&amp;quot;Error reported by pclose()\n&amp;quot;); exit(1); } else { printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;); printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status)); }  其实是满早前问的一个问题，忘更新过来了。</description>
-    </item>
-    
-    <item>
-      <title>Disable Arial in Chrome</title>
-      <link>http://hzmangel.github.io/post/876/</link>
-      <pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/876/</guid>
-      <description>&lt;p&gt;最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Merge Two Hg Repositories</title>
-      <link>http://hzmangel.github.io/post/721/</link>
-      <pubDate>Fri, 09 Jul 2010 01:54:31 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/721/</guid>
-      <description>最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有：
-A: hg pull –f &amp;lt;repo B&amp;gt; A: hg merge A: hg ci  关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。(via)</description>
-    </item>
-    
-    <item>
-      <title>Reuse the TIME_WAIT Port</title>
-      <link>http://hzmangel.github.io/post/618/</link>
-      <pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/618/</guid>
-      <description>最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on 湖间小筑</title><link>http://hzmangel.github.io/tags/linux/</link><description>Recent content in linux on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Mon, 19 Dec 2011 10:41:55 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>List all CVS tags</title><link>http://hzmangel.github.io/post/1052/</link><pubDate>Mon, 19 Dec 2011 10:41:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1052/</guid><description>&lt;p>最近在折腾一个CVS的库，需要把它里面所有的tags给列出来，在网上找了一个&lt;!-- raw HTML omitted -->Perl脚本&lt;!-- raw HTML omitted -->，以前一直是直接用的，那天看了看发现原来不是很难，于是写了一个Python的，为的是可以当成函数嵌到我的脚本中。&lt;/p></description></item><item><title>Blocking/Non-Blocking IO and SYN/ASYN IO</title><link>http://hzmangel.github.io/post/1035/</link><pubDate>Sun, 04 Sep 2011 22:18:55 +0000</pubDate><guid>http://hzmangel.github.io/post/1035/</guid><description>&lt;p>这是我上个月&lt;!-- raw HTML omitted -->linuxfb&lt;!-- raw HTML omitted -->版聚上讲的话题，因为后续还有一些讨论的东西，所以就一并在这记一下。估计下个月听完Bergwolf的AIO还会有些更新。&lt;/p></description></item><item><title>Remove packages installed by setup.py install</title><link>http://hzmangel.github.io/post/999/</link><pubDate>Sun, 03 Jul 2011 01:27:23 +0000</pubDate><guid>http://hzmangel.github.io/post/999/</guid><description>从源码装了个Python程序的包结果发现系统的仓库中有，于是想先把源码装的包删除了再去装仓库中的，可惜setup.py没有uninstall参数，于是改问G 神，在stackoverflow上找到了[折衷的办法](http://stackoverflow.com/questions/1550226/python- setup-py-uninstall)：先用install把包重新装一遍，装的时候记录下文件的改动，然后去把它们统统删除，唔，好囧的办法。
+$ python setup.py install --record foo.txt $ cat foo.txt | xargs rm -f 没找到怎么让它输出到stdout，只好用临时文件弄了。</description></item><item><title>Get Return Value from popen System Call</title><link>http://hzmangel.github.io/post/984/</link><pubDate>Mon, 30 May 2011 17:09:10 +0000</pubDate><guid>http://hzmangel.github.io/post/984/</guid><description>popen的调用的返回值是popen自己的返回值，并不是被调用程序的返回值，如果需要取被调用程序的返回值，则需要先用pclose()取到返回的status信 息，再用wait的宏进行判断。
+int status = pclose(fp); if (status == -1) { printf(&amp;quot;Error reported by pclose()\n&amp;quot;); exit(1); } else { printf(&amp;quot;Process exited? %s\n&amp;quot;, WIFEXITED(status) ? &amp;quot;yes&amp;quot; : &amp;quot;no&amp;quot;); printf(&amp;quot;Process status: %d\n&amp;quot;, WEXITSTATUS(status)); } 其实是满早前问的一个问题，忘更新过来了。</description></item><item><title>Disable Arial in Chrome</title><link>http://hzmangel.github.io/post/876/</link><pubDate>Sun, 23 Jan 2011 14:45:27 +0000</pubDate><guid>http://hzmangel.github.io/post/876/</guid><description>&lt;p>最近折腾debian的字体，系统这块基本满意，只是十分不爽chrome里google系页面使用arial的字体，所以继续折腾。&lt;/p></description></item><item><title>Merge Two Hg Repositories</title><link>http://hzmangel.github.io/post/721/</link><pubDate>Fri, 09 Jul 2010 01:54:31 +0000</pubDate><guid>http://hzmangel.github.io/post/721/</guid><description>最近在折腾手头上的小项目，发现有一个工程已经建了Hg的版本库，但是想把它给丢到现有的版本库中以方便管理。假设现在用的版本库叫A，需要被merge过来的版本库 叫B，于是有：
+A: hg pull –f &amp;lt;repo B&amp;gt; A: hg merge A: hg ci 关键的地方是在那个- f处，如果没有加这个参数会报两个版本库不同源而不让你这么折腾。([via](http://stackoverflow.com/questions/12843 /how-to-combine-two-projects-in-mercurial))</description></item><item><title>Reuse the TIME_WAIT Port</title><link>http://hzmangel.github.io/post/618/</link><pubDate>Wed, 05 May 2010 15:08:38 +0000</pubDate><guid>http://hzmangel.github.io/post/618/</guid><description>最近在调试的时候，经常会需要直接kill掉监听的进程，然后在SLES上再启动进程的时候就会报端口被占用，用netstat查看会发现这个端口处于TIME_WA IT状态。此状态是表示，当机器A发出CLOSE请求后，经过FIN_WAIT_1和FIN_WAIT_2，机器B会将socket置于CLOSE状态，此时机器B会 将端口置于 TIME_WAIT状态一定时间(2*msl)以保证机器B的数据不会丢失。这一策略可以保证TCP的可靠性，但是在测试过程中经常会报端口被占用，da emon启动错误的信息。
 解决的方法一是减少msl时间，让TIME_WAIT的socket尽快结束，这个值好像可以在/proc/sys/net/ipv4/tcp_fin_timeou t中指定，不过不是很确定。再一种方式就是通过设置reuse标志位，让处于TIME_WAIT状态的端口可以被新的进程bind，此方式同样需要动/proc系统中 的东西：
-net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1  其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
-sysctl -w net.ipv4.route.flush=1  差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
-话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</description>
-    </item>
-    
-    <item>
-      <title>The Capital S in Linux Permission Bitmap</title>
-      <link>http://hzmangel.github.io/post/614/</link>
-      <pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/614/</guid>
-      <description>昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
+net.ipv4.tcp_tw_recycle = 1 net.ipv4.tcp_tw_reuse = 1 其实我也不太确定第一个是做什么用的，只是照猫画虎了。这个方式的写法是写在/etc/sysctl.conf文件中的，而不需要直接向/proc文件系统中echo 东西。在改完sysctl.conf文件后运行sysctl -p让配置生效。还有一点需要注意的是可能需要运行如下的命令刷新缓存
+sysctl -w net.ipv4.route.flush=1 差不多就这些了，话说，很诡异的一点就是，这个情况只在ppc64_sles11中碰到过，x86/amd64都没碰到过，ppc64_rh5没做测试，不表态，嗯。
+话说文章里面TCP状态所表示的含义及转换关系是我自己的理解，嘿嘿，自辨对错哈~~</description></item><item><title>The Capital S in Linux Permission Bitmap</title><link>http://hzmangel.github.io/post/614/</link><pubDate>Thu, 25 Mar 2010 17:22:56 +0000</pubDate><guid>http://hzmangel.github.io/post/614/</guid><description>昨天某人丢过来一个问题，为啥Linux下有的文件权限是-rws，有的是- rwS，当时就没想法了，后来某人被逼求助于Google顺便把结果发给了我，顺便记一下吧~
 首先，这个S，不管大写还是小写都是setuid/setgid bit, 大小写的不同之处在于，大写的S表示这个文件没有x位，而小写的则是一般常见（这个只是我 常见的哈，有空查查，如果大S比较常见俺会上来改的）的即是有x权限的。即在chmod中，如果是4755的话，那么它的权限就是通常的-rwsr- xr-x，如果是4655的话，就是大写的-rwSr-xr-x。就这么些东西。
-最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</description>
-    </item>
-    
-    <item>
-      <title>Using sudo in rsh&#39;s command</title>
-      <link>http://hzmangel.github.io/post/610/</link>
-      <pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/610/</guid>
-      <description>公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
-Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动改~</description>
-    </item>
-    
-    <item>
-      <title>Mask Mouse on Linux</title>
-      <link>http://hzmangel.github.io/post/583/</link>
-      <pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/583/</guid>
-      <description>最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
+最后多一句嘴，第一位的那个4其实也是bitmap，4代表setuid bit，2代表setgid bit，1代表sticky bit。下面木有了~~</description></item><item><title>Using sudo in rsh's command</title><link>http://hzmangel.github.io/post/610/</link><pubDate>Mon, 22 Mar 2010 17:47:21 +0000</pubDate><guid>http://hzmangel.github.io/post/610/</guid><description>公司的产品需要配置无密码rsh，刚写了一个脚本用于重置环境，但是被系统告知sudo需要在tty的环境下用，所以只好去找把这个安全选项禁掉的方法。开始想当然的 把pts加到/etc/securetty中，可惜不行，最后求助于G神才发现需要在/etc/sudoers中把下面这行注释掉
+Defaults requiretty 最后说一句，最好用visudo编辑，而不要手动改~</description></item><item><title>Mask Mouse on Linux</title><link>http://hzmangel.github.io/post/583/</link><pubDate>Wed, 13 Jan 2010 23:58:21 +0000</pubDate><guid>http://hzmangel.github.io/post/583/</guid><description>最近折腾个东西，需要把鼠标弄掉，一是不显示，二是对点击事件没有响应。在网上找了找，用了个比较ugly的方法：
 不显示
 一般的发行版都能找到一个叫unclutter的软件包，这玩意的功能就是在你idle多少秒后把鼠标从屏幕上抹掉，具体效果就像mplayer放电影里让鼠标不见的 那样。如果把idle设成0(unclutter –idle 0)，那么鼠标就会从屏幕上消失了，不过在移动的过程中，还是能偶尔看到那熟悉的白色箭头
 屏蔽响应事件
@@ -117,16 +16,7 @@ Defaults requiretty  最后说一句，最好用visudo编辑，而不要手动�
 这个命令可以用来把鼠标的键重新映射到新的行为上去，在它自己的man page里面，可以看到使用 xmodmap -e &amp;ldquo;pointer = 3 2 1&amp;rdquo; 可以让鼠标左右键对调，其实就是让按左键的响应从1变成3，而右键的从3变成1。执行下面这条命令
 xmodmap -e &amp;ldquo;pointer = 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1&amp;rdquo;
 把前面的几个按键都给映射到高位上去，这样一般的程序就不会去处理这些个大的响应事件，于是乎就算是屏蔽了事件吧。
-就这两条命令，具体的没的细究，有空再看吧。</description>
-    </item>
-    
-    <item>
-      <title>Set local dir as yum repo</title>
-      <link>http://hzmangel.github.io/post/581/</link>
-      <pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/581/</guid>
-      <description>新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。
+就这两条命令，具体的没的细究，有空再看吧。</description></item><item><title>Set local dir as yum repo</title><link>http://hzmangel.github.io/post/581/</link><pubDate>Wed, 13 Jan 2010 13:38:19 +0000</pubDate><guid>http://hzmangel.github.io/post/581/</guid><description>新装的RH52，装软件的时候想用yum解决依赖关系，看帮助没找到zypper里面的ar，只好去改配置文件。
 按着/etc/yum.repos.d下的一个.repo文件改了一下，其实也简单，只需要提供名字，baseurl，就差不多了，文件如下：
 $ cat local.repo
 [local repo]
@@ -134,57 +24,17 @@ name=Repository on lldev
 baseurl=file:///XXX/YYY/ZZZ
 enabled=1
 gpgcheck=0
-需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</description>
-    </item>
-    
-    <item>
-      <title>Auth ssh with keys</title>
-      <link>http://hzmangel.github.io/post/580/</link>
-      <pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/580/</guid>
-      <description>每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了…
- S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴  这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~
+需要注意的是那个baseurl下需要有一个目录叫repodata，里面要有个文件repomd.xml，这样才能被yum认出，我用的是光盘目录下的Server 目录。比较不爽的是这个baseurl只支持http/https/ftp/file，想用nfs啥的都没门，只好mount了~</description></item><item><title>Auth ssh with keys</title><link>http://hzmangel.github.io/post/580/</link><pubDate>Wed, 13 Jan 2010 13:17:46 +0000</pubDate><guid>http://hzmangel.github.io/post/580/</guid><description>每次配都要找一堆网页，最后郁闷了，所以在这记上一笔。环境是两台新装的机器，ssh客户端和服务器都安装上了，配置用的默认的。分为两台机器，C表示客户端，即发起 ssh连接请求的机器，S自然是服务端了…
+S: mkdir ~/.ssh # create the directory for keys S: chmod 700 ~/.ssh # 必需滴，要不然不起作用 C: ssh-keygen –d # generate dsa key, the type is changable C: cat ~/.ssh/id_dsa.pub | ssh user@host “cat - &amp;gt;&amp;gt;.ssh/authorized_keys” # copy the keys to remote host S: chmod 600 ~/.ssh/authorized_keys # 必需滴 这样好像就差不多了。多说一句，如果那个权限不对的话，会在log里面看到Authentication refused: bad ownership or modes云云(log文件在/var/log/secure)，当然就连不上了~
 Update at 2010-09-16:
-可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote host&amp;gt;，然后这个命令会做完上面的工作~</description>
-    </item>
-    
-    <item>
-      <title>强制umount无响应NFS分区</title>
-      <link>http://hzmangel.github.io/post/482/</link>
-      <pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/482/</guid>
-      <description>折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
+可以使用ssh-copy-id命令来做上面的事情，命令的用法是 ssh-copy-id -i &amp;lt;pub key&amp;gt; &amp;lt;remote host&amp;gt;，然后这个命令会做完上面的工作~</description></item><item><title>强制umount无响应NFS分区</title><link>http://hzmangel.github.io/post/482/</link><pubDate>Fri, 23 Oct 2009 10:12:09 +0000</pubDate><guid>http://hzmangel.github.io/post/482/</guid><description>折腾机器的时候，不小心mount上了一个NFS分区，然后那台机器又十分神奇的挂了，只好想着点子去umount了，要不然ls都有问题。
 直接umount -f，丫在那等了N久告诉我RPC啥错，然后说device忙，于是乎只有这样了：
 `# fuser -km /mnt/dir
 umount -f /mnt/dir` Updated at 2011-01-11
 唔，在网上又找到了一个办法
 umount -l: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore.
-试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</description>
-    </item>
-    
-    <item>
-      <title>无密码rsh</title>
-      <link>http://hzmangel.github.io/post/328/</link>
-      <pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/328/</guid>
-      <description>最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：/etc/hosts.equiv和家目录下的.rhosts文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~</description>
-    </item>
-    
-    <item>
-      <title>给iphone传电子书</title>
-      <link>http://hzmangel.github.io/post/255/</link>
-      <pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/255/</guid>
-      <description>没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章转换文件名格式说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
+试了一下，满好用，就是在-l后可能还需要等一段时间才能再次mount，不过那个目录应该是放出来了。</description></item><item><title>无密码rsh</title><link>http://hzmangel.github.io/post/328/</link><pubDate>Fri, 18 Jul 2008 09:52:20 +0000</pubDate><guid>http://hzmangel.github.io/post/328/</guid><description>最近在弄 LL，在起服务的时候，出现了权限错误的问题，问了一下才知道要把 rsh 配好，而且要无密码登录。上网找了一下，有以下地方要改：/etc/hosts.equiv和家目录下的.rhosts文件，把需要登录的主机名加进去。然后要把rsh/rlogin/rexec加到文件/etc/securetty中，然后就差不多了好像~</description></item><item><title>给iphone传电子书</title><link>http://hzmangel.github.io/post/255/</link><pubDate>Mon, 17 Mar 2008 10:21:25 +0000</pubDate><guid>http://hzmangel.github.io/post/255/</guid><description>没在iphone上找到好玩的游戏，只好拿它当电子书阅读器了。文章[转换文件名格式](http://hzmangel.cn/2008/03/16/%e8%bd %ac%e6%8d%a2%e6%96%87%e4%bb%b6%e5%90%8d%e6%a0%bc%e5%bc%8f/)说了怎么转换文件格式，其实文本的格式也 需要转换的。把用的脚本写出来吧。
 首先，弄到的txt是用cterm从水木上弄下来的，理由很简单，cterm的F4下载太好用了，所以我就懒了，呵呵。然后用HFS(www.rejetto.co m/hfs/)开服务器，本来是想在iphone的SSH上直接wget的，费了好大力气找到了可用的 wget后下载居然是乱码，从文件名到内容，只好自力更生了。
 用wget把文章弄到那台Linux机器上，在这需要提一下，HFS有可以直接打包下载文件夹的功能，把一个文件夹打成一个tar包传过来，很好用的功能。
 下载下来后，解压。由于我的Linux的终端编码是utf8的，自然乱码就出来了先用convmv转文件名，转完后再用iconv转文本格式。由于iconv不能批量 转，所以写了个py脚本用来弄这个，诶，不会sh脚本的人只能这么玩了。
-#!/usr/bin/python2.5 import glob import os filenames = glob.glob(&#39;*.txt&#39;) for foo in filenames: tmp_name = foo.replace(&#39;Download\\&#39;, &#39;&#39;) cmd_str = &#39;iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;&#39; % (foo, tmp_name) os.system(cmd_str) os.system(&#39;rm &amp;quot;%s&amp;quot;&#39; % foo) print tmp_name  中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</description>
-    </item>
-    
-  </channel>
-</rss>
+#!/usr/bin/python2.5 import glob import os filenames = glob.glob('*.txt') for foo in filenames: tmp_name = foo.replace('Download\\', '') cmd_str = 'iconv -f gb18030 -t utf8 &amp;quot;%s&amp;quot; -o &amp;quot;%s&amp;quot;' % (foo, tmp_name) os.system(cmd_str) os.system('rm &amp;quot;%s&amp;quot;' % foo) print tmp_name 中间还加上了文件名转换的功能，因为解压时文件名多了点东西。 需要注意的就是那个cmd_str两个%s加上的引号，因为文件名中间有空格，所以如果不加的话命令执 行会出错。源目标格式选18030主要是怕有些特殊字符。等全转完后直接用scp拷到iphone就行了。SSH真的很好用，临了再感叹一下，Linux下的东西有些 真的是方便至极。</description></item></channel></rss>

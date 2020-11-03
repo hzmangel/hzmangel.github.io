@@ -1,66 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>饕餮之享 on 湖间小筑</title>
-    <link>http://hzmangel.github.io/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB/</link>
-    <description>Recent content in 饕餮之享 on 湖间小筑</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>Copyright - ©2015 - hzmangel</copyright>
-    <lastBuildDate>Sun, 23 Nov 2008 20:00:38 +0000</lastBuildDate>
-    
-	<atom:link href="http://hzmangel.github.io/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>饺子之二</title>
-      <link>http://hzmangel.github.io/post/367/</link>
-      <pubDate>Sun, 23 Nov 2008 20:00:38 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/367/</guid>
-      <description>&lt;p&gt;关键字： 饺子, DIY&lt;/p&gt;
-
-&lt;p&gt;周六中午一个人吃饭，想着炒菜就头大，主要是家里面没啥菜了，要炒的话还要去买菜，一个人还吃不了多少，正在百无聊赖的想着吃什么的时候，一个念头在脑海中逐渐的成型
-了，做饺子。&lt;/p&gt;
-
-&lt;p&gt;其实想到饺子倒不是因为想吃饺子了，而是因为实在懒的去买那些个菜再慢慢来备菜了。出家门去买韭菜饺皮的时候已经12点了，orz自己一下。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>红烧肉，嗯</title>
-      <link>http://hzmangel.github.io/post/360/</link>
-      <pubDate>Sun, 09 Nov 2008 14:24:53 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/360/</guid>
-      <description>&lt;p&gt;关键字： 做菜&lt;/p&gt;
-
-&lt;p&gt;上次回家从老爸那取来经后就没怎么做过菜，于是趁着这个周日有闲就付诸实施了。&lt;/p&gt;
-
-&lt;p&gt;红烧肉嘛，先是要买肉撒，买回来的肉，切块吧。家里面的刀不快，那肉还是带皮的，只好先扔冷冻室那小冻了10分钟，等差不多硬了再切。切好肉后也就没啥了，就是辅料了
-，蒜，酱油，盐，糖啥的，嗯。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>自己包的饺子，嗯</title>
-      <link>http://hzmangel.github.io/post/325/</link>
-      <pubDate>Sun, 06 Jul 2008 23:13:27 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/325/</guid>
-      <description>&lt;p&gt;关键字： 饺子, DIY&lt;/p&gt;
-
-&lt;p&gt;话说，好吃不过饺子，8过自己包的嘛~~~~~&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>说说老莫</title>
-      <link>http://hzmangel.github.io/post/321/</link>
-      <pubDate>Mon, 30 Jun 2008 10:08:21 +0000</pubDate>
-      
-      <guid>http://hzmangel.github.io/post/321/</guid>
-      <description>&lt;p&gt;关键字：老莫 莫斯科餐厅 西餐&lt;/p&gt;
-
-&lt;p&gt;前天去吃老莫，1954年的老西餐厅，也算是北京的知名餐厅之一了吧。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>饕餮之享 on 湖间小筑</title><link>http://hzmangel.github.io/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB/</link><description>Recent content in 饕餮之享 on 湖间小筑</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Copyright - ©2015 - hzmangel</copyright><lastBuildDate>Sun, 23 Nov 2008 20:00:38 +0000</lastBuildDate><atom:link href="http://hzmangel.github.io/categories/%E9%A5%95%E9%A4%AE%E4%B9%8B%E4%BA%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>饺子之二</title><link>http://hzmangel.github.io/post/367/</link><pubDate>Sun, 23 Nov 2008 20:00:38 +0000</pubDate><guid>http://hzmangel.github.io/post/367/</guid><description>&lt;p>关键字： 饺子, DIY&lt;/p>
+&lt;p>周六中午一个人吃饭，想着炒菜就头大，主要是家里面没啥菜了，要炒的话还要去买菜，一个人还吃不了多少，正在百无聊赖的想着吃什么的时候，一个念头在脑海中逐渐的成型
+了，做饺子。&lt;/p>
+&lt;p>其实想到饺子倒不是因为想吃饺子了，而是因为实在懒的去买那些个菜再慢慢来备菜了。出家门去买韭菜饺皮的时候已经12点了，orz自己一下。&lt;/p></description></item><item><title>红烧肉，嗯</title><link>http://hzmangel.github.io/post/360/</link><pubDate>Sun, 09 Nov 2008 14:24:53 +0000</pubDate><guid>http://hzmangel.github.io/post/360/</guid><description>&lt;p>关键字： 做菜&lt;/p>
+&lt;p>上次回家从老爸那取来经后就没怎么做过菜，于是趁着这个周日有闲就付诸实施了。&lt;/p>
+&lt;p>红烧肉嘛，先是要买肉撒，买回来的肉，切块吧。家里面的刀不快，那肉还是带皮的，只好先扔冷冻室那小冻了10分钟，等差不多硬了再切。切好肉后也就没啥了，就是辅料了
+，蒜，酱油，盐，糖啥的，嗯。&lt;/p></description></item><item><title>自己包的饺子，嗯</title><link>http://hzmangel.github.io/post/325/</link><pubDate>Sun, 06 Jul 2008 23:13:27 +0000</pubDate><guid>http://hzmangel.github.io/post/325/</guid><description>&lt;p>关键字： 饺子, DIY&lt;/p>
+&lt;p>话说，好吃不过饺子，8过自己包的嘛~~~~~&lt;/p></description></item><item><title>说说老莫</title><link>http://hzmangel.github.io/post/321/</link><pubDate>Mon, 30 Jun 2008 10:08:21 +0000</pubDate><guid>http://hzmangel.github.io/post/321/</guid><description>&lt;p>关键字：老莫 莫斯科餐厅 西餐&lt;/p>
+&lt;p>前天去吃老莫，1954年的老西餐厅，也算是北京的知名餐厅之一了吧。&lt;/p></description></item></channel></rss>
